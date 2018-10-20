@@ -1,3 +1,7 @@
+/**
+ * Classe objeto para a encapsulação de dados do Patrimonio.
+ * @author Mei
+ */
 class Patrimonio {
 
     constructor(id) {
@@ -16,6 +20,10 @@ class Patrimonio {
         this._dataBaixa = null;
     }
 
+    /**
+     * Imprime no console todos os valores da classe.
+     * @author Mei
+     */
     printToConsole(){
 
         console.log("Id: " + this._id);
@@ -29,6 +37,20 @@ class Patrimonio {
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
         console.log("Data da Baixa: " + this._dataBaixa);
+    }
+
+    /**
+     * Tenta converter uma string para o seu valor em Float e a retorna.
+     * @param {string} number String a ser convertida.
+     * @returns {number} Valor em Float correspondente ou o valor inicial.
+     * @author Mei
+     */
+    tryParse(number){
+
+        if (isNaN(number) == true && number !== undefined)
+            return parseFloat(number);
+        else
+            return number;
     }
 
     // Getter
@@ -80,7 +102,7 @@ class Patrimonio {
     // Setter
 
     set id(id){
-        if (isNaN(id) == true)
+        if (isNaN(id) == true && id !== undefined)
             this._id = parseInt(id);
         else
             this._id = id;
@@ -99,47 +121,51 @@ class Patrimonio {
     }
 
     set status(status){
-        this._status = status;
+        switch (status) {
+
+            case 'VENDIDO':
+            case 'ALUGADO':
+            case 'EM_POSSE':
+            case 'DESCARTADO':
+            case 'EM_MANUTENCAO':
+                this._status = status;
+                break;
+
+            default:
+                console.log(new Error("O Status recebido não corresponde a nenhum dos valores possíveis."));
+                break;
+        }
     }
 
     set indiceDepreciacao(indiceDepreciacao){
-        if (isNaN(indiceDepreciacao) == true)
-            this._indiceDepreciacao = parseFloat(indiceDepreciacao);
-        else
-            this._indiceDepreciacao = indiceDepreciacao;
+            this._indiceDepreciacao = this.tryParse(indiceDepreciacao);
     }
 
     set valorCompra(valorCompra){
-        if (isNaN(valorCompra) == true)
-            this._valorCompra = parseFloat(valorCompra);
-        else
-            this._valorCompra = valorCompra;
+            this._valorCompra = this.tryParse(valorCompra);
     }
 
     set valorAtual(valorAtual){
-        if (isNaN(valorAtual) == true)
-            this._valorAtual = parseFloat(valorAtual);
-        else
-            this._valorAtual = valorAtual;
+            this._valorAtual = this.tryParse(valorAtual);
     }
 
     set dataCompra(dataCompra){
         if (!(dataCompra instanceof Date))
-            console.log("ERRO! dataCompra precisa receber um objeto instância de Date.");
+            console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
         else
             this._dataCompra = dataCompra;
     }
 
     set dataSaida(dataSaida){
         if (!(dataSaida instanceof Date))
-            console.log("ERRO! dataSaida precisa receber um objeto instância de Date.");
+            console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
     }
 
     set dataBaixa(dataBaixa){
         if (!(dataBaixa instanceof Date))
-            console.log("ERRO! dataBaixa precisa receber um objeto instância de Date.");
+            console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
         else
             this._dataBaixa = dataBaixa;
     }

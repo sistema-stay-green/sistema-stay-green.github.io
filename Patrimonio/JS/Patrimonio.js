@@ -102,10 +102,7 @@ class Patrimonio {
     // Setter
 
     set id(id){
-        if (isNaN(id) == true && id !== undefined)
-            this._id = parseInt(id);
-        else
-            this._id = id;
+        this._id = this.tryParse(id);
     }
 
     set nome(nome){

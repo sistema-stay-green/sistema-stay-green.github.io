@@ -1,29 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Add some padding inside the card container */
-.container-fluid {
-    padding: 2px 16px;
-}
-
 #filtro li{
     list-style:: none;
-}
-a:link{
-    text-decoration: none;
-}
-a:visited{
-    color:inherit;
 }
 
 table {
@@ -47,6 +25,9 @@ table#t01 th {
     background-color: black;
     color: white;
 }
+button{
+    cursor: pointer;
+}
  #menu button {
     background-color:#1e8939; /* Green */
     border: 1px solid #1e8939;
@@ -58,20 +39,18 @@ table#t01 th {
     font-size: 16px;
     cursor: pointer;
     float: left;
+    transition: all 0.5s;
+    font-weight: bold;
+    width: 25%;
 }
+
 #menu button:not(:last-child) {
     border-right: none; /* Prevent double borders */
 }
-#menu button:hover {
-    background-color: #1e8939;
-}
 
-button a:hover {
-    background-color: none;
-}
 #filtro {
   position: absolute;
-  right: 10px;
+  right: 0em;
   float: none;
 }
 #comprar{
@@ -86,6 +65,57 @@ button a:hover {
 html {
   font-family: 'Niramit';
 }
-button{
-    font-weight: bold;
+
+body{
+    margin: 0;
+    background-color: #fafaf2 !important;
+}
+#comprar, #entrada, #saida, #tabela, #filtro{
+    padding: 1em;
+}
+thead {
+    color: white;
+    background-color: #1e8939;
+}
+tbody{
+    background-color: #a7a8a2;
+}
+#menu button span{
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+#menu button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#menu button:hover span {
+  padding-right: 25px;
+}
+
+#menu button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#menu button:focus{
+  outline-style: none;
+}
+input{
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid #2d2d2d;
+  background-color: #fafaf2;
+}
+input:focus{
+    outline-style: none;
+}
+label{
+    cursor: pointer;
 }

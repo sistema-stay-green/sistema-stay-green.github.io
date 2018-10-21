@@ -4,15 +4,16 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Patrimonio</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
   <section id="header">
     <nav id="menu">
-      <button type="button" name="patrionio" onclick="showPatrimonioPage()">Patrimônio</button>
-      <button type="button" name="comprar" onclick="showComprarPage()">Comprar</button>
-      <button type="button" name="entrada" onclick="showEntradaPage()">Entrada</button>
-      <button type="button" name="saida" onclick="showSaidaPage()">Saída</button>
+      <button type="button" name="patrionio" onclick="showPatrimonioPage()"><span>Patrimônio</span></button>
+      <button type="button" name="comprar" onclick="showComprarPage()"><span>Comprar</span></button>
+      <button type="button" name="entrada" onclick="showEntradaPage()"><span>Entrada</span></button>
+      <button type="button" name="saida" onclick="showSaidaPage()"><span>Saída</span></button>
     </nav>
   </section>
   <section id="tabela">
@@ -27,74 +28,83 @@
       </select>
     </section> <br><br><br>
     <table>
-      <tr>
-        <th>id</th>
-        <th>nome</th>
-        <th>tipo</th>
-        <th>descricao</th>
-        <th>status</th>
-        <th>indiceDepreciacao</th>
-        <th>valorCompra</th>
-        <th>valorAtual</th>
-        <th>dataCompra</th>
-        <th>dataSaida</th>
-        <th>dataBaixa</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Trator</td>
-        <td>Máquina</td>
-        <td>Uma máquina que ajuda na colheita do café.</td>
-        <td>VENDIDO</td>
-        <td>15</td>
-        <td>5000</td>
-        <td>4800</td>
-        <td>2018-10-01</td>
-        <td>2018-10-03</td>
-        <td>2018-10-02</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nome</th>
+          <th>tipo</th>
+          <th>descricao</th>
+          <th>status</th>
+          <th>indiceDepreciacao</th>
+          <th>valorCompra</th>
+          <th>valorAtual</th>
+          <th>dataCompra</th>
+          <th>dataSaida</th>
+          <th>dataBaixa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Trator</td>
+          <td>Máquina</td>
+          <td>Uma máquina que ajuda na colheita do café.</td>
+          <td>VENDIDO</td>
+          <td>15</td>
+          <td>5000</td>
+          <td>4800</td>
+          <td>2018-10-01</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+        </tr>
+      </tbody>
     </table>
   </section>
 
   <section id="comprar">
     <br><br><br>
-    <form action="#" method="post">
-      Nome do patrimônio: <input type="text" required id="nome_patrimonio" placeholder="digite..."><br><br>
-      Descrição do patrimônio: <input type="text" id="descricao_patrimonio" placeholder="digite..."><br><br>
-      Índice de depreciação: <input type="number" id="indice_depreciacao" placeholder="*opcional"><br><br>
-      Valor da compra: <input type="number" id="valor_compra" placeholder="*opcional"><br><br>
-      Data da compra: <input type="date" id="data_compra">
-      <button type="submit" name="enviar">Enviar</button>
-    </form>
+      <label for="nome_patrimonio">Nome do patrimônio:</label>
+      <input type="text" required id="nome_patrimonio" placeholder="digite..."><br><br><br>
+      <label for="tipo_patrimonio">Tipo do patrimônio:</label>
+      <input type="text" required id="tipo_patrimonio" placeholder="digite..."><br><br><br>
+      <label for="descricao_patrimonio">Descrição do patrimônio:</label>
+      <input type="text" required id="descricao_patrimonio" placeholder="digite..."><br><br><br>
+      <label for="indice_depreciacao">Índice de depreciação:</label>
+      <input type="number" id="indice_depreciacao" placeholder="*opcional"><br><br><br>
+      <label for="valor_compra">Valor da compra:</label>
+      <input type="number" id="valor_compra" placeholder="*opcional"><br><br><br>
+      <label for="data_compra">Data da compra:</label>
+      <input type="date" id="data_compra"><br><br>
+      <button type="button" name="enviarComprar" onclick="recebeDadosCompra()">Enviar</button>
   </section>
 
   <section id="entrada">
     <br><br><br>
-    <form action="#" method="post">
-      Entrada: <select id="select_entrada">
+      <label for="select_entrada">Entrada: </label>
+      <select id="select_entrada">
         <option value="aluguel">Aluguel</option>
         <option value="manutencao">Manutenção</option>
       </select><br><br>
-      Data de entrada: <input type="date" id="data_entrada">
-      <button type="submit" name="enviar">Enviar</button>
-    </form>
+      <label for="data_entrada">Data de entrada:</label>
+      <input type="date" id="data_entrada"><br><br>
+      <button type="button" name="enviarEntrada" onclick="showSaidaPage()">Enviar</button>
   </section>
 
   <section id="saida">
     <br><br><br>
-    <form action="#" method="post">
-      Saída: <select id="select_saida">
+      <label for="select_saida">Saída: </label>
+      <select id="select_saida">
         <option value="venda">Venda</option>
         <option value="descarte">Descarte</option>
         <option value="aluguel">Aluguel</option>
         <option value="manutencao">Manutenção</option>
       </select><br><br>
-      Data de saída: <input type="date" id="data_saida">
-      <button type="submit" name="enviar">Enviar</button>
-    </form>
+      <label for="data_saida">Data de saída:</label> 
+      <input type="date" id="data_saida"><br><br>
+      <button type="button" name="enviarSaida" onclick="recebeDadosSaida">Enviar</button>
   </section>
   <script src="JS/PatrimonioPage.js"></script>
   <script src="JS/Patrimonio.js"></script>
   <script src="JS/PatrimonioClassTest.js"></script>
-</body>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>

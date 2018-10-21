@@ -5,10 +5,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Patrimonio</title>
     <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css" />
-    <script src="JS/Patrimonio.js"></script>
-    <script src="JS/PatrimonioClassTest.js"></script>
 </head>
 <body>
-    <h1>Hello Patrimônio!</h1>
+  <section id="header">
+    <nav id="menu">
+      <button type="button" name="patrionio" onclick="showPatrimonioPage()">Patrimônio</button>
+      <button type="button" name="comprar" onclick="showComprarPage()">Comprar</button>
+      <button type="button" name="entrada" onclick="showEntradaPage()">Entrada</button>
+      <button type="button" name="saida" onclick="showSaidaPage()">Saída</button>
+    </nav>
+  </section>
+  <section id="tabela">
+    <section id="filtro">
+      <br><label for="filtro_select">Filtro: </label>
+      <select id="filtro_select">
+        <option><a href="#">Em Posse</option>
+        <option><a href="#">Em Manutenção</option>
+        <option><a href="#">Alugados</option>
+        <option><a href="#">Vendidos</option>
+        <option><a href="#">Vendidos</option>
+      </select>
+    </section> <br><br><br>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>nome</th>
+        <th>tipo</th>
+        <th>descricao</th>
+        <th>status</th>
+        <th>indiceDepreciacao</th>
+        <th>valorCompra</th>
+        <th>valorAtual</th>
+        <th>dataCompra</th>
+        <th>dataSaida</th>
+        <th>dataBaixa</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Trator</td>
+        <td>Máquina</td>
+        <td>Uma máquina que ajuda na colheita do café.</td>
+        <td>VENDIDO</td>
+        <td>15</td>
+        <td>5000</td>
+        <td>4800</td>
+        <td>2018-10-01</td>
+        <td>2018-10-03</td>
+        <td>2018-10-02</td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="comprar">
+    <br><br><br>
+    <form action="#" method="post">
+      Nome do patrimônio: <input type="text" required id="nome_patrimonio" placeholder="digite..."><br><br>
+      Descrição do patrimônio: <input type="text" id="descricao_patrimonio" placeholder="digite..."><br><br>
+      Índice de depreciação: <input type="number" id="indice_depreciacao" placeholder="*opcional"><br><br>
+      Valor da compra: <input type="number" id="valor_compra" placeholder="*opcional"><br><br>
+      Data da compra: <input type="date" id="data_compra">
+      <button type="submit" name="enviar">Enviar</button>
+    </form>
+  </section>
+
+  <section id="entrada">
+    <br><br><br>
+    <form action="#" method="post">
+      Entrada: <select id="select_entrada">
+        <option value="aluguel">Aluguel</option>
+        <option value="manutencao">Manutenção</option>
+      </select><br><br>
+      Data de entrada: <input type="date" id="data_entrada">
+      <button type="submit" name="enviar">Enviar</button>
+    </form>
+  </section>
+
+  <section id="saida">
+    <br><br><br>
+    <form action="#" method="post">
+      Saída: <select id="select_saida">
+        <option value="venda">Venda</option>
+        <option value="descarte">Descarte</option>
+        <option value="aluguel">Aluguel</option>
+        <option value="manutencao">Manutenção</option>
+      </select><br><br>
+      Data de saída: <input type="date" id="data_saida">
+      <button type="submit" name="enviar">Enviar</button>
+    </form>
+  </section>
+  <script src="JS/PatrimonioPage.js"></script>
+  <script src="JS/Patrimonio.js"></script>
+  <script src="JS/PatrimonioClassTest.js"></script>
 </body>
 </html>

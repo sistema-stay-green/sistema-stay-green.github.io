@@ -41,7 +41,7 @@ button{
     float: left;
     transition: all 0.5s;
     font-weight: bold;
-    width: 25%;
+    width: 50%;
 }
 
 #menu button:not(:last-child) {
@@ -56,17 +56,13 @@ button{
 #comprar{
    display: none;
 }
-#entrada{
-   display: none;
-}
-#saida{
-    display: none;
-}
 html {
   font-family: 'Niramit';
 }
 
 body{
+  height: 100%;
+  width: 100%;
     margin: 0;
     background-color: #fafaf2 !important;
 }
@@ -106,11 +102,12 @@ tbody{
   outline-style: none;
 }
 input{
-  width: 100%;
-  padding: 10px 20px;
-  margin: 8px 0;
-  border: none;
-  border-bottom: 2px solid #2d2d2d;
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
   background-color: #fafaf2;
 }
 input:focus{
@@ -118,4 +115,25 @@ input:focus{
 }
 label{
     cursor: pointer;
+}
+.div-modal{
+  z-index: -1;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: 300ms ease-in;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: calc(50vh - 20vh);
+  left: calc(50vw - 20vh);
+  height: 40vh;
+  width: 40vh;
+  top: calc()
+  left:50%
+
+}
+.aparece{
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1);
+  transition: 300ms ease-in;
 }

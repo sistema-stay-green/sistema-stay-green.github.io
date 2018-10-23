@@ -12,8 +12,6 @@
     <nav id="menu">
       <button type="button" name="patrionio" onclick="showPatrimonioPage()"><span>Patrimônio</span></button>
       <button type="button" name="comprar" onclick="showComprarPage()"><span>Comprar</span></button>
-      <button type="button" name="entrada" onclick="showEntradaPage()"><span>Entrada</span></button>
-      <button type="button" name="saida" onclick="showSaidaPage()"><span>Saída</span></button>
     </nav>
   </section>
   <section id="tabela">
@@ -41,6 +39,7 @@
           <th>dataCompra</th>
           <th>dataSaida</th>
           <th>dataBaixa</th>
+          <th>Opções</th>
         </tr>
       </thead>
       <tbody>
@@ -56,29 +55,72 @@
           <td>2018-10-01</td>
           <td>2018-10-03</td>
           <td>2018-10-02</td>
+          <td>
+             <button type="button" name="entrada" onclick="showEntradaPage()"><span>Entrada</span></button>
+             <button type="button" name="saida" onclick="showSaidaPage()"><span>Saída</span></button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Trator</td>
+          <td>Máquina</td>
+          <td>Uma máquina que ajuda na colheita do café.</td>
+          <td>VENDIDO</td>
+          <td>15</td>
+          <td>5000</td>
+          <td>4800</td>
+          <td>2018-10-01</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" name="entrada" onclick="showEntradaPage()"><span>Entrada</span></button>
+             <button type="button" name="saida" onclick="showSaidaPage()"><span>Saída</span></button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Trator</td>
+          <td>Máquina</td>
+          <td>Uma máquina que ajuda na colheita do café.</td>
+          <td>VENDIDO</td>
+          <td>15</td>
+          <td>5000</td>
+          <td>4800</td>
+          <td>2018-10-01</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" name="entrada" onclick="showEntradaPage()"><span>Entrada</span></button>
+             <button type="button" name="saida" onclick="showSaidaPage()"><span>Saída</span></button>
+          </td>
         </tr>
       </tbody>
     </table>
   </section>
 
   <section id="comprar">
-    <br><br><br>
       <label for="nome_patrimonio">Nome do patrimônio:</label>
-      <input type="text" required id="nome_patrimonio" placeholder="digite..."><br><br><br>
+      <input type="text" required id="nome_patrimonio" placeholder="digite...">
+
       <label for="tipo_patrimonio">Tipo do patrimônio:</label>
-      <input type="text" required id="tipo_patrimonio" placeholder="digite..."><br><br><br>
+      <input type="text" required id="tipo_patrimonio" placeholder="digite...">
+
       <label for="descricao_patrimonio">Descrição do patrimônio:</label>
-      <input type="text" required id="descricao_patrimonio" placeholder="digite..."><br><br><br>
+      <input type="text" required id="descricao_patrimonio" placeholder="digite...">
+
       <label for="indice_depreciacao">Índice de depreciação:</label>
-      <input type="number" id="indice_depreciacao" placeholder="*opcional"><br><br><br>
+      <input type="number" id="indice_depreciacao" placeholder="digite...">
+
       <label for="valor_compra">Valor da compra:</label>
-      <input type="number" id="valor_compra" placeholder="*opcional"><br><br><br>
+      <input type="number" id="valor_compra" placeholder="digite...">
+
       <label for="data_compra">Data da compra:</label>
-      <input type="date" id="data_compra"><br><br>
-      <button type="button" name="enviarComprar" onclick="recebeDadosCompra()">Enviar</button>
+      <input type="date" id="data_compra">
+
+      <button type="button" name="enviarComprar" onclick="encapsulaDados()">Enviar</button>
   </section>
 
-  <section id="entrada">
+  <section id="entrada" class="div-modal">
     <br><br><br>
       <label for="select_entrada">Entrada: </label>
       <select id="select_entrada">
@@ -90,7 +132,7 @@
       <button type="button" name="enviarEntrada" onclick="showSaidaPage()">Enviar</button>
   </section>
 
-  <section id="saida">
+  <section id="saida" class="div-modal">
     <br><br><br>
       <label for="select_saida">Saída: </label>
       <select id="select_saida">
@@ -99,12 +141,12 @@
         <option value="aluguel">Aluguel</option>
         <option value="manutencao">Manutenção</option>
       </select><br><br>
-      <label for="data_saida">Data de saída:</label> 
+      <label for="data_saida">Data de saída:</label>
       <input type="date" id="data_saida"><br><br>
       <button type="button" name="enviarSaida" onclick="recebeDadosSaida">Enviar</button>
   </section>
   <script src="JS/PatrimonioPage.js"></script>
   <script src="JS/Patrimonio.js"></script>
-  <script src="JS/PatrimonioClassTest.js"></script>
+  <script src="JS/PatrimonioEncapsulate.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>

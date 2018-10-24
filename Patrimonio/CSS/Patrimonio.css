@@ -1,3 +1,7 @@
+/*   Autor: Sávio Cardoso
+     Grupo 5: patrimônio
+     líder: Mei Fagundes */
+
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
 #filtro li{
@@ -73,9 +77,7 @@ thead {
     color: white;
     background-color: #1e8939;
 }
-tbody{
-    background-color: #a7a8a2;
-}
+
 #menu button span{
     display: inline-block;
     position: relative;
@@ -136,4 +138,7 @@ label{
   opacity: 1;
   transform: scale(1);
   transition: 300ms ease-in;
+}
+#cancelar{
+  float: right;
 }

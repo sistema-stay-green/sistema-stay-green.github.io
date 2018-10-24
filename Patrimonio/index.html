@@ -1,3 +1,7 @@
+<!-- Autor: Sávio Cardoso
+     Grupo 5: patrimônio
+     líder: Mei Fagundes-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Patrimonio</title>
     <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -129,7 +134,8 @@
       </select><br><br>
       <label for="data_entrada">Data de entrada:</label>
       <input type="date" id="data_entrada"><br><br>
-      <button type="button" name="enviarEntrada" onclick="showSaidaPage()">Enviar</button>
+      <button type="button" name="enviarEntrada" onclick="recebeDadosEntrada()">Enviar</button>
+      <button type="button" name="cancelar" id="cancelar" onclick="cancelarModal()">Cancelar</button>
   </section>
 
   <section id="saida" class="div-modal">
@@ -143,8 +149,12 @@
       </select><br><br>
       <label for="data_saida">Data de saída:</label>
       <input type="date" id="data_saida"><br><br>
-      <button type="button" name="enviarSaida" onclick="recebeDadosSaida">Enviar</button>
+      <button type="button" name="enviarSaida" onclick="recebeDadosSaida()">Enviar</button>
+      <button type="button" name="cancelar" id="cancelar" onclick="cancelarModal()">Cancelar</button>
   </section>
+  <div class="fundo"></div>
+
+  </div>
   <script src="JS/PatrimonioPage.js"></script>
   <script src="JS/Patrimonio.js"></script>
   <script src="JS/PatrimonioEncapsulate.js"></script>

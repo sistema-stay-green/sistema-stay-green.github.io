@@ -1,4 +1,6 @@
 function encapsulaDados(){
+    document.querySelector("#comprar").style.display = "none";
+    document.querySelector("#tabela").style.display = "block";
     let patrimonio = new Patrimonio(5);
     patrimonio.nome = document.querySelector('#nome_patrimonio').value;
     patrimonio.tipo = document.querySelector('#tipo_patrimonio').value;

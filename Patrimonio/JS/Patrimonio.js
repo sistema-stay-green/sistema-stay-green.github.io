@@ -53,6 +53,28 @@ class Patrimonio {
             return number;
     }
 
+    /**
+     * Converte objeto Patrimonio em string JSON.
+     * @returns {string} String com formatação JSON do objeto.
+     * @author Guilherme Sena
+     */
+    toJSON(){
+      let patrimonioJSON = {
+        "id": this.id,
+        "nome": this.nome,
+        "tipo": this.tipo,
+        "descricao": this.descricao,
+        "status": this.status,
+        "indiceDepreciacao": this.indiceDepreciacao,
+        "valorCompra": this.valorCompra,
+        "valorAtual": this.valorAtual,
+        "dataCompra": this.dataCompra,
+        "dataSaida": this.dataSaida,
+        "dataBaixa": this.dataBaixa
+      }
+      return JSON.stringify(patrimonioJSON);
+    }
+
     // Getter
 
     get id(){

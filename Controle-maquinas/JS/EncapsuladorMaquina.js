@@ -12,7 +12,7 @@ function encapsularTodos(id, nome, descricao, status,
     maquina.nome = nome;
     maquina.tipo = "MAQUINA";
     maquina.descricao = descricao;
-    maquina.status = status
+    maquina.status = status;
     maquina.indiceDepreciacao = indiceDepreciacao;
     maquina.valorCompra = valorCompra;
     maquina.valorAtual = valorAtual;
@@ -29,7 +29,7 @@ function encapsularTodos(id, nome, descricao, status,
  * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
  * @author Guilherme Sena
  */
-function encapsularCompra(id, nome, descricao, status,
+function encapsularCadastrar(id, nome, descricao, status,
                       indiceDepreciacao, valorCompra){
     let maquina = new Maquina(id);
     maquina.id = id;

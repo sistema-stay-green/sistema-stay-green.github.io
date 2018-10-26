@@ -9,7 +9,7 @@ class Maquina {
         // Setting all attributes as null to differ from the default 'undefined'
         this._id = id;
         this._nome = null;
-        this._tipo = null;
+        this._tipo = "MAQUINA";
         this._descricao = null;
         this._status = null;
         this._indiceDepreciacao = null;
@@ -17,6 +17,7 @@ class Maquina {
         this._valorAtual = null;
         this._dataCompra = null;
         this._dataSaida = null;
+        this._dataRetorno = null;
         this._dataBaixa = null;
     }
 
@@ -36,6 +37,7 @@ class Maquina {
         console.log("Valor Atual: " + this._valorAtual);
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
+        console.log("Data de Retorno: " + this._dataRetorno);
         console.log("Data da Baixa: " + this._dataBaixa);
     }
 
@@ -70,6 +72,7 @@ class Maquina {
         "valorAtual": this.valorAtual,
         "dataCompra": this.dataCompra,
         "dataSaida": this.dataSaida,
+        "dataRetorno": this.dataRetorno,
         "dataBaixa": this.dataBaixa
       }
       return JSON.stringify(patrimonioJSON);
@@ -115,6 +118,10 @@ class Maquina {
 
     get dataSaida(){
         return this._dataSaida;
+    }
+
+    get dataRetorno(){
+        return this._dataRetorno;
     }
 
     get dataBaixa(){
@@ -180,6 +187,13 @@ class Maquina {
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
+    }
+
+    set dataRetorno(dataRetorno){
+        if (!(dataRetorno instanceof Date))
+            console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
+        else
+            this._dataRetorno = dataRetorno;
     }
 
     set dataBaixa(dataBaixa){

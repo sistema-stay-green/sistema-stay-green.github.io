@@ -85,3 +85,23 @@ function addPatrimonio(patrimonio = new Patrimonio()){
     // Receive back from Servlet
     // add to page with 'insertPatrimonioIntoPage' function
 }
+
+function hidePatrimonioTable(){
+
+    //let table = document.querySelector("#tabela");
+    document.querySelector("table").style.visibility = "hidden";
+
+    let span = document.createElement("span");
+    span.id = "noResults";
+
+    let message = document.createElement("p");
+    message.innerHTML = "Nenhum Patrimônio foi encontrado.";
+    span.appendChild(message);
+
+    message = document.createElement("p");
+    message.innerHTML = "Tente mudar o filtro selecionado ou registrar um novo Patrimônio.";
+    span.appendChild(message);
+
+    document.querySelector("#tabela").appendChild(span);
+
+}

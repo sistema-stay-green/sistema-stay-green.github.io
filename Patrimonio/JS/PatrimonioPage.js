@@ -5,7 +5,7 @@
 // --- DOM ---
 
 let patrimonioMenuButton = document.querySelector("button[name='patrimonioMenuButton']");
-let addPatrimonioButton = document.querySelector("button[name='addPatrimonioButton']");
+let addPatrimonioButton = document.querySelector("#addPatrimonioButton");
 let entradaOptionButton = document.querySelectorAll("button[name='entradaOptionButton']");
 let saidaOptionButton = document.querySelectorAll("button[name='saidaOptionButton']");
 let cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
@@ -51,6 +51,7 @@ function  recebeDadosSaida(){
 function cancelarModal(){
     saidaModal.classList.remove("aparece");
     entradaModal.classList.remove("aparece");
+    comprarModal.classList.remove("aparece");
 }
 
 // --- EVENT LISTENERS ---

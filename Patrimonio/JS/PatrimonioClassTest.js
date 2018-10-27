@@ -14,3 +14,4 @@ patrimonio.dataBaixa = new Date(2020, 11, 28); // Data
 patrimonio.printToConsole();
 
 insertPatrimonioIntoTable(patrimonio);
+//hidePatrimonioTable();

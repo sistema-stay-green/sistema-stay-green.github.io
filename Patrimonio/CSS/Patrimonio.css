@@ -9,6 +9,7 @@
 /*body*/
 body{
     background-color: #FDFCF3 !important;
+    height: 100vh;
 }
 
 #comprar, #entrada, #saida, #tabela{
@@ -55,18 +56,32 @@ button:focus{
     color: #FDFCF3;
 }
 
-#addPatrimonio{
-    float: right;
-    height: 4em;
-    width: 3em;
-    margin-right: 1em;
-    margin-top: 1em;
+#addPatrimonioButton{
+
+    position: sticky;
+    left: 95%;
+    bottom: 4vh;
+    
+    width: 1vh;
+    height: 5vh;
+    padding: 3.5vh;
+    margin-right: 2em;
+    margin-top: 2em;
     border-radius: 50%;
+}
+
+#addPatrimonioButton img{
+    image-rendering: optimizeQuality;
+    width: 2vh;
+    height: 2vh;
+    position: absolute;
+    top: 35%;
+    right: 35%;
 }
 
 /*selects e inputs/label*/
 #toolbar li{
-    list-style:: none;
+    list-style: none;
 }
 
 #toolbar {
@@ -101,8 +116,10 @@ label{
     position: fixed;
     top: calc(50vh - 20vh);
     left: calc(50vw - 20vh);
-    height: 40vh;
-    width: 40vh;
+    width: 25em;
+}
+.div-modal input{
+    width: 100%;
 }
 
 .aparece{

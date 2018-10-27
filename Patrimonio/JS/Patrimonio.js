@@ -17,6 +17,7 @@ class Patrimonio {
         this._valorAtual = null;
         this._dataCompra = null;
         this._dataSaida = null;
+        this._dataRetorno = null;
         this._dataBaixa = null;
     }
 
@@ -36,6 +37,7 @@ class Patrimonio {
         console.log("Valor Atual: " + this._valorAtual);
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
+        console.log("Data do Retorno: " + this._dataRetorno);
         console.log("Data da Baixa: " + this._dataBaixa);
     }
 
@@ -47,7 +49,7 @@ class Patrimonio {
      */
     tryParse(number){
 
-        if (isNaN(number) == true && number !== undefined)
+        if (isNaN(number) == true && typeof number === "string")
             return parseFloat(number);
         else
             return number;
@@ -60,17 +62,18 @@ class Patrimonio {
      */
     toJSON(){
       let patrimonioJSON = {
-        "id": this.id,
-        "nome": this.nome,
-        "tipo": this.tipo,
-        "descricao": this.descricao,
-        "status": this.status,
-        "indiceDepreciacao": this.indiceDepreciacao,
-        "valorCompra": this.valorCompra,
-        "valorAtual": this.valorAtual,
-        "dataCompra": this.dataCompra,
-        "dataSaida": this.dataSaida,
-        "dataBaixa": this.dataBaixa
+        "id": this._id,
+        "nome": this._nome,
+        "tipo": this._tipo,
+        "descricao": this._descricao,
+        "status": this._status,
+        "indiceDepreciacao": this._indiceDepreciacao,
+        "valorCompra": this._valorCompra,
+        "valorAtual": this._valorAtual,
+        "dataCompra": this._dataCompra,
+        "dataSaida": this._dataSaida,
+        "dataRetorno": this._dataRetorno,
+        "dataBaixa": this._dataBaixa
       }
       return JSON.stringify(patrimonioJSON);
     }
@@ -115,6 +118,10 @@ class Patrimonio {
 
     get dataSaida(){
         return this._dataSaida;
+    }
+
+    get dataRetorno(){
+        return this._dataRetorno;
     }
 
     get dataBaixa(){
@@ -180,6 +187,13 @@ class Patrimonio {
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
+    }
+
+    set dataRetorno(dataRetorno){
+        if (!(dataRetorno instanceof Date))
+            console.log(new Error("dataRetorno precisa receber um objeto instância de Date."));
+        else
+            this._dataRetorno = dataRetorno;
     }
 
     set dataBaixa(dataBaixa){

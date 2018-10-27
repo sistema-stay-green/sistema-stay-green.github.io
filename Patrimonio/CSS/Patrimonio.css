@@ -4,31 +4,18 @@
 
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
-#filtro li{
-    list-style:: none;
+#toolbar li{
+    list-style: none;
 }
 
 table {
     width:100%;
 }
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+
+td {
+    padding: 0.5em;
 }
-th, td {
-    padding: 15px;
-    text-align: left;
-}
-table#t01 tr:nth-child(even) {
-    background-color: #eee;
-}
-table#t01 tr:nth-child(odd) {
-   background-color: #fff;
-}
-table#t01 th {
-    background-color: black;
-    color: white;
-}
+
 button{
     cursor: pointer;
 }
@@ -42,7 +29,7 @@ button{
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    float: left;
+    float: left; /*inline-block is ignored due to the float. If 'float' has a value other than 'none', the box is floated and 'display' is treated as 'block'*/
     transition: all 0.5s;
     font-weight: bold;
     width: 50%;
@@ -52,10 +39,11 @@ button{
     border-right: none; /* Prevent double borders */
 }
 
-#filtro {
-  position: absolute;
-  right: 0em;
-  float: none;
+#toolbar {
+    display: block;
+    position: absolute;
+    right: 3em;
+    padding-top: 1em;
 }
 #comprar{
    display: none;
@@ -70,8 +58,8 @@ body{
     margin: 0;
     background-color: #fafaf2 !important;
 }
-#comprar, #entrada, #saida, #tabela, #filtro{
-    padding: 1em;
+#comprar, #entrada, #saida, #tabela{
+    padding: 3em;
 }
 thead {
     color: white;
@@ -107,7 +95,6 @@ input{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
-  width:300px;
   border:none;
   border-bottom:1px solid #757575;
   background-color: #fafaf2;
@@ -121,17 +108,18 @@ label{
 .div-modal{
   z-index: -1;
   opacity: 0;
-  transform: scale(0.5);
-  transition: 300ms ease-in;
-  background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: 200ms ease-in;
+  background-color: white;
+  border: 0.5em solid #1e8939;
+  border-radius: 2.5em;
   position: fixed;
   top: calc(50vh - 20vh);
   left: calc(50vw - 20vh);
   height: 40vh;
-  width: 40vh;
-  top: calc()
-  left:50%
-
+  width: 50vh;
+  top: calc();
+  /*left: 50%;*/
 }
 .aparece{
   z-index: 1;

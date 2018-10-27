@@ -5,7 +5,7 @@
 // --- DOM ---
 
 let patrimonioMenuButton = document.querySelector("button[name='patrimonioMenuButton']");
-let comprarMenuButton = document.querySelector("button[name='comprarMenuButton']");
+let addPatrimonioButton = document.querySelector("button[name='addPatrimonioButton']");
 let entradaOptionButton = document.querySelectorAll("button[name='entradaOptionButton']");
 let saidaOptionButton = document.querySelectorAll("button[name='saidaOptionButton']");
 let cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
@@ -13,28 +13,30 @@ let enviarEntradaModalButton = document.querySelector("button[name='enviarEntrad
 let enviarSaidaModalButton = document.querySelector("button[name='enviarSaidaModalButton']");
 let entradaModal = document.querySelector("#entrada");
 let saidaModal = document.querySelector("#saida");
+let comprarModal = document.querySelector("#comprar");
 
 // --- FUNCTIONS ---
 
 function showComprarPage(){
-    document.querySelector("#header").style.display = "block";
-    document.querySelector("#comprar").style.display = "block";
-    document.querySelector("#tabela").style.display = "none";
+    comprarModal.classList.toggle("aparece");
+    entradaModal.classList.remove("aparece");
+    saidaModal.classList.remove("aparece");
 }
 
 function showEntradaModal(){
     entradaModal.classList.toggle("aparece");
     saidaModal.classList.remove("aparece");
+    comprarModal.classList.remove("aparece");
 }
 
 function showSaidaModal(){
     saidaModal.classList.toggle("aparece");
     entradaModal.classList.remove("aparece");
+    comprarModal.classList.remove("aparece");
 }
 
 function showPatrimonioPage(){
     document.querySelector("#header").style.display = "block";
-    document.querySelector("#comprar").style.display = "none";
     document.querySelector("#tabela").style.display = "block";
 }
 
@@ -54,7 +56,7 @@ function cancelarModal(){
 // --- EVENT LISTENERS ---
 
 patrimonioMenuButton.addEventListener("click", showPatrimonioPage);
-comprarMenuButton.addEventListener("click", showComprarPage);
+addPatrimonioButton.addEventListener("click", showComprarPage);
 enviarEntradaModalButton.addEventListener("click", recebeDadosEntrada);
 enviarSaidaModalButton.addEventListener("click", recebeDadosSaida);
 

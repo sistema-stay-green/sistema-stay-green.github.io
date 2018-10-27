@@ -16,7 +16,6 @@
         <section id="header">
             <nav id="menu">
                 <button type="button" name="patrimonioMenuButton" onclick="showPatrimonioPage()"><span>Patrimônio</span></button>
-                <button type="button" name="comprarMenuButton" onclick="showComprarPage()"><span>Comprar</span></button>
             </nav>
         </section>
         <section id="tabela">
@@ -105,9 +104,10 @@
                     </tr>
                 </tbody>
             </table>
+            <button type="button" name="addPatrimonioButton" id="addPatrimonio"></button>
         </section>
 
-        <section id="comprar">
+        <section id="comprar" class="div-modal">
             <label for="nome_patrimonio">Nome do patrimônio:</label>
             <input type="text" required id="nome_patrimonio" placeholder="digite...">
 
@@ -126,11 +126,10 @@
             <label for="data_compra">Data da compra:</label>
             <input type="date" id="data_compra">
 
-            <button type="button" name="enviarComprar" onclick="encapsulaDados()">Enviar</button>
+            <button type="button" name="enviarComprarButton" id="enviarComprarButton">Enviar</button>
         </section>
 
         <section id="entrada" class="div-modal">
-            <br><br><br>
             <label for="select_entrada">Entrada: </label>
             <select id="select_entrada">
                 <option value="aluguel">Aluguel</option>
@@ -160,5 +159,7 @@
         <script src="JS/PatrimonioPage.js"></script>
         <script src="JS/Patrimonio.js"></script>
         <script src="JS/PatrimonioEncapsulate.js"></script>
+        <script src="JS/PatrimonioManipulationService.js"></script>
+        <script src="JS/PatrimonioClassTest.js"></script>
     </body>
 </html>

@@ -1,6 +1,11 @@
+// --- DOM ---
+
+let enviarComprarButton = document.querySelector("button[name='enviarComprarButton']");
+let modalPage = document.querySelector("#comprar");
+
+// --- FUNCTIONS ---
 function encapsulaDados(){
-    document.querySelector("#comprar").style.display = "none";
-    document.querySelector("#tabela").style.display = "block";
+    modalPage.classList.remove("aparece");
     let patrimonio = new Patrimonio(5);
     patrimonio.nome = document.querySelector('#nome_patrimonio').value;
     patrimonio.tipo = document.querySelector('#tipo_patrimonio').value;
@@ -14,3 +19,7 @@ function encapsulaDados(){
 
     patrimonio.printToConsole();
 }
+
+// --- EVENT LISTENERS ---
+
+enviarComprarButton.addEventListener("click", encapsulaDados);

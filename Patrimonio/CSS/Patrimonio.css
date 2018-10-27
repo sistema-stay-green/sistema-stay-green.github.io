@@ -2,41 +2,68 @@
      Grupo 5: patrimônio
      líder: Mei Fagundes */
 
+/*Importações*/
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
-#toolbar li{
-    list-style: none;
+
+/*body*/
+body{
+    background-color: #FDFCF3 !important;
 }
 
-table {
+#comprar{
+    display: none;
+    padding: 1em;
+}
+
+#comprar, #entrada, #saida, #tabela{
+    padding: 3em;
+}
+
+
+/*Tabela*/
+table{
     width:100%;
 }
 
-td {
+td{
     padding: 0.5em;
 }
 
-button{
-    cursor: pointer;
-}
- #menu button {
-    background-color:#1e8939; /* Green */
-    border: 1px solid #1e8939;
+thead {
     color: white;
-    padding: 12px 26px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    float: left; /*inline-block is ignored due to the float. If 'float' has a value other than 'none', the box is floated and 'display' is treated as 'block'*/
-    transition: all 0.5s;
+    background-color: #1e8939;
+}
+
+
+/*Botões*/
+#menu button{
+    float: left;
     font-weight: bold;
-    width: 50%;
+    width: 50%; /*varia de acordo com o número de botões no menu*/
+}
+
+#menu button:focus{
+    outline: none;
 }
 
 #menu button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
+    border-right: none; /* Previne bordas duplas */
+}
+
+#cancelar{
+    float: right;
+}
+
+#cancelar:hover{
+    background-color: #1D883A;
+    color: #FDFCF3;
+}
+
+
+/*selects e inputs/label*/
+#toolbar li{
+    list-style:: none;
 }
 
 #toolbar {
@@ -45,88 +72,39 @@ button{
     right: 3em;
     padding-top: 1em;
 }
-#comprar{
-   display: none;
-}
-html {
-  font-family: 'Niramit';
-}
 
-body{
-  height: 100%;
-  width: 100%;
-    margin: 0;
-    background-color: #fafaf2 !important;
-}
-#comprar, #entrada, #saida, #tabela{
-    padding: 3em;
-}
-thead {
-    color: white;
-    background-color: #1e8939;
-}
-
-#menu button span{
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-}
-#menu button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-#menu button:hover span {
-  padding-right: 25px;
-}
-
-#menu button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-#menu button:focus{
-  outline-style: none;
-}
 input{
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  border:none;
-  border-bottom:1px solid #757575;
-  background-color: #fafaf2;
+    display:block;
 }
+
 input:focus{
     outline-style: none;
 }
+
 label{
     cursor: pointer;
 }
+
+
+/*Modal*/
 .div-modal{
-  z-index: -1;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: 200ms ease-in;
-  background-color: white;
-  border: 0.5em solid #1e8939;
-  border-radius: 2.5em;
-  position: fixed;
-  top: calc(50vh - 20vh);
-  left: calc(50vw - 20vh);
-  height: 40vh;
-  width: 50vh;
-  top: calc();
-  /*left: 50%;*/
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 200ms ease-in;
+    background-color: white;
+    border: 0.5em solid #1e8939;
+    border-radius: 2.5em;
+    position: fixed;
+    top: calc(50vh - 20vh);
+    left: calc(50vw - 20vh);
+    height: 40vh;
+    width: 40vh;
 }
+
 .aparece{
-  z-index: 1;
-  opacity: 1;
-  transform: scale(1);
-  transition: 300ms ease-in;
-}
-#cancelar{
-  float: right;
+    z-index: 1;
+    opacity: 1;
+    transform: scale(1);
+    transition: 300ms ease-in;
 }

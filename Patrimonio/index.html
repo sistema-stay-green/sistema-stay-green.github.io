@@ -4,156 +4,161 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Patrimonio</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-<body>
-  <section id="header">
-    <nav id="menu">
-      <button name="patrimonioMenuButton"><span>Patrimônio</span></button>
-      <button name="comprarMenuButton"><span>Comprar</span></button>
-    </nav>
-  </section>
-  <section id="tabela">
-    <section id="toolbar">
-      <br><label for="filtro_select">Filtro: </label>
-      <select id="filtro_select">
-        <option><a href="#">Em Posse</option>
-        <option><a href="#">Em Manutenção</option>
-        <option><a href="#">Alugados</option>
-        <option><a href="#">Vendidos</option>
-        <option><a href="#">Vendidos</option>
-      </select>
-    </section> <br><br><br>
-    <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nome</th>
-          <th>Tipo</th>
-          <th>Finalidade</th>
-          <th>Status</th>
-          <th>Indice de Depreciacao</th>
-          <th>Valor de Compra</th>
-          <th>Valor Atual</th>
-          <th>Data da Compra</th>
-          <th>Data da Saida</th>
-          <th>Data da Baixa</th>
-          <th>Opções</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Trator</td>
-          <td>Máquina</td>
-          <td>Uma máquina que ajuda na colheita do café.</td>
-          <td>VENDIDO</td>
-          <td>15</td>
-          <td>5000</td>
-          <td>4800</td>
-          <td>2018-10-01</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button name="entradaOptionButton"><span>Entrada</span></button>
-             <button name="saidaOptionButton"><span>Saída</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Trator</td>
-          <td>Máquina</td>
-          <td>Uma máquina que ajuda na colheita do café.</td>
-          <td>VENDIDO</td>
-          <td>15</td>
-          <td>5000</td>
-          <td>4800</td>
-          <td>2018-10-01</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-            <button name="entradaOptionButton"><span>Entrada</span></button>
-             <button name="saidaOptionButton"><span>Saída</span></button>
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Trator</td>
-          <td>Máquina</td>
-          <td>Uma máquina que ajuda na colheita do café.</td>
-          <td>VENDIDO</td>
-          <td>15</td>
-          <td>5000</td>
-          <td>4800</td>
-          <td>2018-10-01</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-            <button name="entradaOptionButton"><span>Entrada</span></button>
-            <button name="saidaOptionButton"><span>Saída</span></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Patrimonio</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+    <body>
+        <section id="header">
+            <nav id="menu">
+                <button type="button" name="patrimonioMenuButton" onclick="showPatrimonioPage()"><span>Patrimônio</span></button>
+                <button type="button" name="comprarMenuButton" onclick="showComprarPage()"><span>Comprar</span></button>
+            </nav>
+        </section>
+        <section id="tabela">
+            <section id="toolbar">
+                <br><label for="filtro_select">Filtro: </label>
+                <select id="filtro_select">
+                    <option><a href="#">Em Posse</option>
+                    <option><a href="#">Em Manutenção</option>
+                    <option><a href="#">Alugados</option>
+                    <option><a href="#">Vendidos</option>
+                    <option><a href="#">Vendidos</option>
+                </select>
+            </section> <br><br><br>
+            <table id="patrimonioTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Descricao</th>
+                        <th>Status</th>
+                        <th>Índice de Depreciação</th>
+                        <th>Valor da Compra</th>
+                        <th>Valor Atual</th>
+                        <th>Data da Compra</th>
+                        <th>Data de Saída</th>
+                        <th>Data de Retorno</th>
+                        <th>Data de Baixa</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Trator</td>
+                        <td>Máquina</td>
+                        <td>Uma máquina que ajuda na colheita do café.</td>
+                        <td>VENDIDO</td>
+                        <td>15</td>
+                        <td>5000</td>
+                        <td>4800</td>
+                        <td>2018-10-01</td>
+                        <td>2018-10-03</td>
+                        <td>2018-10-23</td>
+                        <td>2018-10-02</td>
+                        <td>
+                            <button name="entradaOptionButton"><span>Entrada</span></button>
+                            <button name="saidaOptionButton"><span>Saída</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Trator</td>
+                        <td>Máquina</td>
+                        <td>Uma máquina que ajuda na colheita do café.</td>
+                        <td>VENDIDO</td>
+                        <td>15</td>
+                        <td>5000</td>
+                        <td>4800</td>
+                        <td>2018-10-01</td>
+                        <td>2018-10-03</td>
+                        <td>2018-10-23</td>
+                        <td>2018-10-02</td>
+                        <td>
+                            <button name="entradaOptionButton"><span>Entrada</span></button>
+                            <button name="saidaOptionButton"><span>Saída</span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Trator</td>
+                        <td>Máquina</td>
+                        <td>Uma máquina que ajuda na colheita do café.</td>
+                        <td>VENDIDO</td>
+                        <td>15</td>
+                        <td>5000</td>
+                        <td>4800</td>
+                        <td>2018-10-01</td>
+                        <td>2018-10-03</td>
+                        <td>2018-10-23</td>
+                        <td>2018-10-02</td>
+                        <td>
+                            <button name="entradaOptionButton"><span>Entrada</span></button>
+                            <button name="saidaOptionButton"><span>Saída</span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-  <section id="comprar">
-      <label for="nome_patrimonio">Nome do patrimônio:</label>
-      <input type="text" required id="nome_patrimonio" placeholder="digite...">
+        <section id="comprar">
+            <label for="nome_patrimonio">Nome do patrimônio:</label>
+            <input type="text" required id="nome_patrimonio" placeholder="digite...">
 
-      <label for="tipo_patrimonio">Tipo do patrimônio:</label>
-      <input type="text" required id="tipo_patrimonio" placeholder="digite...">
+            <label for="tipo_patrimonio">Tipo do patrimônio:</label>
+            <input type="text" required id="tipo_patrimonio" placeholder="digite...">
 
-      <label for="descricao_patrimonio">Descrição do patrimônio:</label>
-      <input type="text" required id="descricao_patrimonio" placeholder="digite...">
+            <label for="descricao_patrimonio">Descrição do patrimônio:</label>
+            <input type="text" required id="descricao_patrimonio" placeholder="digite...">
 
-      <label for="indice_depreciacao">Índice de depreciação:</label>
-      <input type="number" id="indice_depreciacao" placeholder="digite...">
+            <label for="indice_depreciacao">Índice de depreciação:</label>
+            <input type="number" id="indice_depreciacao" placeholder="digite...">
 
-      <label for="valor_compra">Valor da compra:</label>
-      <input type="number" id="valor_compra" placeholder="digite...">
+            <label for="valor_compra">Valor da compra:</label>
+            <input type="number" id="valor_compra" placeholder="digite...">
 
-      <label for="data_compra">Data da compra:</label>
-      <input type="date" id="data_compra">
+            <label for="data_compra">Data da compra:</label>
+            <input type="date" id="data_compra">
 
-      <button name="enviarComprar" onclick="encapsulaDados()">Enviar</button>
-  </section>
+            <button type="button" name="enviarComprar" onclick="encapsulaDados()">Enviar</button>
+        </section>
 
-  <section id="entrada" class="div-modal">
-      <label for="select_entrada">Entrada: </label>
-      <select id="select_entrada">
-        <option value="aluguel">Aluguel</option>
-        <option value="manutencao">Manutenção</option>
-      </select><br><br>
-      <label for="data_entrada">Data de entrada:</label>
-      <input type="date" id="data_entrada"><br><br>
-      <button name="enviarEntradaModalButton">Enviar</button>
-      <button name="cancelarModalButton">Cancelar</button>
-  </section>
+        <section id="entrada" class="div-modal">
+            <br><br><br>
+            <label for="select_entrada">Entrada: </label>
+            <select id="select_entrada">
+                <option value="aluguel">Aluguel</option>
+                <option value="manutencao">Manutenção</option>
+            </select><br><br>
+            <label for="data_entrada">Data de entrada:</label>
+            <input type="date" id="data_entrada"><br><br>
+            <button name="enviarEntradaModalButton">Enviar</button>
+            <button name="cancelarModalButton">Cancelar</button>
+        </section>
 
-  <section id="saida" class="div-modal">
-      <label for="select_saida">Saída: </label>
-      <select id="select_saida">
-        <option value="venda">Venda</option>
-        <option value="descarte">Descarte</option>
-        <option value="aluguel">Aluguel</option>
-        <option value="manutencao">Manutenção</option>
-      </select><br><br>
-      <label for="data_saida">Data de saída:</label>
-      <input type="date" id="data_saida"><br><br>
-      <button name="enviarSaidaModalButton">Enviar</button>
-      <button name="cancelarModalButton">Cancelar</button>
-  </section>
-  <div class="fundo"></div>
+        <section id="saida" class="div-modal">
+            <br><br><br>
+            <label for="select_saida">Saída: </label>
+            <select id="select_saida">
+                <option value="venda">Venda</option>
+                <option value="descarte">Descarte</option>
+                <option value="aluguel">Aluguel</option>
+                <option value="manutencao">Manutenção</option>
+            </select><br><br>
+            <label for="data_saida">Data de saída:</label>
+            <input type="date" id="data_saida"><br><br>
+            <button name="enviarSaidaModalButton">Enviar</button>
+            <button name="cancelarModalButton">Cancelar</button>
+        </section>
 
-  </div>
-  <script src="JS/PatrimonioPage.js"></script>
-  <script src="JS/Patrimonio.js"></script>
-  <script src="JS/PatrimonioEncapsulate.js"></script>
+        <script src="JS/PatrimonioPage.js"></script>
+        <script src="JS/Patrimonio.js"></script>
+        <script src="JS/PatrimonioEncapsulate.js"></script>
+    </body>
 </html>

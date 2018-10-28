@@ -56,30 +56,32 @@
         <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
 
         <section id="form" class="div-modal">
-            <label for="nome_patrimonio">Nome do patrimônio:</label>
-            <input type="text" name="nomeInput" required placeholder="digite...">
+            <div class="conteudo">
+                <label for="nome_patrimonio">Nome do patrimônio:</label>
+                <input type="text" name="nomeInput" required placeholder="digite...">
 
-            <label for="tipo_patrimonio">Tipo do patrimônio:</label><br>
-            <select name="tipoInput">
-                <option value="MAQUINA" selected>Máquina</option>
-                <option value="OUTROS">Outros</option>
-            </select><br>
+                <label for="tipo_patrimonio">Tipo do patrimônio:</label><br>
+                <select name="tipoInput">
+                    <option value="MAQUINA" selected>Máquina</option>
+                    <option value="OUTROS">Outros</option>
+                </select><br>
 
-            <label for="descricao_patrimonio">Descrição do patrimônio:</label>
-            <input type="text" name="finalidadeInput" required placeholder="digite...">
+                <label for="descricao_patrimonio">Descrição do patrimônio:</label>
+                <input type="text" name="finalidadeInput" required placeholder="digite...">
 
-            <label for="indice_depreciacao">Índice de depreciação:</label>
-            <input type="number" name="indiceDepreciacaoInput" placeholder="digite...">
+                <label for="indice_depreciacao">Índice de depreciação:</label>
+                <input type="number" name="indiceDepreciacaoInput" placeholder="digite...">
 
-            <label for="valor_compra">Valor da compra:</label>
-            <input type="number" name="valorCompraInput" placeholder="digite...">
+                <label for="valor_compra">Valor da compra:</label>
+                <input type="number" name="valorCompraInput" placeholder="digite...">
 
-            <label for="data_compra">Data da compra:</label>
-            <input type="date" name="dataCompraInput">
+                <label for="data_compra">Data da compra:</label>
+                <input type="date" name="dataCompraInput">
 
-            <div class="container-modal">
-                <button name="cancelarModalButton">Cancelar</button>
-                <button type="button" id="enviar">Enviar</button>
+                <div class="container-modal">
+                    <button name="cancelarModalButton">Cancelar</button>
+                    <button type="button" id="enviar">Enviar</button>
+                </div>
             </div>
         </section>
 
@@ -109,6 +111,7 @@
             <button name="cancelarModalButton">Cancelar</button>
         </section>
 
+        <script src="../JS/staygreen.js"></script>
         <script src="JS/Patrimonio.js"></script>
         <script src="JS/PatrimonioPage.js"></script>
         <script src="JS/PatrimonioManipulationService.js"></script>

@@ -147,6 +147,7 @@ label{
     left: calc(50vw - 20vh);
     width: 25em;
     margin-top: -5em;
+    min-height: 33em;
 }
 .div-modal input{
     width: 100%;
@@ -175,4 +176,9 @@ label{
     position: relative;
     bottom: -1.5em;
     margin-left: 3em;
+}
+
+[id|=edit] {
+    padding-right: 0.8em;
+    padding-left: 0.8em;
 }

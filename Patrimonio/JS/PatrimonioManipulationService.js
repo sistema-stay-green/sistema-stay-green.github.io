@@ -9,7 +9,7 @@ function addPatrimonio(patrimonio = new Patrimonio()){
 
     patrimonio.printToConsole();
     patrimonio.calculateValorAtual();
-         
+
     // Send to servlet
     // Receive back from Servlet
     insertPatrimonioIntoTable(patrimonio);

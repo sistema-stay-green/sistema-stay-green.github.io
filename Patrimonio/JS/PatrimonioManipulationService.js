@@ -1,5 +1,5 @@
 
-const enviarCompraButton = document.querySelector("#comprar #enviar");
+const enviarCompraButton = document.querySelector("#form #enviar");
 const currentDate = new Date();
 
 function addPatrimonio(patrimonio = new Patrimonio()){

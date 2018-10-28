@@ -46,4 +46,4 @@ function generatePlaceholders() {
 
 generatePlaceholders();
 hidePatrimonioTable();
-//showPatrimonioTable();
+showPatrimonioTable();

@@ -13,13 +13,16 @@ const saidaOptionButton = document.querySelectorAll("button[name='saidaOptionBut
 const cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
 const enviarEntradaModalButton = document.querySelector("button[name='enviarEntradaModalButton']");
 const enviarSaidaModalButton = document.querySelector("button[name='enviarSaidaModalButton']");
-
 const entradaModal = document.querySelector("#entrada");
 const saidaModal = document.querySelector("#saida");
-const comprarModal = document.querySelector("#comprar");
+const formModal = document.querySelector("#form");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
 
 const NA = "N/A";
+
+let editButton = document.querySelectorAll("[id|=edit]");
+
+const editHandler = () => {showModal('editar')};
 
 // --- FUNCTIONS ---
 
@@ -33,7 +36,7 @@ function showModal(modal){
     switch (modal) {
         case 'compra':
 
-            comprarModal.classList.toggle("aparece");
+            formModal.classList.toggle("aparece");
             entradaModal.classList.remove("aparece");
             saidaModal.classList.remove("aparece");
             break;
@@ -42,17 +45,27 @@ function showModal(modal){
 
             entradaModal.classList.toggle("aparece");
             saidaModal.classList.remove("aparece");
-            comprarModal.classList.remove("aparece");
+            formModal.classList.remove("aparece");
             break;
 
         case 'saida':
 
             saidaModal.classList.toggle("aparece");
             entradaModal.classList.remove("aparece");
-            comprarModal.classList.remove("aparece");
+            formModal.classList.remove("aparece");
+            break;
+
+        case 'editar':
+
+            //saidaModal.classList.toggle("aparece");
+            //entradaModal.classList.remove("aparece");
+            //formModal.classList.remove("aparece");
+            
+            // Construir a div Modal de Editar aqui
             break;
 
         default:
+            console.log("zup");
             break;
     }
 }
@@ -64,7 +77,7 @@ function showModal(modal){
 function hideModal(){
     saidaModal.classList.remove("aparece");
     entradaModal.classList.remove("aparece");
-    comprarModal.classList.remove("aparece");
+    formModal.classList.remove("aparece");
 }
 
 function recebeDadosEntrada(){
@@ -186,6 +199,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
     tr.appendChild(td);
 
     patrimonioTable.appendChild(tr);
+    updateDynamicEventListeners()
 
 }
 
@@ -231,12 +245,12 @@ function recoverPatrimonioFromCompraModal(){
 
     let patrimonio = new Patrimonio();
 
-    patrimonio.nome = document.querySelector("#comprar [name='nomeInput']").value;
-    patrimonio.tipo = document.querySelector("#comprar [name='tipoInput']").value;
-    patrimonio.finalidade = document.querySelector("#comprar [name='finalidadeInput']").value;
-    patrimonio.indiceDepreciacao = document.querySelector("#comprar [name='indiceDepreciacaoInput']").value;
-    patrimonio.valorCompra = document.querySelector("#comprar [name='valorCompraInput']").value;
-    let data = document.querySelector("#comprar [name='dataCompraInput']").value.split('-');
+    patrimonio.nome = document.querySelector("#form [name='nomeInput']").value;
+    patrimonio.tipo = document.querySelector("#form [name='tipoInput']").value;
+    patrimonio.finalidade = document.querySelector("#form [name='finalidadeInput']").value;
+    patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
+    patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
+    let data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
     patrimonio.dataCompra = new Date(data[0], data[1], data[2]);;
 
     return patrimonio;
@@ -247,6 +261,18 @@ function recoverPatrimonioFromCompraModal(){
 addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
 enviarEntradaModalButton.addEventListener("click", recebeDadosEntrada);
 enviarSaidaModalButton.addEventListener("click", recebeDadosSaida);
+
+function updateDynamicEventListeners() {
+
+    editButton = document.querySelectorAll("[id|=edit]");
+
+    for (let i = 0; i < editButton.length; i++) {
+        let currentButton = editButton[i];
+        currentButton.addEventListener("click", editHandler);
+    }
+}
+
+updateDynamicEventListeners();
 
 for (let i = 0; i < entradaOptionButton.length; i++) {
     entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});

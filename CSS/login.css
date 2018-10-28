@@ -1,0 +1,68 @@
+html, #login, body{
+  height: 100%;
+}
+
+#login{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#login > section{
+  height: 100%;
+}
+
+#login > section:first-of-type{
+  background-color: var(--verdeCamarone);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 1.2em 5em;
+  width: 30%;
+}
+
+#login > section:first-of-type > p{
+  color: var(--brancoIvory);
+}
+
+#login > section:first-of-type > img{
+  background-color: var(--verdeCrusoe);
+  width: 12vw;
+  height: 12vw;
+  padding: 1.2em 1.2em;
+  border-radius: 50%;
+}
+
+#login > form{
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0 1.2em;
+  width: 70%;
+}
+
+#login > form > label{
+  display: block;
+  text-align: left;
+  margin: 3% 15%;
+}
+
+#login > form > label > input{
+  display: block;
+  width: 100%;
+}
+
+#login > form > button{
+  margin: .7em .7em;
+  width: 12em;
+}
+
+.ocultar{
+  display: none;
+}
+
+.mensagemErro{
+  color: red;
+}

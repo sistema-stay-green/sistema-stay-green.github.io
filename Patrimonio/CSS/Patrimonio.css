@@ -6,7 +6,6 @@
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
 
-/*body*/
 html{
     font-family: 'Niramit', sans-serif;
 }
@@ -14,19 +13,17 @@ html{
 body{
     background-color: #FDFCF3 !important;
     height: 100vh;
+    padding-right: 2em;
+    padding-left: 2em;
 }
 
-#form, #entrada, #saida, #tabela{
-    padding: 3em;
-}
-
-p:nth-child(1){
+#noResults p:nth-child(1){
     text-align: center;
     font-weight: bold;
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
-p:nth-child(2){
+#noResults p:nth-child(2){
     text-align: center;
     font-weight: lighter;
     font-size: 1.5em;
@@ -34,12 +31,17 @@ p:nth-child(2){
 
 h1{
     text-align: center;
-
+    margin-bottom: 0;
+    font-size: 1.8em;
 }
+
+
 
 /*Tabela*/
 table{
-    width:100%;
+    padding-top: 1em;
+    width: 100%;
+    font-size: 0.9em;
 }
 
 td{
@@ -83,15 +85,11 @@ button:focus{
 
 #addPatrimonioButton{
 
-    position: sticky;
-    left: 95%;
+    position: fixed;
     bottom: 4vh;
-
-    width: 1vh;
-    height: 5vh;
+    right: 4vh;
+    float: right;
     padding: 3.5vh;
-    margin-right: 2em;
-    margin-top: 2em;
     border-radius: 50%;
 }
 
@@ -110,10 +108,13 @@ button:focus{
 }
 
 #toolbar {
-    display: block;
-    position: absolute;
+    display: flex;
     right: 3em;
-    padding-top: 1em;
+    width: 100%;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+    align-content: flex-end;
+    flex-direction: row-reverse;
 }
 
 input{
@@ -128,12 +129,8 @@ label{
     cursor: pointer;
 }
 
-.div-modal label{
-    margin-bottom: -0.5em;
-}
-
-.div-modal input, .div-modal select{
-    margin-bottom: 1.5em;
+.div-modal input, .div-modal select, .div-modal div{
+    margin-bottom: 1em;
 }
 
 
@@ -147,14 +144,18 @@ label{
     border: 0.5em solid #1e8939;
     border-radius: 2.5em;
     position: fixed;
-    top: calc(50vh - 20vh);
-    left: calc(50vw - 20vh);
-    width: 25em;
+    top: calc(50vh - 15em);
+    left: calc(50vw - 12em);
+    width: 20em;
     margin-top: -5em;
-    min-height: 33em;
+    padding: 2em;
+    font-size: 0.95em;
 }
 .div-modal input{
     width: 100%;
+}
+.div-modal label{
+    display: block;
 }
 
 .aparece{
@@ -164,9 +165,14 @@ label{
     transition: 300ms ease-in;
 }
 
-#form{
-    height: 60vh;
+.esconde{
+    display: none;
+    z-index: -1;
+    opacity: 0;
+    transform: scale(1);
+    transition: 300ms ease-in;
 }
+
 
 .container-modal{
     bottom: 0;
@@ -178,9 +184,16 @@ label{
 .container-modal button{
     display: inline-block;
     position: relative;
-    bottom: -1.5em;
+    bottom: -2.5em;
     margin-left: 3em;
 }
+
+.conteudo button{
+    margin-left: 1.8em;
+    padding-top: 0.3em; 
+    padding-bottom: 0.3em; 
+}
+
 
 [id|=edit] {
     padding-right: 0.8em;

@@ -1,6 +1,6 @@
-let patrimonio = new Patrimonio(5);
+let patrimonio = new Patrimonio(0);
 patrimonio.nome = "Adriana";
-patrimonio.tipo = "Trator"
+patrimonio.tipo = "MAQUINA"
 patrimonio.finalidade = "Meio chata mas a gente aguenta";
 patrimonio.status = "VENDIDO"; // Valores predefinidos na classe Patrimonio
 patrimonio.indiceDepreciacao = "1.5";
@@ -11,7 +11,8 @@ patrimonio.dataSaida = new Date(); // Data atual
 patrimonio.dataRetorno = new Date(); // Data atual
 patrimonio.dataBaixa = new Date(2020, 11, 28); // Data
 
-patrimonio.printToConsole();
+//patrimonio.printToConsole();
 
 insertPatrimonioIntoTable(patrimonio);
-//hidePatrimonioTable();
+hidePatrimonioTable();
+showPatrimonioTable();

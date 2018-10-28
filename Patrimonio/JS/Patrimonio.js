@@ -10,7 +10,7 @@ class Patrimonio {
         this._id = id;
         this._nome = null;
         this._tipo = null;
-        this._descricao = null;
+        this._finalidade = null;
         this._status = null;
         this._indiceDepreciacao = null;
         this._valorCompra = null;
@@ -30,7 +30,7 @@ class Patrimonio {
         console.log("Id: " + this._id);
         console.log("Nome: " + this._nome);
         console.log("Tipo: " + this._tipo);
-        console.log("Descrição: " + this._descricao);
+        console.log("Finalidade: " + this._finalidade);
         console.log("Status: " + this._status);
         console.log("Índice de depreciação: " + this._indiceDepreciacao);
         console.log("Valor da Compra: " + this._valorCompra);
@@ -53,6 +53,15 @@ class Patrimonio {
             return parseFloat(number);
         else
             return number;
+    }
+
+    calculateValorAtual(){
+
+        let anoCompra = this._dataCompra.getFullYear();
+        let diferencaData = currentDate.getFullYear() - anoCompra;
+        this._valorAtual = this._valorCompra - 
+            ((diferencaData * (this._indiceDepreciacao/100))
+             * this._valorCompra);
     }
 
     /**
@@ -92,8 +101,8 @@ class Patrimonio {
         return this._tipo;
     }
 
-    get descricao(){
-        return this._descricao;
+    get finalidade(){
+        return this._finalidade;
     }
 
     get status(){
@@ -139,11 +148,21 @@ class Patrimonio {
     }
 
     set tipo(tipo){
-        this._tipo = tipo;
+        switch (tipo) {
+
+            case 'MAQUINA':
+            case 'OUTROS':
+                this._tipo = tipo;
+                break;
+
+            default:
+                console.log(new Error("O Tipo recebido não corresponde a nenhum dos valores possíveis."));
+                break;
+        }
     }
 
-    set descricao(descricao){
-        this._descricao = descricao;
+    set finalidade(finalidade){
+        this._finalidade = finalidade;
     }
 
     set status(status){
@@ -175,28 +194,28 @@ class Patrimonio {
             this._valorAtual = this.tryParse(valorAtual);
     }
 
-    set dataCompra(dataCompra){
+    set dataCompra(dataCompra = new Date()){
         if (!(dataCompra instanceof Date))
             console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
         else
             this._dataCompra = dataCompra;
     }
 
-    set dataSaida(dataSaida){
+    set dataSaida(dataSaida = new Date()){
         if (!(dataSaida instanceof Date))
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
     }
 
-    set dataRetorno(dataRetorno){
+    set dataRetorno(dataRetorno = new Date()){
         if (!(dataRetorno instanceof Date))
             console.log(new Error("dataRetorno precisa receber um objeto instância de Date."));
         else
             this._dataRetorno = dataRetorno;
     }
 
-    set dataBaixa(dataBaixa){
+    set dataBaixa(dataBaixa = new Date()){
         if (!(dataBaixa instanceof Date))
             console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
         else

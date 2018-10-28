@@ -47,3 +47,4 @@ function generatePlaceholders() {
 generatePlaceholders();
 hidePatrimonioTable();
 showPatrimonioTable();
+saidaPatrimonio(0, "em_manutencao");

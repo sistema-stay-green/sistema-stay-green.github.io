@@ -4,7 +4,7 @@ const currentDate = new Date();
 
 function addPatrimonio(patrimonio = new Patrimonio()){
 
-    patrimonio = recoverPatrimonioFromModal();
+    patrimonio = recoverPatrimonioFromCompraModal();
     patrimonio.status = "EM_POSSE";
 
     patrimonio.printToConsole();

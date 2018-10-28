@@ -57,11 +57,13 @@ class Patrimonio {
 
     calculateValorAtual(){
 
-        let anoCompra = this._dataCompra.getFullYear();
-        let diferencaData = currentDate.getFullYear() - anoCompra;
-        this._valorAtual = this._valorCompra - 
-            ((diferencaData * (this._indiceDepreciacao/100))
-             * this._valorCompra);
+        if (this._valorCompra !== null) {
+            let anoCompra = this._dataCompra.getFullYear();
+            let diferencaData = new Date().getFullYear() - anoCompra;
+            this._valorAtual = this._valorCompra - 
+                ((diferencaData * (this._indiceDepreciacao/100))
+                * this._valorCompra);
+        }
     }
 
     /**
@@ -195,28 +197,28 @@ class Patrimonio {
     }
 
     set dataCompra(dataCompra = new Date()){
-        if (!(dataCompra instanceof Date))
+        if (!(dataCompra instanceof Date) && dataCompra !== null)
             console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
         else
             this._dataCompra = dataCompra;
     }
 
     set dataSaida(dataSaida = new Date()){
-        if (!(dataSaida instanceof Date))
+        if (!(dataSaida instanceof Date) && dataSaida !== null)
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
     }
 
     set dataRetorno(dataRetorno = new Date()){
-        if (!(dataRetorno instanceof Date))
+        if (!(dataRetorno instanceof Date) && dataRetorno !== null)
             console.log(new Error("dataRetorno precisa receber um objeto instância de Date."));
         else
             this._dataRetorno = dataRetorno;
     }
 
     set dataBaixa(dataBaixa = new Date()){
-        if (!(dataBaixa instanceof Date))
+        if (!(dataBaixa instanceof Date) && dataBaixa !== null)
             console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
         else
             this._dataBaixa = dataBaixa;

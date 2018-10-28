@@ -104,7 +104,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
         </section>
 
         <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
@@ -131,8 +131,10 @@
             <label for="data_compra">Data da compra:</label>
             <input type="date" name="dataCompraInput">
 
-            <button type="button" id="enviar">Enviar</button>
-            <button name="cancelarModalButton">Cancelar</button>
+            <div class="container-modal">
+                <button name="cancelarModalButton">Cancelar</button>
+                <button type="button" id="enviar">Enviar</button>
+            </div>
         </section>
 
         <section id="entrada" class="div-modal">
@@ -164,7 +166,6 @@
 
         <script src="JS/PatrimonioPage.js"></script>
         <script src="JS/Patrimonio.js"></script>
-        <script src="JS/PatrimonioEncapsulate.js"></script>
         <script src="JS/PatrimonioManipulationService.js"></script>
         <script src="JS/PatrimonioClassTest.js"></script>
     </body>

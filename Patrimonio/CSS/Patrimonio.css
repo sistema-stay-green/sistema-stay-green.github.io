@@ -61,7 +61,7 @@ button:focus{
     position: sticky;
     left: 95%;
     bottom: 4vh;
-    
+
     width: 1vh;
     height: 5vh;
     padding: 3.5vh;
@@ -103,6 +103,14 @@ label{
     cursor: pointer;
 }
 
+.div-modal label{
+    margin-bottom: -0.5em;
+}
+
+.div-modal input, .div-modal select{
+    margin-bottom: 1.5em;
+}
+
 
 /*Modal*/
 .div-modal{
@@ -117,6 +125,7 @@ label{
     top: calc(50vh - 20vh);
     left: calc(50vw - 20vh);
     width: 25em;
+    margin-top: -5em;
 }
 .div-modal input{
     width: 100%;
@@ -131,4 +140,18 @@ label{
 
 #comprar{
     height: 60vh;
+}
+
+.container-modal{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    right: 0;
+}
+
+.container-modal button{
+    display: inline-block;
+    position: relative;
+    bottom: -1.5em;
+    margin-left: 3em;
 }

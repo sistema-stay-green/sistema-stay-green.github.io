@@ -1,3 +1,7 @@
+/*   Autor: Sávio Cardoso
+     Grupo 5: patrimônio
+     líder: Mei Fagundes */
+
 // --- DOM ---
 
 let enviarComprarButton = document.querySelector("button[name='enviarComprarButton']");
@@ -21,5 +25,4 @@ function encapsulaDados(){
 }
 
 // --- EVENT LISTENERS ---
-
 enviarComprarButton.addEventListener("click", encapsulaDados);

@@ -7,13 +7,29 @@
 
 
 /*body*/
+html{
+    font-family: 'Niramit', sans-serif;
+}
+
 body{
     background-color: #FDFCF3 !important;
     height: 100vh;
 }
 
-#comprar, #entrada, #saida, #tabela{
+#form, #entrada, #saida, #tabela{
     padding: 3em;
+}
+
+p:nth-child(1){
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+}
+
+p:nth-child(2){
+    text-align: center;
+    font-weight: lighter;
+    font-size: 1.5em;
 }
 
 
@@ -29,6 +45,11 @@ td{
 thead {
     color: white;
     background-color: #1e8939;
+}
+
+th{
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
 }
 
 
@@ -138,7 +159,7 @@ label{
     transition: 300ms ease-in;
 }
 
-#comprar{
+#form{
     height: 60vh;
 }
 

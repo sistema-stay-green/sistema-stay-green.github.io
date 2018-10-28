@@ -25,7 +25,7 @@ const NA = "N/A";
 
 /**
  * Mostra uma determinada Modal e esconde as outras
- * @param {string} modal 
+ * @param {string} modal
  * @author Mei
  */
 function showModal(modal){
@@ -77,7 +77,7 @@ function  recebeDadosSaida(){
 
 /**
  * Insere um objeto Patrimonio na tabela principal.
- * @param {Patrimonio} patrimonio 
+ * @param {Patrimonio} patrimonio
  * @author Mei
  */
 function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
@@ -171,7 +171,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
     tr.appendChild(td);
 
     // Adicionando os botões com id's variáveis. Ex: 'edit-7'
-    td = document.createElement("td"); 
+    td = document.createElement("td");
 
     button = document.createElement("button");
     button.id = "edit-" + patrimonio.id;

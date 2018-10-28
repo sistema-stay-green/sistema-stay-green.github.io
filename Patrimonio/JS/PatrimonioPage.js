@@ -1,6 +1,8 @@
-/*   Autor: Sávio Cardoso
-     Grupo 5: patrimônio
-     líder: Mei Fagundes */
+/**
+ * Arquivo JavaScript responsável pelas interações dinâmicas da página
+ *  e pelo encapsulamento de objetos Patrimônio.
+ * @author Mei, Sávio
+ */
 
 // --- DOM ---
 
@@ -21,27 +23,48 @@ const NA = "N/A";
 
 // --- FUNCTIONS ---
 
-function showComprarPage(){
-    comprarModal.classList.toggle("aparece");
-    entradaModal.classList.remove("aparece");
+/**
+ * Mostra uma determinada Modal e esconde as outras
+ * @param {string} modal 
+ * @author Mei
+ */
+function showModal(modal){
+
+    switch (modal) {
+        case 'compra':
+
+            comprarModal.classList.toggle("aparece");
+            entradaModal.classList.remove("aparece");
+            saidaModal.classList.remove("aparece");
+            break;
+
+        case 'entrada':
+
+            entradaModal.classList.toggle("aparece");
+            saidaModal.classList.remove("aparece");
+            comprarModal.classList.remove("aparece");
+            break;
+
+        case 'saida':
+
+            saidaModal.classList.toggle("aparece");
+            entradaModal.classList.remove("aparece");
+            comprarModal.classList.remove("aparece");
+            break;
+
+        default:
+            break;
+    }
+}
+
+/**
+ * Esconde todas as div Modal
+ * @author Mei
+ */
+function hideModal(){
     saidaModal.classList.remove("aparece");
-}
-
-function showEntradaModal(){
-    entradaModal.classList.toggle("aparece");
-    saidaModal.classList.remove("aparece");
-    comprarModal.classList.remove("aparece");
-}
-
-function showSaidaModal(){
-    saidaModal.classList.toggle("aparece");
     entradaModal.classList.remove("aparece");
     comprarModal.classList.remove("aparece");
-}
-
-function showPatrimonioPage(){
-    document.querySelector("#header").style.display = "block";
-    document.querySelector("#tabela").style.display = "block";
 }
 
 function recebeDadosEntrada(){
@@ -52,14 +75,8 @@ function  recebeDadosSaida(){
     saidaModal.classList.remove("aparece");
 }
 
-function cancelarModal(){
-    saidaModal.classList.remove("aparece");
-    entradaModal.classList.remove("aparece");
-    comprarModal.classList.remove("aparece");
-}
-
 /**
- * Indenta um objeto Patrimonio na tabela principal.
+ * Insere um objeto Patrimonio na tabela principal.
  * @param {Patrimonio} patrimonio 
  * @author Mei
  */
@@ -197,7 +214,7 @@ function hidePatrimonioTable(){
 }
 
 /**
- * Mostra novamete a tabela e remove a mensagem de aviso
+ * Mostra novamete a tabela e remove a mensagem de aviso.
  * @author Mei
  */
 function showPatrimonioTable(){
@@ -206,7 +223,11 @@ function showPatrimonioTable(){
     document.querySelector("#noResults").remove();
 }
 
-function recoverPatrimonioFromModal(){
+/**
+ * Recupera as informações da div Modal e as armazena em um objeto Patrimonio.
+ * @author Mei
+ */
+function recoverPatrimonioFromCompraModal(){
 
     let patrimonio = new Patrimonio();
 
@@ -223,18 +244,16 @@ function recoverPatrimonioFromModal(){
 
 // --- EVENT LISTENERS ---
 
-patrimonioMenuButton.addEventListener("click", showPatrimonioPage);
-addPatrimonioButton.addEventListener("click", showComprarPage);
+addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
 enviarEntradaModalButton.addEventListener("click", recebeDadosEntrada);
 enviarSaidaModalButton.addEventListener("click", recebeDadosSaida);
 
-
 for (let i = 0; i < entradaOptionButton.length; i++) {
-    entradaOptionButton[i].addEventListener("click", showEntradaModal);
+    entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});
 }
 for (let i = 0; i < saidaOptionButton.length; i++) {
-    saidaOptionButton[i].addEventListener("click", showSaidaModal);
+    saidaOptionButton[i].addEventListener("click", () => {showModal('saida')});
 }
 for (let i = 0; i < cancelarModalButton.length; i++) {
-    cancelarModalButton[i].addEventListener("click", cancelarModal);
+    cancelarModalButton[i].addEventListener("click", hideModal);
 }

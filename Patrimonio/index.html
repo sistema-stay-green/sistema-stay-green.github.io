@@ -13,12 +13,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
-        <section id="header">
-            <nav id="menu">
-                <button type="button" name="patrimonioMenuButton" onclick="showPatrimonioPage()"><span>Patrimônio</span></button>
-            </nav>
-        </section>
         <section id="tabela">
+            <h1>Patrimônio</h1>
             <section id="toolbar">
                 <br><label for="filtro_select">Filtro: </label>
                 <select id="filtro_select">
@@ -78,6 +74,10 @@
                 <label for="data_compra">Data da compra:</label>
                 <input type="date" name="dataCompraInput">
 
+                <div id="statusOptions">
+                    <button id="entradaButton">Entrada</button>
+                    <button id="saidaButton">Saída</button>
+                </div>
                 <div class="container-modal">
                     <button name="cancelarModalButton">Cancelar</button>
                     <button type="button" id="enviar">Enviar</button>

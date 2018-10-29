@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>StayGreen</title>
+  <link href="https://fonts.googleapis.com/css?family=Niramit:200" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="main.js"></script>
+  <script src="Produto.js" charset="utf-8"></script>
+  <script src="Request.js" charset="utf-8"></script>
+  <script src="Insumo.js" charset="utf-8"></script>
+  <style media="screen">
+    
+  </style>
+</head>
+<body>
+  <div class="conteudo">
+    <h1 id="h1TabProduto">Registrar produtos</h1>
+    <table id="tabProduto">
+      <tr>
+        <th>Nome do produto</th>
+        <th>Descrição</th>
+        <th>Unidade de medida</th>
+        <th>Valor</th>
+        <th>Quantidade em estoque</th>
+        <th>Ponto de aviso</th>
+      </tr>
+      <tr>
+        <td><input type="text" id="inpNomeProduto"></td>
+        <td><input type="text" id="inpDescricaoProduto"></td>
+        <td><input type="text" id="inpUniMedProduto"></td>
+        <td><input type="number" id="inpValorProduto"></td>
+        <td><input type="number" id="inpQuantEstoqueProduto"></td>
+        <td><input type="number" id="inpPontoAvisoProduto"></td>
+      </tr>
+    </table>
+    <button type="button" id="btnRegistarProduto">Registrar</button>
+
+    <h1 id="h1TabInsumo">Registrar insumos</h1>
+    <table id="tabInsumo">
+      <tr>
+        <th>Nome do insumo</th>
+        <th>Finalidade</th>
+        <th>Valor unitário</th>
+        <th>Quantidade em estoque</th>
+        <th>Ponto de aviso</th>
+      </tr>
+      <tr>
+        <td><input type="text" id="inpNomeInsumo"></td>
+        <td><input type="text" id="inpFinalidadeInsumo"></td>
+        <td><input type="number" id="inpValorUniInsumo"></td>
+        <td><input type="number" id="inpQuantEstoqueInsumo"></td>
+        <td><input type="number" id="inpPontoAvisoInsumo"></td>
+      </tr>
+    </table>
+    <button type="button" id="btnRegistrarInsumo">Registrar</button>
+  </div>
+</body>
+</html>

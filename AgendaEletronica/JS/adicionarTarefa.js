@@ -2,7 +2,7 @@ let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
     containerFormNovaTarefa = document.querySelector('form');
 
 /*Exibe o formulário de adicionar nova tarefa quando usuário clica no
-botão '+ Nova Trefa'*/
+botão '+ Nova Tarefa'*/
 botaoFormTarefaEl.addEventListener('click', () => {
   let mascaraFormEl = document.querySelector('#mascaraForm');
 
@@ -16,11 +16,52 @@ botaoFormTarefaEl.addEventListener('click', () => {
   containerFormNovaTarefa.classList.remove('invisivel');
 })
 
-/*TODO:
-  * Criar script que encapsula os dados do form em um objeto Tarefa
-  * Fazer um AJAX para enviar esse objeto para o Servlet
+let botaoConfirmarTarefa = document.querySelector('#adicionarNovaTarefa');
 
-  Responsável: João Francisco
-*/
+botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
-let botaoAdicionarNovaTarefa = document.querySelector('#adicionarNovaTarefa');
+function encapsularDadosTarefa(){
+    let novaTarefaAdicionada = new Tarefa();
+
+    novaTarefaAdicionada.nomeTarefa =
+      document.querySelector('#nomeNovaTarefa').value;
+    novaTarefaAdicionada.tipoTarefa =
+      document.querySelector('form select').value;
+    novaTarefaAdicionada.dataInicialTarefa =
+      new Date(document.querySelector('form input:nth-child(2)').value);
+    novaTarefaAdicionada.periodoRepetTarefa =
+      document.querySelector('input[name="periodoRepeticao"]').value;
+    novaTarefaAdicionada.insumosConsumidos = [];
+    novaTarefaAdicionada.qtProduzTarefa =
+      document.querySelector('input[name="producaoPrevista"]').value;
+    novaTarefaAdicionada.gastoTarefa =
+      document.querySelector('input[name="valorGasto"]').value;
+
+    let insumosGeraisCheck =
+        Array.from(document.querySelectorAll('form input[type="checkbox"]')),
+    insumosConsumidos =
+      insumosGeraisCheck.filter((checkbox) => checkbox.checked);
+
+    for(let insumos of insumosConsumidos){
+      novaTarefaAdicionada.insumosConsumidos.push(insumos.value);
+    }
+
+    novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
+
+    console.table(novaTarefaAdicionada);
+
+/*let requisicao = new XMLHttpRequest;
+botaoFormTarefaEl.addEventListener('click', function(){
+  requisicao.open('GET', '/nomeservlet');
+  requisicao.send();
+
+});
+
+requisicao.onreadystatechange = (/*InputsTarefa??) =>{
+   if(requisicao.readyState == XMLHttpRequest.DONE){
+      if(requisicao.status == 200){
+          InputsTarefa.toJSON().stringify();
+      }
+   }
+}*/
+}

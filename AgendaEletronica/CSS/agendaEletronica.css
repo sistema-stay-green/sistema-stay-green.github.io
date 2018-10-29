@@ -98,8 +98,22 @@ form{
 #containerCalendario{
 	position: relative;
 	display: grid;
+	grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
+	grid-template-rows: calc(100vh/4) calc(100vh/4) calc(100vh/4) calc(100vh/4);
 	width: 80vw;
 }
+
+#containerCalendario article{
+	border-bottom: 1px solid var(--pretoNight);
+	border-right: 1px solid var(--pretoNight);
+}
+
+#containerCalendario article p{
+	margin: 0;
+	font-weight: bold;
+	padding: .3em;
+}
+
 
 #botaoFormTarefa{
 	position: absolute;

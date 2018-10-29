@@ -1,14 +1,131 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Patrimonio</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css" />
-    <script src="JS/Patrimonio.js"></script>
-    <script src="JS/PatrimonioClassTest.js"></script>
-</head>
-<body>
-    <h1>Hello Patrimônio!</h1>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Mei Fagundes">
+        <meta name="author" content="Sávio Cardoso">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Patrimônio</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
+    </head>
+    <body>
+        <section id="tabela">
+            <h1>Controle dos Patrimônios</h1>
+            <section id="toolbar">
+                <span>
+                    <label for="filtroSelect">Filtrar: </label>
+                    <select id="filtroSelect">
+                        <option selected>Todos</option>
+                        <option>Em Posse</option>
+                        <option>Em Manutenção</option>
+                        <option>Alugados</option>
+                        <option>Vendidos</option>
+                        <option>Vendidos</option>
+                    </select>
+                </span>
+            </section>
+            <table id="patrimonioTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Descricao</th>
+                        <th>Status</th>
+                        <th>Índice de Depreciação</th>
+                        <th>Valor da Compra</th>
+                        <th>Valor Atual</th>
+                        <th>Data da Compra</th>
+                        <th>Data de Saída</th>
+                        <th>Data de Retorno</th>
+                        <th>Data de Baixa</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        
+
+        <!-- Div Modal Formulário -->
+
+        <section id="form" class="div-modal">
+            <div class="conteudo">
+
+                <label for="nomeInput">Nome do Patrimônio:</label>
+                <input type="text" name="nomeInput" required placeholder="digite...">
+
+                <label for="tipoInput">Tipo do Patrimônio:</label>
+                <select name="tipoInput">
+                    <option value="MAQUINA" selected>Máquina</option>
+                    <option value="OUTROS">Outros</option>
+                </select>
+
+                <label for="finalidadeInput">Descrição do Patrimônio:</label>
+                <input type="text" name="finalidadeInput" required placeholder="digite...">
+
+                <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
+                <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
+
+                <label for="valorCompraInput">Valor da Compra (R$):</label>
+                <input type="number" min="0" name="valorCompraInput" placeholder="digite...">
+
+                <label for="dataCompraInput">Data da Compra:</label>
+                <input type="date" name="dataCompraInput">
+                
+                <div id="statusOptions">
+                    <label for="statusOptions">Mudar Status:</label>
+                    <button id="entradaButton" class="botaoFantasma">Entrada</button>
+                    <button id="saidaButton" class="botaoFantasma">Saída</button>
+                </div>
+            </div>
+
+            <div class="container-modal">
+                <button name="cancelarModalButton">Cancelar</button>
+                <button id="enviar">Enviar</button>
+            </div>
+        </section>
+
+        <!-- Div Modal Entrada -->
+
+        <section id="entrada" class="div-modal">
+            <label for="select_entrada">Entrada: </label>
+            <select id="select_entrada">
+                <option value="aluguel">Aluguel</option>
+                <option value="manutencao">Manutenção</option>
+            </select>
+            <label for="data_entrada">Data de entrada:</label>
+            <input type="date" id="data_entrada">
+            <button name="enviarEntradaModalButton">Enviar</button>
+            <button name="cancelarModalButton">Cancelar</button>
+        </section>
+
+        <!-- Div Modal Saída -->
+
+        <section id="saida" class="div-modal">
+            <label for="select_saida">Saída: </label>
+            <select id="select_saida">
+                <option value="venda">Venda</option>
+                <option value="descarte">Descarte</option>
+                <option value="aluguel">Aluguel</option>
+                <option value="manutencao">Manutenção</option>
+            </select>
+            <label for="data_saida">Data de saída:</label>
+            <input type="date" id="data_saida">
+            <button name="enviarSaidaModalButton">Enviar</button>
+            <button name="cancelarModalButton">Cancelar</button>
+        </section>
+
+        <!-- Floating button -->
+
+        <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
+
+        <script src="../JS/staygreen.js"></script>
+        <script src="JS/Patrimonio.js"></script>
+        <script src="JS/PatrimonioPage.js"></script>
+        <script src="JS/PatrimonioManipulationService.js"></script>
+        <script src="JS/PatrimonioClassTest.js"></script>
+    </body>
 </html>

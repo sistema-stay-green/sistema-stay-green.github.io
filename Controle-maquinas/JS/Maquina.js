@@ -1,205 +1,106 @@
+
 /**
  * Classe objeto para a encapsulação de dados do Patrimonio.
- * @author Mei
+ * @author Guilherme Sena
  */
-class Maquina {
+// Enviaremos já com status?
+// Vender = Descartar?
+// Porque não tinha dataRetorno?
 
-    constructor(id) {
+function encapsularTodos(id, nome, descricao, status,
+                      indiceDepreciacao, valorCompra, valorAtual, dataCompra,
+                      dataSaida, dataRetorno, dataBaixa){
+    let maquina = new Maquina(id);
+    maquina.id = id;
+    maquina.nome = nome;
+    maquina.tipo = "MAQUINA";
+    maquina.descricao = descricao;
+    maquina.status = status;
+    maquina.indiceDepreciacao = indiceDepreciacao;
+    maquina.valorCompra = valorCompra;
+    maquina.valorAtual = valorAtual;
+    maquina.dataCompra = dataCompra;
+    maquina.dataSaida = dataSaida;
+    maquina.dataRetorno = dataRetorno;
+    maquina.dataBaixa = dataBaixa;
+    return maquina;
+}
 
-        // Setting all attributes as null to differ from the default 'undefined'
-        this._id = id;
-        this._nome = null;
-        this._tipo = "MAQUINA";
-        this._descricao = null;
-        this._status = null;
-        this._indiceDepreciacao = null;
-        this._valorCompra = null;
-        this._valorAtual = null;
-        this._dataCompra = null;
-        this._dataSaida = null;
-        this._dataRetorno = null;
-        this._dataBaixa = null;
-    }
+/**
+ * Envia dados para o Servlet para Compra de máquinas.
+ * @param {int} Número inteiro representando o ID da máquina;
+ * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
+ * @author Guilherme Sena
+ */
+function encapsularCadastrar(id, nome, descricao, status,
+                      indiceDepreciacao, valorCompra){
+    let maquina = new Maquina(id);
+    maquina.id = id;
+    maquina.nome = nome;
+    maquina.descricao = descricao;
+    maquina.status = status;
+    maquina.indiceDepreciacao = indiceDepreciacao;
+    maquina.valorCompra = valorCompra;
+    maquina.dataCompra = new Date();
 
-    /**
-     * Imprime no console todos os valores da classe.
-     * @author Mei
-     */
-    printToConsole(){
+    return maquina.toJSON();
+}
 
-        console.log("Id: " + this._id);
-        console.log("Nome: " + this._nome);
-        console.log("Tipo: " + this._tipo);
-        console.log("Descrição: " + this._descricao);
-        console.log("Status: " + this._status);
-        console.log("Índice de depreciação: " + this._indiceDepreciacao);
-        console.log("Valor da Compra: " + this._valorCompra);
-        console.log("Valor Atual: " + this._valorAtual);
-        console.log("Data da Compra: " + this._dataCompra);
-        console.log("Data da Saída: " + this._dataSaida);
-        console.log("Data de Retorno: " + this._dataRetorno);
-        console.log("Data da Baixa: " + this._dataBaixa);
-    }
+/**
+ * Envia dados para o Servlet para Comprar máquina.
+ * @param {int} Número inteiro representando o ID da máquina;
+ * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
+ * @author Guilherme Sena
+ */
+function encapsularVenda(id){
+    let maquina = new Maquina(id);
+    maquina.status = "VENDIDO";
+    maquina.dataBaixa = new Date();
+    return maquina.toJSON();
+}
 
-    /**
-     * Tenta converter uma string para o seu valor em Float e a retorna.
-     * @param {string} number String a ser convertida.
-     * @returns {number} Valor em Float correspondente ou o valor inicial.
-     * @author Mei
-     */
-    tryParse(number){
+/**
+ * Envia dados para o Servlet para Vender máquina.
+ * @param {int} Número inteiro representando o ID da máquina;
+ * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
+ * @author Guilherme Sena
+ */
+function encapsularDescarte(id){
+    let maquina = new Maquina(id);
+    maquina.status = "DESCARTADO";
+    maquina.dataBaixa = new Date();
 
-        if (isNaN(number) == true && number !== undefined)
-            return parseFloat(number);
-        else
-            return number;
-    }
+    return maquina.toJSON();
+}
 
-    /**
-     * Converte objeto Patrimonio em string JSON.
-     * @returns {string} String com formatação JSON do objeto.
-     * @author Guilherme Sena
-     */
-    toJSON(){
-      let patrimonioJSON = {
-        "id": this.id,
-        "nome": this.nome,
-        "tipo": this.tipo,
-        "descricao": this.descricao,
-        "status": this.status,
-        "indiceDepreciacao": this.indiceDepreciacao,
-        "valorCompra": this.valorCompra,
-        "valorAtual": this.valorAtual,
-        "dataCompra": this.dataCompra,
-        "dataSaida": this.dataSaida,
-        "dataRetorno": this.dataRetorno,
-        "dataBaixa": this.dataBaixa
-      }
-      return JSON.stringify(patrimonioJSON);
-    }
+/**
+ * Envia dados para o Servlet para Alugar máquina.
+ * @param {int} Número inteiro representando o ID da máquina;
+ * @param {object} dataRetorno Objeto Data representando data de retorno;
+ * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
+ * @author Guilherme Sena
+ */
+function encapsularAluguel(id, dataRetorno){
+  let maquina = new Maquina(id);
+  maquina.status = "ALUGADO";
+  maquina.dataSaida = new Date();
+  maquina.dataRetorno = dataRetorno;
 
-    // Getter
+  return maquina.toJSON();
+}
 
-    get id(){
-        return this._id;
-    }
+/**
+ * Envia dados para o Servlet para Enviar máquina à manutenção.
+ * @param {int} Número inteiro representando o ID da máquina;
+ * @param {object} dataRetorno Objeto Data representando data de retorno;
+ * @returns {boolean} Verdadeiro se a requisão for feita com sucesso, falso se não.
+ * @author Guilherme Sena
+ */
+function encapsularManutencao(id){
+  let maquina = new Maquina(id);
+  maquina.status = "EM_MANUTENCAO";
+  maquina.dataSaida = new Date();
+  maquina.dataRetorno = dataRetorno;
 
-    get nome(){
-        return this._nome;
-    }
-
-    get tipo(){
-        return this._tipo;
-    }
-
-    get descricao(){
-        return this._descricao;
-    }
-
-    get status(){
-        return this._status;
-    }
-
-    get indiceDepreciacao(){
-        return this._indiceDepreciacao;
-    }
-
-    get valorCompra(){
-        return this._valorCompra;
-    }
-
-    get valorAtual(){
-        return this._valorAtual;
-    }
-
-    get dataCompra(){
-        return this._dataCompra;
-    }
-
-    get dataSaida(){
-        return this._dataSaida;
-    }
-
-    get dataRetorno(){
-        return this._dataRetorno;
-    }
-
-    get dataBaixa(){
-        return this._dataBaixa;
-    }
-
-    // Setter
-
-    set id(id){
-        this._id = this.tryParse(id);
-    }
-
-    set nome(nome){
-        this._nome = nome;
-    }
-
-    set tipo(tipo){
-        this._tipo = tipo;
-    }
-
-    set descricao(descricao){
-        this._descricao = descricao;
-    }
-
-    set status(status){
-        switch (status) {
-
-            case 'VENDIDO':
-            case 'ALUGADO':
-            case 'EM_POSSE':
-            case 'DESCARTADO':
-            case 'EM_MANUTENCAO':
-                this._status = status;
-                break;
-
-            default:
-                console.log(new Error("O Status recebido não corresponde a nenhum dos valores possíveis."));
-                break;
-        }
-    }
-
-    set indiceDepreciacao(indiceDepreciacao){
-            this._indiceDepreciacao = this.tryParse(indiceDepreciacao);
-    }
-
-    set valorCompra(valorCompra){
-            this._valorCompra = this.tryParse(valorCompra);
-    }
-
-    set valorAtual(valorAtual){
-            this._valorAtual = this.tryParse(valorAtual);
-    }
-
-    set dataCompra(dataCompra){
-        if (!(dataCompra instanceof Date))
-            console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
-        else
-            this._dataCompra = dataCompra;
-    }
-
-    set dataSaida(dataSaida){
-        if (!(dataSaida instanceof Date))
-            console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
-        else
-            this._dataSaida = dataSaida;
-    }
-
-    set dataRetorno(dataRetorno){
-        if (!(dataRetorno instanceof Date))
-            console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
-        else
-            this._dataRetorno = dataRetorno;
-    }
-
-    set dataBaixa(dataBaixa){
-        if (!(dataBaixa instanceof Date))
-            console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
-        else
-            this._dataBaixa = dataBaixa;
-    }
+  return maquina.toJSON();
 }

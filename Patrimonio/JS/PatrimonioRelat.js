@@ -92,3 +92,47 @@ class  PatrimonioRelat  {
   //  retorna uma array com os elementos do patrimonio discriminados de acordo
   // com o parâmetro que receber. Parametros de busca suportados: id,nome,tipo,status.
 }
+
+function getPatrimonioBase(patrimonio = new Patrimonio(), key){
+
+  switch (key) {
+
+    case 'EM_MANUTENCAO':
+      //
+      break;
+
+    case 'EM_POSSE':
+      //
+      break;
+
+    case 'ALUGADOS':
+      //
+      break;
+
+    case 'VENDIDOS':
+      //
+      break;
+
+    default:
+    //console.error();
+
+  }
+
+  return;
+}
+
+function getPatrimoniosEmManutencao(patrimonio = new Patrimonio()) {
+    return getPatrimonioBase(patrimonio, 'EM_MANUTENCAO');
+}
+
+function getPatrimoniosEmPosse(patrimonio = new Patrimonio()) {
+    return getPatrimonioBase(patrimonio, 'EM_POSSE');
+}
+
+function getPatrimoniosAlugados(patrimonio = new Patrimonio()) {
+    return getPatrimonioBase(patrimonio, 'ALUGADOS');
+}
+
+function getPatrimoniosVendidos(patrimonio = new Patrimonio()) {
+    return getPatrimonioBase(patrimonio, 'VENDIDOS');
+}

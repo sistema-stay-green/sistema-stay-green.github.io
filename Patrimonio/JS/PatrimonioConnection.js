@@ -5,30 +5,66 @@
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 
-function saidaPatrimonio(patrimonio = new Patrimonio(), key){
+/**
+ * Função para gerar datas no formato correto antes de mandar para o servlet
+ * @author Duda
+ */
 
+function getDataParam(patrimonio = new Patrimonio(), key){
   let params;
 
   switch (key) {
     case 'Compra':
-      params = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
+      if (patrimonio.dataCompra !== null) {
+        params = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
+      }
       break;
-  
+    case 'Saida':
+      if (patrimonio.dataSaida !== null) {
+        params = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
+      }
+      break;
+    case 'Retorno':
+      if (patrimonio.dataRetorno !== null) {
+        params = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+      }
+      break;
+    case 'Baixa':
+      if (patrimonio.dataBaixa !== null) {
+        params = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
+      }
+      break;
     default:
+      console.log(new Error("Erro de leitura de chave"));
       break;
   }
-
-  params = "data" + key + "=" + params;
-
+  if (params !== undefined) {
+    params = "data" + key + "=" + params;
+  }
   console.log(params);
 }
 
-function sendAddPatrimonioToServlet(patrimonio){
+
+function compraPatrimonio(patrimonio){
   let params = "action=c&patrimonio=" + JSON.stringify(patrimonio);
-  params += "&" + saidaPatrimonio(patrimonio);
-
+  params += "&" + getDataParam(patrimonio);
   Request.post(SERVLET_URL, params);
+}
 
-  //TODO: Receber o resultado do servlet através do método GET
-  //let response = Request.get(url);
+
+function saidaPatrimonio(id, status){
+  let params = "?action=s&id=" + id + "&tipoSaida=" + status;
+  Request.get(SERVLET_URL + params);
+}
+
+function entradaPatrimonio(id, data = new Date()){
+  let params = "?action=e&id=" + id + "&dataEntrada=" + data.toISOString().slice(0,10).replace("/-/g","");
+  Request.get(SERVLET_URL + params);
+}
+
+
+function retornoPatrimonio(){
+  let params = "?action=r";
+  Request.get(SERVLET_URL + params);
+
 }

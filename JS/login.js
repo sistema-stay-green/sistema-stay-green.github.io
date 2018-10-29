@@ -57,12 +57,12 @@ inputEmailEl.addEventListener("change", function(){
   let emailUsuario = inputEmailEl.value;
   let labelEl = document.querySelector("#login > form:last-of-type > label:nth-child(4)");
 
-  if((emailUsuario.indexOf("@") === -1 || emailUsuario.indexOf(".") === -1) && labelEl.querySelector("span") === null){
+  if((emailUsuario.indexOf("@") === -1 || emailUsuario.indexOf(".com") === -1) && labelEl.querySelector("span") === null){
     btnConfimarCadastroEl.disable = "true";
     btnConfimarCadastroEl.classList.add("botaoDesab");
     labelEl.insertBefore(escreveMensagemErro(" (E-mail inválido)"), labelEl.querySelector("input"));
   }
-  else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".") > -1) && labelEl.querySelector("span") !== null){
+  else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".com") > -1) && labelEl.querySelector("span") !== null){
     labelEl.removeChild(labelEl.querySelector("span"));
     if(document.querySelectorAll("#login > form .mensagemErro").length === 0){
       btnConfimarCadastroEl.disable = "false";

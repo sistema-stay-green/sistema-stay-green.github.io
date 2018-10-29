@@ -38,6 +38,8 @@ function generatePlaceholders() {
 
         patrimonio.calculateValorAtual();
 
+        saidaPatrimonio(patrimonio, "Compra");
+
         insertPatrimonioIntoTable(patrimonio);
     }
 }
@@ -47,4 +49,3 @@ function generatePlaceholders() {
 generatePlaceholders();
 hidePatrimonioTable();
 showPatrimonioTable();
-saidaPatrimonio(0, "em_manutencao");

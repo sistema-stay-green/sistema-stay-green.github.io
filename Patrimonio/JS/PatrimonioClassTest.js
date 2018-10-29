@@ -38,7 +38,10 @@ function generatePlaceholders() {
 
         patrimonio.calculateValorAtual();
 
-        saidaPatrimonio(patrimonio, "Compra");
+        //saidaPatrimonio(patrimonio, "Compra");
+        //saidaPatrimonio(patrimonio, "Saida");
+        //saidaPatrimonio(patrimonio, "Retorno");
+        //saidaPatrimonio(patrimonio, "Baixa");
 
         insertPatrimonioIntoTable(patrimonio);
     }

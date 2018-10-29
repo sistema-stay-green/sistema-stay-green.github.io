@@ -183,8 +183,8 @@ header > #mascara-conteudo > button{
   cursor: pointer;
 }
 nav{
-  height: 7%;
-  width: 100%;
+  height: 7vh;
+  width: 100vw;
   display: flex;
   background-color: #1d883a;
   align-content: space-around;
@@ -192,25 +192,33 @@ nav{
   position: sticky;
   top:0;
 }
+
 nav > h3{
-  width:20%;
+  width:20vw;
   height: 100%;
   text-align: center;
   font-family: 'Niramit' , sans-serif;
   color:white;
   font-size: calc(20px + 1vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-nav > a{
-  text-decoration: none;
-  width:15%;
+nav > a {
+  text-decoration:none;
+  width:13.3vw;
   height: 100%;
   text-align: center;
   font-family: 'Niramit' , sans-serif;
   color:white;
   font-size: calc(20px + 1vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 nav > a:hover{
   background-color: #116623;
+  text-decoration:none;
 }
 
 footer{

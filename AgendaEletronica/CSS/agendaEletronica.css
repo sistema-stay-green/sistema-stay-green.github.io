@@ -128,8 +128,9 @@ form{
 	margin: 1em;
 }
 
-#botaoFormTarefa{
+section > #botaoFormTarefa{
 	right: 0;
+	margin-right: 23vw;
 }
 
 #adicionarNovaTarefa{

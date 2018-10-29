@@ -2,13 +2,124 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Controle de Maquinas</title>
+    <link rel="stylesheet" href="CSS/Estilo.css">
   </head>
   <body>
-
+    </nav>
+    <h1 id="TituloPagina">Controle De Maquinas</h1>
+    <div class="opções">
+      <button type="button" id="BotãoCadastro" name="BotãoCadastro">Cadastrar</button>
+    </div>
+    <div class="valores">
+      <p><label for="">Nome da Maquina</label></p>
+      <input type="text" class="inputs" name="nome" id="nome" >
+      <p><label>Finalidade da Maquina</label></p>
+      <input type="text" class="inputs" name="finalidade" id="finalidade"></p>
+      <p><label>Valor de Compra</label></p>
+      <input type="number" class="inputs" name="valor" id="valor"></p>
+      <p><label>Indice de depreciação</label></p>
+      <input type="number" class="inputs" name="depreciação" id="depreciação"></p>
+      <p><label>Data de Compra</label></p>
+      <p><input type="date" class="inputs" name="data" id="data"></p>
+      <button type="button" name="BotãoAção" id="BotãoAção">Enviar</button>
+      <button type="button" name="BotãoVoltar" id="BotãoVoltar">Voltar</button>
+    </div>
+    <div class="maquinas">
+      <section id="filtro">
+        <label for="filtro_select">Filtro:</label>
+        <select id="filtro_select">
+          <option><a href="#">Em Posse</option>
+          <option><a href="#">Em Manutenção</option>
+          <option><a href="#">Alugados</option>
+          <option><a href="#">Vendidos</option>
+          <option><a href="#">Descartados</option>
+        </select>
+      </section>
+      <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nome</th>
+          <th>Finalidade</th>
+          <th>valorCompra</th>
+          <th>indiceDepreciacao</th>
+          <th>dataCompra</th>
+          <th>status</th>
+          <th>tipo</th>
+          <th>valorAtual</th>
+          <th>dataSaida</th>
+          <th>dataBaixa</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody class="tabela">
+        <tr class="maquina">
+          <td class="id">1</td>
+          <td>Trator</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>5000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">VENDIDO</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="BotãoSaida">Saida</button>
+          </td>
+        </tr>
+        <tr class="maquina">
+          <td class="id">2</td>
+          <td>Trator</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>5000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">EM_POSSE</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="BotãoSaida">Saida</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div id="saidas" class="saidas">
+      <div class="saidas-conteudo">
+        <span class="fecharModal">&times;</span>
+        <section id="filtro">
+          <label for="filtro_saida">Opção:</label>
+          <select id="filtro_saida">
+            <option><a href="#">Alugar</option>
+            <option><a href="#">Vender</option>
+            <option><a href="#">Enviar para conserto</option>
+            <option><a href="#">Descartar</option>
+          </select>
+          <span id="Retorno"><p><label>Data de Retorno</label></p>
+          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Venda"><p><label>Data de Venda</label></p>
+          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Envio"><p><label>Data de Envio</label></p>
+          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Descarte"><p><label>Data de Descarte</label></p>
+          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="filtro-data"></span>
+        </section>
+     </div>
+   </div>
   </body>
   <!--Scripts TEM que estar nessa ordem, adicionar qualquer outro depois -->
   <script src="../JS/Request.js" charset="utf-8"></script>
-  <script src="JS/Maquina.js" charset="utf-8"></script>
-  <script src="JS/EncapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="JS/maquina.js" charset="utf-8"></script>
+  <script src="JS/encapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="JS/estilizacao.js" charset="utf-8"></script>
 </html>

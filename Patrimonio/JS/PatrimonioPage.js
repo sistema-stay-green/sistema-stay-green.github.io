@@ -48,9 +48,12 @@ function showModal(modal, id){
 
         case 'entrada':
 
-            entradaModal.classList.toggle("aparece");
+            entradaModal.classList.add("aparece");
+            entradaModal.classList.remove("esconde");
             saidaModal.classList.remove("aparece");
+            saidaModal.classList.add("esconde");
             formModal.classList.remove("aparece");
+            formModal.classList.add("esconde");
             break;
 
         case 'saida':
@@ -69,7 +72,7 @@ function showModal(modal, id){
             //formModal.style.minHeight = "37.9em";
             statusOptionsDiv.classList.remove("esconde");
             statusOptionsDiv.classList.add("aparece");
-            
+
             break;
 
         default:
@@ -258,11 +261,11 @@ function recoverPatrimonioFromCompraModal(){
     patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
     patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
     let data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    if (data[0] !== "") 
+    if (data[0] !== "")
         patrimonio.dataCompra = new Date(data[0], data[1], data[2]);
     else
         console.log(new Error("O formato enviado da Data está incorreto!"));
-        
+
     hideModal();
     return patrimonio;
 }
@@ -288,7 +291,6 @@ function updateDynamicEventListeners() {
 }
 
 //updateDynamicEventListeners();
-
 for (let i = 0; i < entradaOptionButton.length; i++) {
     entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});
 }

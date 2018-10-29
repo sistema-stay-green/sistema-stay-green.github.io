@@ -21,7 +21,6 @@
                         <option>Em Manutenção</option>
                         <option>Alugados</option>
                         <option>Vendidos</option>
-                        <option>Vendidos</option>
                     </select>
                 </span>
             </section>
@@ -31,7 +30,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Tipo</th>
-                        <th>Descricao</th>
+                        <th>Finalidade</th>
                         <th>Status</th>
                         <th>Índice de Depreciação</th>
                         <th>Valor da Compra</th>
@@ -47,7 +46,7 @@
             </table>
         </section>
 
-        
+
 
         <!-- Div Modal Formulário -->
 
@@ -63,7 +62,7 @@
                     <option value="OUTROS">Outros</option>
                 </select>
 
-                <label for="finalidadeInput">Descrição do Patrimônio:</label>
+                <label for="finalidadeInput">Finalidade do Patrimônio:</label>
                 <input type="text" name="finalidadeInput" required placeholder="digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
@@ -74,11 +73,11 @@
 
                 <label for="dataCompraInput">Data da Compra:</label>
                 <input type="date" name="dataCompraInput">
-                
+
                 <div id="statusOptions">
                     <label for="statusOptions">Mudar Status:</label>
-                    <button id="entradaButton" class="botaoFantasma">Entrada</button>
-                    <button id="saidaButton" class="botaoFantasma">Saída</button>
+                    <button id="entradaOptionButton" class="botaoFantasma">Entrada</button>
+                    <button id="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
             </div>
 

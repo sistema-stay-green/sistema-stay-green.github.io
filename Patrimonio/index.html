@@ -1,30 +1,30 @@
-<!-- Autor: Sávio Cardoso
-     Grupo 5: patrimônio
-     líder: Mei Fagundes-->
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="author" content="Mei Fagundes">
+        <meta name="author" content="Sávio Cardoso">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Patrimonio</title>
+        <title>Patrimônio</title>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
         <section id="tabela">
-            <h1>Patrimônio</h1>
+            <h1>Controle dos Patrimônios</h1>
             <section id="toolbar">
-                <br><label for="filtro_select">Filtro: </label>
-                <select id="filtro_select">
-                    <option><a href="#">Em Posse</option>
-                    <option><a href="#">Em Manutenção</option>
-                    <option><a href="#">Alugados</option>
-                    <option><a href="#">Vendidos</option>
-                    <option><a href="#">Vendidos</option>
-                </select>
-            </section> <br><br><br>
+                <span>
+                    <label for="filtroSelect">Filtrar: </label>
+                    <select id="filtroSelect">
+                        <option selected>Todos</option>
+                        <option>Em Posse</option>
+                        <option>Em Manutenção</option>
+                        <option>Alugados</option>
+                        <option>Vendidos</option>
+                        <option>Vendidos</option>
+                    </select>
+                </span>
+            </section>
             <table id="patrimonioTable">
                 <thead>
                     <tr>
@@ -43,47 +43,52 @@
                         <th>Opções</th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
-
         </section>
 
-        <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
+        
+
+        <!-- Div Modal Formulário -->
 
         <section id="form" class="div-modal">
             <div class="conteudo">
-                <label for="nome_patrimonio">Nome do patrimônio:</label>
+
+                <label for="nomeInput">Nome do Patrimônio:</label>
                 <input type="text" name="nomeInput" required placeholder="digite...">
 
-                <label for="tipo_patrimonio">Tipo do patrimônio:</label><br>
+                <label for="tipoInput">Tipo do Patrimônio:</label>
                 <select name="tipoInput">
                     <option value="MAQUINA" selected>Máquina</option>
                     <option value="OUTROS">Outros</option>
-                </select><br>
+                </select>
 
-                <label for="descricao_patrimonio">Descrição do patrimônio:</label>
+                <label for="finalidadeInput">Descrição do Patrimônio:</label>
                 <input type="text" name="finalidadeInput" required placeholder="digite...">
 
-                <label for="indice_depreciacao">Índice de depreciação:</label>
-                <input type="number" name="indiceDepreciacaoInput" placeholder="digite...">
+                <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
+                <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
 
-                <label for="valor_compra">Valor da compra:</label>
-                <input type="number" name="valorCompraInput" placeholder="digite...">
+                <label for="valorCompraInput">Valor da Compra (R$):</label>
+                <input type="number" min="0" name="valorCompraInput" placeholder="digite...">
 
-                <label for="data_compra">Data da compra:</label>
+                <label for="dataCompraInput">Data da Compra:</label>
                 <input type="date" name="dataCompraInput">
-
+                
                 <div id="statusOptions">
-                    <button id="entradaButton">Entrada</button>
-                    <button id="saidaButton">Saída</button>
-                </div>
-                <div class="container-modal">
-                    <button name="cancelarModalButton">Cancelar</button>
-                    <button type="button" id="enviar">Enviar</button>
+                    <label for="statusOptions">Mudar Status:</label>
+                    <button id="entradaButton" class="botaoFantasma">Entrada</button>
+                    <button id="saidaButton" class="botaoFantasma">Saída</button>
                 </div>
             </div>
+
+            <div class="container-modal">
+                <button name="cancelarModalButton">Cancelar</button>
+                <button id="enviar">Enviar</button>
+            </div>
         </section>
+
+        <!-- Div Modal Entrada -->
 
         <section id="entrada" class="div-modal">
             <label for="select_entrada">Entrada: </label>
@@ -96,6 +101,8 @@
             <button name="enviarEntradaModalButton">Enviar</button>
             <button name="cancelarModalButton">Cancelar</button>
         </section>
+
+        <!-- Div Modal Saída -->
 
         <section id="saida" class="div-modal">
             <label for="select_saida">Saída: </label>
@@ -110,6 +117,10 @@
             <button name="enviarSaidaModalButton">Enviar</button>
             <button name="cancelarModalButton">Cancelar</button>
         </section>
+
+        <!-- Floating button -->
+
+        <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
 
         <script src="../JS/staygreen.js"></script>
         <script src="JS/Patrimonio.js"></script>

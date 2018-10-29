@@ -13,6 +13,8 @@ const saidaOptionButton = document.querySelectorAll("button[name='saidaOptionBut
 const cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
 const enviarEntradaModalButton = document.querySelector("button[name='enviarEntradaModalButton']");
 const enviarSaidaModalButton = document.querySelector("button[name='enviarSaidaModalButton']");
+//const enviarForm
+const statusOptionsDiv = document.querySelector("#statusOptions");
 const entradaModal = document.querySelector("#entrada");
 const saidaModal = document.querySelector("#saida");
 const formModal = document.querySelector("#form");
@@ -22,7 +24,7 @@ const NA = "N/A";
 
 let editButton = document.querySelectorAll("[id|=edit]");
 
-const editHandler = () => {showModal('editar')};
+const editHandler = (id) => {showModal('editar', id)};
 
 // --- FUNCTIONS ---
 
@@ -31,7 +33,7 @@ const editHandler = () => {showModal('editar')};
  * @param {string} modal
  * @author Mei
  */
-function showModal(modal){
+function showModal(modal, id){
 
     switch (modal) {
         case 'compra':
@@ -39,6 +41,9 @@ function showModal(modal){
             formModal.classList.toggle("aparece");
             entradaModal.classList.remove("aparece");
             saidaModal.classList.remove("aparece");
+            //formModal.style.minHeight = "34em";
+            document.querySelector("#statusOptions").classList.add("esconde");
+            document.querySelector("#statusOptions").classList.remove("aparece");
             break;
 
         case 'entrada':
@@ -57,15 +62,17 @@ function showModal(modal){
 
         case 'editar':
 
-            //saidaModal.classList.toggle("aparece");
-            //entradaModal.classList.remove("aparece");
-            //formModal.classList.remove("aparece");
+            formModal.classList.toggle("aparece");
+            entradaModal.classList.remove("aparece");
+            saidaModal.classList.remove("aparece");
+
+            //formModal.style.minHeight = "37.9em";
+            statusOptionsDiv.classList.remove("esconde");
+            statusOptionsDiv.classList.add("aparece");
             
-            // Construir a div Modal de Editar aqui
             break;
 
         default:
-            console.log("zup");
             break;
     }
 }
@@ -251,8 +258,12 @@ function recoverPatrimonioFromCompraModal(){
     patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
     patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
     let data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    patrimonio.dataCompra = new Date(data[0], data[1], data[2]);;
-
+    if (data[0] !== "") 
+        patrimonio.dataCompra = new Date(data[0], data[1], data[2]);
+    else
+        console.log(new Error("O formato enviado da Data está incorreto!"));
+        
+    hideModal();
     return patrimonio;
 }
 
@@ -266,13 +277,17 @@ function updateDynamicEventListeners() {
 
     editButton = document.querySelectorAll("[id|=edit]");
 
-    for (let i = 0; i < editButton.length; i++) {
+    //editButton.forEach(addEventListener("click", function(){editHandler(1)}));
+
+    editButton[editButton.length - 1].addEventListener("click", function(){editHandler(1)});
+
+    /*for (let i = 0; i < editButton.length; i++) {
         let currentButton = editButton[i];
-        currentButton.addEventListener("click", editHandler);
-    }
+        currentButton.addEventListener("click", function(){editHandler(i)});
+    }*/
 }
 
-updateDynamicEventListeners();
+//updateDynamicEventListeners();
 
 for (let i = 0; i < entradaOptionButton.length; i++) {
     entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});

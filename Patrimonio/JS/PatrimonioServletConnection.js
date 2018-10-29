@@ -1,5 +1,9 @@
-const servletUrl = "http://localhost:8080/StayGreen/PatrimonioServlet";
+/**
+ * Script para comunicação com o servlet PatrimonioServlet no backend.
+ * @author Duda
+ */
 
+const servletUrl = "http://localhost:8080/StayGreen/PatrimonioServlet";
 
 function saidaPatrimonio(id, tipoSaida){
   //TODO: Receber a data do campo da tela

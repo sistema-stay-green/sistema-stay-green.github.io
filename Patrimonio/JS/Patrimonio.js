@@ -57,7 +57,7 @@ class Patrimonio {
 
     calculateValorAtual(){
 
-        if (this._valorCompra !== null) {
+        if (this._valorCompra !== null && this._dataCompra !== null) {
             let anoCompra = this._dataCompra.getFullYear();
             let diferencaData = new Date().getFullYear() - anoCompra;
             this._valorAtual = this._valorCompra - 

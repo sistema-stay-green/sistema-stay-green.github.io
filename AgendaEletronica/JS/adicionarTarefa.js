@@ -3,18 +3,21 @@ let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
 
 /*Exibe o formulário de adicionar nova tarefa quando usuário clica no
 botão '+ Nova Tarefa'*/
-botaoFormTarefaEl.addEventListener('click', () => {
+
+function exibeFormularioNovaTarefa(){
   let mascaraFormEl = document.querySelector('#mascaraForm');
 
   mascaraFormEl.classList.remove('invisivel');
 
   mascaraFormEl.addEventListener('click', () => {
-      mascaraFormEl.classList.add('invisivel');
-      containerFormNovaTarefa.classList.add('invisivel');
+    mascaraFormEl.classList.add('invisivel');
+    containerFormNovaTarefa.classList.add('invisivel');
   })
 
   containerFormNovaTarefa.classList.remove('invisivel');
-})
+
+}
+botaoFormTarefaEl.addEventListener('click', exibeFormularioNovaTarefa);
 
 let botaoConfirmarTarefa = document.querySelector('#adicionarNovaTarefa');
 

@@ -1,0 +1,39 @@
+#tabProduto, #tabInsumo {
+  margin: auto;
+}
+
+#btnRegistarProduto, #btnRegistrarInsumo {
+  margin-top: 2em;
+}
+
+#h1TabInsumo {
+  margin-top: 2em;
+}
+
+tbody select {
+  width: 100%;
+  text-align-last: center;
+}
+
+#btnCriaRelatorio {
+  position: fixed;
+  right: 1%;
+  bottom: 2%;
+}
+
+#selTabela {
+  margin-bottom: 2em;
+}
+
+.ocultar {
+  display: none;
+}
+
+#selFiltro {
+  text-align-last: center;
+}
+
+caption {
+  text-align: right;
+  margin-bottom: 1em;
+}

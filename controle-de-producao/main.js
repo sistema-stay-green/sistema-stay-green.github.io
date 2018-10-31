@@ -22,6 +22,4 @@ window.onload = function () {
   function respostaServlet(retorno){
 
   }
-
-  
 }

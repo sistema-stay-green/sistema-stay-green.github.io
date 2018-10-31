@@ -4,16 +4,16 @@
 <head>
   <meta charset="utf-8">
   <title>StayGreen</title>
-    <link rel="stylesheet" href="estiloStayGreen.css">
-    <link rel="stylesheet" href="estiloControleProducao.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Niramit:200" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="main.js"></script>
-    <script src="Produto.js" charset="utf-8"></script>
-    <script src="Request.js" charset="utf-8"></script>
-    <script src="Insumo.js" charset="utf-8"></script>
-    <script src="estilos.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="estiloStayGreen.css">
+  <link rel="stylesheet" href="estiloControleProducao.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Niramit:200" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="index.js"></script>
+  <script src="Produto.js" charset="utf-8"></script>
+  <script src="Request.js" charset="utf-8"></script>
+  <script src="Insumo.js" charset="utf-8"></script>
+  <script src="estilos.js" charset="utf-8"></script>
 </head>
 <body>
     <div class="conteudo">
@@ -27,8 +27,8 @@
           <caption id="capTabProduto">
             <label for="selFiltro">Filtro: </label>
             <select id="selFiltro">
-              <option value="cafe">Café</option>
-              <option value="leite">Leite</option>
+              <option value="Café">Café</option>
+              <option value="Leite">Leite</option>
               <option value="preco">Preço</option>
               <option value="quantEsotque">Quantidade em estoque</option>
             </select>
@@ -95,6 +95,51 @@
           </tbody>
         </table>
         <button type="button" id="btnRegistrarInsumo">Registrar</button>
+      </section>
+
+      <section id="secProdutosInsumosRegistrados">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome do produto</th>
+              <th>Descrição</th>
+              <th>Unidade de medida</th>
+              <th>Valor</th>
+              <th>Quantidade em estoque</th>
+              <th>Ponto de aviso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome do insumo</th>
+              <th>Finalidade</th>
+              <th>Valor unitário</th>
+              <th>Quantidade em estoque</th>
+              <th>Ponto de aviso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </div>
     <button type="button" id="btnCriaRelatorio">Criar relatório</button>

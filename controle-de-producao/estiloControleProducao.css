@@ -17,8 +17,8 @@ tbody select {
 
 #btnCriaRelatorio {
   position: fixed;
-  right: 1%;
-  bottom: 2%;
+  right: 1em;
+  bottom: 1em;
 }
 
 #selTabela {
@@ -36,4 +36,18 @@ tbody select {
 caption {
   text-align: right;
   margin-bottom: 1em;
+}
+
+#secProdutosInsumosRegistrados {
+  margin-top: 3em;
+  display: flex;
+}
+
+#secProdutosInsumosRegistrados table {
+  flex: 1;
+  margin: 1.5em;
+}
+
+#secProdutosInsumosRegistrados thead {
+  height: 30px;
 }

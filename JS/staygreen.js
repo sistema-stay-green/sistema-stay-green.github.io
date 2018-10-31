@@ -9,11 +9,11 @@
   * Classe que contém métodos estáticos para a realização
   * mais facilitada de requisições AJAX.
   */
-const Request = class {
+class Request {
 
     /**
      * Realiza uma requisição GET, retornando uma Promise com a resposta.
-     * 
+     *
      * @param {string} url - A URL de onde se quer fazer a requisição
      * @param {string} [responseType=json] - O tipo de resposta que se deseja
      * obter. Por padrão, o tipo será JSON
@@ -34,12 +34,12 @@ const Request = class {
             request.send();
 
         });
-        
+
     }
 
     /**
      * Realiza uma requisição POST, retornando uma Promise com a resposta.
-     * 
+     *
      * @param {string} url - A URL de onde se quer fazer a requisição
      * @param {string} params - String contendo os parâmetros a serem
      *  passados na requisição. Exemplo: 'id=3&parametro=valor'
@@ -48,7 +48,7 @@ const Request = class {
      * @returns {Promise} Uma Promise que retorna a resposta do servidor
      */
     static async post(url, params = '', responseType = 'json') {
-        
+
         return await new Promise(function(resolve, reject) {
 
             let request = new XMLHttpRequest();
@@ -63,7 +63,7 @@ const Request = class {
             request.send(params);
 
         });
-        
+
     }
 
 };

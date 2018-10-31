@@ -10,13 +10,14 @@ class Patrimonio {
         this._id = id;
         this._nome = null;
         this._tipo = null;
-        this._descricao = null;
+        this._finalidade = null;
         this._status = null;
         this._indiceDepreciacao = null;
         this._valorCompra = null;
         this._valorAtual = null;
         this._dataCompra = null;
         this._dataSaida = null;
+        this._dataRetorno = null;
         this._dataBaixa = null;
     }
 
@@ -29,13 +30,14 @@ class Patrimonio {
         console.log("Id: " + this._id);
         console.log("Nome: " + this._nome);
         console.log("Tipo: " + this._tipo);
-        console.log("Descrição: " + this._descricao);
+        console.log("Finalidade: " + this._finalidade);
         console.log("Status: " + this._status);
         console.log("Índice de depreciação: " + this._indiceDepreciacao);
         console.log("Valor da Compra: " + this._valorCompra);
         console.log("Valor Atual: " + this._valorAtual);
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
+        console.log("Data do Retorno: " + this._dataRetorno);
         console.log("Data da Baixa: " + this._dataBaixa);
     }
 
@@ -47,10 +49,44 @@ class Patrimonio {
      */
     tryParse(number){
 
-        if (isNaN(number) == true && number !== undefined)
+        if (isNaN(number) == true && typeof number === "string")
             return parseFloat(number);
         else
             return number;
+    }
+
+    calculateValorAtual(){
+
+        if (this._valorCompra !== null && this._dataCompra !== null) {
+            let anoCompra = this._dataCompra.getFullYear();
+            let diferencaData = new Date().getFullYear() - anoCompra;
+            this._valorAtual = this._valorCompra - 
+                ((diferencaData * (this._indiceDepreciacao/100))
+                * this._valorCompra);
+        }
+    }
+
+    /**
+     * Converte objeto Patrimonio em string JSON.
+     * @returns {string} String com formatação JSON do objeto.
+     * @author Guilherme Sena
+     */
+    toJSON(){
+      let patrimonioJSON = {
+        "id": this._id,
+        "nome": this._nome,
+        "tipo": this._tipo,
+        "descricao": this._descricao,
+        "status": this._status,
+        "indiceDepreciacao": this._indiceDepreciacao,
+        "valorCompra": this._valorCompra,
+        "valorAtual": this._valorAtual,
+        "dataCompra": this._dataCompra,
+        "dataSaida": this._dataSaida,
+        "dataRetorno": this._dataRetorno,
+        "dataBaixa": this._dataBaixa
+      }
+      return JSON.stringify(patrimonioJSON);
     }
 
     // Getter
@@ -67,8 +103,8 @@ class Patrimonio {
         return this._tipo;
     }
 
-    get descricao(){
-        return this._descricao;
+    get finalidade(){
+        return this._finalidade;
     }
 
     get status(){
@@ -95,6 +131,10 @@ class Patrimonio {
         return this._dataSaida;
     }
 
+    get dataRetorno(){
+        return this._dataRetorno;
+    }
+
     get dataBaixa(){
         return this._dataBaixa;
     }
@@ -110,11 +150,21 @@ class Patrimonio {
     }
 
     set tipo(tipo){
-        this._tipo = tipo;
+        switch (tipo) {
+
+            case 'MAQUINA':
+            case 'OUTROS':
+                this._tipo = tipo;
+                break;
+
+            default:
+                console.log(new Error("O Tipo recebido não corresponde a nenhum dos valores possíveis."));
+                break;
+        }
     }
 
-    set descricao(descricao){
-        this._descricao = descricao;
+    set finalidade(finalidade){
+        this._finalidade = finalidade;
     }
 
     set status(status){
@@ -146,22 +196,29 @@ class Patrimonio {
             this._valorAtual = this.tryParse(valorAtual);
     }
 
-    set dataCompra(dataCompra){
-        if (!(dataCompra instanceof Date))
+    set dataCompra(dataCompra = new Date()){
+        if (!(dataCompra instanceof Date) && dataCompra !== null)
             console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
         else
             this._dataCompra = dataCompra;
     }
 
-    set dataSaida(dataSaida){
-        if (!(dataSaida instanceof Date))
+    set dataSaida(dataSaida = new Date()){
+        if (!(dataSaida instanceof Date) && dataSaida !== null)
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
     }
 
-    set dataBaixa(dataBaixa){
-        if (!(dataBaixa instanceof Date))
+    set dataRetorno(dataRetorno = new Date()){
+        if (!(dataRetorno instanceof Date) && dataRetorno !== null)
+            console.log(new Error("dataRetorno precisa receber um objeto instância de Date."));
+        else
+            this._dataRetorno = dataRetorno;
+    }
+
+    set dataBaixa(dataBaixa = new Date()){
+        if (!(dataBaixa instanceof Date) && dataBaixa !== null)
             console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
         else
             this._dataBaixa = dataBaixa;

@@ -15,13 +15,22 @@ function exibeFormularioNovaTarefa(){
   })
 
   containerFormNovaTarefa.classList.remove('invisivel');
-
 }
+
 botaoFormTarefaEl.addEventListener('click', exibeFormularioNovaTarefa);
 
 let botaoConfirmarTarefa = document.querySelector('#adicionarNovaTarefa');
 
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
+
+function operacaoRequisicaoTarefas(operacao){
+  Request.get('http:localhost:8080/staygreen/TarefaBDServlet?tarefa=' +
+  novaTarefaAdicionada.toJSONString() + "&operation=" + operacao )
+  .then(function(resultado){
+    window.alert("p");
+  });
+}
+
 
 function encapsularDadosTarefa(){
     let novaTarefaAdicionada = new Tarefa();
@@ -53,18 +62,7 @@ function encapsularDadosTarefa(){
 
     console.table(novaTarefaAdicionada);
 
-/*let requisicao = new XMLHttpRequest;
-botaoFormTarefaEl.addEventListener('click', function(){
-  requisicao.open('GET', '/nomeservlet');
-  requisicao.send();
+    operacaoRequisicaoTarefas('a');
 
-});
-
-requisicao.onreadystatechange = (/*InputsTarefa??) =>{
-   if(requisicao.readyState == XMLHttpRequest.DONE){
-      if(requisicao.status == 200){
-          InputsTarefa.toJSON().stringify();
-      }
-   }
-}*/
+  //Requisicao simples AJAX de enviar dados de uma nova tarefa
 }

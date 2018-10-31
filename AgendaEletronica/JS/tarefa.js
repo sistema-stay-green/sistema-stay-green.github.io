@@ -24,7 +24,7 @@ class Tarefa{
   * @returns {string} String com formatação JSON do objeto.
   * @author Guilherme Sena
   */
-  toJSON(){
+  toJSONString(){
    let tarefaJSON = {
      "nomeTarefa": this.nomeTarefa,
      "descricao": this.descricao,
@@ -37,7 +37,7 @@ class Tarefa{
      "gastoTarefa": this.gastoTarefa
    }
 
-   return JSON.stringify(patrimonioJSON);
+    return JSON.stringify(patrimonioJSON);
   }
 
 

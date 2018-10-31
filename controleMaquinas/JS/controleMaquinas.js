@@ -188,7 +188,6 @@ function VisãoBotão() {
     var pesquisa = botões[i].parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    console.log(nodes);
     if(nodes[6].innerHTML != "EM_POSSE"){
       botões[i].className = "botaoDesab";
     }
@@ -196,5 +195,4 @@ function VisãoBotão() {
       botões[i].className = "BotãoSaida";
     }
   }
-  console.log("teste");
 }

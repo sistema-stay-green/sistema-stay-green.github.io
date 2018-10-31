@@ -19,6 +19,7 @@ const entradaModal = document.querySelector("#entrada");
 const saidaModal = document.querySelector("#saida");
 const formModal = document.querySelector("#form");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
+const mascara = document.querySelector(".mascara");
 
 const NA = "N/A";
 
@@ -34,11 +35,11 @@ const editHandler = (id) => {showModal('editar', id)};
  * @author Mei
  */
 function showModal(modal, id){
-
+    mascara.classList.add("aparece-fundo-escuro");
     switch (modal) {
         case 'compra':
 
-            formModal.classList.toggle("aparece");
+            formModal.classList.add("aparece");
             entradaModal.classList.remove("aparece");
             saidaModal.classList.remove("aparece");
             //formModal.style.minHeight = "34em";
@@ -85,6 +86,7 @@ function showModal(modal, id){
  * @author Mei
  */
 function hideModal(){
+    mascara.classList.remove("aparece-fundo-escuro");
     saidaModal.classList.remove("aparece");
     entradaModal.classList.remove("aparece");
     formModal.classList.remove("aparece");

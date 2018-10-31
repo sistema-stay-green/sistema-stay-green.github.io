@@ -31,7 +31,7 @@ function encapsularDadosTarefa(){
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
     novaTarefaAdicionada.dataInicialTarefa =
-      new Date(document.querySelector('form input:nth-child(2)').value);
+      new Date(document.querySelector('input[name="realizarDia"]').value);
     novaTarefaAdicionada.periodoRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
     novaTarefaAdicionada.insumosConsumidos = [];

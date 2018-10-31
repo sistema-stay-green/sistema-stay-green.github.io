@@ -98,14 +98,39 @@ form{
 #containerCalendario{
 	position: relative;
 	display: grid;
+	grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
+	grid-template-rows: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	width: 80vw;
 }
 
-#botaoFormTarefa{
-	position: absolute;
+#containerCalendario article{
+	border-bottom: 1px solid var(--pretoNight);
+	border-right: 1px solid var(--pretoNight);
+	cursor: pointer;
+	transition: 100ms;
+}
+
+#containerCalendario article:hover{
+	background-color: rgba(0, 0, 0, .05);
+}
+
+#containerCalendario article p{
+	margin: 0;
+	font-weight: bold;
+	padding: .3em;
+}
+
+#containerCalendario button{
+	position: fixed;
 	bottom: 0;
-	right: 0;
 	margin: 1em;
+}
+
+section > #botaoFormTarefa{
+	right: 0;
+	margin-right: 23vw;
 }
 
 #adicionarNovaTarefa{

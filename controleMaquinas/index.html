@@ -4,27 +4,26 @@
     <meta charset="utf-8">
     <title>Controle de Maquinas</title>
     <link rel="stylesheet" href="CSS/Estilo.css">
+    <link rel="stylesheet" href="CSS/StayGreen.css">
   </head>
   <body>
+
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
     <div class="opções">
-      <button type="button" id="BotãoCadastro" name="BotãoCadastro">Cadastrar</button>
+      <button type="button" name="BotãoCadastro">Cadastrar</button>
     </div>
-    <div class="valores">
-      <p><label for="">Nome da Maquina</label></p>
-      <input type="text" class="inputs" name="nome" id="nome" >
-      <p><label>Finalidade da Maquina</label></p>
-      <input type="text" class="inputs" name="finalidade" id="finalidade"></p>
-      <p><label>Valor de Compra</label></p>
-      <input type="number" class="inputs" name="valor" id="valor"></p>
-      <p><label>Indice de depreciação</label></p>
-      <input type="number" class="inputs" name="depreciação" id="depreciação"></p>
-      <p><label>Data de Compra</label></p>
-      <p><input type="date" class="inputs" name="data" id="data"></p>
-      <button type="button" name="BotãoAção" id="BotãoAção">Enviar</button>
-      <button type="button" name="BotãoVoltar" id="BotãoVoltar">Voltar</button>
-    </div>
+    <!-- Parte do Cadastro -->
+    <form class="valores">
+      <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
+      <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
+      <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
+      <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
+      <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
+      <button type="button" name="BotãoAção">Enviar</button>
+      <button type="button" name="BotãoVoltar">Voltar</button>
+    </form>
+
     <div class="maquinas">
       <section id="filtro">
         <label for="filtro_select">Filtro:</label>
@@ -53,7 +52,7 @@
           <th>Opções</th>
         </tr>
       </thead>
-      <tbody class="tabela">
+      <tbody id="tabela">
         <tr class="maquina">
           <td class="id">1</td>
           <td>Trator</td>
@@ -92,35 +91,26 @@
     <div id="saidas" class="saidas">
       <div class="saidas-conteudo">
         <span class="fecharModal">&times;</span>
-        <section id="filtro">
-          <label for="filtro_saida">Opção:</label>
-          <select id="filtro_saida">
-            <option><a href="#">Alugar</option>
-            <option><a href="#">Vender</option>
-            <option><a href="#">Enviar para conserto</option>
-            <option><a href="#">Descartar</option>
-          </select>
-          <span id="Retorno"><p><label>Data de Retorno</label></p>
-          <p><input type="date" class="inputs" name="data" class="data"></p>
+        <section id="filtro2">
+          <label for="filtro_saida">Opção:
+            <select id="filtro_saida">
+              <option><a href="#">Alugar</option>
+              <option><a href="#">Vender</option>
+              <option><a href="#">Enviar para conserto</option>
+              <option><a href="#">Descartar</option>
+            </select>
+          </label>
+          <span id="Retorno"><label>Data de Retorno<input type="date" name="data" class="data"></label>
           <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Venda"><p><label>Data de Venda</label></p>
-          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <span id="Venda"><label>Data de Venda<input type="date" name="data" class="data"></label>
           <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Envio"><p><label>Data de Envio</label></p>
-          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <span id="Envio"><label>Data de Envio<input type="date" name="data" class="data"></label>
           <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Descarte"><p><label>Data de Descarte</label></p>
-          <p><input type="date" class="inputs" name="data" class="data"></p>
+          <span id="Descarte"><label>Data de Descarte<input type="date"  name="data" class="data"></label>
           <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="filtro-data"></span>
         </section>
      </div>
    </div>
   </body>
-  <!--Scripts TEM que estar nessa ordem, adicionar qualquer outro depois -->
-  <script src="../JS/staygreen.js" charset="utf-8"></script>
-  <script src="JS/maquina.js" charset="utf-8"></script>
-  <script src="JS/encapsuladorMaquina.js" charset="utf-8"></script>
-  <script src="JS/estilizacao.js" charset="utf-8"></script>
-  <script src="JS/main.js" charset="utf-8"></script>
+  <script src="JS/Estilizacao.js" charset="utf-8"></script>
 </html>

@@ -24,7 +24,7 @@ const NA = "N/A";
 
 let editButton = document.querySelectorAll("[id|=edit]");
 
-const editHandler = (id) => {showModal('editar', id)};
+const editHandler = (id) => {editPatrimonio(id)};
 
 // --- FUNCTIONS ---
 
@@ -105,12 +105,16 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
     let tr = document.createElement("tr");
     let td;
     let button;
+    let id = patrimonio.id;
+
+    tr.id = "tr-" + patrimonio.id;
 
     td = document.createElement("td");
     if(patrimonio.id !== undefined)
         td.innerHTML = patrimonio.id;
     else
         td.innerHTML = NA;
+    td.id = "id-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -118,6 +122,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.nome;
     else
         td.innerHTML = NA;
+    td.id = "nome-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -125,6 +130,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.tipo;
     else
         td.innerHTML = NA;
+    td.id = "tipo-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -132,6 +138,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.finalidade;
     else
         td.innerHTML = NA;
+    td.id = "finalidade-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -139,6 +146,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.status;
     else
         td.innerHTML = NA;
+    td.id = "status-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -146,6 +154,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.indiceDepreciacao;
     else
         td.innerHTML = NA;
+    td.id = "indiceDepreciacao-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -153,6 +162,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.valorCompra;
     else
         td.innerHTML = NA;
+    td.id = "valorCompra-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -160,6 +170,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.valorAtual;
     else
         td.innerHTML = NA;
+    td.id = "valorAtual-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -167,6 +178,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
     else
         td.innerHTML = NA;
+    td.id = "dataCompra-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -174,6 +186,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
     else
         td.innerHTML = NA;
+    td.id = "dataSaida-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -181,6 +194,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
     else
         td.innerHTML = NA;
+    td.id = "dataRetorno-" + id;
     tr.appendChild(td);
 
     td = document.createElement("td");
@@ -188,6 +202,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
         td.innerHTML = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
     else
         td.innerHTML = NA;
+    td.id = "dataBaixa-" + id;
     tr.appendChild(td);
 
     // Adicionando os botões com id's variáveis. Ex: 'edit-7'
@@ -267,6 +282,82 @@ function recoverPatrimonioFromCompraModal(){
     return patrimonio;
 }
 
+/**
+ * Faz alguma coisa
+ * @param {string} id 
+ * @returns {string} nome
+ * @author Mei
+ */
+function editPatrimonio(id){
+
+    let patrimonio = new Patrimonio();
+    let data;
+
+    let nomeField = document.querySelector("#nome-" + id).innerHTML;
+    let tipoField = document.querySelector("#tipo-" + id).innerHTML;
+    let finalidadeField = document.querySelector("#finalidade-" + id).innerHTML;
+    let statusField = document.querySelector("#status-" + id).innerHTML;
+    let indiceDepreciacaoField = document.querySelector("#indiceDepreciacao-" + id).innerHTML;
+    let valorCompraField = document.querySelector("#valorCompra-" + id).innerHTML;
+    let valorAtualField = document.querySelector("#valorAtual-" + id).innerHTML;
+    let dataCompraField = document.querySelector("#dataCompra-" + id).innerHTML;
+    let dataSaidaField = document.querySelector("#dataSaida-" + id).innerHTML;
+    let dataRetornoField = document.querySelector("#dataRetorno-" + id).innerHTML;
+    let dataBaixaField = document.querySelector("#dataBaixa-" + id).innerHTML;
+
+    if (nomeField !== NA && nomeField !== "")
+        patrimonio.nome = nomeField;
+    if (tipoField !== NA && tipoField !== "")
+        patrimonio.tipo = tipoField;
+    if (finalidadeField !== NA && finalidadeField !== "")
+        patrimonio.finalidade = finalidadeField;
+    if (statusField !== NA && statusField !== "")
+        patrimonio.status = statusField;
+    if (indiceDepreciacaoField !== NA && indiceDepreciacaoField !== "")
+        patrimonio.indiceDepreciacao = indiceDepreciacaoField;
+    if (valorCompraField !== NA && valorCompraField !== "")
+        patrimonio.valorCompra = valorCompraField;
+    finalidadeField
+        patrimonio.valorAtual = valorAtualField;
+
+    if (dataCompraField !== NA && dataCompraField !== ""){
+        data = dataCompraField.split("-");
+        patrimonio.dataCompra = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+    }
+    if (dataSaidaField !== NA && dataSaidaField !== ""){
+        data = dataSaidaField.split("-");
+        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+    }
+    if (dataRetornoField !== NA && dataRetornoField !== ""){
+        data = dataRetornoField.split("-");
+        patrimonio.dataRetorno = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+    }
+    if (dataBaixaField !== NA && dataBaixaField !== ""){
+        data = dataBaixaField.split("-");
+        patrimonio.dataBaixa = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+    }   
+    if (dataSaidaField !== NA && dataSaidaField !== ""){
+        data = dataSaidaField.split("-");
+        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+    }
+
+    patrimonio.printToConsole();
+
+    insertPatrimonioIntoModal(patrimonio);
+    showModal('editar');
+    
+}
+
+function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
+
+    document.querySelector("#form [name='nomeInput']").value = patrimonio.nome;
+    document.querySelector("#form [name='tipoInput']").value = patrimonio.tipo;
+    document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
+    document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
+    document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
+
+}
+
 // --- EVENT LISTENERS ---
 
 addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
@@ -276,18 +367,10 @@ enviarSaidaModalButton.addEventListener("click", recebeDadosSaida);
 function updateDynamicEventListeners() {
 
     editButton = document.querySelectorAll("[id|=edit]");
+    let id = parseInt(editButton[editButton.length - 1].id.slice(5,6));
 
-    //editButton.forEach(addEventListener("click", function(){editHandler(1)}));
-
-    editButton[editButton.length - 1].addEventListener("click", function(){editHandler(1)});
-
-    /*for (let i = 0; i < editButton.length; i++) {
-        let currentButton = editButton[i];
-        currentButton.addEventListener("click", function(){editHandler(i)});
-    }*/
+    editButton[editButton.length - 1].addEventListener("click", function(e){editHandler(id)});
 }
-
-//updateDynamicEventListeners();
 
 for (let i = 0; i < entradaOptionButton.length; i++) {
     entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});

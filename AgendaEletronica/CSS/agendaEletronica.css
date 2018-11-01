@@ -1,0 +1,140 @@
+body,html{
+	height: 100%;
+}
+
+body{
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+}
+
+label{
+  display: block;
+}
+
+aside{
+	display: inline;
+	width: 20%;
+	height: 100%;
+	float: right;
+	border-left: 1px solid;
+	padding-left: 20px;
+}
+
+aside h1{
+	margin: 0;
+}
+
+aside button{
+	width: 95%;
+}
+
+form > section{
+	display: flex;
+	padding: 10px;
+}
+
+form article{
+	width: 50%;
+	padding: 1em;
+	position: relative;
+}
+
+form p {
+	margin: 0;
+	display: inline-block;
+}
+
+form{
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	margin: -15% 0 0 -25%;
+	position: absolute;
+	z-index: 3;
+	background-color: var(--brancoIvory);
+	transition: 200ms;
+	transform: scale(1);
+}
+
+.sectionCheck{
+	border-bottom: 1px solid;
+}
+
+.sectionButton{
+	border-bottom: 1px solid;
+	width: 100%;
+	height: 40%;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+.invisivel{
+	display: none;
+	z-index: -999;
+	transform: scale(0);
+}
+
+#nomeNovaTarefa{
+	box-sizing: border-box;
+	border-bottom: 1px solid var(--brancoIvory);
+	color: var(--brancoIvory);
+	background-color: var(--verdeCamarone);
+	margin: 0;
+	width: 100%;
+	padding: .3em;
+	font-size: calc(20px + .2vw);
+}
+
+#mascaraForm{
+	z-index: 2;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+#containerCalendario{
+	position: relative;
+	display: grid;
+	grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
+	grid-template-rows: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+	width: 80vw;
+}
+
+#containerCalendario article{
+	border-bottom: 1px solid var(--pretoNight);
+	border-right: 1px solid var(--pretoNight);
+	cursor: pointer;
+	transition: 100ms;
+}
+
+#containerCalendario article:hover{
+	background-color: rgba(0, 0, 0, .05);
+}
+
+#containerCalendario article p{
+	margin: 0;
+	font-weight: bold;
+	padding: .3em;
+}
+
+#containerCalendario button{
+	position: fixed;
+	bottom: 0;
+	margin: 1em;
+}
+
+section > #botaoFormTarefa{
+	right: 0;
+	margin-right: 23vw;
+}
+
+#adicionarNovaTarefa{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

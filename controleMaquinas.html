@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Controle de Maquinas</title>
+    <link rel="stylesheet" href="CSS/Estilo.css">
+    <link rel="stylesheet" href="CSS/StayGreen.css">
+  </head>
+  <body>
+
+    </nav>
+    <h1 id="TituloPagina">Controle De Maquinas</h1>
+    <div class="opções">
+      <button type="button" name="BotãoCadastro">Cadastrar</button>
+    </div>
+    <!-- Parte do Cadastro -->
+    <form class="valores">
+      <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
+      <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
+      <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
+      <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
+      <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
+      <button type="button" name="BotãoAção">Enviar</button>
+      <button type="button" name="BotãoVoltar">Voltar</button>
+    </form>
+
+    <div class="maquinas">
+      <section id="filtro">
+        <label for="filtro_select">Filtro:</label>
+        <select id="filtro_select">
+          <option><a href="#">Em Posse</option>
+          <option><a href="#">Em Manutenção</option>
+          <option><a href="#">Alugados</option>
+          <option><a href="#">Vendidos</option>
+          <option><a href="#">Descartados</option>
+        </select>
+      </section>
+      <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nome</th>
+          <th>Finalidade</th>
+          <th>valorCompra</th>
+          <th>indiceDepreciacao</th>
+          <th>dataCompra</th>
+          <th>status</th>
+          <th>tipo</th>
+          <th>valorAtual</th>
+          <th>dataSaida</th>
+          <th>dataBaixa</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody id="tabela">
+        <tr class="maquina">
+          <td class="id">1</td>
+          <td>Trator</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>5000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">VENDIDO</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="BotãoSaida">Saida</button>
+          </td>
+        </tr>
+        <tr class="maquina">
+          <td class="id">2</td>
+          <td>Trator</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>5000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">EM_POSSE</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="BotãoSaida">Saida</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div id="saidas" class="saidas">
+      <div class="saidas-conteudo">
+        <span class="fecharModal">&times;</span>
+        <section id="filtro2">
+          <label for="filtro_saida">Opção:
+            <select id="filtro_saida">
+              <option><a href="#">Alugar</option>
+              <option><a href="#">Vender</option>
+              <option><a href="#">Enviar para conserto</option>
+              <option><a href="#">Descartar</option>
+            </select>
+          </label>
+          <span id="Retorno"><label>Data de Retorno<input type="date" name="data" class="data"></label>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Venda"><label>Data de Venda<input type="date" name="data" class="data"></label>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Envio"><label>Data de Envio<input type="date" name="data" class="data"></label>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="Descarte"><label>Data de Descarte<input type="date"  name="data" class="data"></label>
+          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+        </section>
+     </div>
+   </div>
+  </body>
+  <script src="../JS/controleMaquinas/maquina.js" charset="utf-8"></script>
+  <script src="../JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="../JS/controleMaquinas/main.js" charset="utf-8"></script>
+  <script src="../JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
+</html>
+
+<!--<footer>
+  <ul>
+    <li> Home </li>
+    <li> Maquinas </li>
+    <li> Patrimonio </li>
+    <li><span id="TituloNav">Agronegocio</span></li>
+    <li> Exemplo </li>
+    <li> Exemplo </li>
+    <li> Exemplo </li>
+  </ul>
+</footer>
+<nav>
+  <ul>
+    <li> Home </li>
+    <li> Maquinas </li>
+    <li> Patrimonio </li>
+    <li><span id="TituloNav">Agronegocio</span></li>
+    <li> Exemplo </li>
+    <li> Exemplo </li>
+    <li> Exemplo </li>
+  </ul>

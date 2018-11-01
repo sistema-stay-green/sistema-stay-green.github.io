@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Bárbara Martins">
+    <!-- <link rel="shortcut icon" type="image/png" href="favicon.png"> -->
+    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/staygreen.css">
+    <link rel="stylesheet" href="CSS/perfil.css">
+    <title>Perfil</title>
+  </head>
+  <body>
+    <main>
+      <section id="perfil">
+        <h1>Perfil</h1>
+        <img src="imgs/foto-padrao-usuario.svg" alt="Foto de perfil do usuário">
+        <p>Nome fazendeiro</p>
+        <button id="btnEditar" type="button" class="botaoInvertido">Editar</button>
+      </section>
+      <section id="infoUsuario">
+        <article id="mostraInfoUsuario">
+          <p><strong>CNPJ:</strong> 123456789101112</p>
+          <p><strong>Saldo atual da fazenda:</strong> R$123456789,00</p>
+          <p><strong>E-mail:</strong> blablabla@gmail.com</p>
+          <p><strong>Gráficos:</strong></p>
+        </article>
+        <article id="editaInfoUsuario" class="ocultar">
+          <form>
+            <label>Nome: <input type="text" name="nomeUsuario" placeholder="Nome"></label>
+            <label>CNPJ: <input type="text" name="cnpjUsuario" placeholder="CNPJ" min="0"></label>
+            <label>Saldo atual da Fazenda: <input type="number" placeholder="Saldo financeiro da fazenda" name="saldoUsuario" min="0"></label>
+            <label>E-mail: <input type="email" name="emailUsuario" placeholder="E-mail"></label>
+            <label>Senha: <input type="password" name="senhaUsuario" placeholder="Senha" required></label>
+            <label>Confirmar a senha: <input type="password" name="confSenhaUsuario" placeholder="Confirme a senha" required></label><br>
+            <button id="btnConfirmar" type="button">Confirmar</button>
+            <button type="reset" class="botaoFantasma">Limpar</button>
+            <button id="btnCancelar" type="button">Cancelar</button>
+          </form>
+        </article>
+      </section>
+    </main>
+    <script src="JS/perfil.js" charset="utf-8"></script>
+  </body>
+</html>

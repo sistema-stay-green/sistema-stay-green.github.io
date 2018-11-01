@@ -1,4 +1,4 @@
-// Recebe as informações do formulário de login
+﻿// Recebe as informações do formulário  de login
 let btnEntrarLoginEl = document.querySelector("#login > form:first-of-type > button:first-of-type");
 
 btnEntrarLoginEl.addEventListener("click", function() {

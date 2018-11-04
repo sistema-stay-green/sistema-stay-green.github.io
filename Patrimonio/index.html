@@ -89,6 +89,25 @@
                     <button id="entradaOptionButton" class="botaoFantasma">Entrada</button>
                     <button id="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
+
+                <div name="entrada" class="div-modal">
+                    <label for="EntradaToggle">Registrar Entrada: </label>
+                    <input type="checkbox" id="EntradaToggle">
+                    <label for="dataEntradaInput">Data de entrada:</label>
+                    <input type="date" id="dataEntradaInput">
+                </div>
+
+                <div name="saida" class="div-modal">
+                    <label for="tipoSaidaInput">Saída: </label>
+                    <select id="tipoSaidaInput">
+                        <option value="VENDIDO">Venda</option>
+                        <option value="DESCARTADO">Descarte</option>
+                        <option value="ALUGADO">Aluguel</option>
+                        <option value="EM_MANUTENCAO">Manutenção</option>
+                    </select>
+                    <label for="dataSaidaInput">Data de saída:</label>
+                    <input type="date" id="dataSaidaInput">
+                </div>
             </div>
 
             <div class="container-modal">
@@ -97,35 +116,6 @@
             </div>
         </section>
 
-        <!-- Div Modal Entrada -->
-
-        <section id="entrada" class="div-modal">
-            <label for="select_entrada">Entrada: </label>
-            <select id="select_entrada">
-                <option value="aluguel">Aluguel</option>
-                <option value="manutencao">Manutenção</option>
-            </select>
-            <label for="data_entrada">Data de entrada:</label>
-            <input type="date" id="data_entrada">
-            <button name="enviarEntradaModalButton">Enviar</button>
-            <button name="cancelarModalButton">Cancelar</button>
-        </section>
-
-        <!-- Div Modal Saída -->
-
-        <section id="saida" class="div-modal">
-            <label for="select_saida">Saída: </label>
-            <select id="select_saida">
-                <option value="venda">Venda</option>
-                <option value="descarte">Descarte</option>
-                <option value="aluguel">Aluguel</option>
-                <option value="manutencao">Manutenção</option>
-            </select>
-            <label for="data_saida">Data de saída:</label>
-            <input type="date" id="data_saida">
-            <button name="enviarSaidaModalButton">Enviar</button>
-            <button name="cancelarModalButton">Cancelar</button>
-        </section>
         <!-- Floating button -->
 
         <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>

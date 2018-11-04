@@ -1,17 +1,26 @@
 
-const enviarCompraButton = document.querySelector("#form #enviar");
-const currentDate = new Date();
-
 function addPatrimonio(patrimonio = new Patrimonio()){
 
-    patrimonio = recoverPatrimonioFromCompraModal();
+    patrimonio = getPatrimonioFromModal();
     patrimonio.status = "EM_POSSE";
 
     patrimonio.printToConsole();
     patrimonio.calculateValorAtual();
 
-    sendAddPatrimonioToServlet(patrimonio);
+    //sendAddPatrimonioToServlet(patrimonio);
     insertPatrimonioIntoTable(patrimonio);
 }
 
-enviarCompraButton.addEventListener("click", addPatrimonio);
+function editPatrimonio(){
+
+    patrimonio = new Patrimonio();
+    patrimonio = getPatrimonioFromModal();
+
+    if (currentPatrimonioBeingEdited !== null)
+        patrimonio.id = currentPatrimonioBeingEdited;
+    
+    currentPatrimonioBeingEdited = null;
+        
+    patrimonio.printToConsole();
+    //updatePatrimonio(patrimonio);
+}

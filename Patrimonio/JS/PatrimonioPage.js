@@ -11,21 +11,20 @@ const addPatrimonioButton = document.querySelector("#addPatrimonioButton");
 const entradaOptionButton = document.querySelectorAll("button[name='entradaOptionButton']");
 const saidaOptionButton = document.querySelectorAll("button[name='saidaOptionButton']");
 const cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
-const enviarEntradaModalButton = document.querySelector("button[name='enviarEntradaModalButton']");
+const enviarButton = document.querySelector("#form button[name='enviar']");
 const enviarSaidaModalButton = document.querySelector("button[name='enviarSaidaModalButton']");
-//const enviarForm
 const statusOptionsDiv = document.querySelector("#statusOptions");
 const entradaModal = document.querySelector("#entrada");
 const saidaModal = document.querySelector("#saida");
 const formModal = document.querySelector("#form");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
 const mascara = document.querySelector(".mascara");
-
-const NA = "N/A";
-
 let editButton = document.querySelectorAll("[id|=edit]");
 
-const editHandler = (id) => {editPatrimonio(id)};
+const NA = "N/A";
+const editHandler = (id) => {setupPatrimonioEdit(id)};
+
+let currentPatrimonioBeingEdited = null;
 
 // --- FUNCTIONS ---
 
@@ -42,9 +41,11 @@ function showModal(modal, id){
             formModal.classList.add("aparece");
             entradaModal.classList.remove("aparece");
             saidaModal.classList.remove("aparece");
-            //formModal.style.minHeight = "34em";
             document.querySelector("#statusOptions").classList.add("esconde");
             document.querySelector("#statusOptions").classList.remove("aparece");
+            enviarButton.removeEventListener("click", editPatrimonio);
+            enviarButton.addEventListener("click", addPatrimonio);
+            clearMainModal();
             break;
 
         case 'entrada':
@@ -66,11 +67,10 @@ function showModal(modal, id){
             formModal.classList.toggle("aparece");
             entradaModal.classList.remove("aparece");
             saidaModal.classList.remove("aparece");
-
-            //formModal.style.minHeight = "37.9em";
             statusOptionsDiv.classList.remove("esconde");
             statusOptionsDiv.classList.add("aparece");
-            
+            enviarButton.removeEventListener("click", addPatrimonio);
+            enviarButton.addEventListener("click", editPatrimonio);
             break;
 
         default:
@@ -87,14 +87,6 @@ function hideModal(){
     saidaModal.classList.remove("aparece");
     entradaModal.classList.remove("aparece");
     formModal.classList.remove("aparece");
-}
-
-function recebeDadosEntrada(){
-    entradaModal.classList.remove("aparece");
-}
-
-function  recebeDadosSaida(){
-    saidaModal.classList.remove("aparece");
 }
 
 /**
@@ -265,7 +257,7 @@ function showPatrimonioTable(){
  * Recupera as informações da div Modal e as armazena em um objeto Patrimonio.
  * @author Mei
  */
-function recoverPatrimonioFromCompraModal(){
+function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
 
@@ -290,7 +282,7 @@ function recoverPatrimonioFromCompraModal(){
  * @returns {string} nome
  * @author Mei
  */
-function editPatrimonio(id){
+function getPatrimonioFromTable(id){
 
     let patrimonio = new Patrimonio();
     let data;
@@ -343,13 +335,21 @@ function editPatrimonio(id){
         patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
     }
 
-    patrimonio.printToConsole();
-
-    insertPatrimonioIntoModal(patrimonio);
-    showModal('editar');
-    
+    return patrimonio;
 }
 
+function setupPatrimonioEdit(id){
+
+    patrimonio = getPatrimonioFromTable(id);
+    insertPatrimonioIntoModal(patrimonio);
+    currentPatrimonioBeingEdited = id;
+    showModal('editar');
+}
+
+/**
+ * Insere os dados do objeto Patrimonio na Div Modal
+ * @param {Patrimonio} patrimonio 
+ */
 function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
 
     document.querySelector("#form [name='nomeInput']").value = patrimonio.nome;
@@ -357,21 +357,32 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
     document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
+    document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
+        .toISOString().slice(0,10).replace("/-/g","");
+
+}
+
+function clearMainModal(patrimonio = new Patrimonio()){
+
+    document.querySelector("#form [name='nomeInput']").value = null;
+    document.querySelector("#form [name='tipoInput']").value = "MAQUINA";
+    document.querySelector("#form [name='finalidadeInput']").value = null;
+    document.querySelector("#form [name='indiceDepreciacaoInput']").value = null;
+    document.querySelector("#form [name='valorCompraInput']").value = null;
+    document.querySelector("#form [name='dataCompraInput']").value = null;
 
 }
 
 // --- EVENT LISTENERS ---
 
 addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
-enviarEntradaModalButton.addEventListener("click", recebeDadosEntrada);
-enviarSaidaModalButton.addEventListener("click", recebeDadosSaida);
 
 function updateDynamicEventListeners() {
 
     editButton = document.querySelectorAll("[id|=edit]");
     let id = parseInt(editButton[editButton.length - 1].id.slice(5,6));
 
-    editButton[editButton.length - 1].addEventListener("click", function(e){editHandler(id)});
+    editButton[editButton.length - 1].addEventListener("click", () => {editHandler(id)});
 }
 
 for (let i = 0; i < entradaOptionButton.length; i++) {

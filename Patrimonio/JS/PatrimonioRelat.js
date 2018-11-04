@@ -4,29 +4,29 @@ Lider: Mei Fagundes
 
 */
 
-  relatOcorr(patrimonio = new Patrimonio, key){
+  function relatOcorr(patrimonio = new Patrimonio(), key){
     let PatrimonioOccor = getPatrimonioTipo(patrimonio, key);
     console.log(PatrimonioOccor.tipo()+" ocorrência" + Patrimonio.lenght + "unidades");
   }
-  relatPorcentTipo(){
+  function relatPorcentTipo(){
 
   }
 
-  relatManutTotal(){
+  function relatManutTotal(){
 
   }
-  relatManutTipo(){
+  function relatManutTipo(){
 
   }
-  relatBaixasTotal(){
+  function relatBaixasTotal(){
 
   }
-  relatBaixasTipo(){
+  function relatBaixasTipo(){
 
   }
 
 // getters que retornam arrays com todos os elementos em discriminação solicitada
-function getPatrimonioTipo(patrimonio = new Patrimonio, key){
+function getPatrimonioTipo(patrimonio = new Patrimonio(), key){
     let patrimonioTipos;
     for(let item of patrimonio){
       switch (key) {
@@ -81,7 +81,7 @@ function getPatrimonioBase(patrimonio = new Patrimonio(), key){
         break;
 
       default:
-        console.log(New error("Parametro não suportado pela função discrimina()."));
+        console.log(new Error("Parametro não suportado pela função discrimina()."));
       }
     }
     return patrimonioBase;

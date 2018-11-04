@@ -4,7 +4,8 @@ function addPatrimonio(patrimonio = new Patrimonio()){
     patrimonio = getPatrimonioFromModal();
     patrimonio.status = "EM_POSSE";
 
-    patrimonio.calculateValorAtual();
+    // Temporário
+    patrimonio.id = lastIdGenerated++;
 
     //sendAddPatrimonioToServlet(patrimonio);
     insertPatrimonioIntoTable(patrimonio);

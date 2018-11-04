@@ -5,7 +5,6 @@
 
 // --- CONST ---
 
-const id = ["0", "1", "2", "3", "4"];
 const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];
 const tipo = ["MAQUINA", "OUTROS", "MAQUINA", "OUTROS", "MAQUINA"];
 const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café",
@@ -18,13 +17,15 @@ const dataSaida = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
 const dataRetorno = [new Date(), null, null, null, null];
 const dataBaixa = [null, null, null, new Date(), null];
 
+let lastIdGenerated = 0;
+
 // --- FUNCTIONS ---
 
 function generatePlaceholders() {
 
-    for (let i = 0; i < id.length; i++) {
+    for (let i = 0; i < nome.length; i++) {
 
-        let patrimonio = new Patrimonio(id[i]);
+        let patrimonio = new Patrimonio(lastIdGenerated);
         patrimonio.nome = nome[i];
         patrimonio.tipo = tipo[i];
         patrimonio.finalidade = finalidade[i];
@@ -37,6 +38,7 @@ function generatePlaceholders() {
         patrimonio.dataBaixa = dataBaixa[i];
 
         patrimonio.calculateValorAtual();
+        lastIdGenerated++;
 
         //saidaPatrimonio(patrimonio, "Compra");
         //saidaPatrimonio(patrimonio, "Saida");

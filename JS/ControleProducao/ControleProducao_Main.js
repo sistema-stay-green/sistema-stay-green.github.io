@@ -4,15 +4,32 @@
 
 
 window.onload = function () {
+
   //Váriaveis
   var selecionaTabela = document.getElementsByName("selTabela");
   var produtoTabela = document.getElementById("secProduto");
   var insumoTabela = document.getElementById("secInsumo");
   var selecionaNomeProduto = document.getElementById("selNomeProduto");
   var tdNomeProduto = document.getElementById("tdNomeProduto");
+  var produto;
+  var promises;
+
+  document.querySelector("#btnRegistarProduto").addEventListener('click', function(){
+    produto = new Produto();
+    promises = produto.fazRequisicao();
+    respostaServlet(promise);
+    console.log("chamado");
+  });
+
+  document.querySelector("#btnRegistrarInsumo").addEventListener('click', function(){
+    produto = new Insumo()
+  });
+
+  //tratamento do retorno
+  function respostaServlet(retorno){
+  }
 
 
-  //Lógica
   selecionaTabela[0].onchange = function(){mudaTabela()};
   //Função para alternar entre tabela de produtos e tabela de insumos via select
   function mudaTabela(){

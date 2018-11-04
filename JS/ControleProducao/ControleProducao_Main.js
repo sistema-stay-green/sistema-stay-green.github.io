@@ -14,11 +14,11 @@ window.onload = function () {
   var produto;
   var promises;
 
+
   document.querySelector("#btnRegistarProduto").addEventListener('click', function(){
     produto = new Produto();
     promises = produto.fazRequisicao();
-    respostaServlet(promise);
-    console.log("chamado");
+    respostaServlet(promises);
   });
 
   document.querySelector("#btnRegistrarInsumo").addEventListener('click', function(){

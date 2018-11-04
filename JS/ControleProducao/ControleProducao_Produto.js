@@ -39,8 +39,7 @@ class Produto {
 
 
   fazRequisicao(){
-    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
-
+    var url = "http://localhost:8080/ControleProducaoServlet?" + JSON.stringify(this._item);
     return Request.get(url);
   }
 }

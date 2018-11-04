@@ -99,6 +99,9 @@ button:focus{
     float: right;
     padding: 3.5vh;
     border-radius: 50%;
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);   
 }
 
 #addPatrimonioButton img{

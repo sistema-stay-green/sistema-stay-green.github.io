@@ -4,7 +4,6 @@ function addPatrimonio(patrimonio = new Patrimonio()){
     patrimonio = getPatrimonioFromModal();
     patrimonio.status = "EM_POSSE";
 
-    patrimonio.printToConsole();
     patrimonio.calculateValorAtual();
 
     //sendAddPatrimonioToServlet(patrimonio);
@@ -20,7 +19,19 @@ function editPatrimonio(){
         patrimonio.id = currentPatrimonioBeingEdited;
     
     currentPatrimonioBeingEdited = null;
+
+    patrimonioOld = getPatrimonioFromTable(patrimonio.id);
+    patrimonio.status = patrimonioOld.status;
+    patrimonio.dataSaida = patrimonioOld.dataSaida;
+    patrimonio.dataRetorno = patrimonioOld.dataRetorno;
+    patrimonio.dataBaixa = patrimonioOld.dataBaixa;
         
-    patrimonio.printToConsole();
-    //updatePatrimonio(patrimonio);
+    updatePatrimonioIntoTable(patrimonio);
+    //updatePatrimonioInServlet(patrimonio);
+}
+
+function deletePatrimonio(id) {
+    
+    removePatrimonioFromTable(id);
+    //deletePatrimonioFromServlet(id);
 }

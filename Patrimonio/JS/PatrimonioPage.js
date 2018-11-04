@@ -22,7 +22,6 @@ const mascara = document.querySelector(".mascara");
 let editButton = document.querySelectorAll("[id|=edit]");
 
 const NA = "N/A";
-const editHandler = (id) => {setupPatrimonioEdit(id)};
 
 let currentPatrimonioBeingEdited = null;
 
@@ -101,7 +100,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
     let button;
     let id = patrimonio.id;
 
-    tr.id = "tr-" + patrimonio.id;
+    tr.setAttribute("name","patrimonio-" + patrimonio.id);
 
     td = document.createElement("td");
     if(patrimonio.id !== undefined)
@@ -219,6 +218,33 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
 }
 
+function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
+
+    let id = patrimonio.id;
+    
+    document.querySelector("#nome-" + id).innerHTML = patrimonio.nome;
+    document.querySelector("#tipo-" + id).innerHTML = patrimonio.tipo;
+    document.querySelector("#finalidade-" + id).innerHTML = patrimonio.finalidade;
+    document.querySelector("#status-" + id).innerHTML = patrimonio.status;
+    document.querySelector("#indiceDepreciacao-" + id).innerHTML = patrimonio.indiceDepreciacao;
+    document.querySelector("#valorCompra-" + id).innerHTML = patrimonio.valorCompra;
+    document.querySelector("#valorAtual-" + id).innerHTML = patrimonio.valorAtual;
+    document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
+    console.log(patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g",""));
+    
+    document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
+    document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+    document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
+}
+
+function removePatrimonioFromTable(id){
+
+    document.querySelector("tbody [name=patrimonio-"+ id +"]").remove();
+
+    if (document.querySelectorAll("tbody tr")[0] == null)
+        hidePatrimonioTable();
+}
+
 /**
  * Esconde a tabela principal e a substui por uma mensagem de aviso
  * @author Mei
@@ -236,7 +262,7 @@ function hidePatrimonioTable(){
     span.appendChild(message);
 
     message = document.createElement("p");
-    message.innerHTML = "Tente mudar o filtro selecionado ou registrar um novo Patrimônio.";
+    message.innerHTML = "Tente mudar o filtro selecionado ou registre um novo Patrimônio.";
     span.appendChild(message);
 
     document.querySelector("#tabela").appendChild(span);
@@ -268,7 +294,7 @@ function getPatrimonioFromModal(){
     patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
     let data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
     if (data[0] !== "") 
-        patrimonio.dataCompra = new Date(data[0], data[1], data[2]);
+        patrimonio.dataCompra = new Date(data[0], data[1] - 2, data[2]);
     else
         console.log(new Error("O formato enviado da Data está incorreto!"));
         
@@ -357,8 +383,11 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
     document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
-    document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
-        .toISOString().slice(0,10).replace("/-/g","");
+    if(patrimonio.dataCompra !== null)
+        document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
+            .toISOString().slice(0,10).replace("/-/g","");
+    else
+        document.querySelector("#form [name='dataCompraInput']").value = null;
 
 }
 
@@ -379,10 +408,14 @@ addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
 
 function updateDynamicEventListeners() {
 
+    deleteButton = document.querySelectorAll("[id|=delete]");
     editButton = document.querySelectorAll("[id|=edit]");
-    let id = parseInt(editButton[editButton.length - 1].id.slice(5,6));
 
-    editButton[editButton.length - 1].addEventListener("click", () => {editHandler(id)});
+    let id = parseInt(deleteButton[deleteButton.length - 1].id.slice(7,8));
+    deleteButton[deleteButton.length - 1].addEventListener("click", () => {deletePatrimonio(id)});
+
+    id = parseInt(editButton[editButton.length - 1].id.slice(5,6));
+    editButton[editButton.length - 1].addEventListener("click", () => {setupPatrimonioEdit(id)});
 }
 
 for (let i = 0; i < entradaOptionButton.length; i++) {

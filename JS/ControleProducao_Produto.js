@@ -5,14 +5,17 @@
 class Produto {
 
   encapsulaDados(){
-    this._nome = document.querySelector("#inpNomeProduto").value;
-    this._unMedida = document.querySelector("#inpUniMedProduto").value;
+    this._nome = document.querySelector("#selNomeProduto").value;
     this._descricao = document.querySelector("#inpDescricaoProduto").value;
+    if (document.querySelector("#tdNomeProduto").innerHTML === "KG (Kilograma)") {
+      this._unMedida = "KG";
+    }else {
+      this._unMedida = "L";
+    }
     this._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-    this._estoque = (document.querySelector("#inpQuantEstoqueProduto").value);
-
+    this._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
     //verifica se há um ponto de aviso (valor opcional);
-    var aux = document.querySelector("#inpPontoAvisoProduto").value;
+    var aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
     this._pontoAviso =  aux == null? "" : aux;
 
   }
@@ -21,11 +24,12 @@ class Produto {
     this.encapsulaDados();
     this._item = {
       nome: this._nome,
-      unMedida: this._unMedida,
       descricao: this._descricao,
-      pontoAviso: this._pontoAviso,
-      estoque: this._estoque,
+      unMedida: this._unMedida,
       valorProduto: this._valorProduto,
+      estoque: this._estoque,
+      pontoAviso: this._pontoAviso,
+
       tipo: "Produto"
     };
     console.log(this._item);
@@ -35,7 +39,7 @@ class Produto {
 
 
   fazRequisicao(){
-    var url = "nome_servlet?" + JSON.stringify(this._item);
+    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
 
     return Request.get(url);
   }

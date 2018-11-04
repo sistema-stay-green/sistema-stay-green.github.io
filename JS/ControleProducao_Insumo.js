@@ -30,7 +30,7 @@ class Insumo {
 
   //faz requisição utilizando classe fornecida pela gerência
   fazRequisicao(){
-    var url = "nome_servlet?" + JSON.stringify(this._item);
+    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
     return Request.get(url);
   }
 }

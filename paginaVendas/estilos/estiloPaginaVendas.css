@@ -1,44 +1,20 @@
+/*
+:root{
+  --brancoIvory: #FDFCF3;
+  --verdeCamarone: #1D883A; /* Verde Claro */
+  --verdeCrusoe: #126624; /* Verde Escuro */
+  --pretoNight: #AAA9A4;
+  --cinzaFoggy: #2D2D2E;
+}
+ */
 *:focus{
   outline: none;
 }
-
 body{
   width: 100vw;
   margin: 0;
   overflow-x: hidden;
-  background-color: ivory;
-}
-nav{
-  height: 7vh;
-  width: 100vw;
-  display: flex;
-  background-color: #1d883a;
-  align-content: space-around;
-  align-items: center;
-  position: sticky;
-  top:0;
-}
-
-nav > h3{
-  width:20vw;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-}
-nav > a{
-  text-decoration: none;
-  width:13.3vw;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-}
-nav > a:hover, main > section > button:hover, #carrinho:hover{
-  background-color: #116623;
-
+  background-color: var(--brancoIvory);
 }
 #carrinho {
   width:8.5vh;
@@ -47,12 +23,15 @@ nav > a:hover, main > section > button:hover, #carrinho:hover{
   position: fixed;
   top:8vh;
   right:3vw;
-  background-color: #1d883a;
+  background-color: var(--verdeCamarone);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor:pointer;
   box-shadow: 5px 8px 26px -12px rgba(0,0,0,0.75);
+}
+#carrinho:hover{
+  background-color: var(--verdeCrusoe);
 }
 #carrinho > #quantidade-carrinho {
   position: absolute;
@@ -61,7 +40,7 @@ nav > a:hover, main > section > button:hover, #carrinho:hover{
   top:0;
   right: 0;
   background-color:#9c0505;
-  color: white;
+  color: var(--brancoIvory);
   border-radius: 50%;
   font-family: 'Niramit' , sans-serif;
   display: inline-flex;
@@ -76,6 +55,7 @@ nav > a:hover, main > section > button:hover, #carrinho:hover{
 }
 main{
   width: 90vw;
+  height: content;
   margin:0 auto;
   display: flex;
   flex-direction: column;
@@ -83,21 +63,22 @@ main{
 }
 main > section {
   width: 90vw;
-  height: 90vh;
+  height:content;
   display: flex;
   flex-direction: column;
   justify-content:center;
   border-top :1px solid #e5e5e5;
   border-bottom :1px solid #e5e5e5;
+  padding: 4vh;
 }
 main > section > img {
-    height: 375px;
-    width: 375px;
+    height: 40vh;
+    width: 40vh;
     align-self: center;
 }
-main > section > .descricao {
+main > section > .descricao-estoque {
    font-family:  'Niramit' , sans-serif;
-   font-size: 3vh;
+   font-size: calc(5px + 2vh);
    width: 95%;
    align-self: center;
 }
@@ -125,17 +106,17 @@ main > section > button {
   width: 25%;
   height: 7%;
   text-align: center;
-  background-color: #1d883a;
+  background-color: var(--verdeCamarone);
   font-family:  'Niramit' , sans-serif;
   font-size: 2.5vh;
   border:none;
-  color: white;
+  color: var(--brancoIvory);
   align-self:center;
   cursor: pointer;
 }
 #mascara {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   opacity: 0;
   z-index: -1;
   background-color:transparent;
@@ -165,12 +146,12 @@ main > section > button {
   overflow-y:  auto;
 }
 #div-carrinho > article > p {
-  color:white;
+  color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(10px + 1vh);
 }
 #div-carrinho > article {
-  border-bottom:1px solid white;
+  border-bottom:1px solid var(--brancoIvory);
 }
 #div-modal.aparece , #mascara.aparece,#div-carrinho.aparece, #carrinho > #quantidade-carrinho.aparece{
   opacity: 1;
@@ -179,27 +160,27 @@ main > section > button {
   transition: all 300ms ease-in-out;
 }
 #div-modal > label , #div-carrinho > article > label {
-  color:white;
+  color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(10px + 1vh);
 }
 #div-modal > h1 {
-  color:white;
+  color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(15px + 1.5vh);
 }
 #div-modal > label > input , #div-modal > label > select , #div-carrinho > article > label > input {
-  color:white;
+  color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   border:none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--brancoIvory);
   font-size: calc(10px + 1vh);
   background-color: transparent;
   margin-left: .5vw;
   margin-top: .6vh;
 }
-select > option {
-  background-color: rgba(22, 66, 31, 0.97);
+#div-modal > label > select > option {
+  background-color: rgba(22, 66, 31, .97);
 }
 .div-botoes{
   display: flex;
@@ -207,9 +188,10 @@ select > option {
 }
 #div-modal > .div-botoes > button , #div-carrinho > .div-botoes > button , #div-carrinho > article > button   {
   width: 7vw;
-  height: 4vh;
-  border: 1px solid white;
-  color:white;
+  height: 5vh;
+  padding:0;
+  border: 1px solid var(--brancoIvory);
+  color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   cursor: pointer;
   font-size: calc(10px + 1vh);
@@ -220,5 +202,5 @@ select > option {
 }
 #div-modal > .div-botoes  >  button:hover ,#div-carrinho > .div-botoes > button:hover, #div-carrinho > article > button:hover {
   color: rgba(22, 66, 31);
-  background-color: white;
+  background-color: var(--brancoIvory);
 }

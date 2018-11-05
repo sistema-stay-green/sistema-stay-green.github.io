@@ -1,5 +1,5 @@
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
-    containerFormNovaTarefa = document.querySelector('form');
+    containerFormNovaTarefa = document.querySelector('form'); 
 
 /*Exibe o formulário de adicionar nova tarefa quando usuário clica no
 botão '+ Nova Tarefa'*/

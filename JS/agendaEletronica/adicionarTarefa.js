@@ -1,5 +1,3 @@
-
-window.onload = recebeTarefas;
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
     containerFormNovaTarefa = document.querySelector('form');
 

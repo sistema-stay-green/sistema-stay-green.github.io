@@ -1,3 +1,12 @@
+function recebeTarefas(){
+  Request.get('http:localhost:8080/staygreen/TarefaServlet')
+  .then(function(resultado){
+    window.alert(resultado);
+  });
+}
+
+window.onload = recebeTarefas;
+
 let containerCalendario = document.querySelector('#containerCalendario');
 
  /* Gera calendário dinâmico de forma recursiva

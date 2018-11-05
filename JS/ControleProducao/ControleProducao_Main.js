@@ -6,6 +6,7 @@
 window.onload = function () {
 
   //Váriaveis
+
   var selecionaTabela = document.getElementsByName("selTabela");
   var produtoTabela = document.getElementById("secProduto");
   var insumoTabela = document.getElementById("secInsumo");
@@ -22,13 +23,18 @@ window.onload = function () {
   });
 
   document.querySelector("#btnRegistrarInsumo").addEventListener('click', function(){
-    produto = new Insumo()
+    produto = new Insumo();
   });
 
   //tratamento do retorno
   function respostaServlet(retorno){
+    retorno.then(function(resultado){
+              console.log(resultado);
+            })
+            .catch(function(erro){
+              console.log(erro);
+            });
   }
-
 
   selecionaTabela[0].onchange = function(){mudaTabela()};
   //Função para alternar entre tabela de produtos e tabela de insumos via select
@@ -43,15 +49,15 @@ window.onload = function () {
     }
   }
 
-  selecionaNomeProduto.onchange =  function(){mudaProduto()};
   //Função para alternar entre KG ou L na unidade de medida do produto via select
+  selecionaNomeProduto.onchange =  function(){mudaProduto()};
+
   function mudaProduto(){
     if(selecionaNomeProduto.value === "cafe"){
       tdNomeProduto.innerHTML = "KG (Kilograma)";
     }
     else{
       tdNomeProduto.innerHTML = "L (Litro)";
-
     }
   }
 

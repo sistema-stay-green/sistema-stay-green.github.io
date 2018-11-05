@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vendas</title>
+    <link rel="stylesheet" href="CSS/PaginaVendas/estiloPaginaVendas.css">
+    <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/staygreen.css">
+    <link rel="icon" href="imgs/icons/favicon.png">
+  </head>
+  <body>
+    <nav>
+    <a href="#">Home</a>
+    <a href="#">Agenda</a>
+    <a href="#">Máquinas</a>
+    <h3>Stay Green</h3>
+    <a href="#">Patrimonio</a>
+    <a href="#">Produção</a>
+    <a href="#">Vendas</a>
+  </nav>
+  <div id="carrinho">
+    <img src="imgs/PaginaVendas/shopping-cart.svg" alt="um carrinho de compras">
+    <span id="quantidade-carrinho">0</span>
+  </div>
+  <main></main>
+
+  <div id="mascara" >
+    <section id="div-carrinho">
+        <div class="div-botoes">
+          <button type="button" id="confirmaCarrinho" name="confirmaCarrinho">Confirmar</button>
+          <button type="button" id="cancelaCarrinho" name="cancelaCarrinho">Cancelar</button>
+        </div>
+    </section>
+    <section id="div-modal">
+      <label> Digite seu nome Completo: <input type="text" name="nome" value=""> </label>
+      <label> modo de pagamento:
+        <select name="modoPagamento">
+          <option value="boleto">boleto</option>
+          <option value="credito">Cartão de crédito</option>
+          <option value="debito">cartão de débito</option>
+        </select>
+      </label>
+      <label> Digite a data agendada para a entrega: <input type="date" name="dataEntrega" value=""> </label>
+      <h1>Digite abaixo seu endereço:</h1>
+      <label> Região do Brasil:
+        <select name="regiao">
+          <option value="Sul">Sul</option>
+          <option value="Sudeste">Sudeste</option>
+          <option value="Centro-oeste">Centro-oeste</option>
+          <option value="Nordeste">Nordeste</option>
+          <option value="Norte">Norte</option>
+        </select>
+      </label>
+      <label> Estado: <input type="text" name="estado" value=""> </label>
+      <label> Cidade: <input type="text" name="cidade" value=""> </label>
+      <label> Bairro: <input type="text" name="bairro" value=""> </label>
+      <label> Rua: <input type="text" name="rua" value=""> </label>
+      <label> Número: <input type="text" name="numero" value=""> </label>
+      <label> CEP: <input type="text" name="cep" value=""> </label>
+      <div class="div-botoes">
+        <button id="confirmaModal" type="button" name="confirmaModal">Confirmar</button>
+        <button id="cancelaModal" type="button" name="cancelaModal">Cancelar</button>
+      </div>
+    </section>
+ </div>
+  <script src="JS/staygreen.js"></script>
+  <script src="JS/PaginaVendas/paginaVendas.js"></script>
+
+  </body>
+</html>

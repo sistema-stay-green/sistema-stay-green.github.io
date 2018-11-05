@@ -86,18 +86,20 @@
 
                 <div id="statusOptions">
                     <label for="statusOptions">Mudar Status:</label>
-                    <button id="entradaOptionButton" class="botaoFantasma">Entrada</button>
-                    <button id="saidaOptionButton" class="botaoFantasma">Saída</button>
+                    <button name="entradaOptionButton" class="botaoFantasma">Entrada</button>
+                    <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
 
-                <div name="entrada" class="div-modal">
+                <div name="entrada" class="esconde">
                     <label for="EntradaToggle">Registrar Entrada: </label>
                     <input type="checkbox" id="EntradaToggle">
                     <label for="dataEntradaInput">Data de entrada:</label>
                     <input type="date" id="dataEntradaInput">
                 </div>
 
-                <div name="saida" class="div-modal">
+                <div name="saida" class="esconde">
+                    <label for="saidaToggle">Registrar Saída: </label>
+                    <input type="checkbox" id="saidaToggle">
                     <label for="tipoSaidaInput">Saída: </label>
                     <select id="tipoSaidaInput">
                         <option value="VENDIDO">Venda</option>

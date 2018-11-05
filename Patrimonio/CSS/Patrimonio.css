@@ -220,16 +220,7 @@ label{
     padding-bottom: 0.3em;
 }
 
-
 [id|=edit] {
     padding-right: 0.8em;
     padding-left: 0.8em;
-}
-
-[name=saida] {
-    display: none;
-}
-
-[name=entrada] {
-    display: none;
 }

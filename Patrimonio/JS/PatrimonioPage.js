@@ -8,14 +8,14 @@
 
 const patrimonioMenuButton = document.querySelector("button[name='patrimonioMenuButton']");
 const addPatrimonioButton = document.querySelector("#addPatrimonioButton");
-const entradaOptionButton = document.querySelectorAll("button[name='entradaOptionButton']");
-const saidaOptionButton = document.querySelectorAll("button[name='saidaOptionButton']");
-const cancelarModalButton = document.querySelectorAll("button[name='cancelarModalButton']");
+const entradaOptionButton = document.querySelector("button[name='entradaOptionButton']");
+const saidaOptionButton = document.querySelector("button[name='saidaOptionButton']");
+const cancelarModalButton = document.querySelector("button[name='cancelarModalButton']");
 const enviarButton = document.querySelector("#form button[name='enviar']");
 const enviarSaidaModalButton = document.querySelector("button[name='enviarSaidaModalButton']");
 const statusOptionsDiv = document.querySelector("#statusOptions");
-const entradaModal = document.querySelector("#entrada");
-const saidaModal = document.querySelector("#saida");
+const entradaDiv = document.querySelector("[name=entrada]");
+const saidaDiv = document.querySelector("[name=saida]");
 const formModal = document.querySelector("#form");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
 const mascara = document.querySelector(".mascara");
@@ -32,46 +32,52 @@ let currentPatrimonioBeingEdited = null;
  * @param {string} modal
  * @author Mei
  */
-function showModal(modal, id){
+function showModal(modal){
+
     mascara.classList.add("aparece-fundo-escuro");
+
     switch (modal) {
         case 'compra':
 
             formModal.classList.add("aparece");
-            entradaModal.classList.remove("aparece");
-            saidaModal.classList.remove("aparece");
-            document.querySelector("#statusOptions").classList.add("esconde");
-            document.querySelector("#statusOptions").classList.remove("aparece");
+            statusOptionsDiv.classList.add("esconde");
             enviarButton.removeEventListener("click", editPatrimonio);
             enviarButton.addEventListener("click", addPatrimonio);
             clearMainModal();
             break;
 
-        case 'entrada':
-
-            entradaModal.classList.toggle("aparece");
-            saidaModal.classList.remove("aparece");
-            formModal.classList.remove("aparece");
-            break;
-
-        case 'saida':
-
-            saidaModal.classList.toggle("aparece");
-            entradaModal.classList.remove("aparece");
-            formModal.classList.remove("aparece");
-            break;
-
         case 'editar':
 
             formModal.classList.toggle("aparece");
-            entradaModal.classList.remove("aparece");
-            saidaModal.classList.remove("aparece");
             statusOptionsDiv.classList.remove("esconde");
-            statusOptionsDiv.classList.add("aparece");
             enviarButton.removeEventListener("click", addPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
             break;
 
+        default:
+            break;
+    }
+}
+
+function showEditOptions(key){
+
+    switch (key) {
+        case 'entrada':
+
+            console.log("A");
+            
+            entradaDiv.classList.remove("esconde");
+            saidaDiv.classList.toggle("esconde");
+            break;
+
+        case 'saida':
+
+            console.log("B");
+
+            entradaDiv.classList.toggle("esconde");
+            saidaDiv.classList.remove("esconde");
+            break;
+    
         default:
             break;
     }
@@ -83,8 +89,6 @@ function showModal(modal, id){
  */
 function hideModal(){
     mascara.classList.remove("aparece-fundo-escuro");
-    saidaModal.classList.remove("aparece");
-    entradaModal.classList.remove("aparece");
     formModal.classList.remove("aparece");
 }
 
@@ -474,6 +478,9 @@ function clearMainModal(){
 // --- EVENT LISTENERS ---
 
 addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
+entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})
+saidaOptionButton.addEventListener("click", () => {showEditOptions('saida')})
+cancelarModalButton.addEventListener("click", hideModal)
 
 function updateDynamicEventListeners() {
 
@@ -485,14 +492,4 @@ function updateDynamicEventListeners() {
 
     id = parseInt(editButton[editButton.length - 1].id.slice(5));
     editButton[editButton.length - 1].addEventListener("click", () => {setupPatrimonioEdit(id)});
-}
-
-for (let i = 0; i < entradaOptionButton.length; i++) {
-    entradaOptionButton[i].addEventListener("click", () => {showModal('entrada')});
-}
-for (let i = 0; i < saidaOptionButton.length; i++) {
-    saidaOptionButton[i].addEventListener("click", () => {showModal('saida')});
-}
-for (let i = 0; i < cancelarModalButton.length; i++) {
-    cancelarModalButton[i].addEventListener("click", hideModal);
 }

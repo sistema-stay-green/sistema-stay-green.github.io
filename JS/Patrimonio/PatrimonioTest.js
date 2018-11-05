@@ -48,8 +48,3 @@ function generatePlaceholders() {
         insertPatrimonioIntoTable(patrimonio);
     }
 }
-
-// --- CODE ---
-
-generatePlaceholders();
-//receiveAllPatrimonios();

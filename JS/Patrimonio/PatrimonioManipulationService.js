@@ -1,3 +1,17 @@
+let returnCallback = (patrimonios = []) => {
+
+    clearTableContents();
+    hidePatrimonioTable();
+    for (const patrimonio of patrimonios) {
+
+        insertPatrimonioIntoTable(patrimonio);
+    }
+};
+
+function receivePatrimonios(){
+
+    receiveAllPatrimoniosFromServlet(returnCallback);
+}
 
 function newPatrimonio(patrimonio = new Patrimonio()){
 

@@ -35,6 +35,7 @@ let currentPatrimonioBeingEdited = null;
 function showModal(modal){
 
     mascara.classList.add("aparece-fundo-escuro");
+    hideEditOptions();
 
     switch (modal) {
         case 'compra':
@@ -63,24 +64,26 @@ function showEditOptions(key){
 
     switch (key) {
         case 'entrada':
-
-            console.log("A");
             
             entradaDiv.classList.remove("esconde");
-            saidaDiv.classList.toggle("esconde");
+            saidaDiv.classList.add("esconde");
             break;
 
         case 'saida':
 
-            console.log("B");
-
-            entradaDiv.classList.toggle("esconde");
+            entradaDiv.classList.add("esconde");
             saidaDiv.classList.remove("esconde");
             break;
     
         default:
             break;
     }
+}
+
+function hideEditOptions(){
+
+    entradaDiv.classList.add("esconde");
+    saidaDiv.classList.add("esconde");
 }
 
 /**
@@ -363,7 +366,7 @@ function getPatrimonioFromModal(){
 
     data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
     if (data[0] !== "") 
-        patrimonio.dataCompra = new Date(data[0], data[1] - 2, data[2]);
+        patrimonio.dataCompra = new Date(data[0], data[1] - 1, data[2]);
     else
         console.log(new Error("O formato enviado da Data está incorreto!"));
         
@@ -411,23 +414,23 @@ function getPatrimonioFromTable(id){
 
     if (dataCompraField !== NA && dataCompraField !== ""){
         data = dataCompraField.split("-");
-        patrimonio.dataCompra = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+        patrimonio.dataCompra = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
     }
     if (dataSaidaField !== NA && dataSaidaField !== ""){
         data = dataSaidaField.split("-");
-        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
     }
     if (dataRetornoField !== NA && dataRetornoField !== ""){
         data = dataRetornoField.split("-");
-        patrimonio.dataRetorno = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+        patrimonio.dataRetorno = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
     }
     if (dataBaixaField !== NA && dataBaixaField !== ""){
         data = dataBaixaField.split("-");
-        patrimonio.dataBaixa = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+        patrimonio.dataBaixa = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
     }   
     if (dataSaidaField !== NA && dataSaidaField !== ""){
         data = dataSaidaField.split("-");
-        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]), parseInt(data[2]));
+        patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
     }
 
     return patrimonio;

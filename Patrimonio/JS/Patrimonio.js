@@ -14,7 +14,7 @@ class Patrimonio {
         this._status = null;
         this._indiceDepreciacao = null;
         this._valorCompra = null;
-        this._valorAtual = null;
+        //this._valorAtual = null;
         this._dataCompra = null;
         this._dataSaida = null;
         this._dataRetorno = null;
@@ -34,7 +34,7 @@ class Patrimonio {
         console.log("Status: " + this._status);
         console.log("Índice de depreciação: " + this._indiceDepreciacao);
         console.log("Valor da Compra: " + this._valorCompra);
-        console.log("Valor Atual: " + this._valorAtual);
+        console.log("Valor Atual: " + this.calculateValorAtual());
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
         console.log("Data do Retorno: " + this._dataRetorno);
@@ -60,10 +60,12 @@ class Patrimonio {
         if (this._valorCompra !== null && this._dataCompra !== null) {
             let anoCompra = this._dataCompra.getFullYear();
             let diferencaData = new Date().getFullYear() - anoCompra;
-            this._valorAtual = this._valorCompra - 
+            return this._valorCompra - 
                 ((diferencaData * (this._indiceDepreciacao/100))
                 * this._valorCompra);
         }
+        else
+            return null;
     }
 
     /**
@@ -76,11 +78,10 @@ class Patrimonio {
         "id": this._id,
         "nome": this._nome,
         "tipo": this._tipo,
-        "descricao": this._descricao,
+        "finalidade": this._finalidade,
         "status": this._status,
         "indiceDepreciacao": this._indiceDepreciacao,
         "valorCompra": this._valorCompra,
-        "valorAtual": this._valorAtual,
         "dataCompra": this._dataCompra,
         "dataSaida": this._dataSaida,
         "dataRetorno": this._dataRetorno,
@@ -120,7 +121,8 @@ class Patrimonio {
     }
 
     get valorAtual(){
-        return this._valorAtual;
+        return this.calculateValorAtual();
+        //return this._valorAtual;
     }
 
     get dataCompra(){
@@ -190,10 +192,6 @@ class Patrimonio {
 
     set valorCompra(valorCompra){
             this._valorCompra = this.tryParse(valorCompra);
-    }
-
-    set valorAtual(valorAtual){
-            this._valorAtual = this.tryParse(valorAtual);
     }
 
     set dataCompra(dataCompra = new Date()){

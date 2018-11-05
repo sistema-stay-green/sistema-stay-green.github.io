@@ -10,6 +10,15 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../CSS/staygreen.css"/>
     </head>
     <body>
+      <nav>
+          <a href="#">Home</a>
+          <a href="#">Agenda</a>
+          <a href="#">Máquinas</a>
+          <h3>Stay Green</h3>
+          <a href="#">Patrimônio</a>
+          <a href="#">Produção</a>
+          <a href="#">Vendas</a>
+     </nav>
         <section id="tabela">
             <h1>Controle dos Patrimônios</h1>
             <section id="toolbar">
@@ -21,7 +30,6 @@
                         <option>Em Manutenção</option>
                         <option>Alugados</option>
                         <option>Vendidos</option>
-                        <option>Vendidos</option>
                     </select>
                 </span>
             </section>
@@ -31,7 +39,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Tipo</th>
-                        <th>Descricao</th>
+                        <th>Finalidade</th>
                         <th>Status</th>
                         <th>Índice de Depreciação</th>
                         <th>Valor da Compra</th>
@@ -47,10 +55,11 @@
             </table>
         </section>
 
-        
+
 
         <!-- Div Modal Formulário -->
-
+        <div class="mascara">
+       </div>
         <section id="form" class="div-modal">
             <div class="conteudo">
 
@@ -63,7 +72,7 @@
                     <option value="OUTROS">Outros</option>
                 </select>
 
-                <label for="finalidadeInput">Descrição do Patrimônio:</label>
+                <label for="finalidadeInput">Finalidade do Patrimônio:</label>
                 <input type="text" name="finalidadeInput" required placeholder="digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
@@ -74,57 +83,44 @@
 
                 <label for="dataCompraInput">Data da Compra:</label>
                 <input type="date" name="dataCompraInput">
-                
+
                 <div id="statusOptions">
                     <label for="statusOptions">Mudar Status:</label>
-                    <button id="entradaButton" class="botaoFantasma">Entrada</button>
-                    <button id="saidaButton" class="botaoFantasma">Saída</button>
+                    <button name="entradaOptionButton" class="botaoFantasma">Entrada</button>
+                    <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
+                </div>
+
+                <div name="entrada" class="esconde">
+                    <label for="dataEntradaInput">Data de entrada:</label>
+                    <input type="date" id="dataEntradaInput">
+                </div>
+
+                <div name="saida" class="esconde">
+                    <label for="tipoSaidaInput">Saída: </label>
+                    <select id="tipoSaidaInput">
+                        <option value="VENDIDO">Venda</option>
+                        <option value="DESCARTADO">Descarte</option>
+                        <option value="ALUGADO">Aluguel</option>
+                        <option value="EM_MANUTENCAO">Manutenção</option>
+                    </select>
+                    <label for="dataSaidaInput">Data de saída:</label>
+                    <input type="date" id="dataSaidaInput">
                 </div>
             </div>
 
             <div class="container-modal">
                 <button name="cancelarModalButton">Cancelar</button>
-                <button id="enviar">Enviar</button>
+                <button name="enviar">Enviar</button>
             </div>
-        </section>
-
-        <!-- Div Modal Entrada -->
-
-        <section id="entrada" class="div-modal">
-            <label for="select_entrada">Entrada: </label>
-            <select id="select_entrada">
-                <option value="aluguel">Aluguel</option>
-                <option value="manutencao">Manutenção</option>
-            </select>
-            <label for="data_entrada">Data de entrada:</label>
-            <input type="date" id="data_entrada">
-            <button name="enviarEntradaModalButton">Enviar</button>
-            <button name="cancelarModalButton">Cancelar</button>
-        </section>
-
-        <!-- Div Modal Saída -->
-
-        <section id="saida" class="div-modal">
-            <label for="select_saida">Saída: </label>
-            <select id="select_saida">
-                <option value="venda">Venda</option>
-                <option value="descarte">Descarte</option>
-                <option value="aluguel">Aluguel</option>
-                <option value="manutencao">Manutenção</option>
-            </select>
-            <label for="data_saida">Data de saída:</label>
-            <input type="date" id="data_saida">
-            <button name="enviarSaidaModalButton">Enviar</button>
-            <button name="cancelarModalButton">Cancelar</button>
         </section>
 
         <!-- Floating button -->
 
         <button id="addPatrimonioButton"><img src="Assets/add-button.png" alt=""></button>
-
         <script src="../JS/staygreen.js"></script>
         <script src="JS/Patrimonio.js"></script>
         <script src="JS/PatrimonioPage.js"></script>
+        <script src="JS/PatrimonioConnection.js"></script>
         <script src="JS/PatrimonioManipulationService.js"></script>
         <script src="JS/PatrimonioClassTest.js"></script>
     </body>

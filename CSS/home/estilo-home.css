@@ -1,0 +1,231 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  background-color: yellow;
+  height:93%;
+  width:100%;
+  background-image: url('../../imgs/home/fazenda.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header > #mascara-conteudo {
+  background-color: rgba(16, 43, 18, 0.7);
+  height:100%;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+header > #mascara-conteudo > h1 {
+  color: white;
+  text-align: center;
+  font-family: 'Niramit', sans-serif;
+  font-size:calc(30px + 2vh );
+}
+
+header > #mascara-conteudo > p {
+  color: white;
+  text-align: center;
+  font-family: 'Niramit', sans-serif;
+  font-size: calc(20px + 2vh);
+}
+
+header > #mascara-conteudo > button {
+  text-align: center;
+  width: 15%;
+  height: 9%;
+  border: none;
+  font-family: 'Niramit' , sans-serif;
+  background-color: white;
+  color:rgba(16, 43, 18,1);
+  font-size: calc(20px + 2vh);
+  cursor: pointer;
+}
+
+nav {
+  height: 7%;
+  width: 100%;
+  display: flex;
+  background-color: #1d883a;
+  align-content: space-around;
+  align-items: center;
+  position: sticky;
+  top:0;
+  z-index: 1;
+}
+
+nav > h3 {
+  width:20%;
+  height: 100%;
+  text-align: center;
+  font-family: 'Niramit' , sans-serif;
+  color:white;
+  font-size: calc(20px + 1vh);
+  margin: 0.5%;
+}
+
+nav > a {
+  text-decoration: none;
+  width:15%;
+  height: 100%;
+  text-align: center;
+  font-family: 'Niramit' , sans-serif;
+  color:white;
+  font-size: calc(20px + 1vh);
+}
+
+nav > a:hover {
+  background-color: #116623;
+}
+
+
+footer {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  background-color: #2d2d2d;
+}
+
+footer > section {
+  width: 15%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer > section > h3 {
+  font-family: 'Niramit' , sans-serif;
+  font-size: calc(10px + 1.5vh);
+  color: white;
+}
+
+footer > section > a {
+  text-decoration: none;
+  font-family: 'Niramit' , sans-serif;
+  font-size: calc(10px + 1vh);
+  color: #c6c7c9;
+}
+
+footer > section > img {
+  height: 100px ;
+  width:  100px;
+}
+
+.redes {
+  justify-content: center;
+}
+
+main {
+  height: 110vh;
+  padding: 2vh;
+  display: flex;
+  flex-flow: wrap;
+  background-color: #fafaf2;
+}
+
+main > article > img {
+  width: 14vw;
+  height: 13vw;
+}
+
+main > article {
+  width: 48vw;
+  height: 16vw;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  background-color: #2d2d2d;
+  font-family: 'Niramit' , sans-serif;
+  margin: auto;
+  position: relative;
+}
+
+article:hover {
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
+}
+#vendas {
+  width: 97vw;
+}
+/* #vendas > img {
+  width: 20%;
+} */
+main > article > p {
+  position: absolute;
+  right: 5%;
+  width: 50%;
+  height: content;
+  font-size: calc(5px + .9vw);
+  color: white;
+}
+
+main > article > h3 {
+  position: absolute;
+  bottom: 0;
+  padding: 2px 16px;
+  background-color: #fafaf2;
+  width: 100%;
+  height: 20%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+#maquinas {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.4),
+    rgba(16, 43, 18, 0.4)
+    ), url('../../imgs/home/img3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#producao {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.64),
+    rgba(16, 43, 18, 0.64)
+    ), url('../../imgs/home/img2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#patrimonio {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.4),
+    rgba(16, 43, 18, 0.4)
+    ), url('../../imgs/home/img1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#agenda {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.4),
+    rgba(16, 43, 18, 0.4)
+    ), url('../../imgs/home/img4.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#vendas {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.4),
+    rgba(16, 43, 18, 0.4)
+    ), url('../../imgs/home/img5.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

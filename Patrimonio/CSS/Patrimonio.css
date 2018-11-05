@@ -64,6 +64,7 @@ thead {
 th{
     padding-top: 0.5em !important;
     padding-bottom: 0.5em !important;
+    width: 50vw;
 }
 
 
@@ -216,6 +217,7 @@ label{
     position: relative;
     bottom: -2.5em;
     margin-left: 3em;
+    border-radius: 0.8em;
 }
 
 .conteudo button{
@@ -224,17 +226,24 @@ label{
     padding-bottom: 0.3em;
 }
 
+.conteudo input{
+    max-width: 90%;
+}
+
 .conteudo{
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 40em;
+    width: 19vw;
 }
 
 [id|=edit]{
     padding-right: 0.8em;
     padding-left: 0.8em;
+    border-radius: 0.3em;
+    margin-left: 3.5em;
 }
-
-::-webkit-scrollbar {
-    margin-left: 3em;
+[id|=delete]{
+    border-radius: 0.3em;
+    margin-left: 3.5em;
 }

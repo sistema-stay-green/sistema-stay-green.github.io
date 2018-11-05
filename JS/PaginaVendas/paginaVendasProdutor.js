@@ -1,5 +1,15 @@
 let mainEl = document.querySelector("main");
 let divBotoesEl = document.querySelector(".div-botoes");
+let mascaraEl = document.querySelector("#mascara");
+let botaoEncaEl = document.querySelector("#botaoEnc");
+let botaoFatuEl = document.querySelector("#botaoFat");
+let botaoResulEl = document.querySelector("#botaoRes");
+let botaoRegistraEl = document.querySelector("#botaoRegistra");
+let divEncaEl = document.querySelector("#div-encaminhamentos");
+let divFatuEl = document.querySelector("#div-faturamentos");
+let divResulEl = document.querySelector("#div-resultados");
+let divRegistraEl = document.querySelector("#div-registra"); 
+
 let arrayProdutos = new Array();
 let cafe = {
    id:"1",
@@ -43,10 +53,12 @@ function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
   produto.preco = preco;
   produto.estoque = estoque;
   produto.img = img;
-  arrayProdutos.push(produto); // dps da push no array
+  arrayProdutos.push(produto); 
   console.log(arrayProdutos);
  }
+
 function addProdutosPagina(produtos){
+
    let tabela = document.createElement("table");
 
    let thead = document.createElement("thead");
@@ -62,4 +74,44 @@ function addProdutosPagina(produtos){
    }
    tabela.appendChild(tbody);
    mainEl.insertBefore(tabela,divBotoesEl);
- }
+} 
+function mostraEncaminhamentos(){
+  mascaraEl.classList.add("aparece");
+  divEncaEl.classList.add("aparece");
+  divFatuEl.classList.remove("aparece");
+  divResulEl.classList.remove("aparece");
+  divRegistraEl.classList.remove("aparece");
+}  
+function mostraFaturamentos(){
+  mascaraEl.classList.add("aparece");
+  divEncaEl.classList.remove("aparece");
+  divFatuEl.classList.add("aparece");
+  divResulEl.classList.remove("aparece");
+  divRegistraEl.classList.remove("aparece");
+}
+function mostraResultados(){
+  mascaraEl.classList.add("aparece");
+  divEncaEl.classList.remove("aparece");
+  divFatuEl.classList.remove("aparece");
+  divResulEl.classList.add("aparece");
+  divRegistraEl.classList.remove("aparece");
+} 
+function mostraRegistra() {
+  mascaraEl.classList.add("aparece");
+  divEncaEl.classList.remove("aparece");
+  divFatuEl.classList.remove("aparece");
+  divResulEl.classList.remove("aparece");
+  divRegistraEl.classList.add("aparece");
+} 
+function escondeTudo(){
+  mascaraEl.classList.remove("aparece");
+  divEncaEl.classList.remove("aparece");
+  divFatuEl.classList.remove("aparece");
+  divResulEl.classList.remove("aparece");  
+  divRegistraEl.classList.remove("aparece");
+}
+botaoRegistraEl.addEventListener('click',mostraRegistra);
+botaoEncaEl.addEventListener('click',mostraEncaminhamentos);
+botaoFatuEl.addEventListener('click',mostraFaturamentos);
+botaoResulEl.addEventListener('click',mostraResultados);
+mascaraEl.addEventListener('click',escondeTudo);

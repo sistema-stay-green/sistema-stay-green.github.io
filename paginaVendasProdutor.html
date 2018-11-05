@@ -10,21 +10,42 @@
   </head>
   <body>
     <nav>
-    <a href="#">Home</a>
-    <a href="#">Agenda</a>
-    <a href="#">Máquinas</a>
-    <h3>Stay Green</h3>
-    <a href="#">Patrimonio</a>
-    <a href="#">Produção</a>
-    <a href="#">Vendas</a>
-  </nav>
+	  <a href="#">Home</a>
+	  <a href="#">Agenda</a>
+	  <a href="#">Máquinas</a>
+      <h3>Stay Green</h3>
+	  <a href="#">Patrimonio</a>
+	  <a href="#">Produção</a>
+	  <a href="#">Vendas</a>
+    </nav>
+    <div id="mascara"></div>
+    <div id="div-registra">
+      <h1>Registre um produto</h1>
+      <label> Nome: <input type="text" name="input" value=""> </label>
+      <label> Descrição: <textarea name="" id="" cols="50" rows="5"></textarea> </label>
+      <label> Valor de compra por unidade: <input type="number" value=""></label>
+      <label> Valor de venda por unidade: <input type="number"  value=""></label>
+      <label> Ponto de aviso: <input type="number" value=""></label>
+      <label> Estoque: <input type="number" value=""></label>
+      <label> Unidade de venda:  
+          <select >
+            <option value="Kg">Kg</option>
+            <option value="L">L</option>
+            <option value="unidade">unidade</option>
+          </select>
+        </label>
+      <label > imagem: <input type="text"></label>
+    </div>
+    <section id="div-encaminhamentos"><h1>Encaminhamentos</h1></section>
+    <section id="div-faturamentos"><h1>Faturamentos</h1></section>
+    <section id="div-resultados"><h1>Resultados</h1></section>	
     <main>
       <div class="div-botoes">
-        <button type="button" name="button">Histórico de Encaminhamento</button>
-        <button type="button" name="button">Relatório de Faturamento</button>
-        <button type="button" name="button">Relatório de Resultados</button>
-
-      </div>
+        <button id="botaoRegistra" type="button" name="button">Registrar um Produto</button>
+        <button id="botaoEnc" type="button" name="button">Histórico de Encaminhamento</button>
+        <button id="botaoFat" type="button" name="button">Relatório de Faturamento</button>
+        <button id="botaoRes" type="button" name="button">Relatório de Resultados</button>
+	  </div>
       <script type="text/javascript" src="JS/PaginaVendas/paginaVendasProdutor.js"></script>
     </main>
   </body>

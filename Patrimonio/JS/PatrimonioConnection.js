@@ -45,26 +45,44 @@ function getDataParam(patrimonio = new Patrimonio(), key){
 }
 
 
-function compraPatrimonio(patrimonio){
-  let params = "action=c&patrimonio=" + JSON.stringify(patrimonio);
+function sendNewPatrimonio(patrimonio){
+
+  let params = "?action=c&patrimonio=" + patrimonio.toJSON();
   params += "&" + getDataParam(patrimonio);
-  Request.post(SERVLET_URL, params);
+  Request.get(SERVLET_URL + params).then((response) => {
+
+    console.log(response);
+    
+  });
 }
 
+function sendUpdatedPatrimonio(patrimonio){
 
-function saidaPatrimonio(id, status){
-  let params = "?action=s&id=" + id + "&tipoSaida=" + status;
+  let params = "?action=u&patrimonio=" + patrimonio.toJSON();
+  params += "&" + getDataParam(patrimonio, 'Compra');
+  params += "&" + getDataParam(patrimonio, 'Saida');
+  params += "&" + getDataParam(patrimonio, 'Retorno');
+  params += "&" + getDataParam(patrimonio, 'Baixa');
+  Request.get(SERVLET_URL + params).then((response) => {
+
+    console.log(response);
+    
+  });
+}
+
+function sendDelete(id){
+
+  let params = "?action=d&id=" + id;
   Request.get(SERVLET_URL + params);
 }
 
-function entradaPatrimonio(id, data = new Date()){
-  let params = "?action=e&id=" + id + "&dataEntrada=" + data.toISOString().slice(0,10).replace("/-/g","");
-  Request.get(SERVLET_URL + params);
-}
+function receiveAllPatrimonios(){
 
-
-function retornoPatrimonio(){
   let params = "?action=r";
-  Request.get(SERVLET_URL + params);
+  Request.get(SERVLET_URL + params).then((response) => {
+
+    console.log(response);
+
+  });
 
 }

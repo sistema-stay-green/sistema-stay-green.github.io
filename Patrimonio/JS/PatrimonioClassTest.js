@@ -52,5 +52,4 @@ function generatePlaceholders() {
 // --- CODE ---
 
 generatePlaceholders();
-hidePatrimonioTable();
-showPatrimonioTable();
+//receiveAllPatrimonios();

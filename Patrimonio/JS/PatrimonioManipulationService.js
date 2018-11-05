@@ -1,12 +1,13 @@
 
-function addPatrimonio(patrimonio = new Patrimonio()){
+function newPatrimonio(patrimonio = new Patrimonio()){
 
     patrimonio = getPatrimonioFromModal();
     patrimonio.status = "EM_POSSE";
 
     // Temporário
     patrimonio.id = lastIdGenerated++;
-
+    
+    //compraPatrimonio(patrimonio);
     //sendAddPatrimonioToServlet(patrimonio);
     insertPatrimonioIntoTable(patrimonio);
 }

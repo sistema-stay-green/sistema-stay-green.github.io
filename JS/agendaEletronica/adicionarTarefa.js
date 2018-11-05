@@ -19,7 +19,7 @@ function exibeFormularioNovaTarefa(){
 
 botaoFormTarefaEl.addEventListener('click', exibeFormularioNovaTarefa);
 
-let botaoConfirmarTarefa = document.querySelector('#adicionarNovaTarefa');
+let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
 
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
@@ -27,7 +27,14 @@ function operacaoRequisicaoTarefas(operacao){
   Request.get('http:localhost:8080/staygreen/TarefaBDServlet?tarefa=' +
   novaTarefaAdicionada.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
-    window.alert("p");
+    window.alert(resultado);
+  });
+}
+
+function recebeTarefas(){
+  Request.get('http:localhost:8080/staygreen/TarefaServlet')
+  .then(function(resultado){
+    window.alert(resultado);
   });
 }
 

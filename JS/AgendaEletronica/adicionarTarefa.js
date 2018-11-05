@@ -1,18 +1,21 @@
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
-    containerFormNovaTarefa = document.querySelector('form'); 
+    containerFormNovaTarefa = document.querySelector('form'),
+    mascaraFormEl = document.querySelector('#mascaraForm');
 
+function escondeFormulario(){
+  mascaraFormEl.classList.add('invisivel');
+  containerFormNovaTarefa.classList.add('invisivel');
+}
 /*Exibe o formulário de adicionar nova tarefa quando usuário clica no
 botão '+ Nova Tarefa'*/
 
 function exibeFormularioNovaTarefa(){
-  let mascaraFormEl = document.querySelector('#mascaraForm');
+  let botaoCancelarTarefaEl = document.querySelector('button[name="cancelarTarefa"]');
 
   mascaraFormEl.classList.remove('invisivel');
-
-  mascaraFormEl.addEventListener('click', () => {
-    mascaraFormEl.classList.add('invisivel');
-    containerFormNovaTarefa.classList.add('invisivel');
-  })
+  mascaraFormEl.addEventListener('click', escondeFormulario);
+  
+  botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
 
   containerFormNovaTarefa.classList.remove('invisivel');
 }
@@ -26,13 +29,6 @@ botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 function operacaoRequisicaoTarefas(operacao){
   Request.get('http:localhost:8080/staygreen/TarefaBDServlet?tarefa=' +
   novaTarefaAdicionada.toJSONString() + "&operation=" + operacao )
-  .then(function(resultado){
-    window.alert(resultado);
-  });
-}
-
-function recebeTarefas(){
-  Request.get('http:localhost:8080/staygreen/TarefaServlet')
   .then(function(resultado){
     window.alert(resultado);
   });

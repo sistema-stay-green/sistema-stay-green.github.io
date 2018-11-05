@@ -113,6 +113,10 @@ button:focus{
     right: 35%;
 }
 
+[id|=edit], [id|=delete]{
+    display: block;
+}
+
 /*selects e inputs/label*/
 #toolbar li{
     list-style: none;
@@ -220,7 +224,17 @@ label{
     padding-bottom: 0.3em;
 }
 
-[id|=edit] {
+.conteudo{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 40em;
+}
+
+[id|=edit]{
     padding-right: 0.8em;
     padding-left: 0.8em;
+}
+
+::-webkit-scrollbar {
+    margin-left: 3em;
 }

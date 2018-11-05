@@ -229,6 +229,12 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
 }
 
+function clearTableContents() {
+    
+    patrimonioTable.innerHTML = "";
+    hidePatrimonioTable();
+}
+
 /**
  * Atualiza as informações de um Patrimonio na tabela.
  * @param {Patrimonio} patrimonio 

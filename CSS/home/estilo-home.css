@@ -149,6 +149,7 @@ main > article {
   font-family: 'Niramit' , sans-serif;
   margin: auto;
   position: relative;
+  cursor: pointer;
 }
 
 article:hover {

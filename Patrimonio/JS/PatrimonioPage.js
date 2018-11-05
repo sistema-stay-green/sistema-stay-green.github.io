@@ -43,7 +43,7 @@ function showModal(modal){
             formModal.classList.add("aparece");
             statusOptionsDiv.classList.add("esconde");
             enviarButton.removeEventListener("click", editPatrimonio);
-            enviarButton.addEventListener("click", addPatrimonio);
+            enviarButton.addEventListener("click", newPatrimonio);
             clearMainModal();
             break;
 
@@ -51,7 +51,7 @@ function showModal(modal){
 
             formModal.classList.toggle("aparece");
             statusOptionsDiv.classList.remove("esconde");
-            enviarButton.removeEventListener("click", addPatrimonio);
+            enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
             break;
 

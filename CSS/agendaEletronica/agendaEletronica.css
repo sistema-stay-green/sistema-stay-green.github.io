@@ -133,7 +133,7 @@ section > #botaoFormTarefa{
 	margin-right: 23vw;
 }
 
-#adicionarNovaTarefa{
+form div{
 	position: absolute;
 	bottom: 0;
 	right: 0;

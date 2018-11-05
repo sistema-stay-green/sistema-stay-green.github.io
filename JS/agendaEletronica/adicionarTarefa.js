@@ -21,7 +21,7 @@ function exibeFormularioNovaTarefa(){
 
 botaoFormTarefaEl.addEventListener('click', exibeFormularioNovaTarefa);
 
-let botaoConfirmarTarefa = document.querySelector('#adicionarNovaTarefa');
+let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
 
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 

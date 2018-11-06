@@ -12,6 +12,7 @@ window.onload = function () {
   var insumoTabela = document.getElementById("secInsumo");
   var selecionaNomeProduto = document.getElementById("selNomeProduto");
   var tdNomeProduto = document.getElementById("tdNomeProduto");
+  var secAvisos = document.getElementById('secAvisos');
   var produto;
   var promises;
 

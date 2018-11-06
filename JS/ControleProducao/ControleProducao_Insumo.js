@@ -3,19 +3,6 @@
    líder: Arthur Marcolino */
 
 class Insumo {
-
-  constructor(){
-    encapsulaDados();
-    this._item = {
-      nome: this._nome,
-      finalidade: this._finalidade,
-      valorUnidade: this._valorUnidade,
-      estoque: this._estoque,
-      pontoAviso: this._pontoAviso,
-      Tipo: "Insumo"
-    }
-  }
-
   //encapsula os dados
   encapsulaDados(){
     this._nome = document.querySelector("#inpNomeInsumo");
@@ -28,9 +15,23 @@ class Insumo {
     this._pontoAviso = (aux == null) ? "" : aux;
   }
 
+  constructor(){
+    encapsulaDados();
+    this._item = {
+      nome: this._nome,
+      finalidade: this._finalidade,
+      valorUnidade: this._valorUnidade,
+      estoque: this._estoque,
+      pontoAviso: this._pontoAviso,
+      Tipo: "insumo",
+      id: 0
+    }
+  }
+
+
   //faz requisição utilizando classe fornecida pela gerência
   fazRequisicao(){
-    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
+    var url = "ControleProducaoServlet?json=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=insumo";
     return Request.get(url);
   }
 }

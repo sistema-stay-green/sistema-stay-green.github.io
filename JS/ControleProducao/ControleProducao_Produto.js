@@ -16,8 +16,7 @@ class Produto {
     this._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
     //verifica se há um ponto de aviso (valor opcional);
     var aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-    this._pontoAviso =  aux == null? "" : aux;
-
+    this._pontoAviso = (aux == null) ? "" : aux;
   }
   // encapsula e cria o objeto item
   constructor(){
@@ -29,8 +28,8 @@ class Produto {
       valorProduto: this._valorProduto,
       estoque: this._estoque,
       pontoAviso: this._pontoAviso,
-
-      tipo: "Produto"
+      id: 0,
+      tipo: "produto"
     };
     console.log(this._item);
   }
@@ -39,7 +38,7 @@ class Produto {
 
 
   fazRequisicao(){
-    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
+    var url = "ControleProducaoServlet?json=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=produto";
 
     return Request.get(url);
   }

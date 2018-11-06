@@ -7,6 +7,8 @@ window.onload = function () {
 
   //Váriaveis
 
+  criaTabela("produto");
+
   var selecionaTabela = document.getElementsByName("selTabela");
   var produtoTabela = document.getElementById("secProduto");
   var insumoTabela = document.getElementById("secInsumo");
@@ -42,10 +44,12 @@ window.onload = function () {
     if(selecionaTabela[0].value === "produto"){
       produtoTabela.classList.toggle("ocultar");
       insumoTabela.classList.toggle("ocultar");
+      criaTabela("produto");
     }
     else{
       produtoTabela.classList.toggle("ocultar");
       insumoTabela.classList.toggle("ocultar");
+      criaTabela("insumo");
     }
   }
 

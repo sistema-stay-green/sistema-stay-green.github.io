@@ -38,8 +38,10 @@ class Produto {
   //encapsula os dados
 
 
+
   fazRequisicao(){
-    var url = "http://localhost:8080/ControleProducaoServlet?" + JSON.stringify(this._item);
-    return Request.get(url);
+      var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item);
+      return Request.get(url);
+
+    }
   }
-}

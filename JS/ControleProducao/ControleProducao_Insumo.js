@@ -29,8 +29,10 @@ class Insumo {
   }
 
   //faz requisição utilizando classe fornecida pela gerência
-  fazRequisicao(){
-    var url = "ControleProducaoServlet?" + JSON.stringify(this._item);
-    return Request.get(url);
-  }
-}
+
+    fazRequisicao(){
+        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item);
+        return Request.get(url);
+
+      }
+    }

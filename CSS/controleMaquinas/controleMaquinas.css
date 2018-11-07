@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
 
-html{
-   font-family: 'Niramit', sans-serif;
-   margin: 0;
-   height: 100%;
-}
+
 body{
-  height: 100%;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Niramit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 form > label{
   display: grid;
@@ -20,7 +22,13 @@ form > label{
 table{
   width: 100%;
 }
-
+.footer {
+  margin-top: 5vh;
+  height: 46vh;
+  width: 100vw;
+  margin-bottom:0;
+  align-self: flex-end;
+}
 
 #TituloPagina{
    text-align: center;

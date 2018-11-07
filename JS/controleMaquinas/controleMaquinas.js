@@ -1,17 +1,25 @@
-/*let inputs = document.querySelectorAll(".inputs");
+var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
+    botaoVoltar = document.querySelector("button[name='botaoVoltar']"),
+    botaoAcao = document.querySelector("button[name='botaoAcao']");
 
-for (let input of inputs){
-  input.addEventListener("input", function(e){
-    let alvoEl = e.currentTarget;
-    if(alvoEl.value === ""){
-      let btnCadastroEl = document.querySelector("button[name='botaoAcao']");
-      btnCadastroEl.disable = true;
-      btnCadastroEl.classList.add("botaoDesab");
+//checa se todos os inputs etão preenchidso e valida o cadastro
+function validacao(){
+  //variaveis
+  let inputs = document.querySelectorAll(".inputs"),
+      valor = 0;
+
+  for (let input of inputs){
+    console.log(input.value)
+    //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
+    if(input.value == ""){
+      document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
+      return false;
     }
-  })
-}*/
-
-
+  }
+  //se todos os input estiverem preenchidos retorna "true"e deixa o botão para cadastrar habilitado
+    document.querySelector("button[name='botaoAcao']").classList.remove("botaoDesab");
+    return true;
+}
 
 //fecha a div modal que pergunta os valores a serem cadastrados
 function Voltar(){
@@ -25,6 +33,7 @@ function Voltar(){
 
 //Abre uma div modal que permite a inserção de dados a srem cadastrados
 function Cadastrar(){
+  validacao();
     let inputs = document.querySelectorAll(".inputs");
     for (input of inputs) {
       input.value = "";
@@ -35,45 +44,49 @@ function Cadastrar(){
 
 //função que cadastra valores na tabela sem a utilização do BD
 function cadastroSemBD(){
-  //variaveis
-  let nome = document.querySelector("input[name='nome']").value,
-      finalidade = document.querySelector("input[name='finalidade']").value,
-      valor =  document.querySelector("input[name='valor']").value,
-      data = document.querySelector("input[name='data']").value,
-      depreciação = document.querySelector("input[name='depreciação']").value,
-      botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
-      maquinas = document.querySelector("#tabela");
-  let vetor = [nome,finalidade,valor,depreciação,data];
-  let string = "";
+  if(validacao() == true){
+    //variaveis
+    let nome = document.querySelector("input[name='nome']").value,
+        finalidade = document.querySelector("input[name='finalidade']").value,
+        valor =  document.querySelector("input[name='valor']").value,
+        data = document.querySelector("input[name='data']").value,
+        depreciação = document.querySelector("input[name='depreciação']").value,
+        botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+        maquinas = document.querySelector("#tabela");
+    let vetor = [nome,finalidade,valor,depreciação,data];
+    let string = "";
 
-  //insere os valores adquiridos na div modal em uma string e depois insere essa string na tabela
-  string += "<td class=\"id\">2</td>";
-  for (var i = 0; i < vetor.length; i++) {
-    string += "<td>" + vetor[i] + "</td>";
-  }
-    maquinas.innerHTML += string +
-    "<td class=\"status\">EM_POSSE</td>" +
-    "<td>Máquina</td>" +
-    "<td>NAN</td>" +
-    "<td>NAN</td>" +
-    "<td>NAN</td>" +
-    "<td>" + botaoSaida + "</td>";
+    /*insere os valores adquiridos na div modal em uma string e depois insere
+      essa string na tabela*/
+    string += "<td class=\"id\">2</td>";
+    for (var i = 0; i < vetor.length; i++) {
+      string += "<td>" + vetor[i] + "</td>";
+    }
+      maquinas.innerHTML += string +
+      "<td class=\"status\">EM POSSE</td>" +
+      "<td>Máquina</td>" +
+      "<td>NAN</td>" +
+      "<td>NAN</td>" +
+      "<td>NAN</td>" +
+      "<td>" + botaoSaida + "</td>";
 
-  //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
-  document.querySelector(".maquinas").style.display = "inline-block";
-  document.querySelector(".opcoes").style.display = "block";
-  document.querySelector(".valores_fundo").style.display = "none";
+    //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
+    document.querySelector(".maquinas").style.display = "inline-block";
+    document.querySelector(".opcoes").style.display = "block";
+    document.querySelector(".valores_fundo").style.display = "none";
 
-  //zera os valores dos inputs da div modal
-  var valores = document.querySelectorAll(".inputs");
-  for (var i = 0; i < valores.length; i++) {
-    valores[i].value = "";
-  }
+    //zera os valores dos inputs da div modal
+    var valores = document.querySelectorAll(".inputs");
+    for (var i = 0; i < valores.length; i++) {
+      valores[i].value = "";
+    }
 
-  //permite a chamada da função "saida" ao botão "botaoSaida" ser presionado
-  var botões = document.querySelectorAll(".botaoSaida");
-  for (var i = 0; i < botões.length; i++) {
-    botões[i].addEventListener("click", saida);
+    //permite a chamada da função "saida" ao botão "botaoSaida" ser presionado
+    var botões = document.querySelectorAll(".botaoSaida");
+    for (var i = 0; i < botões.length; i++) {
+      botões[i].addEventListener("click", saida);
+    }
+    document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
   }
 }
 
@@ -83,20 +96,21 @@ function saida(){
   let opcao = document.querySelector("#filtro_saida"),
       elemento = event.target;
 
-  //Pega o estado atual da maquinas, ex: EM_POSSE
+  //Pega o estado atual da maquinas, ex: EM POSSE
   elemento = elemento.parentNode;
   nodes = elemento.parentNode.children;
   console.log(elemento.parentNode);
   console.log(nodes[6].innerHTML);
 
-  /*Verifica se o estado é "EM_POSSE", se for ativa a div modal e permite a escolha
-    do que ira ser feito, ex:Vender, ALugar, etc..*/
-  if (nodes[6].innerHTML == "EM_POSSE") {
+  /*Verifica se o estado é "EM POSSE", se for ativa a div modal e permite a
+    escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
+  if (nodes[6].innerHTML == "EM POSSE") {
     document.querySelector("#saidas").style.display = "block";
 
       if(elemento.className != "botaoDesab"){
-        document.querySelector("#filtro_saida").addEventListener("change", function(elemento){
-          if(opcao.value == "alugar"){
+        document.querySelector("#filtro_saida").addEventListener("change",
+        function(elemento){
+          if(opcao.value == "Alugar"){
             document.querySelector("#retorno").style.display = "block";
             document.querySelector("#venda").style.display = "none";
             document.querySelector("#envio").style.display = "none";
@@ -137,14 +151,15 @@ function saida(){
 
   }
 
-//Função que adiciona ou remove a classe botaoDesab de acordo com o estado da maquina
+/*Função que adiciona ou remove a classe botaoDesab de acordo com o estado da
+  maquina*/
 function visaoBotao() {
   let botões = document.querySelectorAll(".botaoSaida");
   for (var i = 0; i < botões.length; i++) {
     var pesquisa = botões[i].parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML != "EM_POSSE"){
+    if(nodes[6].innerHTML != "EM POSSE"){
       botões[i].className = "botaoDesab";
     }
     else {
@@ -172,14 +187,14 @@ function AlteraStatus(elemento,opcao){
     elemento.innerHTML = "<tr class=\"maquina\">";
     for (var i = 0; i < vetor.length; i++) {
       if(i == 6){
-        if(opcao.value == "alugar"){
+        if(opcao.value == "Alugar"){
           elemento.innerHTML += "<td>ALUGADO</td>";
         }
         else if(opcao.value == "Vender"){
           elemento.innerHTML += "<td>VENDIDO</td>";
         }
         else if(opcao.value == "Enviar para conserto"){
-          elemento.innerHTML += "<td>EM_CONSERTO</td>";
+          elemento.innerHTML += "<td>EM CONSERTO</td>";
         }
         else if(opcao.value == "Descartar"){
           elemento.innerHTML += "<td>DESCARTADO</td>";
@@ -198,7 +213,7 @@ function AlteraStatus(elemento,opcao){
   }
 
 /*Chama a função "visaoBotao" que altera a classe do "botaoSaida" de acordo
-  com o estado da maquina, se for EM_POSSE não se altera, ao contrario,
+  com o estado da maquina, se for EM POSSE não se altera, ao contrario,
   adiciona a classe botaoDesab*/
   visaoBotao();
 
@@ -211,14 +226,15 @@ function AlteraStatus(elemento,opcao){
 
 
 //parte que mexe com a abertura e fechamento das divs modais
-document.querySelector("button[name='botaoVoltar']").addEventListener("click", function(){
+botaoVoltar.addEventListener("click", function(){
   document.querySelector(".valores_fundo").style.display = "none";
 })
 document.querySelector(".fecharModal").addEventListener("click", function(){
   document.querySelector("#saidas").style.display = "none";
 })
 window.addEventListener("click", function(event){
-    if (event.target == document.querySelector(".valores_fundo") || event.target == document.querySelector("#saidas")) {
+    if (event.target == document.querySelector(".valores_fundo") ||
+        event.target == document.querySelector("#saidas")) {
         document.querySelector(".valores_fundo").style.display = "none";
         document.querySelector("#saidas").style.display = "none";
     }
@@ -231,10 +247,14 @@ window.addEventListener("click", function(event){
 
 //Chamada das funções
 
-document.querySelector("button[name='botaoCadastro']").addEventListener("click", Cadastrar);
-document.querySelector("button[name='botaoVoltar']").addEventListener("click", Voltar);
-document.querySelector("button[name='botaoAcao']").addEventListener("click", cadastroSemBD);
+botaoCadastro.addEventListener("click", Cadastrar);
+botaoVoltar.addEventListener("click", Voltar);
+botaoAcao.addEventListener("click", cadastroSemBD);
 
+let inputs = document.querySelectorAll(".inputs");
+for (let input of inputs){
+  input.addEventListener("change", validacao);
+}
 
 let chamaSaida = document.querySelectorAll(".botaoSaida");
 for (var i = 0; i < chamaSaida.length; i++) {

@@ -37,7 +37,7 @@ class Tarefa{
      "gastoTarefa": this.gastoTarefa
    }
 
-    return JSON.stringify(patrimonioJSON);
+    return JSON.stringify(tarefaJSON);
   }
 
 

@@ -12,7 +12,12 @@ function recebeInsumos(){
 }
 
 window.onload = recebeTarefas;
+
 let containerCalendario = document.querySelector('#containerCalendario');
+
+const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
 
  /* Gera calendário dinâmico de forma recursiva
   *
@@ -22,10 +27,8 @@ let containerCalendario = document.querySelector('#containerCalendario');
   */
 
 function geraCalendario(dataBase) {
-  const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-    ],
-    QUANTIDADEDATAS = 16;
+ 
+  const QUANTIDADEDATAS = 16;
 
   if(document.querySelector('#containerCalendario > button[name="carregarDatas"]')
       === null){

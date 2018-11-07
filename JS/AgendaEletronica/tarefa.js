@@ -19,13 +19,20 @@ class Tarefa{
         return number;
   }
 
+  /**
+   * Formata uma data no formato AAAA-MM-DD
+   * @param {Date} data a data a ser formatada
+   * @returns {string} data formatada
+   * @author Pedro
+   */
   formatData(data){
     return data.getUTCFullYear() + "-" +
         (data.getMonth() + 1 < 10 ? "0" + (data.getMonth() + 1) :
           data.getMonth() + 1) + "-" + (data.getDate() < 10 ? "0" +
             data.getDate() : data.getDate());
   }
-  /*
+
+  /** 
   * Converte objeto Patrimonio em string JSON.
   * @returns {string} String com formatação JSON do objeto.
   * @author Guilherme Sena

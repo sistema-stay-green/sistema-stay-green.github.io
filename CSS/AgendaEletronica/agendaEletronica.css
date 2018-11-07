@@ -57,6 +57,20 @@ form{
 	transform: scale(1);
 }
 
+textarea{
+	background-color: var(--brancoIvory);
+	width: 60%;
+	font-size: calc(15px + .1vw);
+    box-sizing: border-box;
+	font-family: 'Niramit', sans-serif;
+    display: block;
+    margin: 2% 0 auto 3%;
+}
+
+textarea::placeholder{
+	font-weight: bold;
+}
+
 .sectionCheck{
 	border-bottom: 1px solid;
 }

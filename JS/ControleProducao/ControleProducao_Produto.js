@@ -19,7 +19,7 @@ class Produto {
         this._pontoAviso = aux == null ? "" : aux;
 
     }
-      id: 0,
+    
     // encapsula e cria o objeto item
     constructor() {
         this.encapsulaDados();
@@ -30,15 +30,10 @@ class Produto {
             valorUnitProduto: this._valorProduto,
             quantEstoqueProduto: this._estoque,
             pontoAvisoProduto: this._pontoAviso,
-
-            tipo: "Produto"
+            tipo: "produto"
         };
         console.log(this._item);
     }
-
-    //encapsula os dados
-
-
 
     fazRequisicao() {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=produto";

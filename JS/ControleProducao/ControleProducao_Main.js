@@ -1,11 +1,17 @@
-/* Autor: Diego Demétrio
+ /* Autor: Diego Demétrio
  Grupo 1: Controle de produção
  líder: Arthur Marcolino */
 
 
 window.onload = function () {
+    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=0&botao=buscar&tipo=produto";
 
-  criaTabela("produto");
+    Request.get(url)
+       .then(function(res){
+            criaTabela(res, "produto");
+
+        })
+       .catch(function(erro){ console.log(erro); return;});
     //Váriaveis
 
     var selecionaTabela = document.getElementsByName("selTabela");
@@ -72,7 +78,8 @@ window.onload = function () {
         if (selecionaTabela[0].value === "produto") {
             produtoTabela.classList.toggle("ocultar");
             insumoTabela.classList.toggle("ocultar");
-        } else {
+        }
+        else {
             produtoTabela.classList.toggle("ocultar");
             insumoTabela.classList.toggle("ocultar");
         }
@@ -80,7 +87,7 @@ window.onload = function () {
 
     //Função para alternar entre KG ou L na unidade de medida do produto via select
     selecionaNomeProduto.onchange = function () {
-        mudaProduto()
+        mudaProduto();
     };
 
     function mudaProduto() {
@@ -153,5 +160,3 @@ window.onload = function () {
 
     }
 };
-
-

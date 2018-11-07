@@ -19,6 +19,12 @@ class Tarefa{
         return number;
   }
 
+  formatData(data){
+    return data.getUTCFullYear() + "-" +
+        (data.getMonth() + 1 < 10 ? "0" + (data.getMonth() + 1) :
+          data.getMonth() + 1) + "-" + (data.getDate() < 10 ? "0" +
+            data.getDate() : data.getDate());
+  }
   /*
   * Converte objeto Patrimonio em string JSON.
   * @returns {string} String com formatação JSON do objeto.
@@ -27,17 +33,17 @@ class Tarefa{
   toJSONString(){
    let tarefaJSON = {
      "nomeTarefa": this.nomeTarefa,
-     "descricao": this.descricao,
+     "descrTarefa": "aaaa",
      "tipoTarefa": this.tipoTarefa,
-     "dataInicialTarefa": this.dataInicialTarefa,
-     "periodoRepetTarefa": this.periodoRepetTarefa,
+     "dataInicialTarefa": this.formatData(this.dataInicialTarefa),
+     "periodRepetTarefa": this.periodoRepetTarefa,
      "insumosTarefa": this.insumosTarefa,
-     "qtInsumosTarefa": this.qtInsumosTarefa,
-     "qtProduzTarefa": this.qtProduzTarefa,
+     "quantInsumosTarefa": this.qtInsumosTarefa,
+     "quantProduzTarefa": this.qtProduzTarefa,
      "gastoTarefa": this.gastoTarefa
    }
 
-    return JSON.stringify(patrimonioJSON);
+    return JSON.stringify(tarefaJSON);
   }
 
 

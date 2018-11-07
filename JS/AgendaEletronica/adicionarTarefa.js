@@ -14,7 +14,7 @@ function exibeFormularioNovaTarefa(){
 
   mascaraFormEl.classList.remove('invisivel');
   mascaraFormEl.addEventListener('click', escondeFormulario);
-  
+
   botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
 
   containerFormNovaTarefa.classList.remove('invisivel');
@@ -26,11 +26,20 @@ let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"
 
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
-function operacaoRequisicaoTarefas(operacao){
-  Request.get('http:localhost:8080/staygreen/TarefaBDServlet?tarefa=' +
-  novaTarefaAdicionada.toJSONString() + "&operation=" + operacao )
+function operacaoRequisicaoTarefas(operacao, tarefa){
+  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao );
+  Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
-    window.alert(resultado);
+    console.log(resultado);
+  });
+}
+
+function editarInsumo(insumoJSON) {
+  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=editar&JSON='
+  + insumoJSON + "&tipo=insumo").then(function(resultado){
+    console.log(resultado);
   });
 }
 
@@ -63,9 +72,8 @@ function encapsularDadosTarefa(){
 
     novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
 
-    console.table(novaTarefaAdicionada);
 
-    operacaoRequisicaoTarefas('a');
+    operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 
   //Requisicao simples AJAX de enviar dados de uma nova tarefa
 }

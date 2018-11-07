@@ -6,7 +6,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
   let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
 
-  Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value + "&senha=" + senhaInputEl.value)
+  Request.get("http://localhost:8080/StayGreen/logarusuario?login=" + emailInputEl.value + "&senha=" + senhaInputEl.value)
          .then(function(){window.location.redirect("index.html")})
          .catch(function(){
            alert("Erro ao logar o servidor");
@@ -25,7 +25,8 @@ btnConfimarCadastroEl.addEventListener("click", function() {
       emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
       senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
 
-  Request.get("http://localhost:8080/cadastrarusuario?nome=" + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario + "&login=" + emailUsuario + "&senha=" + senhaUsuario);
+  Request.get("http://localhost:8080/StayGreen/cadastrarusuario?nome=" + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
+      .then(res => console.log(res));
 
 });
 

@@ -1,12 +1,17 @@
 function recebeTarefas(){
-  Request.get('http:localhost:8080/staygreen/TarefaServlet')
+  Request.get('http:localhost:8080/StayGreen/TarefaServlet')
   .then(function(resultado){
-    window.alert(resultado);
+    console.log(resultado);
+  });
+}
+function recebeInsumos(){
+  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
+  .then(function(resultado) {
+      console.log(resultado);
   });
 }
 
 window.onload = recebeTarefas;
-
 let containerCalendario = document.querySelector('#containerCalendario');
 
  /* Gera calendário dinâmico de forma recursiva

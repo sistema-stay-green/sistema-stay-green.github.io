@@ -29,12 +29,10 @@ botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 /**
  * Faz uma requisição para o Servlet 'TarefaBDServlet' para adicionar, remover ou alterar uma tarefa
  * @param {Caractere} operacao a operação a ser feita
- * @param {Tarefa} o objeto tarefa que irá sofrer a operação
+ * @param {Tarefa} tarefa objeto Tarefa que irá sofrer a operação
  * @author Pedro
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
-  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
-  tarefa.toJSONString() + "&operation=" + operacao );
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
@@ -55,6 +53,8 @@ function encapsularDadosTarefa(){
 
     novaTarefaAdicionada.nomeTarefa =
       document.querySelector('#nomeNovaTarefa').value;
+    novaTarefaAdicionada.descrTarefa = 
+      document.querySelector('textarea[name="descricaoTarefa"').value;
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
     novaTarefaAdicionada.dataInicialTarefa =
@@ -77,7 +77,6 @@ function encapsularDadosTarefa(){
     }
 
     novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
-
 
     operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 

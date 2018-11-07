@@ -1,6 +1,6 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Duda
+ * @author Maria Eduarda
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
@@ -8,7 +8,7 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 /**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
@@ -28,41 +28,42 @@ function receiveAllPatrimoniosFromServlet(callBack){
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
  * @param {Patrimonio} patrimonio 
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
   Request.get(SERVLET_URL + params).then((response) => {
-    
     callBack(encapsulateJSON(response));
   });
 }
 
 /**
  * Envia um Patrimonio atualizado para o Servlet
- * @param {Patrimonio} patrimonio
- * @author Mei Fagundes, Duda Pasquel
+ * @param {Patrimonio} patrimonio 
+ * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
+ * @author Mei Fagundes, Maria Eduarda
  */
-function sendUpdatedPatrimonio(patrimonio){
+function sendUpdatedPatrimonio(patrimonio, callBack){
 
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
   Request.get(SERVLET_URL + params).then((response) => {
-
+    callBack(patrimonio.id,response);
 
   });
 }
 
 /**
  * Envia uma requisição de remoção de um Patrimonio para o Servlet
- * @param {Patrimonio} patrimonio 
- * @author Mei Fagundes, Duda Pasquel
+ * @param {Patrimonio} patrimonio
+ * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
+ * @author Mei Fagundes, Maria Eduarda
  */
-function sendDeletedPatrimonio(id){
+function sendDeletedPatrimonio(id, callBack){
 
   let params = "?action=d&id=" + id;
   Request.get(SERVLET_URL + params).then((response) => {
-
+    callBack(id,response);
 
   });
 }

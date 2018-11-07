@@ -1,108 +1,34 @@
-/*
-@author Rafael Herbert
-Lider: Mei Fagundes
+/**
+ * Script para auxiliar no funcionamento do filtro.
+ * @author Mei Fagundes, Maria Eduarda
+ */
 
-*/
-
-  function relatOcorr(patrimonio = new Patrimonio(), key){
-    let PatrimonioOccor = getPatrimonioTipo(patrimonio, key);
-    console.log(PatrimonioOccor.tipo()+" ocorrência" + Patrimonio.lenght + "unidades");
-  }
-  function relatPorcentTipo(){
-
-  }
-
-  function relatManutTotal(){
-
-  }
-  function relatManutTipo(){
-
-  }
-  function relatBaixasTotal(){
-
-  }
-  function relatBaixasTipo(){
-
-  }
-
-// getters que retornam arrays com todos os elementos em discriminação solicitada
-function getPatrimonioTipo(patrimonio = new Patrimonio(), key){
-    let patrimonioTipos;
-    for(let item of patrimonio){
-      switch (key) {
-        case 'MAQUINA':
-          if(key == patrimonio.tipo())
-            patrimonioTipos.push(patrimonio.getPrototypeOf(item));
-          break;
-        case 'OUTROS':
-          if(key == patrimonio.tipo())
-            patrimonioTipos.push(patrimonio.getPrototypeOf(item));
-          break;
-        default:
-      }//chave switch
-    }//chave for(..of)
-}//retorna uma array
-
-
-function allBaixas(patrimonio = new Patrimonio()){
-    let patrimonioBaixas;
-    patrimonioBaixas.push(getPatrimoniosVendidos);
-    patrimonioBaixas.push(getPatrimoniosDescartados);
-    return patrimonioBaixas;
-  }//retorna array com elementos do patrimonio em baixa
-
-function getPatrimonioBase(patrimonio = new Patrimonio(), key){
-  let patrimonioBase;
-  for(let item of patrimonio){
-    switch (key) {
-      case 'EM_MANUTENCAO':
-        if(key == patrimonio.status())
-          patrimonioBase.push(patrimonio.getPrototypeOf(item));
-        break;
-
-      case 'EM_POSSE':
-        if(key == patrimonio.status())
-          patrimonioBase.push(patrimonio.getPrototypeOf(item));
-        break;
-
-      case 'ALUGADOS':
-        if(key == patrimonio.status())
-          patrimonioBase.push(patrimonio.getPrototypeOf(item));
-        break;
-
-      case 'VENDIDOS':
-        if(key == patrimonio.status())
-          patrimonioBase.push(patrimonio.getPrototypeOf(item));
-        break;
-
-      case 'DESCARTADO':
-        if(key == patrimonio.status())
-          patrimonioBase.push(patrimonio.getPrototypeOf(item));
-        break;
-
-      default:
-        console.log(new Error("Parametro não suportado pela função discrimina()."));
-      }
+function getPatrimonioBase(patrimonios = new Patrimonio()[], status){
+  let patrimonioBase = new Patrimonio()[];
+  for(let patrimonio of patrimonios){
+      if(status == patrimonio.status())
+        patrimonioBase.push(patrimonio);
     }
     return patrimonioBase;
   }
 
-function getPatrimoniosEmManutencao(patrimonio = new Patrimonio()) {
-    return getPatrimonioBase(patrimonio, 'EM_MANUTENCAO');
+function getPatrimoniosEmManutencao(patrimonios = new Patrimonio()[]) {
+    return getPatrimonioBase(patrimonios, 'EM_MANUTENCAO');
+
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_MANUTENCAO'
 
-function getPatrimoniosEmPosse(patrimonio = new Patrimonio()) {
-    return getPatrimonioBase(patrimonio, 'EM_POSSE');
+function getPatrimoniosEmPosse(patrimonios = new Patrimonio()[]) {
+    return getPatrimonioBase(patrimonios, 'EM_POSSE');
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_POSSE'
 
-function getPatrimoniosAlugados(patrimonio = new Patrimonio()) {
-    return getPatrimonioBase(patrimonio, 'ALUGADOS');
+function getPatrimoniosAlugados(patrimonios = new Patrimonio()[]) {
+    return getPatrimonioBase(patrimonios, 'ALUGADOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'ALUGADOS'
 
-function getPatrimoniosVendidos(patrimonio = new Patrimonio()) {
-    return getPatrimonioBase(patrimonio, 'VENDIDOS');
+function getPatrimoniosVendidos(patrimonios = new Patrimonio()[]) {
+    return getPatrimonioBase(patrimonios, 'VENDIDOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'VENDIDOS'
 
-function getPatrimoniosDescartados(patrimonio = new Patrimonio()){
-    return getPatrimonioBase(patrimonio, 'DESCARTADO');
+function getPatrimoniosDescartados(patrimonios = new Patrimonio()[]){
+    return getPatrimonioBase(patrimonios, 'DESCARTADO');
 }//retorna array com elementos do patrimonio discriminados pelo status 'DESCARTADO

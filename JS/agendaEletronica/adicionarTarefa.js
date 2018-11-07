@@ -27,6 +27,8 @@ let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
 function operacaoRequisicaoTarefas(operacao, tarefa){
+  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao );
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){

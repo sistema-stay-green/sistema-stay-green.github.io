@@ -3,26 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Controle de Maquinas</title>
-    <link rel="stylesheet" href="CSS/Estilo.css">
-    <link rel="stylesheet" href="CSS/StayGreen.css">
+    <link rel="stylesheet" href="CSS/controleMaquinas/controleMaquinas.css">
+    <link rel="stylesheet" href="CSS/staygreen.css">
   </head>
   <body>
 
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
-    <div class="opções">
-      <button type="button" name="BotãoCadastro">Cadastrar</button>
+    <div class="opcoes">
+      <button type="button" name="botaoCadastro">Cadastrar</button>
     </div>
     <!-- Parte do Cadastro -->
-    <form class="valores">
-      <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
-      <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
-      <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
-      <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
-      <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
-      <button type="button" name="BotãoAção">Enviar</button>
-      <button type="button" name="BotãoVoltar">Voltar</button>
-    </form>
+    <div class="valores_fundo">
+      <form class="valores">
+        <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
+        <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
+        <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
+        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
+        <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
+        <button type="button" name="botaoAcao">Enviar</button>
+        <button type="button" name="botaoVoltar">Voltar</button>
+      </form>
+    </div>
 
     <div class="maquinas">
       <section id="filtro">
@@ -49,7 +51,7 @@
           <th>valorAtual</th>
           <th>dataSaida</th>
           <th>dataBaixa</th>
-          <th>Opções</th>
+          <th>opcoes</th>
         </tr>
       </thead>
       <tbody id="tabela">
@@ -66,7 +68,7 @@
           <td>2018-10-03</td>
           <td>2018-10-02</td>
           <td>
-             <button type="button" class="BotãoSaida">Saida</button>
+             <button type="button" class="botaoSaida">Saida</button>
           </td>
         </tr>
         <tr class="maquina">
@@ -82,7 +84,7 @@
           <td>2018-10-03</td>
           <td>2018-10-02</td>
           <td>
-             <button type="button" class="BotãoSaida">Saida</button>
+             <button type="button" class="botaoSaida">Saida</button>
           </td>
         </tr>
       </tbody>
@@ -94,28 +96,28 @@
         <section id="filtro2">
           <label for="filtro_saida">Opção:
             <select id="filtro_saida">
-              <option><a href="#">Alugar</option>
+              <option><a href="#">alugar</option>
               <option><a href="#">Vender</option>
               <option><a href="#">Enviar para conserto</option>
               <option><a href="#">Descartar</option>
             </select>
           </label>
-          <span id="Retorno"><label>Data de Retorno<input type="date" name="data" class="data"></label>
-          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Venda"><label>Data de Venda<input type="date" name="data" class="data"></label>
-          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Envio"><label>Data de Envio<input type="date" name="data" class="data"></label>
-          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
-          <span id="Descarte"><label>Data de Descarte<input type="date"  name="data" class="data"></label>
-          <button type="button" class="BotãoEnviar" name="BotãoEnviar">Enviar</button></span>
+          <span id="retorno"><label>Data de retorno<input type="date" name="data" class="data"></label>
+          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
+          <span id="venda"><label>Data de venda<input type="date" name="data" class="data"></label>
+          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
+          <span id="envio"><label>Data de envio<input type="date" name="data" class="data"></label>
+          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
+          <span id="descarte"><label>Data de descarte<input type="date"  name="data" class="data"></label>
+          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
         </section>
      </div>
    </div>
   </body>
-  <script src="../JS/controleMaquinas/maquina.js" charset="utf-8"></script>
-  <script src="../JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
-  <script src="../JS/controleMaquinas/main.js" charset="utf-8"></script>
-  <script src="../JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
+  <!--<script src="JS/controleMaquinas/maquina.js" charset="utf-8"></script>
+  <script src="JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="JS/controleMaquinas/main.js" charset="utf-8"></script>-->
+  <script src="JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
 </html>
 
 <!--<footer>

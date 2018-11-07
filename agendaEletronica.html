@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Stay Green - Agenda</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/AgendaEletronica/agendaEletronica.css">
@@ -59,9 +59,9 @@
     </section>
     <section class="sectionCheck">
       <h1>Ver Tarefas</h1>
-      <label><input type="checkbox" name="Dia" value="Dia">Do dia</label>
-      <label><input type="checkbox" name="Semana" value="Semana">Do semana</label>
-      <label><input type="checkbox" name="Mes" value="Mes">Do mês</label>
+      <label><input type="checkbox" name="filtroData" value="Dia">Do dia  <input type="number" min="1" max="31" name="filtroDia" value="1"></label>
+      <label><input type="checkbox" name="filtroData" value="Semana">Do semana</label>
+      <label><input type="checkbox" name="filtroData" value="Mes">Do mês <select name="filtroMes"></select></label>
     </section>
     <section class="sectionButton">
       <button type="button" class="botaoRelatorio">Relatório de Gastos</button>
@@ -75,5 +75,6 @@
   <script src="JS/AgendaEletronica/adicionarTarefa.js"></script>
   <script src="JS/AgendaEletronica/exibirTarefas.js"></script>
   <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
+  <script src="JS/AgendaEletronica/filtrosTarefas.js"></script>
 </body>
 </html>

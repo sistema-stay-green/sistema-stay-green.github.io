@@ -1,13 +1,23 @@
 function recebeTarefas(){
-  Request.get('http:localhost:8080/staygreen/TarefaServlet')
+  Request.get('http:localhost:8080/StayGreen/TarefaServlet')
   .then(function(resultado){
-    window.alert(resultado);
+    console.log(resultado);
+  });
+}
+function recebeInsumos(){
+  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
+  .then(function(resultado) {
+      console.log(resultado);
   });
 }
 
 window.onload = recebeTarefas;
 
 let containerCalendario = document.querySelector('#containerCalendario');
+
+const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
 
  /* Gera calendário dinâmico de forma recursiva
   *
@@ -17,10 +27,8 @@ let containerCalendario = document.querySelector('#containerCalendario');
   */
 
 function geraCalendario(dataBase) {
-  const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-    ],
-    QUANTIDADEDATAS = 16;
+ 
+  const QUANTIDADEDATAS = 16;
 
   if(document.querySelector('#containerCalendario > button[name="carregarDatas"]')
       === null){

@@ -3,6 +3,12 @@
  líder: Arthur Marcolino */
 
 class Insumo {
+  //encapsula os dados
+  encapsulaDados(){
+    this._nome = document.querySelector("#inpNomeInsumo");
+    this._finalidade = document.querySelector("#inpFinalidadeInsumo");
+    this._valorUnidade = document.querySelector("#inpValorUniInsumo");
+    this._estoque = document.querySelector("#inpQuantEstoqueInsumo");
 
     encapsulaDados() {
         this._nome = document.querySelector("#inpNomeInsumo").value;

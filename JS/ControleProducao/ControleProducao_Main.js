@@ -5,6 +5,7 @@
 
 window.onload = function () {
 
+  criaTabela("produto");
     //Váriaveis
 
     var selecionaTabela = document.getElementsByName("selTabela");

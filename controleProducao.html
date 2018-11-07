@@ -1,19 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>StayGreen</title>
-        <link rel="stylesheet" href="CSS/staygreen.css">
-        <link rel="stylesheet" href="CSS/ControleProducao/ControleProducao_estilo.css">
-        <link href="https://fonts.googleapis.com/css?family=Niramit:200" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <title>StayGreen</title>
+  <link rel="stylesheet" href="CSS/staygreen.css">
+  <link rel="stylesheet" href="CSS/ControleProducao/ControleProducao_estilo.css">
+  <link href="https://fonts.googleapis.com/css?family=Niramit:200" rel="stylesheet">
 
-    </head>
-    <body>
-        <div class="conteudo">
-            <h1 id="h1TabProduto">Registrar</h1>
-            <select name="selTabela">
-                <option value="produto">Produto</option>
-                <option value="insumo">Insumo</option>
+</head>
+<body>
+    <div id="conteudo">
+      <h1 id="h1TabProduto">Registrar</h1>
+      <select name="selTabela">
+        <option value="produto">Produto</option>
+        <option value="insumo">Insumo</option>
+      </select>
+      <section id="secProduto">
+        <table class="tabProduto">
+          <caption id="capTabProduto">
+            <label for="selFiltro">Filtro: </label>
+            <select id="selFiltro">
+              <option value="Café">Café</option>
+              <option value="Leite">Leite</option>
+              <option value="preco">Preço</option>
+              <option value="quantEsotque">Quantidade em estoque</option>
+            </select>
+          </caption>
+          <thead>
+            <tr>
+              <th>Nome do produto</th>
+              <th>Descrição</th>
+              <th>Unidade de medida</th>
+              <th>Valor</th>
+              <th>Quantidade em estoque</th>
+              <th>Ponto de aviso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select id="selNomeProduto">
+                  <option value="cafe">Café</option>
+                  <option value="leite">Leite</option>
+                </select>
+              </td>
+              <td><input type="text" id="inpDescricaoProduto"></td>
+              <td id="tdNomeProduto">
+                KG (Kilograma)
+              </td>
+              <td><input type="number" id="inpValorProduto"></td>
+              <td><input type="number" id="inpQuantEstoqueProduto"></td>
+              <td><input type="number" id="inpPontoAvisoProduto"></td>
+            </tr>
+          <tbody>
+        </table>
+        <button type="button" id="btnRegistarProduto">Registrar</button>
+      </section>
+
+      <section id="secInsumo" class="ocultar">
+        <table class="tabInsumo">
+          <caption id="capTabProduto">
+            <label for="selFiltro">Filtro: </label>
+            <select id="selFiltro">
+              <option value="cafe">Café</option>
+              <option value="leite">Leite</option>
+              <option value="preco">Preço</option>
+              <option value="quantEsotque">Quantidade em estoque</option>
             </select>
             <section id="secProduto">
                 <table class="tabProduto">
@@ -57,105 +109,70 @@
                 <button type="button" id="btnRegistarProduto">Registrar</button>
             </section>
 
-            <section id="secInsumo" class="ocultar">
-                <table class="tabInsumo">
-                    <caption id="capTabProduto">
-                        <label for="selFiltro">Filtro: </label>
-                        <select id="selFiltro">
-                            <option value="cafe">Café</option>
-                            <option value="leite">Leite</option>
-                            <option value="preco">Preço</option>
-                            <option value="quantEsotque">Quantidade em estoque</option>
-                        </select>
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>Nome do insumo</th>
-                            <th>Finalidade</th>
-                            <th>Valor unitário</th>
-                            <th>Quantidade em estoque</th>
-                            <th>Ponto de aviso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" id="inpNomeInsumo"></td>
-                            <td><input type="text" id="inpFinalidadeInsumo"></td>
-                            <td><input step="any" type="number" id="inpValorUniInsumo"></td>
-                            <td><input step="1" type="number" id="inpQuantEstoqueInsumo"></td>
-                            <td><input step="1" type="number" id="inpPontoAvisoInsumo"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="button" id="btnRegistrarInsumo">Registrar</button>
-            </section>
-
-            <section id="secAvisos"></section>
-
-            <section id="secProdutosInsumosRegistrados">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome do produto</th>
-                            <th>Descrição</th>
-                            <th>Unidade de medida</th>
-                            <th>Valor</th>
-                            <th>Quantidade em estoque</th>
-                            <th>Ponto de aviso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ND</td>
-                            <td>ND</td>
-                            <td>ND</td>
-                            <td>ND</td>
-                            <td>ND</td>
-                            <td>ND</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome do insumo</th>
-                            <th>Finalidade</th>
-                            <th>Valor unitário</th>
-                            <th>Quantidade em estoque</th>
-                            <th>Ponto de aviso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>ND</th>
-                            <th>ND</th>
-                            <th>ND</th>
-                            <th>ND</th>
-                            <th>ND</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-            <div id="divModal" class="esconde">
-                <div id="conteudoDivModal">
-                    <h2>Teste</h2>
-                    <button type="button" id="btnRelatorio1">Relatório 1</button>
-                    <button type="button" id="btnRelatorio2">Relatório 2</button>
-                    <div id="divBtnFechar">
-                        <button type="button" id="btnFechaModal">Fechar</button>
-                    </div>
-                </div>
-            </div>
+      <section id="secProdutosInsumosRegistrados">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome do produto</th>
+              <th>Descrição</th>
+              <th>Unidade de medida</th>
+              <th>Valor</th>
+              <th>Quantidade em estoque</th>
+              <th>Ponto de aviso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome do insumo</th>
+              <th>Finalidade</th>
+              <th>Valor unitário</th>
+              <th>Quantidade em estoque</th>
+              <th>Ponto de aviso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+              <th>ND</th>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <div id="divModal" class="esconde">
+        <div id="conteudoDivModal">
+          <h2>Teste</h2>
+          <button type="button" id="btnRelatorio1">Relatório 1</button>
+          <button type="button" id="btnRelatorio2">Relatório 2</button>
+          <div id="divBtnFechar">
+            <button type="button" id="btnFechaModal">Fechar</button>
+          </div>
         </div>
-        <div id="divMascara" class="ocultar"></div>
-        <button type="button" id="btnCriaRelatorio">Criar relatório</button>
+      </div>
+    </div>
+    <div id="divMascara" class="ocultar"></div>
+    <button type="button" id="btnCriaRelatorio">Criar relatório</button>
 
-        <!-- Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
-        <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
-        <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
-        <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
-        <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
-    </body>
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
+  </body>
 </html>

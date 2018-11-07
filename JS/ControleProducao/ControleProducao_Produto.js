@@ -19,6 +19,7 @@ class Produto {
         this._pontoAviso = aux == null ? "" : aux;
 
     }
+      id: 0,
     // encapsula e cria o objeto item
     constructor() {
         this.encapsulaDados();

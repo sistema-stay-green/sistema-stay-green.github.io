@@ -1,5 +1,4 @@
-// Define se a página será executada de forma estática ou dinâmica (com conexão).
-const staticDebugMode = true;
+// --- CODE ---
 
 if (!staticDebugMode) {
     receivePatrimonios();

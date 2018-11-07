@@ -248,8 +248,8 @@ function confirmaCarrinho(){
   let articlesCarrinho = document.querySelectorAll("#div-carrinho > article");
   let boolManda = true;
   for(let article of articlesCarrinho){
-    if(article.querySelector("label > input").value <= 0 ||
-        article.querySelector("label > input").value >  article.querySelector("label > input").max)
+    if(parseInt(article.querySelector("label > input").value) <= 0 ||
+        parseInt(article.querySelector("label > input").value) >  parseInt(article.querySelector("label > input").max))
       boolManda = false;
   }
 

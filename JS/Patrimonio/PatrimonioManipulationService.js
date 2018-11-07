@@ -8,6 +8,11 @@ let returnCallback = (patrimonios = []) => {
     }
 };
 
+let comprarCallback = (patrimonio = new Patrimonio()) => {
+
+    insertPatrimonioIntoTable(patrimonio);
+};
+
 function receivePatrimonios(){
 
     receiveAllPatrimoniosFromServlet(returnCallback);
@@ -17,13 +22,13 @@ function newPatrimonio(patrimonio = new Patrimonio()){
 
     patrimonio = getPatrimonioFromModal();
     patrimonio.status = "EM_POSSE";
-
-    // Temporário
-    patrimonio.id = lastIdGenerated++;
     
-    //compraPatrimonio(patrimonio);
-    //sendAddPatrimonioToServlet(patrimonio);
-    insertPatrimonioIntoTable(patrimonio);
+    if (!staticDebugMode)
+        sendNewPatrimonio(patrimonio, comprarCallback);
+    else {
+        patrimonio.id = lastIdGenerated++;
+        insertPatrimonioIntoTable(patrimonio);
+    }
 }
 
 function editPatrimonio(){

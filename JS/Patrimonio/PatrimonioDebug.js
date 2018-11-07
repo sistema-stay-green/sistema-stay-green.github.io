@@ -12,10 +12,13 @@ const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20
 const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];
 const indiceDepreciacao = [10, 1, 20, 2, 30];
 const valorCompra = [10000, null, 50000, null, 800000];
-const dataCompra = [new Date(2017, 5, 9), new Date(2016, 10, 20), new Date(2015, 12, 13), new Date(2017, 3, 5), new Date(2017, 10 ,3)];
-const dataSaida = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
-const dataRetorno = [new Date(), null, null, null, null];
-const dataBaixa = [null, null, null, new Date(), null];
+const dC = [new Date(2017, 5, 9), new Date(2016, 10, 20), new Date(2015, 12, 13), new Date(2017, 3, 5), new Date(2017, 10 ,3)];
+const dS = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
+const dR = [new Date(), null, null, null, null];
+const dB = [null, null, null, new Date(), null];
+
+// Define se a página será executada de forma estática ou dinâmica (com conexão).
+const staticDebugMode = true;
 
 let lastIdGenerated = 0;
 
@@ -32,19 +35,13 @@ function generatePlaceholders() {
         patrimonio.status = status[i];
         patrimonio.indiceDepreciacao = indiceDepreciacao[i];
         patrimonio.valorCompra = valorCompra[i];
-        patrimonio.dataCompra = dataCompra[i];
-        patrimonio.dataSaida = dataSaida[i];
-        patrimonio.dataRetorno = dataRetorno[i];
-        patrimonio.dataBaixa = dataBaixa[i];
-
-        patrimonio.calculateValorAtual();
+        patrimonio.dataCompra = dC[i];
+        patrimonio.dataSaida = dS[i];
+        patrimonio.dataRetorno = dR[i];
+        patrimonio.dataBaixa = dB[i];
         lastIdGenerated++;
-
-        //saidaPatrimonio(patrimonio, "Compra");
-        //saidaPatrimonio(patrimonio, "Saida");
-        //saidaPatrimonio(patrimonio, "Retorno");
-        //saidaPatrimonio(patrimonio, "Baixa");
 
         insertPatrimonioIntoTable(patrimonio);
     }
 }
+

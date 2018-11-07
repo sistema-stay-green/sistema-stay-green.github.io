@@ -243,7 +243,27 @@ label{
     border-radius: 0.3em;
     margin-left: 3.5em;
 }
+
 [id|=delete]{
     border-radius: 0.3em;
     margin-left: 3.5em;
+}
+
+.erroModal{
+    opacity: 0;
+    transform: scale(0.9);
+    transition: 300ms ease-in;
+    background-color: white;
+    border: 0.3em solid #E1170F;
+    border-radius: 1.5em;
+    position: fixed;
+    bottom: 3vh;
+    left: 1vw;
+    width: 8em;
+    padding: 0.5em;
+    font-size: 0.95em;
+    text-align: center;
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
 }

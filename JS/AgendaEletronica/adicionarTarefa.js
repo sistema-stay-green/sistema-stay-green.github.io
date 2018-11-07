@@ -6,9 +6,9 @@ function escondeFormulario(){
   mascaraFormEl.classList.add('invisivel');
   containerFormNovaTarefa.classList.add('invisivel');
 }
+
 /*Exibe o formulário de adicionar nova tarefa quando usuário clica no
 botão '+ Nova Tarefa'*/
-
 function exibeFormularioNovaTarefa(){
   let botaoCancelarTarefaEl = document.querySelector('button[name="cancelarTarefa"]');
 
@@ -26,6 +26,12 @@ let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"
 
 botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
+/**
+ * Faz uma requisição para o Servlet 'TarefaBDServlet' para adicionar, remover ou alterar uma tarefa
+ * @param {Caractere} operacao a operação a ser feita
+ * @param {Tarefa} o objeto tarefa que irá sofrer a operação
+ * @author Pedro
+ */
 function operacaoRequisicaoTarefas(operacao, tarefa){
   console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao );

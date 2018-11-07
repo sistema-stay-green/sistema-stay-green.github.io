@@ -1,12 +1,13 @@
+/*Recebimento das tarefas e insumos armazenados na DB*/ 
 function recebeTarefas(){
   Request.get('http:localhost:8080/StayGreen/TarefaServlet')
-  .then(function(resultado){
+  .then((resultado) => {
     console.log(resultado);
   });
 }
 function recebeInsumos(){
   Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
-  .then(function(resultado) {
+  .then((resultado) => {
       console.log(resultado);
   });
 }
@@ -19,13 +20,11 @@ const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
- /* Gera calendário dinâmico de forma recursiva
-  *
+ /**
+  * Gera calendário dinâmico de forma recursiva
   * @author  Pedro
   * @param dataBase a primeira data do calendário
-  *
   */
-
 function geraCalendario(dataBase) {
  
   const QUANTIDADEDATAS = 16;

@@ -48,7 +48,7 @@ function sendUpdatedPatrimonio(patrimonio, callBack){
 
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
   Request.get(SERVLET_URL + params).then((response) => {
-    callBack(patrimonio.id,response);
+    callBack(patrimonio,response);
 
   });
 }

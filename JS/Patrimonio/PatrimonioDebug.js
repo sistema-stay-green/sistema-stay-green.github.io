@@ -3,28 +3,25 @@
  * @author Mei
  */
 
-// --- CONST ---
-
-const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];
-const tipo = ["MAQUINA", "OUTROS", "MAQUINA", "OUTROS", "MAQUINA"];
-const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café",
-     "Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café", "Uma máquina que ajuda na colheita do café."];
-const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];
-const indiceDepreciacao = [10, 1, 20, 2, 30];
-const valorCompra = [10000, null, 50000, null, 800000];
-const dC = [new Date(2017, 5, 9), new Date(2016, 10, 20), new Date(2015, 12, 13), new Date(2017, 3, 5), new Date(2017, 10 ,3)];
-const dS = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
-const dR = [new Date(), null, null, null, null];
-const dB = [null, null, null, new Date(), null];
-
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
 const staticDebugMode = true;
-
 let lastIdGenerated = 0;
 
 // --- FUNCTIONS ---
 
 function generatePlaceholders() {
+
+    const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];
+    const tipo = ["MAQUINA", "OUTROS", "MAQUINA", "OUTROS", "MAQUINA"];
+    const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café",
+        "Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café", "Uma máquina que ajuda na colheita do café."];
+    const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];
+    const indiceDepreciacao = [10, 1, 20, 2, 30];
+    const valorCompra = [10000, null, 50000, null, 800000];
+    const dC = [new Date(2017, 5, 9), new Date(2016, 10, 20), new Date(2015, 12, 13), new Date(2017, 3, 5), new Date(2017, 10 ,3)];
+    const dS = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
+    const dR = [new Date(), null, null, null, null];
+    const dB = [null, null, null, new Date(), null];
 
     for (let i = 0; i < nome.length; i++) {
 
@@ -44,4 +41,3 @@ function generatePlaceholders() {
         insertPatrimonioIntoTable(patrimonio);
     }
 }
-

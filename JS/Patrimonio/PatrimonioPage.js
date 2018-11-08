@@ -24,6 +24,8 @@ let editButton = document.querySelectorAll("[id|=edit]");
 const NA = "N/A";
 
 let currentPatrimonioBeingEdited = null;
+let entradaBeingEdited = false;
+let saidaBeingEdited = false;
 
 // --- FUNCTIONS ---
 
@@ -71,6 +73,8 @@ function showEditOptions(key){
             entradaDiv.style.display = "block";
             saidaDiv.classList.add("esconde");
             saidaDiv.style.display = "none";
+            entradaBeingEdited = true;
+            saidaBeingEdited = false;
             break;
 
         case 'saida':
@@ -79,6 +83,8 @@ function showEditOptions(key){
             entradaDiv.style.display = "none";
             saidaDiv.classList.remove("esconde");
             saidaDiv.style.display = "block";
+            entradaBeingEdited = false;
+            saidaBeingEdited = true;
             break;
     
         default:
@@ -86,7 +92,7 @@ function showEditOptions(key){
     }
 }
 
-function showErrorModal(cod){
+function showError(cod){
 
     errorModal = document.querySelector("#errorModal");
     let message;
@@ -97,11 +103,11 @@ function showErrorModal(cod){
             break;
 
         case 1:
-            message = "ERRO! ";
+            message = "ERRO! Todos os campos devem estar preenchidos para enviar.";
             break;
 
         case 2:
-            message = "ERRO! ";
+            message = "ERRO! Os valores inseridos são inválidos.";
             break;
             
         case 3:
@@ -135,6 +141,8 @@ function hideEditOptions(){
 function hideModal(){
     mascara.classList.remove("aparece-fundo-escuro");
     formModal.classList.add("esconde");
+    entradaBeingEdited = false;
+    saidaBeingEdited = false;
 }
 
 /**
@@ -391,35 +399,68 @@ function showPatrimonioTable(){
 /**
  * Recupera as informações da div Modal e as armazena em um objeto Patrimonio.
  * @author Mei
+ * @returns {Patrimonio} Retorna um objeto Patrimonio preenchido.
  */
 function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
-    let data;
+    dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
+    
+    if (isModalFilled()) {
 
-    if (document.querySelector("#form [name='nomeInput']").value !== "")
+        if (document.querySelector("#form [name='indiceDepreciacaoInput']").value >= 100) {
+            showError(2);
+            return null;
+        }
         patrimonio.nome = document.querySelector("#form [name='nomeInput']").value;
-
-    if (document.querySelector("#form [name='tipoInput']").value !== "")
         patrimonio.tipo = document.querySelector("#form [name='tipoInput']").value;
-
-    if (document.querySelector("#form [name='finalidadeInput']").value !== "")
         patrimonio.finalidade = document.querySelector("#form [name='finalidadeInput']").value;
-
-    if (document.querySelector("#form [name='indiceDepreciacaoInput']").value !== "")
         patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
-
-    if (document.querySelector("#form [name='valorCompraInput']").value !== "")
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
+        patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
 
-    data = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    if (data[0] !== "") 
-        patrimonio.dataCompra = new Date(data[0], data[1] - 1, data[2]);
-    else
-        console.log(new Error("O formato enviado da Data está incorreto!"));
-        
-    hideModal();
-    return patrimonio;
+        if (entradaBeingEdited) {
+            dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
+            patrimonio.dataEntrada = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+        }
+        if (saidaBeingEdited) {
+            dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
+            patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+            patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
+        }
+        hideModal();
+        return patrimonio;
+    }
+    else{
+        showError(1);
+        return null;
+    }
+}
+
+function isModalFilled(){
+
+    dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
+    
+    if (document.querySelector("#form [name='nomeInput']").value == "" ||
+    document.querySelector("#form [name='tipoInput']").value == "" ||
+    document.querySelector("#form [name='finalidadeInput']").value == "" ||
+    document.querySelector("#form [name='indiceDepreciacaoInput']").value == "" ||
+    document.querySelector("#form [name='valorCompraInput']").value == "")
+        return false
+
+    if (entradaBeingEdited) {
+        dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
+        if (dataEntrada[0] == "")
+            return false
+    }
+
+    if (saidaBeingEdited) {
+        dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
+        if (dataSaida[0] == "")
+            return false
+    }
+
+    return true;
 }
 
 /**
@@ -504,11 +545,22 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
     document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
+
+    if (patrimonio.status !== "EM_POSSE") {
+        document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
+    }
+    
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
             .toISOString().slice(0,10).replace("/-/g","");
-    else
-        document.querySelector("#form [name='dataCompraInput']").value = null;
+
+    if(patrimonio.dataRetorno !== null)
+        document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetorno
+            .toISOString().slice(0,10).replace("/-/g","");
+
+    if(patrimonio.dataSaida !== null)
+        document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaida
+            .toISOString().slice(0,10).replace("/-/g","");
 
 }
 

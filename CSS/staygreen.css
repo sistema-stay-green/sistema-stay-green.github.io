@@ -188,8 +188,8 @@ header > #mascara-conteudo > button{
   cursor: pointer;
 }
 nav{
-  height: 7vh;
-  width: 100vw;
+  height: 3.2em;
+  width: 100%;
   display: flex;
   background-color: #1d883a;
   align-content: space-around;

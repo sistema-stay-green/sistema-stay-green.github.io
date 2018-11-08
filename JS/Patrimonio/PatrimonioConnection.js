@@ -20,6 +20,9 @@ function receiveAllPatrimoniosFromServlet(callBack){
       patrimonios.push(encapsulateJSON(current));
     }
     callBack(patrimonios);
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 
 }
@@ -33,8 +36,16 @@ function receiveAllPatrimoniosFromServlet(callBack){
 function sendNewPatrimonio(patrimonio, callBack){
 
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params).then((response) => {
-    callBack(encapsulateJSON(response));
+  Request.get(SERVLET_URL + params, "text").then((response) => {
+
+    if (response.slice(0,1) !== "F")
+      callBack(encapsulateJSON(JSON.parse(response)));
+    else
+      showError(2);
+    
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 }
 
@@ -44,12 +55,29 @@ function sendNewPatrimonio(patrimonio, callBack){
  * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
  * @author Mei Fagundes, Maria Eduarda
  */
-function sendUpdatedPatrimonio(patrimonio, callBack){
+function sendUpdatedPatrimonio(patrimonio){
 
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params).then((response) => {
-    callBack(patrimonio,response);
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
+    switch (response.slice(0,1)) {
+      case "S":
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+    
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 }
 
@@ -62,9 +90,28 @@ function sendUpdatedPatrimonio(patrimonio, callBack){
 function sendDeletedPatrimonio(id, callBack){
 
   let params = "?action=d&id=" + id;
-  Request.get(SERVLET_URL + params).then((response) => {
-    callBack(id,response);
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
+    switch (response.slice(0,1)) {
+      case "S":
+        callBack(id);
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+  
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+  }
+
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 }
 

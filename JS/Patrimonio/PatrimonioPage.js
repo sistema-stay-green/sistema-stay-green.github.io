@@ -21,11 +21,13 @@ const patrimonioTable = document.querySelector("#patrimonioTable tbody");
 const mascara = document.querySelector(".mascara");
 let editButton = document.querySelectorAll("[id|=edit]");
 
+// --- VAR ---
+
 const NA = "N/A";
 
-let currentPatrimonioBeingEdited = null;
-let entradaBeingEdited = false;
-let saidaBeingEdited = false;
+let currentPatrimonioIdBeingEdited = null;
+let isEntradaBeingEdited = false;
+let isSaidaBeingEdited = false;
 
 // --- FUNCTIONS ---
 
@@ -73,8 +75,8 @@ function showEditOptions(key){
             entradaDiv.style.display = "block";
             saidaDiv.classList.add("esconde");
             saidaDiv.style.display = "none";
-            entradaBeingEdited = true;
-            saidaBeingEdited = false;
+            isEntradaBeingEdited = true;
+            isSaidaBeingEdited = false;
             break;
 
         case 'saida':
@@ -83,8 +85,8 @@ function showEditOptions(key){
             entradaDiv.style.display = "none";
             saidaDiv.classList.remove("esconde");
             saidaDiv.style.display = "block";
-            entradaBeingEdited = false;
-            saidaBeingEdited = true;
+            isEntradaBeingEdited = false;
+            isSaidaBeingEdited = true;
             break;
     
         default:
@@ -99,18 +101,26 @@ function showError(cod){
 
     switch (cod) {
         case 0:
-            message = "ERRO! Conexão não estabelecida.";
+            message = "ERRO! A Conexão com o servidor não pôde ser estabelecida.";
             break;
 
         case 1:
-            message = "ERRO! Todos os campos devem estar preenchidos para enviar.";
+            message = "ERRO! Patrimônio não encontrado no Server.";
             break;
 
         case 2:
+            message = "ERRO! Parametros inválidos enviados.";
+            break;
+
+        case 3:
+            message = "ERRO! Todos os campos devem estar preenchidos para enviar.";
+            break;
+
+        case 4:
             message = "ERRO! Os valores inseridos são inválidos.";
             break;
             
-        case 3:
+        case 5:
             message = "ERRO! ";
             break;
     
@@ -141,8 +151,8 @@ function hideEditOptions(){
 function hideModal(){
     mascara.classList.remove("aparece-fundo-escuro");
     formModal.classList.add("esconde");
-    entradaBeingEdited = false;
-    saidaBeingEdited = false;
+    isEntradaBeingEdited = false;
+    isSaidaBeingEdited = false;
 }
 
 /**
@@ -157,9 +167,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
     let button;
     let id = patrimonio.id;
 
-    if (document.querySelector("#noResults") !== null) {
-        showPatrimonioTable();
-    }
+    showPatrimonioTable();
 
     tr.setAttribute("name","patrimonio-" + patrimonio.id);
 
@@ -368,22 +376,8 @@ function removePatrimonioFromTable(id){
  */
 function hidePatrimonioTable(){
 
-    //let table = document.querySelector("#tabela");
     document.querySelector("table").style.display = "none";
-
-    let span = document.createElement("span");
-    span.id = "noResults";
-
-    let message = document.createElement("p");
-    message.innerHTML = "Nenhum Patrimônio foi encontrado.";
-    span.appendChild(message);
-
-    message = document.createElement("p");
-    message.innerHTML = "Tente mudar o filtro selecionado ou registre um novo Patrimônio.";
-    span.appendChild(message);
-
-    document.querySelector("#tabela").appendChild(span);
-
+    document.querySelector("#noResults").style.display = "block";
 }
 
 /**
@@ -393,7 +387,7 @@ function hidePatrimonioTable(){
 function showPatrimonioTable(){
 
     document.querySelector("table").style.display = "block";
-    document.querySelector("#noResults").remove();
+    document.querySelector("#noResults").style.display = "none";
 }
 
 /**
@@ -409,7 +403,7 @@ function getPatrimonioFromModal(){
     if (isModalFilled()) {
 
         if (document.querySelector("#form [name='indiceDepreciacaoInput']").value >= 100) {
-            showError(2);
+            showError(4);
             return null;
         }
         patrimonio.nome = document.querySelector("#form [name='nomeInput']").value;
@@ -419,12 +413,15 @@ function getPatrimonioFromModal(){
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
         patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
 
-        if (entradaBeingEdited) {
-            dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
-            patrimonio.dataEntrada = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+        dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
+        dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
+        
+        if (dataEntrada[0] !== "") {
+            
+            patrimonio.dataRetorno = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
         }
-        if (saidaBeingEdited) {
-            dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
+        if (dataSaida[0] !== "") {
+            
             patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
             patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
         }
@@ -432,7 +429,7 @@ function getPatrimonioFromModal(){
         return patrimonio;
     }
     else{
-        showError(1);
+        showError(3);
         return null;
     }
 }
@@ -448,13 +445,13 @@ function isModalFilled(){
     document.querySelector("#form [name='valorCompraInput']").value == "")
         return false
 
-    if (entradaBeingEdited) {
+    if (isEntradaBeingEdited) {
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
         if (dataEntrada[0] == "")
             return false
     }
 
-    if (saidaBeingEdited) {
+    if (isSaidaBeingEdited) {
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
         if (dataSaida[0] == "")
             return false
@@ -474,6 +471,7 @@ function getPatrimonioFromTable(id){
     let patrimonio = new Patrimonio();
     let data;
 
+    let idField = document.querySelector("#id-" + id).innerHTML;
     let nomeField = document.querySelector("#nome-" + id).innerHTML;
     let tipoField = document.querySelector("#tipo-" + id).innerHTML;
     let finalidadeField = document.querySelector("#finalidade-" + id).innerHTML;
@@ -486,6 +484,8 @@ function getPatrimonioFromTable(id){
     let dataRetornoField = document.querySelector("#dataRetorno-" + id).innerHTML;
     let dataBaixaField = document.querySelector("#dataBaixa-" + id).innerHTML;
 
+    if (idField !== NA && idField !== "")
+        patrimonio.id = idField;
     if (nomeField !== NA && nomeField !== "")
         patrimonio.nome = nomeField;
     if (tipoField !== NA && tipoField !== "")
@@ -529,7 +529,7 @@ function setupPatrimonioEdit(id){
 
     patrimonio = getPatrimonioFromTable(id);
     insertPatrimonioIntoModal(patrimonio);
-    currentPatrimonioBeingEdited = id;
+    currentPatrimonioIdBeingEdited = id;
     showModal('editar');
 }
 
@@ -549,6 +549,8 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     if (patrimonio.status !== "EM_POSSE") {
         document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
     }
+    else
+        document.querySelector("#form [name='tipoSaidaInput']").value = "";
     
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra

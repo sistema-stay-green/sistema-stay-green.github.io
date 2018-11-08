@@ -100,19 +100,19 @@ class Patrimonio {
 
         if (this._dataCompra !== null){
             let dC = this._dataCompra.toISOString().slice(0,10).replace("/-/g","").split("-");
-            patrimonioJSON["dataCompraPatrimonio"] = {"year":parseInt(dC[0]), "month":parseInt(dC[1]), "dayOfMonth":parseInt(dC[2])};
+            patrimonioJSON["dataCompraPatrimonio"] = {"year":parseInt(dC[0]), "month":parseInt(dC[1]) - 1, "dayOfMonth":parseInt(dC[2])};
         }
         if (this._dataSaida !== null){
             let dS = this._dataSaida.toISOString().slice(0,10).replace("/-/g","").split("-");
-            patrimonioJSON["dataSaidaPatrimonio"] = {"year":parseInt(dS[0]), "month":parseInt(dS[1]), "dayOfMonth":parseInt(dS[2])};
+            patrimonioJSON["dataSaidaPatrimonio"] = {"year":parseInt(dS[0]), "month":parseInt(dS[1]) - 1, "dayOfMonth":parseInt(dS[2])};
         }
         if (this._dataRetorno !== null){
             let dR = this._dataRetorno.toISOString().slice(0,10).replace("/-/g","").split("-");
-            patrimonioJSON["dataRetornoPatrimonio"] = {"year":parseInt(dR[0]), "month":parseInt(dR[1]), "dayOfMonth":parseInt(dR[2])};
+            patrimonioJSON["dataRetornoPatrimonio"] = {"year":parseInt(dR[0]), "month":parseInt(dR[1]) - 1, "dayOfMonth":parseInt(dR[2])};
         }
         if (this._dataBaixa !== null){
             let dB = this._dataBaixa.toISOString().slice(0,10).replace("/-/g","").split("-");
-            patrimonioJSON["dataBaixaPatrimonio"] = {"year":parseInt(dB[0]), "month":parseInt(dB[1]), "dayOfMonth":parseInt(dB[2])};
+            patrimonioJSON["dataBaixaPatrimonio"] = {"year":parseInt(dB[0]), "month":parseInt(dB[1]) - 1, "dayOfMonth":parseInt(dB[2])};
         }
 
       return JSON.stringify(patrimonioJSON);
@@ -169,6 +169,22 @@ class Patrimonio {
         return this._dataBaixa;
     }
 
+    get dataCompraString(){
+        return this._dataCompra.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataSaidaString(){
+        return this._dataSaida.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataRetornoString(){
+        return this._dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataBaixaString(){
+        return this._dataBaixa.toISOString().slice(0,10).replace("/-/g","");
+    }
+
     // Setter
 
     set id(id){
@@ -223,28 +239,28 @@ class Patrimonio {
     }
 
     set dataCompra(dataCompra = new Date()){
-        if (!(dataCompra instanceof Date) && dataCompra !== null)
+        if (!(dataCompra instanceof Date))
             console.log(new Error("dataCompra precisa receber um objeto instância de Date."));
         else
             this._dataCompra = dataCompra;
     }
 
     set dataSaida(dataSaida = new Date()){
-        if (!(dataSaida instanceof Date) && dataSaida !== null)
+        if (!(dataSaida instanceof Date))
             console.log(new Error("dataSaida precisa receber um objeto instância de Date."));
         else
             this._dataSaida = dataSaida;
     }
 
     set dataRetorno(dataRetorno = new Date()){
-        if (!(dataRetorno instanceof Date) && dataRetorno !== null)
+        if (!(dataRetorno instanceof Date))
             console.log(new Error("dataRetorno precisa receber um objeto instância de Date."));
         else
             this._dataRetorno = dataRetorno;
     }
 
     set dataBaixa(dataBaixa = new Date()){
-        if (!(dataBaixa instanceof Date) && dataBaixa !== null)
+        if (!(dataBaixa instanceof Date))
             console.log(new Error("dataBaixa precisa receber um objeto instância de Date."));
         else
             this._dataBaixa = dataBaixa;

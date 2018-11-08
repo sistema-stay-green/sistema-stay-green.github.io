@@ -43,9 +43,9 @@
                         <th>Finalidade</th>
                         <th>Status</th>
                         <th>Índice de Depreciação</th>
-                        <th>Valor da Compra</th>
+                        <th>Valor da Compra/Procução</th>
                         <th>Valor Atual</th>
-                        <th>Data da Compra</th>
+                        <th>Data da Compra/Procução</th>
                         <th>Data de Saída</th>
                         <th>Data de Retorno</th>
                         <th>Data de Baixa</th>
@@ -54,6 +54,10 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <span id="noResults">
+                <p>Nenhum Patrimônio foi encontrado.</p>
+                <p>Tente mudar o filtro selecionado, registrar um novo Patrimônio ou verificar se o servidor está ativo.</p>
+            </span>
         </section>
 
 
@@ -87,18 +91,19 @@
 
                 <div id="statusOptions">
                     <label for="statusOptions">Mudar Status:</label>
-                    <button name="entradaOptionButton" class="botaoFantasma">Entrada</button>
+                    <button name="entradaOptionButton" class="botaoFantasma">Retorno</button>
                     <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
 
                 <div name="entrada" class="esconde">
-                    <label for="dataEntradaInput">Data de entrada:</label>
+                    <label for="dataEntradaInput">Data de Retorno:</label>
                     <input type="date" name="dataEntradaInput">
                 </div>
 
                 <div name="saida" class="esconde">
                     <label for="tipoSaidaInput">Saída: </label>
                     <select name="tipoSaidaInput">
+                        <option value="">Não Resgistrar</option>
                         <option value="VENDIDO">Venda</option>
                         <option value="DESCARTADO">Descarte</option>
                         <option value="ALUGADO">Aluguel</option>
@@ -123,10 +128,10 @@
 
         <script src="JS/staygreen.js"></script>
         <script src="JS/Patrimonio/Patrimonio.js"></script>
+        <script src="JS/Patrimonio/PatrimonioConnection.js"></script>
         <script src="JS/Patrimonio/PatrimonioPage.js"></script>
         <script src="JS/Patrimonio/PatrimonioDebug.js"></script>
-        <script src="JS/Patrimonio/PatrimonioConnection.js"></script>
-        <script src="JS/Patrimonio/PatrimonioManipulationService.js"></script>
+        <script src="JS/Patrimonio/PatrimonioManipulation.js"></script>
         <script src="JS/Patrimonio/PatrimonioInit.js"></script>
     </body>
 </html>

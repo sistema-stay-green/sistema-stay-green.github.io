@@ -1,21 +1,25 @@
-let returnCallback = (patrimonios = []) => {
-
+let returnCallBack = (patrimonios = []) => {
+    
     clearTableContents();
-    hidePatrimonioTable();
     for (const patrimonio of patrimonios) {
 
         insertPatrimonioIntoTable(patrimonio);
     }
 };
 
-let comprarCallback = (patrimonio = new Patrimonio()) => {
+let comprarCallBack = (patrimonio = new Patrimonio()) => {
 
     insertPatrimonioIntoTable(patrimonio);
 };
 
+let deletarCallBack = (id, responseCode) => {
+
+    removePatrimonioFromTable(id);
+};
+
 function receivePatrimonios(){
 
-    receiveAllPatrimoniosFromServlet(returnCallback);
+    receiveAllPatrimoniosFromServlet(returnCallBack);
 }
 
 function newPatrimonio(patrimonio = new Patrimonio()){
@@ -25,7 +29,7 @@ function newPatrimonio(patrimonio = new Patrimonio()){
 
         patrimonio.status = "EM_POSSE";
         if (!staticDebugMode)
-        sendNewPatrimonio(patrimonio, comprarCallback);
+        sendNewPatrimonio(patrimonio, comprarCallBack);
         else {
             patrimonio.id = lastIdGenerated++;
             insertPatrimonioIntoTable(patrimonio);
@@ -38,23 +42,15 @@ function editPatrimonio(){
     patrimonio = new Patrimonio();
     patrimonio = getPatrimonioFromModal();
     if (patrimonio !== null) {
-        if (currentPatrimonioBeingEdited !== null)
-        patrimonio.id = currentPatrimonioBeingEdited;
     
-        currentPatrimonioBeingEdited = null;
-
-        patrimonioOld = getPatrimonioFromTable(patrimonio.id);
-        patrimonio.status = patrimonioOld.status;
-        patrimonio.dataSaida = patrimonioOld.dataSaida;
-        patrimonio.dataRetorno = patrimonioOld.dataRetorno;
-        patrimonio.dataBaixa = patrimonioOld.dataBaixa;
-            
         updatePatrimonioIntoTable(patrimonio);
+        patrimonio = getPatrimonioFromTable(currentPatrimonioIdBeingEdited);
+        currentPatrimonioIdBeingEdited = null;
+        sendUpdatedPatrimonio(patrimonio);
     }
 }
 
 function deletePatrimonio(id) {
-    
-    removePatrimonioFromTable(id);
-    //deletePatrimonioFromServlet(id);
+
+    sendDeletedPatrimonio(id, deletarCallBack);
 }

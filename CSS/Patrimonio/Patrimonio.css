@@ -12,7 +12,7 @@ html{
 
 body{
     background-color: #FDFCF3 !important;
-    width:100vw;
+    width:100%;
 }
 
 button{
@@ -59,16 +59,20 @@ nav > h3{
      width:21vw !important;
 }
 
+table{
+    overflow: auto;
+}
+
 
 /*Tabela*/
 #tabela{
     padding-top: 1em;
-    width: 98vw;
+    width: 98%;
     font-size: 0.9em;
     margin: 0 auto;
 }
 
-td{
+td, th, #noResults, h1{
     padding: 0.5em;
     cursor: default;
 }
@@ -246,8 +250,8 @@ label{
 
 .conteudo{
     padding-left: 0.1em;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-x: auto;
     max-height: 70vh;
     max-width: 80vw;
     width: 23em;
@@ -275,7 +279,7 @@ label{
     position: fixed;
     bottom: 3vh;
     left: 1vw;
-    width: 8em;
+    width: 15em;
     padding: 0.8em;
     text-align: left;
 

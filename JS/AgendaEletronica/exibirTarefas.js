@@ -25,6 +25,9 @@ const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
   * @author  Pedro
   * @param dataBase a primeira data do calendário
   */
+
+/*TODO: Em vez de carregar ainda mais dias e deixar os 'articles' muito apertados, substituir os dias mostrados pelos novos e 
+colocar um botão de 'voltar'*/
 function geraCalendario(dataBase) {
  
   const QUANTIDADEDATAS = 16;

@@ -34,7 +34,7 @@
                     </select>
                 </span>
             </section>
-            <table id="patrimonioTable">
+            <table id="patrimonioTable" class="shadow">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -61,11 +61,11 @@
         <!-- Div Modal Formulário -->
         <div class="mascara">
        </div>
-        <section id="form" class="div-modal">
+        <section id="form" class="div-modal shadow esconde">
             <div class="conteudo">
 
                 <label for="nomeInput">Nome do Patrimônio:</label>
-                <input type="text" name="nomeInput" required placeholder="digite...">
+                <input type="text" name="nomeInput" placeholder="digite...">
 
                 <label for="tipoInput">Tipo do Patrimônio:</label>
                 <select name="tipoInput">
@@ -74,7 +74,7 @@
                 </select>
 
                 <label for="finalidadeInput">Finalidade do Patrimônio:</label>
-                <input type="text" name="finalidadeInput" required placeholder="digite...">
+                <input type="text" name="finalidadeInput" placeholder="digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
                 <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
@@ -93,40 +93,40 @@
 
                 <div name="entrada" class="esconde">
                     <label for="dataEntradaInput">Data de entrada:</label>
-                    <input type="date" id="dataEntradaInput">
+                    <input type="date" name="dataEntradaInput">
                 </div>
 
                 <div name="saida" class="esconde">
                     <label for="tipoSaidaInput">Saída: </label>
-                    <select id="tipoSaidaInput">
+                    <select name="tipoSaidaInput">
                         <option value="VENDIDO">Venda</option>
                         <option value="DESCARTADO">Descarte</option>
                         <option value="ALUGADO">Aluguel</option>
                         <option value="EM_MANUTENCAO">Manutenção</option>
                     </select>
                     <label for="dataSaidaInput">Data de saída:</label>
-                    <input type="date" id="dataSaidaInput">
+                    <input type="date" name="dataSaidaInput">
                 </div>
             </div>
 
             <div class="container-modal">
-                <button name="cancelarModalButton">Cancelar</button>
-                <button name="enviar">Enviar</button>
+                <button name="cancelarModalButton" class="shadow">Cancelar</button>
+                <button name="enviar" class="shadow">Enviar</button>
             </div>
         </section>
 
-        <section id="erro" class="erroModal">
+        <section id="errorModal" class="esconde shadow">
             <p>ERRO!!!</p>
         </section>
-        <!-- Floating button -->
 
-        <button id="addPatrimonioButton"><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+        <button id="addPatrimonioButton" class="shadow"><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+
         <script src="JS/staygreen.js"></script>
         <script src="JS/Patrimonio/Patrimonio.js"></script>
-        <script src="JS/Patrimonio/PatrimonioDebug.js"></script>
         <script src="JS/Patrimonio/PatrimonioPage.js"></script>
+        <script src="JS/Patrimonio/PatrimonioDebug.js"></script>
         <script src="JS/Patrimonio/PatrimonioConnection.js"></script>
         <script src="JS/Patrimonio/PatrimonioManipulationService.js"></script>
-        <script src="JS/Patrimonio/PatrimonioMain.js"></script>
+        <script src="JS/Patrimonio/PatrimonioInit.js"></script>
     </body>
 </html>

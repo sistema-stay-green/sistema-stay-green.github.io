@@ -13,7 +13,23 @@ html{
 body{
     background-color: #FDFCF3 !important;
     width:100vw;
+}
 
+button{
+    transition: 150ms ease-in-out;
+}
+
+button:hover{
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+}
+
+input:focus{
+    transition: 200ms ease-in-out;
+    -webkit-box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
 }
 
 #noResults p:nth-child(1){
@@ -54,6 +70,7 @@ nav > h3{
 
 td{
     padding: 0.5em;
+    cursor: default;
 }
 
 thead {
@@ -65,6 +82,16 @@ th{
     padding-top: 0.5em !important;
     padding-bottom: 0.5em !important;
     width: 50vw;
+}
+
+tr{
+    transition: 100ms ease-in-out;
+}
+
+tr:hover{
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
 }
 
 
@@ -100,9 +127,6 @@ button:focus{
     float: right;
     padding: 3.5vh;
     border-radius: 50%;
-    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
-    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
-    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
 }
 
 #addPatrimonioButton img{
@@ -142,7 +166,7 @@ input:focus{
 }
 
 label{
-    cursor: pointer;
+    
 }
 
 .div-modal input, .div-modal select, .div-modal div{
@@ -154,17 +178,15 @@ label{
 .mascara{
   z-index: -1;
   opacity: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 150vh;
+  width: 150vw;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top:0;
 }
 .div-modal{
-    /*z-index: -1;*/
-    opacity: 0;
-    transform: scale(0.9);
-    transition: 300ms ease-in;
+    z-index: 1;
+    transition: 300ms ease-in-out;
     background-color: white;
     border: 0.5em solid #1e8939;
     border-radius: 2.5em;
@@ -183,13 +205,6 @@ label{
     display: block;
 }
 
-.aparece{
-    z-index: 1;
-    opacity: 1;
-    transform: scale(1);
-    transition: 300ms ease-in;
-}
-
 .aparece-fundo-escuro{
     z-index: 1;
     opacity: 1;
@@ -197,11 +212,10 @@ label{
 }
 
 .esconde{
-    display: none;
+    transform: scale(0.8);
     z-index: -1;
     opacity: 0;
-    transform: scale(1);
-    transition: 300ms ease-in;
+    transition: 300ms ease-in-out;
 }
 
 
@@ -216,7 +230,7 @@ label{
     display: inline-block;
     position: relative;
     bottom: -2.5em;
-    margin-left: 3em;
+    margin-left: 3.6em;
     border-radius: 0.8em;
 }
 
@@ -231,9 +245,11 @@ label{
 }
 
 .conteudo{
+    padding-left: 0.1em;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 70vh;
+    max-width: 80vw;
     width: 23em;
 }
 
@@ -249,8 +265,8 @@ label{
     margin-left: 3.5em;
 }
 
-.erroModal{
-    opacity: 0;
+#errorModal{
+    z-index: 1;
     transform: scale(0.9);
     transition: 300ms ease-in;
     background-color: white;
@@ -260,9 +276,12 @@ label{
     bottom: 3vh;
     left: 1vw;
     width: 8em;
-    padding: 0.5em;
-    font-size: 0.95em;
-    text-align: center;
+    padding: 0.8em;
+    text-align: left;
+
+}
+
+.shadow{
     -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
     -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
     box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);

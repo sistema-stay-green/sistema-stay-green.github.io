@@ -40,8 +40,9 @@ function showModal(modal){
     switch (modal) {
         case 'compra':
 
-            formModal.classList.add("aparece");
+            formModal.classList.remove("esconde");
             statusOptionsDiv.classList.add("esconde");
+            statusOptionsDiv.style.display = "none"
             enviarButton.removeEventListener("click", editPatrimonio);
             enviarButton.addEventListener("click", newPatrimonio);
             clearMainModal();
@@ -49,8 +50,9 @@ function showModal(modal){
 
         case 'editar':
 
-            formModal.classList.toggle("aparece");
+            formModal.classList.remove("esconde");
             statusOptionsDiv.classList.remove("esconde");
+            statusOptionsDiv.style.display = "block";
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
             break;
@@ -66,13 +68,17 @@ function showEditOptions(key){
         case 'entrada':
             
             entradaDiv.classList.remove("esconde");
+            entradaDiv.style.display = "block";
             saidaDiv.classList.add("esconde");
+            saidaDiv.style.display = "none";
             break;
 
         case 'saida':
 
             entradaDiv.classList.add("esconde");
+            entradaDiv.style.display = "none";
             saidaDiv.classList.remove("esconde");
+            saidaDiv.style.display = "block";
             break;
     
         default:
@@ -80,10 +86,46 @@ function showEditOptions(key){
     }
 }
 
+function showErrorModal(cod){
+
+    errorModal = document.querySelector("#errorModal");
+    let message;
+
+    switch (cod) {
+        case 0:
+            message = "ERRO! Conexão não estabelecida.";
+            break;
+
+        case 1:
+            message = "ERRO! ";
+            break;
+
+        case 2:
+            message = "ERRO! ";
+            break;
+            
+        case 3:
+            message = "ERRO! ";
+            break;
+    
+        default:
+            throw new Error("Código de erro inválido!");
+    }
+
+    errorModal.classList.remove("esconde");
+    errorModal.innerHTML = message;
+    setTimeout(() => {
+        errorModal.classList.add("esconde");
+    }, 5000);
+
+}
+
 function hideEditOptions(){
 
     entradaDiv.classList.add("esconde");
+    entradaDiv.style.display = "none";
     saidaDiv.classList.add("esconde");
+    saidaDiv.style.display = "none";
 }
 
 /**
@@ -92,7 +134,7 @@ function hideEditOptions(){
  */
 function hideModal(){
     mascara.classList.remove("aparece-fundo-escuro");
-    formModal.classList.remove("aparece");
+    formModal.classList.add("esconde");
 }
 
 /**

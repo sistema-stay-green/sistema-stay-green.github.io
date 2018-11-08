@@ -20,16 +20,22 @@ class Tarefa{
   }
 
   /**
-   * Formata uma data no formato AAAA-MM-DD
+   * Formata uma data no formato de um objeto contendo seu ano, dia, mês, e horário 
    * @param {Date} data a data a ser formatada
-   * @returns {string} data formatada
+   * @returns {object} data formatada
    * @author Pedro
    */
   formatData(data){
-    return data.getUTCFullYear() + "-" +
-        (data.getMonth() + 1 < 10 ? "0" + (data.getMonth() + 1) :
-          data.getMonth() + 1) + "-" + (data.getDate() < 10 ? "0" +
-            data.getDate() : data.getDate());
+    let dataFormatada = {
+      "year": data.getUTCFullYear(),
+      "month": data.getMonth(),
+      "dayOfMonth": data.getDate(),
+      "hourOfDay": data.getHours(),
+      "minute": data.getMinutes(),
+      "second": data.getSeconds()
+    }
+
+    return dataFormatada;
   }
 
   /** 

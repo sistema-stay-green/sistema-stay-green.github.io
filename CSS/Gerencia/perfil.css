@@ -51,24 +51,24 @@ h1 {
   margin: 0 10%;
 }
 
-#editaInfoUsuario {
+article:has(> #cadastro) {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
 }
 
-#editaInfoUsuario > form > button {
+#cadastro > button {
   width: 8em;
   margin: 1vw;
 }
 
-#editaInfoUsuario > form > label {
+#cadastro > label {
   display: block;
   text-align: left;
   margin: 1vw;
 }
 
-#editaInfoUsuario > form > label > input {
+#cadastro > label > input {
   display: block;
   width: 100%;
 }

@@ -2,46 +2,34 @@
 let btnEditarEl = document.querySelector("#btnEditar"),
     btnConfirmarEl = document.querySelector('#btnConfirmar')
     btnCancelarEl = document.querySelector('#btnCancelar'),
-    formEditaEl = document.querySelector("#editaInfoUsuario"),
-    articleMostraEl = document.querySelector("#mostraInfoUsuario"),
-    inputConfSenhaEl = document.querySelector("#editaInfoUsuario > form:last-of-type input[name='confSenhaUsuario']"),
-    inputSenhaEl = document.querySelector("#editaInfoUsuario > form:last-of-type input[name='senhaUsuario']"),
-    inputEmailEl = document.querySelector("#editaInfoUsuario > form:last-of-type input[name='emailUsuario']");
+    formEditaEl = document.querySelector("#infoUsuario > article:nth-child(2)"),
+    articleMostraEl = document.querySelector("#mostraInfoUsuario");
+
+// Recebe as informações do formulário de cadastro
+let btnConfimarCadastroEl = document.querySelector("#cadastro > button:first-of-type");
+
+btnConfimarCadastroEl.addEventListener("click", function() {
+
+  let nomeUsuario = document.querySelector("#cadastro input[name='nomeUsuario']").value,
+      cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']").value,
+      saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
+      emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
+      senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value;
+
+  Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
+              + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
+              + "&login=" + emailUsuario + "&senha=" + senhaUsuario);
+
+});
 
 // Chama funções relacionadas a cada botão
 btnEditarEl.addEventListener("click", alternaArticles);
 btnCancelarEl.addEventListener("click", alternaArticles);
 
-// Testa se os inputs são válidos ou não
-inputConfSenhaEl.addEventListener("change", checarSenhas);
-inputSenhaEl.addEventListener("change", checarSenhas);
-inputEmailEl.addEventListener("change", checaEmail);
-
 function alternaArticles(){
   formEditaEl.classList.toggle("ocultar");
   articleMostraEl.classList.toggle("ocultar");
   btnEditarEl.classList.toggle("ocultar");
-}
-
-function checarSenhas() {
-
-  let senha = document.querySelector("#editaInfoUsuario > form:last-of-type input[name='senhaUsuario']").value,
-      labelEl = document.querySelector("#editaInfoUsuario > form:last-of-type > label:last-of-type"),
-      senhaConfirmar = inputConfSenhaEl.value;
-
-  if(senha !== senhaConfirmar && labelEl.querySelector("span") === null) {
-    btnConfirmarEl.disable = "true";
-    btnConfirmarEl.classList.add("botaoDesab");
-    labelEl.insertBefore(escreveMensagemErro(" (Senhas não são iguais)"), labelEl.querySelector("input"));
-  }
-  else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
-    labelEl.removeChild(labelEl.querySelector("span"));
-    if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
-      btnConfirmarEl.disable = "false";
-      btnConfirmarEl.classList.remove("botaoDesab");
-    }
-  }
-
 }
 
 // Função que escreve mensagem de errono formulário
@@ -55,49 +43,3 @@ function escreveMensagemErro(mensagem) {
   return mensagemEl;
 
 }
-
-// Mostra mensagem caso o email digitado não for válido
-function checaEmail() {
-
-  let emailUsuario = inputEmailEl.value;
-  let labelEl = document.querySelector("#editaInfoUsuario > form:last-of-type > label:nth-child(4)");
-
-  if(emailUsuario == "" && labelEl.contains(labelEl.querySelector("span"))) {
-    labelEl.removeChild(labelEl.querySelector("span"));
-    if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
-      btnConfirmarEl.disable = "false";
-      btnConfirmarEl.classList.remove("botaoDesab");
-    }
-  }
-  else {
-    if((emailUsuario.indexOf("@") === -1 || emailUsuario.indexOf(".com") === -1) && labelEl.querySelector("span") === null) {
-      btnConfirmarEl.disable = "true";
-      btnConfirmarEl.classList.add("botaoDesab");
-      labelEl.insertBefore(escreveMensagemErro(" (E-mail inválido)"), labelEl.querySelector("input"));
-    }
-    else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".com") > -1) && labelEl.querySelector("span") !== null) {
-      labelEl.removeChild(labelEl.querySelector("span"));
-      if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
-        btnConfirmarEl.disable = "false";
-        btnConfirmarEl.classList.remove("botaoDesab");
-      }
-    }
-  }
-
-}
-
-// AJAX
-let btnConfimarCadastroEl = document.querySelector("#cadastro > button:first-of-type");
-
-btnConfimarCadastroEl.addEventListener("click", function() {
-
-  let nomeUsuario = document.querySelector("#cadastro input[name='nomeUsuario']").value,
-      cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']").value,
-      saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
-      emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
-      senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value;
-
-  Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome=" + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario + "&login=" + emailUsuario + "&senha=" + senhaUsuario);
-  
-
-});

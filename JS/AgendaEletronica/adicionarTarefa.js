@@ -77,7 +77,6 @@ function encapsularDadosTarefa(){
     }
 
     novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
-
     operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 
   //Requisicao simples AJAX de enviar dados de uma nova tarefa

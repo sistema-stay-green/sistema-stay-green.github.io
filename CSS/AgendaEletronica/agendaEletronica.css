@@ -6,6 +6,7 @@ body{
 	margin: 0;
 	display: flex;
 	flex-direction: row;
+	overflow: hidden;
 }
 
 label{
@@ -46,10 +47,7 @@ form p {
 }
 
 form{
-	top: 50%;
-	left: 50%;
-	width: 50%;
-	margin: -15% 0 0 -25%;
+	margin: 25vh 30vw;
 	position: absolute;
 	z-index: 3;
 	background-color: var(--brancoIvory);
@@ -59,12 +57,14 @@ form{
 
 textarea{
 	background-color: var(--brancoIvory);
-	width: 60%;
+	width: 95%;
+	height: 10vh;
 	font-size: calc(15px + .1vw);
     box-sizing: border-box;
 	font-family: 'Niramit', sans-serif;
     display: block;
-    margin: 2% 0 auto 3%;
+	margin: 2% 0 auto 3%;
+	padding: .5em;
 }
 
 textarea::placeholder{

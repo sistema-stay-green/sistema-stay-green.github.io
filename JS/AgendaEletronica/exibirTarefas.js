@@ -6,6 +6,7 @@ function recebeTarefas(){
     geraCalendario(new Date(), resultado);
   });
 }
+
 function recebeInsumos(){
   Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
   .then((resultado) => {
@@ -15,7 +16,9 @@ function recebeInsumos(){
 
 window.onload = recebeTarefas;
 
-let containerCalendario = document.querySelector('#containerCalendario');
+
+let containerCalendario = document.querySelector('#containerCalendario'),
+    botoesGeradoresDataPossuemEventos = false;
 
 const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -30,16 +33,28 @@ const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 function geraCalendario(dataBase, tarefasProgramadas) {
  
   const QUANTIDADEDATAS = 16;
-  let botaoGerarMaisData = document.querySelector('button[name="carregarDatas"]');
+  let botaoGerarMaisData = document.querySelector('button[name="carregarDatas"]'),
+      botaoVerDatasAnteriores = document.querySelector('button[name="voltarCalendario"]');
 
   //Evento de clique no botão para gerar mais dias
+  if(!botoesGeradoresDataPossuemEventos){
     botaoGerarMaisData.addEventListener('click', () => {
       document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
         containerCalendario.removeChild(containerDia));
       geraCalendario(dataBase, tarefasProgramadas);
     });
-  
-  
+
+    botaoVerDatasAnteriores.addEventListener('click', () =>{
+      dataBase.setDate(dataBase.getDate() - 2 * QUANTIDADEDATAS);
+
+      document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
+        containerCalendario.removeChild(containerDia));
+        geraCalendario(dataBase, tarefasProgramadas);
+    })
+
+    botoesGeradoresDataPossuemEventos = true;
+  }
+
   //Gerando os dias e adicionando as tarefas programadas
   for(let contadorDias = 0; contadorDias < QUANTIDADEDATAS; contadorDias++){
     let containerDia = document.createElement('article'),
@@ -59,9 +74,9 @@ function geraCalendario(dataBase, tarefasProgramadas) {
 
     containerDia.appendChild(textoData)
 
+    //Se houverem tarefas para esse dia, coloque-a no article correspondente
     for(let tarefa of tarefasProgramadas){
-      let diaTarefa = tarefa.dataInicialTarefa.dayOfMonth;
-       if(deveRealizarTarefa(tarefa, dataAtual.getDate())){
+       if(deveRealizarTarefa(tarefa, dataAtual)){
           let tarefaAgendadaEl = document.createElement('p');
   
           tarefaAgendadaEl.innerHTML = tarefa.nomeTarefa;
@@ -71,14 +86,14 @@ function geraCalendario(dataBase, tarefasProgramadas) {
           containerDia.appendChild(tarefaAgendadaEl);
         }
      }
-
+    
+    /*Assim que clica no container representando o dia, abre o formulário para inserir uma nova tarefa
+    naquele dia*/
     containerDia.addEventListener('click', () => {
       exibeFormularioTarefa();
       document.querySelector('form input:nth-child(2)').value = containerDia.dataset.date;
-
     })
 
-    ;
     containerCalendario.appendChild(containerDia);
   }
 }
@@ -87,11 +102,12 @@ function geraCalendario(dataBase, tarefasProgramadas) {
  * Checa se a uma tarefa deve ser realizada em um dia ou não
  * 
  * @param {Tarefa} tarefa a tarefa que supostamente acontece no dia proposto
- * @param {Number} diaProposto o dia que aconteceria a tarefa
+ * @param {Date} dataProposta a data que aconteceria a tarefa
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
  */
-function deveRealizarTarefa(tarefa, diaProposto){
-  if(diaProposto === tarefa.dataInicialTarefa.dayOfMonth)
+function deveRealizarTarefa(tarefa, dataProposta){
+  if(dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth && 
+    dataProposta.getMonth() === tarefa.dataInicialTarefa.month)
     return true;
 
   return false;

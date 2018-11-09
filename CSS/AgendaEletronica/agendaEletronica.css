@@ -46,6 +46,12 @@ form p {
 	display: inline-block;
 }
 
+form div{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
 form{
 	margin: 25vh 30vw;
 	position: absolute;
@@ -150,7 +156,7 @@ textarea::placeholder{
 	padding: .3em;
 }
 
-#containerCalendario button{
+#containerCalendario div, #containerCalendario > button{
 	position: fixed;
 	bottom: 0;
 	margin: 1em;
@@ -159,10 +165,4 @@ textarea::placeholder{
 section > #botaoFormTarefa{
 	right: 0;
 	margin-right: 23vw;
-}
-
-form div{
-	position: absolute;
-	bottom: 0;
-	right: 0;
 }

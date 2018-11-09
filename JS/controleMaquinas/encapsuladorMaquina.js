@@ -26,10 +26,6 @@ function encapsularTodos(id, nome, descricao, status,
     maquina.indiceDepreciacao = indiceDepreciacao;
     maquina.valorCompra = valorCompra;
     maquina.valorAtual = valorAtual;
-    maquina.dataCompra = dataCompra;
-    maquina.dataSaida = dataSaida;
-    maquina.dataRetorno = dataRetorno;
-    maquina.dataBaixa = dataBaixa;
     return maquina;
 }
 
@@ -53,7 +49,6 @@ function encapsularCadastrar(id, nome, descricao, status,
     maquina.status = status;
     maquina.indiceDepreciacao = indiceDepreciacao;
     maquina.valorCompra = valorCompra;
-    maquina.dataCompra = new Date();
 
     return maquina.toJSON();
 }
@@ -67,7 +62,7 @@ function encapsularCadastrar(id, nome, descricao, status,
 function encapsularVenda(id){
     let maquina = new Maquina(id);
     maquina.status = "VENDIDO";
-    maquina.dataBaixa = new Date();
+
     return maquina.toJSON();
 }
 
@@ -80,7 +75,6 @@ function encapsularVenda(id){
 function encapsularDescarte(id){
     let maquina = new Maquina(id);
     maquina.status = "DESCARTADO";
-    maquina.dataBaixa = new Date();
 
     return maquina.toJSON();
 }
@@ -92,11 +86,9 @@ function encapsularDescarte(id){
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularAluguel(id, dataRetorno){
+function encapsularAluguel(id){
   let maquina = new Maquina(id);
   maquina.status = "ALUGADO";
-  maquina.dataSaida = new Date();
-  maquina.dataRetorno = dataRetorno;
 
   return maquina.toJSON();
 }
@@ -108,7 +100,7 @@ function encapsularAluguel(id, dataRetorno){
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularManutencao(id, dataRetorno){
+function encapsularManutencao(id){
   let maquina = new Maquina(id);
   maquina.status = "EM_MANUTENCAO";
   maquina.dataSaida = new Date();

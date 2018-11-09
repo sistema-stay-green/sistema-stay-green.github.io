@@ -7,9 +7,10 @@ function escondeFormulario(){
   containerFormNovaTarefa.classList.add('invisivel');
 }
 
-/*Exibe o formulário de adicionar nova tarefa quando usuário clica no
-botão '+ Nova Tarefa'*/
-function exibeFormularioNovaTarefa(){
+/** Exibe o formulário de adicionar nova tarefa quando usuário clica no
+ * @param {Tarefa=} tarefaAExibir tarefa cujos dados serão exibidos no formulário
+*/
+function exibeFormularioTarefa(tarefaAExibir){
   let botaoCancelarTarefaEl = document.querySelector('button[name="cancelarTarefa"]');
 
   mascaraFormEl.classList.remove('invisivel');
@@ -18,9 +19,28 @@ function exibeFormularioNovaTarefa(){
   botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
 
   containerFormNovaTarefa.classList.remove('invisivel');
+
+  if(tarefaAExibir){
+    document.querySelector('#nomeNovaTarefa').value =
+      tarefaAExibir.nomeTarefa;
+    document.querySelector('textarea[name="descricaoTarefa"').value = 
+      tarefaAExibir.descrTarefa;
+    document.querySelector('form select').value =
+      tarefaAExibir.tipoTarefa;
+    document.querySelector('input[name="realizarDia"]').value =
+      tarefaAExibir.dataInicialTarefa;
+    document.querySelector('input[name="periodoRepeticao"]').value =
+      tarefaAExibir.periodRepetTarefa;
+    document.querySelector('input[name="producaoPrevista"]').value =
+      tarefaAExibir.quantProduzTarefa;
+    document.querySelector('input[name="valorGasto"]').value =
+      tarefaAExibir.gastoTarefa;
+  }
+
+  return;
 }
 
-botaoFormTarefaEl.addEventListener('click', exibeFormularioNovaTarefa);
+botaoFormTarefaEl.addEventListener('click', exibeFormularioTarefa);
 
 let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
 

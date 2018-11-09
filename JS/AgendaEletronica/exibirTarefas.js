@@ -1,9 +1,12 @@
+let tarefasArmazenadasBD;
+
 /*Recebimento das tarefas e insumos armazenados na DB*/ 
 function recebeTarefas(){
   Request.get('http:localhost:8080/StayGreen/TarefaServlet')
   .then((resultado) => {
-    console.log(resultado);
-    geraCalendario(new Date(), resultado);
+    tarefasArmazenadasBD = resultado;   
+    geraCalendario(new Date(), tarefasArmazenadasBD);
+    aplicarEventoGeracaoDataBotoes();
   });
 }
 
@@ -17,12 +20,12 @@ function recebeInsumos(){
 window.onload = recebeTarefas;
 
 
-let containerCalendario = document.querySelector('#containerCalendario'),
-    botoesGeradoresDataPossuemEventos = false;
+let containerCalendario = document.querySelector('#containerCalendario');
 
 const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
 "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-];
+],
+  QUANTIDADEDATAS = 16;
 
  /**
   * Gera calendário dinâmico de forma recursiva
@@ -31,29 +34,6 @@ const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
   * @param {Tarefa[]} tarefasProgramadas as tarefas que estão programadas para serem realizadas
   */
 function geraCalendario(dataBase, tarefasProgramadas) {
- 
-  const QUANTIDADEDATAS = 16;
-  let botaoGerarMaisData = document.querySelector('button[name="carregarDatas"]'),
-      botaoVerDatasAnteriores = document.querySelector('button[name="voltarCalendario"]');
-
-  //Evento de clique no botão para gerar mais dias
-  if(!botoesGeradoresDataPossuemEventos){
-    botaoGerarMaisData.addEventListener('click', () => {
-      document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
-        containerCalendario.removeChild(containerDia));
-      geraCalendario(dataBase, tarefasProgramadas);
-    });
-
-    botaoVerDatasAnteriores.addEventListener('click', () =>{
-      dataBase.setDate(dataBase.getDate() - 2 * QUANTIDADEDATAS);
-
-      document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
-        containerCalendario.removeChild(containerDia));
-        geraCalendario(dataBase, tarefasProgramadas);
-    })
-
-    botoesGeradoresDataPossuemEventos = true;
-  }
 
   //Gerando os dias e adicionando as tarefas programadas
   for(let contadorDias = 0; contadorDias < QUANTIDADEDATAS; contadorDias++){
@@ -111,4 +91,30 @@ function deveRealizarTarefa(tarefa, dataProposta){
     return true;
 
   return false;
+}
+
+/**
+ * Adiciona o evento de clique aos botões de ver mais dias no calendário e 
+ *  de ver dias anteriores
+ */
+function aplicarEventoGeracaoDataBotoes(){
+  let botaoGerarMaisData = document.querySelector('button[name="carregarDatas"]'),
+      botaoVerDatasAnteriores = document.querySelector('button[name="voltarCalendario"]'),
+      dataInicial = new Date(document.querySelector('#containerCalendario article:last-of-type').dataset.date);
+
+  //Evento de clique no botão para gerar mais dias
+    botaoGerarMaisData.addEventListener('click', () => {
+      document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
+        containerCalendario.removeChild(containerDia));
+
+      geraCalendario(dataInicial, tarefasArmazenadasBD);
+    });
+
+    botaoVerDatasAnteriores.addEventListener('click', () =>{
+      dataInicial.setDate(dataInicial.getDate() - 2 * QUANTIDADEDATAS);
+
+      document.querySelectorAll('#containerCalendario article').forEach(containerDia => 
+        containerCalendario.removeChild(containerDia));
+        geraCalendario(dataInicial, tarefasArmazenadasBD);
+    })
 }

@@ -3,32 +3,32 @@
  * @author Mei Fagundes, Maria Eduarda
  */
 
-function getPatrimonioBase(patrimonios = new Patrimonio()[], status){
-  let patrimonioBase = new Patrimonio()[];
+function getPatrimonioBase(patrimonios = [], status){
+  let patrimoniosResult = [];
   for(let patrimonio of patrimonios){
       if(status == patrimonio.status())
-        patrimonioBase.push(patrimonio);
+        patrimoniosResult.push(patrimonio);
     }
-    return patrimonioBase;
-  }
+    return patrimoniosResult;
+}
 
-function getPatrimoniosEmManutencao(patrimonios = new Patrimonio()[]) {
+function getPatrimoniosEmManutencao(patrimonios = []) {
     return getPatrimonioBase(patrimonios, 'EM_MANUTENCAO');
 
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_MANUTENCAO'
 
-function getPatrimoniosEmPosse(patrimonios = new Patrimonio()[]) {
+function getPatrimoniosEmPosse(patrimonios = []) {
     return getPatrimonioBase(patrimonios, 'EM_POSSE');
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_POSSE'
 
-function getPatrimoniosAlugados(patrimonios = new Patrimonio()[]) {
+function getPatrimoniosAlugados(patrimonios = []) {
     return getPatrimonioBase(patrimonios, 'ALUGADOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'ALUGADOS'
 
-function getPatrimoniosVendidos(patrimonios = new Patrimonio()[]) {
+function getPatrimoniosVendidos(patrimonios = []) {
     return getPatrimonioBase(patrimonios, 'VENDIDOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'VENDIDOS'
 
-function getPatrimoniosDescartados(patrimonios = new Patrimonio()[]){
+function getPatrimoniosDescartados(patrimonios = []){
     return getPatrimonioBase(patrimonios, 'DESCARTADO');
 }//retorna array com elementos do patrimonio discriminados pelo status 'DESCARTADO

@@ -9,33 +9,44 @@
   <link rel="stylesheet" href="CSS/staygreen.css">
   <link rel="icon" href="imgs/icons/favicon.png">
 </head>
+
 <body>
   <div id="mascaraForm" class="invisivel"></div>
   <form class="invisivel">
-    <input type="text" placeholder="Nova Tarefa (Clique para editar)"
-    value="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
+    <input type="text" placeholder="Nova Tarefa (Clique para editar)" value="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
     <label>
-        <textarea rows="5" name="descricaoTarefa" placeholder="Coloque a descrição da tarefa aqui"></textarea>
-    </label>   
-    <section>  
+      <textarea rows="5" name="descricaoTarefa" placeholder="Coloque a descrição da tarefa aqui"></textarea>
+    </label>
+    <section>
+
       <article class="column">
-        <label><p>Realizar no dia: </p><input type="date" name="realizarDia"></label>
-        <label><p>Tipo:</p>
-            <select>
-              <option disabled selected>Escolha..</option>
-              <option value="ADUBACAO">Adubação</option>
-              <option value="IRRIGACAO">Irrigação</option>
-              <option value="ARAR">Arar</option>
-              <option value="MAQUINARIO">Maquinário</option>
-              <option value="COLHEITA">Colheita</option>
-              <option value="PECUARIA">Pecuária</option>
-              <option value="OUTROS">Outros</option>
-            </select>
-          </label>
-        <label><p>Valor Gasto:</p> <input type="number" name="valorGasto" min="0.00" step="0.1"></label>
-        <label><p>Período de repetição (dias):</p> <input type="number" min="0" name="periodoRepeticao"></label>
-        <label><p>Produção prevista:</p> <input type="number" name="producaoPrevista" min="0" step="0.1"></label>
+        <label>
+          <p>Realizar no dia: </p><input type="date" name="realizarDia">
+        </label>
+        <label>
+          <p>Tipo:</p>
+          <select>
+            <option disabled selected>Escolha..</option>
+            <option value="ADUBACAO">Adubação</option>
+            <option value="IRRIGACAO">Irrigação</option>
+            <option value="ARAR">Arar</option>
+            <option value="MAQUINARIO">Maquinário</option>
+            <option value="COLHEITA">Colheita</option>
+            <option value="PECUARIA">Pecuária</option>
+            <option value="OUTROS">Outros</option>
+          </select>
+        </label>
+        <label>
+          <p>Valor Gasto:</p> <input type="number" name="valorGasto" min="0.00" step="0.1">
+        </label>
+        <label>
+          <p>Período de repetição (dias):</p> <input type="number" min="0" name="periodoRepeticao">
+        </label>
+        <label>
+          <p>Produção prevista:</p> <input type="number" name="producaoPrevista" min="0" step="0.1">
+        </label>
       </article>
+
       <article class="column">
         <p>Insumos Consumidos:</p>
         <label><input type="checkbox" name="Insumo1" value="Insumo1">Insumo1</label>
@@ -55,21 +66,39 @@
     <div>
       <button name="voltarCalendario">Ver dias anteriores</button>
       <button name="carregarDatas">Carregar mais dias</button>
-    </div> 
+    </div>
     <button id="botaoFormTarefa">+ Nova Tarefa</button>
   </section>
   <aside>
-    <section class="sectionCheck"><h1>Filtrar por</h1>
-      <label><input type="checkbox" name="Tipo" value="Tipo">Tipo: Selecione</label>
-      <label><input type="checkbox" name="TratoCultural" value="TratoCultural"> Atividades de trato cultural</label>
-      <label><input type="checkbox" name="UsoDefensivoEAdubacao" value="UsoDefensivoEAdubacao"> Atividades de uso defensivo e adubação</label>
+    <section class="sectionCheck">
+      <h1>Filtrar por</h1>
+      <label><input type="checkbox" name="filtroGeral" value="3">Tipo:
+        <select name="tiposTarefa">
+          <option disabled selected>Selecione..</option>
+          <option value="ADUBACAO">Adubação</option>
+          <option value="IRRIGACAO">Irrigação</option>
+          <option value="ARAR">Arar</option>
+          <option value="MAQUINARIO">Maquinário</option>
+          <option value="COLHEITA">Colheita</option>
+          <option value="PECUARIA">Pecuária</option>
+          <option value="OUTROS">Outros</option>
+        </select></label>
+
+      <label><input type="checkbox" name="filtroGeral" value="4"> Atividades de trato cultural</label>
+
+      <label><input type="checkbox" name="filtroGeral" value="5"> Atividades de uso
+        defensivo e adubação</label>
     </section>
+
     <section class="sectionCheck">
       <h1>Ver Tarefas</h1>
-      <label><input type="checkbox" name="filtroData" value="Dia">Do dia  <input type="number" min="1" max="31" name="filtroDia" value="1"></label>
-      <label><input type="checkbox" name="filtroData" value="Semana">Do semana</label>
-      <label><input type="checkbox" name="filtroData" value="Mes">Do mês <select name="filtroMes"></select></label>
+
+      <label><input type="checkbox" name="filtroData" value="0">Do dia <input type="number" min="1" max="31" name="filtroDia"
+          value="12"></label>
+      <label><input type="checkbox" name="filtroData" value="1">Do semana</label>
+      <label><input type="checkbox" name="filtroData" value="2">Do mês <select name="filtroMes"></select></label>
     </section>
+
     <section class="sectionButton">
       <button type="button" class="botaoRelatorio">Relatório de Gastos</button>
       <button type="button" class="botaoRelatorio">Relatório de Produção</button>
@@ -77,11 +106,11 @@
     </section>
   </aside>
 
-  <script src="JS/AgendaEletronica/tarefa.js"></script>
   <script src="JS/staygreen.js"></script>
-  <script src="JS/AgendaEletronica/adicionarTarefa.js"></script>
+  <script src="JS/AgendaEletronica/tarefa.js"></script>
   <script src="JS/AgendaEletronica/exibirTarefas.js"></script>
-  <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
+  <script src="JS/AgendaEletronica/adicionarTarefa.js"></script>
   <script src="JS/AgendaEletronica/filtrosTarefas.js"></script>
+  <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
 </body>
 </html>

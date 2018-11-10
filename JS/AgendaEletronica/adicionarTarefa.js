@@ -20,7 +20,7 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
 
-  if(tarefaAExibir){
+  if(tarefaAExibir != undefined){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
     document.querySelector('textarea[name="descricaoTarefa"').value = 

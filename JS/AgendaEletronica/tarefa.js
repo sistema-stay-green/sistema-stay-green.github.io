@@ -1,5 +1,5 @@
-class Tarefa{
-  constructor(){
+class Tarefa {
+  constructor() {
 
   }
 
@@ -12,11 +12,11 @@ class Tarefa{
  * @author Mei, Pedro
  *
  */
-  tryParse(number, typeFloat = false){
-      if (!isNaN(number) && number != undefined)
-        return typeFloat? parseFloat(number) : parseInt(number);
-      else
-        return number;
+  tryParse(number, typeFloat = false) {
+    if (!isNaN(number) && number != undefined)
+      return typeFloat ? parseFloat(number) : parseInt(number);
+    else
+      return number;
   }
 
   /**
@@ -25,7 +25,7 @@ class Tarefa{
    * @returns {object} data formatada
    * @author Pedro
    */
-  formatData(data){
+  formatData(data) {
     let dataFormatada = {
       "year": data.getUTCFullYear(),
       "month": data.getMonth(),
@@ -43,97 +43,97 @@ class Tarefa{
   * @returns {string} String com formatação JSON do objeto.
   * @author Guilherme Sena
   */
-  toJSONString(){
-   let tarefaJSON = {
-     "nomeTarefa": this.nomeTarefa,
-     "descrTarefa": "aaaa",
-     "tipoTarefa": this.tipoTarefa,
-     "dataInicialTarefa": this.formatData(this.dataInicialTarefa),
-     "periodRepetTarefa": this.periodoRepetTarefa,
-     "insumosTarefa": this.insumosTarefa,
-     "quantInsumosTarefa": this.qtInsumosTarefa,
-     "quantProduzTarefa": this.qtProduzTarefa,
-     "gastoTarefa": this.gastoTarefa
-   }
+  toJSONString() {
+    let tarefaJSON = {
+      "nomeTarefa": this.nomeTarefa,
+      "descrTarefa": "aaaa",
+      "tipoTarefa": this.tipoTarefa,
+      "dataInicialTarefa": this.formatData(this.dataInicialTarefa),
+      "periodRepetTarefa": this.periodoRepetTarefa,
+      "insumosTarefa": this.insumosTarefa,
+      "quantInsumosTarefa": this.qtInsumosTarefa,
+      "quantProduzTarefa": this.qtProduzTarefa,
+      "gastoTarefa": this.gastoTarefa
+    }
 
     return JSON.stringify(tarefaJSON);
   }
 
 
   //Setters
-  set nomeTarefa(nomeTarefa){
+  set nomeTarefa(nomeTarefa) {
     this._nomeTarefa = nomeTarefa;
   }
 
-  set descrTarefa(descrTarefa){
+  set descrTarefa(descrTarefa) {
     this._descrTarefa = descrTarefa;
   }
 
-  set tipoTarefa(tipoTarefa){
+  set tipoTarefa(tipoTarefa) {
     this._tipoTarefa = tipoTarefa;
   }
 
-  set dataInicialTarefa(dataInicialTarefa){
-     if(!(dataInicialTarefa instanceof Date))
-        this._dataInicialTarefa = new Date();
-     else
-        this._dataInicialTarefa = dataInicialTarefa;
+  set dataInicialTarefa(dataInicialTarefa) {
+    if (!(dataInicialTarefa instanceof Date))
+      this._dataInicialTarefa = new Date();
+    else
+      this._dataInicialTarefa = dataInicialTarefa;
   }
 
-  set periodoRepetTarefa(periodoRepetTarefa){
+  set periodoRepetTarefa(periodoRepetTarefa) {
     this._periodoRepetTarefa = this.tryParse(periodoRepetTarefa);
   }
 
-  set insumosTarefa(insumosTarefa){
+  set insumosTarefa(insumosTarefa) {
     this._insumosTarefa = insumosTarefa;
   }
 
-  set qtInsumosTarefa(qtInsumosTarefa){
+  set qtInsumosTarefa(qtInsumosTarefa) {
     this._qtInsumosTarefa = this.tryParse(qtInsumosTarefa);
   }
 
-  set qtProduzTarefa(qtProduzTarefa){
+  set qtProduzTarefa(qtProduzTarefa) {
     this._qtProduzTarefa = this.tryParse(qtProduzTarefa, true);
   }
 
-  set gastoTarefa(gastoTarefa){
+  set gastoTarefa(gastoTarefa) {
     this._gastoTarefa = this.tryParse(gastoTarefa, true);
   }
 
   //Getters
-  get nomeTarefa(){
+  get nomeTarefa() {
     return this._nomeTarefa;
   }
 
-  get descrTarefa(){
+  get descrTarefa() {
     return this._descrTarefa;
   }
 
-  get tipoTarefa(){
+  get tipoTarefa() {
     return this._tipoTarefa;
   }
 
-  get dataInicialTarefa(){
+  get dataInicialTarefa() {
     return this._dataInicialTarefa;
   }
 
-  get periodoRepetTarefa(){
+  get periodoRepetTarefa() {
     return this._periodoRepetTarefa;
   }
 
-  get insumosTarefa(){
+  get insumosTarefa() {
     return this._insumosTarefa;
   }
 
-  get qtInsumosTarefa(){
+  get qtInsumosTarefa() {
     return this._qtInsumosTarefa;
   }
 
-  get qtProduzTarefa(){
+  get qtProduzTarefa() {
     return this._qtProduzTarefa;
   }
 
-  get gastoTarefa(){
+  get gastoTarefa() {
     return this._gastoTarefa;
   }
 

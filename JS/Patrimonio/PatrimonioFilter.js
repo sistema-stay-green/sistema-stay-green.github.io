@@ -3,7 +3,7 @@
  * @author Mei Fagundes, Maria Eduarda
  */
 
-function getPatrimonioBase(patrimonios = [], status){
+function getPatrimoniosFromStatus(patrimonios = [], status){
   let patrimoniosResult = [];
   for(let patrimonio of patrimonios){
       if(status == patrimonio.status())
@@ -13,22 +13,22 @@ function getPatrimonioBase(patrimonios = [], status){
 }
 
 function getPatrimoniosEmManutencao(patrimonios = []) {
-    return getPatrimonioBase(patrimonios, 'EM_MANUTENCAO');
+    return getPatrimoniosFromStatus(patrimonios, 'EM_MANUTENCAO');
 
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_MANUTENCAO'
 
 function getPatrimoniosEmPosse(patrimonios = []) {
-    return getPatrimonioBase(patrimonios, 'EM_POSSE');
+    return getPatrimoniosFromStatus(patrimonios, 'EM_POSSE');
 }//retorna array com elementos do patrimonio discriminados pelo status 'EM_POSSE'
 
 function getPatrimoniosAlugados(patrimonios = []) {
-    return getPatrimonioBase(patrimonios, 'ALUGADOS');
+    return getPatrimoniosFromStatus(patrimonios, 'ALUGADOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'ALUGADOS'
 
 function getPatrimoniosVendidos(patrimonios = []) {
-    return getPatrimonioBase(patrimonios, 'VENDIDOS');
+    return getPatrimoniosFromStatus(patrimonios, 'VENDIDOS');
 }//retorna array com elementos do patrimonio discriminados pelo status 'VENDIDOS'
 
 function getPatrimoniosDescartados(patrimonios = []){
-    return getPatrimonioBase(patrimonios, 'DESCARTADO');
+    return getPatrimoniosFromStatus(patrimonios, 'DESCARTADO');
 }//retorna array com elementos do patrimonio discriminados pelo status 'DESCARTADO

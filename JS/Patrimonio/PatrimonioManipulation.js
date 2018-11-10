@@ -51,6 +51,9 @@ function editPatrimonio(){
 }
 
 function deletePatrimonio(id) {
-
-    sendDeletedPatrimonio(id, deletarCallBack);
+    
+    if (!staticDebugMode)
+        sendDeletedPatrimonio(id, deletarCallBack);
+    else
+        removePatrimonioFromTable(id);
 }

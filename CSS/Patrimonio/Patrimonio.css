@@ -61,6 +61,7 @@ nav > h3{
 
 table{
     overflow: auto;
+    margin-bottom: 3em;
 }
 
 
@@ -89,7 +90,7 @@ th{
 }
 
 tr{
-    transition: 100ms ease-in-out;
+    transition: 80ms ease-in-out;
 }
 
 tr:hover{

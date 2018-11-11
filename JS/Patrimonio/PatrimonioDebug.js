@@ -22,6 +22,7 @@ function generatePlaceholders() {
     const dS = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
     const dR = [new Date(), null, null, null, null];
     const dB = [null, null, null, new Date(), null];
+    let patrimonioRelat = [];
 
     for (let i = 0; i < nome.length; i++) {
 
@@ -38,6 +39,11 @@ function generatePlaceholders() {
         patrimonio.dataBaixa = dB[i];
         lastIdGenerated++;
 
+        patrimonioRelat.push(patrimonio);
+
         insertPatrimonioIntoTable(patrimonio);
     }
+
+    patrimonioRelat = getPatrimoniosVendidos(patrimonioRelat);
+    console.log(patrimonioRelat);
 }

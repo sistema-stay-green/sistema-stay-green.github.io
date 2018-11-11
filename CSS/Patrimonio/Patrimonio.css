@@ -5,7 +5,8 @@
 /*Importações*/
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
-/*body*/
+/* GENERAL */
+
 html{
     font-family: 'Niramit', sans-serif;
 }
@@ -32,40 +33,30 @@ input:focus{
     box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
 }
 
-#noResults p:nth-child(1){
-    text-align: center;
-    font-weight: bold;
-    font-size: 2.5em;
-}
-
-#noResults p:nth-child(2){
-    text-align: center;
-    font-weight: lighter;
-    font-size: 1.5em;
-}
-
 h1{
     text-align: center;
     margin-bottom: 0;
     font-size: 2.2em;
 }
 
-.escurece{
-    background-color: black;
-    margin: 0;
-}
-
 nav > h3{
-     width:21vw !important;
+    width:21vw !important;
 }
 
 table{
+    transition: 250ms ease-in-out;
     overflow: auto;
     margin-bottom: 3em;
 }
 
+table:hover{
+    -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
+}
 
-/*Tabela*/
+/* TABLE */
+
 #tabela{
     padding-top: 1em;
     width: 98%;
@@ -99,8 +90,24 @@ tr:hover{
     box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
 }
 
+/* */
+
+
+
+#noResults p:nth-child(1){
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+#noResults p:nth-child(2){
+    text-align: center;
+    font-weight: lighter;
+    font-size: 1.5em;
+}
 
 /*Botões*/
+
 #menu button{
     float: left;
     font-weight: bold;
@@ -124,17 +131,22 @@ button:focus{
     color: #FDFCF3;
 }
 
-#addPatrimonioButton{
-
+#floatingButtons{
+    display: flex;
+    flex-direction: row-reverse;
     position: fixed;
     bottom: 4vh;
     right: 4vh;
-    float: right;
-    padding: 3.5vh;
-    border-radius: 50%;
 }
 
-#addPatrimonioButton img{
+#floatingButtons button{
+    position: relative;
+    padding: 3.5vh;
+    border-radius: 50%;
+    margin-left: 2vh;
+}
+
+#floatingButtons button img{
     image-rendering: optimizeQuality;
     width: 2vh;
     height: 2vh;
@@ -145,9 +157,22 @@ button:focus{
 
 [id|=edit], [id|=delete]{
     display: block;
+    border-radius: 0.3em;
+    margin-left: 3.5em;
 }
 
-/*selects e inputs/label*/
+[id|=edit]{
+    padding-right: 0.8em;
+    padding-left: 0.8em;
+}
+
+[id|=delete]{
+    border-radius: 0.3em;
+    margin-left: 3.5em;
+}
+
+/* Selects, Inputs e Labels */
+
 #toolbar li{
     list-style: none;
 }
@@ -170,16 +195,11 @@ input:focus{
     outline-style: none;
 }
 
-label{
-    
-}
-
-.div-modal input, .div-modal select, .div-modal div{
+#form input, #form select, #form div{
     margin-bottom: 1em;
 }
 
-
-/*Modal*/
+/* Modal */
 .mascara{
   z-index: -1;
   opacity: 0;
@@ -189,24 +209,68 @@ label{
   position: fixed;
   top:0;
 }
-.div-modal{
+
+.modal{
     z-index: 1;
-    transition: 300ms ease-in-out;
     background-color: white;
     border: 0.5em solid #1e8939;
     border-radius: 2.5em;
     position: fixed;
+    transition: 300ms ease-in-out;
+    padding: 2em;
+}
+
+#relatorio{
+    top: 6vh;
+    bottom: 6vh;
+    left: 15vw;
+    right: 15vw;
+}
+
+#relatorio div:nth-child(2){
+    position: absolute;
+    display: absolute;
+    float: right;
+    flex-direction: row-reverse;
+}
+
+#relatorio div:nth-child(2) button{
+    position: relative;
+    top: 1em;
+    margin-left: 2em;
+    border-radius: 0.8em;
+}
+
+#relatorio div:nth-child(1){
+    position: relative;
+    overflow-y: auto;
+    height: 100%;
+}
+
+#errorModal{
+    transform: scale(0.9);
+    border: 0.3em solid #E1170F;
+    border-radius: 1.5em;
+    bottom: 3vh;
+    left: 1vw;
+    width: 15em;
+    padding: 0.8em;
+    text-align: left;
+}
+
+#form{
     top: 20vh;
     left: calc(50vw - 11em);
     width: 22em;
     margin-top: -5em;
-    padding: 2em;
     font-size: 0.95em;
 }
-.div-modal input{
+
+#form input{
     width: 100%;
 }
-.div-modal label{
+
+#form label{
     display: block;
 }
 
@@ -258,36 +322,19 @@ label{
     width: 23em;
 }
 
-[id|=edit]{
-    padding-right: 0.8em;
-    padding-left: 0.8em;
-    border-radius: 0.3em;
-    margin-left: 3.5em;
-}
-
-[id|=delete]{
-    border-radius: 0.3em;
-    margin-left: 3.5em;
-}
-
-#errorModal{
-    z-index: 1;
-    transform: scale(0.9);
-    transition: 300ms ease-in;
-    background-color: white;
-    border: 0.3em solid #E1170F;
-    border-radius: 1.5em;
-    position: fixed;
-    bottom: 3vh;
-    left: 1vw;
-    width: 15em;
-    padding: 0.8em;
-    text-align: left;
-
-}
-
 .shadow{
-    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
-    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
-    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
+}
+
+.focusedShadow{
+    -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
+}
+
+.escurece{
+    background-color: black;
+    margin: 0;
 }

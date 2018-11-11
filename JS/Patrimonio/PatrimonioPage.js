@@ -7,7 +7,9 @@
 // --- DOM ---
 
 const patrimonioMenuButton = document.querySelector("button[name='patrimonioMenuButton']");
-const addPatrimonioButton = document.querySelector("#addPatrimonioButton");
+const addButton = document.querySelector("button[name='addButton']");
+const relatorioButton = document.querySelector("button[name='relatorioButton']");
+const closeRelatorioButton = document.querySelector("button[name='closeRelatorio']");
 const entradaOptionButton = document.querySelector("button[name='entradaOptionButton']");
 const saidaOptionButton = document.querySelector("button[name='saidaOptionButton']");
 const cancelarModalButton = document.querySelector("button[name='cancelarModalButton']");
@@ -17,6 +19,7 @@ const statusOptionsDiv = document.querySelector("#statusOptions");
 const entradaDiv = document.querySelector("[name=entrada]");
 const saidaDiv = document.querySelector("[name=saida]");
 const formModal = document.querySelector("#form");
+const relatorioModal = document.querySelector("#relatorio");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
 const mascara = document.querySelector(".mascara");
 let editButton = document.querySelectorAll("[id|=edit]");
@@ -60,6 +63,9 @@ function showModal(modal){
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
             break;
+
+        case 'relatorio':
+            relatorioModal.classList.remove("esconde");
 
         default:
             break;
@@ -151,6 +157,7 @@ function hideEditOptions(){
 function hideModal(){
     mascara.classList.remove("aparece-fundo-escuro");
     formModal.classList.add("esconde");
+    relatorioModal.classList.add("esconde");
     isEntradaBeingEdited = false;
     isSaidaBeingEdited = false;
 }
@@ -582,7 +589,9 @@ function clearMainModal(){
 
 // --- EVENT LISTENERS ---
 
-addPatrimonioButton.addEventListener("click", () => {showModal('compra')});
+addButton.addEventListener("click", () => {showModal('compra')});
+relatorioButton.addEventListener("click", () => {showModal('relatorio')});
+closeRelatorioButton.addEventListener("click", hideModal);
 entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})
 saidaOptionButton.addEventListener("click", () => {showEditOptions('saida')})
 cancelarModalButton.addEventListener("click", hideModal)

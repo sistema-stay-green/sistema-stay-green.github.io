@@ -5,7 +5,9 @@
 
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
 const staticDebugMode = true;
+
 let lastIdGenerated = 0;
+let relatorioStaticStash = [];
 
 // --- FUNCTIONS ---
 
@@ -17,12 +19,11 @@ function generatePlaceholders() {
         "Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café", "Uma máquina que ajuda na colheita do café."];
     const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];
     const indiceDepreciacao = [10, 1, 20, 2, 30];
-    const valorCompra = [10000, null, 50000, null, 800000];
+    const valorCompra = [10000, 8000, 50000, 35000, 800000];
     const dC = [new Date(2017, 5, 9), new Date(2016, 10, 20), new Date(2015, 12, 13), new Date(2017, 3, 5), new Date(2017, 10 ,3)];
     const dS = [null, new Date(2018, 10, 20), new Date(), null, new Date()];
     const dR = [new Date(), null, null, null, null];
     const dB = [null, null, null, new Date(), null];
-    let patrimonioRelat = [];
 
     for (let i = 0; i < nome.length; i++) {
 
@@ -39,11 +40,8 @@ function generatePlaceholders() {
         patrimonio.dataBaixa = dB[i];
         lastIdGenerated++;
 
-        patrimonioRelat.push(patrimonio);
+        relatorioStaticStash.push(patrimonio);
 
         insertPatrimonioIntoTable(patrimonio);
     }
-
-    patrimonioRelat = getPatrimoniosVendidos(patrimonioRelat);
-    console.log(patrimonioRelat);
 }

@@ -127,7 +127,7 @@ function showError(cod){
             break;
             
         case 5:
-            message = "ERRO! ";
+            message = "ERRO! Nenhum Patrimônio registrado para gerar o relatório.";
             break;
     
         default:
@@ -308,6 +308,10 @@ function clearTableContents() {
 function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     let id = patrimonio.id;
+
+    console.log(document.querySelector("#nome-" + id));
+    console.log(id);
+    
     
     if(patrimonio.nome !== null && patrimonio.nome !== "")
         document.querySelector("#nome-" + id).innerHTML = patrimonio.nome;
@@ -373,8 +377,12 @@ function removePatrimonioFromTable(id){
 
     document.querySelector("tbody [name=patrimonio-"+ id +"]").remove();
 
-    if (document.querySelectorAll("tbody tr")[0] == null)
+    if (isPatrimoniosEmpty())
         hidePatrimonioTable();
+}
+
+function isPatrimoniosEmpty(){
+    return document.querySelectorAll("tbody tr")[0] == null;
 }
 
 /**
@@ -428,9 +436,19 @@ function getPatrimonioFromModal(){
             patrimonio.dataRetorno = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
         }
         if (dataSaida[0] !== "") {
+
+            let statusTmp = document.querySelector("#form [name='tipoSaidaInput']").value;
+
+            if (document.querySelector("#form [name='tipoSaidaInput']").value !== "")
+                patrimonio.status = statusTmp;
+
+            if (statusTmp == "DESCARTADO"){
+                patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+            }
+            else
+                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
             
-            patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-            patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
         }
         hideModal();
         return patrimonio;
@@ -587,10 +605,158 @@ function clearMainModal(){
 
 }
 
+function generateRelatorio(patrimonios = []){
+
+    if (patrimonios.length !== 0) {
+
+        let relatorio = document.querySelector("#relatorio div:nth-child(1)");
+        let h1 = document.createElement("h1");
+        let h3;
+        let patrimoniosTemp;
+
+        // Título
+        h1.innerHTML = "Relatório dos Patrimônios registrados";
+        relatorio.appendChild(h1);
+
+        // EM_POSSE
+        
+        patrimoniosTemp = getPatrimoniosEmPosse(patrimonios);
+        if (patrimoniosTemp !== null) {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Patrimônios em Posse:";
+            relatorio.appendChild(h3);
+            patrimoniosTemp = generateUlForRelatorio(patrimoniosTemp);
+            relatorio.appendChild(patrimoniosTemp);
+        }
+
+        // EM_MANUTENCAO
+        
+        patrimoniosTemp = getPatrimoniosEmManutencao(patrimonios);
+        if (patrimoniosTemp !== null) {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Patrimônios em Manutenção:";
+            relatorio.appendChild(h3);
+            patrimoniosTemp = generateUlForRelatorio(patrimoniosTemp);
+            relatorio.appendChild(patrimoniosTemp);
+        }
+
+        // ALUGADO
+        
+        patrimoniosTemp = getPatrimoniosAlugados(patrimonios);
+        if (patrimoniosTemp !== null) {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Patrimônios Alugados:";
+            relatorio.appendChild(h3);
+            patrimoniosTemp = generateUlForRelatorio(patrimoniosTemp);
+            relatorio.appendChild(patrimoniosTemp);
+        }
+
+        // VENDIDO
+        
+        patrimoniosTemp = getPatrimoniosVendidos(patrimonios);
+        if (patrimoniosTemp !== null) {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Patrimônios Vendidos:";
+            relatorio.appendChild(h3);
+            patrimoniosTemp = generateUlForRelatorio(patrimoniosTemp);
+            relatorio.appendChild(patrimoniosTemp);
+        }
+
+        // DESCARTADO
+        
+        patrimoniosTemp = getPatrimoniosDescartados(patrimonios);
+        if (patrimoniosTemp !== null) {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Patrimônios Descartados:";
+            relatorio.appendChild(h3);
+            patrimoniosTemp = generateUlForRelatorio(patrimoniosTemp);
+            relatorio.appendChild(patrimoniosTemp);
+        }
+
+        showModal('relatorio');
+    }
+    else
+        showError(5);
+}
+
+function generateUlForRelatorio(patrimonios = []){
+
+    if (patrimonios !== null) {
+
+        let ul, li, p;
+        ul = document.createElement("ul");
+        
+        for (const patrimonio of patrimonios) {
+            
+            li = document.createElement("li");
+
+            // Id | Nome
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>#" + patrimonio.id + "</span> | " + patrimonio.nome;
+            li.appendChild(p);
+
+            // Tipo
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Tipo: </span>" + patrimonio.tipo;
+            li.appendChild(p);
+
+            // Finalidade
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Finalidade: </span>" + patrimonio.finalidade;
+            li.appendChild(p);
+
+            // Índice de depreciação
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Índice de depreciação: </span>" + patrimonio.indiceDepreciacao + "%/ano";
+            li.appendChild(p);
+
+            // Valor da Compra
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Valor da Compra: </span>R$" + patrimonio.valorCompra;
+            li.appendChild(p);
+
+            // Valor Atual
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Valor Atual: </span>R$" + patrimonio.valorAtual;
+            li.appendChild(p);
+
+            // Data da Compra
+            p = document.createElement("p");
+            p.innerHTML = "<span class='bold'>Data da Compra: </span>" + patrimonio.dataCompraString;
+            li.appendChild(p);
+
+            // Data da Saída
+            if (patrimonio.dataSaida !== null) {
+                p = document.createElement("p");
+                p.innerHTML = "<span class='bold'>Data da Saída: </span>" + patrimonio.dataSaidaString;
+                li.appendChild(p);
+            }
+
+            // Data do Retorno
+            if (patrimonio.dataRetorno !== null) {
+                p = document.createElement("p");
+                p.innerHTML = "<span class='bold'>Data do Retorno: </span>" + patrimonio.dataRetornoString;
+                li.appendChild(p);
+            }
+
+            // Data da Baixa
+            if (patrimonio.dataBaixa !== null) {
+                p = document.createElement("p");
+                p.innerHTML = "<span class='bold'>Data da Baixa: </span>" + patrimonio.dataBaixaString;
+                li.appendChild(p);
+            }
+
+            ul.appendChild(li);
+        }
+
+        return ul;
+    }
+}
+
 // --- EVENT LISTENERS ---
 
 addButton.addEventListener("click", () => {showModal('compra')});
-relatorioButton.addEventListener("click", () => {showModal('relatorio')});
+//relatorioButton.addEventListener("click", showRelatorio);
 closeRelatorioButton.addEventListener("click", hideModal);
 entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})
 saidaOptionButton.addEventListener("click", () => {showEditOptions('saida')})

@@ -4,11 +4,15 @@
  */
 function getPatrimoniosFromStatus(patrimonios = [], status){
   let patrimoniosResult = [];
+  
   for(let patrimonio of patrimonios){
       if(status == patrimonio.status)
         patrimoniosResult.push(patrimonio);
     }
-    return patrimoniosResult;
+    if (patrimoniosResult.length !== 0)
+        return patrimoniosResult;
+    else
+        return null;
 }
 
 /**

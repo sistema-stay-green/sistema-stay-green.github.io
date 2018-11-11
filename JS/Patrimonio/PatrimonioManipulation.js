@@ -17,9 +17,23 @@ let deletarCallBack = (id, responseCode) => {
     removePatrimonioFromTable(id);
 };
 
+let relatorioCallBack = (patrimonios = []) => {
+    
+    generateRelatorio(patrimonios);
+}
+
 function receivePatrimonios(){
 
     receiveAllPatrimoniosFromServlet(returnCallBack);
+}
+
+function showRelatorio(){
+
+    if (!staticDebugMode) {
+        receiveAllPatrimoniosFromServlet(relatorioCallBack);
+    }
+    else
+        generateRelatorio(relatorioStaticStash);
 }
 
 function newPatrimonio(patrimonio = new Patrimonio()){
@@ -39,15 +53,25 @@ function newPatrimonio(patrimonio = new Patrimonio()){
 
 function editPatrimonio(){
 
-    patrimonio = new Patrimonio();
     patrimonio = getPatrimonioFromModal();
-    if (patrimonio !== null) {
-    
-        updatePatrimonioIntoTable(patrimonio);
-        patrimonio = getPatrimonioFromTable(currentPatrimonioIdBeingEdited);
-        currentPatrimonioIdBeingEdited = null;
-        sendUpdatedPatrimonio(patrimonio);
+
+    if (!staticDebugMode) {
+        if (patrimonio !== null) {
+
+            patrimonio.id = currentPatrimonioIdBeingEdited;
+            updatePatrimonioIntoTable(patrimonio);
+            patrimonio = getPatrimonioFromTable(currentPatrimonioIdBeingEdited);
+            currentPatrimonioIdBeingEdited = null;
+            sendUpdatedPatrimonio(patrimonio);
+        }
     }
+    else{
+        patrimonio = getPatrimonioFromModal();
+        patrimonio.id = currentPatrimonioIdBeingEdited;
+        updatePatrimonioIntoTable(patrimonio);
+    }
+
+    
 }
 
 function deletePatrimonio(id) {
@@ -57,3 +81,5 @@ function deletePatrimonio(id) {
     else
         removePatrimonioFromTable(id);
 }
+
+relatorioButton.addEventListener("click", showRelatorio);

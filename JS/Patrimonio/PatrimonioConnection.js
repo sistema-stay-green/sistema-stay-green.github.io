@@ -1,6 +1,6 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Maria Eduarda
+ * @author Maria Eduarda, Mei Fagundes
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";

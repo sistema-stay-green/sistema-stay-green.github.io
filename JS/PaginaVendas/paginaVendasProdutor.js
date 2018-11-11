@@ -9,7 +9,8 @@ let divEncaEl = document.querySelector("#div-encaminhamentos");
 let divFatuEl = document.querySelector("#div-faturamentos");
 let divResulEl = document.querySelector("#div-resultados");
 let divRegistraEl = document.querySelector("#div-registra");
-
+let botaoConfirmaEl = document.querySelector("#div-registra > .div-botoes > button:first-of-type");
+let botaoCancelaEl = document.querySelector("#div-registra > .div-botoes > button:last-of-type");
 let arrayProdutos = new Array();
 let cafe = {
    id:"1",
@@ -110,8 +111,19 @@ function escondeTudo(){
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
-botaoRegistraEl.addEventListener('click',mostraRegistra);
-botaoEncaEl.addEventListener('click',mostraEncaminhamentos);
-botaoFatuEl.addEventListener('click',mostraFaturamentos);
-botaoResulEl.addEventListener('click',mostraResultados);
-mascaraEl.addEventListener('click',escondeTudo);
+function confirmaRegistraProduto(){
+  divRegistraEl.classList.remove("aparece");
+  mascaraEl.classList.remove("aparece");
+}
+function cancelaRegistraProduto(){
+  divRegistraEl.classList.remove("aparece");
+  mascaraEl.classList.remove("aparece");
+}
+
+botaoRegistraEl.addEventListener('click', mostraRegistra);
+botaoEncaEl.addEventListener('click', mostraEncaminhamentos);
+botaoFatuEl.addEventListener('click', mostraFaturamentos);
+botaoResulEl.addEventListener('click', mostraResultados);
+mascaraEl.addEventListener('click', escondeTudo);
+botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
+botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);

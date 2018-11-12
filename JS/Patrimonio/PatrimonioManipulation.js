@@ -69,7 +69,11 @@ function receivePatrimonios(){
 
 function changeFilter(){
 
-    receiveAllPatrimoniosFromServlet(filterCallBack);
+    if (!staticDebugMode)
+        receiveAllPatrimoniosFromServlet(filterCallBack);
+    else
+        filterCallBack(patrimonioStaticStash);
+    
 
 }
 
@@ -79,7 +83,7 @@ function showRelatorio(){
         receiveAllPatrimoniosFromServlet(relatorioCallBack);
     }
     else
-        generateRelatorio(relatorioStaticStash);
+        generateRelatorio(patrimonioStaticStash);
 }
 
 function newPatrimonio(patrimonio = new Patrimonio()){

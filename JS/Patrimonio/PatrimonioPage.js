@@ -10,6 +10,7 @@ const patrimonioMenuButton = document.querySelector("button[name='patrimonioMenu
 const addButton = document.querySelector("button[name='addButton']");
 const relatorioButton = document.querySelector("button[name='relatorioButton']");
 const closeRelatorioButton = document.querySelector("button[name='closeRelatorio']");
+const printRelatorioButton = document.querySelector("button[name='printRelatorio']");
 const entradaOptionButton = document.querySelector("button[name='entradaOptionButton']");
 const saidaOptionButton = document.querySelector("button[name='saidaOptionButton']");
 const cancelarModalButton = document.querySelector("button[name='cancelarModalButton']");
@@ -615,6 +616,7 @@ function generateRelatorio(patrimonios = []){
         let patrimoniosTemp;
 
         // Título
+        relatorio.innerHTML = "";
         h1.innerHTML = "Relatório dos Patrimônios registrados";
         relatorio.appendChild(h1);
 
@@ -692,7 +694,7 @@ function generateUlForRelatorio(patrimonios = []){
 
             // Id | Nome
             p = document.createElement("p");
-            p.innerHTML = "<span class='bold'>#" + patrimonio.id + "</span> | " + patrimonio.nome;
+            p.innerHTML = "<span class='bold'>#" + patrimonio.id + "</span>  |  " + patrimonio.nome;
             li.appendChild(p);
 
             // Tipo
@@ -753,11 +755,28 @@ function generateUlForRelatorio(patrimonios = []){
     }
 }
 
+function printRelatorio() {
+
+    let content = document.querySelector("#relatorio").innerHTML;
+    let printWindow = window.open('', 'Print', 'height=768,width=1024');
+
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('</head><body >');
+    printWindow.document.write(content);
+    printWindow.document.write('</body></html>');
+
+    printWindow.document.close();
+    printWindow.focus()
+    printWindow.print();
+    printWindow.close();
+}
+
 // --- EVENT LISTENERS ---
 
 addButton.addEventListener("click", () => {showModal('compra')});
 //relatorioButton.addEventListener("click", showRelatorio);
 closeRelatorioButton.addEventListener("click", hideModal);
+printRelatorioButton.addEventListener("click", printRelatorio);
 entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})
 saidaOptionButton.addEventListener("click", () => {showEditOptions('saida')})
 cancelarModalButton.addEventListener("click", hideModal)

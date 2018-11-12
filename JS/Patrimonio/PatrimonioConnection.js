@@ -27,9 +27,69 @@ function receiveAllPatrimoniosFromServlet(callBack){
 
 }
 
+function PesquisaID(id, callBack){
+
+  let params = "?action=s&s=id&id=";
+  Request.get(SERVLET_URL + params + id).then((response) => {
+
+    let patrimonios = [];
+    switch (response.slice(0,1)) {
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+    for (const current of response) {
+      patrimonios.push(encapsulateJSON(current));
+    }
+    callBack(patrimonios);
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
+  });
+
+}
+
+function PesquisaNome(nome, callBack){
+
+  let params = "?action=s&s=nome&nome=";
+  Request.get(SERVLET_URL + params + nome).then((response) => {
+
+    let patrimonios = [];
+    switch (response.slice(0,1)) {
+      
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+    for (const current of response) {
+      patrimonios.push(encapsulateJSON(current));
+    }
+    callBack(patrimonios);
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
+  });
+
+}
+
 /**
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
- * @param {Patrimonio} patrimonio 
+ * @param {Patrimonio} patrimonio
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
  * @author Mei Fagundes, Maria Eduarda
  */
@@ -42,7 +102,7 @@ function sendNewPatrimonio(patrimonio, callBack){
       callBack(encapsulateJSON(JSON.parse(response)));
     else
       showError(2);
-    
+
   }, (reason) => {
     console.log(reason);
     showError(0);
@@ -51,7 +111,7 @@ function sendNewPatrimonio(patrimonio, callBack){
 
 /**
  * Envia um Patrimonio atualizado para o Servlet
- * @param {Patrimonio} patrimonio 
+ * @param {Patrimonio} patrimonio
  * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
  * @author Mei Fagundes, Maria Eduarda
  */
@@ -71,7 +131,7 @@ function sendUpdatedPatrimonio(patrimonio){
       case "F":
         showError(2);
         break;
-    
+
       default:
         throw new Error("Reposta incorreta recebida do Server.");
     }
@@ -104,7 +164,7 @@ function sendDeletedPatrimonio(id, callBack){
       case "F":
         showError(2);
         break;
-  
+
       default:
         throw new Error("Reposta incorreta recebida do Server.");
   }
@@ -117,7 +177,7 @@ function sendDeletedPatrimonio(id, callBack){
 
 /**
  * Encapsula as informações de um JSON em um objeto Patrimonio
- * @param {JSON} json 
+ * @param {JSON} json
  * @returns {Patrimonio} Retorna o objeto Patrimonio resultante;
  * @author Mei Fagundes
  */

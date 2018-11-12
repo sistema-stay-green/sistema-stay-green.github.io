@@ -55,14 +55,24 @@ class Patrimonio {
             return number;
     }
 
+    /**
+     * Calcula o valor atual de cada patrimônio. Valor mímimo = 10% do valor de compra.
+     * @returns {number} valor em Float correspondente ao valor atual.
+     * @author Mei, Maria Eduarda
+     */
     calculateValorAtual(){
 
         if (this._valorCompra !== null && this._dataCompra !== null) {
             let anoCompra = this._dataCompra.getFullYear();
             let diferencaData = new Date().getFullYear() - anoCompra;
-            return this._valorCompra - 
+            let valorAtt = this._valorCompra -
                 ((diferencaData * (this._indiceDepreciacao/100))
                 * this._valorCompra);
+            let valorMinimo = this._valorCompra/10;
+            if(valorAtt > valorMinimo){
+              return valorAtt;
+            }else
+              return valorMinimo;
         }
         else
             return null;

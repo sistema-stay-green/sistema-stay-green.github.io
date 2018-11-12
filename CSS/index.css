@@ -39,16 +39,23 @@ header > #mascara-conteudo > p {
   font-size: calc(20px + 2vh);
 }
 
-header > #mascara-conteudo > button {
+header > #mascara-conteudo > a {
+  text-decoration: none;
   text-align: center;
-  width: 15%;
-  height: 9%;
+  width: 16%;
+  height: 10%;
   border: none;
   font-family: 'Niramit' , sans-serif;
   background-color: white;
   color:rgba(16, 43, 18,1);
   font-size: calc(20px + 2vh);
   cursor: pointer;
+}
+header > #mascara-conteudo > a:hover{
+  box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
+  width: 16.5%;
+  height: 10.5%;
+
 }
 
 nav {
@@ -166,7 +173,7 @@ main > article > p {
   right: 5%;
   width: 50%;
   height: content;
-  font-size: calc(5px + .9vw);
+  font-size: calc(12.5px + .9vw);
   color: white;
 }
 

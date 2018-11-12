@@ -10,6 +10,7 @@
 
 body{
   width: 100vw;
+  min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
   background-color: var(--brancoIvory);
@@ -31,7 +32,7 @@ main > .div-botoes {
 }
 #mascara {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   opacity: 0;
   z-index: -1;
   background-color:transparent;

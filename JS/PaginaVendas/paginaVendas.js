@@ -29,7 +29,7 @@ window.onload = function recebeJSON(){
 }
 
 /* A ser utilizado para fins de teste */
-/*  
+/*
 let cafe = {
     id:"1",
     nome:"café",
@@ -124,7 +124,7 @@ function addProdutosPagina(produtos){
 /**
  * Adiciona os produtos no carrinho
  * @author Vinicius Gabriel
- * @param {*} evt 
+ * @param {*} evt
  */
 function addCarrinho(evt){
   let id, descricao, preco, quantidade, quantidadeMax, clicadoEl, paiEl, filhos,
@@ -209,7 +209,7 @@ function addCarrinho(evt){
 
 /**
  * Remove um produto do carrinho
- * @param {} evt 
+ * @param {} evt
  */
 function removeItem(evt){
   clicadoEl = evt.currentTarget;
@@ -284,3 +284,25 @@ cancelaCarrinhoEl.addEventListener('click',cancelaCarrinho);
 confirmaCarrinhoEl.addEventListener('click',confirmaCarrinho);
 cancelaModalEl.addEventListener('click',cancelaModal);
 confirmaModalEl.addEventListener('click',confirmaModal);
+
+let padrao = '#####-###';
+
+let inputCep = divModalEl.querySelector("label:last-of-type > input");
+  inputCep.addEventListener('input', e => {
+    let entrada = inputCep.value;
+    if(isNaN(entrada[entrada.length - 1])){
+      entrada = entrada.replace(entrada.slice(entrada.length - 1), '');
+    }
+
+    let padraoIndex = 0, resultado = '';
+    for (let i = 0; padraoIndex < padrao.length && i < entrada.length; i++, padraoIndex++) {
+      if (padrao[padraoIndex] != '#') {
+        while (padrao[padraoIndex] != '#' && entrada[i] != padrao[padraoIndex]  && padraoIndex != padrao.length - 1) {
+          resultado += padrao[padraoIndex];
+          padraoIndex++;
+        }
+      }
+      resultado += entrada[i];
+    }
+    inputCep.value = resultado;
+});

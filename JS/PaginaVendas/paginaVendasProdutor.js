@@ -127,3 +127,25 @@ botaoResulEl.addEventListener('click', mostraResultados);
 mascaraEl.addEventListener('click', escondeTudo);
 botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
 botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
+
+let padrao = '#####-###';
+
+let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
+  inputCep.addEventListener('input', e => {
+    let entrada = inputCep.value;
+    if(isNaN(entrada[entrada.length - 1])){
+      entrada = entrada.replace(entrada.slice(entrada.length - 1), '');
+    }
+
+    let padraoIndex = 0, resultado = '';
+    for (let i = 0; padraoIndex < padrao.length && i < entrada.length; i++, padraoIndex++) {
+      if (padrao[padraoIndex] != '#') {
+        while (padrao[padraoIndex] != '#' && entrada[i] != padrao[padraoIndex]  && padraoIndex != padrao.length - 1) {
+          resultado += padrao[padraoIndex];
+          padraoIndex++;
+        }
+      }
+      resultado += entrada[i];
+    }
+    inputCep.value = resultado;
+});

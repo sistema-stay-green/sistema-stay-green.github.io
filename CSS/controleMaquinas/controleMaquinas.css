@@ -15,19 +15,17 @@ form > label{
   display: grid;
   margin: 0.9em;
 }
+.editar-conteudo > #filtro2 > label{
+  display: block;
+  margin-top: 2.5em;
+  margin-bottom: 1.5em;
+}
 #filtro2 > label, span > label{
   display: block;
   margin-bottom: 1.5em;
 }
 table{
   width: 100%;
-}
-.footer {
-  margin-top: 5vh;
-  height: 46vh;
-  width: 100vw;
-  margin-bottom:0;
-  align-self: flex-end;
 }
 
 #TituloPagina{
@@ -79,7 +77,7 @@ table{
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.valores{
+.valores,.editar-conteudo{
   text-align: center;
    background-color: #FDFCF3;
    margin: 9% 33%;
@@ -91,7 +89,7 @@ table{
    position: fixed;
    z-index: 3;
 }
-.valores_fundo{
+.valores_fundo,.saidas,.editar{
   display: none;
   position: fixed;
   z-index: 1;
@@ -117,18 +115,6 @@ table{
 .TituloNome{
     font-weight: bold;
 }
-.saidas {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
 .saidas-conteudo {
     background-color: #FDFCF3;
     margin: 15% auto;
@@ -151,4 +137,11 @@ table{
 .fecharModal:hover{
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
+}
+.footer {
+  margin-top: 20vh;
+  height: 31vh;
+  width: 100vw;
+  margin-bottom: 0;
+  align-self: flex-end;
 }

@@ -1,6 +1,7 @@
 var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoVoltar = document.querySelector("button[name='botaoVoltar']"),
-    botaoAcao = document.querySelector("button[name='botaoAcao']");
+    botaoAcao = document.querySelector("button[name='botaoAcao']"),
+    botaoEditarMaquina = document.querySelector("button[name='botaoEditarMaquina']");
 
 //checa se todos os inputs etão preenchidso e valida o cadastro
 function validacao(){
@@ -32,7 +33,7 @@ function Voltar(){
 }
 
 //Abre uma div modal que permite a inserção de dados a srem cadastrados
-function Cadastrar(){
+function cadastrar_fe(){
   validacao();
     let inputs = document.querySelectorAll(".inputs");
     for (input of inputs) {
@@ -82,7 +83,7 @@ function cadastroSemBD(){
     }
 
     //permite a chamada da função "saida" ao botão "botaoSaida" ser presionado
-    var botões = document.querySelectorAll(".botaoSaida");
+    let botões = document.querySelectorAll(".botaoSaida");
     for (var i = 0; i < botões.length; i++) {
       botões[i].addEventListener("click", saida);
     }
@@ -111,28 +112,11 @@ function saida(){
         document.querySelector("#filtro_saida").addEventListener("change",
         function(elemento){
           if(opcao.value == "Alugar"){
-            document.querySelector("#retorno").style.display = "block";
-            document.querySelector("#venda").style.display = "none";
-            document.querySelector("#envio").style.display = "none";
-            document.querySelector("#descarte").style.display = "none";
+            document.querySelector("label[name='valor-label']").style.display = "block";
           }
-          else if(opcao.value == "Vender"){
-            document.querySelector("#retorno").style.display = "none";
-            document.querySelector("#venda").style.display = "block";
-            document.querySelector("#envio").style.display = "none";
-            document.querySelector("#descarte").style.display = "none";
-          }
-          else if(opcao.value == "Enviar para conserto"){
-            document.querySelector("#retorno").style.display = "none";
-            document.querySelector("#venda").style.display = "none";
-            document.querySelector("#envio").style.display = "block";
-            document.querySelector("#descarte").style.display = "none";
-          }
-          else if(opcao.value == "Descartar"){
-            document.querySelector("#retorno").style.display = "none";
-            document.querySelector("#venda").style.display = "none";
-            document.querySelector("#envio").style.display = "none";
-            document.querySelector("#descarte").style.display = "block";
+          else{
+            document.querySelector("label[name='valor-label']").style.display = "none";
+            document.querySelector("label[name='valor-label']").value = "";
           }
         });
     }
@@ -140,13 +124,11 @@ function saida(){
       elemento = a linha da tabela obtida pelo parent node
       opcao = o que sera feito, ex: Vender, Descartar, etc...
       */
-    let botão = document.querySelectorAll(".botaoEnviar");
-    for (var i = 0; i < botão.length; i++) {
-      botão[i].addEventListener("click", function(){
+    let botão = document.querySelector("button[name='botaoEnviar']");
+      botão.addEventListener("click", function(){
         AlteraStatus(elemento,opcao);
         document.querySelector("#saidas").style.display = "none";
       });
-      }
     }
 
   }
@@ -168,6 +150,65 @@ function visaoBotao() {
   }
 }
 
+/**/
+function Editar(){
+  document.querySelector("#editar").style.display = "block";
+  elemento = event.target;
+  elemento = elemento.parentElement;
+  nodes = elemento.parentNode.children;
+  console.log(elemento.parentNode);
+  let id = document.querySelector("input[name='id-editar']"),
+      nome = document.querySelector("input[name='nome-editar']"),
+      finalidade = document.querySelector("input[name='finalidade-editar']"),
+      valor =  document.querySelector("input[name='valor-editar']"),
+      data = document.querySelector("input[name='data-editar']"),
+      depreciação = document.querySelector("input[name='depreciação-editar']");
+  let vetor = [id,nome,finalidade,valor,depreciação,data],
+      i = 0;
+  for (valor of vetor) {
+    valor.value = nodes[i].innerHTML;
+    i++;
+  }
+}
+
+/**/
+function EditarMaquina() {
+  let id = document.querySelector("input[name='id-editar']"),
+      nome = document.querySelector("input[name='nome-editar']"),
+      finalidade = document.querySelector("input[name='finalidade-editar']"),
+      valor =  document.querySelector("input[name='valor-editar']"),
+      data = document.querySelector("input[name='data-editar']"),
+      depreciação = document.querySelector("input[name='depreciação-editar']");
+  let vetor = [id,nome,finalidade,valor,depreciação,data],
+      maquinas = document.querySelectorAll(".maquina"),
+      string = "";
+      for (maquina of maquinas) {
+        nodes = maquina.children;
+        if(nodes[0].innerHTML == id.value){
+          for (var i = 0; i < nodes.length; i++) {
+            if(i < 6){
+              string += "<td>" + vetor[i].value + "</td>";
+            }
+            else {
+              string += "<td>" + nodes[i].innerHTML + "</td>";
+            }
+            if(i == nodes.length - 1){
+              maquina.innerHTML = string;
+            }
+          }
+        }
+      }
+      document.querySelector("#editar").style.display = "none";
+      let edita = document.querySelectorAll(".botaoEditar");
+      for (var i = 0; i < edita.length; i++) {
+        edita[i].addEventListener("click", Editar)
+      }
+      let botoes = document.querySelectorAll(".botaoSaida");
+      for (var i = 0; i < botoes.length; i++) {
+        botoes[i].addEventListener("click", saida);
+      }
+
+}
 //função que altera o status da maquina
 function AlteraStatus(elemento,opcao){
     //Pega os "filhos" da variavel elemento
@@ -189,15 +230,23 @@ function AlteraStatus(elemento,opcao){
       if(i == 6){
         if(opcao.value == "Alugar"){
           elemento.innerHTML += "<td>ALUGADO</td>";
+          let valorAluguel = document.querySelector("input[name='valorAluguel']"),
+              periodo = document.querySelector("input[name='periodo']");
+          alugar(vetor[0], periodo, valorAluguel);
         }
         else if(opcao.value == "Vender"){
           elemento.innerHTML += "<td>VENDIDO</td>";
+
+          vender(vetor[0]);
         }
         else if(opcao.value == "Enviar para conserto"){
           elemento.innerHTML += "<td>EM CONSERTO</td>";
+          let periodo = document.querySelector("input[name='periodo']");
+          manuntenir(vetor[0], periodo);
         }
         else if(opcao.value == "Descartar"){
           elemento.innerHTML += "<td>DESCARTADO</td>";
+          descartar(veor[0]);
         }
       }
       else {
@@ -206,8 +255,12 @@ function AlteraStatus(elemento,opcao){
     }
     elemento.innerHTML += "</tr>";
 
-//Permite a chamada da função saida ao clicar no "botaoSaida"
-  botoes = document.querySelectorAll(".botaoSaida");
+/*Permite a chamada da função saida ao clicar no "botaoSaida"*/
+  let edita = document.querySelectorAll(".botaoEditar");
+  for (var i = 0; i < edita.length; i++) {
+    edita[i].addEventListener("click", Editar)
+  }
+  let botoes = document.querySelectorAll(".botaoSaida");
   for (var i = 0; i < botoes.length; i++) {
     botoes[i].addEventListener("click", saida);
   }
@@ -217,7 +270,7 @@ function AlteraStatus(elemento,opcao){
   adiciona a classe botaoDesab*/
   visaoBotao();
 
-  //Zera os valores dos inputs da data requisitada
+  /*Zera os valores dos inputs da data requisitada*/
   let valores = document.querySelectorAll("input[name='data']");
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
@@ -229,27 +282,32 @@ function AlteraStatus(elemento,opcao){
 botaoVoltar.addEventListener("click", function(){
   document.querySelector(".valores_fundo").style.display = "none";
 })
-document.querySelector(".fecharModal").addEventListener("click", function(){
+let fecharModal = document.querySelectorAll(".fecharModal");
+for (let fechar of fecharModal){
+  fechar.addEventListener("click", function(){
   document.querySelector("#saidas").style.display = "none";
+  document.querySelector("#editar").style.display = "none";
 })
+}
 window.addEventListener("click", function(event){
     if (event.target == document.querySelector(".valores_fundo") ||
-        event.target == document.querySelector("#saidas")) {
+        event.target == document.querySelector("#saidas") ||
+        event.target == document.querySelector("#editar")) {
         document.querySelector(".valores_fundo").style.display = "none";
         document.querySelector("#saidas").style.display = "none";
+        document.querySelector("#editar").style.display = "none";
     }
 })
 //fim
 
-
-
-
-
 //Chamada das funções
-
-botaoCadastro.addEventListener("click", Cadastrar);
+botaoEditarMaquina.addEventListener("click", EditarMaquina);
+botaoCadastro.addEventListener("click", cadastrar_fe);
 botaoVoltar.addEventListener("click", Voltar);
-botaoAcao.addEventListener("click", cadastroSemBD);
+botaoAcao.addEventListener("click", function(){
+  cadastroSemBD();
+  cadastrar();
+  });
 
 let inputs = document.querySelectorAll(".inputs");
 for (let input of inputs){
@@ -259,5 +317,10 @@ for (let input of inputs){
 let chamaSaida = document.querySelectorAll(".botaoSaida");
 for (var i = 0; i < chamaSaida.length; i++) {
   chamaSaida[i].addEventListener("click", saida);
+}
+
+let edita = document.querySelectorAll(".botaoEditar");
+for (var i = 0; i < edita.length; i++) {
+  edita[i].addEventListener("click", Editar)
 }
 window.onload = visaoBotao;

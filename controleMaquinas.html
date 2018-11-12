@@ -32,7 +32,8 @@
         <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
     </div>
-
+    <!-- FIM -->
+    <!-- Parte contendo as maquinas -->
     <div class="maquinas">
       <section id="filtro">
         <label for="filtro_select">Filtro:</label>
@@ -76,11 +77,12 @@
           <td>2018-10-02</td>
           <td>
              <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
           </td>
         </tr>
         <tr class="maquina">
           <td class="id">2</td>
-          <td>Trator</td>
+          <td>Trator2</td>
           <td>Uma máquina que ajuda na colheita do café</td>
           <td>5000</td>
           <td>15</td>
@@ -92,11 +94,13 @@
           <td>2018-10-02</td>
           <td>
              <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
           </td>
         </tr>
       </tbody>
     </table>
     </div>
+    <!-- Opções de saidas das maquinas -->
     <div id="saidas" class="saidas">
       <div class="saidas-conteudo">
         <span class="fecharModal">&times;</span>
@@ -110,25 +114,28 @@
             </select>
           </label>
           <span id="retorno">
-            <label>Data de retorno: <input type="date" name="data" class="data"></label>
-            <label>Valor do aluguel:<input type="number" name="valorAluguel"></label>
-           <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
-          </span>
-          <span id="venda">
-            <label>Data de venda: <input type="date" name="data" class="data"></label>
-            <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
-          </span>
-          <span id="envio">
-            <label>Data de envio: <input type="date" name="data" class="data"></label>
-            <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
-          </span>
-          <span id="descarte">
-            <label>Data de descarte: <input type="date"  name="data" class="data"></label>
+            <label name="periodo-label">Periodo/Retorno: <input type="number" name="periodo" class="periodo"></label>
+            <label name="valor-label">Valor: <input type="number" name="valorAluguel"></label>
             <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
           </span>
         </section>
      </div>
-   </div>
+    </div>
+    <div id="editar" class="editar">
+      <div class="editar-conteudo">
+        <span class="fecharModal">&times;</span>
+        <section id="filtro2">
+          <input type="hidden" class="inputs" name="id-editar" required></label>
+          <label>Nome da Máquina <input type="text" class="inputs" name="nome-editar" required></label>
+          <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade-editar"  required></label>
+          <label>Valor de Compra<input type="number" class="inputs" name="valor-editar"  required></label>
+          <label>Indice de depreciação<input type="number" class="inputs" name="depreciação-editar"  required></label>
+          <label>Data de Compra <input type="date" class="inputs" name="data-editar"  required></label>
+          <button type="button" name="botaoEditarMaquina">Editar</button>
+        </section>
+      </div>
+     </div>
+
    <footer class="footer">
       <section>
         <h3>empresa</h3>
@@ -169,6 +176,7 @@
   <script src="JS/staygreen.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/maquina.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="JS/controleMaquinas/conexaoMaquina.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/main.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
 </html>

@@ -4,14 +4,17 @@
         <meta charset="utf-8" />
         <meta name="author" content="Mei Fagundes">
         <meta name="author" content="Sávio Cardoso">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Controle de Patrimônio</title>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/staygreen.css"/>
+        <link rel="stylesheet" type="text/css" media="print" href="CSS/Patrimonio/Print.css"/>
         <link rel="icon" type="image/png" href="imgs/icons/favicon.png">
     </head>
     <body>
-      <nav>
+      <nav class="shadow">
           <a href="index.html">Home</a>
           <a href="#">Agenda</a>
           <a href="#">Máquinas</a>
@@ -60,12 +63,10 @@
             </span>
         </section>
 
-
-
         <!-- Div Modal Formulário -->
         <div class="mascara">
        </div>
-        <section id="form" class="div-modal shadow esconde">
+        <section id="form" class="modal shadow esconde">
             <div class="conteudo">
 
                 <label for="nomeInput">Nome do Patrimônio:</label>
@@ -103,8 +104,8 @@
                 <div name="saida" class="esconde">
                     <label for="tipoSaidaInput">Saída: </label>
                     <select name="tipoSaidaInput">
-                        <option value="">Não Resgistrar</option>
-                        <option value="*VENDIDO">Venda</option>
+                        <option value="" selected>Não Resgistrar</option>
+                        <option value="VENDIDO">Venda</option>
                         <option value="DESCARTADO">Descarte</option>
                         <option value="ALUGADO">Aluguel</option>
                         <option value="EM_MANUTENCAO">Manutenção</option>
@@ -120,11 +121,23 @@
             </div>
         </section>
 
-        <section id="errorModal" class="esconde shadow">
+        <section id="relatorio" class="modal shadow esconde">
+            <div></div>
+            <div>
+                <button name="printRelatorio" class="shadow">Imprimir</button>
+                <button name="closeRelatorio" class="shadow">Fechar</button>
+            </div>
+        </section>
+
+        <section id="errorModal" class="modal esconde shadow">
             <p>ERRO!!!</p>
         </section>
 
-        <button id="addPatrimonioButton" class="shadow"><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+        <div id="floatingButtons">
+            <button name="addButton" class="shadow" title="Registrar Patrimônio Comprado."><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+            <button name="relatorioButton" class="shadow" title="Gerar Relatório."><img src="imgs/Patrimonio/library-material-design.png" alt=""></button>
+        </div>
+        
 
         <script src="JS/staygreen.js"></script>
         <script src="JS/Patrimonio/Patrimonio.js"></script>

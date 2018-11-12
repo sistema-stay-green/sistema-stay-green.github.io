@@ -1,3 +1,4 @@
+
 let returnCallBack = (patrimonios = []) => {
     
     clearTableContents();
@@ -22,9 +23,54 @@ let relatorioCallBack = (patrimonios = []) => {
     generateRelatorio(patrimonios);
 }
 
+let filterCallBack = (patrimonios = []) => {
+
+    switch (filtroSelect.value) {
+
+        case "":
+            break;
+
+        case "EM_POSSE":
+            patrimonios = getPatrimoniosEmPosse(patrimonios);
+            break;
+
+        case "EM_MANUTENCAO":
+            patrimonios = getPatrimoniosEmManutencao(patrimonios);
+            break;
+
+        case "ALUGADO":
+            patrimonios = getPatrimoniosAlugados(patrimonios);
+            break;
+
+        case "VENDIDO":
+            patrimonios = getPatrimoniosVendidos(patrimonios);
+            break;
+
+        case "DESCARTADO":
+            patrimonios = getPatrimoniosDescartados(patrimonios);
+            break;
+    
+        default:
+            throw new Error("O filtro possui um valor inválido");
+    }
+
+    clearTableContents();
+    for (const patrimonio of patrimonios) {
+
+        insertPatrimonioIntoTable(patrimonio);
+    }
+}
+
 function receivePatrimonios(){
 
     receiveAllPatrimoniosFromServlet(returnCallBack);
+
+}
+
+function changeFilter(){
+
+    receiveAllPatrimoniosFromServlet(filterCallBack);
+
 }
 
 function showRelatorio(){
@@ -83,3 +129,4 @@ function deletePatrimonio(id) {
 }
 
 relatorioButton.addEventListener("click", showRelatorio);
+filtroSelect.addEventListener("change", changeFilter);

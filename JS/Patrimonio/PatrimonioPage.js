@@ -22,6 +22,7 @@ const saidaDiv = document.querySelector("[name=saida]");
 const formModal = document.querySelector("#form");
 const relatorioModal = document.querySelector("#relatorio");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
+const filtroSelect = document.querySelector("#filtroSelect");
 const mascara = document.querySelector(".mascara");
 let editButton = document.querySelectorAll("[id|=edit]");
 
@@ -404,6 +405,42 @@ function showPatrimonioTable(){
 
     document.querySelector("table").style.display = "block";
     document.querySelector("#noResults").style.display = "none";
+}
+
+function changeFilter(){
+
+
+    receiveAllPatrimoniosFromServlet();
+
+    switch (filtroSelect.value) {
+
+        case "":
+            
+            break;
+
+        case "EM_POSSE":
+            
+            break;
+
+        case "EM_MANUTENCAO":
+            
+            break;
+
+        case "ALUGADO":
+            
+            break;
+
+        case "VENDIDO":
+            
+            break;
+
+        case "VENDIDO":
+            
+            break;
+    
+        default:
+            break;
+    }
 }
 
 /**

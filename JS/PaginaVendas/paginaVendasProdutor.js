@@ -116,6 +116,18 @@ botaoFatuEl.addEventListener('click',mostraFaturamentos);
 botaoResulEl.addEventListener('click',mostraResultados);
 mascaraEl.addEventListener('click',escondeTudo);
 
+//compra é valor negativo
+let resultado = 0;
 function relatorioResultados(){
-  
+  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet', )
+     .then(function(resposta){
+         resultado = resposta;
+     });
+
+  if(resultado < 0)
+    resultado = "Produtor está tendo prejuízo";
+  else if(resultado > 0)
+    resultado = "Produtor está tendo lucro";
+  else
+    resultado = "Indiferente";
 }

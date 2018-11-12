@@ -10,7 +10,7 @@ header {
   background-color: yellow;
   height:93%;
   width:100%;
-  background-image: url('../../imgs/home/fazenda.jpeg');
+  background-image: url('../imgs/home/fazenda.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -187,7 +187,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img3.jpg');
+    ), url('../imgs/home/img3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -197,7 +197,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.64),
     rgba(16, 43, 18, 0.64)
-    ), url('../../imgs/home/img2.jpg');
+    ), url('../imgs/home/img2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -207,7 +207,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img1.jpg');
+    ), url('../imgs/home/img1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -217,7 +217,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img4.jpg');
+    ), url('../imgs/home/img4.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -226,7 +226,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img5.jpg');
+    ), url('../imgs/home/img5.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -83,7 +83,7 @@ function encapsularDadosTarefa(){
       new Date(document.querySelector('input[name="realizarDia"]').value);
     novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
-    novaTarefaAdicionada.insumosTarefa = [];
+    novaTarefaAdicionada.insumosTarefa = "";
     novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;
     novaTarefaAdicionada.gastoTarefa =
@@ -95,8 +95,10 @@ function encapsularDadosTarefa(){
       insumosGeraisCheck.filter((checkbox) => checkbox.checked);
 
     for(let insumos of insumosConsumidos){
-      novaTarefaAdicionada.insumosTarefa.push(insumos.value);
+      novaTarefaAdicionada.insumosTarefa += insumos.value + ', ';
     }
+    let length = novaTarefaAdicionada.insumosTarefa.length;
+    novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada.insumosTarefa.substr(0, length-2);
     novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
     operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 

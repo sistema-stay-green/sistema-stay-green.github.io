@@ -21,16 +21,14 @@ button{
 }
 
 button:hover{
-    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
+    box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
 }
 
 input:focus{
     transition: 200ms ease-in-out;
-    -webkit-box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
-    box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
 }
 
 h1{
@@ -39,8 +37,23 @@ h1{
     font-size: 2.2em;
 }
 
-nav > h3{
-    width:21vw !important;
+nav{
+    transition: 250ms ease-in-out;
+}
+
+nav a, nav h3{
+    width: 18vw;
+    box-sizing: border-box;
+    transition: 50ms ease-out;
+}
+
+nav h3{
+    cursor: default;
+}
+
+nav:hover{
+    -webkit-box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
 }
 
 table{
@@ -50,9 +63,8 @@ table{
 }
 
 table:hover{
-    -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
 }
 
 .bold{
@@ -90,13 +102,12 @@ th{
 }
 
 tr{
-    transition: 80ms ease-in-out;
+    transition: 120ms ease-in-out;
 }
 
 tr:hover{
-    -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
 }
 
 /* */
@@ -155,6 +166,11 @@ button:focus{
     margin-left: 2vh;
 }
 
+#floatingButtons button:hover{
+    -webkit-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
+    box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
+}
+
 #floatingButtons button img{
     image-rendering: optimizeQuality;
     width: 2vh;
@@ -204,7 +220,7 @@ input:focus{
     outline-style: none;
 }
 
-#form input, #form select, #form div{
+#form input:not(#statusOptions), #form select, #form div{
     margin-bottom: 1em;
 }
 
@@ -232,8 +248,9 @@ input:focus{
 #relatorio{
     top: 6vh;
     bottom: 6vh;
-    left: 15vw;
-    right: 15vw;
+    left: calc(50vw - 25em);
+    width: 50em;
+    box-sizing: border-box;
 }
 
 #relatorio div:nth-child(2){
@@ -278,11 +295,12 @@ input:focus{
 }
 
 #form{
-    top: 20vh;
-    left: calc(50vw - 11em);
-    width: 22em;
+    top: 18vh;
+    left: calc(50vw - 13.5em);
+    width: 27em;
     margin-top: -5em;
     font-size: 0.95em;
+    box-sizing: border-box;
 }
 
 #form input{
@@ -342,14 +360,12 @@ input:focus{
 }
 
 .shadow{
-    -webkit-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
-    box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
 }
 
 .focusedShadow{
     -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
     box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
 }
 

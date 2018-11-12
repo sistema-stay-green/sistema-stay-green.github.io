@@ -78,9 +78,13 @@ function showEditOptions(key){
 
     switch (key) {
         case 'entrada':
-            
-            entradaDiv.classList.remove("esconde");
-            entradaDiv.style.display = "block";
+            if(entradaDiv.style.display == "block"){
+                entradaDiv.style.display = "none";
+                entradaDiv.classList.add("esconde");
+            }else{
+                entradaDiv.style.display = "block";
+                entradaDiv.classList.remove("esconde");
+            }
             saidaDiv.classList.add("esconde");
             saidaDiv.style.display = "none";
             isEntradaBeingEdited = true;
@@ -88,15 +92,19 @@ function showEditOptions(key){
             break;
 
         case 'saida':
-
+            if(saidaDiv.style.display == "block"){
+                saidaDiv.classList.add("esconde");
+                saidaDiv.style.display = "none";
+            }else{
+                saidaDiv.classList.remove("esconde");
+                saidaDiv.style.display = "block";
+            }
             entradaDiv.classList.add("esconde");
             entradaDiv.style.display = "none";
-            saidaDiv.classList.remove("esconde");
-            saidaDiv.style.display = "block";
             isEntradaBeingEdited = false;
             isSaidaBeingEdited = true;
             break;
-    
+
         default:
             break;
     }
@@ -127,11 +135,11 @@ function showError(cod){
         case 4:
             message = "ERRO! Os valores inseridos são inválidos.";
             break;
-            
+
         case 5:
             message = "ERRO! Nenhum Patrimônio registrado para gerar o relatório.";
             break;
-    
+
         default:
             throw new Error("Código de erro inválido!");
     }
@@ -297,14 +305,14 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 }
 
 function clearTableContents() {
-    
+
     patrimonioTable.innerHTML = "";
     hidePatrimonioTable();
 }
 
 /**
  * Atualiza as informações de um Patrimonio na tabela.
- * @param {Patrimonio} patrimonio 
+ * @param {Patrimonio} patrimonio
  * @author Mei
  */
 function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
@@ -313,33 +321,33 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     console.log(document.querySelector("#nome-" + id));
     console.log(id);
-    
-    
+
+
     if(patrimonio.nome !== null && patrimonio.nome !== "")
         document.querySelector("#nome-" + id).innerHTML = patrimonio.nome;
-    else 
+    else
         document.querySelector("#nome-" + id).innerHTML = NA;
 
     if(patrimonio.tipo !== null && patrimonio.tipo !== "")
         document.querySelector("#tipo-" + id).innerHTML = patrimonio.tipo;
     else
         document.querySelector("#tipo-" + id).innerHTML = NA;
-    
+
     if(patrimonio.finalidade !== null && patrimonio.finalidade !== "")
         document.querySelector("#finalidade-" + id).innerHTML = patrimonio.finalidade;
     else
         document.querySelector("#finalidade-" + id).innerHTML = NA;
-    
+
     if(patrimonio.status !== null && patrimonio.status !== "")
         document.querySelector("#status-" + id).innerHTML = patrimonio.status;
     else
         document.querySelector("#status-" + id).innerHTML = NA;
-    
+
     if(patrimonio.indiceDepreciacao !== null && patrimonio.indiceDepreciacao !== "")
         document.querySelector("#indiceDepreciacao-" + id).innerHTML = patrimonio.indiceDepreciacao;
     else
         document.querySelector("#indiceDepreciacao-" + id).innerHTML = NA;
-    
+
     if(patrimonio.valorCompra !== null && patrimonio.valorCompra !== "")
         document.querySelector("#valorCompra-" + id).innerHTML = patrimonio.valorCompra;
     else
@@ -349,25 +357,25 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
         document.querySelector("#valorAtual-" + id).innerHTML = patrimonio.valorAtual;
     else
         document.querySelector("#valorAtual-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataCompra !== null && patrimonio.dataCompra !== "")
         document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompra
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataCompra-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataSaida !== null && patrimonio.dataSaida !== "")
         document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaida
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataSaida-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataRetorno !== null && patrimonio.dataRetorno !== "")
         document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetorno
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataRetorno-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataBaixa !== null && patrimonio.dataBaixa !== "")
         document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixa
         .toISOString().slice(0,10).replace("/-/g","");
@@ -415,29 +423,29 @@ function changeFilter(){
     switch (filtroSelect.value) {
 
         case "":
-            
+
             break;
 
         case "EM_POSSE":
-            
+
             break;
 
         case "EM_MANUTENCAO":
-            
+
             break;
 
         case "ALUGADO":
-            
+
             break;
 
         case "VENDIDO":
-            
+
             break;
 
         case "VENDIDO":
-            
+
             break;
-    
+
         default:
             break;
     }
@@ -452,7 +460,7 @@ function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    
+
     if (isModalFilled()) {
 
         if (document.querySelector("#form [name='indiceDepreciacaoInput']").value >= 100) {
@@ -468,9 +476,9 @@ function getPatrimonioFromModal(){
 
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
-        
+
         if (dataEntrada[0] !== "") {
-            
+
             patrimonio.dataRetorno = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
         }
         if (dataSaida[0] !== "") {
@@ -486,7 +494,7 @@ function getPatrimonioFromModal(){
             }
             else
                 patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-            
+
         }
         hideModal();
         return patrimonio;
@@ -500,7 +508,7 @@ function getPatrimonioFromModal(){
 function isModalFilled(){
 
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    
+
     if (document.querySelector("#form [name='nomeInput']").value == "" ||
     document.querySelector("#form [name='tipoInput']").value == "" ||
     document.querySelector("#form [name='finalidadeInput']").value == "" ||
@@ -525,7 +533,7 @@ function isModalFilled(){
 
 /**
  * Retorna um objeto Patrimonio da Tabela com o Id fornecido.
- * @param {string} id 
+ * @param {string} id
  * @returns {string} nome
  * @author Mei
  */
@@ -579,7 +587,7 @@ function getPatrimonioFromTable(id){
     if (dataBaixaField !== NA && dataBaixaField !== ""){
         data = dataBaixaField.split("-");
         patrimonio.dataBaixa = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
-    }   
+    }
     if (dataSaidaField !== NA && dataSaidaField !== ""){
         data = dataSaidaField.split("-");
         patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
@@ -614,7 +622,7 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     }
     else
         document.querySelector("#form [name='tipoSaidaInput']").value = "";
-    
+
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
             .toISOString().slice(0,10).replace("/-/g","");
@@ -658,7 +666,7 @@ function generateRelatorio(patrimonios = []){
         relatorio.appendChild(h1);
 
         // EM_POSSE
-        
+
         patrimoniosTemp = getPatrimoniosEmPosse(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -669,7 +677,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // EM_MANUTENCAO
-        
+
         patrimoniosTemp = getPatrimoniosEmManutencao(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -680,7 +688,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // ALUGADO
-        
+
         patrimoniosTemp = getPatrimoniosAlugados(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -691,7 +699,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // VENDIDO
-        
+
         patrimoniosTemp = getPatrimoniosVendidos(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -702,7 +710,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // DESCARTADO
-        
+
         patrimoniosTemp = getPatrimoniosDescartados(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -724,9 +732,9 @@ function generateUlForRelatorio(patrimonios = []){
 
         let ul, li, p;
         ul = document.createElement("ul");
-        
+
         for (const patrimonio of patrimonios) {
-            
+
             li = document.createElement("li");
 
             // Id | Nome

@@ -284,6 +284,10 @@ input:focus{
     text-align: center;
 }
 
+#btnRelatorio{
+    margin-left: 23em;
+}
+
 #errorModal{
     transform: scale(0.9);
     border: 0.3em solid #E1170F;
@@ -381,18 +385,18 @@ input:focus{
     html{
         font-family: 'Niramit', sans-serif;
     }
-    
+
     body{
         background-color: #FDFCF3 !important;
         width:100%;
     }
-    
+
     h1{
         text-align: center !important;
         padding: 0px !important;
         margin: 0px !important;
     }
-    
+
     h2{
         text-align: center !important;
     }

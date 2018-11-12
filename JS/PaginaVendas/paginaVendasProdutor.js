@@ -8,7 +8,7 @@ let botaoRegistraEl = document.querySelector("#botaoRegistra");
 let divEncaEl = document.querySelector("#div-encaminhamentos");
 let divFatuEl = document.querySelector("#div-faturamentos");
 let divResulEl = document.querySelector("#div-resultados");
-let divRegistraEl = document.querySelector("#div-registra"); 
+let divRegistraEl = document.querySelector("#div-registra");
 
 let arrayProdutos = new Array();
 let cafe = {
@@ -53,7 +53,7 @@ function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
   produto.preco = preco;
   produto.estoque = estoque;
   produto.img = img;
-  arrayProdutos.push(produto); 
+  arrayProdutos.push(produto);
   console.log(arrayProdutos);
  }
 
@@ -74,14 +74,14 @@ function addProdutosPagina(produtos){
    }
    tabela.appendChild(tbody);
    mainEl.insertBefore(tabela,divBotoesEl);
-} 
+}
 function mostraEncaminhamentos(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.add("aparece");
   divFatuEl.classList.remove("aparece");
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
-}  
+}
 function mostraFaturamentos(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.remove("aparece");
@@ -95,19 +95,19 @@ function mostraResultados(){
   divFatuEl.classList.remove("aparece");
   divResulEl.classList.add("aparece");
   divRegistraEl.classList.remove("aparece");
-} 
+}
 function mostraRegistra() {
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.remove("aparece");
   divFatuEl.classList.remove("aparece");
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.add("aparece");
-} 
+}
 function escondeTudo(){
   mascaraEl.classList.remove("aparece");
   divEncaEl.classList.remove("aparece");
   divFatuEl.classList.remove("aparece");
-  divResulEl.classList.remove("aparece");  
+  divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
 botaoRegistraEl.addEventListener('click',mostraRegistra);
@@ -115,3 +115,7 @@ botaoEncaEl.addEventListener('click',mostraEncaminhamentos);
 botaoFatuEl.addEventListener('click',mostraFaturamentos);
 botaoResulEl.addEventListener('click',mostraResultados);
 mascaraEl.addEventListener('click',escondeTudo);
+
+function relatorioResultados(){
+  
+}

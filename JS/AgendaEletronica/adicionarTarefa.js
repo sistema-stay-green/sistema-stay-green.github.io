@@ -1,6 +1,11 @@
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
     containerFormNovaTarefa = document.querySelector('form'),
-    mascaraFormEl = document.querySelector('#mascaraForm');
+    mascaraFormEl = document.querySelector('#mascaraForm'),
+    botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
+
+botaoConfirmarTarefa.addEventListener('click', (evt) => {
+        operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
+});
 
 function escondeFormulario(){
   mascaraFormEl.classList.add('invisivel');
@@ -19,11 +24,10 @@ function exibeFormularioTarefa(tarefaAExibir){
   botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
 
   containerFormNovaTarefa.classList.remove('invisivel');
-
-  if(tarefaAExibir != undefined){
+  if(tarefaAExibir != null){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
-    document.querySelector('textarea[name="descricaoTarefa"').value = 
+    document.querySelector('textarea[name="descricaoTarefa"').value =
       tarefaAExibir.descrTarefa;
     document.querySelector('form select').value =
       tarefaAExibir.tipoTarefa;
@@ -35,16 +39,33 @@ function exibeFormularioTarefa(tarefaAExibir){
       tarefaAExibir.quantProduzTarefa;
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
+    botaoConfirmarTarefa.dataset.operacao = 'u';
+    return;
+  }else{
+    document.querySelector('#nomeNovaTarefa').value =
+      "Nova tarefa (clique para editar)";
+    document.querySelector('textarea[name="descricaoTarefa"').value =
+      "Descrição da Tarefa";
+    document.querySelector('form select').value =
+      "ARAR";
+    let data = new Date();
+    document.querySelector('input[name="realizarDia"]').value =
+      data.getUTCFullYear() + "-" + data.getMonth() + "-" + data.getDate();
+    document.querySelector('input[name="periodoRepeticao"]').value =
+      1;
+    document.querySelector('input[name="producaoPrevista"]').value =
+      100;
+    document.querySelector('input[name="valorGasto"]').value =
+      100;
+    botaoConfirmarTarefa.dataset.operacao = 'a';
   }
 
   return;
 }
 
-botaoFormTarefaEl.addEventListener('click', exibeFormularioTarefa);
-
-let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
-
-botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
+botaoFormTarefaEl.addEventListener('click', function() {
+  exibeFormularioTarefa(null);
+});
 
 /**
  * Faz uma requisição para o Servlet 'TarefaBDServlet' para adicionar, remover ou alterar uma tarefa
@@ -53,6 +74,8 @@ botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
  * @author Pedro
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
+  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao);
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
@@ -73,16 +96,16 @@ function encapsularDadosTarefa(){
 
     novaTarefaAdicionada.nomeTarefa =
       document.querySelector('#nomeNovaTarefa').value;
-    novaTarefaAdicionada.descrTarefa = 
+    novaTarefaAdicionada.descrTarefa =
       document.querySelector('textarea[name="descricaoTarefa"').value;
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
     novaTarefaAdicionada.dataInicialTarefa =
       new Date(document.querySelector('input[name="realizarDia"]').value);
-    novaTarefaAdicionada.periodoRepetTarefa =
+    novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
-    novaTarefaAdicionada.insumosConsumidos = [];
-    novaTarefaAdicionada.qtProduzTarefa =
+    novaTarefaAdicionada.insumosTarefa = "";
+    novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;
     novaTarefaAdicionada.gastoTarefa =
       document.querySelector('input[name="valorGasto"]').value;
@@ -93,11 +116,11 @@ function encapsularDadosTarefa(){
       insumosGeraisCheck.filter((checkbox) => checkbox.checked);
 
     for(let insumos of insumosConsumidos){
-      novaTarefaAdicionada.insumosConsumidos.push(insumos.value);
+      novaTarefaAdicionada.insumosTarefa += insumos.value + ', ';
     }
+    let length = novaTarefaAdicionada.insumosTarefa.length;
+    novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada.insumosTarefa.substr(0, length-2);
+    novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
 
-    novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
-    operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
-
-  //Requisicao simples AJAX de enviar dados de uma nova tarefa
+    return novaTarefaAdicionada;
 }

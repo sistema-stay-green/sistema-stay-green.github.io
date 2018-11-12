@@ -122,7 +122,13 @@ function aplicaFiltros() {
                     //tarefasFiltradas = tarefasFiltradas.filter(FUNCOESFILTROS[codigoFiltro](tarefa, ));
                     //resultado recebe ele mesmo filtrado com cada filtro do vetor
                 }
-                console.log(tarefasFiltradas);
+
+                //Se há filtros ativos, mostre apenas as tarefas filtradas
+                if(filtrosMarcados.length != 0)
+                    geraCalendario(tarefasFiltradas, false);
+                else    
+                    geraCalendario(tarefasArmazenadasBD, true, new Date());
+                
             }
             )
         })

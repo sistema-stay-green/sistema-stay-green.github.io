@@ -20,12 +20,13 @@ class Tarefa {
   }
 
   /**
-   * Formata uma data no formato de um objeto contendo seu ano, dia, mês, e horário 
+   * Formata uma data no formato de um objeto contendo seu ano, dia, mês, e horário adequado
+   * para o envio para o Servlet
    * @param {Date} data a data a ser formatada
    * @returns {object} data formatada
    * @author Pedro
    */
-  formatData(data) {
+  formatDataServlet(data) {
     let dataFormatada = {
       "year": data.getUTCFullYear(),
       "month": data.getMonth(),
@@ -38,7 +39,23 @@ class Tarefa {
     return dataFormatada;
   }
 
-  /** 
+  /**
+   * Converte uma data no formato de data enviado pelo Servlet para um objeto Date do JavaScript
+   * @param {Object} servletData 
+   * @returns {Date} objeto Date formatado
+   */
+  static toDateObject(servletData){
+    let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :
+    servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
+      servletData.dayOfMonth : servletData.dayOfMonth);
+    
+    let dataFormatadaClient = new Date(stringData);
+    dataFormatadaClient.setDate(dataFormatadaClient.getUTCDate());
+
+    return dataFormatadaClient;
+  }
+
+  /**
   * Converte objeto Patrimonio em string JSON.
   * @returns {string} String com formatação JSON do objeto.
   * @author Guilherme Sena
@@ -48,7 +65,7 @@ class Tarefa {
       "nomeTarefa": this.nomeTarefa,
       "descrTarefa": "aaaa",
       "tipoTarefa": this.tipoTarefa,
-      "dataInicialTarefa": this.formatData(this.dataInicialTarefa),
+      "dataInicialTarefa": this.formatDataServlet(this.dataInicialTarefa),
       "periodRepetTarefa": this.periodoRepetTarefa,
       "insumosTarefa": this.insumosTarefa,
       "quantInsumosTarefa": this.qtInsumosTarefa,

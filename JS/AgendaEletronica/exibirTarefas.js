@@ -5,7 +5,7 @@ function recebeTarefas() {
   Request.get('http:localhost:8080/StayGreen/TarefaServlet')
     .then((resultado) => {
       tarefasArmazenadasBD = resultado;
-      geraCalendario(new Date(), tarefasArmazenadasBD);
+      geraCalendario(tarefasArmazenadasBD, true, new Date());
       aplicarEventoGeracaoDataBotoes();
       aplicaFiltros();
     });
@@ -28,38 +28,51 @@ const QUANTIDADEDATAS = 16;
 /**
  * Gera calendário dinâmico de forma recursiva
  * @author  Pedro
- * @param {Date} dataBase a primeira data do calendário
  * @param {Tarefa[]} tarefasProgramadas as tarefas que estão programadas para serem realizadas
+ * @param {Boolean} [calendarioSequencial = false] indica se deve gerar datas em sequência ou não. Se for
+ * false, só serão geradas as datas nas quais as tarefas serão realizadas.
+ * @param {Date=} dataBase a primeira data do calendário
  */
-function geraCalendario(dataBase, tarefasProgramadas) {
-  //Gera vários dias no calendário e os coloca no DOM
-  for (let contadorDias = 0; contadorDias < QUANTIDADEDATAS; contadorDias++) {
-    let dataAtual = dataBase,
-        containerDia = criaContainerDia(dataAtual, tarefasProgramadas);
+function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBase) {
+  document.querySelectorAll('#containerCalendario article').forEach(containerDia =>
+    containerCalendario.removeChild(containerDia));
+  if(calendarioSequencial){
+    for (let contadorDias = 0; contadorDias < QUANTIDADEDATAS; contadorDias++) {
+      let dataAtual = dataBase,
+          containerDia = criaContainerDia(dataAtual, tarefasProgramadas);
 
-    dataAtual.setDate(dataBase.getDate() + 1);
+      dataAtual.setDate(dataBase.getDate() + 1);
 
-    containerCalendario.appendChild(containerDia);
+      containerCalendario.appendChild(containerDia);
+    }
+  }else{
+    for(let tarefa of tarefasProgramadas){
+      console.log(Tarefa.toDateObject(tarefa.dataInicialTarefa));
+      
+      containerCalendario.appendChild(criaContainerDia(Tarefa.toDateObject(tarefa.dataInicialTarefa), [tarefa]));
+    }
   }
 }
 
 /**
  * Checa se a uma tarefa deve ser realizada em um dia ou não
- * 
+ *
  * @param {Tarefa} tarefa a tarefa que supostamente acontece no dia proposto
  * @param {Date} dataProposta a data que aconteceria a tarefa
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
  */
 function deveRealizarTarefa(tarefa, dataProposta) {
   if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
-    dataProposta.getMonth() === tarefa.dataInicialTarefa.month)
+    dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
+        Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
+            tarefa.periodRepetTarefa === 0 )
     return true;
 
   return false;
 }
 
 /**
- * Adiciona o evento de clique aos botões de ver mais dias no calendário e 
+ * Adiciona o evento de clique aos botões de ver mais dias no calendário e
  *  de ver dias anteriores
  */
 function aplicarEventoGeracaoDataBotoes() {
@@ -69,18 +82,13 @@ function aplicarEventoGeracaoDataBotoes() {
 
   //Evento de clique no botão para gerar mais dias
   botaoGerarMaisData.addEventListener('click', () => {
-    document.querySelectorAll('#containerCalendario article').forEach(containerDia =>
-      containerCalendario.removeChild(containerDia));
-
-    geraCalendario(dataInicial, tarefasArmazenadasBD);
+    geraCalendario(tarefasArmazenadasBD, true, dataInicial);
   });
 
   botaoVerDatasAnteriores.addEventListener('click', () => {
     dataInicial.setDate(dataInicial.getDate() - 2 * QUANTIDADEDATAS);
 
-    document.querySelectorAll('#containerCalendario article').forEach(containerDia =>
-      containerCalendario.removeChild(containerDia));
-    geraCalendario(dataInicial, tarefasArmazenadasBD);
+    geraCalendario(tarefasArmazenadasBD, true, dataInicial);
   })
 }
 
@@ -114,7 +122,11 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
       tarefaAgendadaEl.innerHTML = tarefa.nomeTarefa;
       tarefaAgendadaEl.classList.add('tarefa');
 
-      tarefaAgendadaEl.addEventListener('click', () => exibeFormularioTarefa(tarefa));
+      tarefaAgendadaEl.addEventListener('click', (e) => {
+        exibeFormularioTarefa(tarefa);
+        e.stopPropagation();
+        e.preventDefault();
+      });
       containerDia.appendChild(tarefaAgendadaEl);
     }
   }

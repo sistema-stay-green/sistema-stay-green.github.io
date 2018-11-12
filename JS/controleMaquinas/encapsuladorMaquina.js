@@ -14,9 +14,8 @@
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularTodos(id, nome, descricao, status,
-                      indiceDepreciacao, valorCompra, valorAtual, dataCompra,
-                      dataSaida, dataRetorno, dataBaixa){
+function encapsularTodos(id, nome, descricao, status, indiceDepreciacao,
+  valorCompra, valorAtual, dataCompra, dataSaida, dataRetorno, dataBaixa){
     let maquina = new Maquina(id);
     maquina.id = id;
     maquina.nome = nome;
@@ -41,7 +40,7 @@ function encapsularTodos(id, nome, descricao, status,
  * @author Guilherme Sena
  */
 function encapsularCadastrar(id, nome, descricao, status,
-                      indiceDepreciacao, valorCompra){
+  indiceDepreciacao, valorCompra){
     let maquina = new Maquina(id);
     maquina.id = id;
     maquina.nome = nome;

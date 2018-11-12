@@ -1,6 +1,11 @@
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
     containerFormNovaTarefa = document.querySelector('form'),
-    mascaraFormEl = document.querySelector('#mascaraForm');
+    mascaraFormEl = document.querySelector('#mascaraForm'),
+    botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
+
+botaoConfirmarTarefa.addEventListener('click', (evt) => {
+        operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
+});
 
 function escondeFormulario(){
   mascaraFormEl.classList.add('invisivel');
@@ -20,7 +25,7 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
 
-  if(tarefaAExibir != undefined){
+  if(tarefaAExibir){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
     document.querySelector('textarea[name="descricaoTarefa"').value =
@@ -35,16 +40,15 @@ function exibeFormularioTarefa(tarefaAExibir){
       tarefaAExibir.quantProduzTarefa;
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
+    botaoConfirmarTarefa.dataset.operacao = 'u';
+  }else{
+    botaoConfirmarTarefa.dataset.operacao = 'a';
   }
 
   return;
 }
 
 botaoFormTarefaEl.addEventListener('click', exibeFormularioTarefa);
-
-let botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
-
-botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
 
 /**
  * Faz uma requisição para o Servlet 'TarefaBDServlet' para adicionar, remover ou alterar uma tarefa
@@ -100,7 +104,6 @@ function encapsularDadosTarefa(){
     let length = novaTarefaAdicionada.insumosTarefa.length;
     novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada.insumosTarefa.substr(0, length-2);
     novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
-    operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 
-  //Requisicao simples AJAX de enviar dados de uma nova tarefa
+    return novaTarefaAdicionada;
 }

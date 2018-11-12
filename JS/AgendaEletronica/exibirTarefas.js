@@ -52,7 +52,9 @@ function geraCalendario(dataBase, tarefasProgramadas) {
  */
 function deveRealizarTarefa(tarefa, dataProposta) {
   if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
-    dataProposta.getMonth() === tarefa.dataInicialTarefa.month)
+    dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
+        Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
+            tarefa.periodRepetTarefa === 0 )
     return true;
 
   return false;

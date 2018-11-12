@@ -19,7 +19,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
 function checaEmail() {
 
   let emailUsuario = inputEmailEl.value,
-      btnConfirmarEl = document.querySelector('#btnConfirmar')
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type')
       labelEl = document.querySelector("#cadastro > label:nth-child(4)");
 
   if(emailUsuario == "" && labelEl.contains(labelEl.querySelector("span"))) {
@@ -65,6 +65,18 @@ function checarSenhas() {
       btnConfimarCadastroEl.classList.remove("botaoDesab");
     }
   }
+
+}
+
+// Função que escreve mensagem de errono formulário
+function escreveMensagemErro(mensagem) {
+
+  let mensagemEl = document.createElement("span");
+
+  mensagemEl.innerHTML = mensagem;
+  mensagemEl.classList.add("mensagemErro");
+
+  return mensagemEl;
 
 }
 

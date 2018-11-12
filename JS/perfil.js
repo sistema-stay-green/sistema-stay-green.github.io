@@ -1,9 +1,10 @@
 // Declaração de variáveis
 let btnEditarEl = document.querySelector("#btnEditar"),
-    btnConfirmarEl = document.querySelector('#btnConfirmar')
-    btnCancelarEl = document.querySelector('#btnCancelar'),
+    btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type')
+    btnCancelarEl = document.querySelector('#cadastro > button:last-of-type'),
     formEditaEl = document.querySelector("#infoUsuario > article:nth-child(2)"),
     articleMostraEl = document.querySelector("#mostraInfoUsuario");
+    console.log(btnCancelarEl);
 
 // Recebe as informações do formulário de cadastro
 let btnConfimarCadastroEl = document.querySelector("#cadastro > button:first-of-type");
@@ -30,16 +31,4 @@ function alternaArticles(){
   formEditaEl.classList.toggle("ocultar");
   articleMostraEl.classList.toggle("ocultar");
   btnEditarEl.classList.toggle("ocultar");
-}
-
-// Função que escreve mensagem de errono formulário
-function escreveMensagemErro(mensagem) {
-
-  let mensagemEl = document.createElement("span");
-
-  mensagemEl.innerHTML = mensagem;
-  mensagemEl.classList.add("mensagemErro");
-
-  return mensagemEl;
-
 }

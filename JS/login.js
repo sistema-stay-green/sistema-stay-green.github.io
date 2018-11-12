@@ -35,16 +35,3 @@ btnCadastrarEl.addEventListener("click", function() {
   }
 
 });
-
-
-
-function escreveMensagemErro(mensagem) {
-
-  let mensagemEl = document.createElement("span");
-
-  mensagemEl.innerHTML = mensagem;
-  mensagemEl.classList.add("mensagemErro");
-
-  return mensagemEl;
-
-}

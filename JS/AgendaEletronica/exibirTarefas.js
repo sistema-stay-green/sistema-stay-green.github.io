@@ -45,7 +45,7 @@ function geraCalendario(dataBase, tarefasProgramadas) {
 
 /**
  * Checa se a uma tarefa deve ser realizada em um dia ou não
- * 
+ *
  * @param {Tarefa} tarefa a tarefa que supostamente acontece no dia proposto
  * @param {Date} dataProposta a data que aconteceria a tarefa
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
@@ -59,7 +59,7 @@ function deveRealizarTarefa(tarefa, dataProposta) {
 }
 
 /**
- * Adiciona o evento de clique aos botões de ver mais dias no calendário e 
+ * Adiciona o evento de clique aos botões de ver mais dias no calendário e
  *  de ver dias anteriores
  */
 function aplicarEventoGeracaoDataBotoes() {

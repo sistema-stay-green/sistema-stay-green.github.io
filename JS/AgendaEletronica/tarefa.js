@@ -20,7 +20,7 @@ class Tarefa {
   }
 
   /**
-   * Formata uma data no formato de um objeto contendo seu ano, dia, mês, e horário 
+   * Formata uma data no formato de um objeto contendo seu ano, dia, mês, e horário
    * @param {Date} data a data a ser formatada
    * @returns {object} data formatada
    * @author Pedro
@@ -38,7 +38,7 @@ class Tarefa {
     return dataFormatada;
   }
 
-  /** 
+  /**
   * Converte objeto Patrimonio em string JSON.
   * @returns {string} String com formatação JSON do objeto.
   * @author Guilherme Sena

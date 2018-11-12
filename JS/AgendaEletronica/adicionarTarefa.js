@@ -23,7 +23,7 @@ function exibeFormularioTarefa(tarefaAExibir){
   if(tarefaAExibir != undefined){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
-    document.querySelector('textarea[name="descricaoTarefa"').value = 
+    document.querySelector('textarea[name="descricaoTarefa"').value =
       tarefaAExibir.descrTarefa;
     document.querySelector('form select').value =
       tarefaAExibir.tipoTarefa;
@@ -53,6 +53,8 @@ botaoConfirmarTarefa.addEventListener('click', encapsularDadosTarefa);
  * @author Pedro
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
+  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao );
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
@@ -73,16 +75,16 @@ function encapsularDadosTarefa(){
 
     novaTarefaAdicionada.nomeTarefa =
       document.querySelector('#nomeNovaTarefa').value;
-    novaTarefaAdicionada.descrTarefa = 
+    novaTarefaAdicionada.descrTarefa =
       document.querySelector('textarea[name="descricaoTarefa"').value;
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
     novaTarefaAdicionada.dataInicialTarefa =
       new Date(document.querySelector('input[name="realizarDia"]').value);
-    novaTarefaAdicionada.periodoRepetTarefa =
+    novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
-    novaTarefaAdicionada.insumosConsumidos = [];
-    novaTarefaAdicionada.qtProduzTarefa =
+    novaTarefaAdicionada.insumosTarefa = [];
+    novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;
     novaTarefaAdicionada.gastoTarefa =
       document.querySelector('input[name="valorGasto"]').value;
@@ -93,10 +95,9 @@ function encapsularDadosTarefa(){
       insumosGeraisCheck.filter((checkbox) => checkbox.checked);
 
     for(let insumos of insumosConsumidos){
-      novaTarefaAdicionada.insumosConsumidos.push(insumos.value);
+      novaTarefaAdicionada.insumosTarefa.push(insumos.value);
     }
-
-    novaTarefaAdicionada.qtInsumosTarefa = insumosConsumidos.length;
+    novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
     operacaoRequisicaoTarefas('a', novaTarefaAdicionada);
 
   //Requisicao simples AJAX de enviar dados de uma nova tarefa

@@ -250,6 +250,7 @@ input:focus{
     bottom: 6vh;
     left: calc(50vw - 25em);
     width: 50em;
+    background-color: #FDFCF3 !important;
     box-sizing: border-box;
 }
 
@@ -372,4 +373,27 @@ input:focus{
 .escurece{
     background-color: black;
     margin: 0;
+}
+
+@media print{
+    @import url('https://fonts.googleapis.com/css?family=Niramit');
+
+    html{
+        font-family: 'Niramit', sans-serif;
+    }
+    
+    body{
+        background-color: #FDFCF3 !important;
+        width:100%;
+    }
+    
+    h1{
+        text-align: center !important;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+    
+    h2{
+        text-align: center !important;
+    }
 }

@@ -761,7 +761,8 @@ function printRelatorio() {
     let printWindow = window.open('', 'Print', 'height=768,width=1024');
 
     printWindow.document.write('<html><head><title>Print</title>');
-    printWindow.document.write('</head><body >');
+    printWindow.document.write("<link rel='stylesheet' type='text/css' media='screen' href='CSS/Patrimonio/Print.css'/>");
+    printWindow.document.write('</head><body onafterprint="self.close()">');
     printWindow.document.write(content);
     printWindow.document.write('</body></html>');
 

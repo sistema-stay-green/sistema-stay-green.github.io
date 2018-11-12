@@ -10,6 +10,7 @@ let confirmaCarrinhoEl = document.querySelector("#confirmaCarrinho");
 let cancelaModalEl  = document.querySelector("#cancelaModal");
 let confirmaModalEl = document.querySelector("#confirmaModal");
 let arrayProdutos = new Array();
+let arrayCarrinho;
 
 /**
  * Faz a requisição AJAX para adicionar produtos na tela
@@ -173,6 +174,7 @@ function addCarrinho(evt){
     inputQuantidade.addEventListener('input', function(evt){
       let quantidadeInp = parseInt(evt.currentTarget.value);
       precoTotal.innerHTML = "Valor total: R$" + quantidadeInp * preco;
+      precoTotal.dataset.preco = quantidadeInp * preco;
       let label = evt.currentTarget.parentElement;
       if(( quantidadeInp <= 0 || quantidadeInp > parseInt(evt.currentTarget.max)  || isNaN(quantidadeInp)) && label.children.length == 1  ){
         let span = document.createElement("span");
@@ -189,6 +191,7 @@ function addCarrinho(evt){
 
     let precoTotal = document.createElement("p");
     precoTotal.innerHTML = "Valor total: R$" + quantidade * preco;
+    precoTotal.dataset.preco = quantidade * preco;
     article.appendChild(precoTotal);
 
     let botaoRemover = document.createElement("button");
@@ -247,10 +250,17 @@ function cancelaCarrinho(){
 function confirmaCarrinho(){
   let articlesCarrinho = document.querySelectorAll("#div-carrinho > article");
   let boolManda = true;
+  arrayCarrinho = new Array();
   for(let article of articlesCarrinho){
     if(parseInt(article.querySelector("label > input").value) <= 0 ||
         parseInt(article.querySelector("label > input").value) >  parseInt(article.querySelector("label > input").max))
       boolManda = false;
+      console.log(article);
+      arrayCarrinho.push({
+        id : parseInt(article.dataset.id),
+        quantidade: parseInt(article.querySelector('input').value),
+        valor: parseInt(article.querySelector('p[data-preco]').dataset.preco),
+      });
   }
 
   if (boolManda) {

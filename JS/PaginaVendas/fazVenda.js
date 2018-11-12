@@ -2,12 +2,8 @@ let modalConfirma = document.getElementById('div-modal');
 let nomeInput = modalConfirma.querySelector('input[name=nome]');
 let modoPagamentoSelect = modalConfirma.querySelector('select[name=modoPagamento]');
 let dataEntregaInput = modalConfirma.querySelector('input[name=dataEntrega]');
-let regiaoSelect = modalConfirma.querySelector('select[name=reagiao]');
-let estadoInput = modalConfirma.querySelector('input[name=estado]');
-let cidadeInput = modalConfirma.querySelector('input[name=cidade]');
-let bairroInput = modalConfirma.querySelector('input[name=bairro]');
-let ruaInput = modalConfirma.querySelector('input[name=rua]');
-let numeroInput = modalConfirma.querySelector('input[name=numero]');
+let regiaoSelect = modalConfirma.querySelector('select[name=regiao]');
+let enderecoInput = modalConfirma.querySelector('input[name=endereco]');
 let cepInput = modalConfirma.querySelector('input[name=cep]');
 let confirmaButton = modalConfirma.querySelector('#confirmaModal');
 
@@ -21,10 +17,10 @@ class Comprador{
 }
 
 class Venda{
-    contructor(idItemTransacao, valorTransacao, quantTransacao, dataEntrega = new Date()){
-        this.idItemTransacao = idItemTransacao
-        this.valorTransacao = valorTransacao
-        this.quantTransacao = quantTransacao
+    constructor(idItemTransacao, valorTransacao, quantTransacao, dataEntrega = new Date()){
+        this.idItemTransacao = idItemTransacao;
+        this.valorTransacao = valorTransacao;
+        this.quantTransacao = quantTransacao;
         this.dia = dataEntrega.getDate();
         this.mes = dataEntrega.getMonth()+1;
         this.ano = dataEntrega.getFullYear();
@@ -34,10 +30,8 @@ class Venda{
 }
 
 confirmaButton.addEventListener('click', e => {
-    let venda = new Venda(null, null, null, dataEntregaInput.valueAsDate);
-    let endereco = `${ruaInput.value}, nº ${numeroInput.value} - Bairro ${bairroInput.value}`
-        + ` - ${cidadeInput.value}`;
-    let comprador = new Comprador(nomeInput.value, endereco, cepInput.value, modoPagamentoSelect.value);
+    let venda = new Venda(arrayCarrinho[0].id, arrayCarrinho[0].valor , arrayCarrinho[0].quantidade, dataEntregaInput.valueAsDate);
+    let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepInput.value, modoPagamentoSelect.value);
     let query = "?";
     for (const key in venda) {
         if (venda.hasOwnProperty(key)) {
@@ -52,4 +46,5 @@ confirmaButton.addEventListener('click', e => {
         }
     }
     console.log(query);
+    Request.get(`http://localhost:8080/StayGreen/DadosVendasServlet${query}`);
 });

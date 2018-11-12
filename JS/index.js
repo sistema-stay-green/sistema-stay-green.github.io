@@ -14,11 +14,11 @@ cardPatrimonio.addEventListener('click', function(){ mudaUrl("Patrimonio.html");
 cardMaquinas.addEventListener('click', function(){ mudaUrl("controleMaquinas.html"); });
 cardProducao.addEventListener('click', function(){ mudaUrl("controleProducao.html"); });
 // trasicao
-
-document.querySelector("#comecar").addEventListener("click", function(){
-    scrollTo(main);
-});
-
-function scrollTo(hash) {
-    location.hash = "#" + hash;
-}
+// 
+// document.querySelector("#comecar").addEventListener("click", function(){
+//     scrollTo(main);
+// });
+//
+// function scrollTo(hash) {
+//     location.hash = "#" + hash;
+// }

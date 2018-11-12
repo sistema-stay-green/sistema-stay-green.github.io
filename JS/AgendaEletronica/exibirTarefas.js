@@ -116,7 +116,11 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
       tarefaAgendadaEl.innerHTML = tarefa.nomeTarefa;
       tarefaAgendadaEl.classList.add('tarefa');
 
-      tarefaAgendadaEl.addEventListener('click', () => exibeFormularioTarefa(tarefa));
+      tarefaAgendadaEl.addEventListener('click', (e) => {
+        exibeFormularioTarefa(tarefa);
+        e.stopPropagation();
+        e.preventDefault();
+      });
       containerDia.appendChild(tarefaAgendadaEl);
     }
   }

@@ -24,8 +24,7 @@ function exibeFormularioTarefa(tarefaAExibir){
   botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
 
   containerFormNovaTarefa.classList.remove('invisivel');
-
-  if(tarefaAExibir){
+  if(tarefaAExibir != null){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
     document.querySelector('textarea[name="descricaoTarefa"').value =
@@ -41,14 +40,32 @@ function exibeFormularioTarefa(tarefaAExibir){
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
     botaoConfirmarTarefa.dataset.operacao = 'u';
+    return;
   }else{
+    document.querySelector('#nomeNovaTarefa').value =
+      "Nova tarefa (clique para editar)";
+    document.querySelector('textarea[name="descricaoTarefa"').value =
+      "Descrição da Tarefa";
+    document.querySelector('form select').value =
+      "ARAR";
+    let data = new Date();
+    document.querySelector('input[name="realizarDia"]').value =
+      data.getUTCFullYear() + "-" + data.getMonth() + "-" + data.getDate();
+    document.querySelector('input[name="periodoRepeticao"]').value =
+      1;
+    document.querySelector('input[name="producaoPrevista"]').value =
+      100;
+    document.querySelector('input[name="valorGasto"]').value =
+      100;
     botaoConfirmarTarefa.dataset.operacao = 'a';
   }
 
   return;
 }
 
-botaoFormTarefaEl.addEventListener('click', exibeFormularioTarefa);
+botaoFormTarefaEl.addEventListener('click', function() {
+  exibeFormularioTarefa(null);
+});
 
 /**
  * Faz uma requisição para o Servlet 'TarefaBDServlet' para adicionar, remover ou alterar uma tarefa
@@ -58,7 +75,7 @@ botaoFormTarefaEl.addEventListener('click', exibeFormularioTarefa);
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
   console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
-  tarefa.toJSONString() + "&operation=" + operacao );
+  tarefa.toJSONString() + "&operation=" + operacao);
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){

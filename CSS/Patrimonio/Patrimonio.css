@@ -259,6 +259,7 @@ input:focus{
     display: absolute;
     float: right;
     flex-direction: row-reverse;
+    margin-left: 23em;
 }
 
 #relatorio div:nth-child(2) button{
@@ -282,10 +283,6 @@ input:focus{
 
 #relatorio div h2{
     text-align: center;
-}
-
-#btnRelatorio{
-    margin-left: 23em;
 }
 
 #errorModal{

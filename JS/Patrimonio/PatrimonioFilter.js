@@ -63,7 +63,7 @@ function getPatrimoniosFromTipo(patrimonios = [],tipo){
   let patrimoniosResult = [];
 
   for(let patrimonio of patrimonios){
-      if(tipo == patrimonio.tipo){
+      if(tipo == patrimonio.tipo)
         patrimoniosResult.push(patrimonio);
     }
     if (patrimoniosResult.length !== 0)

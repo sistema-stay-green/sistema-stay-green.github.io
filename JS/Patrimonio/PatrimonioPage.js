@@ -54,6 +54,8 @@ function showModal(modal){
             statusOptionsDiv.style.display = "none"
             enviarButton.removeEventListener("click", editPatrimonio);
             enviarButton.addEventListener("click", newPatrimonio);
+            document.querySelector("#form [name='dataSaidaInput']").value = "";
+            document.querySelector("#form [name='dataEntradaInput']").value = "";
             clearMainModal();
             break;
 
@@ -64,6 +66,7 @@ function showModal(modal){
             statusOptionsDiv.style.display = "block";
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
+            
             break;
 
         case 'relatorio':
@@ -87,7 +90,7 @@ function showEditOptions(key){
             }
             saidaDiv.classList.add("esconde");
             saidaDiv.style.display = "none";
-            isEntradaBeingEdited = true;
+            isEntradaBeingEdited = !isEntradaBeingEdited;
             isSaidaBeingEdited = false;
             break;
 
@@ -102,7 +105,7 @@ function showEditOptions(key){
             entradaDiv.classList.add("esconde");
             entradaDiv.style.display = "none";
             isEntradaBeingEdited = false;
-            isSaidaBeingEdited = true;
+            isSaidaBeingEdited = !isSaidaBeingEdited;
             break;
 
         default:
@@ -484,9 +487,7 @@ function getPatrimonioFromModal(){
         if (dataSaida[0] !== "") {
 
             let statusTmp = document.querySelector("#form [name='tipoSaidaInput']").value;
-
-            if (document.querySelector("#form [name='tipoSaidaInput']").value !== "")
-                patrimonio.status = statusTmp;
+            patrimonio.status = statusTmp;
 
             if (statusTmp == "DESCARTADO"){
                 patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
@@ -599,6 +600,7 @@ function getPatrimonioFromTable(id){
 function setupPatrimonioEdit(id){
 
     patrimonio = getPatrimonioFromTable(id);
+    clearMainModal();
     insertPatrimonioIntoModal(patrimonio);
     currentPatrimonioIdBeingEdited = id;
     showModal('editar');
@@ -616,12 +618,7 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
     document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
-
-    if (patrimonio.status !== "EM_POSSE") {
-        document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
-    }
-    else
-        document.querySelector("#form [name='tipoSaidaInput']").value = "";
+    document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
 
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
@@ -648,6 +645,8 @@ function clearMainModal(){
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = null;
     document.querySelector("#form [name='valorCompraInput']").value = null;
     document.querySelector("#form [name='dataCompraInput']").value = null;
+    document.querySelector("#form [name='dataSaidaInput']").value = null;
+    document.querySelector("#form [name='dataEntradaInput']").value = null;
 
 }
 
@@ -792,6 +791,10 @@ function generateUlForRelatorio(patrimonios = []){
                 p.innerHTML = "<span class='bold'>Data da Baixa: </span>" + patrimonio.dataBaixaString;
                 li.appendChild(p);
             }
+
+            p = document.createElement("p");
+            p.innerHTML = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
+            li.appendChild(p);
 
             ul.appendChild(li);
         }

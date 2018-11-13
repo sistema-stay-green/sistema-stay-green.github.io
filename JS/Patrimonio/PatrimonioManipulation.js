@@ -24,11 +24,8 @@ let relatorioCallBack = (patrimonios = []) => {
 }
 
 let filterCallBack = (patrimonios = []) => {
-
+    
     switch (filtroSelect.value) {
-
-        case "":
-            break;
 
         case "EM_POSSE":
             patrimonios = getPatrimoniosEmPosse(patrimonios);
@@ -49,9 +46,11 @@ let filterCallBack = (patrimonios = []) => {
         case "DESCARTADO":
             patrimonios = getPatrimoniosDescartados(patrimonios);
             break;
-    
+
+        case "":
+            break;
         default:
-            throw new Error("O filtro possui um valor inválido");
+            throw new Error("O filtro possui um valor inválido!");
     }
 
     clearTableContents();

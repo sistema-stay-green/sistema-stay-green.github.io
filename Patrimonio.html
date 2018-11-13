@@ -29,11 +29,12 @@
                 <span>
                     <label for="filtroSelect">Filtrar: </label>
                     <select id="filtroSelect">
-                        <option selected>Todos</option>
-                        <option>Em Posse</option>
-                        <option>Em Manutenção</option>
-                        <option>Alugados</option>
-                        <option>Vendidos</option>
+                        <option value="" selected>Todos</option>
+                        <option value="EM_POSSE">Em Posse</option>
+                        <option value="EM_MANUTENCAO">Em Manutenção</option>
+                        <option value="ALUGADO">Alugados</option>
+                        <option value="VENDIDO">Vendidos</option>
+                        <option value="DESCARTADO">Descartados</option>
                     </select>
                 </span>
             </section>
@@ -49,9 +50,9 @@
                         <th>Valor da Compra/Procução</th>
                         <th>Valor Atual</th>
                         <th>Data da Compra/Procução</th>
-                        <th>Data de Saída</th>
-                        <th>Data de Retorno</th>
-                        <th>Data de Baixa</th>
+                        <th>Data da última Saída</th>
+                        <th>Data do último Retorno</th>
+                        <th>Data da última Baixa</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -78,39 +79,39 @@
                     <option value="OUTROS">Outros</option>
                 </select>
 
-                <label for="finalidadeInput">Finalidade do Patrimônio:</label>
+                <label for="finalidadeInput">Descrição da finalidade do Patrimônio:</label>
                 <input type="text" name="finalidadeInput" placeholder="digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
                 <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
 
-                <label for="valorCompraInput">Valor da Compra (R$):</label>
+                <label for="valorCompraInput">Valor da Compra/Produção (R$):</label>
                 <input type="number" min="0" name="valorCompraInput" placeholder="digite...">
 
-                <label for="dataCompraInput">Data da Compra:</label>
+                <label for="dataCompraInput">Data da Compra/Produção:</label>
                 <input type="date" name="dataCompraInput">
 
                 <div id="statusOptions">
-                    <label for="statusOptions">Mudar Status:</label>
+                    <label for="statusOptions">Registrar Entrada/Saída:</label>
                     <button name="entradaOptionButton" class="botaoFantasma">Retorno</button>
                     <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
 
                 <div name="entrada" class="esconde">
-                    <label for="dataEntradaInput">Data de Retorno:</label>
+                    <label for="dataEntradaInput">Data do Retorno:</label>
                     <input type="date" name="dataEntradaInput">
                 </div>
 
                 <div name="saida" class="esconde">
                     <label for="tipoSaidaInput">Saída: </label>
                     <select name="tipoSaidaInput">
-                        <option value="" selected>Não Resgistrar</option>
+                        <option value="EM_POSSE" selected>Em Posse</option>
                         <option value="VENDIDO">Venda</option>
                         <option value="DESCARTADO">Descarte</option>
                         <option value="ALUGADO">Aluguel</option>
                         <option value="EM_MANUTENCAO">Manutenção</option>
                     </select>
-                    <label for="dataSaidaInput">Data de saída:</label>
+                    <label for="dataSaidaInput">Data da Saída:</label>
                     <input type="date" name="dataSaidaInput">
                 </div>
             </div>
@@ -123,7 +124,7 @@
 
         <section id="relatorio" class="modal shadow esconde">
             <div></div>
-            <div id="btnRelatorio">
+            <div>
                 <button name="printRelatorio" class="shadow">Imprimir</button>
                 <button name="closeRelatorio" class="shadow">Cancelar</button>
             </div>

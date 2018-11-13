@@ -41,14 +41,14 @@ class Tarefa {
 
   /**
    * Converte uma data no formato de data enviado pelo Servlet para um objeto Date do JavaScript
-   * @param {Object} servletData 
+   * @param {Object} servletData
    * @returns {Date} objeto Date formatado
    */
   static toDateObject(servletData){
     let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :
     servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
       servletData.dayOfMonth : servletData.dayOfMonth);
-    
+
     let dataFormatadaClient = new Date(stringData);
     dataFormatadaClient.setDate(dataFormatadaClient.getUTCDate());
 
@@ -66,13 +66,12 @@ class Tarefa {
       "descrTarefa": "aaaa",
       "tipoTarefa": this.tipoTarefa,
       "dataInicialTarefa": this.formatDataServlet(this.dataInicialTarefa),
-      "periodRepetTarefa": this.periodoRepetTarefa,
+      "periodRepetTarefa": this.periodRepetTarefa,
       "insumosTarefa": this.insumosTarefa,
-      "quantInsumosTarefa": this.qtInsumosTarefa,
-      "quantProduzTarefa": this.qtProduzTarefa,
+      "quantInsumosTarefa": this.quantInsumosTarefa,
+      "quantProduzTarefa": this.quantProduzTarefa,
       "gastoTarefa": this.gastoTarefa
     }
-
     return JSON.stringify(tarefaJSON);
   }
 
@@ -97,20 +96,20 @@ class Tarefa {
       this._dataInicialTarefa = dataInicialTarefa;
   }
 
-  set periodoRepetTarefa(periodoRepetTarefa) {
-    this._periodoRepetTarefa = this.tryParse(periodoRepetTarefa);
+  set periodRepetTarefa(periodoRepetTarefa) {
+    this._periodRepetTarefa = this.tryParse(periodoRepetTarefa);
   }
 
   set insumosTarefa(insumosTarefa) {
     this._insumosTarefa = insumosTarefa;
   }
 
-  set qtInsumosTarefa(qtInsumosTarefa) {
-    this._qtInsumosTarefa = this.tryParse(qtInsumosTarefa);
+  set quantInsumosTarefa(quantInsumosTarefa) {
+    this._quantInsumosTarefa = this.tryParse(quantInsumosTarefa);
   }
 
-  set qtProduzTarefa(qtProduzTarefa) {
-    this._qtProduzTarefa = this.tryParse(qtProduzTarefa, true);
+  set quantProduzTarefa(quantProduzTarefa) {
+    this._quantProduzTarefa = this.tryParse(quantProduzTarefa, true);
   }
 
   set gastoTarefa(gastoTarefa) {
@@ -134,20 +133,20 @@ class Tarefa {
     return this._dataInicialTarefa;
   }
 
-  get periodoRepetTarefa() {
-    return this._periodoRepetTarefa;
+  get periodRepetTarefa() {
+    return this._periodRepetTarefa;
   }
 
   get insumosTarefa() {
     return this._insumosTarefa;
   }
 
-  get qtInsumosTarefa() {
-    return this._qtInsumosTarefa;
+  get quantInsumosTarefa() {
+    return this._quantInsumosTarefa;
   }
 
-  get qtProduzTarefa() {
-    return this._qtProduzTarefa;
+  get quantProduzTarefa() {
+    return this._quantProduzTarefa;
   }
 
   get gastoTarefa() {

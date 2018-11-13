@@ -104,6 +104,7 @@ function encapsularDadosTarefa(){
       new Date(document.querySelector('input[name="realizarDia"]').value);
     novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
+    console.log(novaTarefaAdicionada.periodRepetTarefa);
     novaTarefaAdicionada.insumosTarefa = "";
     novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;

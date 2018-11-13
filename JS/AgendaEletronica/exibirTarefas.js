@@ -8,6 +8,7 @@ function recebeTarefas() {
       geraCalendario(tarefasArmazenadasBD, true, new Date());
       aplicarEventoGeracaoDataBotoes();
       aplicaFiltros();
+      aplicarRelatorios();
     });
 }
 

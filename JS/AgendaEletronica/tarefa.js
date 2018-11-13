@@ -63,6 +63,7 @@ class Tarefa {
   */
   toJSONString() {
     let tarefaJSON = {
+      "idTarefa": this.idTarefa,
       "nomeTarefa": this.nomeTarefa,
       "descrTarefa": "aaaa",
       "tipoTarefa": this.tipoTarefa,
@@ -78,6 +79,10 @@ class Tarefa {
 
 
   //Setters
+  set idTarefa(idTarefa) {
+    this._idTarefa = this.tryParse(idTarefa);
+  }
+
   set nomeTarefa(nomeTarefa) {
     this._nomeTarefa = nomeTarefa;
   }
@@ -97,8 +102,8 @@ class Tarefa {
       this._dataInicialTarefa = dataInicialTarefa;
   }
 
-  set periodRepetTarefa(periodoRepetTarefa) {
-    this._periodRepetTarefa = this.tryParse(periodoRepetTarefa);
+  set periodRepetTarefa(periodRepetTarefa) {
+    this._periodRepetTarefa = this.tryParse(periodRepetTarefa);
   }
 
   set insumosTarefa(insumosTarefa) {
@@ -118,6 +123,10 @@ class Tarefa {
   }
 
   //Getters
+  get idTarefa() {
+    return this._idTarefa;
+  }
+
   get nomeTarefa() {
     return this._nomeTarefa;
   }

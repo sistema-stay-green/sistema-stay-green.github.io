@@ -43,6 +43,7 @@ class Tarefa {
    * Converte uma data no formato de data enviado pelo Servlet para um objeto Date do JavaScript
    * @param {Object} servletData 
    * @returns {Date} objeto Date formatado
+   * @author Pedro
    */
   static toDateObject(servletData){
     let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :

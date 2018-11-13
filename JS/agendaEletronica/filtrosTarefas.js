@@ -123,6 +123,14 @@ function aplicaFiltros() {
                     //resultado recebe ele mesmo filtrado com cada filtro do vetor
                 }
 
+                if(tarefasFiltradas.length === 0){
+                    let tituloErro = document.createElement('h1');
+                    tituloErro.innerHTML = 'Nenhuma tarefa se encaixa aos filtros selecionados.';
+                    containerCalendario.appendChild(tituloErro);
+                }else{
+                    if(document.querySelector('#containerCalendario > h1') != null)
+                         containerCalendario.removeChild(document.querySelector('#containerCalendario > h1'));
+                }
                 //Se há filtros ativos, mostre apenas as tarefas filtradas
                 if(filtrosMarcados.length != 0)
                     geraCalendario(tarefasFiltradas, false);

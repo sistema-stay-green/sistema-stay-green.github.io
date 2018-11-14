@@ -49,7 +49,7 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
   }else{
     for(let tarefa of tarefasProgramadas){
       console.log(Tarefa.toDateObject(tarefa.dataInicialTarefa));
-      
+
       containerCalendario.appendChild(criaContainerDia(Tarefa.toDateObject(tarefa.dataInicialTarefa), [tarefa]));
     }
   }
@@ -122,9 +122,12 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
 
       tarefaAgendadaEl.innerHTML = tarefa.nomeTarefa;
       tarefaAgendadaEl.classList.add('tarefa');
+      tarefaAgendadaEl.dataset.idTarefa = tarefa.idTarefa;
 
       tarefaAgendadaEl.addEventListener('click', (e) => {
-        exibeFormularioTarefa(tarefa);
+        let tarefaObjWithId = tarefa;
+        tarefaObjWithId.idTarefa = e.currentTarget.dataset.idTarefa;
+        exibeFormularioTarefa(tarefaObjWithId);
         e.stopPropagation();
         e.preventDefault();
       });

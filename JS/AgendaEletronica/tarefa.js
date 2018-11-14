@@ -65,7 +65,7 @@ class Tarefa {
     let tarefaJSON = {
       "idTarefa": this.idTarefa,
       "nomeTarefa": this.nomeTarefa,
-      "descrTarefa": "aaaa",
+      "descrTarefa": this.descrTarefa,
       "tipoTarefa": this.tipoTarefa,
       "dataInicialTarefa": this.formatDataServlet(this.dataInicialTarefa),
       "periodRepetTarefa": this.periodRepetTarefa,

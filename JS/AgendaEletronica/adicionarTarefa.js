@@ -31,15 +31,18 @@ function exibeFormularioTarefa(tarefaAExibir){
       tarefaAExibir.descrTarefa;
     document.querySelector('form select').value =
       tarefaAExibir.tipoTarefa;
+    let data = Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa);
     document.querySelector('input[name="realizarDia"]').value =
-      tarefaAExibir.dataInicialTarefa;
+      data.getUTCFullYear() + "-" + data.getMonth() + "-" + data.getDate();
     document.querySelector('input[name="periodoRepeticao"]').value =
       tarefaAExibir.periodRepetTarefa;
     document.querySelector('input[name="producaoPrevista"]').value =
       tarefaAExibir.quantProduzTarefa;
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
+    botaoConfirmarTarefa.dataset.idTarefa = tarefaAExibir.idTarefa;
     botaoConfirmarTarefa.dataset.operacao = 'u';
+    botaoConfirmarTarefa.innerHTML = "Atualizar";
     return;
   }else{
     document.querySelector('#nomeNovaTarefa').value =
@@ -57,6 +60,7 @@ function exibeFormularioTarefa(tarefaAExibir){
       100;
     document.querySelector('input[name="valorGasto"]').value =
       100;
+    botaoConfirmarTarefa.innerHTML = "Adicionar";
     botaoConfirmarTarefa.dataset.operacao = 'a';
   }
 
@@ -74,12 +78,30 @@ botaoFormTarefaEl.addEventListener('click', function() {
  * @author Pedro
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
-  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
-  tarefa.toJSONString() + "&operation=" + operacao);
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
-    console.log(resultado);
+    if(resultado == 0) {
+      console.log("Erro");
+    } else {
+      if(operacao == 'a') {
+        tarefa.idTarefa = resultado;
+        tarefasArmazenadasBD.push(encapsularDadosTarefa());
+      } else {
+        if(operacao == 'u') {
+          for(let tarefatmp of tarefasArmazenadasBD) {
+            if(tarefa.idTarefa == tarefatmp.idTarefa)
+              tarefatmp = tarefa;
+            }
+        }
+        else {
+          for(let tarefatmp of tarefasArmazenadasBD) {
+            if(tarefa.idTarefa == tarefatmp.idTarefa)
+              delete tarefatmp;
+          }
+        }
+      }
+    }
   });
 }
 
@@ -93,7 +115,6 @@ function editarInsumo(insumoJSON) {
 
 function encapsularDadosTarefa(){
     let novaTarefaAdicionada = new Tarefa();
-
     novaTarefaAdicionada.nomeTarefa =
       document.querySelector('#nomeNovaTarefa').value;
     novaTarefaAdicionada.descrTarefa =
@@ -104,23 +125,25 @@ function encapsularDadosTarefa(){
       new Date(document.querySelector('input[name="realizarDia"]').value);
     novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
-    console.log(novaTarefaAdicionada.periodRepetTarefa);
     novaTarefaAdicionada.insumosTarefa = "";
     novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;
     novaTarefaAdicionada.gastoTarefa =
       document.querySelector('input[name="valorGasto"]').value;
+    novaTarefaAdicionada.idTarefa = document.querySelector('button[name="adicionarTarefa"]')
+      .dataset.idTarefa;
 
     let insumosGeraisCheck =
         Array.from(document.querySelectorAll('form input[type="checkbox"]')),
-    insumosConsumidos =
-      insumosGeraisCheck.filter((checkbox) => checkbox.checked);
+      insumosConsumidos =
+        insumosGeraisCheck.filter((checkbox) => checkbox.checked);
 
     for(let insumos of insumosConsumidos){
       novaTarefaAdicionada.insumosTarefa += insumos.value + ', ';
     }
     let length = novaTarefaAdicionada.insumosTarefa.length;
-    novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada.insumosTarefa.substr(0, length-2);
+    novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada
+      .insumosTarefa.substr(0, length-2);
     novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
 
     return novaTarefaAdicionada;

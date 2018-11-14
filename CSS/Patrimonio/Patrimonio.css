@@ -39,6 +39,8 @@ h1{
 
 nav{
     transition: 250ms ease-in-out;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 nav a, nav h3{
@@ -49,6 +51,7 @@ nav a, nav h3{
 
 nav h3{
     cursor: default;
+    font-weight: bold;
 }
 
 nav:hover{
@@ -59,7 +62,7 @@ nav:hover{
 table{
     transition: 250ms ease-in-out;
     overflow: auto;
-    margin-bottom: 3em;
+    margin-bottom: 5em;
 }
 
 table:hover{

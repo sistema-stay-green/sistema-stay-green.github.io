@@ -1,0 +1,206 @@
+/*
+:root{
+  --brancoIvory: #FDFCF3;
+  --verdeCamarone: #1D883A;  Verde Claro 
+  --verdeCrusoe: #126624;  Verde Escuro 
+  --pretoNight: #AAA9A4;
+  --cinzaFoggy: #2D2D2E;
+}
+ */
+*:focus{
+  outline: none;
+}
+body{
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--brancoIvory);
+}
+#carrinho {
+  width:8.5vh;
+  height:8.5vh;
+  border-radius:50%;
+  position: fixed;
+  top:8vh;
+  right:3vw;
+  background-color: var(--verdeCamarone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer;
+  box-shadow: 5px 8px 26px -12px rgba(0,0,0,0.75);
+}
+#carrinho:hover{
+  background-color: var(--verdeCrusoe);
+}
+#carrinho > #quantidade-carrinho {
+  position: absolute;
+  height: 2.7vh;
+  width: 2.7vh;
+  top:0;
+  right: 0;
+  background-color:#9c0505;
+  color: var(--brancoIvory);
+  border-radius: 50%;
+  font-family: 'Niramit' , sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  opacity: 0;
+}
+#carrinho > img {
+  width: 4.5vh;
+  height: 4.5vh;
+}
+main{
+  width: 90vw;
+  height: content;
+  margin:0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+main > section {
+  width: 90vw;
+  height:content;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  border-top :1px solid #e5e5e5;
+  border-bottom :1px solid #e5e5e5;
+  padding: 4vh;
+}
+main > section > img {
+    height: 40vh;
+    width: 40vh;
+    align-self: center;
+}
+main > section > .descricao-estoque {
+   font-family:  'Niramit' , sans-serif;
+   font-size: calc(5px + 2vh);
+   width: 95%;
+   align-self: center;
+}
+main > section > .preco {
+  font-family:  'Niramit' , sans-serif;
+  font-size: 4vh;
+  width: 95%;
+  align-self: center;
+}
+main > section > label {
+  font-family:  'Niramit' , sans-serif;
+  font-size: 3vh;
+  width: 95%;
+  align-self: center;
+}
+main > section > label > input {
+  font-family:  'Niramit' , sans-serif;
+  font-size: 3vh;
+  border:none;
+  background-color: transparent;
+  border-bottom: 1px solid black;
+  width: 7%;
+}
+main > section > button {
+  width: 25%;
+  height: 7%;
+  text-align: center;
+  background-color: var(--verdeCamarone);
+  font-family:  'Niramit' , sans-serif;
+  font-size: 2.5vh;
+  border:none;
+  color: var(--brancoIvory);
+  align-self:center;
+  cursor: pointer;
+}
+#mascara {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  z-index: -1;
+  background-color:transparent;
+  position: fixed;
+  left:0;
+  top:0;
+  transition: all 300ms ease-in-out;
+}
+
+#div-modal , #div-carrinho  {
+  transition: all 300ms ease-in-out;
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  opacity: 0;
+  margin-top: -35vh;
+  margin-left: -35vw;
+  transform: scale(.5);
+  z-index: -1;
+  width: 70vw;
+  height: 70vh;
+  background-color: rgba(22, 66, 31, 0.97);
+  cursor: pointer;
+  display: flex;
+  padding:2%;
+  flex-direction: column;
+  overflow-y:  auto;
+}
+#div-carrinho > article > p {
+  color:var(--brancoIvory);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(10px + 1vh);
+}
+#div-carrinho > article {
+  border-bottom:1px solid var(--brancoIvory);
+}
+#div-modal.aparece , #mascara.aparece,#div-carrinho.aparece, #carrinho > #quantidade-carrinho.aparece{
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+  transition: all 300ms ease-in-out;
+}
+#div-modal > label , #div-carrinho > article > label {
+  color:var(--brancoIvory);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(10px + 1vh);
+}
+#div-modal > h1 {
+  color:var(--brancoIvory);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(15px + 1.5vh);
+}
+#div-modal > label > input , #div-modal > label > select , #div-carrinho > article > label > input {
+  color:var(--brancoIvory);
+  font-family:  'Niramit' , sans-serif;
+  border:none;
+  border-bottom: 1px solid var(--brancoIvory);
+  font-size: calc(10px + 1vh);
+  background-color: transparent;
+  margin-left: .5vw;
+  margin-top: .6vh;
+}
+#div-modal > label > select > option {
+  background-color: rgba(22, 66, 31, .97);
+}
+.div-botoes{
+  display: flex;
+  justify-content: center;
+}
+#div-modal > .div-botoes > button , #div-carrinho > .div-botoes > button , #div-carrinho > article > button   {
+  width: 7vw;
+  height: 5vh;
+  padding:0;
+  border: 1px solid var(--brancoIvory);
+  color:var(--brancoIvory);
+  font-family:  'Niramit' , sans-serif;
+  cursor: pointer;
+  font-size: calc(10px + 1vh);
+  background-color: transparent;
+  margin-left: 1vw;
+  margin-bottom:2vh;
+  margin-top: 1vh;
+}
+#div-modal > .div-botoes  >  button:hover ,#div-carrinho > .div-botoes > button:hover, #div-carrinho > article > button:hover {
+  color: rgba(22, 66, 31);
+  background-color: var(--brancoIvory);
+}

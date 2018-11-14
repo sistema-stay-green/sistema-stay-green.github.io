@@ -1,4 +1,4 @@
-/* Sistema de Agronegocio :: Stay Green
+﻿/* Sistema de Agronegocio :: Stay Green
  * CEFET-MG
  * INF-2A 2018
  * * * * * * * * * * * * * * * * * * * *
@@ -11,6 +11,11 @@
   --verdeCrusoe: #126624; /* Verde Escuro */
   --pretoNight: #AAA9A4;
   --cinzaFoggy: #2D2D2E;
+}
+
+::selection{
+  background-color: var(--verdeCamarone);
+  color: var(--brancoIvory);
 }
 
 *:focus{
@@ -183,8 +188,8 @@ header > #mascara-conteudo > button{
   cursor: pointer;
 }
 nav{
-  height: 7vh;
-  width: 100vw;
+  height: 3.2em;
+  width: 100%;
   display: flex;
   background-color: #1d883a;
   align-content: space-around;

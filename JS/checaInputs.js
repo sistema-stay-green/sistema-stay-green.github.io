@@ -1,19 +1,3 @@
-// Recebe as informações do formulário  de login
-let btnEntrarLoginEl = document.querySelector("#cadastro > button:first-of-type");
-
-btnEntrarLoginEl.addEventListener("click", function() {
-
-  let emailInputEl = document.querySelector("#cadastro > label:first-of-type > input"),
-      senhaInputEl = document.querySelector("#cadastro > label:last-of-type > input");
-
-  Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
-              + "&senha=" + senhaInputEl.value)
-         .then(function(){window.location.redirect("index.html")})
-         .catch(function(){
-           alert("Erro ao logar o servidor");
-         });
-
-});
 
 // Mostra mensagem caso o email digitado não for válido
 function checaEmail() {

@@ -30,7 +30,7 @@ function formatarData(){
 }
 
 function receberTodos(){
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+"acao="+"r").
+  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r").
     then(function(resultado) {
       return resultado;
     });
@@ -42,11 +42,11 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
     indiceDepreciacao, valorCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquina+
-              "acao="+"c"+
-              "dataCompra="+dataCompra+
-              "dataSaida="+null+
-              "dataRetorno="+null+
-              "dataBaixa="+null+
+              "&acao="+"c"+
+              "&dataCompra="+dataCompra+
+              "&dataSaida="+null+
+              "&dataRetorno="+null+
+              "&dataBaixa="+null+
               "&quantidade="+quantidade).then(function(resultado) {
                 return resultado;
               });

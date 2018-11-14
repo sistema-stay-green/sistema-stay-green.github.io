@@ -13,12 +13,12 @@ cardVendas.addEventListener('click', function(){ mudaUrl("paginaVendasProdutor.h
 cardPatrimonio.addEventListener('click', function(){ mudaUrl("Patrimonio.html"); });
 cardMaquinas.addEventListener('click', function(){ mudaUrl("controleMaquinas.html"); });
 cardProducao.addEventListener('click', function(){ mudaUrl("controleProducao.html"); });
-// trasicao
-// 
-// document.querySelector("#comecar").addEventListener("click", function(){
-//     scrollTo(main);
-// });
-//
-// function scrollTo(hash) {
-//     location.hash = "#" + hash;
-// }
+
+//transition
+document.querySelector('#comecar').addEventListener('click', function (e) {
+  e.preventDefault();
+  document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+  });
+});
+

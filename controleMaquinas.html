@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="CSS/staygreen.css">
   </head>
   <body>
-
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Agenda</a>
+      <a href="#">Máquinas</a>
+      <h3>Stay Green</h3>
+      <a href="#">Patrimonio</a>
+      <a href="#">Produção</a>
+      <a href="#">Vendas</a>
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
     <div class="opcoes">
@@ -21,11 +28,12 @@
         <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
         <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
-        <button type="button" name="botaoAcao">Enviar</button>
-        <button type="button" name="botaoVoltar">Voltar</button>
+        <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
+        <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
     </div>
-
+    <!-- FIM -->
+    <!-- Parte contendo as maquinas -->
     <div class="maquinas">
       <section id="filtro">
         <label for="filtro_select">Filtro:</label>
@@ -40,18 +48,18 @@
       <table>
       <thead>
         <tr>
-          <th>id</th>
-          <th>nome</th>
+          <th>ID</th>
+          <th>Nome</th>
           <th>Finalidade</th>
-          <th>valorCompra</th>
-          <th>indiceDepreciacao</th>
-          <th>dataCompra</th>
-          <th>status</th>
-          <th>tipo</th>
-          <th>valorAtual</th>
-          <th>dataSaida</th>
-          <th>dataBaixa</th>
-          <th>opcoes</th>
+          <th>Valor de compra</th>
+          <th>Indice de depreciação</th>
+          <th>Data de compra</th>
+          <th>Status</th>
+          <th>Tipo</th>
+          <th>Valor atual</th>
+          <th>Data de saída</th>
+          <th>Data de baixa</th>
+          <th>Opções</th>
         </tr>
       </thead>
       <tbody id="tabela">
@@ -69,75 +77,106 @@
           <td>2018-10-02</td>
           <td>
              <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
           </td>
         </tr>
         <tr class="maquina">
           <td class="id">2</td>
-          <td>Trator</td>
+          <td>Trator2</td>
           <td>Uma máquina que ajuda na colheita do café</td>
           <td>5000</td>
           <td>15</td>
           <td>2018-10-01</td>
-          <td class="status">EM_POSSE</td>
+          <td class="status">EM POSSE</td>
           <td>Máquina</td>
           <td>4800</td>
           <td>2018-10-03</td>
           <td>2018-10-02</td>
           <td>
              <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
           </td>
         </tr>
       </tbody>
     </table>
     </div>
+    <!-- Opções de saidas das maquinas -->
     <div id="saidas" class="saidas">
       <div class="saidas-conteudo">
         <span class="fecharModal">&times;</span>
         <section id="filtro2">
           <label for="filtro_saida">Opção:
             <select id="filtro_saida">
-              <option><a href="#">alugar</option>
+              <option><a href="#">Alugar</option>
               <option><a href="#">Vender</option>
               <option><a href="#">Enviar para conserto</option>
               <option><a href="#">Descartar</option>
             </select>
           </label>
-          <span id="retorno"><label>Data de retorno<input type="date" name="data" class="data"></label>
-          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
-          <span id="venda"><label>Data de venda<input type="date" name="data" class="data"></label>
-          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
-          <span id="envio"><label>Data de envio<input type="date" name="data" class="data"></label>
-          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
-          <span id="descarte"><label>Data de descarte<input type="date"  name="data" class="data"></label>
-          <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button></span>
+          <span id="retorno">
+            <label name="periodo-label">Periodo/Retorno: <input type="number" name="periodo" class="periodo"></label>
+            <label name="valor-label">Valor: <input type="number" name="valorAluguel"></label>
+            <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
+          </span>
         </section>
      </div>
-   </div>
+    </div>
+    <div id="editar" class="editar">
+      <div class="editar-conteudo">
+        <span class="fecharModal">&times;</span>
+        <section id="filtro2">
+          <input type="hidden" class="inputs" name="id-editar" required></label>
+          <label>Nome da Máquina <input type="text" class="inputs" name="nome-editar" required></label>
+          <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade-editar"  required></label>
+          <label>Valor de Compra<input type="number" class="inputs" name="valor-editar"  required></label>
+          <label>Indice de depreciação<input type="number" class="inputs" name="depreciação-editar"  required></label>
+          <label>Data de Compra <input type="date" class="inputs" name="data-editar"  required></label>
+          <button type="button" name="botaoEditarMaquina">Editar</button>
+        </section>
+      </div>
+     </div>
+
+   <footer class="footer">
+      <section>
+        <h3>empresa</h3>
+        <a href="#">email1</a>
+        <a href="#">email2</a>
+        <a href="#">email3</a>
+      </section>
+      <section>
+        <h3>desenvolvedores</h3>
+        <a href="#">email1</a>
+        <a href="#">email2</a>
+        <a href="#">email3</a>
+      </section>
+      <section>
+        <h3>contatos</h3>
+        <a href="#">email1</a>
+        <a href="#">email2</a>
+        <a href="#">email3</a>
+      </section>
+      <section>
+        <h3>curiosidades</h3>
+        <a href="#">email1</a>
+        <a href="#">email2</a>
+        <a href="#">email3</a>
+      </section>
+      <section>
+        <h3>Saiba mais</h3>
+        <a href="#">email1</a>
+        <a href="#">email2</a>
+        <a href="#">email3</a>
+      </section>
+      <section class="redes">
+        <img src="imgs/home/face.png" alt="">
+        <a href="#">segue la no face</a>
+      </section>
+    </footer>
   </body>
-  <!--<script src="JS/controleMaquinas/maquina.js" charset="utf-8"></script>
+  <script src="JS/staygreen.js" charset="utf-8"></script>
+  <script src="JS/controleMaquinas/maquina.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/main.js" charset="utf-8"></script>-->
+  <script src="JS/controleMaquinas/conexaoMaquina.js" charset="utf-8"></script>
+  <script src="JS/controleMaquinas/main.js" charset="utf-8"></script>
   <script src="JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
 </html>
-
-<!--<footer>
-  <ul>
-    <li> Home </li>
-    <li> Maquinas </li>
-    <li> Patrimonio </li>
-    <li><span id="TituloNav">Agronegocio</span></li>
-    <li> Exemplo </li>
-    <li> Exemplo </li>
-    <li> Exemplo </li>
-  </ul>
-</footer>
-<nav>
-  <ul>
-    <li> Home </li>
-    <li> Maquinas </li>
-    <li> Patrimonio </li>
-    <li><span id="TituloNav">Agronegocio</span></li>
-    <li> Exemplo </li>
-    <li> Exemplo </li>
-    <li> Exemplo </li>
-  </ul>

@@ -285,7 +285,7 @@ confirmaCarrinhoEl.addEventListener('click',confirmaCarrinho);
 cancelaModalEl.addEventListener('click',cancelaModal);
 confirmaModalEl.addEventListener('click',confirmaModal);
 
-let padrao = '#####-###';
+let padrao = '########';
 
 let inputCep = divModalEl.querySelector("label:last-of-type > input");
   inputCep.addEventListener('input', e => {

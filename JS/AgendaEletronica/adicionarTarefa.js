@@ -32,8 +32,12 @@ function exibeFormularioTarefa(tarefaAExibir){
     document.querySelector('form select').value =
       tarefaAExibir.tipoTarefa;
     let data = Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa);
+    console.log(Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa));
     document.querySelector('input[name="realizarDia"]').value =
-      data.getUTCFullYear() + "-" + data.getMonth() + "-" + data.getDate();
+      data.getUTCFullYear() + "-" + ((data.getMonth+1 < 10) ? '0' + data.getMonth()
+        + 1 : data.getMonth() + 1 + "-" + data.getDate());
+    /*console.log(data.getUTCFullYear() + "-" + data.getMonth+1 < 10 ? '0' + data.getMonth()
+      + 1 : data.getMonth() + 1 + "-" + data.getDate());*/
     document.querySelector('input[name="periodoRepeticao"]').value =
       tarefaAExibir.periodRepetTarefa;
     document.querySelector('input[name="producaoPrevista"]').value =
@@ -53,7 +57,8 @@ function exibeFormularioTarefa(tarefaAExibir){
       "ARAR";
     let data = new Date();
     document.querySelector('input[name="realizarDia"]').value =
-      data.getUTCFullYear() + "-" + data.getMonth() + "-" + data.getDate();
+    data.getUTCFullYear() + "-" + ((data.getMonth + 1 < 10) ? '0' + data.getMonth()
+    + 1 : data.getMonth() + 1 + "-" + data.getUTCDate());
     document.querySelector('input[name="periodoRepeticao"]').value =
       1;
     document.querySelector('input[name="producaoPrevista"]').value =
@@ -78,6 +83,8 @@ botaoFormTarefaEl.addEventListener('click', function() {
  * @author Pedro
  */
 function operacaoRequisicaoTarefas(operacao, tarefa){
+  console.log('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
+  tarefa.toJSONString() + "&operation=" + operacao);
   Request.get('http:localhost:8080/StayGreen/TarefaBDServlet?tarefa=' +
   tarefa.toJSONString() + "&operation=" + operacao )
   .then(function(resultado){
@@ -121,8 +128,9 @@ function encapsularDadosTarefa(){
       document.querySelector('textarea[name="descricaoTarefa"').value;
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
-    novaTarefaAdicionada.dataInicialTarefa =
-      new Date(document.querySelector('input[name="realizarDia"]').value);
+    let data = new Date(document.querySelector('input[name="realizarDia"]').value);
+    data.setDate(data.getDate() + 1);
+    novaTarefaAdicionada.dataInicialTarefa = data;
     novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
     novaTarefaAdicionada.insumosTarefa = "";

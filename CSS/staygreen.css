@@ -187,15 +187,10 @@ header > #mascara-conteudo > button {
   font-size: calc(20px + 2vh);
   cursor: pointer;
 }
-<<<<<<< HEAD
+
 nav{
   height: 3.2em;
   width: 100%;
-=======
-nav {
-  height: 7vh;
-  width: 100vw;
->>>>>>> front-end
   display: flex;
   background-color: #1d883a;
   align-content: space-around;

@@ -11,31 +11,80 @@
 </head>
 
 <body>
-  <!-- <nav>
+  <nav>
     <a href="#">Home</a>
-    <a href="Patrimonio/index.html">Patrimônio</a>
+    <a href="Patrimonio.html">Patrimônio</a>
     <a href="#">Produção</a>
     <h3>STAY GREEN</h3>
     <a href="#">Agenda</a>
     <a href="#">Maquinas</a>
     <a href="#">Vendas</a>
-  </nav> -->
-  <div id="mascaraForm" class="invisivel"></div>
-  <form class="invisivel">
-    <input type="text" placeholder="Nova Tarefa (Clique para editar)" value="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
-    <label>
-      <textarea rows="5" name="descricaoTarefa" placeholder="Coloque a descrição da tarefa aqui"></textarea>
-    </label>
-    <section>
+  </nav>
+  <main>
+    <div id="mascaraForm" class="invisivel"></div>
+    <form class="invisivel">
+      <input type="text" placeholder="Nova Tarefa (Clique para editar)" value="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
+      <label>
+        <textarea rows="5" name="descricaoTarefa" placeholder="Coloque a descrição da tarefa aqui"></textarea>
+      </label>
+      <section>
 
-      <article class="column">
-        <label>
-          <p>Realizar no dia: </p><input type="date" name="realizarDia">
-        </label>
-        <label>
-          <p>Tipo:</p>
-          <select>
-            <option disabled selected>Escolha..</option>
+        <article class="column">
+          <label>
+            <p>Realizar no dia: </p><input type="date" name="realizarDia">
+          </label>
+          <label>
+            <p>Tipo:</p>
+            <select>
+              <option disabled selected>Escolha..</option>
+              <option value="ADUBACAO">Adubação</option>
+              <option value="IRRIGACAO">Irrigação</option>
+              <option value="ARAR">Arar</option>
+              <option value="MAQUINARIO">Maquinário</option>
+              <option value="COLHEITA">Colheita</option>
+              <option value="PECUARIA">Pecuária</option>
+              <option value="OUTROS">Outros</option>
+            </select>
+          </label>
+          <label>
+            <p>Valor Gasto:</p> <input type="number" name="valorGasto" min="0.00" step="0.1">
+          </label>
+          <label>
+            <p>Período de repetição (dias):</p> <input type="number" min="0" name="periodoRepeticao">
+          </label>
+          <label>
+            <p>Produção prevista:</p> <input type="number" name="producaoPrevista" min="0" step="0.1">
+          </label>
+        </article>
+
+        <article class="column">
+          <p>Insumos Consumidos:</p>
+          <label><input type="checkbox" name="Insumo1" value="Insumo1">Insumo1</label>
+          <label><input type="checkbox" name="Insumo2" value="Insumo2">Insumo2</label>
+          <label><input type="checkbox" name="Insumo3" value="Insumo3">Insumo3</label>
+          <label><input type="checkbox" name="Insumo4" value="Insumo4">Insumo4</label>
+          <label><input type="checkbox" name="Insumo5" value="Insumo5">Insumo5</label>
+          <div>
+            <button type="button" name="adicionarTarefa" data-operacao"a">Adicionar</button>
+            <button type="button" class="botaoFantasma" name="cancelarTarefa">Cancelar</button>
+          </div>
+        </article>
+      </section>
+    </form>
+
+    <section id="containerCalendario">
+      <div>
+        <button name="voltarCalendario">Ver dias anteriores</button>
+        <button name="carregarDatas">Carregar mais dias</button>
+      </div>
+      <button id="botaoFormTarefa">+ Nova Tarefa</button>
+    </section>
+    <aside>
+      <section class="sectionCheck">
+        <h1>Filtrar por</h1>
+        <label><input type="checkbox" name="filtroGeral" value="3">Tipo:
+          <select name="tiposTarefa">
+            <option disabled selected>Selecione..</option>
             <option value="ADUBACAO">Adubação</option>
             <option value="IRRIGACAO">Irrigação</option>
             <option value="ARAR">Arar</option>
@@ -43,83 +92,73 @@
             <option value="COLHEITA">Colheita</option>
             <option value="PECUARIA">Pecuária</option>
             <option value="OUTROS">Outros</option>
-          </select>
-        </label>
-        <label>
-          <p>Valor Gasto:</p> <input type="number" name="valorGasto" min="0.00" step="0.1">
-        </label>
-        <label>
-          <p>Período de repetição (dias):</p> <input type="number" min="0" name="periodoRepeticao">
-        </label>
-        <label>
-          <p>Produção prevista:</p> <input type="number" name="producaoPrevista" min="0" step="0.1">
-        </label>
-      </article>
+          </select></label>
 
-      <article class="column">
-        <p>Insumos Consumidos:</p>
-        <label><input type="checkbox" name="Insumo1" value="Insumo1">Insumo1</label>
-        <label><input type="checkbox" name="Insumo2" value="Insumo2">Insumo2</label>
-        <label><input type="checkbox" name="Insumo3" value="Insumo3">Insumo3</label>
-        <label><input type="checkbox" name="Insumo4" value="Insumo4">Insumo4</label>
-        <label><input type="checkbox" name="Insumo5" value="Insumo5">Insumo5</label>
-        <div>
-          <button type="button" name="adicionarTarefa" data-operacao"a">Adicionar</button>
-          <button type="button" class="botaoFantasma" name="cancelarTarefa">Cancelar</button>
-        </div>
-      </article>
-    </section>
-  </form>
+        <label><input type="checkbox" name="filtroGeral" value="4"> Atividades de trato cultural</label>
 
-  <section id="containerCalendario">
-    <div>
-      <button name="voltarCalendario">Ver dias anteriores</button>
-      <button name="carregarDatas">Carregar mais dias</button>
-    </div>
-    <button id="botaoFormTarefa">+ Nova Tarefa</button>
+        <label><input type="checkbox" name="filtroGeral" value="5"> Atividades de uso
+          defensivo e adubação</label>
+      </section>
+
+      <section class="sectionCheck">
+        <h1>Ver Tarefas</h1>
+
+        <label><input type="checkbox" name="filtroData" value="0">Do dia <input type="number" min="1" max="31" name="filtroDia"
+            value="12"></label>
+        <label><input type="checkbox" name="filtroData" value="1">Do semana</label>
+        <label><input type="checkbox" name="filtroData" value="2">Do mês <select name="filtroMes"></select></label>
+      </section>
+
+      <section class="sectionButton">
+        <button type="button" class="botaoRelatorio" data-codrelat="0">Relatório de Gastos</button>
+        <button type="button" class="botaoRelatorio" data-codrelat="1">Relatório de Produção</button>
+        <button type="button" class="botaoRelatorio" data-codrelat="2">Consumo de Insumos</button>
+      </section>
+    </aside>
+
+    <script src="JS/staygreen.js"></script>
+    <script src="JS/AgendaEletronica/tarefa.js"></script>
+    <script src="JS/AgendaEletronica/exibirTarefas.js"></script>
+    <script src="JS/AgendaEletronica/adicionarTarefa.js"></script>
+    <script src="JS/AgendaEletronica/filtrosTarefas.js"></script>
+    <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
+
+  </main>
+  <footer>
+  <section>
+    <h3>empresa</h3>
+    <a href="#">email1</a>
+    <a href="#">email2</a>
+    <a href="#">email3</a>
   </section>
-  <aside>
-    <section class="sectionCheck">
-      <h1>Filtrar por</h1>
-      <label><input type="checkbox" name="filtroGeral" value="3">Tipo:
-        <select name="tiposTarefa">
-          <option disabled selected>Selecione..</option>
-          <option value="ADUBACAO">Adubação</option>
-          <option value="IRRIGACAO">Irrigação</option>
-          <option value="ARAR">Arar</option>
-          <option value="MAQUINARIO">Maquinário</option>
-          <option value="COLHEITA">Colheita</option>
-          <option value="PECUARIA">Pecuária</option>
-          <option value="OUTROS">Outros</option>
-        </select></label>
-
-      <label><input type="checkbox" name="filtroGeral" value="4"> Atividades de trato cultural</label>
-
-      <label><input type="checkbox" name="filtroGeral" value="5"> Atividades de uso
-        defensivo e adubação</label>
-    </section>
-
-    <section class="sectionCheck">
-      <h1>Ver Tarefas</h1>
-
-      <label><input type="checkbox" name="filtroData" value="0">Do dia <input type="number" min="1" max="31" name="filtroDia"
-          value="12"></label>
-      <label><input type="checkbox" name="filtroData" value="1">Do semana</label>
-      <label><input type="checkbox" name="filtroData" value="2">Do mês <select name="filtroMes"></select></label>
-    </section>
-
-    <section class="sectionButton">
-      <button type="button" class="botaoRelatorio" data-codrelat="0">Relatório de Gastos</button>
-      <button type="button" class="botaoRelatorio" data-codrelat="1">Relatório de Produção</button>
-      <button type="button" class="botaoRelatorio" data-codrelat="2">Consumo de Insumos</button>
-    </section>
-  </aside>
-
-  <script src="JS/staygreen.js"></script>
-  <script src="JS/AgendaEletronica/tarefa.js"></script>
-  <script src="JS/AgendaEletronica/exibirTarefas.js"></script>
-  <script src="JS/AgendaEletronica/adicionarTarefa.js"></script>
-  <script src="JS/AgendaEletronica/filtrosTarefas.js"></script>
-  <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
+  <section>
+    <h3>desenvolvedores</h3>
+    <a href="#">email1</a>
+    <a href="#">email2</a>
+    <a href="#">email3</a>
+  </section>
+  <section>
+    <h3>contatos</h3>
+    <a href="#">email1</a>
+    <a href="#">email2</a>
+    <a href="#">email3</a>
+  </section>
+  <section>
+    <h3>curiosidades</h3>
+    <a href="#">email1</a>
+    <a href="#">email2</a>
+    <a href="#">email3</a>
+  </section>
+  <section>
+    <h3>Saiba mais</h3>
+    <a href="#">email1</a>
+    <a href="#">email2</a>
+    <a href="#">email3</a>
+  </section>
+  <section class="redes">
+    <img src="imgs/home/face.png" alt="">
+    <a href="#">segue la no face</a>
+  </section>
+</footer>
 </body>
 </html>

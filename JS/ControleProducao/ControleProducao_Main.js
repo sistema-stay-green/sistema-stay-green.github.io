@@ -4,15 +4,13 @@
 
 
 window.onload = function () {
-    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=0&botao=buscar&tipo=produto";
+    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&tipo=produto";
 
     Request.get(url)
        .then(function(res){
             criaTabela(res, "produto");
-
         })
        .catch(function(erro){ console.log(erro); return;});
-    //Váriaveis
 
     var selecionaTabela = document.getElementsByName("selTabela");
     var produtoTabela = document.getElementById("secProduto");
@@ -89,12 +87,17 @@ window.onload = function () {
     selecionaNomeProduto.onchange = function () {
         mudaProduto();
     };
-
+    var seleciona = document.querySelector("#selDescricaoProduto");
     function mudaProduto() {
         if (selecionaNomeProduto.value === "cafe") {
             tdNomeProduto.innerHTML = "KG (Kilograma)";
+            seleciona.innerHTML = "<option value=\"bourbon\">Bourbon</option>" +
+                                  "<option value=\"robusta\">Robusta</option>" +
+                                  "<option value=\"arabica\">Arabica</option>";
+
         } else {
             tdNomeProduto.innerHTML = "L (Litro)";
+            seleciona.innerHTML = "<option value=\"integral\">Integral</option>"
         }
     }
     function checarInputs() {
@@ -157,6 +160,5 @@ window.onload = function () {
                 break;
             default:
         }
-
     }
 };

@@ -42,19 +42,19 @@ header > #mascara-conteudo > p {
 header > #mascara-conteudo > a {
   text-decoration: none;
   text-align: center;
-  width: 16%;
-  height: 10%;
+  width: 15%;
+  height: 9%;
   border: none;
   font-family: 'Niramit' , sans-serif;
   background-color: white;
   color:rgba(16, 43, 18,1);
-  font-size: calc(20px + 2vh);
+  font-size: calc(20px + 2.3vh);
   cursor: pointer;
 }
 header > #mascara-conteudo > a:hover{
   box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
-  width: 16.5%;
-  height: 10.5%;
+  width: 15.5%;
+  height: 9.5%;
 
 }
 

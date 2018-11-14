@@ -209,6 +209,12 @@ class Patrimonio {
         switch (tipo) {
 
             case 'MAQUINA':
+            case 'ANIMAL':
+            case 'IMOVEL':
+            case 'MERCADORIA':
+            case 'UTENSILIO':
+            case 'VEICULO':
+            case 'TERRENO':
             case 'OUTROS':
                 this._tipo = tipo;
                 break;

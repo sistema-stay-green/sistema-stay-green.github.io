@@ -66,7 +66,7 @@ function showModal(modal){
             statusOptionsDiv.style.display = "block";
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
-
+            
             break;
 
         case 'relatorio':
@@ -141,6 +141,10 @@ function showError(cod){
 
         case 5:
             message = "ERRO! Nenhum Patrimônio registrado para gerar o relatório.";
+            break;
+
+        case 6:
+            message = "ERRO! A Data de Compra deve ser menor que a Data de Retorno/Saída.";
             break;
 
         default:
@@ -477,25 +481,52 @@ function getPatrimonioFromModal(){
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
         patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
 
+
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
 
         if (dataEntrada[0] !== "") {
 
-            patrimonio.dataRetorno = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+            let dataEntradaTmp = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+            if (patrimonio.dataCompra.getTime() < dataEntradaTmp.getTime()) {
+                patrimonio.dataRetorno = dataEntradaTmp;
+
+                document.querySelector("#form [name='dataEntradaInput']").classList.remove("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+            }
+            else{
+                document.querySelector("#form [name='dataEntradaInput']").classList.add("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                showError(6);
+                return null;
+            }
+            
         }
+
         if (dataSaida[0] !== "") {
 
             let statusTmp = document.querySelector("#form [name='tipoSaidaInput']").value;
             patrimonio.status = statusTmp;
 
-            if (statusTmp == "DESCARTADO"){
-                patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-            }
-            else
-                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+            let dataSaidaTmp = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+            if (patrimonio.dataSaida !== null && patrimonio.dataSaida.getTime() < dataSaidaTmp.getTime()) {
 
+                if (statusTmp == "DESCARTADO"){
+                    patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+                    patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+                }
+                else
+                    patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+
+                document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+            }
+            else{
+                document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                showError(6);
+                return null;
+            }
         }
         hideModal();
         return patrimonio;

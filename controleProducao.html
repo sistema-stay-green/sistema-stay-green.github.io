@@ -10,22 +10,14 @@
 </head>
 <body>
     <div class="conteudo">
-      <h1 id="h1TabProduto">Registrar</h1>
-      <select name="selTabela">
+      <h1>Controle de produção</h1>
+      <h2 id="h2TabProduto">Registrar:</h2>
+      <select id="selTabela" name="selTabela">
         <option value="produto">Produto</option>
         <option value="insumo">Insumo</option>
       </select>
       <section id="secProduto">
         <table class="tabProduto">
-          <caption id="capTabProduto">
-            <label for="selFiltro">Filtro: </label>
-            <select id="selFiltro">
-              <option value="Café">Café</option>
-              <option value="Leite">Leite</option>
-              <option value="preco">Preço</option>
-              <option value="quantEsotque">Quantidade em estoque</option>
-            </select>
-          </caption>
           <thead>
             <tr>
               <th>Nome do produto</th>
@@ -44,7 +36,11 @@
                   <option value="leite">Leite</option>
                 </select>
               </td>
-              <td><input type="text" id="inpDescricaoProduto"></td>
+              <td><select id="selDescricaoProduto">
+                <option value="bourbon">Bourbon</option>
+                <option value="robusta">Robusta</option>
+                <option value="arabica">Arabica</option>
+              </select></td>
               <td id="tdNomeProduto">
                 KG (Kilograma)
               </td>
@@ -59,15 +55,6 @@
 
       <section id="secInsumo" class="ocultar">
         <table class="tabInsumo">
-          <caption id="capTabProduto">
-            <label for="selFiltro">Filtro: </label>
-            <select id="selFiltro">
-              <option value="cafe">Café</option>
-              <option value="leite">Leite</option>
-              <option value="preco">Preço</option>
-              <option value="quantEsotque">Quantidade em estoque</option>
-            </select>
-          </caption>
           <thead>
             <tr>
               <th>Nome do insumo</th>
@@ -89,11 +76,32 @@
         </table>
         <button type="button" id="btnRegistrarInsumo">Registrar</button>
       </section>
+      <section id="secAvisos">
 
-      <section id="secAvisos"></section>
+      </section>
 
       <section id="secProdutosInsumosRegistrados">
-        <table>
+        <h2 id="h2Registros">Registros a serem mostrados: </h2>
+        <select id="selRegistros" name="selRegistros">
+          <option value="produtosRegistrados">Produtos</option>
+          <option value="insumosRegistrados">Insumos</option>
+          <option value="ambosRegistrados">Ambos</option>
+        </select>
+        <table id="tabProdutosRegistrados">
+          <caption id="capTabProduto">
+            <div class="divCaption">
+              <h3 id="h3CaptionProduto">Produtos</h3>
+              <div class="filtroTabela">
+                <label for="selFiltro">Filtro: </label>
+                <select class="selFiltro">
+                  <option value="Café">Café</option>
+                  <option value="Leite">Leite</option>
+                  <option value="preco">Preço</option>
+                  <option value="quantEsotque">Quantidade em estoque</option>
+                </select>
+              </div>
+            </div>
+          </caption>
           <thead>
             <tr>
               <th>Nome do produto</th>
@@ -115,7 +123,21 @@
             </tr>
           </tbody>
         </table>
-        <table>
+        <table id="tabInsumosRegistrados" class="ocultar">
+          <caption id="capTabInsumo">
+            <div class="divCaption">
+              <h3 id="h3CaptionInsumo">Insumos</h3>
+              <div class="filtroTabela">
+                <label for="selFiltro">Filtro: </label>
+                <select class="selFiltro">
+                  <option value="Café">Café</option>
+                  <option value="Leite">Leite</option>
+                  <option value="preco">Preço</option>
+                  <option value="quantEsotque">Quantidade em estoque</option>
+                </select>
+              </div>
+            </div>
+          </caption>
           <thead>
             <tr>
               <th>Nome do insumo</th>
@@ -136,13 +158,42 @@
           </tbody>
         </table>
       </section>
-      <div id="divModal" class="esconde">
+      <div id="divModal" class="esconde modal">
         <div id="conteudoDivModal">
-          <h2>Teste</h2>
-          <button type="button" id="btnRelatorio1">Relatório 1</button>
-          <button type="button" id="btnRelatorio2">Relatório 2</button>
+          <h2>Histórico por mercadorias / por período</h2>
+          <div id="divPeriodo">
+            <label for="selPeriodo">Período: </label>
+            <select id="selPeriodo">
+              <option value="diario">Diário</option>
+              <option value="semanal">Semanal</option>
+              <option value="mensal">Mensal</option>
+            </select>
+          </div>
+          <button type="button" id="btnRelatorioHistorico">Gerar relatório</button>
+          <h2>Relatório de produção</h2>
+          <button type="button" id="btnRelatorioProducao">Gerar relatório</button>
           <div id="divBtnFechar">
-            <button type="button" id="btnFechaModal">Fechar</button>
+            <button type="button" id="btnFechaModal" class="botaoFantasma">Fechar</button>
+          </div>
+        </div>
+      </div>
+      <div id="modalRelatorioHistorico" class="esconde modal">
+        <div>
+          <h1>Título 1</h1>
+          <p>texto 1</p>
+          <div class="divBotoes">
+            <button type="button" id="btnVoltaRelatorioH" class="voltarModal">Voltar</button>
+            <button type="button" id="btnFechaRelatorioH" class="botaoFantasma">Fechar</button>
+          </div>
+        </div>
+      </div>
+      <div id="modalRelatorioProducao" class="esconde modal">
+        <div>
+          <h1>Título 2</h1>
+          <p>texto 2</p>
+          <div class="divBotoes">
+            <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>
+            <button type="button" id="btnFechaRelatorioP" class="botaoFantasma">Fechar</button>
           </div>
         </div>
       </div>
@@ -157,5 +208,8 @@
     <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Requisicao.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_RelatoriosMercadoriasPeriodo.js" charset="utf-8"></script>
+
   </body>
 </html>

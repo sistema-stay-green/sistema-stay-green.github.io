@@ -66,7 +66,7 @@ function showModal(modal){
             statusOptionsDiv.style.display = "block";
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
-            
+
             break;
 
         case 'relatorio':

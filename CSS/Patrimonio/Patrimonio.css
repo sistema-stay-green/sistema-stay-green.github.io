@@ -296,6 +296,25 @@ input:focus{
     text-align: left;
 }
 
+.inputVazio{
+    border-color: #E1170F;
+}
+
+input.inputVazio::-webkit-input-placeholder{
+   color: #E1170F;
+   opacity: 0.7;
+}
+
+input.inputVazio::-moz-placeholder{  /* Firefox 19+ */
+   color: #E1170F;
+   opacity: 0.7;
+}
+
+input.inputVazio:-ms-input-placeholder{
+   color: #E1170F;
+   opacity: 0.7;
+}
+
 #form{
     top: 18vh;
     left: calc(50vw - 13.5em);

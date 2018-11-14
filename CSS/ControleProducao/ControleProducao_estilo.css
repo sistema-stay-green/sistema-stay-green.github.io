@@ -1,18 +1,20 @@
-#tabProduto, #tabInsumo {
-  margin: auto;
+tbody select {
+  width: 100%;
+  text-align-last: center;
+}
+
+caption h3 {
+  -webkit-margin-before: 0.25em;
+  -webkit-margin-after: 0.25em;
+  -webkit-margin-start: 1em;
 }
 
 #btnRegistarProduto, #btnRegistrarInsumo {
   margin-top: 2em;
 }
 
-#h1TabInsumo {
-  margin-top: 2em;
-}
-
-tbody select {
-  width: 100%;
-  text-align-last: center;
+#h2TabProduto, #h2Registros {
+  display: inline-block;
 }
 
 #btnCriaRelatorio {
@@ -23,37 +25,133 @@ tbody select {
 
 #selTabela {
   margin-bottom: 2em;
+  border-style: none;
+}
+
+#secProdutosInsumosRegistrados {
+  margin-top: 3em;
+}
+
+#selRegistros {
+  border-style: none;
+  text-align-last: center;
+}
+
+#tabProdutosRegistrados, #tabInsumosRegistrados {
+  margin: auto;
+  margin-top: 1em;
+}
+
+#tabProdutosRegistrados {
+  width: 70em;
+  margin-bottom: 4em;
+}
+
+#capTabProduto, #capTabInsumo {
+  border: solid 0.1em var(--verdeCamarone);
+  margin-bottom: 0.05em;
+}
+
+#h3CaptionProduto, #h3CaptionInsumo {
+  display: inline;
+  float: left;
+}
+
+#tabInsumosRegistrados {
+  width: 70em;
+}
+
+#conteudoDivModal h2 {
+  color: var(--verdeCamarone);
+}
+
+#divPeriodo {
+  margin-bottom: 1em;
+}
+
+#selPeriodo {
+  border-style: none;
+  text-align-last: center;
+}
+
+#btnRelatorioHistorico {
+  margin-bottom: 1em;
+}
+
+#divBtnFechar {
+  margin-top: 2em;
+  align-items: center;
+  margin-bottom: 1.25em;
+}
+
+#divMascara {
+  position: absolute;
+  z-index: 1;
+  background-color: #000;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+.tabProduto, .tabInsumo {
+  margin: auto;
+}
+
+.tabProduto {
+  width: 70em;
+}
+
+.tabInsumo {
+  width: 70em;
+}
+
+.selFiltro {
+  text-align-last: center;
+  border-style: none;
+}
+
+.filtroTabela {
+  float: right;
+  display: inline;
+  margin-top: 0.25em;
 }
 
 .ocultar {
   display: none;
 }
 
-#selFiltro {
-  text-align-last: center;
-}
-
-caption {
-  text-align: right;
-  margin-bottom: 1em;
-}
-
-#secProdutosInsumosRegistrados {
-  margin-top: 3em;
-  display: flex;
-}
-
-#secProdutosInsumosRegistrados table {
-  flex: 1;
-  margin: 1.5em;
-}
-
-#secProdutosInsumosRegistrados thead {
-  height: 30px;
-}
-
 .conteudo {
   text-align: center;
+}
+
+.esconde {
+  opacity: 0;
+  z-index: -1;
+  display: none;
+}
+
+.modal {
+  width: 20em;
+  left: calc(50vw - 10em);
+  top: calc(50vh - 20em);
+  background-color: var(--brancoIvory);
+  border: solid 0.25em var(--verdeCamarone);
+  border-radius: 1em;
+}
+
+.posDivModal {
+  z-index: 2;
+  position: fixed;
+}
+
+.voltarModal {
+  border: solid 1px var(--verdeCamarone);
+}
+
+.divBotoes {
+  margin-bottom: 1.25em;
 }
 
 nav {

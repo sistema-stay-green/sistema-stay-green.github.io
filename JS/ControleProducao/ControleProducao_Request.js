@@ -5,10 +5,10 @@
  * @file JavaScript para propósito geral.
  */
 
- /**
-  * Classe que contém métodos estáticos para a realização
-  * mais facilitada de requisições AJAX.
-  */
+/**
+ * Classe que contém métodos estáticos para a realização
+ * mais facilitada de requisições AJAX.
+ */
 const Request = class {
 
     /**
@@ -21,12 +21,12 @@ const Request = class {
      */
     static async get(url, responseType = 'json') {
 
-        return await new Promise(function(resolve, reject) {
+        return await new Promise(function (resolve, reject) {
 
             let request = new XMLHttpRequest();
             request.responseType = responseType;
             request.open('GET', url, true);
-            request.onreadystatechange = function() {
+            request.onreadystatechange = function () {
                 if (request.readyState === 4 && request.status === 200)
                     resolve(request.response);
             };
@@ -34,7 +34,7 @@ const Request = class {
             request.send();
 
         });
-        
+
     }
 
     /**
@@ -48,13 +48,13 @@ const Request = class {
      * @returns {Promise} Uma Promise que retorna a resposta do servidor
      */
     static async post(url, params = '', responseType = 'json') {
-        
-        return await new Promise(function(resolve, reject) {
+
+        return await new Promise(function (resolve, reject) {
 
             let request = new XMLHttpRequest();
             request.responseType = responseType;
             request.open('POST', url, true);
-            request.onreadystatechange = function() {
+            request.onreadystatechange = function () {
                 if (request.readyState === 4 && request.status === 200)
                     resolve(request.response);
             };
@@ -63,7 +63,8 @@ const Request = class {
             request.send(params);
 
         });
-        
+
     }
 
-};
+}
+;

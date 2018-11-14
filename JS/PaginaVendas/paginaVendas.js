@@ -15,17 +15,18 @@
  let dadosJSON;
 
 // window.onload = function recebeJSON(){
-//   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet', ).then(function(resp)){
-//       try {
-//         dadosJSON = JSON.parse(xmlhttp.responseText);
-//         addArrayProdutos(dadosJSON);
-//         addProdutosPagina(arrayProdutos);
-//       } catch(e) {
-//         eval("dadosJSON = (" + xmlhttp.responseText + ");");
-//         addArrayProdutos(dadosJSON);
-//         addProdutosPagina(arrayProdutos);
-//       }
-//   };
+//   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet', )
+//     .then(function(resposta){
+//         try {
+//           dadosJSON = JSON.parse(resposta);
+//           addArrayProdutos(dadosJSON);
+//           addProdutosPagina(arrayProdutos);
+//         } catch(e) {
+//           eval("dadosJSON = (" + resposta + ");");
+//           addArrayProdutos(dadosJSON);
+//           addProdutosPagina(arrayProdutos);
+//         }
+//     });
 // }
 
 //Caso a função acima dê erro

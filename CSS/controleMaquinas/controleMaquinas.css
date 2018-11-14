@@ -1,17 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Niramit');
 
 
-html{
-   font-family: 'Niramit', sans-serif;
-   margin: 0;
-   height: 100%;
-}
+
 body{
-  height: 100%;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Niramit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 form > label{
   display: grid;
   margin: 0.9em;
+}
+.editar-conteudo > #filtro2 > label{
+  display: block;
+  margin-top: 2.5em;
+  margin-bottom: 1.5em;
 }
 #filtro2 > label, span > label{
   display: block;
@@ -20,7 +27,6 @@ form > label{
 table{
   width: 100%;
 }
-
 
 #TituloPagina{
    text-align: center;
@@ -48,10 +54,10 @@ table{
 #filtro{
   text-align: end;
 }
-#Venda,#Envio,#Descarte{
+#venda,#envio,#descarte{
   display: none;
 }
-#BotãoCadastro{
+#botaoCadastro{
   margin-left: 1em;
 }
 
@@ -59,29 +65,22 @@ table{
 .saidas-conteudo #filtro{
   text-align: left;
 }
-.opções{
+.opcoes{
    text-align: left;
    margin-bottom: 1em;
 }
-.OpçõesBotões{
-  float: right;
-}
-.BotãoOpção:hover {
+.botaoOpcao:hover {
    background-color: #3e8e41
 }
-.BotãoOpção:active {
+.botaoOpcao:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.valores{
-   text-align: center;
-   display: none;
+.valores,.editar-conteudo{
+  text-align: center;
    background-color: #FDFCF3;
-   top: 5em;
-   left: 26em;
-   right: 26em;
-   bottom: 2em;
+   margin: 9% 33%;
    padding: 20px;
    border: 0.4em solid #1D883A;
    width: 30%;
@@ -90,7 +89,19 @@ table{
    position: fixed;
    z-index: 3;
 }
-.TabelaDeMaquinas{
+.valores_fundo,.saidas,.editar{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+.tabelaDeMaquinas{
     display: inline;
     width:99%;
     border: 7px double;
@@ -103,18 +114,6 @@ table{
 }
 .TituloNome{
     font-weight: bold;
-}
-.saidas {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
 }
 .saidas-conteudo {
     background-color: #FDFCF3;
@@ -138,4 +137,11 @@ table{
 .fecharModal:hover{
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
+}
+.footer {
+  margin-top: 20vh;
+  height: 31vh;
+  width: 100vw;
+  margin-bottom: 0;
+  align-self: flex-end;
 }

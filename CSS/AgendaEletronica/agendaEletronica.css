@@ -6,6 +6,7 @@ body{
 	margin: 0;
 	display: flex;
 	flex-direction: row;
+	overflow: hidden;
 }
 
 label{
@@ -45,16 +46,37 @@ form p {
 	display: inline-block;
 }
 
+form div{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
 form{
-	top: 50%;
-	left: 50%;
-	width: 50%;
-	margin: -15% 0 0 -25%;
+	min-height: 31em;
+	top: calc(50% - 31em/2);
+	margin: auto 30vw;
 	position: absolute;
 	z-index: 3;
 	background-color: var(--brancoIvory);
 	transition: 200ms;
 	transform: scale(1);
+}
+
+textarea{
+	background-color: var(--brancoIvory);
+	width: 95%;
+	height: 10vh;
+	font-size: calc(15px + .1vw);
+    box-sizing: border-box;
+	font-family: 'Niramit', sans-serif;
+    display: block;
+	margin: 2% 0 auto 3%;
+	padding: .5em;
+}
+
+textarea::placeholder{
+	font-weight: bold;
 }
 
 .sectionCheck{
@@ -74,6 +96,19 @@ form{
 	display: none;
 	z-index: -999;
 	transform: scale(0);
+}
+
+.tarefa{
+	background-color: var(--verdeCamarone);
+    width: 80%;
+    color: var(--brancoIvory);
+	margin-left: 5%;
+	transition: 100ms;
+	z-index: 2;
+}
+
+.tarefa:hover{
+	background-color: var(--verdeCrusoe);
 }
 
 #nomeNovaTarefa{
@@ -99,7 +134,7 @@ form{
 	position: relative;
 	display: grid;
 	grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
-	grid-template-rows: auto;
+	grid-template-rows: calc(100vh/4) calc(100vh/4) calc(100vh/4) calc(100vh/4);
 	overflow-y: auto;
 	overflow-x: hidden;
 	width: 80vw;
@@ -110,6 +145,15 @@ form{
 	border-right: 1px solid var(--pretoNight);
 	cursor: pointer;
 	transition: 100ms;
+	overflow-y: auto;
+}
+
+#containerCalendario > h1{	  
+	margin: 0 auto;	
+	grid-column: span 4;
+	display: blcok;
+	font-weight: bold;
+	grid-row-start: 3;
 }
 
 #containerCalendario article:hover{
@@ -117,12 +161,12 @@ form{
 }
 
 #containerCalendario article p{
-	margin: 0;
+	margin: 1vw;
 	font-weight: bold;
 	padding: .3em;
 }
 
-#containerCalendario button{
+#containerCalendario div, #containerCalendario > button{
 	position: fixed;
 	bottom: 0;
 	margin: 1em;
@@ -132,9 +176,6 @@ section > #botaoFormTarefa{
 	right: 0;
 	margin-right: 23vw;
 }
+body > #mascaraForm > form {
 
-form div{
-	position: absolute;
-	bottom: 0;
-	right: 0;
 }

@@ -4,14 +4,17 @@
         <meta charset="utf-8" />
         <meta name="author" content="Mei Fagundes">
         <meta name="author" content="Sávio Cardoso">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Controle de Patrimônio</title>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/staygreen.css"/>
+        <link rel="stylesheet" type="text/css" media="print" href="CSS/Patrimonio/Print.css"/>
         <link rel="icon" type="image/png" href="imgs/icons/favicon.png">
     </head>
     <body>
-      <nav>
+      <nav class="shadow">
           <a href="index.html">Home</a>
           <a href="#">Agenda</a>
           <a href="#">Máquinas</a>
@@ -34,7 +37,7 @@
                     </select>
                 </span>
             </section>
-            <table id="patrimonioTable">
+            <table id="patrimonioTable" class="shadow">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -43,9 +46,9 @@
                         <th>Finalidade</th>
                         <th>Status</th>
                         <th>Índice de Depreciação</th>
-                        <th>Valor da Compra</th>
+                        <th>Valor da Compra/Procução</th>
                         <th>Valor Atual</th>
-                        <th>Data da Compra</th>
+                        <th>Data da Compra/Procução</th>
                         <th>Data de Saída</th>
                         <th>Data de Retorno</th>
                         <th>Data de Baixa</th>
@@ -54,18 +57,20 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <span id="noResults">
+                <p>Nenhum Patrimônio foi encontrado.</p>
+                <p>Tente mudar o filtro selecionado, registrar um novo Patrimônio ou verificar se o servidor está ativo.</p>
+            </span>
         </section>
-
-
 
         <!-- Div Modal Formulário -->
         <div class="mascara">
        </div>
-        <section id="form" class="div-modal">
+        <section id="form" class="modal shadow esconde">
             <div class="conteudo">
 
                 <label for="nomeInput">Nome do Patrimônio:</label>
-                <input type="text" name="nomeInput" required placeholder="digite...">
+                <input type="text" name="nomeInput" placeholder="digite...">
 
                 <label for="tipoInput">Tipo do Patrimônio:</label>
                 <select name="tipoInput">
@@ -74,7 +79,7 @@
                 </select>
 
                 <label for="finalidadeInput">Finalidade do Patrimônio:</label>
-                <input type="text" name="finalidadeInput" required placeholder="digite...">
+                <input type="text" name="finalidadeInput" placeholder="digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
                 <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
@@ -87,43 +92,60 @@
 
                 <div id="statusOptions">
                     <label for="statusOptions">Mudar Status:</label>
-                    <button name="entradaOptionButton" class="botaoFantasma">Entrada</button>
+                    <button name="entradaOptionButton" class="botaoFantasma">Retorno</button>
                     <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
                 </div>
 
                 <div name="entrada" class="esconde">
-                    <label for="dataEntradaInput">Data de entrada:</label>
-                    <input type="date" id="dataEntradaInput">
+                    <label for="dataEntradaInput">Data de Retorno:</label>
+                    <input type="date" name="dataEntradaInput">
                 </div>
 
                 <div name="saida" class="esconde">
                     <label for="tipoSaidaInput">Saída: </label>
-                    <select id="tipoSaidaInput">
+                    <select name="tipoSaidaInput">
+                        <option value="" selected>Não Resgistrar</option>
                         <option value="VENDIDO">Venda</option>
                         <option value="DESCARTADO">Descarte</option>
                         <option value="ALUGADO">Aluguel</option>
                         <option value="EM_MANUTENCAO">Manutenção</option>
                     </select>
                     <label for="dataSaidaInput">Data de saída:</label>
-                    <input type="date" id="dataSaidaInput">
+                    <input type="date" name="dataSaidaInput">
                 </div>
             </div>
 
             <div class="container-modal">
-                <button name="cancelarModalButton">Cancelar</button>
-                <button name="enviar">Enviar</button>
+                <button name="cancelarModalButton" class="shadow">Cancelar</button>
+                <button name="enviar" class="shadow">Enviar</button>
             </div>
         </section>
 
-        <!-- Floating button -->
+        <section id="relatorio" class="modal shadow esconde">
+            <div></div>
+            <div>
+                <button name="printRelatorio" class="shadow">Imprimir</button>
+                <button name="closeRelatorio" class="shadow">Fechar</button>
+            </div>
+        </section>
 
-        <button id="addPatrimonioButton"><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+        <section id="errorModal" class="modal esconde shadow">
+            <p>ERRO!!!</p>
+        </section>
+
+        <div id="floatingButtons">
+            <button name="addButton" class="shadow" title="Registrar Patrimônio Comprado."><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+            <button name="relatorioButton" class="shadow" title="Gerar Relatório."><img src="imgs/Patrimonio/library-material-design.png" alt=""></button>
+        </div>
+        
+
         <script src="JS/staygreen.js"></script>
         <script src="JS/Patrimonio/Patrimonio.js"></script>
-        <script src="JS/Patrimonio/PatrimonioPage.js"></script>
+        <script src="JS/Patrimonio/PatrimonioFilter.js"></script>
         <script src="JS/Patrimonio/PatrimonioConnection.js"></script>
-        <script src="JS/Patrimonio/PatrimonioManipulationService.js"></script>
-        <script src="JS/Patrimonio/PatrimonioTest.js"></script>
-        <script src="JS/Patrimonio/PatrimonioMain.js"></script>
+        <script src="JS/Patrimonio/PatrimonioPage.js"></script>
+        <script src="JS/Patrimonio/PatrimonioDebug.js"></script>
+        <script src="JS/Patrimonio/PatrimonioManipulation.js"></script>
+        <script src="JS/Patrimonio/PatrimonioInit.js"></script>
     </body>
 </html>

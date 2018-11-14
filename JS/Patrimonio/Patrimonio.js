@@ -74,19 +74,47 @@ class Patrimonio {
      * @author Guilherme Sena
      */
     toJSON(){
-      let patrimonioJSON = {
-        "id": this._id,
-        "nome": this._nome,
-        "tipo": this._tipo,
-        "finalidade": this._finalidade,
-        "status": this._status,
-        "indiceDepreciacao": this._indiceDepreciacao,
-        "valorCompra": this._valorCompra,
-        "dataCompra": this._dataCompra,
-        "dataSaida": this._dataSaida,
-        "dataRetorno": this._dataRetorno,
-        "dataBaixa": this._dataBaixa
-      }
+
+        let patrimonioJSON = {};
+
+        if (this._id !== null)
+            patrimonioJSON["idPatrimonio"] = this._id;
+
+        if (this._nome !== null)
+            patrimonioJSON["nomePatrimonio"] = this._nome;
+
+        if (this._tipo !== null)
+            patrimonioJSON["tipoPatrimonio"] = this._tipo;
+
+        if (this._finalidade !== null)
+            patrimonioJSON["finalidadePatrimonio"] = this._finalidade;
+
+        if (this._status !== null)
+            patrimonioJSON["statusPatrimonio"] = this._status;
+
+        if (this._indiceDepreciacao !== null)
+            patrimonioJSON["indDeprecPatrimonio"] = this._indiceDepreciacao;
+
+        if (this._valorCompra !== null)
+            patrimonioJSON["valorCompraPatrimonio"] = this._valorCompra;
+
+        if (this._dataCompra !== null){
+            let dC = this._dataCompra.toISOString().slice(0,10).replace("/-/g","").split("-");
+            patrimonioJSON["dataCompraPatrimonio"] = {"year":parseInt(dC[0]), "month":parseInt(dC[1]) - 1, "dayOfMonth":parseInt(dC[2])};
+        }
+        if (this._dataSaida !== null){
+            let dS = this._dataSaida.toISOString().slice(0,10).replace("/-/g","").split("-");
+            patrimonioJSON["dataSaidaPatrimonio"] = {"year":parseInt(dS[0]), "month":parseInt(dS[1]) - 1, "dayOfMonth":parseInt(dS[2])};
+        }
+        if (this._dataRetorno !== null){
+            let dR = this._dataRetorno.toISOString().slice(0,10).replace("/-/g","").split("-");
+            patrimonioJSON["dataRetornoPatrimonio"] = {"year":parseInt(dR[0]), "month":parseInt(dR[1]) - 1, "dayOfMonth":parseInt(dR[2])};
+        }
+        if (this._dataBaixa !== null){
+            let dB = this._dataBaixa.toISOString().slice(0,10).replace("/-/g","").split("-");
+            patrimonioJSON["dataBaixaPatrimonio"] = {"year":parseInt(dB[0]), "month":parseInt(dB[1]) - 1, "dayOfMonth":parseInt(dB[2])};
+        }
+
       return JSON.stringify(patrimonioJSON);
     }
 
@@ -139,6 +167,22 @@ class Patrimonio {
 
     get dataBaixa(){
         return this._dataBaixa;
+    }
+
+    get dataCompraString(){
+        return this._dataCompra.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataSaidaString(){
+        return this._dataSaida.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataRetornoString(){
+        return this._dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+    }
+
+    get dataBaixaString(){
+        return this._dataBaixa.toISOString().slice(0,10).replace("/-/g","");
     }
 
     // Setter

@@ -1,62 +1,28 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Duda
+ * @author Maria Eduarda, Mei Fagundes
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 
 /**
- * Função para gerar datas no formato correto antes de mandar para o servlet
- * @author Duda
- * @param {Patrimonio} patrimonio
- * @param key Tipo de data desejada.
- */
-function getDataParam(patrimonio = new Patrimonio(), key){
-  let params;
-
-  switch (key) {
-    case 'Compra':
-      if (patrimonio.dataCompra !== null) {
-        params = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
-      }
-      break;
-    case 'Saida':
-      if (patrimonio.dataSaida !== null) {
-        params = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
-      }
-      break;
-    case 'Retorno':
-      if (patrimonio.dataRetorno !== null) {
-        params = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
-      }
-      break;
-    case 'Baixa':
-      if (patrimonio.dataBaixa !== null) {
-        params = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
-      }
-      break;
-    default:
-      console.log(new Error("Erro de leitura de chave"));
-      break;
-  }
-  if (params !== undefined) {
-    params = "data" + key + "=" + params;
-  }
-  console.log(params);
-}
-
-/**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes
+ * @author Mei Fagundes, Maria Eduarda
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
   let params = "?action=r";
   Request.get(SERVLET_URL + params).then((response) => {
 
-    callBack(encapsulateJSON(response));
-
+    let patrimonios = [];
+    for (const current of response) {
+      patrimonios.push(encapsulateJSON(current));
+    }
+    callBack(patrimonios);
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 
 }
@@ -65,102 +31,134 @@ function receiveAllPatrimoniosFromServlet(callBack){
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
  * @param {Patrimonio} patrimonio 
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes
+ * @author Mei Fagundes, Maria Eduarda
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
-  params += "&" + getDataParam(patrimonio);
-  Request.get(SERVLET_URL + params).then((response) => {
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
-    callBack(encapsulateJSON(response));
+    if (response.slice(0,1) !== "F")
+      callBack(encapsulateJSON(JSON.parse(response)));
+    else
+      showError(2);
     
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 }
 
 /**
  * Envia um Patrimonio atualizado para o Servlet
- * @param {Patrimonio} patrimonio
- * @author Mei Fagundes
+ * @param {Patrimonio} patrimonio 
+ * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
+ * @author Mei Fagundes, Maria Eduarda
  */
 function sendUpdatedPatrimonio(patrimonio){
 
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
-  params += "&" + getDataParam(patrimonio, 'Compra');
-  params += "&" + getDataParam(patrimonio, 'Saida');
-  params += "&" + getDataParam(patrimonio, 'Retorno');
-  params += "&" + getDataParam(patrimonio, 'Baixa');
-  Request.get(SERVLET_URL + params).then((response) => {
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
-    console.log(response);
+    switch (response.slice(0,1)) {
+      case "S":
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
     
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
   });
 }
 
 /**
  * Envia uma requisição de remoção de um Patrimonio para o Servlet
- * @param {Patrimonio} patrimonio 
- * @author Mei Fagundes
+ * @param {Patrimonio} patrimonio
+ * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
+ * @author Mei Fagundes, Maria Eduarda
  */
-function sendDeletedPatrimonio(patrimonio = new Patrimonio()){
+function sendDeletedPatrimonio(id, callBack){
 
-  let params = "?action=d&id=" + patrimonio.id;
-  Request.get(SERVLET_URL + params);
+  let params = "?action=d&id=" + id;
+  Request.get(SERVLET_URL + params, "text").then((response) => {
+
+    switch (response.slice(0,1)) {
+      case "S":
+        callBack(id);
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+  
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+  }
+
+  }, (reason) => {
+    console.log(reason);
+    showError(0);
+  });
 }
 
 /**
- * Encapsula as informações de um JSON em objetos Patrimonio
+ * Encapsula as informações de um JSON em um objeto Patrimonio
  * @param {JSON} json 
- * @returns Retorna um array de patrimonios
+ * @returns {Patrimonio} Retorna o objeto Patrimonio resultante;
  * @author Mei Fagundes
  */
 function encapsulateJSON(json){
 
-  let patrimonios = [];
-  let patrimonio;
+  patrimonio = new Patrimonio();
+  patrimonio.id = json.idPatrimonio;
 
-  for (const current of json) {
+  if (json.hasOwnProperty('nomePatrimonio'))
+    patrimonio.nome = json.nomePatrimonio;
 
-    patrimonio = new Patrimonio();
-    patrimonio.id = current.idPatrimonio;
+  if (json.hasOwnProperty('tipoPatrimonio'))
+    patrimonio.tipo = json.tipoPatrimonio;
 
-    if (current.hasOwnProperty('nomePatrimonio'))
-    patrimonio.nome = current.nomePatrimonio;
+  if (json.hasOwnProperty('finalidadePatrimonio'))
+    patrimonio.finalidade = json.finalidadePatrimonio;
 
-    if (current.hasOwnProperty('tipoPatrimonio'))
-    patrimonio.tipo = current.tipoPatrimonio;
+  if (json.hasOwnProperty('statusPatrimonio'))
+    patrimonio.status = json.statusPatrimonio;
 
-    if (current.hasOwnProperty('finalidadePatrimonio'))
-    patrimonio.finalidade = current.finalidadePatrimonio;
+  if (json.hasOwnProperty('indDeprecPatrimonio'))
+    patrimonio.indiceDepreciacao = json.indDeprecPatrimonio;
 
-    if (current.hasOwnProperty('statusPatrimonio'))
-    patrimonio.status = current.statusPatrimonio;
+  if (json.hasOwnProperty('valorCompraPatrimonio'))
+    patrimonio.valorCompra = json.valorCompraPatrimonio;
 
-    if (current.hasOwnProperty('indDeprecPatrimonio'))
-    patrimonio.indiceDepreciacao = current.indDeprecPatrimonio;
-
-    if (current.hasOwnProperty('valorCompraPatrimonio'))
-    patrimonio.valorCompra = current.valorCompraPatrimonio;
-
-    if (current.hasOwnProperty('dataRetornoPatrimonio')) {
-      patrimonio.dataRetorno = new Date(parseInt(current.dataRetornoPatrimonio.year),
-        parseInt(current.dataRetornoPatrimonio.month), parseInt(current.dataRetornoPatrimonio.dayOfMonth));
-    }
-    if (current.hasOwnProperty('dataCompraPatrimonio')){
-      patrimonio.dataCompra = new Date(parseInt(current.dataCompraPatrimonio.year),
-        parseInt(current.dataCompraPatrimonio.month), parseInt(current.dataCompraPatrimonio.dayOfMonth));
-    }
-    if (current.hasOwnProperty('dataBaixaPatrimonio')){
-      patrimonio.dataBaixa = new Date(parseInt(current.dataBaixaPatrimonio.year),
-        parseInt(current.dataBaixaPatrimonio.month), parseInt(current.dataBaixaPatrimonio.dayOfMonth));
-    }
-    if (current.hasOwnProperty('dataSaidaPatrimonio')){
-      patrimonio.dataSaida = new Date(parseInt(current.dataSaidaPatrimonio.year),
-        parseInt(current.dataSaidaPatrimonio.month), parseInt(current.dataSaidaPatrimonio.dayOfMonth));
-    }
-
-    patrimonios.push(patrimonio);
+  if (json.hasOwnProperty('dataRetornoPatrimonio')) {
+    patrimonio.dataRetorno = new Date(parseInt(json.dataRetornoPatrimonio.year),
+      parseInt(json.dataRetornoPatrimonio.month), parseInt(json.dataRetornoPatrimonio.dayOfMonth));
   }
-
-  return patrimonios;
+  if (json.hasOwnProperty('dataCompraPatrimonio')){
+    patrimonio.dataCompra = new Date(parseInt(json.dataCompraPatrimonio.year),
+      parseInt(json.dataCompraPatrimonio.month), parseInt(json.dataCompraPatrimonio.dayOfMonth));
+  }
+  if (json.hasOwnProperty('dataBaixaPatrimonio')){
+    patrimonio.dataBaixa = new Date(parseInt(json.dataBaixaPatrimonio.year),
+      parseInt(json.dataBaixaPatrimonio.month), parseInt(json.dataBaixaPatrimonio.dayOfMonth));
+  }
+  if (json.hasOwnProperty('dataSaidaPatrimonio')){
+    patrimonio.dataSaida = new Date(parseInt(json.dataSaidaPatrimonio.year),
+      parseInt(json.dataSaidaPatrimonio.month), parseInt(json.dataSaidaPatrimonio.dayOfMonth));
+  }
+  return patrimonio;
 }

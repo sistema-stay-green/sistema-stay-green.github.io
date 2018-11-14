@@ -9,14 +9,16 @@ function aplicarRelatorios() {
     }))
 }
 
+
 function geraRelatorio(codigoRelatorio) {
   switch (codigoRelatorio) {
-    case 0:
+    case 0: //Relativo ao Relatório de Gastos
         return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'gastoTarefa'], 'gastoTarefa');
-    case 1:
-        break;
-    case 2:
-      break;
+    case 1: //Relativo ao Relatório de Produção
+        return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'quantProduzTarefa'], 'quantProduzTarefa');
+    case 2: //Relativo ao Relatório de Insumos
+        return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'insumosTarefa', 'quantInsumosTarefa'], '', false);
+
   }
 }
 
@@ -47,7 +49,7 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
   cabecalhoTabela.appendChild(celulaTabelaCabecalho);
 
   tabelaRelatorioGastos.appendChild(cabecalhoTabela);
- 
+
   //Criando e adicionando o corpo (conteúdo) da tabela
   let conteudoTabela = document.createElement('tbody');
 
@@ -79,7 +81,7 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
     rodapeTabela.appendChild(celulaTabelaRodape);
 
     tabelaRelatorioGastos.appendChild(rodapeTabela);
-    
+
   }
 
   return tabelaRelatorioGastos;

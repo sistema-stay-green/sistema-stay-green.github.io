@@ -5,7 +5,7 @@
  * CSS Geral
  */
 
-:root{
+:root {
   --brancoIvory: #FDFCF3;
   --verdeCamarone: #1D883A; /* Verde Claro */
   --verdeCrusoe: #126624; /* Verde Escuro */
@@ -13,16 +13,16 @@
   --cinzaFoggy: #2D2D2E;
 }
 
-::selection{
+::selection {
   background-color: var(--verdeCamarone);
   color: var(--brancoIvory);
 }
 
-*:focus{
+*:focus {
   outline: none;
 }
 
-body{
+body {
   font-family: 'Niramit', sans-serif;
   margin: 0;
   background-color: var(--brancoIvory);
@@ -30,16 +30,16 @@ body{
   color: var(--cinzaFoggy);
 }
 
-a{
+a {
   color: var(--verdeCrusoe);
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   text-decoration: underline;
 }
 
-button{
+button {
   transition: 200ms;
   cursor: pointer;
   padding: .5em 2em;
@@ -49,41 +49,41 @@ button{
   color: var(--brancoIvory);
 }
 
-button:hover{
+button:hover {
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
 }
 
-.botaoInvertido{
+.botaoInvertido {
   color: var(--verdeCamarone);
   background-color: var(--brancoIvory);
 }
 
-.botaoInvertido:hover{
+.botaoInvertido:hover {
   background-color: var(--verdeCamarone);
   color: var(--brancoIvory);
 }
 
-.botaoFantasma{
+.botaoFantasma {
   border: 1px solid var(--verdeCamarone);
   background-color: transparent;
   color: var(--verdeCamarone);
 }
 
-.botaoDesab{
+.botaoDesab {
   background-color: grey;
   cursor: not-allowed;
 }
 
-.botaoDesab:hover{
+.botaoDesab:hover {
   background-color: grey;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
   font-weight: 200;
 }
 
-input{
+input {
   padding: .15em;
   font-family: inherit;
   border: none;
@@ -91,11 +91,11 @@ input{
   background-color: transparent;
 }
 
-input, button{
+input, button {
   font-size: inherit;
 }
 
-select{
+select {
   font-family: inherit;
   font-size: inherit;
   border: none;
@@ -104,49 +104,49 @@ select{
   color: var(--cinzaFoggy);
 }
 
-select > option{
+select > option {
   background-color: var(--brancoIvory);
 }
 
-table{
+table {
   border-collapse: collapse;
   text-align: center;
   background-color: var(--brancoIvory);
 }
 
-tfoot{
+tfoot {
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
 }
 
-th{
+th {
   padding: 0em 1em;
   font-weight: normal;
 }
 
-thead{
+thead {
   background-color: var(--verdeCamarone);
   color: var(--brancoIvory);
   border: none;
 }
 
-thead > tr{
+thead > tr {
   border: none;
 }
 
-tr{
+tr {
   border-bottom: 1px solid var(--pretoNight);
   padding: 1em;
 }
 
-td > button{
+td > button {
   padding: 0 .5em;
   margin: calc(4px + .1vw);
 }
 
 /* Estilização do Header e do Footer */
 
-header{
+header {
   display: flex;
   background-color: yellow;
   height:93%;
@@ -155,7 +155,7 @@ header{
   background-repeat: no-repeat;
   background-size: cover;
 }
-header > #mascara-conteudo{
+header > #mascara-conteudo {
   background-color: rgba(16, 43, 18, 0.7);
   height:100%;
   width:100%;
@@ -164,19 +164,19 @@ header > #mascara-conteudo{
   align-items: center;
   justify-content: center;
 }
-header > #mascara-conteudo > h1{
+header > #mascara-conteudo > h1 {
   color: white;
   text-align: center;
   font-family: 'Niramit', sans-serif;
   font-size:calc(30px + 2vh );
 }
-header > #mascara-conteudo > p{
+header > #mascara-conteudo > p {
   color: white;
   text-align: center;
   font-family: 'Niramit', sans-serif;
   font-size: calc(20px + 2vh);
 }
-header > #mascara-conteudo > button{
+header > #mascara-conteudo > button {
   text-align: center;
   width: 15%;
   height: 9%;
@@ -187,6 +187,7 @@ header > #mascara-conteudo > button{
   font-size: calc(20px + 2vh);
   cursor: pointer;
 }
+
 nav{
   height: 3.2em;
   width: 100%;
@@ -198,13 +199,13 @@ nav{
   top:0;
 }
 
-nav > h3{
+nav > h3 {
   width:20vw;
   height: 100%;
   text-align: center;
   font-family: 'Niramit' , sans-serif;
   color:white;
-  font-size: calc(20px + 1vh);
+  font-size: calc(20px + 1vw);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,17 +217,17 @@ nav > a {
   text-align: center;
   font-family: 'Niramit' , sans-serif;
   color:white;
-  font-size: calc(20px + 1vh);
+  font-size: calc(20px + .7vw);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-nav > a:hover{
+nav > a:hover {
   background-color: #116623;
   text-decoration:none;
 }
 
-footer{
+footer {
   height: 50%;
   width: 100%;
   display: flex;
@@ -240,21 +241,21 @@ footer > section {
   align-items: center;
   justify-content: space-around;
 }
-footer > section > h3{
+footer > section > h3 {
     font-family: 'Niramit' , sans-serif;
     font-size: calc(10px + 1.5vh);
     color: white;
 }
-footer > section > a{
+footer > section > a {
     text-decoration: none;
     font-family: 'Niramit' , sans-serif;
     font-size: calc(10px + 1vh);
     color: #c6c7c9;
 }
-footer > section > img{
+footer > section > img {
   height: 100px ;
   width:  100px;
 }
-.redes{
+.redes {
   justify-content: center;
 }

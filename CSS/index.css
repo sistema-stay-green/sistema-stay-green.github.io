@@ -10,7 +10,7 @@ header {
   background-color: yellow;
   height:93%;
   width:100%;
-  background-image: url('../../imgs/home/fazenda.jpeg');
+  background-image: url('../imgs/home/fazenda.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -39,7 +39,8 @@ header > #mascara-conteudo > p {
   font-size: calc(20px + 2vh);
 }
 
-header > #mascara-conteudo > button {
+header > #mascara-conteudo > a {
+  text-decoration: none;
   text-align: center;
   width: 15%;
   height: 9%;
@@ -47,8 +48,14 @@ header > #mascara-conteudo > button {
   font-family: 'Niramit' , sans-serif;
   background-color: white;
   color:rgba(16, 43, 18,1);
-  font-size: calc(20px + 2vh);
+  font-size: calc(20px + 2.3vh);
   cursor: pointer;
+}
+header > #mascara-conteudo > a:hover{
+  box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
+  width: 15.5%;
+  height: 9.5%;
+
 }
 
 nav {
@@ -166,7 +173,7 @@ main > article > p {
   right: 5%;
   width: 50%;
   height: content;
-  font-size: calc(5px + .9vw);
+  font-size: calc(12.5px + .9vw);
   color: white;
 }
 
@@ -187,7 +194,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img3.jpg');
+    ), url('../imgs/home/img3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -197,7 +204,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.64),
     rgba(16, 43, 18, 0.64)
-    ), url('../../imgs/home/img2.jpg');
+    ), url('../imgs/home/img2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -207,7 +214,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img1.jpg');
+    ), url('../imgs/home/img1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -217,7 +224,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img4.jpg');
+    ), url('../imgs/home/img4.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -226,7 +233,7 @@ main > article > h3 {
   linear-gradient(
     rgba(16, 43, 18, 0.4),
     rgba(16, 43, 18, 0.4)
-    ), url('../../imgs/home/img5.jpg');
+    ), url('../imgs/home/img5.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }

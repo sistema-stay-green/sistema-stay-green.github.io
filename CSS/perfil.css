@@ -6,6 +6,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 93vh;
 }
 
 main > section {
@@ -13,7 +14,7 @@ main > section {
 }
 
 main > section:first-of-type {
-  background-color: var(--verdeCamarone);
+  background-color: var(--verdeCrusoe);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -29,7 +30,7 @@ main > section:first-of-type > p {
 }
 
 main > section:first-of-type > img {
-  background-color: var(--verdeCrusoe);
+  background-color: var(--verdeCamarone);
   width: 12vw;
   height: 12vw;
   padding: 1.2em 1.2em;
@@ -50,24 +51,24 @@ h1 {
   margin: 0 10%;
 }
 
-#editaInfoUsuario {
+article:has(> #cadastro) {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
 }
 
-#editaInfoUsuario > form > button {
+#cadastro > button {
   width: 8em;
   margin: 1vw;
 }
 
-#editaInfoUsuario > form > label {
+#cadastro > label {
   display: block;
   text-align: left;
   margin: 1vw;
 }
 
-#editaInfoUsuario > form > label > input {
+#cadastro > label > input {
   display: block;
   width: 100%;
 }

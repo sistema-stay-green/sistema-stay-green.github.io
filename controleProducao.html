@@ -36,7 +36,11 @@
                   <option value="leite">Leite</option>
                 </select>
               </td>
-              <td><input type="text" id="inpDescricaoProduto"></td>
+              <td><select id="selDescricaoProduto">
+                <option value="bourbon">Bourbon</option>
+                <option value="robusta">Robusta</option>
+                <option value="arabica">Arabica</option>
+              </select></td>
               <td id="tdNomeProduto">
                 KG (Kilograma)
               </td>
@@ -72,6 +76,9 @@
         </table>
         <button type="button" id="btnRegistrarInsumo">Registrar</button>
       </section>
+      <section id="secAvisos">
+
+      </section>
 
       <section id="secProdutosInsumosRegistrados">
         <h2 id="h2Registros">Registros a serem mostrados: </h2>
@@ -82,13 +89,18 @@
         </select>
         <table id="tabProdutosRegistrados">
           <caption id="capTabProduto">
-            <label for="selFiltro">Filtro: </label>
-            <select id="selFiltro">
-              <option value="Café">Café</option>
-              <option value="Leite">Leite</option>
-              <option value="preco">Preço</option>
-              <option value="quantEsotque">Quantidade em estoque</option>
-            </select>
+            <div class="divCaption">
+              <h3 id="h3CaptionProduto">Produtos</h3>
+              <div class="filtroTabela">
+                <label for="selFiltro">Filtro: </label>
+                <select class="selFiltro">
+                  <option value="Café">Café</option>
+                  <option value="Leite">Leite</option>
+                  <option value="preco">Preço</option>
+                  <option value="quantEsotque">Quantidade em estoque</option>
+                </select>
+              </div>
+            </div>
           </caption>
           <thead>
             <tr>
@@ -112,14 +124,19 @@
           </tbody>
         </table>
         <table id="tabInsumosRegistrados" class="ocultar">
-          <caption id="capTabProduto">
-            <label for="selFiltro">Filtro: </label>
-            <select id="selFiltro">
-              <option value="Café">Café</option>
-              <option value="Leite">Leite</option>
-              <option value="preco">Preço</option>
-              <option value="quantEsotque">Quantidade em estoque</option>
-            </select>
+          <caption id="capTabInsumo">
+            <div class="divCaption">
+              <h3 id="h3CaptionInsumo">Insumos</h3>
+              <div class="filtroTabela">
+                <label for="selFiltro">Filtro: </label>
+                <select class="selFiltro">
+                  <option value="Café">Café</option>
+                  <option value="Leite">Leite</option>
+                  <option value="preco">Preço</option>
+                  <option value="quantEsotque">Quantidade em estoque</option>
+                </select>
+              </div>
+            </div>
           </caption>
           <thead>
             <tr>
@@ -192,5 +209,7 @@
     <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Requisicao.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_RelatoriosMercadoriasPeriodo.js" charset="utf-8"></script>
+
   </body>
 </html>

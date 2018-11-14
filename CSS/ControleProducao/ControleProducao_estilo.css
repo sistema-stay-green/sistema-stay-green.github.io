@@ -3,9 +3,10 @@ tbody select {
   text-align-last: center;
 }
 
-caption {
-  text-align: right;
-  margin-bottom: 1em;
+caption h3 {
+  -webkit-margin-before: 0.25em;
+  -webkit-margin-after: 0.25em;
+  -webkit-margin-start: 1em;
 }
 
 #btnRegistarProduto, #btnRegistrarInsumo {
@@ -27,12 +28,13 @@ caption {
   border-style: none;
 }
 
-#selFiltro {
-  text-align-last: center;
-}
-
 #secProdutosInsumosRegistrados {
   margin-top: 3em;
+}
+
+#selRegistros {
+  border-style: none;
+  text-align-last: center;
 }
 
 #tabProdutosRegistrados, #tabInsumosRegistrados {
@@ -41,7 +43,22 @@ caption {
 }
 
 #tabProdutosRegistrados {
+  width: 70em;
   margin-bottom: 4em;
+}
+
+#capTabProduto, #capTabInsumo {
+  border: solid 0.1em var(--verdeCamarone);
+  margin-bottom: 0.05em;
+}
+
+#h3CaptionProduto, #h3CaptionInsumo {
+  display: inline;
+  float: left;
+}
+
+#tabInsumosRegistrados {
+  width: 70em;
 }
 
 #conteudoDivModal h2 {
@@ -80,6 +97,25 @@ caption {
 
 .tabProduto, .tabInsumo {
   margin: auto;
+}
+
+.tabProduto {
+  width: 70em;
+}
+
+.tabInsumo {
+  width: 70em;
+}
+
+.selFiltro {
+  text-align-last: center;
+  border-style: none;
+}
+
+.filtroTabela {
+  float: right;
+  display: inline;
+  margin-top: 0.25em;
 }
 
 .ocultar {

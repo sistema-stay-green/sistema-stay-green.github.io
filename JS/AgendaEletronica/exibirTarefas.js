@@ -63,10 +63,13 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
  */
 function deveRealizarTarefa(tarefa, dataProposta) {
+  if(tarefa.dataInicialTarefa.month > dataProposta.getMonth())
+    return false;
+
   if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
     dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
         Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
-            tarefa.periodRepetTarefa === 0 )
+            tarefa.periodRepetTarefa === 0)
     return true;
 
   return false;

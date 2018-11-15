@@ -23,17 +23,12 @@ class Produto {
 
     // encapsula e cria o objeto item
     constructor() {
-        this.encapsulaDados();
-        this._item = {
-            nomeProduto: this._nome,
-            descrProduto: this._descricao,
-            unidMedProduto: this._unMedida,
-            valorUnitProduto: this._valorProduto,
-            quantEstoqueProduto: this._estoque,
-            pontoAvisoProduto: this._pontoAviso,
-            tipo: "produto"
-        };
-        console.log(this._item);
+        this._nome = null;
+        this._descricao = null;
+        this._unMedida = null;
+        this._valorProduto = null;
+        this._estoque = null;
+        this._pontoAviso = null;
     }
 
     fazRequisicao() {

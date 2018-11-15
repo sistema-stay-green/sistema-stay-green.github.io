@@ -1,16 +1,17 @@
  /* Autor: Diego Demétrio
  Grupo 1: Controle de produção
  líder: Arthur Marcolino */
-function fazRequest(url){
+function fazRequestTabela(url, tipo){
 
   Request.get(url)
-         .then(function(res){ criaTabela(res); })
+         .then(function(res){ criaTabela(res, tipo); })
          .catch(function(error){ console.log(error); });
 }
 window.onload = function () {
     let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=produto";
 
-    fazRequest(url);
+    fazRequestTabela(url, "produto");
+    fazRequestTabela(url, "insumo");
 
     var selecionaTabela = document.getElementsByName("selTabela");
     var produtoTabela = document.getElementById("secProduto");
@@ -35,7 +36,7 @@ window.onload = function () {
         else {
             Avisos(1);
         }
-        fazRequisicao(url);
+        fazRequestTabela(url, "produto");
     });
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
@@ -53,7 +54,7 @@ window.onload = function () {
         else {
             Avisos(1);
         }
-        fazRequisicao(url);
+        fazRequestTabela(url, "insumo");
 
     });
     //tratamento do retorno
@@ -166,3 +167,27 @@ window.onload = function () {
         }
     }
 };
+
+
+function encapsulaDados(tipo) {
+        if(tipo == "produto"){
+            var produto = new Produto();
+
+            produto._nome = document.querySelector("#selNomeProduto").value;
+
+            produto._descricao = document.querySelector("#inpDescricaoProduto").value;
+            if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
+                this._unMedida = "KG";
+            } else {
+                this._unMedida = "L";
+            }
+            produto._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
+            produto._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
+
+            //verifica se há um ponto de aviso (valor opcional);
+            var aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
+            this._pontoAviso = aux == null ? "" : aux;
+
+        }
+        
+    }

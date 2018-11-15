@@ -36,6 +36,7 @@ function criaTabela(itens, tipo){
 												+ "</tr>"
 												+ "</tbody>";
 	}
+	console.log(itens);
 	if(itens != null) {
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);

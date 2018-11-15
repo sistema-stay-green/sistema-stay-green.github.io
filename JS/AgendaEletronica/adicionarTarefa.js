@@ -5,6 +5,7 @@ let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
 
 botaoConfirmarTarefa.addEventListener('click', (evt) => {
         operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
+        escondeFormulario();
 });
 
 function escondeFormulario(){
@@ -27,42 +28,54 @@ function exibeFormularioTarefa(tarefaAExibir){
   if(tarefaAExibir != null){
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
+
     document.querySelector('textarea[name="descricaoTarefa"').value =
       tarefaAExibir.descrTarefa;
+
     document.querySelector('form select').value =
       tarefaAExibir.tipoTarefa;
+
     let data = Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa);
-    console.log(Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa));
+    
     document.querySelector('input[name="realizarDia"]').value =
       data.getUTCFullYear() + "-" + ((data.getMonth+1 < 10) ? '0' + data.getMonth()
         + 1 : data.getMonth() + 1 + "-" + data.getDate());
-    /*console.log(data.getUTCFullYear() + "-" + data.getMonth+1 < 10 ? '0' + data.getMonth()
-      + 1 : data.getMonth() + 1 + "-" + data.getDate());*/
+
     document.querySelector('input[name="periodoRepeticao"]').value =
       tarefaAExibir.periodRepetTarefa;
+
     document.querySelector('input[name="producaoPrevista"]').value =
       tarefaAExibir.quantProduzTarefa;
+
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
+
     botaoConfirmarTarefa.dataset.idTarefa = tarefaAExibir.idTarefa;
     botaoConfirmarTarefa.dataset.operacao = 'u';
     botaoConfirmarTarefa.innerHTML = "Atualizar";
     return;
+
   }else{
     document.querySelector('#nomeNovaTarefa').value =
       "Nova tarefa (clique para editar)";
+
     document.querySelector('textarea[name="descricaoTarefa"').value =
       "Descrição da Tarefa";
+
     document.querySelector('form select').value =
       "ARAR";
+
     let data = new Date();
     document.querySelector('input[name="realizarDia"]').value =
     data.getUTCFullYear() + "-" + ((data.getMonth + 1 < 10) ? '0' + data.getMonth()
     + 1 : data.getMonth() + 1 + "-" + data.getUTCDate());
+
     document.querySelector('input[name="periodoRepeticao"]').value =
       1;
+
     document.querySelector('input[name="producaoPrevista"]').value =
       100;
+
     document.querySelector('input[name="valorGasto"]').value =
       100;
     botaoConfirmarTarefa.innerHTML = "Adicionar";
@@ -124,20 +137,29 @@ function encapsularDadosTarefa(){
     let novaTarefaAdicionada = new Tarefa();
     novaTarefaAdicionada.nomeTarefa =
       document.querySelector('#nomeNovaTarefa').value;
+
     novaTarefaAdicionada.descrTarefa =
       document.querySelector('textarea[name="descricaoTarefa"').value;
+
     novaTarefaAdicionada.tipoTarefa =
       document.querySelector('form select').value;
+
     let data = new Date(document.querySelector('input[name="realizarDia"]').value);
     data.setDate(data.getDate() + 1);
+
     novaTarefaAdicionada.dataInicialTarefa = data;
+
     novaTarefaAdicionada.periodRepetTarefa =
       document.querySelector('input[name="periodoRepeticao"]').value;
+
     novaTarefaAdicionada.insumosTarefa = "";
+
     novaTarefaAdicionada.quantProduzTarefa =
       document.querySelector('input[name="producaoPrevista"]').value;
+
     novaTarefaAdicionada.gastoTarefa =
       document.querySelector('input[name="valorGasto"]').value;
+
     novaTarefaAdicionada.idTarefa = document.querySelector('button[name="adicionarTarefa"]')
       .dataset.idTarefa;
 
@@ -149,9 +171,11 @@ function encapsularDadosTarefa(){
     for(let insumos of insumosConsumidos){
       novaTarefaAdicionada.insumosTarefa += insumos.value + ', ';
     }
+
     let length = novaTarefaAdicionada.insumosTarefa.length;
     novaTarefaAdicionada.insumosTarefa = novaTarefaAdicionada
       .insumosTarefa.substr(0, length-2);
+
     novaTarefaAdicionada.quantInsumosTarefa = insumosConsumidos.length;
 
     return novaTarefaAdicionada;

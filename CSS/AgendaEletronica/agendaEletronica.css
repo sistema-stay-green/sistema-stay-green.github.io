@@ -80,6 +80,9 @@ textarea::placeholder{
 	font-weight: bold;
 }
 
+nav{
+	z-index: 999;
+}
 .sectionCheck{
 	border-bottom: 1px solid;
 }

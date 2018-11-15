@@ -1,16 +1,16 @@
  /* Autor: Diego Demétrio
  Grupo 1: Controle de produção
  líder: Arthur Marcolino */
+function fazRequest(url){
 
-
+  Request.get(url)
+         .then(function(res){ criaTabela(res); })
+         .catch(function(error){ console.log(error); });
+}
 window.onload = function () {
-    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&tipo=produto";
+    let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=produto";
 
-    Request.get(url)
-       .then(function(res){
-            criaTabela(res, "produto");
-        })
-       .catch(function(erro){ console.log(erro); return;});
+    fazRequest(url);
 
     var selecionaTabela = document.getElementsByName("selTabela");
     var produtoTabela = document.getElementById("secProduto");
@@ -31,10 +31,11 @@ window.onload = function () {
             }, 1000);
             Avisos(0);
             Avisos(4);
-        } else {
+        } 
+        else {
             Avisos(1);
         }
-
+        fazRequisicao(url);
     });
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
@@ -48,9 +49,11 @@ window.onload = function () {
             }, 1000);
             Avisos(0);
             Avisos(4);
-        } else {
+        }
+        else {
             Avisos(1);
         }
+        fazRequisicao(url);
 
     });
     //tratamento do retorno
@@ -108,6 +111,7 @@ window.onload = function () {
                 if (inputs[i].value === "" || inputs[i].validity.valid === false || inputs[i].value === "NaN") {
                     inputs[i].style.border = "1px solid red";
                     cont++;
+                    console.log(inputs);
                 } else {
                     inputs[i].style.border = "none";
                     inputs[i].style.borderBottom = "1px solid black";

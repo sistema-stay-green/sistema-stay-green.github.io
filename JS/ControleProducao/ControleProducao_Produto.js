@@ -28,7 +28,7 @@ class Produto {
             this._item = {
                 nomeProduto: this._nomeProduto,
                 descrProduto: this._descrProduto,
-                unidMedidaProduto: this._unidMedProduto,
+                unidMedProduto: this._unidMedProduto,
                 valorUnitProduto: this._valorUnitProduto,
                 quantEstoqueProduto: this._quantEstoqueProduto,
                 pontoAvisoProduto: this._pontoAvisoProduto 
@@ -44,7 +44,6 @@ class Produto {
 
     fazRequisicao() {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=produto";
-        console.log(this._item);
         return Request.get(url);
     }
 }

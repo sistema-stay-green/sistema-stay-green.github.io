@@ -24,7 +24,7 @@ window.onload = function () {
 
     document.querySelector("#btnRegistarProduto").addEventListener('click', function () {
         if (checarInputs()) {
-            produto = new Produto();
+            produto = encapsulaDados("produto");
             promises = produto.fazRequisicao();
             setTimeout(function () {
                 console.log(promises);
@@ -42,7 +42,7 @@ window.onload = function () {
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
         console.log(checarInputs());
         if (checarInputs()) {
-            insumo = new Insumo();
+            insumo = encapsulaDados("insumo");
             promises = insumo.fazRequisicao();
             setTimeout(function () {
                 console.log(promises);
@@ -168,26 +168,65 @@ window.onload = function () {
     }
 };
 
-
+function encapsulaDadosJSON(tipo, JSON){
+    var item;
+    if(tipo == "produto"){
+        item = new Produto();
+        item._nome = JSON.nome;
+        item._descricao = JSON.descricao;
+        item._unMedida = JSON.unMedida;
+        item._valorProduto = JSON.valorProduto;
+        item._estoque = JSON.estoque;
+        item._pontoAviso = JSON.pontoAviso;
+        item.toJSON();
+    }
+    else {
+        item = new Insumo();
+        item._nome = JSON.nome;
+        item._finalidade = JSON.descricao;
+        item._valorUnidade = JSON.unMedida;
+        item._estoque = JSON.valorProduto;
+        item._pontoAviso = JSON.pontoAviso;
+        item.toJSON();
+    }
+}
 function encapsulaDados(tipo) {
+    var item;
         if(tipo == "produto"){
-            var produto = new Produto();
+            var item = new Produto();
 
-            produto._nome = document.querySelector("#selNomeProduto").value;
+            item._nome = document.querySelector("#selNomeProduto").value;
 
-            produto._descricao = document.querySelector("#inpDescricaoProduto").value;
+            item._descricao = document.querySelector("#inpDescricaoProduto").value;
+
             if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
-                this._unMedida = "KG";
-            } else {
-                this._unMedida = "L";
+                item._unMedida = "KG";
+            } 
+            else {
+                item._unMedida = "L";
             }
-            produto._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-            produto._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
+            item._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
+            item._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
 
             //verifica se há um ponto de aviso (valor opcional);
-            var aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-            this._pontoAviso = aux == null ? "" : aux;
-
+            let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
+            item._pontoAviso = (aux == null) ? "" : aux;
+            console.log("aux = " + aux);
+            item.toJSON();
         }
-        
-    }
+        else{
+            var insumo = new Insumo();
+
+            item._nome = document.querySelector("#inpNomeInsumo").value;
+            item._finalidade = document.querySelector("#inpFinalidadeInsumo").value;
+            item._valorUnidade = parseFloat(document.querySelector("#inpValorUniInsumo").value);
+            item._estoque = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
+
+            //verifica se há um ponto de aviso
+            let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
+            item._pontoAviso = (aux == null) ? "" : aux;
+
+            item.toJSON();
+        }
+    return item;
+}

@@ -2,40 +2,7 @@ function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	console.log(sufixo);
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
-	if(tipo == "produto") {
-		tabela.innerHTML = "<thead>"
-												+ "<tr>"
-												+ "<th>Nome do produto</th>"
-												+ "<th>Descrição</th>"
-												+ "<th>Unidade de medida</th>"
-												+ "<th>Valor</th>"
-												+ "<th>Quantidade em estoque</th>"
-												+ "<th>Ponto de aviso</th>"
-												+ "<th>Opções</th>"
-												+ "</tr>"
-												+ "</thead>"
-												+ "<tbody>"
-												+ "<tr>"
-												+ "</tr>"
-												+ "</tbody>";
-	}
-
-	else {
-		tabela.innerHTML =  "<thead>"
-												+ "<tr>"
-												+ "<th>Nome do insumo</th>"
-												+ "<th>Finalidade</th>"
-												+ "<th>Valor unitário/th>"
-												+ "<th>Quantidade em estoque</th>"
-												+ "<th>Ponto de aviso</th>"
-												+ "<th>Opções</th>"
-												+ "</tr>"
-												+ "</thead>"
-												+ "<tbody>"
-												+ "<tr>"
-												+ "</tr>"
-												+ "</tbody>";
-	}
+	
 	console.log(itens);
 	if(itens != null) {
 		for (var i = 0; i < itens.length; i++) {

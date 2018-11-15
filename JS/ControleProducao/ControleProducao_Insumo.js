@@ -5,26 +5,35 @@
 class Insumo {
 
     constructor() {
-        this.encapsulaDados();
-        this._item = {
-            nomeInsumo: this._nome,
-            finalidadeInsumo: this._finalidade,
-            valorCompraInsumo: this._valorUnidade,
-            quantEstoqueInsumo: this._estoque,
-            pontoAvisoInsumo: this._pontoAviso,
-            tipo: "insumo"
-        }
+        this._nome = null;
+        this._finalidade = null;
+        this._valorCompra = null;
+        this._quantEstoque = null;
+        this._pontoAviso = null;
+        this._item = null;
     }
 
     //encapsula os dados
-      encapsulaDados() {
-          this._nome = document.querySelector("#inpNomeInsumo").value;
-          this._finalidade = document.querySelector("#inpFinalidadeInsumo").value;
-          this._valorUnidade = parseFloat(document.querySelector("#inpValorUniInsumo").value);
-          this._estoque = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
-          //verifica se há um ponto de aviso
-          var aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
-          this._pontoAviso = (aux == null) ? "" : aux;
+      toJSON(){
+        this._item = {};
+        if(this._nome != null &&
+               this._finalidade != null &&
+               this._valorCompra != null &&
+               this._quantEstoque != null ){
+            this._item = {
+                nome: this._nome,
+                finalidade: this._finalidade,
+                valorCompra: this._valorCompra,
+                quantEstoque: this._quantEstoque,
+                pontoAviso: this._pontoAviso 
+            }
+            this._item[nome] = this._nome;
+            this._item[descricao] = this._descricao;
+            this._item[valorProduto] = this._valorProduto;
+            this._item[estoque] = this._estoque;
+            this._item[pontoAviso] = this._pontoAviso;
+            console.log(this._item);
+        }
       }
 
     //faz requisição utilizando classe fornecida pela gerência
@@ -32,6 +41,5 @@ class Insumo {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=insumo";
         console.log(url);
         return Request.get(url);
-
     }
 }

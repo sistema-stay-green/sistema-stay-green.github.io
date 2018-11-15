@@ -8,31 +8,32 @@ class Produto {
 
     // encapsula e cria o objeto item
     constructor() {
-        this._nome = null;
-        this._descricao = null;
-        this._unMedida = null;
-        this._valorProduto = null;
-        this._quantEstoque = null;
-        this._pontoAviso = null;
+        this._nomeProduto = null;
+        this._descrProduto = null;
+        this._unidMedProduto = null;
+        this._valorUnitProduto = null;
+        this._quantEstoqueProduto = null;
+        this._pontoAvisoProduto = null;
+
+        this._fotoMercadoria = null;
         this._item = null;
     }
 
     toJSON(){
-        if(this._nome != null &&
-               this._descricao != null &&
-               this._unMedida != null &&
-               this._valorProduto != null &&
-               this._estoque != null){
+        if(this._nomeProduto != null &&
+               this._descrProduto != null &&
+               this._unidMedProduto != null &&
+               this._valorUnitProduto != null &&
+               this._quantEstoqueProduto != null){
             this._item = {
-                nome: this._nome,
-                descricao: this._descricao,
-                unMedida: this._unMedida,
-                valorProduto: this._valorProduto,
-                quantEstoque: this._estoque,
-                pontoAviso: this._pontoAviso 
+                nomeProduto: this._nomeProduto,
+                descrProduto: this._descrProduto,
+                unidMedidaProduto: this._unidMedProduto,
+                valorUnitProduto: this._valorUnitProduto,
+                quantEstoqueProduto: this._quantEstoqueProduto,
+                pontoAvisoProduto: this._pontoAvisoProduto 
             }
             
-            console.log("pontoaviso" + this._pontoAviso);
         }
 
     }
@@ -40,8 +41,10 @@ class Produto {
     getItem(){
         return this._item;
     }
+
     fazRequisicao() {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=produto";
+        console.log(this._item);
         return Request.get(url);
     }
 }

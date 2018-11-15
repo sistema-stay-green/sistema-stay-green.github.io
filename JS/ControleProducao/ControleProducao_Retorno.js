@@ -1,14 +1,14 @@
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
-	console.log(sufixo);
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
+	var tabela2 = tabela.tbody;
 	
-	console.log(itens);
 	if(itens != null) {
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);
 			for (var j = 0; j < 7; j++) {
 				var celula = linha.insertCell(j);
+
 				switch (j) {
 					case 0:
 					celula.innerHTML = itens[i].nomeProduto;
@@ -29,13 +29,14 @@ function criaTabela(itens, tipo){
 					celula.innerHTML = itens[i].pontoAvisoProduto;
 					break;
 					case 6:
-					celula.innerHTML = "<button id='btnEditar"+itens[i].idProduto+"'>Editar</button><button id='btnRemover"+itens[i].idProduto+"'>Remover</button>"
+					celula.innerHTML = "<button id='btnEditar" + itens[i].idProduto + "'>Editar</button><button id='btnRemover" + itens[i].idProduto + "'>Remover</button>"
 					break;
 
 				}
 			}
 		}
 	}
+
 	adicionarEventos(itens);
 }
 
@@ -54,5 +55,9 @@ function adicionarEventos(vet) {
 
 		}
 	}
+
+}
+
+function adicionaLinha(){
 
 }

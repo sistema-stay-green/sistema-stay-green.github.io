@@ -1,18 +1,19 @@
  /* Autor: Diego Demétrio
  Grupo 1: Controle de produção
  líder: Arthur Marcolino */
-function fazRequestTabela(url, tipo){
 
-  Request.get(url)
-         .then(function(res){ criaTabela(res, tipo); })
-         .catch(function(error){ console.log(error); });
+function fazRequisicaoTabela(tipo){
+    let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=" + tipo;
+    Request.get(url)
+           .then(function(res){
+            criaTabela(res, tipo)
+           })
+           .catch(function(error){ console.log(error)});
 }
+
 window.onload = function () {
-    let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=produto";
-
-    fazRequestTabela(url, "produto");
-    fazRequestTabela(url, "insumo");
-
+    fazRequisicaoTabela("produto");
+    fazRequisicaoTabela("insumo");
     var selecionaTabela = document.getElementsByName("selTabela");
     var produtoTabela = document.getElementById("secProduto");
     var insumoTabela = document.getElementById("secInsumo");
@@ -26,6 +27,7 @@ window.onload = function () {
         if (checarInputs()) {
             produto = encapsulaDados("produto");
             promises = produto.fazRequisicao();
+            console.log(produto._item);
             setTimeout(function () {
                 console.log(promises);
                 respostaServlet(promises);
@@ -36,7 +38,7 @@ window.onload = function () {
         else {
             Avisos(1);
         }
-        fazRequestTabela(url, "produto");
+
     });
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
@@ -54,7 +56,6 @@ window.onload = function () {
         else {
             Avisos(1);
         }
-        fazRequestTabela(url, "insumo");
 
     });
     //tratamento do retorno
@@ -93,17 +94,13 @@ window.onload = function () {
     };
     var seleciona = document.querySelector("#selDescricaoProduto");
     function mudaProduto() {
-        if (selecionaNomeProduto.value === "cafe") {
-            tdNomeProduto.innerHTML = "KG (Kilograma)";
-            seleciona.innerHTML = "<option value=\"bourbon\">Bourbon</option>" +
-                                  "<option value=\"robusta\">Robusta</option>" +
-                                  "<option value=\"arabica\">Arabica</option>";
-
+        if (selecionaNomeProduto.value === "LEITE") {
+            tdNomeProduto.innerHTML = "L (Litro)"
         } else {
-            tdNomeProduto.innerHTML = "L (Litro)";
-            seleciona.innerHTML = "<option value=\"integral\">Integral</option>"
+            tdNomeProduto.innerHTML = "KG (Kilograma)";
         }
     }
+
     function checarInputs() {
         var inputs = document.querySelectorAll('input');
         var cont = 0;
@@ -189,44 +186,46 @@ function encapsulaDadosJSON(tipo, JSON){
         item._pontoAviso = JSON.pontoAviso;
         item.toJSON();
     }
+    return item;
 }
+
 function encapsulaDados(tipo) {
     var item;
-        if(tipo == "produto"){
+    if(tipo == "produto"){
             var item = new Produto();
 
-            item._nome = document.querySelector("#selNomeProduto").value;
+            item._nomeProduto = document.querySelector("#selNomeProduto").value;
 
-            item._descricao = document.querySelector("#inpDescricaoProduto").value;
+            item._descrProduto = document.querySelector("#inpDescricaoProduto").value;
 
             if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
-                item._unMedida = "KG";
+                item._unidMedProduto = "KG";
             } 
             else {
-                item._unMedida = "L";
+                item._unidMedProduto = "L";
             }
-            item._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-            item._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
+            item._valorUnitProduto = parseFloat(document.querySelector("#inpValorProduto").value);
+            item._quantEstoqueProduto = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
 
             //verifica se há um ponto de aviso (valor opcional);
             let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-            item._pontoAviso = (aux == null) ? "" : aux;
+            item._pontoAvisoProduto = (aux == null) ? "" : aux;
             console.log("aux = " + aux);
             item.toJSON();
-        }
-        else{
+    }
+    else{
             var insumo = new Insumo();
 
-            item._nome = document.querySelector("#inpNomeInsumo").value;
-            item._finalidade = document.querySelector("#inpFinalidadeInsumo").value;
-            item._valorUnidade = parseFloat(document.querySelector("#inpValorUniInsumo").value);
-            item._estoque = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
+            item._nomeInsumo = document.querySelector("#inpNomeInsumo").value;
+            item._finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo").value;
+            item._valorCompraInsumo = parseFloat(document.querySelector("#inpValorUniInsumo").value);
+            item._quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
 
             //verifica se há um ponto de aviso
             let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
-            item._pontoAviso = (aux == null) ? "" : aux;
+            item._pontoAvisoInsumo = (aux == null) ? "" : aux;
 
             item.toJSON();
-        }
+    }
     return item;
 }

@@ -1,3 +1,7 @@
+nav {
+  height: 3.2em !important;
+}
+
 tbody select {
   width: 100%;
   text-align-last: center;
@@ -10,11 +14,13 @@ caption h3 {
 }
 
 #btnRegistarProduto, #btnRegistrarInsumo {
-  margin-top: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-#h2TabProduto, #h2Registros {
+#h2Registrar, #h2Registros {
   display: inline-block;
+  font-weight: bold;
 }
 
 #btnCriaRelatorio {
@@ -43,7 +49,7 @@ caption h3 {
 }
 
 #tabProdutosRegistrados {
-  width: 70em;
+  width: 78em;
   margin-bottom: 4em;
 }
 
@@ -55,10 +61,11 @@ caption h3 {
 #h3CaptionProduto, #h3CaptionInsumo {
   display: inline;
   float: left;
+  font-weight: bold;
 }
 
 #tabInsumosRegistrados {
-  width: 70em;
+  width: 78em;
 }
 
 #conteudoDivModal h2 {
@@ -119,7 +126,14 @@ caption h3 {
 }
 
 .ocultar {
-  display: none;
+  display: none !important;
+}
+
+.tabFlex {
+  flex-wrap: wrap;
+  display: flex;
+  width: 80em;
+  margin: auto;
 }
 
 .conteudo {

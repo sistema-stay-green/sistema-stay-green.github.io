@@ -32,15 +32,14 @@
             <tr>
               <td>
                 <select id="selNomeProduto">
-                  <option value="cafe">Café</option>
-                  <option value="leite">Leite</option>
+                  <option value="CAFE_BOURBON">Café Bourbon</option>
+                  <option value="CAFE_ROBUSTA">Café Robusta</option>
+                  <option value="CAFE_ARABICA">Café Arábica</option>
+
+                  <option value="LEITE">Leite</option>
                 </select>
               </td>
-              <td><select id="selDescricaoProduto">
-                <option value="bourbon">Bourbon</option>
-                <option value="robusta">Robusta</option>
-                <option value="arabica">Arabica</option>
-              </select></td>
+              <td><input type="text" id="inpDescricaoProduto"></td>
               <td id="tdNomeProduto">KG (Kilograma)</td>
               <td><input type="number" id="inpValorProduto"></td>
               <td><input type="number" id="inpQuantEstoqueProduto"></td>
@@ -95,7 +94,7 @@
                   <option value="Café">Café</option>
                   <option value="Leite">Leite</option>
                   <option value="preco">Preço</option>
-                  <option value="quantEsotque">Quantidade em estoque</option>
+                  <option value="quantEstoque">Quantidade em estoque</option>
                 </select>
               </div>
             </div>
@@ -205,6 +204,6 @@
     <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
-
+    <script src="JS/ControleProducao/ControleProducao_Retorno.js" charset="utf-8"></script>
   </body>
 </html>

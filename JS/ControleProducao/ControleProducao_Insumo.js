@@ -28,13 +28,13 @@ class Insumo {
                 pontoAvisoInsumo: this._pontoAvisoInsumo 
             }
             
-            console.log(this._item);
         }
       }
 
     //faz requisição utilizando classe fornecida pela gerência
     fazRequisicao() {
-        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=insumo";
+        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=insumo";
+        console.log(this._item);
         return Request.get(url);
     }
 }

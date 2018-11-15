@@ -6,10 +6,21 @@ function fazRequisicaoTabela(tipo){
     let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=" + tipo;
     Request.get(url)
            .then(function(res){
-            criaTabela(res, tipo)
+            criaTabela(res, tipo);
+            if (res.length >= 4 ) {
+                  document.querySelector("#btnRegistarProduto").disabled = true;
+                  document.querySelector("#btnRegistarProduto").style.cursor = "not-allowed";
+                  document.querySelector("#btnRegistarProduto").title = "Máximo de 4 produtos atingido";
+            }else {
+                  document.querySelector("#btnRegistarProduto").disabled = false;
+                  document.querySelector("#btnRegistarProduto").style.cursor = "pointer";
+                  document.querySelector("#btnRegistarProduto").title = "";
+            }
            })
            .catch(function(error){ console.log(error)});
 }
+
+
 
 window.onload = function () {
     fazRequisicaoTabela("produto");
@@ -23,32 +34,32 @@ window.onload = function () {
     var produto;
     var promises;
 
+
     document.querySelector("#btnRegistarProduto").addEventListener('click', function () {
         if (checarInputs()) {
             produto = encapsulaDados("produto");
             promises = produto.fazRequisicao();
-            console.log(produto._item);
             setTimeout(function () {
-                console.log(promises);
                 respostaServlet(promises);
+                fazRequisicaoTabela("produto");
             }, 1000);
             Avisos(0);
             Avisos(4);
-        } 
+        }
         else {
             Avisos(1);
         }
+
 
     });
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
-        console.log(checarInputs());
         if (checarInputs()) {
             insumo = encapsulaDados("insumo");
             promises = insumo.fazRequisicao();
             setTimeout(function () {
-                console.log(promises);
                 respostaServlet(promises);
+                fazRequisicaoTabela("insumo");
             }, 1000);
             Avisos(0);
             Avisos(4);
@@ -56,6 +67,7 @@ window.onload = function () {
         else {
             Avisos(1);
         }
+
 
     });
     //tratamento do retorno
@@ -109,14 +121,12 @@ window.onload = function () {
                 if (inputs[i].value === "" || inputs[i].validity.valid === false || inputs[i].value === "NaN") {
                     inputs[i].style.border = "1px solid red";
                     cont++;
-                    console.log(inputs);
                 } else {
                     inputs[i].style.border = "none";
                     inputs[i].style.borderBottom = "1px solid black";
                 }
             }
         }
-        console.log(cont);
         if (cont > 0) {
             cont = 0;
             return false;
@@ -169,21 +179,21 @@ function encapsulaDadosJSON(tipo, JSON){
     var item;
     if(tipo == "produto"){
         item = new Produto();
-        item._nome = JSON.nome;
-        item._descricao = JSON.descricao;
-        item._unMedida = JSON.unMedida;
-        item._valorProduto = JSON.valorProduto;
-        item._estoque = JSON.estoque;
-        item._pontoAviso = JSON.pontoAviso;
+        item._nomeProduto = JSON._nomeProduto;
+        item._descrProduto = JSON._descrProduto;
+        item._unidMedProduto = JSON._unidMedProduto;
+        item._valorUnitProduto = JSON._valorUnitProduto;
+        item._quantEstoqueProduto = JSON._quantEstoqueProduto;
+        item._pontoAvisoProduto = JSON._pontoAvisoProduto;
         item.toJSON();
     }
     else {
         item = new Insumo();
-        item._nome = JSON.nome;
-        item._finalidade = JSON.descricao;
-        item._valorUnidade = JSON.unMedida;
-        item._estoque = JSON.valorProduto;
-        item._pontoAviso = JSON.pontoAviso;
+        item._nomeInsumo = JSON.nomeInsumo;
+        item._finalidadeInsumo = JSON.finalidadeInsumo;
+        item._valorCompraInsumo = JSON.valorCompraInsumo;
+        item._quantEstoqueInsumo = JSON.quantEstoqueInsumo;
+        item._pontoAvisoInsumo = JSON.pontoAvisoInsumo;
         item.toJSON();
     }
     return item;
@@ -192,7 +202,7 @@ function encapsulaDadosJSON(tipo, JSON){
 function encapsulaDados(tipo) {
     var item;
     if(tipo == "produto"){
-            var item = new Produto();
+            item = new Produto();
 
             item._nomeProduto = document.querySelector("#selNomeProduto").value;
 
@@ -200,7 +210,7 @@ function encapsulaDados(tipo) {
 
             if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
                 item._unidMedProduto = "KG";
-            } 
+            }
             else {
                 item._unidMedProduto = "L";
             }
@@ -210,11 +220,10 @@ function encapsulaDados(tipo) {
             //verifica se há um ponto de aviso (valor opcional);
             let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
             item._pontoAvisoProduto = (aux == null) ? "" : aux;
-            console.log("aux = " + aux);
             item.toJSON();
     }
     else{
-            var insumo = new Insumo();
+            item = new Insumo();
 
             item._nomeInsumo = document.querySelector("#inpNomeInsumo").value;
             item._finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo").value;

@@ -75,7 +75,6 @@ function criaTabela(itens, tipo){
 			
 		}
 	}
-
 	adicionarEventos(itens);
 }
 var aux;
@@ -84,16 +83,31 @@ function adicionarEventos(vet) {
 	var botoes = document.querySelectorAll("table button");
 	for (botao of botoes) {
 		aux = botao;
-		if(botao.id.includes("btnEditar")){
-			botao.addEventListener('click', function(){ removeLinha(aux); })
+		if(botao.id.includes("Editar")){
+			botao.addEventListener('click', function(){ editaLinha(aux); })
 		}
-		else if(botao.id.includes("btnRemover")){
-			botao.addEventListener('click', function(){ editaLinha(aux) });
+		else if(botao.id.includes("Remover")){
+			botao.addEventListener('click', function(){ removeLinha(aux) });
 		}
 	}
 
 }
 
 function removeLinha(botao){
+	let id = botao.id.slice(17, botao.id.length);
+	let url; 
 	console.log(botao);
+	if(botao.id.includes("Produto")){
+		//remove do BD
+		url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id" + id;
+		Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+		fazRequisicaoTabela("produto");
+	}
+	else{
+		//remove do BD
+		url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id" + id;
+		Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+		fazRequisicaoTabela("insumo");
+	}
+
 }

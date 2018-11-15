@@ -27,7 +27,6 @@ class Insumo {
                 quantEstoqueInsumo: this._quantEstoqueInsumo,
                 pontoAvisoInsumo: this._pontoAvisoInsumo 
             }
-            
         }
       }
 

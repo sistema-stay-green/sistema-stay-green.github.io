@@ -4,22 +4,7 @@
 
 class Produto {
 
-    encapsulaDados() {
-        this._nome = document.querySelector("#selNomeProduto").value;
-        this._descricao = document.querySelector("#selDescricaoProduto").value;
-        if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
-            this._unMedida = "KG";
-        } else {
-            this._unMedida = "L";
-        }
-        this._valorProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-        this._estoque = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
-
-        //verifica se há um ponto de aviso (valor opcional);
-        var aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-        this._pontoAviso = aux == null ? "" : aux;
-
-    }
+    
 
     // encapsula e cria o objeto item
     constructor() {

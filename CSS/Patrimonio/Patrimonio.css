@@ -14,16 +14,21 @@ html{
 body{
     background-color: #FDFCF3 !important;
     width:100%;
+    min-height: 100vh;
+}
+
+body.waiting *{
+    cursor: progress !important;
+}
+
+#main{
+    box-sizing: border-box;
+    padding: 2em;
+    min-height: 45vh;
 }
 
 button{
     transition: 150ms ease-in-out;
-}
-
-button :not(#floatingButtons button){
-    transition: 150ms ease-in-out;
-    padding-top: 0.4em !important;
-    padding-bottom: 0.4em !important;
 }
 
 button:hover{
@@ -40,17 +45,15 @@ input:focus{
 h1{
     text-align: center;
     margin-bottom: 0;
+    margin-top: 0;
     font-size: 2.2em;
 }
 
 nav{
     transition: 250ms ease-in-out;
-    margin: 0px;
 }
 
 nav a, nav h3{
-    width: 18vw;
-    box-sizing: border-box;
     transition: 50ms ease-out;
 }
 
@@ -64,11 +67,21 @@ nav:hover{
     -webkit-box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
     box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
 }
+footer{
+    bottom: 0;
+    height: 35vh !important;
+    transition: 250ms ease-in-out;
+}
+
+footer:hover{
+    -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+}
 
 table{
     transition: 250ms ease-in-out;
     overflow: auto;
-    margin-bottom: 5em;
+    margin-bottom: 1em;
 }
 
 table:hover{
@@ -87,9 +100,12 @@ p{
 
 /* TABLE */
 
+#patrimonioTable{
+    margin-bottom: 10vh;
+}
+
 #tabela{
     padding-top: 1em;
-    width: 98%;
     font-size: 0.9em;
     margin: 0 auto;
 }
@@ -119,9 +135,11 @@ tr:hover{
     box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
 }
 
-/* */
+/* No Results Message*/
 
-
+#noResults{
+    margin-bottom: 35vh;
+}
 
 #noResults p:nth-child(1){
     text-align: center;
@@ -163,14 +181,15 @@ button:focus{
 #floatingButtons{
     display: flex;
     flex-direction: row-reverse;
-    position: fixed;
-    bottom: 4vh;
-    right: 4vh;
+    position: sticky;
+    bottom: 2em;
 }
 
 #floatingButtons button{
+    display: flex;
+    align-content: space-around;
     position: relative;
-    padding: 3.5vh;
+    padding: 1.8em;
     border-radius: 50%;
     margin-left: 2vh;
 }
@@ -182,8 +201,10 @@ button:focus{
 
 #floatingButtons button img{
     image-rendering: optimizeQuality;
-    width: 2vh;
-    height: 2vh;
+    display: block;
+    width: 1.1em;
+    height: 1.1em;
+    box-sizing: border-box;
     position: absolute;
     top: 35%;
     right: 35%;
@@ -193,8 +214,6 @@ button:focus{
     display: block;
     border-radius: 0.3em;
     margin-left: 3.5em;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
 }
 
 [id|=edit]{
@@ -394,8 +413,8 @@ input.inputVazio:-ms-input-placeholder{
 }
 
 .shadow{
-    -webkit-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
-    box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.5);
 }
 
 .focusedShadow{

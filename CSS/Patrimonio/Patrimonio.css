@@ -81,7 +81,7 @@ footer:hover{
 table{
     transition: 250ms ease-in-out;
     overflow: auto;
-    margin-bottom: 1em;
+    margin-bottom: 10vh;
 }
 
 table:hover{
@@ -99,10 +99,6 @@ p{
 }
 
 /* TABLE */
-
-#patrimonioTable{
-    margin-bottom: 10vh;
-}
 
 #tabela{
     padding-top: 1em;

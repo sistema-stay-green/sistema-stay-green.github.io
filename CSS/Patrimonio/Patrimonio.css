@@ -20,6 +20,12 @@ button{
     transition: 150ms ease-in-out;
 }
 
+button :not(#floatingButtons button){
+    transition: 150ms ease-in-out;
+    padding-top: 0.4em !important;
+    padding-bottom: 0.4em !important;
+}
+
 button:hover{
     -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
     box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
@@ -39,8 +45,7 @@ h1{
 
 nav{
     transition: 250ms ease-in-out;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
+    margin: 0px;
 }
 
 nav a, nav h3{
@@ -188,6 +193,8 @@ button:focus{
     display: block;
     border-radius: 0.3em;
     margin-left: 3.5em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 [id|=edit]{
@@ -373,6 +380,8 @@ input.inputVazio:-ms-input-placeholder{
 
 .conteudo input{
     max-width: 90%;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 .conteudo{

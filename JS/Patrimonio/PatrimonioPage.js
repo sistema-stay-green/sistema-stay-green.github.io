@@ -326,10 +326,6 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     let id = patrimonio.id;
 
-    console.log(document.querySelector("#nome-" + id));
-    console.log(id);
-
-
     if(patrimonio.nome !== null && patrimonio.nome !== "")
         document.querySelector("#nome-" + id).innerHTML = patrimonio.nome;
     else
@@ -467,6 +463,7 @@ function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
+    warnUserAboutEmptyTextInputs();
 
     if (isModalFilled()) {
 
@@ -480,6 +477,7 @@ function getPatrimonioFromModal(){
         patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
         patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
+        patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
 
 
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
@@ -488,46 +486,61 @@ function getPatrimonioFromModal(){
         if (dataEntrada[0] !== "") {
 
             let dataEntradaTmp = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+            
             if (patrimonio.dataCompra.getTime() < dataEntradaTmp.getTime()) {
-                patrimonio.dataRetorno = dataEntradaTmp;
 
+                patrimonio.dataRetorno = dataEntradaTmp;
                 document.querySelector("#form [name='dataEntradaInput']").classList.remove("inputVazio");
                 document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
             }
             else{
                 document.querySelector("#form [name='dataEntradaInput']").classList.add("inputVazio");
                 document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                
                 showError(6);
                 return null;
             }
-            
         }
 
         if (dataSaida[0] !== "") {
 
-            let statusTmp = document.querySelector("#form [name='tipoSaidaInput']").value;
-            patrimonio.status = statusTmp;
-
             let dataSaidaTmp = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-            if (patrimonio.dataSaida !== null && patrimonio.dataSaida.getTime() < dataSaidaTmp.getTime()) {
 
-                if (statusTmp == "DESCARTADO"){
-                    patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-                    patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+            if (patrimonio.status == "DESCARTADO") {
+
+                if (patrimonio.dataCompra.getTime() < dataSaidaTmp.getTime()) {
+
+                    patrimonio.dataBaixa = dataSaidaTmp;
+                    patrimonio.dataSaida = dataSaidaTmp;
+                    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
                 }
-                else
-                    patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+                else{
 
-                document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
-                document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+                    document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                    showError(6);
+                    return null;
+                }
             }
             else{
-                document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
-                document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
-                showError(6);
-                return null;
+
+                if (patrimonio.dataCompra.getTime() < dataSaidaTmp.getTime()) {
+
+                    patrimonio.dataSaida = dataSaidaTmp;
+                    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+                }
+                else{
+
+                    document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                    showError(6);
+                    return null;
+                }
             }
         }
+
         hideModal();
         return patrimonio;
     }
@@ -539,28 +552,90 @@ function getPatrimonioFromModal(){
 
 function isModalFilled(){
 
+    if (document.querySelector("#form [name='nomeInput']").value == "" ||
+        document.querySelector("#form [name='tipoInput']").value == "" ||
+        document.querySelector("#form [name='finalidadeInput']").value == "" ||
+        document.querySelector("#form [name='indiceDepreciacaoInput']").value == "" ||
+        document.querySelector("#form [name='valorCompraInput']").value == "")
+            return false
+
+
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
 
-    if (document.querySelector("#form [name='nomeInput']").value == "" ||
-    document.querySelector("#form [name='tipoInput']").value == "" ||
-    document.querySelector("#form [name='finalidadeInput']").value == "" ||
-    document.querySelector("#form [name='indiceDepreciacaoInput']").value == "" ||
-    document.querySelector("#form [name='valorCompraInput']").value == "")
-        return false
+    for (const dataField of dataCompra) {
+    
+        if (dataField == "")
+            return false;
+    }
 
     if (isEntradaBeingEdited) {
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
-        if (dataEntrada[0] == "")
-            return false
+
+        for (const dataField of dataEntrada) {
+            
+            if (dataField == "")
+                return false;
+        }
     }
 
     if (isSaidaBeingEdited) {
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
-        if (dataSaida[0] == "")
-            return false
+
+        for (const dataField of dataSaida) {
+        
+            if (dataField == "")
+                return false;
+        }
     }
 
     return true;
+}
+
+function warnUserAboutEmptyTextInputs(){
+
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='nomeInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='finalidadeInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='indiceDepreciacaoInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='valorCompraInput']"));
+
+    dataCompra = document.querySelector("#form [name='dataCompraInput']");
+    warnUserAboutEmptyFieldsIterateDate(dataCompra);
+
+    if (isEntradaBeingEdited) {
+        dataEntrada = document.querySelector("#form [name='dataEntradaInput']");
+        warnUserAboutEmptyFieldsIterateDate(dataEntrada);
+    }
+
+    if (isSaidaBeingEdited) {
+        dataSaida = document.querySelector("#form [name='dataSaidaInput']");
+        warnUserAboutEmptyFieldsIterateDate(dataSaida);
+    }
+
+}
+
+function warnUserAboutEmptyFieldsIterateDate(element) {
+
+    dataFieldArray = element.value.split('-');
+    
+    for (const dataField of dataFieldArray) {
+        
+        if (dataField == "")
+            element.classList.add("inputVazio");
+        else
+            element.classList.remove("inputVazio");
+    }
+}
+
+function warnUserAboutEmptyFieldsIterateText(element) {
+    
+    if (element.value == ""){
+        element.classList.add("inputVazio");
+        element.placeholder = "Campo obrigatório!";
+    }
+    else{
+        element.classList.remove("inputVazio");
+        element.placeholder = "Digite...";
+    }
 }
 
 /**

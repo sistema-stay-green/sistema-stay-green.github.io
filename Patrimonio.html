@@ -8,8 +8,8 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Controle de Patrimônio</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/staygreen.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="print" href="CSS/Patrimonio/Print.css"/>
         <link rel="icon" type="image/png" href="imgs/icons/favicon.png">
     </head>
@@ -71,22 +71,28 @@
             <div class="conteudo">
 
                 <label for="nomeInput">Nome do Patrimônio:</label>
-                <input type="text" name="nomeInput" placeholder="digite...">
+                <input type="text" name="nomeInput" placeholder="Digite...">
 
                 <label for="tipoInput">Tipo do Patrimônio:</label>
                 <select name="tipoInput">
                     <option value="MAQUINA" selected>Máquina</option>
+                    <option value="ANIMAL">Animal</option>
+                    <option value="IMOVEL">Imóvel</option>
+                    <option value="MERCADORIA">Mercadoria</option>
+                    <option value="UTENSILIO">Utensilio</option>
+                    <option value="VEICULO">Veículo</option>
+                    <option value="TERRENO">Terreno</option>
                     <option value="OUTROS">Outros</option>
                 </select>
 
                 <label for="finalidadeInput">Descrição da finalidade do Patrimônio:</label>
-                <input type="text" name="finalidadeInput" placeholder="digite...">
+                <input type="text" name="finalidadeInput" placeholder="Digite...">
 
                 <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
-                <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
+                <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="Digite...">
 
                 <label for="valorCompraInput">Valor da Compra/Produção (R$):</label>
-                <input type="number" min="0" name="valorCompraInput" placeholder="digite...">
+                <input type="number" min="0" name="valorCompraInput" placeholder="Digite...">
 
                 <label for="dataCompraInput">Data da Compra/Produção:</label>
                 <input type="date" name="dataCompraInput">

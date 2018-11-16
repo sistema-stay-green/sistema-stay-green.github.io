@@ -104,23 +104,19 @@ function editPatrimonio(){
 
     patrimonio = getPatrimonioFromModal();
 
-    if (!staticDebugMode) {
-        if (patrimonio !== null) {
+    if (patrimonio !== null) {
 
-            patrimonio.id = currentPatrimonioIdBeingEdited;
-            updatePatrimonioIntoTable(patrimonio);
+        patrimonio.id = currentPatrimonioIdBeingEdited;
+        updatePatrimonioIntoTable(patrimonio);
+
+        if (!staticDebugMode) {
+
+            
             patrimonio = getPatrimonioFromTable(currentPatrimonioIdBeingEdited);
             currentPatrimonioIdBeingEdited = null;
             sendUpdatedPatrimonio(patrimonio);
         }
     }
-    else{
-        patrimonio = getPatrimonioFromModal();
-        patrimonio.id = currentPatrimonioIdBeingEdited;
-        updatePatrimonioIntoTable(patrimonio);
-    }
-
-    
 }
 
 function deletePatrimonio(id) {

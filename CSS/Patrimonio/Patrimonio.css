@@ -52,6 +52,7 @@ nav a, nav h3{
 nav h3{
     cursor: default;
     font-weight: bold;
+    margin-left: 0.1em;
 }
 
 nav:hover{

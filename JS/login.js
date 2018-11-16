@@ -1,34 +1,36 @@
 // Recebe as informações do formulário  de login
-let btnEntrarLoginEl = document.querySelector("#cadastro > button:first-of-type");
+let btnEntrarLoginEl = document.querySelector("#login > form:first-of-type > button:first-of-type");
 
 btnEntrarLoginEl.addEventListener("click", function() {
 
-  let emailInputEl = document.querySelector("#cadastro > label:first-of-type > input"),
-      senhaInputEl = document.querySelector("#cadastro > label:last-of-type > input");
+  let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
+      senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
+      //usuario = new Usuario();
 
   Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
               + "&senha=" + senhaInputEl.value)
-         .then(function(){window.location.redirect("index.html")})
-         .catch(function(){
-           alert("Erro ao logar o servidor");
-         });
+         .then(() => { window.location.redirect("index.html") })
+         .catch(() => { alert("Erro ao logar o servidor") });
 
-})
+});
 
 // Recebe as informações do formulário de cadastro
-let btnConfimarCadastroEl = document.querySelector("#cadastro > button:first-of-type");
+let btnConfimarCadastroEl = document.querySelector("#login > form:last-of-type > button:first-of-type");
 
 btnConfimarCadastroEl.addEventListener("click", function() {
 
-  let nomeUsuario = document.querySelector("#cadastro input[name='nomeUsuario']").value,
-      cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']").value,
-      saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
-      emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
-      senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value;
+  let nomeUsuario = document.querySelector("#login > form:last-of-type input[name='nomeUsuario']").value,
+      cnpjUsuario = document.querySelector("#login > form:last-of-type input[name='cnpjUsuario']").value,
+      saldoUsuario = document.querySelector("#login > form:last-of-type input[name='saldoUsuario']").value,
+      emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
+      senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
+      //usuario = new Usuario();
 
-  Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
-              + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-              + "&login=" + emailUsuario + "&senha=" + senhaUsuario);
+      Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
+                  + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
+                  + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
+             .then(() => { window.location.redirect("index.html") })
+             .catch(() => { alert("Erro ao cadastrar os dados no servidor") });
 
 });
 
@@ -46,9 +48,22 @@ btnCadastrarEl.addEventListener("click", function() {
   if(forms[0].classList.contains("ocultar")) {
     mensagemCadastroEl.innerHTML = "Faça o login no botão abaixo caso já tenha uma conta no sistema";
     btnCadastrarEl.innerHTML = "Login";
-  } else {
+  }
+  else {
     mensagemCadastroEl.innerHTML = "Cadastre-se aqui, caso necessite acessar as partes administrativas do sistema";
     btnCadastrarEl.innerHTML = "Cadastrar";
   }
+
+});
+
+// Remove mensagens de erro dos inputs ao clicar em limpar
+let btnLimparEl = document.querySelector("#cadastro > button:last-of-type");
+
+btnLimparEl.addEventListener("click", function(){
+
+  let spanErros = document.querySelectorAll("#cadastro .mensagemErro");
+
+  for (const erroEl of spanErros)
+    erroEl.parentElement.removeChild(erroEl);
 
 });

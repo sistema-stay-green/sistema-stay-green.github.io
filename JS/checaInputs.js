@@ -2,7 +2,7 @@
 function checaEmail() {
 
   let emailUsuario = inputEmailEl.value,
-      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type')
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
       labelEl = document.querySelector("#cadastro > label:nth-child(4)");
 
   if(emailUsuario == "" && labelEl.contains(labelEl.querySelector("span"))) {
@@ -20,7 +20,7 @@ function checaEmail() {
     }
     else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".com") > -1) && labelEl.querySelector("span") !== null) {
       labelEl.removeChild(labelEl.querySelector("span"));
-      if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
+      if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
         btnConfirmarEl.disable = "false";
         btnConfirmarEl.classList.remove("botaoDesab");
       }
@@ -43,7 +43,7 @@ function checarSenhas() {
   }
   else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
     labelEl.removeChild(labelEl.querySelector("span"));
-    if(document.querySelectorAll("#login > form .mensagemErro").length === 0) {
+    if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
       btnConfimarCadastroEl.disable = "false";
       btnConfimarCadastroEl.classList.remove("botaoDesab");
     }

@@ -13,7 +13,7 @@ let comprarCallBack = (patrimonio = new Patrimonio()) => {
     insertPatrimonioIntoTable(patrimonio);
 };
 
-let deletarCallBack = (id, responseCode) => {
+let deletarCallBack = (id) => {
 
     removePatrimonioFromTable(id);
 };
@@ -63,17 +63,15 @@ let filterCallBack = (patrimonios = []) => {
 function receivePatrimonios(){
 
     receiveAllPatrimoniosFromServlet(returnCallBack);
-
 }
 
 function changeFilter(){
 
-    if (!staticDebugMode)
+    if (!staticDebugMode){
         receiveAllPatrimoniosFromServlet(filterCallBack);
+    }
     else
         filterCallBack(patrimonioStaticStash);
-    
-
 }
 
 function showRelatorio(){
@@ -91,8 +89,9 @@ function newPatrimonio(patrimonio = new Patrimonio()){
     if (patrimonio !== null) {
 
         patrimonio.status = "EM_POSSE";
-        if (!staticDebugMode)
-        sendNewPatrimonio(patrimonio, comprarCallBack);
+        if (!staticDebugMode){
+            sendNewPatrimonio(patrimonio, comprarCallBack);
+        }
         else {
             patrimonio.id = lastIdGenerated++;
             insertPatrimonioIntoTable(patrimonio);
@@ -111,7 +110,6 @@ function editPatrimonio(){
 
         if (!staticDebugMode) {
 
-            
             patrimonio = getPatrimonioFromTable(currentPatrimonioIdBeingEdited);
             currentPatrimonioIdBeingEdited = null;
             sendUpdatedPatrimonio(patrimonio);
@@ -121,8 +119,10 @@ function editPatrimonio(){
 
 function deletePatrimonio(id) {
     
-    if (!staticDebugMode)
+    if (!staticDebugMode){
+
         sendDeletedPatrimonio(id, deletarCallBack);
+    }
     else
         removePatrimonioFromTable(id);
 }

@@ -33,6 +33,7 @@ const NA = "N/A";
 let currentPatrimonioIdBeingEdited = null;
 let isEntradaBeingEdited = false;
 let isSaidaBeingEdited = false;
+let isErrorVisible = false;
 
 // --- FUNCTIONS ---
 
@@ -115,48 +116,57 @@ function showEditOptions(key){
 
 function showError(cod){
 
-    errorModal = document.querySelector("#errorModal");
-    let message;
+    if (isErrorVisible){
+        setTimeout(() => {
+            showError(cod);
+        }, 4000)
+        return;
+    }
+
+    let message = "<span class='bold'>ERRO! </span>";
 
     switch (cod) {
         case 0:
-            message = "ERRO! A Conexão com o servidor não pôde ser estabelecida.";
+            message += "A Conexão com o servidor não pôde ser estabelecida.";
             break;
 
         case 1:
-            message = "ERRO! Patrimônio não encontrado no Server.";
+            message += "Patrimônio não encontrado no Server.";
             break;
 
         case 2:
-            message = "ERRO! Parametros inválidos enviados.";
+            message += "Parametros inválidos enviados.";
             break;
 
         case 3:
-            message = "ERRO! Todos os campos devem estar preenchidos para enviar.";
+            message += "Todos os campos devem estar preenchidos para enviar.";
             break;
 
         case 4:
-            message = "ERRO! Os valores inseridos são inválidos.";
+            message += "Os valores inseridos são inválidos.";
             break;
 
         case 5:
-            message = "ERRO! Nenhum Patrimônio registrado para gerar o relatório.";
+            message += "Nenhum Patrimônio registrado para gerar o relatório.";
             break;
 
         case 6:
-            message = "ERRO! A Data de Compra deve ser menor que a Data de Retorno/Saída.";
+            message += "A Data de Compra deve ser menor que a Data de Retorno/Saída.";
             break;
 
         default:
             throw new Error("Código de erro inválido!");
     }
 
-    errorModal.classList.remove("esconde");
     errorModal.innerHTML = message;
+    isErrorVisible = true;
+    errorModal.classList.remove("esconde");
     setTimeout(() => {
-        errorModal.classList.add("esconde");
-    }, 5000);
-
+        if (isErrorVisible){
+            isErrorVisible = false;
+            errorModal.classList.add("esconde");
+        }
+    }, 4000);
 }
 
 function hideEditOptions(){
@@ -172,9 +182,11 @@ function hideEditOptions(){
  * @author Mei
  */
 function hideModal(){
+
     mascara.classList.remove("aparece-fundo-escuro");
     formModal.classList.add("esconde");
     relatorioModal.classList.add("esconde");
+    clearEmptyFieldsWarning();
     isEntradaBeingEdited = false;
     isSaidaBeingEdited = false;
 }
@@ -636,6 +648,21 @@ function warnUserAboutEmptyFieldsIterateText(element) {
         element.classList.remove("inputVazio");
         element.placeholder = "Digite...";
     }
+}
+
+function clearEmptyFieldsWarning(){
+
+    document.querySelector("#form [name='nomeInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='nomeInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='finalidadeInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='finalidadeInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='indiceDepreciacaoInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='indiceDepreciacaoInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='valorCompraInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='valorCompraInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='dataEntradaInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
 }
 
 /**

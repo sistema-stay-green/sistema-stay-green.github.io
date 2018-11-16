@@ -12,9 +12,11 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=r";
   Request.get(SERVLET_URL + params).then((response) => {
 
+    document.body.classList.remove("waiting");
     let patrimonios = [];
     for (const current of response) {
       patrimonios.push(encapsulateJSON(current));
@@ -32,9 +34,11 @@ function receiveAllPatrimoniosFromServlet(callBack){
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
   Request.get(SERVLET_URL + params).then((response) => {
-    
+
+    document.body.classList.remove("waiting");
     callBack(encapsulateJSON(response));
   });
 }
@@ -46,11 +50,11 @@ function sendNewPatrimonio(patrimonio, callBack){
  */
 function sendUpdatedPatrimonio(patrimonio){
   
-
+  document.body.classList.add("waiting");
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
   Request.get(SERVLET_URL + params).then((response) => {
 
-
+    document.body.classList.remove("waiting");
   });
 }
 
@@ -59,12 +63,14 @@ function sendUpdatedPatrimonio(patrimonio){
  * @param {Patrimonio} patrimonio 
  * @author Mei Fagundes, Duda Pasquel
  */
-function sendDeletedPatrimonio(id){
+function sendDeletedPatrimonio(id, callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=d&id=" + id;
   Request.get(SERVLET_URL + params).then((response) => {
 
-
+    callBack(id);
+    document.body.classList.remove("waiting");
   });
 }
 

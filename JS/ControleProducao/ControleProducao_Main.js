@@ -7,15 +7,6 @@ function fazRequisicaoTabela(tipo){
     Request.get(url)
            .then(function(res){
             criaTabela(res, tipo);
-            if (res.length >= 4 ) {
-                  document.querySelector("#btnRegistarProduto").disabled = true;
-                  document.querySelector("#btnRegistarProduto").style.cursor = "not-allowed";
-                  document.querySelector("#btnRegistarProduto").title = "Máximo de 4 produtos atingido";
-            }else {
-                  document.querySelector("#btnRegistarProduto").disabled = false;
-                  document.querySelector("#btnRegistarProduto").style.cursor = "pointer";
-                  document.querySelector("#btnRegistarProduto").title = "";
-            }
            })
            .catch(function(error){ console.log(error)});
 }
@@ -25,33 +16,13 @@ function fazRequisicaoTabela(tipo){
 window.onload = function () {
     fazRequisicaoTabela("produto");
     fazRequisicaoTabela("insumo");
-    var selecionaTabela = document.getElementsByName("selTabela");
     var produtoTabela = document.getElementById("secProduto");
     var insumoTabela = document.getElementById("secInsumo");
-    var selecionaNomeProduto = document.getElementById("selNomeProduto");
-    var tdNomeProduto = document.getElementById("tdNomeProduto");
-    var secAvisos = document.getElementById('secAvisos');
+    //var modalAvisos = document.getElementById('modalAvisos');
     var produto;
     var promises;
 
-
-    document.querySelector("#btnRegistarProduto").addEventListener('click', function () {
-        if (checarInputs()) {
-            produto = encapsulaDados("produto");
-            promises = produto.fazRequisicao();
-            setTimeout(function () {
-                respostaServlet(promises);
-                fazRequisicaoTabela("produto");
-            }, 1000);
-            Avisos(0);
-            Avisos(4);
-        }
-        else {
-            Avisos(1);
-        }
-
-
-    });
+;
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
         if (checarInputs()) {
@@ -61,11 +32,11 @@ window.onload = function () {
                 respostaServlet(promises);
                 fazRequisicaoTabela("insumo");
             }, 1000);
-            Avisos(0);
-            Avisos(4);
+          //  Avisos(0);
+          //  Avisos(4);
         }
         else {
-            Avisos(1);
+          //  Avisos(1);
         }
 
 
@@ -74,45 +45,16 @@ window.onload = function () {
     function respostaServlet(retorno) {
         retorno.then(function (resultado) {
             if (resultado == 2) {
-                Avisos(0);
-                Avisos(2);
+            //    Avisos(0);
+            //    Avisos(2);
                 limparInputs();
             }
         })
                 .catch(function (erro) {
-                    Avisos(0);
-                    Avisos(3);
+              //      Avisos(0);
+              //      Avisos(3);
                 });
     }
-
-    selecionaTabela[0].onchange = function () {
-        mudaTabela()
-    };
-    //Função para alternar entre tabela de produtos e tabela de insumos via select
-    function mudaTabela() {
-        if (selecionaTabela[0].value === "produto") {
-            produtoTabela.classList.toggle("ocultar");
-            insumoTabela.classList.toggle("ocultar");
-        }
-        else {
-            produtoTabela.classList.toggle("ocultar");
-            insumoTabela.classList.toggle("ocultar");
-        }
-    }
-
-    //Função para alternar entre KG ou L na unidade de medida do produto via select
-    selecionaNomeProduto.onchange = function () {
-        mudaProduto();
-    };
-    var seleciona = document.querySelector("#selDescricaoProduto");
-    function mudaProduto() {
-        if (selecionaNomeProduto.value === "LEITE") {
-            tdNomeProduto.innerHTML = "L (Litro)"
-        } else {
-            tdNomeProduto.innerHTML = "KG (Kilograma)";
-        }
-    }
-
     function checarInputs() {
         var inputs = document.querySelectorAll('input');
         var cont = 0;
@@ -134,7 +76,6 @@ window.onload = function () {
             cont = 0;
             return true;
         }
-
     }
 
     function limparInputs() {
@@ -148,31 +89,31 @@ window.onload = function () {
     }
 
 
-    function Avisos(i) {
-        switch (i) {
-            case 0:
-                secAvisos.innerHTML = "";
-                secAvisos.style.color = "green";
-                break;
-            case 1:
-                secAvisos.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar</p>";
-                secAvisos.style.color = "red";
-                break;
-            case 2:
-                secAvisos.innerHTML = "<p>Salvo no banco de dados com sucesso</p>";
-                secAvisos.style.color = "#1d883a";
-                break;
-            case 3:
-                secAvisos.innerHTML = "<p>A conexão com o banco de dados falhou</p>";
-                secAvisos.style.color = "red";
-                break;
-            case 4:
-                secAvisos.innerHTML = "<p>Enviando...</p>";
-                secAvisos.style.color = "orange";
-                break;
-            default:
-        }
-    }
+    // function Avisos(i) {
+    //     switch (i) {
+    //         case 0:
+    //             secAvisos.innerHTML = "";
+    //             secAvisos.style.color = "green";
+    //             break;
+    //         case 1:
+    //             secAvisos.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar</p>";
+    //             secAvisos.style.color = "red";
+    //             break;
+    //         case 2:
+    //             secAvisos.innerHTML = "<p>Salvo no banco de dados com sucesso</p>";
+    //             secAvisos.style.color = "#1d883a";
+    //             break;
+    //         case 3:
+    //             secAvisos.innerHTML = "<p>A conexão com o banco de dados falhou</p>";
+    //             secAvisos.style.color = "red";
+    //             break;
+    //         case 4:
+    //             secAvisos.innerHTML = "<p>Enviando...</p>";
+    //             secAvisos.style.color = "orange";
+    //             break;
+    //         default:
+    //     }
+    // }
 };
 
 function encapsulaDadosJSON(tipo, JSON){
@@ -203,38 +144,34 @@ function encapsulaDados(tipo) {
     var item;
     if(tipo == "produto"){
             item = new Produto();
-
-            item._nomeProduto = document.querySelector("#selNomeProduto").value;
-
-            item._descrProduto = document.querySelector("#inpDescricaoProduto").value;
-
-            if (document.querySelector("#tdNomeProduto").innerHTML == "KG (Kilograma)") {
-                item._unidMedProduto = "KG";
+            if (document.querySelector("#inpNomeProduto").value == "Leite") {
+                item.nomeProduto = "LEITE";
+            }else if (document.querySelector("#inpNomeProduto").value == "Café Bourbon") {
+                item.nomeProduto = "CAFE_BOURBON"
+            }else if (document.querySelector("#inpNomeProduto").value == "Café Roubusta") {
+                item.nomeProduto = "CAFE_ROBUSTA";
+            }else {
+                item.nomeProduto = "CAFE_ARABICA";
             }
-            else {
-                item._unidMedProduto = "L";
-            }
-            item._valorUnitProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-            item._quantEstoqueProduto = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
+            item.descrProduto = document.querySelector("#inpDescricaoProduto").value;
+            item.unidadeMedidaProduto = document.querySelector("#inpUnidadeMedidaProduto").value;
+            item.valorUnitProduto = parseFloat(document.querySelector("#inpValorProduto").value);
+            item.quantEstoqueProduto = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
 
             //verifica se há um ponto de aviso (valor opcional);
             let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-            item._pontoAvisoProduto = (aux == null) ? "" : aux;
-            item.toJSON();
+            item.pontoAvisoProduto = (aux == null) ? "" : aux;
     }
     else{
             item = new Insumo();
-
-            item._nomeInsumo = document.querySelector("#inpNomeInsumo").value;
-            item._finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo").value;
-            item._valorCompraInsumo = parseFloat(document.querySelector("#inpValorUniInsumo").value);
-            item._quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
+            item.nomeInsumo = document.querySelector("#inpNomeInsumo2").value;
+            item.finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo2").value;
+            item.valorCompraInsumo = parseFloat(document.querySelector("#valorCompraInsumo2").value);
+            item.quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo2").value);
 
             //verifica se há um ponto de aviso
-            let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
-            item._pontoAvisoInsumo = (aux == null) ? "" : aux;
-
-            item.toJSON();
+            let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo2").value);
+            item.pontoAvisoInsumo = (aux == null) ? "" : aux;
     }
     return item;
 }

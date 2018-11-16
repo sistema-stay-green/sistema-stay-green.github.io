@@ -9,89 +9,19 @@
 
 </head>
 <body>
-    <div class="conteudo">
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="Patrimonio.html">Patrimônio</a>
-        <a href="controleProducao.html">Produção</a>
-        <h3>STAY GREEN</h3>
-        <a href="agendaEletronica.html">Agenda</a>
-        <a href="controleMaquinas.html">Maquinas</a>
-        <a href="paginaVendasProdutor.html">Vendas</a>
-      </nav>
-      <h2 id="h2Registrar">Registrar:</h2>
-      <select id="selTabela" name="selTabela">
-        <option value="produto">Produto</option>
-        <option value="insumo">Insumo</option>
-      </select>
-      <section id="secProduto" class="tabFlex">
-        <table class="tabProduto">
-          <thead>
-            <tr>
-              <th>Nome do produto</th>
-              <th>Descrição</th>
-              <th>Unidade de medida</th>
-              <th>Valor</th>
-              <th>Quantidade em estoque</th>
-              <th>Ponto de aviso</th>
-            <tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <select id="selNomeProduto">
-                  <option value="CAFE_BOURBON">Café Bourbon</option>
-                  <option value="CAFE_ROBUSTA">Café Robusta</option>
-                  <option value="CAFE_ARABICA">Café Arábica</option>
-
-                  <option value="LEITE">Leite</option>
-                </select>
-              </td>
-              <td><input type="text" id="inpDescricaoProduto"></td>
-              <td id="tdNomeProduto">KG (Kilograma)</td>
-              <td><input type="number" id="inpValorProduto"></td>
-              <td><input type="number" id="inpQuantEstoqueProduto"></td>
-              <td><input type="number" id="inpPontoAvisoProduto"></td>
-            </tr>
-          <tbody>
-        </table>
-        <button type="button" id="btnRegistarProduto">Registrar</button>
-      </section>
-
-      <section id="secInsumo" class="ocultar tabFlex">
-        <table class="tabInsumo">
-          <thead>
-            <tr>
-              <th>Nome do insumo</th>
-              <th>Finalidade</th>
-              <th>Valor unitário</th>
-              <th>Quantidade em estoque</th>
-              <th>Ponto de aviso</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" id="inpNomeInsumo"></td>
-              <td><input type="text" id="inpFinalidadeInsumo"></td>
-              <td><input type="number" id="inpValorUniInsumo"></td>
-              <td><input type="number" id="inpQuantEstoqueInsumo"></td>
-              <td><input type="number" id="inpPontoAvisoInsumo"></td>
-            </tr>
-          </tbody>
-        </table>
-        <button type="button" id="btnRegistrarInsumo">Registrar</button>
-      </section>
-      <section id="secAvisos">
-
-      </section>
-
-      <section id="secProdutosInsumosRegistrados">
-        <h2 id="h2Registros">Registros a serem mostrados: </h2>
-        <select id="selRegistros" name="selRegistros">
-          <option value="produtosRegistrados">Produtos</option>
-          <option value="insumosRegistrados">Insumos</option>
-          <option value="ambosRegistrados">Ambos</option>
-        </select>
+  <div class="conteudo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Patrimonio.html">Patrimônio</a>
+      <a href="controleProducao.html">Produção</a>
+      <h3>STAY GREEN</h3>
+      <a href="agendaEletronica.html">Agenda</a>
+      <a href="controleMaquinas.html">Maquinas</a>
+      <a href="paginaVendasProdutor.html">Vendas</a>
+    </nav>
+    <section id="secProdutosInsumosRegistrados">
+      <h2 id="h2Registros">Controle de Produção</h2>
+      <section id="secProduto">
         <table id="tabProdutosRegistrados">
           <caption id="capTabProduto">
             <div class="divCaption">
@@ -111,16 +41,20 @@
               <th>Nome do produto</th>
               <th>Descrição</th>
               <th>Unidade de medida</th>
-              <th>Valor</th>
+              <th>Preço por unidade</th>
               <th>Quantidade em estoque</th>
               <th>Ponto de aviso</th>
+              <th>Opções</th>
             </tr>
           </thead>
           <tbody>
             <tr></tr>
           </tbody>
         </table>
-        <table id="tabInsumosRegistrados" class="ocultar">
+      </section>
+
+      <section id="secInsumo">
+        <table id="tabInsumosRegistrados" class="">
           <caption id="capTabInsumo">
             <div class="divCaption">
               <h3 id="h3CaptionInsumo">Insumos</h3>
@@ -137,9 +71,10 @@
             <tr>
               <th>Nome do insumo</th>
               <th>Finalidade</th>
-              <th>Valor unitário</th>
+              <th>Preço por unidade</th>
               <th>Quantidade em estoque</th>
               <th>Ponto de aviso</th>
+              <th>Opções</th>
             </tr>
           </thead>
           <tbody>
@@ -147,57 +82,155 @@
           </tbody>
         </table>
       </section>
-      <div id="divModal" class="esconde modal">
-        <div id="conteudoDivModal">
-          <h2>Histórico por mercadorias / por período</h2>
-          <div id="divPeriodo">
-            <label for="selPeriodo">Período: </label>
-            <select id="selPeriodo">
-              <option value="diario">Diário</option>
-              <option value="semanal">Semanal</option>
-              <option value="mensal">Mensal</option>
-            </select>
-          </div>
-          <button type="button" id="btnRelatorioHistorico">Gerar relatório</button>
-          <h2>Relatório de produção</h2>
-          <button type="button" id="btnRelatorioProducao">Gerar relatório</button>
-          <div id="divBtnFechar">
-            <button type="button" id="btnFechaModal" class="botaoFantasma">Fechar</button>
-          </div>
-        </div>
+    </section>
+
+    <div id="divModalInsumo" class="esconde modal posDivModal">
+      <h3>Registrar insumos</h3>
+      <div class="divModalInsumo2">
+        <section>
+          <label for="nomeInsumo">Nome do insumo:</label>
+          <input type="text" maxlength="40" placeholder="Exemplo: Gasolina" name="nomeInsumo" id="inpNomeInsumo">
+        </section>
+        <section>
+          <label for="finalidadeInsumo">Finalidade do insumo:</label>
+          <input type="text" maxlength="120" placeholder="Exemplo: Abastecer máquinas" name="finalidadeInsumo" id="inpFinalidadeInsumo">
+        </section>
+        <section>
+          <label for="precoInsumo">Preço por unidade:</label>
+          <input type="number" min="0" step="0.001" max="999999999" placeholder="Exemplo: 4.85" name="precoInsumo" id="valorCompraInsumo">
+        </section>
+        <section>
+          <label for="quantidadeInsumo">Quantidade em estoque:</label>
+          <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 500" name="quantidadeInsumo" id="inpQuantEstoqueInsumo">
+        </section>
+        <section>
+          <label for="pontoInsumo">Ponto de aviso:</label>
+          <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 100" name="pontoInsumo" id="inpPontoAvisoInsumo">
+        </section>
+        <button type="button" id="btnRegistrarInsumo">Registrar</button>
+        <button type="button" id="btnLimparModalInsumo">Limpar</button>
+        <button type="button" id="btnFecharModalInsumo">Fechar</button>
       </div>
-      <div id="modalRelatorioHistorico" class="esconde modal">
-        <div>
-          <h1>Relatório de Mercadorias por Período</h1>
-          <p id="conteudoRelatorioHistorico">texto 1</p>
-          <div class="divBotoes">
-            <button type="button" id="btnVoltaRelatorioH" class="voltarModal">Voltar</button>
-            <button type="button" id="btnFechaRelatorioH" class="botaoFantasma">Fechar</button>
-          </div>
+    </div>
+
+    <div id="divModal" class="esconde modal">
+      <div id="conteudoDivModal">
+        <h2>Histórico por mercadorias / por período</h2>
+        <div id="divPeriodo">
+          <label for="selPeriodo">Período: </label>
+          <select id="selPeriodo">
+            <option value="diario">Diário</option>
+            <option value="semanal">Semanal</option>
+            <option value="mensal">Mensal</option>
+          </select>
         </div>
-      </div>
-      <div id="modalRelatorioProducao" class="esconde modal">
-        <div>
-          <h1>Relatório de Produção</h1>
-          <p id="conteudoRelatorioProducao">texto 2</p>
-          <div class="divBotoes">
-            <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>
-            <button type="button" id="btnFechaRelatorioP" class="botaoFantasma">Fechar</button>
-          </div>
+        <button type="button" id="btnRelatorioHistorico">Gerar relatório</button>
+        <h2>Relatório de produção</h2>
+        <button type="button" id="btnRelatorioProducao">Gerar relatório</button>
+        <div id="divBtnFechar">
+          <button type="button" id="btnFechaModal" class="botaoFantasma">Fechar</button>
         </div>
       </div>
     </div>
-    <div id="divMascara" class="ocultar"></div>
-    <button type="button" id="btnCriaRelatorio">Relatórios</button>
+    <div id="modalRelatorioHistorico" class="esconde modal">
+      <div>
+        <h1>Relatório de Mercadorias por Período</h1>
+        <p id="conteudoRelatorioHistorico">texto 1</p>
+        <div class="divBotoes">
+          <button type="button" id="btnVoltaRelatorioH" class="voltarModal">Voltar</button>
+          <button type="button" id="btnFechaRelatorioH" class="botaoFantasma">Fechar</button>
+        </div>
+      </div>
+    </div>
+    <div id="modalRelatorioProducao" class="esconde modal">
+      <div>
+        <h1>Relatório de Produção</h1>
+        <p id="conteudoRelatorioProducao">texto 2</p>
+        <div class="divBotoes">
+          <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>
+          <button type="button" id="btnFechaRelatorioP" class="botaoFantasma">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="divMascara" class="ocultar"></div>
+  <button type="button" id="btnCriaRelatorio">Relatórios</button>
+  <button type="button" id="btnAbrirModalInsumo"><img src="imgs/ControleProducao/plus.png"></button>
 
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Retorno.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_RelatoriosMercadoriasPeriodo.js" charset="utf-8"></script>
-  </body>
+  <div id="divModalCerteza" class="esconde modal posDivModal">
+    <div id="divModalCerteza2">
+      <h3>Você tem certeza que deseja realizar essa ação?</h3>
+      <button type="button" id="btnSimModalCerteza">Sim</button>
+      <button type="button" id="btnNaoModalCerteza">Não</button>
+    </div>
+  </div>
+
+  <div id="divModalEditarProduto" class="esconde modal posDivModal">
+    <div id="divModalEditarProduto2">
+      <section>
+        <label for="nomeProduto">Nome do produto:</label>
+        <input type="text" maxlength="40" name="nomeProduto" id="inpNomeProduto" value="" readonly>
+      </section>
+      <section>
+        <label for="descricaoProduto">Descrição do produto:</label>
+        <input type="text" maxlength="120" placeholder="Exemplo: Abastecer máquinas" name="descricaoProduto" id="inpDescricaoProduto">
+      </section>
+      <section>
+        <label for="UnidadeMedidaProduto">Unidade de medida:</label>
+        <input type="text" name="precoProduto" id="inpUnidadeMedidaProduto" value="" readonly>
+      </section>
+      <section>
+        <label for="valorProduto">Preço por unidade:</label>
+        <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 500" name="valorProduto" id="inpValorProduto">
+      </section>
+      <section>
+        <label for="quantidadeProduto">Quantidade em estoque:</label>
+        <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 500" name="quantidadeProduto" id="inpQuantEstoqueProduto">
+      </section>
+      <section>
+        <label for="pontoProduto">Ponto de aviso:</label>
+        <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 100" name="pontoProduto" id="inpPontoAvisoProduto">
+      </section>
+      <button type="button" id="btnCancelaEditarProduto">Cancelar</button>
+      <button type="button" id="btnConfirmarEditarProduto">Concluir</button>
+    </div>
+  </div>
+
+  <div id="divModalEditarInsumo" class="esconde modal posDivModal">
+    <div id="divModalEditarInsumo2">
+      <section>
+        <label for="nomeInsumo2">Nome do insumo:</label>
+        <input type="text" maxlength="40" placeholder="Exemplo: Gasolina" name="nomeInsumo2" id="inpNomeInsumo2">
+      </section>
+      <section>
+        <label for="finalidadeInsumo2">Finalidade do insumo:</label>
+        <input type="text" maxlength="120" placeholder="Exemplo: Abastecer máquinas" name="finalidadeInsumo2" id="inpFinalidadeInsumo2">
+      </section>
+      <section>
+        <label for="precoInsumo2">Preço por unidade:</label>
+        <input type="number" min="0" step="0.001" max="999999999" placeholder="Exemplo: 4.85" name="precoInsumo2" id="valorCompraInsumo2">
+      </section>
+      <section>
+        <label for="quantidadeInsumo2">Quantidade em estoque:</label>
+        <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 500" name="quantidadeInsumo2" id="inpQuantEstoqueInsumo2">
+      </section>
+      <section>
+        <label for="pontoInsumo2">Ponto de aviso:</label>
+        <input type="number" min="0" step="1" max="999999999" placeholder="Exemplo: 100" name="pontoInsumo2" id="inpPontoAvisoInsumo2">
+      </section>
+      <button type="button" id="btnCancelarEditarInsumo">Cancelar</button>
+      <button type="button" id="btnConfirmarEditarInsumo">Concluir</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_Retorno.js" charset="utf-8"></script>
+  <script src="JS/ControleProducao/ControleProducao_RelatoriosMercadoriasPeriodo.js" charset="utf-8"></script>
+</body>
 </html>

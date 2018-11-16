@@ -4,31 +4,109 @@
 
 class Insumo {
 
-    constructor() {
-        this._nomeInsumo = null;
-        this._finalidadeInsumo = null;
-        this._valorCompraInsumo = null;
-        this._quantEstoqueInsumo = null;
-        this._pontoAvisoInsumo = null;
-        this._item = null;
+    construtorSemParametros() {
+        this.idInsumo = null;
+        this.nomeInsumo = null;
+        this.finalidadeInsumo = null;
+        this.valorCompraInsumo = null;
+        this.quantEstoqueInsumo = null;
+        this.pontoAvisoInsumo = null;
+    }
+    /**
+     *
+     * @return Id de um objeto insumo
+     */
+    getIdInsumo() {
+        return idInsumo;
     }
 
-    //encapsula os dados
-      toJSON(){
-        this._item = {};
-        if(this._nomeInsumo != null &&
-               this._finalidadeInsumo != null &&
-               this._valorCompraInsumo != null &&
-               this._quantEstoqueInsumo != null ){
-            this._item = {
-                nomeInsumo: this._nomeInsumo,
-                finalidadeInsumo: this._finalidadeInsumo,
-                valorCompraInsumo: this._valorCompraInsumo,
-                quantEstoqueInsumo: this._quantEstoqueInsumo,
-                pontoAvisoInsumo: this._pontoAvisoInsumo 
-            }
-        }
-      }
+    /**
+     * Define o id de um objeto insumo
+     * @param idInsumo
+     */
+   setIdInsumo(idInsumo) {
+        this.idInsumo = idInsumo;
+    }
+
+    /**
+     *
+     * @return nome de um objeto insumo
+     */
+   getNomeInsumo() {
+        return nomeInsumo;
+    }
+
+    /**
+     * Define o nome de um objeto insumo
+     * @param nomeInsumo
+     */
+   setNomeInsumo(nomeInsumo) {
+        this.nomeInsumo = nomeInsumo;
+    }
+
+    /**
+     *
+     * @return a finalidade de um objeto insumo
+     */
+ getFinalidadeInsumo() {
+        return finalidadeInsumo;
+    }
+
+    /**
+     * Define o nome de um objeto insumo
+     * @param finalidadeInsumo
+     */
+ setFinalidadeInsumo(finalidadeInsumo) {
+        this.finalidadeInsumo = finalidadeInsumo;
+    }
+
+    /**
+     *
+     * @return o valor de cada unidade de um objeto insumo
+     */
+ getValorCompraInsumo() {
+        return valorCompraInsumo;
+    }
+
+    /**
+     * Define o valor de cada unidade de um objeto insumo
+     * @param valorCompraInsumo
+     */
+setValorCompraInsumo(valorCompraInsumo) {
+        this.valorCompraInsumo = valorCompraInsumo;
+    }
+
+    /**
+     *
+     * @return estoque de um objeto insumo
+     */
+ getQuantEstoqueInsumo() {
+        return quantEstoqueInsumo;
+    }
+
+    /**
+     * Define o estoque de um objeto insumo
+     * @param quantEstoqueInsumo
+     */
+setQuantEstoqueInsumo(quantEstoqueInsumo) {
+        this.quantEstoqueInsumo = quantEstoqueInsumo;
+    }
+
+    /**
+     *
+     * @return ponto de aviso para o estoque baixo de um objeto insumo
+     */
+getPontoAvisoInsumo() {
+        return pontoAvisoInsumo;
+    }
+
+    /**
+     * Define o ponto de aviso para o estoque baixo de um objeto insumo
+     * @param pontoAvisoInsumo
+     */
+ setPontoAvisoInsumo(pontoAvisoInsumo) {
+        this.pontoAvisoInsumo = pontoAvisoInsumo;
+    }
 
     //faz requisição utilizando classe fornecida pela gerência
     fazRequisicao() {

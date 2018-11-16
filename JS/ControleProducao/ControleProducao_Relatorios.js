@@ -1,5 +1,13 @@
 var divModalEl = document.querySelector("#divModal");
 var divMascaraEl = document.querySelector("#divMascara");
+var divModalInsumo = document.querySelector('#divModalInsumo');
+var divModalInsumo2 = document.querySelector('#divModalInsumo2');
+var divModalCerteza = document.querySelector('#divModalCerteza');
+var divModalCerteza2 = document.querySelector('#divModalCerteza2');
+var divModalEditarProduto = document.querySelector('#divModalEditarProduto');
+var divModalEditarInsumo2 = document.querySelector('#divModalEditarInsumo2');
+var divModalEditarInsumo = document.querySelector('#divModalEditarInsumo');
+var divModalEditarInsumo2 = document.querySelector('#divModalEditarInsumo2');
 var modalRelatorioHistoricoEl = document.querySelector("#modalRelatorioHistorico");
 var modalRelatorioProducaoEl = document.querySelector("#modalRelatorioProducao");
 var btnCriaRelatorioEl = document.querySelector("#btnCriaRelatorio");
@@ -10,6 +18,17 @@ var btnFechaRelatorioHEl = document.querySelector("#btnFechaRelatorioH");
 var btnRelatorioProducaoEl = document.querySelector("#btnRelatorioProducao");
 var btnVoltaRelatorioPEl = document.querySelector("#btnVoltaRelatorioP");
 var btnFechaRelatorioPEl = document.querySelector("#btnFechaRelatorioP");
+var btnAbrirModalInsumo = document.querySelector('#btnAbrirModalInsumo');
+var btnFecharModalInsumo = document.querySelector('#btnFecharModalInsumo');
+var btnLimparModalInsumo = document.querySelector('#btnLimparModalInsumo');
+var btnSimModalCerteza = document.querySelector('#btnSimModalCerteza');
+var btnNaoModalCerteza = document.querySelector('#btnNaoModalCerteza');
+var btnCancelaEditarProduto = document.querySelector('#btnCancelaEditarProduto');
+var btnConfirmarEditarProduto = document.querySelector('#btnConfirmarEditarProduto');
+var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo');
+var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
+
+
 
 btnCriaRelatorioEl.addEventListener( 'click' , mostraDivModal );
 btnFechaModalEl.addEventListener( 'click' ,  mostraDivModal );
@@ -19,6 +38,18 @@ btnFechaRelatorioHEl.addEventListener( 'click' , fechaRelatorioHistorico );
 btnRelatorioProducaoEl.addEventListener( 'click' , mostraRelatorioProducao );
 btnVoltaRelatorioPEl.addEventListener( 'click' , mostraRelatorioProducao );
 btnFechaRelatorioPEl.addEventListener( 'click' , fechaRelatorioProducao );
+btnAbrirModalInsumo.addEventListener( 'click' , abreInsumoModal );
+btnFecharModalInsumo.addEventListener( 'click' , fechaInsumoModal );
+btnLimparModalInsumo.addEventListener( 'click' , limpaInsumoModal );
+btnSimModalCerteza.addEventListener( 'click' , funcaoModalCerteza );
+btnNaoModalCerteza.addEventListener( 'click' , funcaoModalCerteza );
+btnCancelaEditarProduto.addEventListener( 'click' , funcaoEditarProduto );
+btnConfirmarEditarProduto.addEventListener( 'click' , funcaoEditarProduto );
+btnCancelarEditarInsumo.addEventListener( 'click' , funcaoEditarInsumo );
+btnConfirmarEditarInsumo.addEventListener( 'click' , funcaoEditarInsumo );
+
+
+
 
 function mostraDivModal() {
   divModalEl.classList.toggle("esconde");
@@ -52,39 +83,36 @@ function fechaRelatorioProducao() {
   divMascaraEl.classList.toggle("ocultar");
 }
 
-var selRegistrosEl = document.querySelectorAll("#selRegistros");
-var tabProdutosRegistradosEl = document.querySelector("#tabProdutosRegistrados");
-var tabInsumosRegistradosEl = document.querySelector("#tabInsumosRegistrados");
+function abreInsumoModal() {
+  divModalInsumo.classList.remove("esconde");
+  divMascaraEl.classList.remove("ocultar");
+}
 
-selRegistrosEl[0].onchange = function() {
-  teste();
-};
+function fechaInsumoModal() {
+  divModalInsumo.classList.add("esconde");
+  divMascaraEl.classList.add("ocultar");
+}
 
-function teste() {
-  if (selRegistrosEl[0].value === "produtosRegistrados") {
-    if (tabProdutosRegistradosEl.classList.contains("ocultar")) {
-      tabProdutosRegistradosEl.classList.toggle("ocultar");
-      tabInsumosRegistradosEl.classList.toggle("ocultar");
-    }
-    else {
-      tabInsumosRegistradosEl.classList.toggle("ocultar");
-    }
+function limpaInsumoModal() {
+  var inputs = document.querySelectorAll('input');
+  for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].clientHeight > 0) {
+          inputs[i].value = "";
+      }
   }
-  else if (selRegistrosEl[0].value === "insumosRegistrados") {
-    if (tabInsumosRegistradosEl.classList.contains("ocultar")) {
-      tabProdutosRegistradosEl.classList.toggle("ocultar");
-      tabInsumosRegistradosEl.classList.toggle("ocultar");
-    }
-    else {
-      tabProdutosRegistradosEl.classList.toggle("ocultar");
-    }
-  }
-  else {
-    if (tabProdutosRegistradosEl.classList.contains("ocultar")) {
-      tabProdutosRegistradosEl.classList.toggle("ocultar");
-    }
-    else {
-      tabInsumosRegistradosEl.classList.toggle("ocultar");
-    }
-  }
+}
+
+function funcaoModalCerteza() {
+  divModalCerteza.classList.add("esconde");
+  divMascaraEl.classList.add("ocultar");
+}
+
+function funcaoEditarProduto() {
+  divModalEditarProduto.classList.add("esconde");
+  divMascaraEl.classList.add("ocultar");
+}
+
+function funcaoEditarInsumo() {
+  divModalEditarInsumo.classList.add("esconde");
+  divMascaraEl.classList.add("ocultar");
 }

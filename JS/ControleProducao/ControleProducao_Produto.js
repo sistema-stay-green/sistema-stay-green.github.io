@@ -4,43 +4,97 @@
 
 class Produto {
 
-    
+
 
     // encapsula e cria o objeto item
     constructor() {
-        this._nomeProduto = null;
-        this._descrProduto = null;
-        this._unidMedProduto = null;
-        this._valorUnitProduto = null;
-        this._quantEstoqueProduto = null;
-        this._pontoAvisoProduto = null;
-
-        this._fotoMercadoria = null;
-        this._item = null;
+        this.idProduto = null;
+        this.nomeProduto = null;
+        this.descrProduto = null;
+        this.valorUnitProduto = null;
+        this.quantEstoqueProduto = null;
+        this.pontoAvisoProduto = null;
+        this.fotoMercadoria = null;
+        this.unidMedProduto = null;
+    }
+    /**
+     *
+     * @return Id de um objeto Produto
+     */
+    getIdProduto() {
+        return idProduto;
     }
 
-    toJSON(){
-        if(this._nomeProduto != null &&
-               this._descrProduto != null &&
-               this._unidMedProduto != null &&
-               this._valorUnitProduto != null &&
-               this._quantEstoqueProduto != null){
-            this._item = {
-                nomeProduto: this._nomeProduto,
-                descrProduto: this._descrProduto,
-                unidMedProduto: this._unidMedProduto,
-                valorUnitProduto: this._valorUnitProduto,
-                quantEstoqueProduto: this._quantEstoqueProduto,
-                pontoAvisoProduto: this._pontoAvisoProduto 
-            }
-            
-        }
-
+    /**
+     * Define o id de um objeto Produto
+     * @param idProduto
+     */
+   setIdProduto(idProduto) {
+        this.idProduto = idProduto;
     }
 
-    getItem(){
-        return this._item;
+    /**
+     *
+     * @return nome de um objeto Produto
+     */
+   getNomeProduto() {
+        return nomeProduto;
     }
+
+    /**
+     * Define o nome de um objeto Produto
+     * @param nomeProduto
+     */
+   setNomeProduto(nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+getDescrProduto() {
+           return descrProduto;
+       }
+
+setDescrProduto(descrProduto) {
+           this.descrProduto = descrProduto;
+       }
+
+ getUnidMedProduto() {
+           return unidMedProduto;
+       }
+
+setUnidMedProduto(unidMedProduto) {
+           this.unidMedProduto = unidMedProduto;
+       }
+
+ getValorUnitProduto() {
+           return valorUnitProduto;
+       }
+
+setValorUnitProduto(valorUnitProduto) {
+           this.valorUnitProduto = valorUnitProduto;
+       }
+
+ getQuantEstoqueProduto() {
+           return quantEstoqueProduto;
+       }
+
+setQuantEstoqueProduto(quantEstoqueProduto) {
+           this.quantEstoqueProduto = quantEstoqueProduto;
+       }
+
+getPontoAvisoProduto() {
+           return pontoAvisoProduto;
+       }
+
+setPontoAvisoProduto(pontoAvisoProduto) {
+           this.pontoAvisoProduto = pontoAvisoProduto;
+       }
+
+getFotoMercadoria() {
+           return fotoMercadoria;
+       }
+setFotoMercadoria(fotoMercadoria) {
+           this.fotoMercadoria = fotoMercadoria;
+       }
 
     fazRequisicao() {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=produto";

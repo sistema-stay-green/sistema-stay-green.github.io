@@ -3,11 +3,11 @@ function criaTabela(itens, tipo){
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
 	var aux = tabela.innerHTML.slice(0, tabela.innerHTML.indexOf("<tbody>"));
 	aux += "<tbody>" +
-			 "<tr>" + 
-			 "</tr>" + 
+			 "<tr>" +
+			 "</tr>" +
 		   "</tbody>"
 	tabela.innerHTML = aux;
-	
+
 	if(itens != null) {
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);
@@ -19,7 +19,15 @@ function criaTabela(itens, tipo){
 
 					switch (j) {
 						case 0:
-						celula.innerHTML = itens[i].nomeProduto;
+						if (itens[i].nomeProduto == "LEITE") {
+							celula.innerHTML = "Leite";
+						}else if (itens[i].nomeProduto == "CAFE_BOURBON") {
+							celula.innerHTML = "Café Bourbon"
+						}else if (itens[i].nomeProduto == "CAFE_ROBUSTA") {
+							celula.innerHTML = "Café Roubusta";
+						}else {
+							celula.innerHTML = "Café Arabica";
+						}
 						break;
 						case 1:
 						celula.innerHTML = itens[i].descrProduto;
@@ -45,7 +53,7 @@ function criaTabela(itens, tipo){
 			}
 			else {
 				for(var j = 0; j < 6; j++){
-					
+
 					var celula = linha.insertCell(j);
 
 					switch (j) {
@@ -65,49 +73,208 @@ function criaTabela(itens, tipo){
 						celula.innerHTML = itens[i].pontoAvisoInsumo;
 						break;
 						case 5:
-						celula.innerHTML = "<button id='btnEditarInsumo" + itens[i].idInsumo + "'>Editar</button><button id='btnRemoverInsumo" + itens[i].idProduto + "'>Remover</button>"
+						celula.innerHTML = "<button id='btnEditarInsumo" + itens[i].idInsumo + "'>Editar</button><button id='btnRemoverInsumo" + itens[i].idInsumo + "'>Remover</button>"
 						break;
 					}
 
 				}
 			}
 			linha.innerHTML += "<input type=\"hidden\" value=\"" + itens[i].idProduto + "\" class=\"idsProdutos\">";
-			
+
 		}
 	}
-	adicionarEventos(itens);
+	adicionarEventos();
 }
-var aux;
-function adicionarEventos(vet) {
-	var itens = vet;
+
+function adicionarEventos() {
+	var aux;
 	var botoes = document.querySelectorAll("table button");
 	for (botao of botoes) {
 		aux = botao;
-		if(botao.id.includes("Editar")){
-			botao.addEventListener('click', function(){ editaLinha(aux); })
-		}
-		else if(botao.id.includes("Remover")){
-			botao.addEventListener('click', function(){ removeLinha(aux) });
+		if (botao.title == "") {
+			if(botao.id.includes("Editar")){
+				botao.addEventListener('click', function(e){ editarMercadoria(e.target.id); });
+				botao.title = "Click aqui para editar";
+			}
+			else if(botao.id.includes("Remover")){
+				botao.addEventListener('click', function(e){ removerMercadoria(e.target.id); });
+				botao.title = "Click aqui para remover";
+			}
 		}
 	}
 
 }
 
-function removeLinha(botao){
-	let id = botao.id.slice(17, botao.id.length);
-	let url; 
-	console.log(botao);
-	if(botao.id.includes("Produto")){
-		//remove do BD
-		url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id" + id;
-		Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
-		fazRequisicaoTabela("produto");
-	}
-	else{
-		//remove do BD
-		url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id" + id;
-		Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
-		fazRequisicaoTabela("insumo");
-	}
 
+function removerMercadoria(id){
+	let url;
+	funcaoCerteza(function (confirmar) {
+			if (confirmar) {
+				if(id.includes("Produto")){
+					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id=" + id.substring(17);;
+					 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+					 document.querySelector("body").style.cursor = "progress";
+					 setTimeout(function () {
+					  	document.querySelector("body").style.cursor = "default";
+							 fazRequisicaoTabela("produto");
+					 }, 1000);
+			 }
+			 else{
+				 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id=" + id.substring(16);;
+				 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+				 document.querySelector("body").style.cursor = "progress";
+				 setTimeout(function () {
+						document.querySelector("body").style.cursor = "default";
+						 fazRequisicaoTabela("insumo");
+				 }, 1000);
+			 }
+			}
+	});
+
+
+}
+
+function editarMercadoria(id){
+				if(id.includes("Produto")){
+					var inpNomeProduto =	document.getElementById('inpNomeProduto');
+					var inpDescricaoProduto =	document.getElementById('inpDescricaoProduto');
+					inpDescricaoProduto.onfocus = function(){this.select()};
+					var inpUnidadeMedidaProduto =	document.getElementById('inpUnidadeMedidaProduto');
+					var inpValorProduto =	document.getElementById('inpValorProduto');
+					inpValorProduto.onfocus = function(){this.select()};
+					var inpQuantEstoqueProduto =	document.getElementById('inpQuantEstoqueProduto');
+					inpQuantEstoqueProduto.onfocus = function(){this.select()};
+					var inpPontoAvisoProduto =	document.getElementById('inpPontoAvisoProduto');
+					inpPontoAvisoProduto.onfocus = function(){this.select()};
+					var link = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&tipo=produto&id=" + id.substring(16);
+					Request.get(link)
+					.then(function(res) {
+						inpNomeProduto.style.border = 'none';
+						inpNomeProduto.style.cursor = 'no-drop';
+						inpDescricaoProduto.value = res.descrProduto;
+						inpUnidadeMedidaProduto.value = res.unidMedProduto;
+						inpUnidadeMedidaProduto.style.border = 'none';
+						inpUnidadeMedidaProduto.style.cursor = 'no-drop';
+						inpUnidadeMedidaProduto.style.width = "8%";
+						inpValorProduto.value = res.valorUnitProduto;
+						inpQuantEstoqueProduto.value = res.quantEstoqueProduto;
+						inpPontoAvisoProduto.value = res.pontoAvisoProduto;
+
+						if (res.nomeProduto == "LEITE") {
+							inpNomeProduto.value = "Leite";
+							inpNomeProduto.style.width = "13%";
+							inpUnidadeMedidaProduto.style.width = "5%";
+						}else if (res.nomeProduto == "CAFE_BOURBON") {
+							inpNomeProduto.value = "Café Bourbon"
+							inpNomeProduto.style.width = "32%";
+						}else if (res.nomeProduto == "CAFE_ROBUSTA") {
+							inpNomeProduto.value = "Café Roubusta";
+							inpNomeProduto.style.width = "33%";
+						}else {
+						inpNomeProduto.value = "Café Arabica";
+						inpNomeProduto.style.width = "31%";
+						}
+
+
+					})
+					.catch(function(erro){
+					 console.log(erro);
+					});
+					editarProduto(function (confirmar) {
+						if (confirmar) {
+							funcaoCerteza(function (certeza) {
+								 if (certeza) {
+									 var produto = encapsulaDados("produto");
+									 produto.idProduto = id.substring(16);
+										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(15);
+										Request.get(url)
+										.then(function(res) {
+											console.log(res);
+
+										})
+										.catch(function(erro){
+										 console.log(erro);
+										});
+									 document.querySelector("body").style.cursor = "progress";
+									setTimeout(function () {
+										 document.querySelector("body").style.cursor = "default";
+											fazRequisicaoTabela("produto");
+									}, 1000);
+								 }
+								 });
+								}
+					 });
+			 }else{
+					var inpNomeInsumo2 =	document.getElementById('inpNomeInsumo2');
+					inpNomeInsumo2.onfocus = function(){this.select()};
+					var inpFinalidadeInsumo2 =	document.getElementById('inpFinalidadeInsumo2');
+					inpFinalidadeInsumo2.onfocus = function(){this.select()};
+					var valorCompraInsumo2 =	document.getElementById('valorCompraInsumo2');
+					valorCompraInsumo2.onfocus = function(){this.select()};
+					var inpQuantEstoqueInsumo2 =	document.getElementById('inpQuantEstoqueInsumo2');
+					inpQuantEstoqueInsumo2.onfocus = function(){this.select()};
+					var inpPontoAvisoInsumo2 =	document.getElementById('inpPontoAvisoInsumo2');
+					inpPontoAvisoInsumo2.onfocus = function(){this.select()};
+					var link = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&tipo=insumo&id=" + id.substring(15);
+					Request.get(link)
+					.then(function(res) {
+						inpNomeInsumo2.value = res.nomeInsumo;
+						inpFinalidadeInsumo2.value = res.finalidadeInsumo;
+						valorCompraInsumo2.value = res.valorCompraInsumo;
+						inpQuantEstoqueInsumo2.value = res.quantEstoqueInsumo;
+						inpPontoAvisoInsumo2.value = res.pontoAvisoInsumo;
+					})
+					.catch(function(erro){
+					 console.log(erro);
+					});
+
+					 editarInsumo(function (confirmar) {
+						 if (confirmar) {
+							 funcaoCerteza(function (certeza) {
+						 			if (certeza) {
+										var insumo = encapsulaDados("insumo");
+										insumo.idInsumo = id.substring(15);
+										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(insumo)+ "&operacao=atualizar&tipo=insumo&id=" + id.substring(15);
+										Request.get(url)
+										.then(function(res) {
+										 console.log(res);
+
+										})
+										.catch(function(erro){
+										console.log(erro);
+										});
+										document.querySelector("body").style.cursor = "progress";
+										setTimeout(function () {
+										 document.querySelector("body").style.cursor = "default";
+											fazRequisicaoTabela("insumo");
+										}, 1000);
+
+						 			}
+
+							});
+						}
+			 });
+		 }
+}
+
+
+function funcaoCerteza(callback) {
+		divModalCerteza.classList.remove("esconde");
+		divMascaraEl.classList.remove("ocultar");
+    btnSimModalCerteza.onclick = function() { callback(true); };
+    btnNaoModalCerteza.onclick = function() { callback(false); };
+}
+
+function editarInsumo(callback) {
+		divModalEditarInsumo.classList.remove("esconde");
+		divMascaraEl.classList.remove("ocultar");
+    btnConfirmarEditarInsumo.onclick = function() { callback(true); };
+    btnCancelarEditarInsumo.onclick = function() { callback(false); };
+}
+
+function editarProduto(callback) {
+		divModalEditarProduto.classList.remove("esconde");
+		divMascaraEl.classList.remove("ocultar");
+    btnConfirmarEditarProduto.onclick = function() { callback(true); };
+    btnCancelaEditarProduto.onclick = function() { callback(false); };
 }

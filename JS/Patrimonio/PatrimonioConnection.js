@@ -1,6 +1,6 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Maria Eduarda, Mei Fagundes
+ * @author Duda
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
@@ -8,21 +8,20 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 /**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Maria Eduarda
+ * @author Mei Fagundes, Duda Pasquel
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=r";
   Request.get(SERVLET_URL + params).then((response) => {
 
+    document.body.classList.remove("waiting");
     let patrimonios = [];
     for (const current of response) {
       patrimonios.push(encapsulateJSON(current));
     }
     callBack(patrimonios);
-  }, (reason) => {
-    console.log(reason);
-    showError(0);
   });
 
 }
@@ -31,87 +30,47 @@ function receiveAllPatrimoniosFromServlet(callBack){
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
  * @param {Patrimonio} patrimonio 
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Maria Eduarda
+ * @author Mei Fagundes, Duda Pasquel
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params, "text").then((response) => {
+  Request.get(SERVLET_URL + params).then((response) => {
 
-    if (response.slice(0,1) !== "F")
-      callBack(encapsulateJSON(JSON.parse(response)));
-    else
-      showError(2);
-    
-  }, (reason) => {
-    console.log(reason);
-    showError(0);
+    document.body.classList.remove("waiting");
+    callBack(encapsulateJSON(response));
   });
 }
 
 /**
  * Envia um Patrimonio atualizado para o Servlet
- * @param {Patrimonio} patrimonio 
- * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
- * @author Mei Fagundes, Maria Eduarda
+ * @param {Patrimonio} patrimonio
+ * @author Mei Fagundes, Duda Pasquel
  */
 function sendUpdatedPatrimonio(patrimonio){
-
+  
+  document.body.classList.add("waiting");
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params, "text").then((response) => {
+  Request.get(SERVLET_URL + params).then((response) => {
 
-    switch (response.slice(0,1)) {
-      case "S":
-        break;
-
-      case "N":
-        showError(1);
-        break;
-
-      case "F":
-        showError(2);
-        break;
-    
-      default:
-        throw new Error("Reposta incorreta recebida do Server.");
-    }
-  }, (reason) => {
-    console.log(reason);
-    showError(0);
+    document.body.classList.remove("waiting");
   });
 }
 
 /**
  * Envia uma requisição de remoção de um Patrimonio para o Servlet
- * @param {Patrimonio} patrimonio
- * @param callBack CallBack a ser executada para verificar a resposta com base no id do patrimonio.
- * @author Mei Fagundes, Maria Eduarda
+ * @param {Patrimonio} patrimonio 
+ * @author Mei Fagundes, Duda Pasquel
  */
 function sendDeletedPatrimonio(id, callBack){
 
+  document.body.classList.add("waiting");
   let params = "?action=d&id=" + id;
-  Request.get(SERVLET_URL + params, "text").then((response) => {
+  Request.get(SERVLET_URL + params).then((response) => {
 
-    switch (response.slice(0,1)) {
-      case "S":
-        callBack(id);
-        break;
-
-      case "N":
-        showError(1);
-        break;
-
-      case "F":
-        showError(2);
-        break;
-  
-      default:
-        throw new Error("Reposta incorreta recebida do Server.");
-  }
-
-  }, (reason) => {
-    console.log(reason);
-    showError(0);
+    callBack(id);
+    document.body.classList.remove("waiting");
   });
 }
 

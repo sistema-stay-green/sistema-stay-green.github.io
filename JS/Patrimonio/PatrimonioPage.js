@@ -22,6 +22,7 @@ const saidaDiv = document.querySelector("[name=saida]");
 const formModal = document.querySelector("#form");
 const relatorioModal = document.querySelector("#relatorio");
 const patrimonioTable = document.querySelector("#patrimonioTable tbody");
+const filtroSelect = document.querySelector("#filtroSelect");
 const mascara = document.querySelector(".mascara");
 let editButton = document.querySelectorAll("[id|=edit]");
 
@@ -32,6 +33,7 @@ const NA = "N/A";
 let currentPatrimonioIdBeingEdited = null;
 let isEntradaBeingEdited = false;
 let isSaidaBeingEdited = false;
+let isErrorVisible = false;
 
 // --- FUNCTIONS ---
 
@@ -53,6 +55,8 @@ function showModal(modal){
             statusOptionsDiv.style.display = "none"
             enviarButton.removeEventListener("click", editPatrimonio);
             enviarButton.addEventListener("click", newPatrimonio);
+            document.querySelector("#form [name='dataSaidaInput']").value = "";
+            document.querySelector("#form [name='dataEntradaInput']").value = "";
             clearMainModal();
             break;
 
@@ -63,6 +67,7 @@ function showModal(modal){
             statusOptionsDiv.style.display = "block";
             enviarButton.removeEventListener("click", newPatrimonio);
             enviarButton.addEventListener("click", editPatrimonio);
+            
             break;
 
         case 'relatorio':
@@ -77,25 +82,33 @@ function showEditOptions(key){
 
     switch (key) {
         case 'entrada':
-            
-            entradaDiv.classList.remove("esconde");
-            entradaDiv.style.display = "block";
+            if(entradaDiv.style.display == "block"){
+                entradaDiv.style.display = "none";
+                entradaDiv.classList.add("esconde");
+            }else{
+                entradaDiv.style.display = "block";
+                entradaDiv.classList.remove("esconde");
+            }
             saidaDiv.classList.add("esconde");
             saidaDiv.style.display = "none";
-            isEntradaBeingEdited = true;
+            isEntradaBeingEdited = !isEntradaBeingEdited;
             isSaidaBeingEdited = false;
             break;
 
         case 'saida':
-
+            if(saidaDiv.style.display == "block"){
+                saidaDiv.classList.add("esconde");
+                saidaDiv.style.display = "none";
+            }else{
+                saidaDiv.classList.remove("esconde");
+                saidaDiv.style.display = "block";
+            }
             entradaDiv.classList.add("esconde");
             entradaDiv.style.display = "none";
-            saidaDiv.classList.remove("esconde");
-            saidaDiv.style.display = "block";
             isEntradaBeingEdited = false;
-            isSaidaBeingEdited = true;
+            isSaidaBeingEdited = !isSaidaBeingEdited;
             break;
-    
+
         default:
             break;
     }
@@ -103,44 +116,57 @@ function showEditOptions(key){
 
 function showError(cod){
 
-    errorModal = document.querySelector("#errorModal");
-    let message;
+    if (isErrorVisible){
+        setTimeout(() => {
+            showError(cod);
+        }, 4000)
+        return;
+    }
+
+    let message = "<span class='bold'>ERRO! </span>";
 
     switch (cod) {
         case 0:
-            message = "ERRO! A Conexão com o servidor não pôde ser estabelecida.";
+            message += "A Conexão com o servidor não pôde ser estabelecida.";
             break;
 
         case 1:
-            message = "ERRO! Patrimônio não encontrado no Server.";
+            message += "Patrimônio não encontrado no Server.";
             break;
 
         case 2:
-            message = "ERRO! Parametros inválidos enviados.";
+            message += "Parametros inválidos enviados.";
             break;
 
         case 3:
-            message = "ERRO! Todos os campos devem estar preenchidos para enviar.";
+            message += "Todos os campos devem estar preenchidos para enviar.";
             break;
 
         case 4:
-            message = "ERRO! Os valores inseridos são inválidos.";
+            message += "Os valores inseridos são inválidos.";
             break;
-            
+
         case 5:
-            message = "ERRO! Nenhum Patrimônio registrado para gerar o relatório.";
+            message += "Nenhum Patrimônio registrado para gerar o relatório.";
             break;
-    
+
+        case 6:
+            message += "A Data de Compra deve ser menor que a Data de Retorno/Saída.";
+            break;
+
         default:
             throw new Error("Código de erro inválido!");
     }
 
-    errorModal.classList.remove("esconde");
     errorModal.innerHTML = message;
+    isErrorVisible = true;
+    errorModal.classList.remove("esconde");
     setTimeout(() => {
-        errorModal.classList.add("esconde");
-    }, 5000);
-
+        if (isErrorVisible){
+            isErrorVisible = false;
+            errorModal.classList.add("esconde");
+        }
+    }, 4000);
 }
 
 function hideEditOptions(){
@@ -156,9 +182,11 @@ function hideEditOptions(){
  * @author Mei
  */
 function hideModal(){
+
     mascara.classList.remove("aparece-fundo-escuro");
     formModal.classList.add("esconde");
     relatorioModal.classList.add("esconde");
+    clearEmptyFieldsWarning();
     isEntradaBeingEdited = false;
     isSaidaBeingEdited = false;
 }
@@ -296,49 +324,45 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 }
 
 function clearTableContents() {
-    
+
     patrimonioTable.innerHTML = "";
     hidePatrimonioTable();
 }
 
 /**
  * Atualiza as informações de um Patrimonio na tabela.
- * @param {Patrimonio} patrimonio 
+ * @param {Patrimonio} patrimonio
  * @author Mei
  */
 function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     let id = patrimonio.id;
 
-    console.log(document.querySelector("#nome-" + id));
-    console.log(id);
-    
-    
     if(patrimonio.nome !== null && patrimonio.nome !== "")
         document.querySelector("#nome-" + id).innerHTML = patrimonio.nome;
-    else 
+    else
         document.querySelector("#nome-" + id).innerHTML = NA;
 
     if(patrimonio.tipo !== null && patrimonio.tipo !== "")
         document.querySelector("#tipo-" + id).innerHTML = patrimonio.tipo;
     else
         document.querySelector("#tipo-" + id).innerHTML = NA;
-    
+
     if(patrimonio.finalidade !== null && patrimonio.finalidade !== "")
         document.querySelector("#finalidade-" + id).innerHTML = patrimonio.finalidade;
     else
         document.querySelector("#finalidade-" + id).innerHTML = NA;
-    
+
     if(patrimonio.status !== null && patrimonio.status !== "")
         document.querySelector("#status-" + id).innerHTML = patrimonio.status;
     else
         document.querySelector("#status-" + id).innerHTML = NA;
-    
+
     if(patrimonio.indiceDepreciacao !== null && patrimonio.indiceDepreciacao !== "")
         document.querySelector("#indiceDepreciacao-" + id).innerHTML = patrimonio.indiceDepreciacao;
     else
         document.querySelector("#indiceDepreciacao-" + id).innerHTML = NA;
-    
+
     if(patrimonio.valorCompra !== null && patrimonio.valorCompra !== "")
         document.querySelector("#valorCompra-" + id).innerHTML = patrimonio.valorCompra;
     else
@@ -348,25 +372,25 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
         document.querySelector("#valorAtual-" + id).innerHTML = patrimonio.valorAtual;
     else
         document.querySelector("#valorAtual-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataCompra !== null && patrimonio.dataCompra !== "")
         document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompra
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataCompra-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataSaida !== null && patrimonio.dataSaida !== "")
         document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaida
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataSaida-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataRetorno !== null && patrimonio.dataRetorno !== "")
         document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetorno
         .toISOString().slice(0,10).replace("/-/g","");
     else
         document.querySelector("#dataRetorno-" + id).innerHTML = NA;
-    
+
     if(patrimonio.dataBaixa !== null && patrimonio.dataBaixa !== "")
         document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixa
         .toISOString().slice(0,10).replace("/-/g","");
@@ -406,6 +430,42 @@ function showPatrimonioTable(){
     document.querySelector("#noResults").style.display = "none";
 }
 
+function changeFilter(){
+
+
+    receiveAllPatrimoniosFromServlet();
+
+    switch (filtroSelect.value) {
+
+        case "":
+
+            break;
+
+        case "EM_POSSE":
+
+            break;
+
+        case "EM_MANUTENCAO":
+
+            break;
+
+        case "ALUGADO":
+
+            break;
+
+        case "VENDIDO":
+
+            break;
+
+        case "VENDIDO":
+
+            break;
+
+        default:
+            break;
+    }
+}
+
 /**
  * Recupera as informações da div Modal e as armazena em um objeto Patrimonio.
  * @author Mei
@@ -415,7 +475,8 @@ function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    
+    warnUserAboutEmptyTextInputs();
+
     if (isModalFilled()) {
 
         if (document.querySelector("#form [name='indiceDepreciacaoInput']").value >= 100) {
@@ -428,29 +489,70 @@ function getPatrimonioFromModal(){
         patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
         patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
+        patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
+
 
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
-        
+
         if (dataEntrada[0] !== "") {
+
+            let dataEntradaTmp = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
             
-            patrimonio.dataRetorno = new Date(dataEntrada[0], dataEntrada[1] - 1, dataEntrada[2]);
+            if (patrimonio.dataCompra.getTime() < dataEntradaTmp.getTime()) {
+
+                patrimonio.dataRetorno = dataEntradaTmp;
+                document.querySelector("#form [name='dataEntradaInput']").classList.remove("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+            }
+            else{
+                document.querySelector("#form [name='dataEntradaInput']").classList.add("inputVazio");
+                document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                
+                showError(6);
+                return null;
+            }
         }
+
         if (dataSaida[0] !== "") {
 
-            let statusTmp = document.querySelector("#form [name='tipoSaidaInput']").value;
+            let dataSaidaTmp = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
 
-            if (document.querySelector("#form [name='tipoSaidaInput']").value !== "")
-                patrimonio.status = statusTmp;
+            if (patrimonio.status == "DESCARTADO") {
 
-            if (statusTmp == "DESCARTADO"){
-                patrimonio.dataBaixa = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
+                if (patrimonio.dataCompra.getTime() < dataSaidaTmp.getTime()) {
+
+                    patrimonio.dataBaixa = dataSaidaTmp;
+                    patrimonio.dataSaida = dataSaidaTmp;
+                    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+                }
+                else{
+
+                    document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                    showError(6);
+                    return null;
+                }
             }
-            else
-                patrimonio.dataSaida = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
-            
+            else{
+
+                if (patrimonio.dataCompra.getTime() < dataSaidaTmp.getTime()) {
+
+                    patrimonio.dataSaida = dataSaidaTmp;
+                    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+                }
+                else{
+
+                    document.querySelector("#form [name='dataSaidaInput']").classList.add("inputVazio");
+                    document.querySelector("#form [name='dataCompraInput']").classList.add("inputVazio");
+                    showError(6);
+                    return null;
+                }
+            }
         }
+
         hideModal();
         return patrimonio;
     }
@@ -462,33 +564,110 @@ function getPatrimonioFromModal(){
 
 function isModalFilled(){
 
-    dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    
     if (document.querySelector("#form [name='nomeInput']").value == "" ||
-    document.querySelector("#form [name='tipoInput']").value == "" ||
-    document.querySelector("#form [name='finalidadeInput']").value == "" ||
-    document.querySelector("#form [name='indiceDepreciacaoInput']").value == "" ||
-    document.querySelector("#form [name='valorCompraInput']").value == "")
-        return false
+        document.querySelector("#form [name='tipoInput']").value == "" ||
+        document.querySelector("#form [name='finalidadeInput']").value == "" ||
+        document.querySelector("#form [name='indiceDepreciacaoInput']").value == "" ||
+        document.querySelector("#form [name='valorCompraInput']").value == "")
+            return false
+
+
+    dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
+
+    for (const dataField of dataCompra) {
+    
+        if (dataField == "")
+            return false;
+    }
 
     if (isEntradaBeingEdited) {
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
-        if (dataEntrada[0] == "")
-            return false
+
+        for (const dataField of dataEntrada) {
+            
+            if (dataField == "")
+                return false;
+        }
     }
 
     if (isSaidaBeingEdited) {
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');
-        if (dataSaida[0] == "")
-            return false
+
+        for (const dataField of dataSaida) {
+        
+            if (dataField == "")
+                return false;
+        }
     }
 
     return true;
 }
 
+function warnUserAboutEmptyTextInputs(){
+
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='nomeInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='finalidadeInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='indiceDepreciacaoInput']"));
+    warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='valorCompraInput']"));
+
+    dataCompra = document.querySelector("#form [name='dataCompraInput']");
+    warnUserAboutEmptyFieldsIterateDate(dataCompra);
+
+    if (isEntradaBeingEdited) {
+        dataEntrada = document.querySelector("#form [name='dataEntradaInput']");
+        warnUserAboutEmptyFieldsIterateDate(dataEntrada);
+    }
+
+    if (isSaidaBeingEdited) {
+        dataSaida = document.querySelector("#form [name='dataSaidaInput']");
+        warnUserAboutEmptyFieldsIterateDate(dataSaida);
+    }
+
+}
+
+function warnUserAboutEmptyFieldsIterateDate(element) {
+
+    dataFieldArray = element.value.split('-');
+    
+    for (const dataField of dataFieldArray) {
+        
+        if (dataField == "")
+            element.classList.add("inputVazio");
+        else
+            element.classList.remove("inputVazio");
+    }
+}
+
+function warnUserAboutEmptyFieldsIterateText(element) {
+    
+    if (element.value == ""){
+        element.classList.add("inputVazio");
+        element.placeholder = "Campo obrigatório!";
+    }
+    else{
+        element.classList.remove("inputVazio");
+        element.placeholder = "Digite...";
+    }
+}
+
+function clearEmptyFieldsWarning(){
+
+    document.querySelector("#form [name='nomeInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='nomeInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='finalidadeInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='finalidadeInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='indiceDepreciacaoInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='indiceDepreciacaoInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='valorCompraInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='valorCompraInput']").placeholder = "Digite...";
+    document.querySelector("#form [name='dataCompraInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='dataEntradaInput']").classList.remove("inputVazio");
+    document.querySelector("#form [name='dataSaidaInput']").classList.remove("inputVazio");
+}
+
 /**
  * Retorna um objeto Patrimonio da Tabela com o Id fornecido.
- * @param {string} id 
+ * @param {string} id
  * @returns {string} nome
  * @author Mei
  */
@@ -542,7 +721,7 @@ function getPatrimonioFromTable(id){
     if (dataBaixaField !== NA && dataBaixaField !== ""){
         data = dataBaixaField.split("-");
         patrimonio.dataBaixa = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
-    }   
+    }
     if (dataSaidaField !== NA && dataSaidaField !== ""){
         data = dataSaidaField.split("-");
         patrimonio.dataSaida = new Date(parseInt(data[0]), parseInt(data[1]) - 1, parseInt(data[2]));
@@ -554,6 +733,7 @@ function getPatrimonioFromTable(id){
 function setupPatrimonioEdit(id){
 
     patrimonio = getPatrimonioFromTable(id);
+    clearMainModal();
     insertPatrimonioIntoModal(patrimonio);
     currentPatrimonioIdBeingEdited = id;
     showModal('editar');
@@ -571,13 +751,8 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='finalidadeInput']").value = patrimonio.finalidade;
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = patrimonio.indiceDepreciacao;
     document.querySelector("#form [name='valorCompraInput']").value = patrimonio.valorCompra;
+    document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
 
-    if (patrimonio.status !== "EM_POSSE") {
-        document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
-    }
-    else
-        document.querySelector("#form [name='tipoSaidaInput']").value = "";
-    
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
             .toISOString().slice(0,10).replace("/-/g","");
@@ -603,6 +778,8 @@ function clearMainModal(){
     document.querySelector("#form [name='indiceDepreciacaoInput']").value = null;
     document.querySelector("#form [name='valorCompraInput']").value = null;
     document.querySelector("#form [name='dataCompraInput']").value = null;
+    document.querySelector("#form [name='dataSaidaInput']").value = null;
+    document.querySelector("#form [name='dataEntradaInput']").value = null;
 
 }
 
@@ -621,7 +798,7 @@ function generateRelatorio(patrimonios = []){
         relatorio.appendChild(h1);
 
         // EM_POSSE
-        
+
         patrimoniosTemp = getPatrimoniosEmPosse(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -632,7 +809,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // EM_MANUTENCAO
-        
+
         patrimoniosTemp = getPatrimoniosEmManutencao(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -643,7 +820,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // ALUGADO
-        
+
         patrimoniosTemp = getPatrimoniosAlugados(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -654,7 +831,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // VENDIDO
-        
+
         patrimoniosTemp = getPatrimoniosVendidos(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -665,7 +842,7 @@ function generateRelatorio(patrimonios = []){
         }
 
         // DESCARTADO
-        
+
         patrimoniosTemp = getPatrimoniosDescartados(patrimonios);
         if (patrimoniosTemp !== null) {
             h3 = document.createElement("h2");
@@ -687,9 +864,9 @@ function generateUlForRelatorio(patrimonios = []){
 
         let ul, li, p;
         ul = document.createElement("ul");
-        
+
         for (const patrimonio of patrimonios) {
-            
+
             li = document.createElement("li");
 
             // Id | Nome
@@ -747,6 +924,10 @@ function generateUlForRelatorio(patrimonios = []){
                 p.innerHTML = "<span class='bold'>Data da Baixa: </span>" + patrimonio.dataBaixaString;
                 li.appendChild(p);
             }
+
+            p = document.createElement("p");
+            p.innerHTML = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
+            li.appendChild(p);
 
             ul.appendChild(li);
         }

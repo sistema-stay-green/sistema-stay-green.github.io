@@ -7,7 +7,7 @@
 const staticDebugMode = true;
 
 let lastIdGenerated = 0;
-let relatorioStaticStash = [];
+let patrimonioStaticStash = [];
 
 // --- FUNCTIONS ---
 
@@ -40,7 +40,7 @@ function generatePlaceholders() {
         patrimonio.dataBaixa = dB[i];
         lastIdGenerated++;
 
-        relatorioStaticStash.push(patrimonio);
+        patrimonioStaticStash.push(patrimonio);
 
         insertPatrimonioIntoTable(patrimonio);
     }

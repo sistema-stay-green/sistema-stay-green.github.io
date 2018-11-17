@@ -132,13 +132,23 @@ function limpaRelatorio(){
 }
 
 function filtrarTabelas(e) {
+if (e.target.id == "selFiltroP") {
   var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=produto&id=" + e.target.value;
   Request.get(url)
   .then(function(res) {
-   console.log(res);
-
+   criaTabela(res, "produto");
   })
   .catch(function(erro){
   console.log(erro);
   });
+}else {
+  var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=insumo&id=" + e.target.value;
+  Request.get(url)
+  .then(function(res) {
+   criaTabela(res, "insumo");
+  })
+  .catch(function(erro){
+  console.log(erro);
+  });
+}
 }

@@ -1,9 +1,8 @@
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
-	console.log(tabela.rows);
-	if (tabela.rows.length >= 1) {
-		for (var i = 1; i < tabela.rows.length; i++) {
+	if (tabela.rows.length > 2) {
+		for (var i = 0; 2 != tabela.rows.length; i++) {
 			tabela.deleteRow(1);
 		}
 	}
@@ -111,19 +110,19 @@ function removerMercadoria(id){
 				if(id.includes("Produto")){
 					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id=" + id.substring(17);;
 					 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
-					 document.querySelector("body").style.cursor = "progress";
+					 desativarBotoes(true);
 					 setTimeout(function () {
-					  	document.querySelector("body").style.cursor = "default";
-							 fazRequisicaoTabela("produto");
+					 		desativarBotoes(false);
+							fazRequisicaoTabela("produto");
 					 }, 1000);
 			 }
 			 else{
 				 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id=" + id.substring(16);;
 				 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
-				 document.querySelector("body").style.cursor = "progress";
+				 desativarBotoes(true);
 				 setTimeout(function () {
-						document.querySelector("body").style.cursor = "default";
-						 fazRequisicaoTabela("insumo");
+				 	desativarBotoes(false);
+					fazRequisicaoTabela("insumo");
 				 }, 1000);
 			 }
 			}
@@ -193,10 +192,10 @@ function editarMercadoria(id){
 										.catch(function(erro){
 										 console.log(erro);
 										});
-									 document.querySelector("body").style.cursor = "progress";
+									 desativarBotoes(true);
 									setTimeout(function () {
-										 document.querySelector("body").style.cursor = "default";
-											fazRequisicaoTabela("produto");
+										desativarBotoes(false);
+										fazRequisicaoTabela("produto");
 									}, 1000);
 								 }
 								 });
@@ -241,9 +240,9 @@ function editarMercadoria(id){
 										.catch(function(erro){
 										console.log(erro);
 										});
-										document.querySelector("body").style.cursor = "progress";
+										desativarBotoes(true);
 										setTimeout(function () {
-										 document.querySelector("body").style.cursor = "default";
+										 desativarBotoes(false);
 											fazRequisicaoTabela("insumo");
 										}, 1000);
 
@@ -275,4 +274,31 @@ function editarProduto(callback) {
 		divMascaraEl.classList.remove("ocultar");
     btnConfirmarEditarProduto.onclick = function() { callback(true); };
     btnCancelaEditarProduto.onclick = function() { callback(false); };
+}
+
+function desativarBotoes(valor) {
+	var botoes = document.querySelectorAll("button");
+	var selects =  document.querySelectorAll("select");
+	var body = document.querySelector("body");
+	if (valor) {
+		for (var i = 0; i < botoes.length; i++) {
+			 botoes[i].disabled = true;
+			 botoes[i].style.cursor = "no-drop";
+			 body.style.cursor = "wait";
+		}
+		for (var i = 0; i < selects.length; i++) {
+			selects[i].disabled = true;
+			selects[i].style.cursor = "no-drop";
+		}
+	}else {
+		for (var i = 0; i < botoes.length; i++) {
+			 botoes[i].disabled = false;
+			 botoes[i].style.cursor = "pointer";
+			 body.style.cursor = "default";
+		}
+		for (var i = 0; i < selects.length; i++) {
+			selects[i].disabled = false;
+			selects[i].style.cursor = "pointer";
+		}
+	}
 }

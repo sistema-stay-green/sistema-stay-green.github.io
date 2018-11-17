@@ -27,7 +27,7 @@ var btnCancelaEditarProduto = document.querySelector('#btnCancelaEditarProduto')
 var btnConfirmarEditarProduto = document.querySelector('#btnConfirmarEditarProduto');
 var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo');
 var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
-var textoAviso = document.getElementById('textoAviso');
+var avisoRelatorio = document.getElementById('avisoRelatorio');
 var tabelaLeite = document.getElementById('tabelaRelLeite');
 var tabelaCafeA= document.getElementById('tabelaRelCafeA');
 var tabelaCafeB = document.getElementById('tabelaRelCafeB');
@@ -128,7 +128,7 @@ function funcaoEditarInsumo() {
 }
 
 function limpaRelatorio(){
-  textoAviso.innerHTML = " ";
+  avisoRelatorio.innerHTML = " ";
   var aux = tabelaLeite.innerHTML.slice(0, tabelaLeite.innerHTML.indexOf("<tbody>"));
   aux += "<tbody>" +
        "<tr>" +

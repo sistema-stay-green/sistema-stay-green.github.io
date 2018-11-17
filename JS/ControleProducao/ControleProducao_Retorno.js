@@ -47,7 +47,6 @@ function criaTabela(itens, tipo){
 						break;
 						case 4:
 						celula.innerHTML = itens[i].quantEstoqueProduto;
-						console.log(itens[i].quantEstoqueProduto + "  " + itens[i].pontoAvisoProduto);
 						if(itens[i].quantEstoqueProduto < itens[i].pontoAvisoProduto){
 							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso1.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
 						}
@@ -57,7 +56,6 @@ function criaTabela(itens, tipo){
 						else {
 							celula.style.border = "";
 						}
-						console.log(celula);
 						break;
 						case 5:
 						celula.innerHTML = itens[i].pontoAvisoProduto;

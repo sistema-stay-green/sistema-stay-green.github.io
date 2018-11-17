@@ -7,7 +7,7 @@ var btnVoltaRelatorioP = document.getElementById('btnVoltaRelatorioP');
 var btnFechaRelatorioP = document.getElementById('btnFechaRelatorioP');
 var divInsumo = document.getElementById('conteudoInsumo');
 var divProduto = document.getElementById('conteudoProduto');
-var textoAviso = document.getElementById('textoAviso');
+var avisoRelatorio = document.getElementById('avisoRelatorio');
 var tabelaProdutoLeite = document.getElementById('tabelaRelLeite');
 var tabelaProdutoCafeB = document.getElementById('tabelaRelCafeB');
 var tabelaProdutoCafeR = document.getElementById('tabelaRelCafeR');
@@ -35,13 +35,11 @@ function criaRelatorioH(){
     var contador = 0;
 
     if(resultado == null){
-      textoAviso.hidden = false;
+      avisoRelatorio.innerHTML == "" ? avisoRelatorio.innerHTML = "Não foram encontradas transações nesse período": avisoRelatorio.innerHTML="Não foram " +
+      "encontradas transações nesse período";
 
     }else{
-      tituloProduto.hidden = false;
-      tituloInsumo.hidden = false;
-
-      console.log(resultado);
+      avisoRelatorio.innerHTML == "Não foram encontradas transações nesse período" ? avisoRelatorio.innerHTML="": avisoRelatorio.innerHTML = "";
       resultado.forEach(function(){
 
         //teste para saber se a transação é de Produto
@@ -72,9 +70,11 @@ function criaRelatorioH(){
           }
           //teste para saber se a transação é de Insumo
         }else if(resultado[contador].tipoTransacao == "INSUMO"){
-          contInsumos++;
+             contInsumos++;
+              var linha = tabelaInsumo.insertRow(contInsumos + 1);
+              insereInsumoTabela(resultado, contador, linha);
 
-          paragrafoInsumo.innerHTML = resultado[contador].idTransacao;
+
 
         }
 
@@ -124,6 +124,33 @@ function insereProdutoTabela(resultado, contador, linha){
     }
   }
 
+}
+function insereInsumoTabela(resultado, contador, linha){
+  console.log(resultado[contador]);
+  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+resultado[contador].idItemTransacao+"&tipo=insumo")
+  .then(function(resposta){
+      var nome = resposta.nomeInsumo;
+      console.log(nome);
+      for(let i = 1; i <= 4; i++){
+        var celula = linha.insertCell(i-1);
+        switch(i){
+          case 1:
+          celula.innerHTML = nome;
+          break;
+          case 2:
+          celula.innerHTML = formataData(resultado, contador);
+
+          break;
+          case 3:
+          celula.innerHTML = resultado[contador].quantTransacao;
+          break;
+          case 4:
+          celula.innerHTML = resultado[contador].valorTransacao+"$";
+          break;
+        }
+      }
+  })
+  .catch(function(erro){console.log(erro);});
 }
 
 

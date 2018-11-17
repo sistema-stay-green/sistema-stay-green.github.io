@@ -23,7 +23,10 @@ btnRelatorioH.addEventListener('click', criaRelatorioH);
     para o servlet que retorna um ArrayList com as transações feitas**/
 function criaRelatorioH(){
   var periodo = document.getElementById('selPeriodo').value;
-  var contProdutos = 0;
+  var contLeite = 0;
+  var contCafeB = 0;
+  var contCafeR = 0;
+  var contCafeA = 0;
   var contInsumos = 0;
   //Realiza a requisição para o servlet, que retorna um ArrayList com as Transações dentro daquele período
   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio1&id=" + periodo)
@@ -43,31 +46,30 @@ function criaRelatorioH(){
 
         //teste para saber se a transação é de Produto
         if(resultado[contador].tipoTransacao == "PRODUTO"){
-          contProdutos++;
           switch (resultado[contador].idItemTransacao) {
             case 1:
-              var linha = tabelaProdutoLeite.insertRow(contProdutos + 1);
+              contLeite++;
+              var linha = tabelaProdutoLeite.insertRow(contLeite + 1);
               insereProdutoTabela(resultado, contador, linha);
               break;
             case 2:
-              var linha = tabelaProdutoLeite.insertRow(contProdutos + 1);
+              contCafeB++;
+              var linha = tabelaProdutoCafeB.insertRow(contCafeB + 1);
               insereProdutoTabela(resultado, contador, linha);
               break;
-            case 1:
-                var linha = tabelaProdutoLeite.insertRow(contProdutos + 1);
+            case 3:
+                contCafeR++;
+                var linha = tabelaProdutoCafeR.insertRow(contCafeR + 1);
                 insereProdutoTabela(resultado, contador, linha);
                 break;
-            case 1:
-              var linha = tabelaProdutoLeite.insertRow(contProdutos + 1);
+            case 4:
+              contCafeA++;
+              var linha = tabelaProdutoCafeA.insertRow(contCafeA + 1);
               insereProdutoTabela(resultado, contador, linha);
               break;
             default:
 
           }
-
-
-
-
           //teste para saber se a transação é de Insumo
         }else if(resultado[contador].tipoTransacao == "INSUMO"){
           contInsumos++;

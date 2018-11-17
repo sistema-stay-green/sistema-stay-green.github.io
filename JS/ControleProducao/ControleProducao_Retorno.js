@@ -30,7 +30,7 @@ function criaTabela(itens, tipo){
 						}
 						break;
 						case 1:
-						celula.innerHTML = itens[i].descrProduto;
+						celula.innerHTML = decode_utf8(itens[i].descrProduto);
 						break;
 						case 2:
 						celula.innerHTML = itens[i].unidMedProduto;
@@ -40,6 +40,17 @@ function criaTabela(itens, tipo){
 						break;
 						case 4:
 						celula.innerHTML = itens[i].quantEstoqueProduto;
+						console.log(itens[i].quantEstoqueProduto + "  " + itens[i].pontoAvisoProduto);
+						if(itens[i].quantEstoqueProduto < itens[i].pontoAvisoProduto){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso1.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+						}
+						else if(itens[i].quantEstoqueProduto == itens[i].pontoAvisoProduto){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso2.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+						}
+						else {
+							celula.style.border = "";
+						}
+						console.log(celula);
 						break;
 						case 5:
 						celula.innerHTML = itens[i].pontoAvisoProduto;
@@ -58,16 +69,25 @@ function criaTabela(itens, tipo){
 
 					switch (j) {
 						case 0:
-						celula.innerHTML = itens[i].nomeInsumo;
+						celula.innerHTML = decode_utf8(itens[i].nomeInsumo);
 						break;
 						case 1:
-						celula.innerHTML = itens[i].finalidadeInsumo;
+						celula.innerHTML = decode_utf8(itens[i].finalidadeInsumo);
 						break;
 						case 2:
 						celula.innerHTML = itens[i].valorCompraInsumo;
 						break;
 						case 3:
 						celula.innerHTML = itens[i].quantEstoqueInsumo;
+						if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso1.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+						}
+						else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso2.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+						}
+						else {
+							celula.style.border = "";
+						}
 						break;
 						case 4:
 						celula.innerHTML = itens[i].pontoAvisoInsumo;
@@ -277,4 +297,11 @@ function editarProduto(callback) {
 		divMascaraEl.classList.remove("ocultar");
     btnConfirmarEditarProduto.onclick = function() { callback(true); };
     btnCancelaEditarProduto.onclick = function() { callback(false); };
+}
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
 }

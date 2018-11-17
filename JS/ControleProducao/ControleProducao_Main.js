@@ -31,6 +31,7 @@ window.onload = function () {
             setTimeout(function () {
                 respostaServlet(promises);
                 fazRequisicaoTabela("insumo");
+                console.log("mito");
             }, 1000);
           //  Avisos(0);
           //  Avisos(4);
@@ -187,3 +188,29 @@ function encapsulaDados(tipo, operacao) {
     }
     return item;
 }
+
+// document.querySelector("#btnRemoverProdutos").addEventListener('click', function(){ 
+//   removerTodos("produto");
+//   fazRequisicaoTabela("produto");
+// });
+// document.querySelector("#btnRemoverInsumos").addEventListener('click', function(){ 
+//   removerTodos("insumo");
+//   fazRequisicaoTabela("insumo");
+// });
+// document.querySelector("#btnRemoverTodos").addEventListener('click', function(){ 
+//   removerTodos("ambos");
+//   fazRequisicaoTabela("insumo");
+//   fazRequisicaoTabela("produto");
+// });
+
+// function removerTodos(tipo){
+//   var url;
+//   if(tipo == ambos)
+//     url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=removerTodos";
+//   else
+//     url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=" + tipo;
+//   Request.get(url)
+//          .then(function(res){ console.log("Removido(s) com sucesso\t" + res); })
+//          .catch(function(erro){ console.log("Erro na remoção de itens\t" + erro) });
+// }
+

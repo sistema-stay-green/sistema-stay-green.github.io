@@ -319,3 +319,11 @@ footer > section > img {
 .redes {
   justify-content: center;
 }
+
+.aviso{
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 4px;
+  left: 5px;
+}

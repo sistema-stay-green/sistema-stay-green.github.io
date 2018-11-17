@@ -160,7 +160,7 @@ function encapsulaDados(tipo, operacao) {
                   item.nomeProduto = "LEITE";
               }else if (document.querySelector("#inpNomeProduto").value == "Café Bourbon") {
                   item.nomeProduto = "CAFE_BOURBON"
-              }else if (document.querySelector("#inpNomeProduto").value == "Café Roubusta") {
+              }else if (document.querySelector("#inpNomeProduto").value == "Café Robusta") {
                   item.nomeProduto = "CAFE_ROBUSTA";
               }else {
                   item.nomeProduto = "CAFE_ARABICA";
@@ -188,6 +188,7 @@ function encapsulaDados(tipo, operacao) {
     }
     return item;
 }
+
 
 // document.querySelector("#btnRemoverProdutos").addEventListener('click', function(){ 
 //   removerTodos("produto");

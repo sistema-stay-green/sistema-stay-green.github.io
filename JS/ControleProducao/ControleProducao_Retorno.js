@@ -1,3 +1,7 @@
+/* Autor: Diego Demétrio
+ Grupo 1: Controle de produção
+ líder: Arthur Marcolino */
+
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
@@ -21,16 +25,19 @@ function criaTabela(itens, tipo){
 						case 0:
 						if (itens[i].nomeProduto == "LEITE") {
 							celula.innerHTML = "Leite";
-						}else if (itens[i].nomeProduto == "CAFE_BOURBON") {
+						}
+						else if (itens[i].nomeProduto == "CAFE_BOURBON") {
 							celula.innerHTML = "Café Bourbon"
-						}else if (itens[i].nomeProduto == "CAFE_ROBUSTA") {
-							celula.innerHTML = "Café Roubusta";
-						}else {
-							celula.innerHTML = "Café Arabica";
+						}
+						else if (itens[i].nomeProduto == "CAFE_ROBUSTA") {
+							celula.innerHTML = "Café Robusta";
+						}
+						else {
+							celula.innerHTML = "Café Arábica";
 						}
 						break;
 						case 1:
-						celula.innerHTML = decode_utf8(itens[i].descrProduto);
+						celula.innerHTML = (itens[i].descrProduto);
 						break;
 						case 2:
 						celula.innerHTML = itens[i].unidMedProduto;
@@ -69,10 +76,10 @@ function criaTabela(itens, tipo){
 
 					switch (j) {
 						case 0:
-						celula.innerHTML = decode_utf8(itens[i].nomeInsumo);
+						celula.innerHTML = itens[i].nomeInsumo;
 						break;
 						case 1:
-						celula.innerHTML = decode_utf8(itens[i].finalidadeInsumo);
+						celula.innerHTML = itens[i].finalidadeInsumo;
 						break;
 						case 2:
 						celula.innerHTML = itens[i].valorCompraInsumo;
@@ -297,11 +304,4 @@ function editarProduto(callback) {
 		divMascaraEl.classList.remove("ocultar");
     btnConfirmarEditarProduto.onclick = function() { callback(true); };
     btnCancelaEditarProduto.onclick = function() { callback(false); };
-}
-function encode_utf8(s) {
-  return unescape(encodeURIComponent(s));
-}
-
-function decode_utf8(s) {
-  return decodeURIComponent(escape(s));
 }

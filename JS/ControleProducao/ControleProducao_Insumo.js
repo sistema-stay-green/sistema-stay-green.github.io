@@ -12,6 +12,7 @@ class Insumo {
         this.quantEstoqueInsumo = null;
         this.pontoAvisoInsumo = null;
     }
+
     /**
      *
      * @return Id de um objeto insumo
@@ -110,8 +111,7 @@ getPontoAvisoInsumo() {
 
     //faz requisição utilizando classe fornecida pela gerência
     fazRequisicao() {
-        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=insumo";
-        console.log(this._item);
+        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this) + "&operacao=adicionar&tipo=insumo";
         return Request.get(url);
     }
 }

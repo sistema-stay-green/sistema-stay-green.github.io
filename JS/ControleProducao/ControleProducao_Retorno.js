@@ -184,7 +184,7 @@ function editarMercadoria(id){
 						if (confirmar) {
 							funcaoCerteza(function (certeza) {
 								 if (certeza) {
-									 var produto = encapsulaDados("produto");
+									 var produto = encapsulaDados("produto", "editar");
 									 produto.idProduto = id.substring(16);
 										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(15);
 										Request.get(url)
@@ -232,7 +232,7 @@ function editarMercadoria(id){
 						 if (confirmar) {
 							 funcaoCerteza(function (certeza) {
 						 			if (certeza) {
-										var insumo = encapsulaDados("insumo");
+										var insumo = encapsulaDados("insumo", "editar");
 										insumo.idInsumo = id.substring(15);
 										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(insumo)+ "&operacao=atualizar&tipo=insumo&id=" + id.substring(15);
 										Request.get(url)

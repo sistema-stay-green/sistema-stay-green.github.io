@@ -26,7 +26,7 @@ window.onload = function () {
 
     document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
         if (checarInputs()) {
-            insumo = encapsulaDados("insumo");
+            insumo = encapsulaDados("insumo", "adicionar");
             promises = insumo.fazRequisicao();
             setTimeout(function () {
                 respostaServlet(promises);
@@ -140,38 +140,50 @@ function encapsulaDadosJSON(tipo, JSON){
     return item;
 }
 
-function encapsulaDados(tipo) {
+function encapsulaDados(tipo, operacao) {
     var item;
-    if(tipo == "produto"){
-            item = new Produto();
-            if (document.querySelector("#inpNomeProduto").value == "Leite") {
-                item.nomeProduto = "LEITE";
-            }else if (document.querySelector("#inpNomeProduto").value == "Café Bourbon") {
-                item.nomeProduto = "CAFE_BOURBON"
-            }else if (document.querySelector("#inpNomeProduto").value == "Café Roubusta") {
-                item.nomeProduto = "CAFE_ROBUSTA";
-            }else {
-                item.nomeProduto = "CAFE_ARABICA";
-            }
-            item.descrProduto = document.querySelector("#inpDescricaoProduto").value;
-            item.unidadeMedidaProduto = document.querySelector("#inpUnidadeMedidaProduto").value;
-            item.valorUnitProduto = parseFloat(document.querySelector("#inpValorProduto").value);
-            item.quantEstoqueProduto = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
+    if (operacao == "adicionar") {
+              item = new Insumo();
+              item.nomeInsumo = document.querySelector("#inpNomeInsumo").value;
+              item.finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo").value;
+              item.valorCompraInsumo = parseFloat(document.querySelector("#valorCompraInsumo").value);
+              item.quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
 
-            //verifica se há um ponto de aviso (valor opcional);
-            let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
-            item.pontoAvisoProduto = (aux == null) ? "" : aux;
-    }
-    else{
-            item = new Insumo();
-            item.nomeInsumo = document.querySelector("#inpNomeInsumo2").value;
-            item.finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo2").value;
-            item.valorCompraInsumo = parseFloat(document.querySelector("#valorCompraInsumo2").value);
-            item.quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo2").value);
+              //verifica se há um ponto de aviso
+              let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
+              item.pontoAvisoInsumo = (aux == null) ? "" : aux;
+    }else {
+      if(tipo == "produto"){
+              item = new Produto();
+              if (document.querySelector("#inpNomeProduto").value == "Leite") {
+                  item.nomeProduto = "LEITE";
+              }else if (document.querySelector("#inpNomeProduto").value == "Café Bourbon") {
+                  item.nomeProduto = "CAFE_BOURBON"
+              }else if (document.querySelector("#inpNomeProduto").value == "Café Roubusta") {
+                  item.nomeProduto = "CAFE_ROBUSTA";
+              }else {
+                  item.nomeProduto = "CAFE_ARABICA";
+              }
+              item.descrProduto = document.querySelector("#inpDescricaoProduto").value;
+              item.unidadeMedidaProduto = document.querySelector("#inpUnidadeMedidaProduto").value;
+              item.valorUnitProduto = parseFloat(document.querySelector("#inpValorProduto").value);
+              item.quantEstoqueProduto = parseInt(document.querySelector("#inpQuantEstoqueProduto").value);
 
-            //verifica se há um ponto de aviso
-            let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo2").value);
-            item.pontoAvisoInsumo = (aux == null) ? "" : aux;
+              //verifica se há um ponto de aviso (valor opcional);
+              let aux = parseInt(document.querySelector("#inpPontoAvisoProduto").value);
+              item.pontoAvisoProduto = (aux == null) ? "" : aux;
+      }
+      else{
+              item = new Insumo();
+              item.nomeInsumo = document.querySelector("#inpNomeInsumo2").value;
+              item.finalidadeInsumo = document.querySelector("#inpFinalidadeInsumo2").value;
+              item.valorCompraInsumo = parseFloat(document.querySelector("#valorCompraInsumo2").value);
+              item.quantEstoqueInsumo = parseInt(document.querySelector("#inpQuantEstoqueInsumo2").value);
+
+              //verifica se há um ponto de aviso
+              let aux = parseInt(document.querySelector("#inpPontoAvisoInsumo2").value);
+              item.pontoAvisoInsumo = (aux == null) ? "" : aux;
+      }
     }
     return item;
 }

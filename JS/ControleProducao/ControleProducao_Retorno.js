@@ -1,13 +1,12 @@
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
-	var aux = tabela.innerHTML.slice(0, tabela.innerHTML.indexOf("<tbody>"));
-	aux += "<tbody>" +
-			 "<tr>" +
-			 "</tr>" +
-		   "</tbody>"
-	tabela.innerHTML = aux;
-
+	console.log(tabela.rows);
+	if (tabela.rows.length >= 1) {
+		for (var i = 1; i < tabela.rows.length; i++) {
+			tabela.deleteRow(1);
+		}
+	}
 	if(itens != null) {
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);
@@ -79,10 +78,9 @@ function criaTabela(itens, tipo){
 
 				}
 			}
-			linha.innerHTML += "<input type=\"hidden\" value=\"" + itens[i].idProduto + "\" class=\"idsProdutos\">";
-
 		}
 	}
+
 	adicionarEventos();
 }
 

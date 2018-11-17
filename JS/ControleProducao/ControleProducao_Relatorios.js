@@ -28,6 +28,8 @@ var btnConfirmarEditarProduto = document.querySelector('#btnConfirmarEditarProdu
 var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo');
 var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
 var textoAviso = document.getElementById('avisoConteudoVazio');
+var selFiltroP = document.getElementById('selFiltroP');
+var selFiltroI = document.getElementById('selFiltroI');
 
 
 
@@ -52,6 +54,8 @@ btnVoltaRelatorioHEl.addEventListener( 'click' , limpaRelatorio );
 btnFechaRelatorioHEl.addEventListener( 'click' , limpaRelatorio );
 btnVoltaRelatorioPEl.addEventListener( 'click' , limpaRelatorio );
 btnFechaRelatorioPEl.addEventListener( 'click' , limpaRelatorio );
+selFiltroP.addEventListener( 'change' , filtrarTabelas );
+selFiltroI.addEventListener( 'change' , filtrarTabelas );
 
 
 
@@ -125,4 +129,16 @@ function funcaoEditarInsumo() {
 function limpaRelatorio(){
   console.log("limpou tudo");
   textoAviso.innerHTML = " ";
+}
+
+function filtrarTabelas(e) {
+  var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=produto&id=" + e.target.value;
+  Request.get(url)
+  .then(function(res) {
+   console.log(res);
+
+  })
+  .catch(function(erro){
+  console.log(erro);
+  });
 }

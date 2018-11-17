@@ -27,7 +27,12 @@ var btnCancelaEditarProduto = document.querySelector('#btnCancelaEditarProduto')
 var btnConfirmarEditarProduto = document.querySelector('#btnConfirmarEditarProduto');
 var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo');
 var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
-var textoAviso = document.getElementById('avisoConteudoVazio');
+var textoAviso = document.getElementById('textoAviso');
+var tabelaLeite = document.getElementById('tabelaRelLeite');
+var tabelaCafeA= document.getElementById('tabelaRelCafeA');
+var tabelaCafeB = document.getElementById('tabelaRelCafeB');
+var tabelaCafeR = document.getElementById('tabelaRelCafeR');
+
 
 
 
@@ -123,6 +128,35 @@ function funcaoEditarInsumo() {
 }
 
 function limpaRelatorio(){
-  console.log("limpou tudo");
   textoAviso.innerHTML = " ";
+  var aux = tabelaLeite.innerHTML.slice(0, tabelaLeite.innerHTML.indexOf("<tbody>"));
+  aux += "<tbody>" +
+       "<tr>" +
+       "</tr>" +
+       "</tbody>"
+  tabelaLeite.innerHTML = aux;
+  var aux = tabelaCafeA.innerHTML.slice(0, tabelaCafeA.innerHTML.indexOf("<tbody>"));
+  aux += "<tbody>" +
+       "<tr>" +
+       "</tr>" +
+       "</tbody>"
+  tabelaCafeA.innerHTML = aux;
+  var aux = tabelaCafeB.innerHTML.slice(0, tabelaCafeB.innerHTML.indexOf("<tbody>"));
+  aux += "<tbody>" +
+       "<tr>" +
+       "</tr>" +
+       "</tbody>"
+  tabelaCafeB.innerHTML = aux;
+  var aux = tabelaCafeR.innerHTML.slice(0, tabelaCafeR.innerHTML.indexOf("<tbody>"));
+  aux += "<tbody>" +
+       "<tr>" +
+       "</tr>" +
+       "</tbody>"
+  tabelaCafeR.innerHTML = aux;
+  var aux = tabelaInsumo.innerHTML.slice(0, tabelaInsumo.innerHTML.indexOf("<tbody>"));
+  aux += "<tbody>" +
+       "<tr>" +
+       "</tr>" +
+       "</tbody>"
+  tabelaInsumo.innerHTML = aux;
 }

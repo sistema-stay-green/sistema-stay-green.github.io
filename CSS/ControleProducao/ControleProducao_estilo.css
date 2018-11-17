@@ -186,6 +186,10 @@ button img {
 #tabelaProduto , #tabelaInsumo{
   width: 100%;
 }
+#modalRelatorioHistorico{
+  overflow-y: scroll;
+  max-height: calc(100vh - 210px);
+}
 .tabProduto, .tabInsumo {
   margin: auto;
 }
@@ -229,6 +233,7 @@ button img {
   background-color: var(--brancoIvory);
   border: solid 0.25em var(--verdeCamarone);
   border-radius: 1em;
+
 }
 
 .posDivModal {

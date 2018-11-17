@@ -139,16 +139,64 @@
         <h1>Relatório de Mercadorias por Período</h1>
         <div id="conteudoProduto">
           <h2 id="tituloProduto">Produtos</h2>
-
-          <table id="tabelaProduto">
-
+          <label for="tabelaRelLeite"><b>Leite</b></label>
+          <table id="tabelaRelLeite">
+            <thead>
+              <th>Data Transacao</th>
+              <th>Quantidade Transação</th>
+              <th>Valor Transação</th>
+            </thead>
+            <tbody>
+              <th></th>
+            </tbody>
+          </table>
+          <label for="tabelaRelCafeB"><b>Café Bourbon</b></label>
+          <table id="tabelaRelCafeB">
+            <thead>
+              <th>Data Transacao</th>
+              <th>Quantidade Transação</th>
+              <th>Valor Transação</th>
+            </thead>
+            <tbody>
+              <th></th>
+            </tbody>
+          </table>
+          <label for="tabelaRelCafeR"><b>Café Robusta</b></label>
+          <table id="tabelaRelCafeR">
+            <thead>
+              <th>Data Transacao</th>
+              <th>Quantidade Transação</th>
+              <th>Valor Transação</th>
+            </thead>
+            <tbody>
+              <th></th>
+            </tbody>
+          </table>
+          <label for="tabelaRelCafeA"><b>Café Arábica</b></label>
+          <table id="tabelaRelCafeA">
+            <thead>
+              <th>Data Transação</th>
+              <th>Quantidade Transação</th>
+              <th>Valor Transação</th>
+            </thead>
+            <tbody>
+              <th></th>
+            </tbody>
           </table>
         </div>
-        <h4 id="avisoConteudoVazio" hidden>Não foram encontradas transações nesse período</h4>
+        <h4 id="avisoRelatorio">Não foram encontradas transações nesse período</h4>
         <div id="conteudoInsumo">
           <h2 id="tituloInsumo">Insumos</h2>
           <table id="tabelaInsumo">
-
+            <thead>
+              <th>Insumo</th>
+              <th>Data</th>
+              <th>Quantidade</th>
+              <th>Valor</th>
+            </thead>
+            <tbody>
+              <th></th>
+            </tbody>
           </table>
 
         <div class="divBotoes">
@@ -242,7 +290,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
   <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
   <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>

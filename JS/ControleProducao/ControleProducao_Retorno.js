@@ -1,3 +1,7 @@
+/* Autor: Diego Demétrio
+ Grupo 1: Controle de produção
+ líder: Arthur Marcolino */
+
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
@@ -19,16 +23,19 @@ function criaTabela(itens, tipo){
 						case 0:
 						if (itens[i].nomeProduto == "LEITE") {
 							celula.innerHTML = "Leite";
-						}else if (itens[i].nomeProduto == "CAFE_BOURBON") {
+						}
+						else if (itens[i].nomeProduto == "CAFE_BOURBON") {
 							celula.innerHTML = "Café Bourbon"
-						}else if (itens[i].nomeProduto == "CAFE_ROBUSTA") {
-							celula.innerHTML = "Café Roubusta";
-						}else {
-							celula.innerHTML = "Café Arabica";
+						}
+						else if (itens[i].nomeProduto == "CAFE_ROBUSTA") {
+							celula.innerHTML = "Café Robusta";
+						}
+						else {
+							celula.innerHTML = "Café Arábica";
 						}
 						break;
 						case 1:
-						celula.innerHTML = itens[i].descrProduto;
+						celula.innerHTML = (itens[i].descrProduto);
 						break;
 						case 2:
 						celula.innerHTML = itens[i].unidMedProduto;
@@ -38,6 +45,17 @@ function criaTabela(itens, tipo){
 						break;
 						case 4:
 						celula.innerHTML = itens[i].quantEstoqueProduto;
+						if (itens[i].pontoAvisoProduto != 0) {
+							if(itens[i].quantEstoqueProduto < itens[i].pontoAvisoProduto){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueMenor.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+							}
+							else if(itens[i].quantEstoqueProduto == itens[i].pontoAvisoProduto){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueBaixo.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+							}
+							else if(((itens[i].quantEstoqueProduto) - (itens[i].quantEstoqueProduto) * 0.25) <= itens[i].pontoAvisoProduto){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoquePerto.png\" title=\"Estoque próximo ao ponto de aviso!\" class=\"aviso\">";
+							}
+						}
 						break;
 						case 5:
 						celula.innerHTML = itens[i].pontoAvisoProduto;
@@ -66,6 +84,15 @@ function criaTabela(itens, tipo){
 						break;
 						case 3:
 						celula.innerHTML = itens[i].quantEstoqueInsumo;
+						if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso1.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+						}
+						else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
+							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso2.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+						}
+						else {
+							celula.style.border = "";
+						}
 						break;
 						case 4:
 						celula.innerHTML = itens[i].pontoAvisoInsumo;

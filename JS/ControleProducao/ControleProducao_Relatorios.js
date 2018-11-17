@@ -47,6 +47,10 @@ btnCancelaEditarProduto.addEventListener( 'click' , funcaoEditarProduto );
 btnConfirmarEditarProduto.addEventListener( 'click' , funcaoEditarProduto );
 btnCancelarEditarInsumo.addEventListener( 'click' , funcaoEditarInsumo );
 btnConfirmarEditarInsumo.addEventListener( 'click' , funcaoEditarInsumo );
+btnVoltaRelatorioHEl.addEventListener( 'click' , limpaRelatorio );
+btnFechaRelatorioHEl.addEventListener( 'click' , limpaRelatorio );
+btnVoltaRelatorioPEl.addEventListener( 'click' , limpaRelatorio );
+btnFechaRelatorioPEl.addEventListener( 'click' , limpaRelatorio );
 
 
 
@@ -115,4 +119,12 @@ function funcaoEditarProduto() {
 function funcaoEditarInsumo() {
   divModalEditarInsumo.classList.add("esconde");
   divMascaraEl.classList.add("ocultar");
+}
+
+function limpaRelatorio(){
+  paragrafoInsumos.innerHTML = "";
+  paragrafoProdutos.innerHTML = "";
+  relCafeBourbon.innerHTML = "";
+  relCafeArabica.innerHTML = "";
+  relCafeRobusta.innerHTML = "";
 }

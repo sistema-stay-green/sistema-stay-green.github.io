@@ -27,6 +27,7 @@ var btnCancelaEditarProduto = document.querySelector('#btnCancelaEditarProduto')
 var btnConfirmarEditarProduto = document.querySelector('#btnConfirmarEditarProduto');
 var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo');
 var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
+var textoAviso = document.getElementById('avisoConteudoVazio');
 
 
 
@@ -122,9 +123,6 @@ function funcaoEditarInsumo() {
 }
 
 function limpaRelatorio(){
-  paragrafoInsumos.innerHTML = "";
-  paragrafoProdutos.innerHTML = "";
-  relCafeBourbon.innerHTML = "";
-  relCafeArabica.innerHTML = "";
-  relCafeRobusta.innerHTML = "";
+  console.log("limpou tudo");
+  textoAviso.innerHTML = " ";
 }

@@ -5,60 +5,69 @@
 var btnRelatorioH = document.getElementById('btnRelatorioHistorico');
 var btnVoltaRelatorioP = document.getElementById('btnVoltaRelatorioP');
 var btnFechaRelatorioP = document.getElementById('btnFechaRelatorioP');
-var paragrafoInsumos = document.getElementById('paragrafoInsumo');
-var paragrafoProdutos = document.getElementById('paragrafoProduto');
-var relLeite = document.getElementById('relLeite');
-var relCafeBourbon = document.getElementById('relCafeBourbon');
-var relCafeArabica = document.getElementById('relCafeArabica');
-var relCafeRobusta = document.getElementById('relCafeRobusta');
 var divInsumo = document.getElementById('conteudoInsumo');
 var divProduto = document.getElementById('conteudoProduto');
-//Variáveis auxiliares
-var textoRel = "";
-var auxLimpezaRelatorio = 0;
-
-
+var textoAviso = document.getElementById('avisoConteudoVazio');
+var tabelaProduto = document.getElementById('tabelaProduto');
+var tabelaInsumo = document.getElementById('tabelaInsumo');
+var tituloProduto = document.getElementById('tituloProduto');
+var tituloInsumo = document.getElementById('tituloInsumo');
+//Variáveis Auxiliares
+var contProdutos = 0;
+var contInsumos = 0;
 
 
 btnRelatorioH.addEventListener('click', criaRelatorioH);
-
-
 
 /** @autor Alberto
     Descrição: função que apartir de um periodo faz uma requisição
     para o servlet que retorna um ArrayList com as transações feitas**/
 function criaRelatorioH(){
-  if (auxLimpezaRelatorio != 0) {
-    //vai ter algo aqui que limpa o relatorio;
-  }
 
   var periodo = document.getElementById('selPeriodo').value;
-
   //Realiza a requisição para o servlet, que retorna um ArrayList com as Transações dentro daquele período
-  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio1&id=" + periodo).then(function(resultado){
+  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio1&id=" + periodo)
+  .then(function(resultado){
+
     var contador = 0;
 
     if(resultado == null){
-      paragrafoProduto.innerHTML = "Não foram encontradas transações de produtos nesse periodo";
-      paragrafoInsumo.innerHTML = "Não foram encontradas transações de produtos nesse periodo";
+
+      tituloProduto.hidden = true;
+      tituloInsumo.hidden = true;
+      textoAviso.hidden = false;
+
     }else{
+      tituloProduto.hidden = false;
+      tituloInsumo.hidden = false;
+
       console.log(resultado);
 
+      var tabelaProdutoHead = tabelaProduto.createTHead();
+      var tabelaProdutoRow = tabelaProdutoHead.insertRow(contProdutos);
+      var tabelaProdutosCell = tabelaProdutoRow.insertCell(contProdutos);
+      tabelaProdutosCell.innerHTML = "Valor Transação";
+      tabelaProdutosCell = tabelaProdutoRow.insertCell(contProdutos);
+      tabelaProdutosCell.innerHTML = "Data Transação";
+      tabelaProdutosCell = tabelaProdutoRow.insertCell(contProdutos);
+      tabelaProdutosCell.innerHTML = "Produto";
+      tabelaProdutosCell.insertRow().insertCell().innerHTML = "";
+
+
+      var tabelaInsumoHead = tabelaInsumo.createTHead();
       resultado.forEach(function(){
+
         //teste para saber se a transação é de Produto
         if(resultado[contador].tipoTransacao == "PRODUTO"){
 
-          var idItem = resultado[contador].idItemTransacao;
-          //realiza a requisição para o servlet que retorna o Produto a partir do idItemTransacao obtido na requisição anterior
-          Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+
-          idItem+"&tipo=produto").then(function(resposta){
-            console.log
-            textoRel = resultado[contador].valorTransacao;
-            console.log(textoRel);
-            encontraTipoProduto(idItem).innerHTML = textoRel;
 
-          })
-          .catch(function(erro){console.log(erro);});
+
+
+          var idItem = resultado[contador].idItemTransacao;
+
+          requestProduto(resultado, contador, idItem);
+
+
           //teste para saber se a transação é de Insumo
         }else if(resultado[contador].tipoTransacao == "INSUMO"){
           console.log("insumo");
@@ -67,6 +76,7 @@ function criaRelatorioH(){
         }
 
         contador++;
+
       })
     }
   })
@@ -83,8 +93,8 @@ function formataData(resultado, contador){
 /** @autor Alberto
     Descrição: função que retorna, a partir da id, o elemento no qual deve ser
     inserido o texto do relatório **/
-function encontraTipoProduto(id){
-  switch (id) {
+function insereProduto(resultado, contador){
+  switch (resultado[contador].idItemTransacao) {
     case 1:
       return relLeite;
       break;
@@ -105,5 +115,22 @@ function encontraTipoProduto(id){
     mais agradável visualmente para o usuário **/
 function ajustaNomeProduto(resposta){
   var vetorTemp = resposta.nomeProduto.split("_");
+  if (vetorTemp["length"] > 1) {
+    vetorTemp = vetorTemp[0] + " " + vetorTemp[1];
+  }
   return vetorTemp;
+}
+
+
+
+function requestProduto(resultado, contador, idItem){
+  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+
+  idItem+"&tipo=produto").then(function(resposta){
+    var textoRel = ajustaNomeProduto(resposta) + ": " + resultado[contador].valorTransacao+" R$ "+
+      formataData(resultado, contador);
+    encontraTipoProduto(idItem).innerHTML = textoRel;
+
+
+  })
+  .catch(function(erro){console.log(erro);});
 }

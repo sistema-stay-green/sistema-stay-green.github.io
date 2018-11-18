@@ -134,13 +134,15 @@
         </div>
       </div>
     </div>
+
     <div id="modalRelatorioHistorico" class="esconde modal">
       <div>
         <h1>Relatório de Mercadorias por Período</h1>
+
         <div id="conteudoProduto">
           <h2 id="tituloProduto">Produtos</h2>
           <label for="tabelaRelLeite"><b>Leite</b></label>
-          <table id="tabelaRelLeite">
+          <table id="tabelaRelLeite" class="centralizaTabela">
             <thead>
               <th>Data Transacao</th>
               <th>Quantidade Transação</th>
@@ -151,7 +153,7 @@
             </tbody>
           </table>
           <label for="tabelaRelCafeB"><b>Café Bourbon</b></label>
-          <table id="tabelaRelCafeB">
+          <table id="tabelaRelCafeB" class="centralizaTabela">
             <thead>
               <th>Data Transacao</th>
               <th>Quantidade Transação</th>
@@ -162,7 +164,7 @@
             </tbody>
           </table>
           <label for="tabelaRelCafeR"><b>Café Robusta</b></label>
-          <table id="tabelaRelCafeR">
+          <table id="tabelaRelCafeR" class="centralizaTabela">
             <thead>
               <th>Data Transacao</th>
               <th>Quantidade Transação</th>
@@ -173,7 +175,7 @@
             </tbody>
           </table>
           <label for="tabelaRelCafeA"><b>Café Arábica</b></label>
-          <table id="tabelaRelCafeA">
+          <table id="tabelaRelCafeA" class="centralizaTabela">
             <thead>
               <th>Data Transação</th>
               <th>Quantidade Transação</th>
@@ -184,7 +186,9 @@
             </tbody>
           </table>
         </div>
+
         <h4 id="avisoRelatorio">Não foram encontradas transações nesse período</h4>
+
         <div id="conteudoInsumo">
           <h2 id="tituloInsumo">Insumos</h2>
           <table id="tabelaInsumo">
@@ -198,30 +202,29 @@
               <th></th>
             </tbody>
           </table>
+        </div>
 
         <div class="divBotoes">
           <button type="button" id="btnVoltaRelatorioH" class="voltarModal">Voltar</button>
           <button type="button" id="btnFechaRelatorioH" class="botaoFantasma">Fechar</button>
         </div>
+
       </div>
     </div>
     <div id="modalRelatorioProducao" class="esconde modal">
       <div>
         <h1>Relatório de Produção</h1>
-
-
-        </div>
-
-        <div class="divBotoes">
-          <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>
-          <button type="button" id="btnFechaRelatorioP" class="botaoFantasma">Fechar</button>
-        </div>
       </div>
+      <div class="divBotoes">
+        <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>
+        <button type="button" id="btnFechaRelatorioP" class="botaoFantasma">Fechar</button>
+      </div>
+    </div>
     </div>
   </div>
   <div id="divMascara" class="ocultar"></div>
-  <button type="button" id="btnCriaRelatorio">Relatórios</button>
-  <button type="button" id="btnAbrirModalInsumo"><img src="imgs/ControleProducao/plus.png"></button>
+  <button type="button" id="btnCriaRelatorio"><img src="imgs/ControleProducao/iconeRelatorio.png" id="iconeRelatorio"></button>
+  <button type="button" id="btnAbrirModalInsumo"><img src="imgs/ControleProducao/plus.png" id="iconePlus"></button>
 
   <div id="divModalCerteza" class="esconde modal posDivModal">
     <div id="divModalCerteza2">

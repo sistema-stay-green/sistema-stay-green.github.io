@@ -156,11 +156,12 @@ function encapsulaDados(tipo, operacao) {
     }else {
       if(tipo == "produto"){
               item = new Produto();
-              if (document.querySelector("#inpNomeProduto").value == "Leite") {
+              let nome  = document.querySelector("#inpNomeProduto").value;
+              if (nome == "Leite") {
                   item.nomeProduto = "LEITE";
-              }else if (document.querySelector("#inpNomeProduto").value == "Café Bourbon") {
+              }else if (nome == "Café Bourbon") {
                   item.nomeProduto = "CAFE_BOURBON"
-              }else if (document.querySelector("#inpNomeProduto").value == "Café Robusta") {
+              }else if (nome == "Café Robusta") {
                   item.nomeProduto = "CAFE_ROBUSTA";
               }else {
                   item.nomeProduto = "CAFE_ARABICA";
@@ -190,15 +191,15 @@ function encapsulaDados(tipo, operacao) {
 }
 
 
-// document.querySelector("#btnRemoverProdutos").addEventListener('click', function(){ 
+// document.querySelector("#btnRemoverProdutos").addEventListener('click', function(){
 //   removerTodos("produto");
 //   fazRequisicaoTabela("produto");
 // });
-// document.querySelector("#btnRemoverInsumos").addEventListener('click', function(){ 
+// document.querySelector("#btnRemoverInsumos").addEventListener('click', function(){
 //   removerTodos("insumo");
 //   fazRequisicaoTabela("insumo");
 // });
-// document.querySelector("#btnRemoverTodos").addEventListener('click', function(){ 
+// document.querySelector("#btnRemoverTodos").addEventListener('click', function(){
 //   removerTodos("ambos");
 //   fazRequisicaoTabela("insumo");
 //   fazRequisicaoTabela("produto");
@@ -214,4 +215,3 @@ function encapsulaDados(tipo, operacao) {
 //          .then(function(res){ console.log("Removido(s) com sucesso\t" + res); })
 //          .catch(function(erro){ console.log("Erro na remoção de itens\t" + erro) });
 // }
-

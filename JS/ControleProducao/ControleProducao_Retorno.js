@@ -36,6 +36,7 @@ function criaTabela(itens, tipo){
 						break;
 						case 1:
 						celula.innerHTML = (itens[i].descrProduto);
+						celula.style.wordBreak = "break-all";
 						break;
 						case 2:
 						celula.innerHTML = itens[i].unidMedProduto;
@@ -61,7 +62,7 @@ function criaTabela(itens, tipo){
 						celula.innerHTML = itens[i].pontoAvisoProduto;
 						break;
 						case 6:
-						celula.innerHTML = "<button id='btnEditarProduto" + itens[i].idProduto + "'>Editar</button><button id='btnRemoverProduto" + itens[i].idProduto + "'>Remover</button>"
+						celula.innerHTML = "<button id='btnEditarProduto" + itens[i].idProduto + "'>Atualizar</button><button id='btnRemoverProduto" + itens[i].idProduto + "'>Remover</button>"
 						break;
 
 					}
@@ -84,14 +85,16 @@ function criaTabela(itens, tipo){
 						break;
 						case 3:
 						celula.innerHTML = itens[i].quantEstoqueInsumo;
-						if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
-							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso1.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
-						}
-						else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
-							celula.innerHTML += " <img src=\"imgs/ControleProducao/aviso2.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
-						}
-						else {
-							celula.style.border = "";
+						if (itens[i].pontoAvisoInsumo != 0) {
+							if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueMenor.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+							}
+							else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueBaixo.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+							}
+							else if(((itens[i].quantEstoqueInsumo) - (itens[i].quantEstoqueInsumo) * 0.25) <= itens[i].pontoAvisoInsumo){
+								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoquePerto.png\" title=\"Estoque próximo ao ponto de aviso!\" class=\"aviso\">";
+							}
 						}
 						break;
 						case 4:
@@ -135,8 +138,14 @@ function removerMercadoria(id){
 	funcaoCerteza(function (confirmar) {
 			if (confirmar) {
 				if(id.includes("Produto")){
-					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id=" + id.substring(17);;
-					 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id=" + id.substring(17);
+					 Request.get(url).then(function(res){
+						 if (res.resultado == "SUCESSO") {
+							 
+						 }
+					 }).catch(function(erro){
+						 console.log(erro);
+					 });
 					 desativarBotoes(true);
 					 setTimeout(function () {
 					 		desativarBotoes(false);
@@ -192,7 +201,7 @@ function editarMercadoria(id){
 							inpNomeProduto.value = "Café Bourbon"
 							inpNomeProduto.style.width = "32%";
 						}else if (res.nomeProduto == "CAFE_ROBUSTA") {
-							inpNomeProduto.value = "Café Roubusta";
+							inpNomeProduto.value = "Café Robusta";
 							inpNomeProduto.style.width = "33%";
 						}else {
 						inpNomeProduto.value = "Café Arabica";
@@ -210,10 +219,9 @@ function editarMercadoria(id){
 								 if (certeza) {
 									 var produto = encapsulaDados("produto", "editar");
 									 produto.idProduto = id.substring(16);
-										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(15);
+										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(16);
 										Request.get(url)
 										.then(function(res) {
-											console.log(res);
 
 										})
 										.catch(function(erro){

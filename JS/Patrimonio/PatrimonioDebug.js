@@ -4,7 +4,7 @@
  */
 
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
-const staticDebugMode = false;
+const staticDebugMode = true;
 
 let lastIdGenerated = 0;
 let patrimonioStaticStash = [];

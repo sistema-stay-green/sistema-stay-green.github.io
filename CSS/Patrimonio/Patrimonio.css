@@ -3,12 +3,17 @@
      líder: Mei Fagundes */
 
 /*Importações*/
-@import url('https://fonts.googleapis.com/css?family=Niramit');
+@font-face {
+    font-family: 'Niramit';
+    src: url('Niramit/Niramit-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* GENERAL */
 
 html{
-    font-family: 'Niramit', sans-serif;
+    font-family: 'Niramit';
 }
 
 body{
@@ -188,11 +193,14 @@ button:focus{
     padding: 1.8em;
     border-radius: 50%;
     margin-left: 2vh;
+
+    -webkit-box-shadow: 2px 2px 14px 0px rgba(0,0,0,0.5);
+    box-shadow: 2x 2px 14px 0px rgba(0,0,0,0.5);
 }
 
 #floatingButtons button:hover{
-    -webkit-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
-    box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
+    box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
 }
 
 #floatingButtons button img{
@@ -409,8 +417,8 @@ input.inputVazio:-ms-input-placeholder{
 }
 
 .shadow{
-    -webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
 }
 
 .focusedShadow{
@@ -424,10 +432,16 @@ input.inputVazio:-ms-input-placeholder{
 }
 
 @media print{
-    @import url('https://fonts.googleapis.com/css?family=Niramit');
+
+    @font-face {
+        font-family: 'Niramit';
+        src: url('Niramit/Niramit-Regular.ttf');
+        font-weight: normal;
+        font-style: normal;
+    }
 
     html{
-        font-family: 'Niramit', sans-serif;
+        font-family: 'Niramit';
     }
 
     body{

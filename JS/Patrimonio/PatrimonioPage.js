@@ -945,18 +945,16 @@ function printRelatorio() {
     printWindow.document.write("<link rel='stylesheet' type='text/css' media='screen' href='CSS/Patrimonio/Print.css'/>");
     printWindow.document.write('</head><body onafterprint="self.close()">');
     printWindow.document.write(content);
+    printWindow.document.write('<script type="text/javascript">' + 'window.onload = () => { setTimeout(() => { window.print(); window.close(); }, 200) };' + '</script>');
     printWindow.document.write('</body></html>');
 
     printWindow.document.close();
-    printWindow.focus()
-    printWindow.print();
-    printWindow.close();
+    printWindow.focus();
 }
 
 // --- EVENT LISTENERS ---
 
 addButton.addEventListener("click", () => {showModal('compra')});
-//relatorioButton.addEventListener("click", showRelatorio);
 closeRelatorioButton.addEventListener("click", hideModal);
 printRelatorioButton.addEventListener("click", printRelatorio);
 entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})

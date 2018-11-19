@@ -2,16 +2,13 @@
 Grupo 1: Controle de produção
 líder: Arthur Marcolino */
 
-function fazRequisicaoTabela(tipo){
-   let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=" + tipo;
-   Request.get(url)
-          .then(function(res){
-           criaTabela(res, tipo);
-          })
-          .catch(function(error){ console.log(error)});
-}
 
 
+
+/**
+* @author Diego Demétrio
+* Chama a função que cria as tabelas e atrela um evento ao botão de registrar insumos
+*/
 
 window.onload = function () {
    fazRequisicaoTabela("produto");
@@ -20,9 +17,6 @@ window.onload = function () {
    var insumoTabela = document.getElementById("secInsumo");
    var produto;
    var promises;
-
-;
-
    document.querySelector("#btnRegistrarInsumo").addEventListener('click', function () {
        if (checarInputs()) {
            insumo = encapsulaDados("insumo", "adicionar");
@@ -32,52 +26,76 @@ window.onload = function () {
                fazRequisicaoTabela("insumo");
                limparInputs();
            }, 1000);
-         //  avisos(4);
        }
-       else {
-         //  Avisos(1);
-       }
-
-
    });
-   //tratamento do retorno
-   function respostaServlet(retorno) {
-       retorno.then(function (res) {
-             avisos(res.resultado);
-             limparInputs();
-       }).catch(function (erro) {
-         avisos("FALHA", erro);
-       });
-   }
-
-
-
 };
 
-function encapsulaDadosJSON(tipo, JSON){
+/**
+* @author Diego Demétrio
+* Faz a requisição AJAX para criar as tabelas
+* @param tipo produto ou insumo
+*/
+function fazRequisicaoTabela(tipo){
+   let url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=" + tipo;
+   Request.get(url)
+          .then(function(res){
+           criaTabela(res, tipo);
+          })
+          .catch(function(error){ console.log(error)});
+}
+
+/**
+* Função de debugging
+* @author Diego Demétrio
+* @param retorno retorno da requisição AJAX
+*/
+function respostaServlet(retorno) {
+    retorno.then(function (res) {
+          avisos(res.resultado);
+          limparInputs();
+    }).catch(function (erro) {
+      avisos("FALHA", erro);
+    });
+}
+
+/**
+* @author Diego Demétrio
+* Cria um objeto produto ou insumo com os dados JSON
+* @param tipo produto ou insumo
+* @param obj objeto em JSON
+* @return item(objeto insumo ou produto)
+*/
+function encapsulaDadosJSON(tipo, obj){
    var item;
    if(tipo == "produto"){
        item = new Produto();
-       item._nomeProduto = JSON._nomeProduto;
-       item._descrProduto = JSON._descrProduto;
-       item._unidMedProduto = JSON._unidMedProduto;
-       item._valorUnitProduto = JSON._valorUnitProduto;
-       item._quantEstoqueProduto = JSON._quantEstoqueProduto;
-       item._pontoAvisoProduto = JSON._pontoAvisoProduto;
+       item._nomeProduto = obj._nomeProduto;
+       item._descrProduto = obj._descrProduto;
+       item._unidMedProduto = obj._unidMedProduto;
+       item._valorUnitProduto = obj._valorUnitProduto;
+       item._quantEstoqueProduto = obj._quantEstoqueProduto;
+       item._pontoAvisoProduto = obj._pontoAvisoProduto;
        item.toJSON();
    }
    else {
        item = new Insumo();
-       item._nomeInsumo = JSON.nomeInsumo;
-       item._finalidadeInsumo = JSON.finalidadeInsumo;
-       item._valorCompraInsumo = JSON.valorCompraInsumo;
-       item._quantEstoqueInsumo = JSON.quantEstoqueInsumo;
-       item._pontoAvisoInsumo = JSON.pontoAvisoInsumo;
+       item._nomeInsumo = obj.nomeInsumo;
+       item._finalidadeInsumo = obj.finalidadeInsumo;
+       item._valorCompraInsumo = obj.valorCompraInsumo;
+       item._quantEstoqueInsumo = obj.quantEstoqueInsumo;
+       item._pontoAvisoInsumo = obj.pontoAvisoInsumo;
        item.toJSON();
    }
    return item;
 }
 
+/**
+ * @author Diego Demétrio
+ * Cria um objeto produto ou insumo com os dados das inputs
+ * @param tipo insumo ou produto
+ * @param operacao adicionar ou editar
+ * @return item(objeto insumo ou produto)
+*/
 function encapsulaDados(tipo, operacao) {
    var item;
    if (operacao == "adicionar") {

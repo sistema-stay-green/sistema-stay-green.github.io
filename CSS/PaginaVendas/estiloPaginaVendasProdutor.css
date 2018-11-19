@@ -19,6 +19,9 @@ main{
   width: 90vw;
   margin: 0 auto;
   font-size: calc(7px + 2vh);
+  display: flex;
+  flex-direction:column;
+  padding: 2vh;
 }
 main > table{
   width:100%;
@@ -29,6 +32,10 @@ main > .div-botoes {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 3vh;
+}
+main > label > input {
+  width: 5vw;
 }
 #mascara {
   width: 100vw;

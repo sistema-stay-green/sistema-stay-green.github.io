@@ -3,18 +3,8 @@ tbody select {
   text-align-last: center;
 }
 
-body, html{
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-}
-
 select{
   cursor: pointer;
-}
-
-table{
-  width: 95%;
 }
 
 caption h3 {
@@ -36,39 +26,7 @@ button #iconePlus, #iconeRelatorio {
   height: 2vh;
   position: absolute;
   top: 32%;
-}
-
-footer {
-  bottom: 0;
-  max-height: 30vh;
-}
-
-#secRodape {
-  bottom: 0;
-  position: absolute;
-  width: 100%;
-}
-
-#botoesRelatoriosInsumo {
-  position: sticky;
-  bottom: 2em;
-  display: flex;
-  flex-direction: row-reverse;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding-right: 1em;
-}
-
-#iconePlus {
-  right: 6%;
-}
-
-#iconeRelatorio {
-  right: 2%;
-}
-
-#secInsumo{
-  margin-bottom: 100px;
+  right: 32%;
 }
 
 #btnRegistrarInsumo {
@@ -82,17 +40,16 @@ footer {
 }
 
 #btnCriaRelatorio {
-  height: 5vh;
-  width: 5vh;
+  position: fixed;
   right: 1em;
   bottom: 1em;
   border-radius: 50%;
-  margin-left: 1em;
   padding: 3vh;
   border: 1px solid var(--cinzaFoggy);
 }
 
 #btnAbrirModalInsumo {
+  position: fixed;
   right: 6em;
   bottom: 1em;
   padding: 3vh;
@@ -220,7 +177,8 @@ footer {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
+  overflow: hidden;
 }
 
 #divModalCerteza{

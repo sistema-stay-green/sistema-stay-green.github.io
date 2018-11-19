@@ -62,50 +62,75 @@ function criaTabela(itens, tipo){
 						celula.innerHTML = itens[i].pontoAvisoProduto;
 						break;
 						case 6:
-						celula.innerHTML = "<button id='btnEditarProduto" + itens[i].idProduto + "'>Atualizar</button><button id='btnRemoverProduto" + itens[i].idProduto + "'>Remover</button>"
+						celula.innerHTML = "<button id='btnEditarProduto" + itens[i].idProduto + "'>Atualizar</button><button id='btnRemoverProduto" + itens[i].idProduto + "'>Descartar</button>"
 						break;
 
 					}
 				}
 			}
 			else {
-				for(var j = 0; j < 6; j++){
-
-					var celula = linha.insertCell(j);
-
-					switch (j) {
-						case 0:
-						celula.innerHTML = itens[i].nomeInsumo;
-						break;
-						case 1:
-						celula.innerHTML = itens[i].finalidadeInsumo;
-						break;
-						case 2:
-						celula.innerHTML = itens[i].valorCompraInsumo;
-						break;
-						case 3:
-						celula.innerHTML = itens[i].quantEstoqueInsumo;
-						if (itens[i].pontoAvisoInsumo != 0) {
-							if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
-								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueMenor.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+				if (itens[i].valorCompraInsumo >= 0) {
+					for(var j = 0; j < 6; j++){
+						var celula = linha.insertCell(j);
+						switch (j) {
+							case 0:
+							celula.innerHTML = itens[i].nomeInsumo;
+							break;
+							case 1:
+							celula.innerHTML = itens[i].finalidadeInsumo;
+							break;
+							case 2:
+							celula.innerHTML = itens[i].valorCompraInsumo;
+							break;
+							case 3:
+							celula.innerHTML = itens[i].quantEstoqueInsumo;
+							if (itens[i].pontoAvisoInsumo != 0) {
+								if(itens[i].quantEstoqueInsumo < itens[i].pontoAvisoInsumo){
+									celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueMenor.png\" title=\"Estoque menor que o ponto de aviso!\" class=\"aviso\">";
+								}
+								else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
+									celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueBaixo.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
+								}
+								else if(((itens[i].quantEstoqueInsumo) - (itens[i].quantEstoqueInsumo) * 0.25) <= itens[i].pontoAvisoInsumo){
+									celula.innerHTML += " <img src=\"imgs/ControleProducao/estoquePerto.png\" title=\"Estoque próximo ao ponto de aviso!\" class=\"aviso\">";
+								}
 							}
-							else if(itens[i].quantEstoqueInsumo == itens[i].pontoAvisoInsumo){
-								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueBaixo.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
-							}
-							else if(((itens[i].quantEstoqueInsumo) - (itens[i].quantEstoqueInsumo) * 0.25) <= itens[i].pontoAvisoInsumo){
-								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoquePerto.png\" title=\"Estoque próximo ao ponto de aviso!\" class=\"aviso\">";
-							}
+							break;
+							case 4:
+							celula.innerHTML = itens[i].pontoAvisoInsumo;
+							break;
+							case 5:
+							celula.innerHTML = "<button id='btnEditarInsumo" + itens[i].idInsumo + "'>Atualizar</button><button id='btnRemoverInsumo" + itens[i].idInsumo + "'>Descartar</button><button id='btnDefinitivoInsumo" + itens[i].idInsumo + "'>Deletar</button>"
+							break;
 						}
-						break;
-						case 4:
-						celula.innerHTML = itens[i].pontoAvisoInsumo;
-						break;
-						case 5:
-						celula.innerHTML = "<button id='btnEditarInsumo" + itens[i].idInsumo + "'>Editar</button><button id='btnRemoverInsumo" + itens[i].idInsumo + "'>Remover</button>"
-						break;
 					}
+				}else{
+					for(var j = 0; j < 6; j++){
+						var celula = linha.insertCell(j);
+						switch (j) {
+							case 0:
+							celula.innerHTML = itens[i].nomeInsumo;
+							break;
+							case 1:
+							celula.innerHTML = itens[i].finalidadeInsumo;
+							break;
+							case 2:
+							celula.innerHTML = "-";
+							break;
+							case 3:
+							celula.innerHTML = "-";
+							break;
+							case 4:
+							celula.innerHTML = "-";
+							break;
+							case 5:
+							celula.innerHTML = "<button id='btnEditarInsumo" + itens[i].idInsumo + "'>Atualizar</button><button id='btnRemoverInsumo" + itens[i].idInsumo + "'>Descartar</button><button id='btnDefinitivoInsumo" + itens[i].idInsumo + "'>Deletar</button>"
+							break;
+						}
 
+					}
 				}
+
 			}
 		}
 	}
@@ -126,6 +151,9 @@ function adicionarEventos() {
 			else if(botao.id.includes("Remover")){
 				botao.addEventListener('click', function(e){ removerMercadoria(e.target.id); });
 				botao.title = "Click aqui para remover";
+			}else if(botao.id.includes("Definitivo")){
+				botao.addEventListener('click', function(e){ deletarMercadoria(e.target.id); });
+				botao.title = "Click aqui para deletar";
 			}
 		}
 	}
@@ -154,7 +182,7 @@ function removerMercadoria(id){
 			 }
 			 else{
 				 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id=" + id.substring(16);;
-				 Request.get(url).then(function(res) { console.log(res);	}).catch(function(erro){console.log(erro);});
+				 Request.get(url).then(function(res) { 	}).catch(function(erro){console.log(erro);});
 				 desativarBotoes(true);
 				 setTimeout(function () {
 				 	desativarBotoes(false);
@@ -164,7 +192,93 @@ function removerMercadoria(id){
 			}
 	});
 
+}
 
+function avisos(i, res) {
+	divModalAvisos2.innerHTML = "";
+	divModalAvisos2.style.color = "black";
+		switch (i) {
+				case "SUCESSO":
+						divModalAvisos2.innerHTML = "Operação realizada com sucesso!!";
+						divModalAvisos2.style.color = "green";
+						divModalAvisos2.classList.remove("esconde");
+						break;
+				case "INPUT_INVALIDO":
+						divModalAvisos2.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar...</p>";
+						divModalAvisos2.style.color = "red";
+						divModalAvisos.classList.remove("esconde");
+						divModalAvisos.style.right = "10px";
+;
+						break;
+				case "FALHA":
+						divModalAvisos2.classList.remove("esconde");
+						divModalAvisos2.style.color = "red";
+						if (res.target.statusText) {
+							divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo:"+ res.target.statusText +"</p>";
+						}else {
+							 divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo: Falha ao conectar com banco de dados.</p>";
+						}
+						break;
+				case "FALHA":
+						divModalAvisos2.classList.remove("esconde");
+						divModalAvisos2.innerHTML = "<p>Houve uma falha</p>";
+						divModalAvisos2.style.color = "red";
+						break;
+				default:
+		}
+}
+
+function checarInputs() {
+		var inputs = document.querySelectorAll('input');
+		var cont = 0;
+		for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].clientHeight > 0) {
+						if (inputs[i].value === "" || inputs[i].validity.valid === false || inputs[i].value === "NaN") {
+								inputs[i].style.border = "1px solid red";
+								cont++;
+						} else {
+								inputs[i].style.border = "none";
+								if (inputs[i].readOnly == false) {
+									inputs[i].style.borderBottom = "1px solid black";
+								}
+						}
+				}
+		}
+		if (cont > 0) {
+				cont = 0;
+				avisos("INPUT_INVALIDO");
+				return false;
+		} else {
+				cont = 0;
+				return true;
+		}
+}
+
+function limparInputs() {
+		var inputs = document.querySelectorAll('input');
+		var cont = 0;
+		for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].clientHeight > 0) {
+						inputs[i].value = "";
+				}
+		}
+}
+
+
+
+	function deletarMercadoria(id){
+		let url;
+		funcaoCerteza(function (confirmar) {
+				if (confirmar) {
+					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=removerDefinitivo&id=" + id.substring(19);
+					 Request.get(url).then(function(res) { 	}).catch(function(erro){console.log(erro);});
+					 desativarBotoes(true);
+					 setTimeout(function () {
+					 	desativarBotoes(false);
+						fazRequisicaoTabela("insumo");
+					 }, 1000);
+				}
+		});
 }
 
 function editarMercadoria(id){
@@ -215,25 +329,27 @@ function editarMercadoria(id){
 					});
 					editarProduto(function (confirmar) {
 						if (confirmar) {
-							funcaoCerteza(function (certeza) {
-								 if (certeza) {
-									 var produto = encapsulaDados("produto", "editar");
-									 produto.idProduto = id.substring(16);
-										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(16);
-										Request.get(url)
-										.then(function(res) {
+							if (funcaoEditarProduto()) {
+								funcaoCerteza(function (certeza) {
+									 if (certeza) {
+										 var produto = encapsulaDados("produto", "editar");
+										 produto.idProduto = id.substring(16);
+											url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(produto)+ "&operacao=atualizar&tipo=produto&id=" + id.substring(16);
+											Request.get(url)
+											.then(function(res) {
 
-										})
-										.catch(function(erro){
-										 console.log(erro);
-										});
-									 desativarBotoes(true);
-									setTimeout(function () {
-										desativarBotoes(false);
-										fazRequisicaoTabela("produto");
-									}, 1000);
-								 }
-								 });
+											})
+											.catch(function(erro){
+											 console.log(erro);
+											});
+										 desativarBotoes(true);
+										setTimeout(function () {
+											desativarBotoes(false);
+											fazRequisicaoTabela("produto");
+										}, 1000);
+									 }
+									 });
+							}
 								}
 					 });
 			 }else{
@@ -262,28 +378,29 @@ function editarMercadoria(id){
 
 					 editarInsumo(function (confirmar) {
 						 if (confirmar) {
-							 funcaoCerteza(function (certeza) {
-						 			if (certeza) {
-										var insumo = encapsulaDados("insumo", "editar");
-										insumo.idInsumo = id.substring(15);
-										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(insumo)+ "&operacao=atualizar&tipo=insumo&id=" + id.substring(15);
-										Request.get(url)
-										.then(function(res) {
-										 console.log(res);
+							 if (funcaoEditarInsumo()) {
+								 funcaoCerteza(function (certeza) {
+  						 			if (certeza) {
+  										var insumo = encapsulaDados("insumo", "editar");
+  										insumo.idInsumo = id.substring(15);
+  										url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(insumo)+ "&operacao=atualizar&tipo=insumo&id=" + id.substring(15);
+  										Request.get(url)
+  										.then(function(res) {
 
-										})
-										.catch(function(erro){
-										console.log(erro);
-										});
-										desativarBotoes(true);
-										setTimeout(function () {
-										 desativarBotoes(false);
-											fazRequisicaoTabela("insumo");
-										}, 1000);
+  										})
+  										.catch(function(erro){
+  										console.log(erro);
+  										});
+  										desativarBotoes(true);
+  										setTimeout(function () {
+  										 desativarBotoes(false);
+  											fazRequisicaoTabela("insumo");
+  										}, 1000);
 
-						 			}
+  						 			}
 
-							});
+  							});
+							 }
 						}
 			 });
 		 }

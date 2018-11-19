@@ -8,6 +8,8 @@ var divModalEditarProduto = document.querySelector('#divModalEditarProduto');
 var divModalEditarInsumo2 = document.querySelector('#divModalEditarInsumo2');
 var divModalEditarInsumo = document.querySelector('#divModalEditarInsumo');
 var divModalEditarInsumo2 = document.querySelector('#divModalEditarInsumo2');
+var divModalAvisos = document.querySelector('#divModalAvisos');
+var divModalAvisos2 = document.querySelector('#divModalAvisos2');
 var modalRelatorioHistoricoEl = document.querySelector("#modalRelatorioHistorico");
 var modalRelatorioProducaoEl = document.querySelector("#modalRelatorioProducao");
 var btnCriaRelatorioEl = document.querySelector("#btnCriaRelatorio");
@@ -121,15 +123,50 @@ function funcaoModalCerteza() {
   divMascaraEl.classList.add("ocultar");
 }
 
-function funcaoEditarProduto() {
-  divModalEditarProduto.classList.add("esconde");
-  divMascaraEl.classList.add("ocultar");
+function funcaoEditarProduto(e) {
+if (e) {
+  if (e.target.id == "btnCancelaEditarProduto") {
+    divModalEditarProduto.classList.add("esconde");
+    divMascaraEl.classList.add("ocultar");
+  }else {
+    if (checarInputs()) {
+      divModalEditarProduto.classList.add("esconde");
+      divMascaraEl.classList.add("ocultar");
+    }
+  }
+} else {
+    if (checarInputs()) {
+      divModalEditarProduto.classList.add("esconde");
+      divMascaraEl.classList.add("ocultar");
+      return true;
+    }else {
+      return false;
+    }
+  }
 }
 
-function funcaoEditarInsumo() {
-  divModalEditarInsumo.classList.add("esconde");
-  divMascaraEl.classList.add("ocultar");
+function funcaoEditarInsumo(e){
+if (e) {
+  if (e.target.id == "btnCancelarEditarInsumo") {
+    divModalEditarInsumo.classList.add("esconde");
+    divMascaraEl.classList.add("ocultar");
+  }else {
+    if (checarInputs()) {
+      divModalEditarInsumo.classList.add("esconde");
+      divMascaraEl.classList.add("ocultar");
+    }
+  }
+} else {
+    if (checarInputs()) {
+      divModalEditarInsumo.classList.add("esconde");
+      divMascaraEl.classList.add("ocultar");
+      return true;
+    }else {
+      return false;
+    }
+  }
 }
+
 
 function limpaRelatorio(){
   avisoRelatorio.innerHTML = " ";

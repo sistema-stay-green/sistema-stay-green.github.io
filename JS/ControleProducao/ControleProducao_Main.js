@@ -18,7 +18,6 @@ window.onload = function () {
    fazRequisicaoTabela("insumo");
    var produtoTabela = document.getElementById("secProduto");
    var insumoTabela = document.getElementById("secInsumo");
-   //var modalAvisos = document.getElementById('modalAvisos');
    var produto;
    var promises;
 
@@ -31,10 +30,9 @@ window.onload = function () {
            setTimeout(function () {
                respostaServlet(promises);
                fazRequisicaoTabela("insumo");
-               console.log("mito");
+               limparInputs();
            }, 1000);
-         //  Avisos(0);
-         //  Avisos(4);
+         //  avisos(4);
        }
        else {
          //  Avisos(1);
@@ -44,77 +42,16 @@ window.onload = function () {
    });
    //tratamento do retorno
    function respostaServlet(retorno) {
-       retorno.then(function (resultado) {
-           if (resultado == 2) {
-           //    Avisos(0);
-           //    Avisos(2);
-               limparInputs();
-           }
-       })
-               .catch(function (erro) {
-             //      Avisos(0);
-             //      Avisos(3);
-               });
-   }
-   function checarInputs() {
-       var inputs = document.querySelectorAll('input');
-       var cont = 0;
-       for (var i = 0; i < inputs.length; i++) {
-           if (inputs[i].clientHeight > 0) {
-               if (inputs[i].value === "" || inputs[i].validity.valid === false || inputs[i].value === "NaN") {
-                   inputs[i].style.border = "1px solid red";
-                   cont++;
-               } else {
-                   inputs[i].style.border = "none";
-                   inputs[i].style.borderBottom = "1px solid black";
-               }
-           }
-       }
-       if (cont > 0) {
-           cont = 0;
-           return false;
-       } else {
-           cont = 0;
-           return true;
-       }
-   }
-
-   function limparInputs() {
-       var inputs = document.querySelectorAll('input');
-       var cont = 0;
-       for (var i = 0; i < inputs.length; i++) {
-           if (inputs[i].clientHeight > 0) {
-               inputs[i].value = "";
-           }
-       }
+       retorno.then(function (res) {
+             avisos(res.resultado);
+             limparInputs();
+       }).catch(function (erro) {
+         avisos("FALHA", erro);
+       });
    }
 
 
-   // function Avisos(i) {
-   //     switch (i) {
-   //         case 0:
-   //             secAvisos.innerHTML = "";
-   //             secAvisos.style.color = "green";
-   //             break;
-   //         case 1:
-   //             secAvisos.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar</p>";
-   //             secAvisos.style.color = "red";
-   //             break;
-   //         case 2:
-   //             secAvisos.innerHTML = "<p>Salvo no banco de dados com sucesso</p>";
-   //             secAvisos.style.color = "#1d883a";
-   //             break;
-   //         case 3:
-   //             secAvisos.innerHTML = "<p>A conexão com o banco de dados falhou</p>";
-   //             secAvisos.style.color = "red";
-   //             break;
-   //         case 4:
-   //             secAvisos.innerHTML = "<p>Enviando...</p>";
-   //             secAvisos.style.color = "orange";
-   //             break;
-   //         default:
-   //     }
-   // }
+
 };
 
 function encapsulaDadosJSON(tipo, JSON){

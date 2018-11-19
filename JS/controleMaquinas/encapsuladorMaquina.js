@@ -99,7 +99,7 @@ function encapsularAluguel(id){
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularManutencao(id){
+function encapsularManutencao(id, dataRetorno){
   let maquina = new Maquina(id);
   maquina.status = "EM_MANUTENCAO";
   maquina.dataSaida = new Date();

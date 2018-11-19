@@ -18,7 +18,7 @@
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
     <div class="opcoes">
-      <button type="button" name="botaoCadastro">Cadastrar</button>
+      <button type="button" class="botaoCadastro" name="botaoCadastro">Cadastrar</button>
     </div>
     <!-- Parte do Cadastro -->
     <div class="valores_fundo">
@@ -28,6 +28,7 @@
         <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
         <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
+        <label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label>
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
         <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
@@ -70,7 +71,7 @@
           <td>5000</td>
           <td>15</td>
           <td>2018-10-01</td>
-          <td class="status">VENDIDO</td>
+          <td class="status">Vendido</td>
           <td>Máquina</td>
           <td>4800</td>
           <td>2018-10-03</td>
@@ -87,7 +88,58 @@
           <td>5000</td>
           <td>15</td>
           <td>2018-10-01</td>
-          <td class="status">EM POSSE</td>
+          <td class="status">Em posse</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
+          </td>
+        </tr>
+        <tr class="maquina">
+          <td class="id">3</td>
+          <td>Teste</td>
+          <td>Alguma coisa</td>
+          <td>5000</td>
+          <td>44</td>
+          <td>2018-10-01</td>
+          <td class="status">Alugado</td>
+          <td>Máquina</td>
+          <td>4800</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
+          </td>
+        </tr>
+        <tr class="maquina">
+          <td class="id">4</td>
+          <td>teste2</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>4000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">Em manutenção</td>
+          <td>Máquina</td>
+          <td>3000</td>
+          <td>2018-10-03</td>
+          <td>2018-10-02</td>
+          <td>
+             <button type="button" class="botaoSaida">Saida</button>
+             <button type="button" class="botaoEditar">Editar</button>
+          </td>
+        </tr>
+        <tr class="maquina">
+          <td class="id">5</td>
+          <td>Trator3</td>
+          <td>Uma máquina que ajuda na colheita do café</td>
+          <td>5000</td>
+          <td>15</td>
+          <td>2018-10-01</td>
+          <td class="status">Descartado</td>
           <td>Máquina</td>
           <td>4800</td>
           <td>2018-10-03</td>
@@ -135,7 +187,19 @@
         </section>
       </div>
      </div>
+     <section class="relatorioModal">
+       <section class="relatorio" id="relatorio">
+         <h1>Relatorio das maquinas</h1>
+         <span class="fecharModal">&times;</span>
+         <section id="maquinasPosse"><h2>Maquinas em posse</h2></section>
+         <section id="maquinasManutencao"><h2>Maquinas em manutenção</h2></section>
+         <section id="maquinasAlugadas"><h2>Maquinas Alugadas</h2></section>
+         <section id="maquinasDescartadas"><h2>Maquinas descartadas</h2></section>
+         <section id="maquinasVendidas"><h2>Maquinas Vendidas</h2></section>
+       </section>
+     </section>
 
+    <button type="button" class="botaoRelatorio" name="botaoRelatorio">Relatorio</button>
    <footer class="footer">
       <section>
         <h3>empresa</h3>

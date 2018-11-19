@@ -118,7 +118,7 @@ function alugar(id, valorAluguel){
  * @author Guilherme Sena
  */
 function manuntenir(id, dataRetorno){
-  let maquinaJSON = encapsularManutencao(id);
+  let maquinaJSON = encapsularManutencao(id, dataRetorno);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "&maquinasJSON="+maquinaJSON+
               "&acao="+"m"+

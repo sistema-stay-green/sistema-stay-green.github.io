@@ -10,12 +10,10 @@ document.querySelector('#comecar').addEventListener('click', function (e) {
   });
 });
 
-const usuarioLogado = true;
+// Verifica e altera a página se o usuário estiver logado ou não
+let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
-//let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
-//if(dadosUsuario === null){ naoEstaLogado } else{ logado }
-
-if(usuarioLogado){ //não logado
+if(dadosUsuario === null){ //não logado
 
   let cards = document.querySelectorAll("#main > article");
 

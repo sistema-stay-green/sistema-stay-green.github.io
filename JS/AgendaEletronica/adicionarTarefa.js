@@ -6,17 +6,28 @@ let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
 
 botaoConfirmarTarefa.addEventListener('click', (evt) => {
   operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
-  escondeFormulario();
+  alteraVisibilidadeElemento(containerFormNovaTarefa, true);
 });
 
 botaoExcluirTarefa.addEventListener('click', (evt) => {
   operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
-  escondeFormulario();
+  alteraVisibilidadeElemento(containerFormNovaTarefa, true);
 });
 
-function escondeFormulario(){
-  mascaraFormEl.classList.add('invisivel');
-  containerFormNovaTarefa.classList.add('invisivel');
+/** Altera a visibilidade de um elemento 
+ * @param {HTMLElement} elemento o elemento que terá a visibilidade
+ * alterada
+ * @param {Boolean} deveEsconder valor que indica se o elemento deve ser
+ * escondido ou não.
+*/
+function alteraVisibilidadeElemento(elemento, deveEsconder){
+  if(deveEsconder){
+    mascaraFormEl.classList.add('invisivel');
+    elemento.classList.add('invisivel');
+  }else{
+    mascaraFormEl.classList.remove('invisivel');
+    elemento.classList.remove('invisivel');
+  }
 }
 
 /** Exibe o formulário de adicionar nova tarefa quando usuário clica no
@@ -26,12 +37,21 @@ function exibeFormularioTarefa(tarefaAExibir){
   let botaoCancelarTarefaEl = document.querySelector('button[name="cancelarTarefa"]');
 
   mascaraFormEl.classList.remove('invisivel');
-  mascaraFormEl.addEventListener('click', escondeFormulario);
+  mascaraFormEl.addEventListener('click', () => {alteraVisibilidadeElemento(containerFormNovaTarefa, true)});
 
-  botaoCancelarTarefaEl.addEventListener('click', escondeFormulario);
+  botaoCancelarTarefaEl.addEventListener('click', () => {alteraVisibilidadeElemento(containerFormNovaTarefa, true)});
 
   containerFormNovaTarefa.classList.remove('invisivel');
   if(tarefaAExibir != null){
+    for(let insumo of insumosArmazenadosBD) {
+      let insumoCheckBox =  document.createElement('input'),
+          labelInsumo = document.createElement('label');
+      insumoCheckBox.type = 'checkbox';
+      insumoCheckBox.name = insumo.nomeInsumo;
+      insumoCheckBox.value = insumo.nomeInsumo;
+      labelInsumo.appendChild(insumoCheckBox);
+      labelInsumo.innerHTML = insumo.nomeInsumo;
+    }
     document.querySelector('button[name="excluirTarefa"]').classList.remove('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
@@ -74,6 +94,7 @@ function exibeFormularioTarefa(tarefaAExibir){
       "ARAR";
 
     let data = new Date();
+
     document.querySelector('input[name="realizarDia"]').value =
     data.getUTCFullYear() + "-" + ((data.getMonth + 1 < 10) ? '0' + data.getMonth()
     + 1 : data.getMonth() + 1 + "-" + data.getUTCDate());

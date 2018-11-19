@@ -134,8 +134,13 @@ function aplicaFiltros() {
                 //Se há filtros ativos, mostre apenas as tarefas filtradas
                 if(filtrosMarcados.length != 0)
                     geraCalendario(tarefasFiltradas, false);
-                else    
+                else {
+                    document.querySelectorAll('#containerCalendario h1').forEach(tituloErro => {
+                        document.querySelector('#containerCalendario').removeChild(tituloErro);
+                    })
                     geraCalendario(tarefasArmazenadasBD, true, new Date());
+                }   
+                   
                 
             }
             )

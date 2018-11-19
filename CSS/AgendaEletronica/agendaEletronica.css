@@ -134,6 +134,21 @@ nav{
 	background-color: rgba(0, 0, 0, .5);
 }
 
+#containerRelatorio{
+	width: 50vw;
+	height: 50vh;
+	left: calc(50vw/2);
+	top: 50%;
+	margin-top: -25vh;
+	background-color: var(--brancoIvory);
+	position: absolute;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	z-index: 3;
+	padding: 1.2em;
+}
+
 #containerCalendario{
 	position: relative;
 	display: grid;

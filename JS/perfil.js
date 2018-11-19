@@ -24,7 +24,7 @@ btnConfimarCadastroEl.addEventListener("click", function() {
   usuario.email = emailUsuario;
   usuario.senha = null;
 
-  Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
+  Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
               + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
               + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
          .then(() => {
@@ -39,7 +39,7 @@ btnCancelarEl.addEventListener("click", alternaArticles);
 btnEditarEl.addEventListener("click", function(){
   alternaArticles();
 
-  // Pegar os valores do BD e se algum valor for null ou undefined n atualizar
+  // Pegar os valores do BD. se algum atualizado valor for null ou undefined n atualizar
   let nomeUsuario = document.querySelector("#cadastro input[name='nomeUsuario']"),
       cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']"),
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']"),

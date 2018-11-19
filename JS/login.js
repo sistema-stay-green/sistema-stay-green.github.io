@@ -39,7 +39,7 @@ btnConfimarCadastroEl.addEventListener("click", function() {
 
       localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
 
-      Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
+      Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
                   + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
                   + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
              .then(() => {

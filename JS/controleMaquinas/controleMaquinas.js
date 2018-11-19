@@ -44,32 +44,37 @@ function cadastrar_fe(){
 }
 
 //função que cadastra valores na tabela sem a utilização do BD
-function cadastroSemBD(){
+function cadastro(){
   if(validacao() == true){
     //variaveis
     let nome = document.querySelector("input[name='nome']").value,
         finalidade = document.querySelector("input[name='finalidade']").value,
         valor =  document.querySelector("input[name='valor']").value,
         data = document.querySelector("input[name='data']").value,
-        depreciação = document.querySelector("input[name='depreciação']").value,
+        depreciacao = document.querySelector("input[name='depreciação']").value,
         botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+        botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
         maquinas = document.querySelector("#tabela");
-    let vetor = [nome,finalidade,valor,depreciação,data];
+    let vetor = [nome,finalidade,valor,depreciacao,data];
     let string = "";
+
+    cadastrar(nome, finalidade, "EM POSSE", depreciacao, valor,
+      novaData(), 1)
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
       essa string na tabela*/
-    string += "<td class=\"id\">2</td>";
-    for (var i = 0; i < vetor.length; i++) {
-      string += "<td>" + vetor[i] + "</td>";
+      let maquina = encapsularCadastrar(null, nome, finalidade, "em posse",
+        depreciacao, valor)
+    for (var i = 0; i < maquina.length; i++) {
+      if(i == 0){
+        string += "<td class=\"id\">" + maquina[i] + "</td>";
+      }else {
+        string += "<td>" + maquina[i] + "</td>";
+      }
     }
       maquinas.innerHTML += string +
-      "<td class=\"status\">EM POSSE</td>" +
-      "<td>Máquina</td>" +
-      "<td>NAN</td>" +
-      "<td>NAN</td>" +
-      "<td>NAN</td>" +
-      "<td>" + botaoSaida + "</td>";
+      "<td>" + botaoSaida + "</td>" +
+      "<td>" + botaoEditar + "</td>";
 
     //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
     document.querySelector(".maquinas").style.display = "inline-block";
@@ -137,6 +142,7 @@ function saida(){
   maquina*/
 function visaoBotao() {
   let botões = document.querySelectorAll(".botaoSaida");
+  let botões2 = document.querySelectorAll(".botaoEditar");
   for (var i = 0; i < botões.length; i++) {
     var pesquisa = botões[i].parentNode;
     pesquisa = pesquisa.parentNode;
@@ -145,33 +151,49 @@ function visaoBotao() {
       botões[i].className = "botaoDesab";
     }
     else {
-      botões[i].className = "botaoSaida";
+      botões[i].className = "botaoEditar";
+    }
+  }
+  for (botao of botões2) {
+    var pesquisa = botao.parentNode;
+    pesquisa = pesquisa.parentNode;
+    var nodes = pesquisa.children;
+    if(nodes[6].innerHTML != "EM POSSE"){
+      botao.className = "botaoDesab";
+    }
+    else {
+      botao.className = "botaoEditar";
     }
   }
 }
 
-/**/
+/*Chama a aba para editar maquinas em posse*/
 function Editar(){
-  document.querySelector("#editar").style.display = "block";
   elemento = event.target;
   elemento = elemento.parentElement;
   nodes = elemento.parentNode.children;
-  console.log(elemento.parentNode);
-  let id = document.querySelector("input[name='id-editar']"),
-      nome = document.querySelector("input[name='nome-editar']"),
-      finalidade = document.querySelector("input[name='finalidade-editar']"),
-      valor =  document.querySelector("input[name='valor-editar']"),
-      data = document.querySelector("input[name='data-editar']"),
-      depreciação = document.querySelector("input[name='depreciação-editar']");
-  let vetor = [id,nome,finalidade,valor,depreciação,data],
-      i = 0;
-  for (valor of vetor) {
-    valor.value = nodes[i].innerHTML;
-    i++;
+  if(nodes[6] == "EM POSSE"){
+    document.querySelector("#editar").style.display = "block";
+    elemento = event.target;
+    elemento = elemento.parentElement;
+    nodes = elemento.parentNode.children;
+    console.log(elemento.parentNode);
+    let id = document.querySelector("input[name='id-editar']"),
+        nome = document.querySelector("input[name='nome-editar']"),
+        finalidade = document.querySelector("input[name='finalidade-editar']"),
+        valor =  document.querySelector("input[name='valor-editar']"),
+        data = document.querySelector("input[name='data-editar']"),
+        depreciação = document.querySelector("input[name='depreciação-editar']");
+    let vetor = [id,nome,finalidade,valor,depreciação,data],
+        i = 0;
+    for (valor of vetor) {
+      valor.value = nodes[i].innerHTML;
+      i++;
+    }
   }
 }
 
-/**/
+/*Edita a maquina selecionada*/
 function EditarMaquina() {
   let id = document.querySelector("input[name='id-editar']"),
       nome = document.querySelector("input[name='nome-editar']"),
@@ -182,6 +204,9 @@ function EditarMaquina() {
   let vetor = [id,nome,finalidade,valor,depreciação,data],
       maquinas = document.querySelectorAll(".maquina"),
       string = "";
+      descartar(id);
+      cadastrar(nome, finalidade, "EM POSSE", depreciacao, valor,
+        data, 1);
       for (maquina of maquinas) {
         nodes = maquina.children;
         if(nodes[0].innerHTML == id.value){
@@ -209,6 +234,7 @@ function EditarMaquina() {
       }
 
 }
+
 //função que altera o status da maquina
 function AlteraStatus(elemento,opcao){
     //Pega os "filhos" da variavel elemento
@@ -236,7 +262,6 @@ function AlteraStatus(elemento,opcao){
         }
         else if(opcao.value == "Vender"){
           elemento.innerHTML += "<td>VENDIDO</td>";
-
           vender(vetor[0]);
         }
         else if(opcao.value == "Enviar para conserto"){
@@ -246,7 +271,7 @@ function AlteraStatus(elemento,opcao){
         }
         else if(opcao.value == "Descartar"){
           elemento.innerHTML += "<td>DESCARTADO</td>";
-          descartar(veor[0]);
+          descartar(vetor[0]);
         }
       }
       else {
@@ -274,6 +299,29 @@ function AlteraStatus(elemento,opcao){
   let valores = document.querySelectorAll("input[name='data']");
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
+  }
+}
+
+function CarregaElementos(){
+  let carregarpagina = receberTodos(),
+      string = "",
+      botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+      botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+      maquinas = document.querySelector("#tabela");
+  var j = 1;
+  for (var i = 0; i < carregarpagina.length; i++) {
+    if(i == 0){
+      string += "<td class=\"id\">" + carregarpagina[i] + "</td>";
+    }else {
+      string += "<td>" + carregarpagina[i] + "</td>";
+    }
+    if(j%8 == 0){
+      maquinas.innerHTML += string +
+      "<td>" + botaoSaida + "</td>" +
+      "<td>" + botaoEditar + "</td>";
+      string = "";
+    }
+    j++;
   }
 }
 
@@ -305,8 +353,7 @@ botaoEditarMaquina.addEventListener("click", EditarMaquina);
 botaoCadastro.addEventListener("click", cadastrar_fe);
 botaoVoltar.addEventListener("click", Voltar);
 botaoAcao.addEventListener("click", function(){
-  cadastroSemBD();
-  cadastrar();
+  cadastro();
   });
 
 let inputs = document.querySelectorAll(".inputs");
@@ -323,4 +370,5 @@ let edita = document.querySelectorAll(".botaoEditar");
 for (var i = 0; i < edita.length; i++) {
   edita[i].addEventListener("click", Editar)
 }
+window.onload = CarregaElementos;
 window.onload = visaoBotao;

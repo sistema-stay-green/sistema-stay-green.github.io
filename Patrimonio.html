@@ -4,140 +4,185 @@
         <meta charset="utf-8" />
         <meta name="author" content="Mei Fagundes">
         <meta name="author" content="Sávio Cardoso">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Controle de Patrimônio</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="screen" href="CSS/staygreen.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="CSS/Patrimonio/Patrimonio.css"/>
         <link rel="stylesheet" type="text/css" media="print" href="CSS/Patrimonio/Print.css"/>
         <link rel="icon" type="image/png" href="imgs/icons/favicon.png">
     </head>
     <body>
       <nav class="shadow">
           <a href="index.html">Home</a>
-          <a href="#">Agenda</a>
-          <a href="#">Máquinas</a>
-          <h3>Stay Green</h3>
-          <a href="#">Patrimônio</a>
-          <a href="#">Produção</a>
-          <a href="#">Vendas</a>
+          <a href="Patrimonio.html">Patrimônio</a>
+          <a href="controleProducao.html">Produção</a>
+          <h3>STAY GREEN</h3>
+          <a href="agendaEletronica.html">Agenda</a>
+          <a href="controleMaquinas.html">Máquinas</a>
+          <a href="paginaVendasProdutor.html">Vendas</a>
      </nav>
-        <section id="tabela">
-            <h1>Controle de Patrimônio</h1>
-            <section id="toolbar">
-                <span>
-                    <label for="filtroSelect">Filtrar: </label>
-                    <select id="filtroSelect">
-                        <option selected>Todos</option>
-                        <option>Em Posse</option>
-                        <option>Em Manutenção</option>
-                        <option>Alugados</option>
-                        <option>Vendidos</option>
-                    </select>
+        <div class="mascara"></div>
+        <section id="main">
+            <section id="tabela">
+                <h1>Controle de Patrimônio</h1>
+                <section id="toolbar">
+                    <span>
+                        <label for="filtroSelect">Filtrar: </label>
+                        <select id="filtroSelect">
+                            <option value="" selected>Todos</option>
+                            <option value="EM_POSSE">Em Posse</option>
+                            <option value="EM_MANUTENCAO">Em Manutenção</option>
+                            <option value="ALUGADO">Alugados</option>
+                            <option value="VENDIDO">Vendidos</option>
+                            <option value="DESCARTADO">Descartados</option>
+                        </select>
+                    </span>
+                </section>
+                <table id="patrimonioTable" class="shadow">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Finalidade</th>
+                            <th>Status</th>
+                            <th>Índice de Depreciação</th>
+                            <th>Valor da Compra/Procução</th>
+                            <th>Valor Atual</th>
+                            <th>Data da Compra/Procução</th>
+                            <th>Data da última Saída</th>
+                            <th>Data do último Retorno</th>
+                            <th>Data da última Baixa</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <span id="noResults">
+                    <p>Nenhum Patrimônio foi encontrado.</p>
+                    <p>Tente mudar o filtro selecionado, registrar um novo Patrimônio ou verificar se o servidor está ativo.</p>
                 </span>
             </section>
-            <table id="patrimonioTable" class="shadow">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>Finalidade</th>
-                        <th>Status</th>
-                        <th>Índice de Depreciação</th>
-                        <th>Valor da Compra/Procução</th>
-                        <th>Valor Atual</th>
-                        <th>Data da Compra/Procução</th>
-                        <th>Data de Saída</th>
-                        <th>Data de Retorno</th>
-                        <th>Data de Baixa</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <span id="noResults">
-                <p>Nenhum Patrimônio foi encontrado.</p>
-                <p>Tente mudar o filtro selecionado, registrar um novo Patrimônio ou verificar se o servidor está ativo.</p>
-            </span>
-        </section>
 
-        <!-- Div Modal Formulário -->
-        <div class="mascara">
-       </div>
-        <section id="form" class="modal shadow esconde">
-            <div class="conteudo">
+            <!-- Div Modal Formulário -->
+            
+            <section id="form" class="modal shadow esconde">
+                <div class="conteudo">
 
-                <label for="nomeInput">Nome do Patrimônio:</label>
-                <input type="text" name="nomeInput" placeholder="digite...">
+                    <label for="nomeInput">Nome do Patrimônio:</label>
+                    <input type="text" name="nomeInput" placeholder="Digite...">
 
-                <label for="tipoInput">Tipo do Patrimônio:</label>
-                <select name="tipoInput">
-                    <option value="MAQUINA" selected>Máquina</option>
-                    <option value="OUTROS">Outros</option>
-                </select>
-
-                <label for="finalidadeInput">Finalidade do Patrimônio:</label>
-                <input type="text" name="finalidadeInput" placeholder="digite...">
-
-                <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
-                <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="digite...">
-
-                <label for="valorCompraInput">Valor da Compra (R$):</label>
-                <input type="number" min="0" name="valorCompraInput" placeholder="digite...">
-
-                <label for="dataCompraInput">Data da Compra:</label>
-                <input type="date" name="dataCompraInput">
-
-                <div id="statusOptions">
-                    <label for="statusOptions">Mudar Status:</label>
-                    <button name="entradaOptionButton" class="botaoFantasma">Retorno</button>
-                    <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
-                </div>
-
-                <div name="entrada" class="esconde">
-                    <label for="dataEntradaInput">Data de Retorno:</label>
-                    <input type="date" name="dataEntradaInput">
-                </div>
-
-                <div name="saida" class="esconde">
-                    <label for="tipoSaidaInput">Saída: </label>
-                    <select name="tipoSaidaInput">
-                        <option value="" selected>Não Resgistrar</option>
-                        <option value="VENDIDO">Venda</option>
-                        <option value="DESCARTADO">Descarte</option>
-                        <option value="ALUGADO">Aluguel</option>
-                        <option value="EM_MANUTENCAO">Manutenção</option>
+                    <label for="tipoInput">Tipo do Patrimônio:</label>
+                    <select name="tipoInput">
+                        <option value="MAQUINA" selected>Máquina</option>
+                        <option value="ANIMAL">Animal</option>
+                        <option value="IMOVEL">Imóvel</option>
+                        <option value="MERCADORIA">Mercadoria</option>
+                        <option value="UTENSILIO">Utensilio</option>
+                        <option value="VEICULO">Veículo</option>
+                        <option value="TERRENO">Terreno</option>
+                        <option value="OUTROS">Outros</option>
                     </select>
-                    <label for="dataSaidaInput">Data de saída:</label>
-                    <input type="date" name="dataSaidaInput">
+
+                    <label for="finalidadeInput">Descrição da finalidade do Patrimônio:</label>
+                    <input type="text" name="finalidadeInput" placeholder="Digite...">
+
+                    <label for="indiceDepreciacaoInput">Índice de Depreciação por Ano (%):</label>
+                    <input type="number" min="0" max="100" name="indiceDepreciacaoInput" placeholder="Digite...">
+
+                    <label for="valorCompraInput">Valor da Compra/Produção (R$):</label>
+                    <input type="number" min="0" name="valorCompraInput" placeholder="Digite...">
+
+                    <label for="dataCompraInput">Data da Compra/Produção:</label>
+                    <input type="date" name="dataCompraInput">
+
+                    <div id="statusOptions">
+                        <label for="statusOptions">Registrar Entrada/Saída:</label>
+                        <button name="entradaOptionButton" class="botaoFantasma">Retorno</button>
+                        <button name="saidaOptionButton" class="botaoFantasma">Saída</button>
+                    </div>
+
+                    <div name="entrada" class="esconde">
+                        <label for="dataEntradaInput">Data do Retorno:</label>
+                        <input type="date" name="dataEntradaInput">
+                    </div>
+
+                    <div name="saida" class="esconde">
+                        <label for="tipoSaidaInput">Saída: </label>
+                        <select name="tipoSaidaInput">
+                            <option value="EM_POSSE" selected>Em Posse</option>
+                            <option value="VENDIDO">Venda</option>
+                            <option value="DESCARTADO">Descarte</option>
+                            <option value="ALUGADO">Aluguel</option>
+                            <option value="EM_MANUTENCAO">Manutenção</option>
+                        </select>
+                        <label for="dataSaidaInput">Data da Saída:</label>
+                        <input type="date" name="dataSaidaInput">
+                    </div>
                 </div>
-            </div>
 
-            <div class="container-modal">
-                <button name="cancelarModalButton" class="shadow">Cancelar</button>
-                <button name="enviar" class="shadow">Enviar</button>
+                <div class="container-modal">
+                    <button name="cancelarModalButton" class="shadow">Cancelar</button>
+                    <button name="enviar" class="shadow">Enviar</button>
+                </div>
+            </section>
+
+            <section id="relatorio" class="modal shadow esconde">
+                <div></div>
+                <div>
+                    <button name="printRelatorio" class="shadow">Imprimir</button>
+                    <button name="closeRelatorio" class="shadow">Cancelar</button>
+                </div>
+            </section>
+
+            <section id="errorModal" class="modal esconde shadow">
+                <p>ERRO!!!</p>
+            </section>
+
+            <div id="floatingButtons">
+                <button name="addButton" class="shadow" title="Registrar Patrimônio Comprado."><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
+                <button name="relatorioButton" class="shadow" title="Gerar Relatório."><img src="imgs/Patrimonio/library-material-design.png" alt=""></button>
             </div>
         </section>
 
-        <section id="relatorio" class="modal shadow esconde">
-            <div></div>
-            <div>
-                <button name="printRelatorio" class="shadow">Imprimir</button>
-                <button name="closeRelatorio" class="shadow">Fechar</button>
-            </div>
-        </section>
-
-        <section id="errorModal" class="modal esconde shadow">
-            <p>ERRO!!!</p>
-        </section>
-
-        <div id="floatingButtons">
-            <button name="addButton" class="shadow" title="Registrar Patrimônio Comprado."><img src="imgs/Patrimonio/add-material-design.png" alt=""></button>
-            <button name="relatorioButton" class="shadow" title="Gerar Relatório."><img src="imgs/Patrimonio/library-material-design.png" alt=""></button>
-        </div>
-        
+            <footer class="shadow">
+                <section>
+                <h3>empresa</h3>
+                <a href="#">email1</a>
+                <a href="#">email2</a>
+                <a href="#">email3</a>
+                </section>
+                <section>
+                <h3>desenvolvedores</h3>
+                <a href="#">email1</a>
+                <a href="#">email2</a>
+                <a href="#">email3</a>
+                </section>
+                <section>
+                <h3>contatos</h3>
+                <a href="#">email1</a>
+                <a href="#">email2</a>
+                <a href="#">email3</a>
+                </section>
+                <section>
+                <h3>curiosidades</h3>
+                <a href="#">email1</a>
+                <a href="#">email2</a>
+                <a href="#">email3</a>
+                </section>
+                <section>
+                <h3>Saiba mais</h3>
+                <a href="#">email1</a>
+                <a href="#">email2</a>
+                <a href="#">email3</a>
+                </section>
+                <section class="redes">
+                <img src="imgs/home/face.png" alt="">
+                <a href="#">segue la no face</a>
+                </section>
+            </footer>
 
         <script src="JS/staygreen.js"></script>
         <script src="JS/Patrimonio/Patrimonio.js"></script>

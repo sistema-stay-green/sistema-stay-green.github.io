@@ -14,61 +14,37 @@
  //Variável que recebe o JSON do servlet
  let dadosJSON;
 
-// window.onload = function recebeJSON(){
-//   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet', )
-//     .then(function(resposta){
-//         try {
-//           dadosJSON = JSON.parse(resposta);
-//           addArrayProdutos(dadosJSON);
-//           addProdutosPagina(arrayProdutos);
-//         } catch(e) {
-//           eval("dadosJSON = (" + resposta + ");");
-//           addArrayProdutos(dadosJSON);
-//           addProdutosPagina(arrayProdutos);
-//         }
-//     });
-// }
+  window.onload = function recebeJSON(){
+    Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
+      .then(function(resposta){
+        for (var i = 0; i < resposta.length; i++) {
+          dadosJSON = resposta;
+          addArrayProdutos(dadosJSON[i]);
+        }
+        addProdutosPagina(arrayProdutos);
+      });
+  }
 
-//Caso a função acima dê erro
-  // window.onload = function recebeJSON(){
-  //   let xhttp = new XMLHttpRequest();
-  //   xhttp.onreadystatechange = function(){
-  //       if (xhttp.readyState === 4 && xhttp.status === 200) {
-  //         try {
-  //           dadosJSON = JSON.parse(xmlhttp.responseText);
-  //           addArrayProdutos(dadosJSON);
-  //           addProdutosPagina(arrayProdutos);
-  //         } catch(e) {
-  //           eval("dadosJSON = (" + xmlhttp.responseText + ");");
-  //           addArrayProdutos(dadosJSON);
-  //           addProdutosPagina(arrayProdutos);
-  //         }
-  //       }
-  //   };
-  //   xhttp.open("POST", 'http://localhost:8080/StayGreen/ProdutosVendaServlet', true);
-  //   xhttp.send();
-  // }
-
-  let cafe = {
-     id:"1",
-     nome:"café",
-     descricao:"uma saca de café",
-     preco: 15,
-     estoque:44,
-     img:"http://s2.glbimg.com/P6Nn4AXYPq-K1Xek4cCKyONYYyA=/e.glbimg.com/og/ed/f/original/2014/01/15/cafe.jpg"
- };
- let leite = {
-    id:"2",
-    nome:"leite",
-    descricao:"um copão de leite daqls bem tope memo ta lgd? tipo mt nice como giga noias",
-    preco: 10,
-    estoque:50,
-    img:"http://camby.com.br/imagens/noticia/leite280813.jpg"
-};
- addArrayProdutos(cafe);
- addArrayProdutos(leite);
- addProdutosPagina(arrayProdutos);
-function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
+//   let cafe = {
+//      id:"1",
+//      nome:"café",
+//      descricao:"uma saca de café",
+//      preco: 15,
+//      estoque:44,
+//      img:"http://s2.glbimg.com/P6Nn4AXYPq-K1Xek4cCKyONYYyA=/e.glbimg.com/og/ed/f/original/2014/01/15/cafe.jpg"
+//  };
+//  let leite = {
+//     id:"2",
+//     nome:"leite",
+//     descricao:"um copão de leite daqls bem tope memo ta lgd? tipo mt nice como giga noias",
+//     preco: 10,
+//     estoque:50,
+//     img:"http://camby.com.br/imagens/noticia/leite280813.jpg"
+// };
+ // addArrayProdutos(cafe);
+ // addArrayProdutos(leite);
+ // addProdutosPagina(arrayProdutos);
+function addArrayProdutos(json){
     let produto = {
        nome:"",
        descricao:"",
@@ -76,12 +52,11 @@ function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
        estoque:0,
        img:""
    };
-    produto.nome = nome;
-    produto.id = id;
-    produto.descricao = descricao;
-    produto.preco = preco;
-    produto.estoque = estoque;
-    produto.img = img;
+    produto.nome = json.nomeProduto;
+    produto.descricao = json.descrProduto;
+    produto.preco = json.valorUnitProduto;
+    produto.estoque = json.quantEstoqueProduto;
+    produto.img = json.fotoMercadoria;
     arrayProdutos.push(produto); // dps da push no array
     console.log(arrayProdutos);
    }

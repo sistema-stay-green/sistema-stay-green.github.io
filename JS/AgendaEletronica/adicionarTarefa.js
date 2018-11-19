@@ -32,6 +32,7 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
   if(tarefaAExibir != null){
+    document.querySelector('button[name="excluirTarefa"]').classList.remove('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
 
@@ -62,6 +63,7 @@ function exibeFormularioTarefa(tarefaAExibir){
     return;
 
   }else{
+    document.querySelector('button[name="excluirTarefa"]').classList.add('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       "Nova tarefa (clique para editar)";
 

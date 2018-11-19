@@ -1,11 +1,17 @@
 let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
     containerFormNovaTarefa = document.querySelector('form'),
     mascaraFormEl = document.querySelector('#mascaraForm'),
-    botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]');
+    botaoConfirmarTarefa = document.querySelector('button[name="adicionarTarefa"]'),
+    botaoExcluirTarefa = document.querySelector('button[name="excluirTarefa"]');
 
 botaoConfirmarTarefa.addEventListener('click', (evt) => {
-        operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
-        escondeFormulario();
+  operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
+  escondeFormulario();
+});
+
+botaoExcluirTarefa.addEventListener('click', (evt) => {
+  operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
+  escondeFormulario();
 });
 
 function escondeFormulario(){
@@ -26,6 +32,7 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
   if(tarefaAExibir != null){
+    document.querySelector('button[name="excluirTarefa"]').classList.remove('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
 
@@ -36,7 +43,7 @@ function exibeFormularioTarefa(tarefaAExibir){
       tarefaAExibir.tipoTarefa;
 
     let data = Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa);
-    
+
     document.querySelector('input[name="realizarDia"]').value =
       data.getUTCFullYear() + "-" + ((data.getMonth+1 < 10) ? '0' + data.getMonth()
         + 1 : data.getMonth() + 1 + "-" + data.getDate());
@@ -56,6 +63,7 @@ function exibeFormularioTarefa(tarefaAExibir){
     return;
 
   }else{
+    document.querySelector('button[name="excluirTarefa"]').classList.add('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       "Nova tarefa (clique para editar)";
 

@@ -4,9 +4,14 @@ function aplicarRelatorios() {
 
   botoesRelatorio.forEach(botaoRelatorio =>
     botaoRelatorio.addEventListener('click', () => {
-      let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat);
-      geraRelatorio(codigoRelatorio);
-    }))
+      let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
+
+  //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
+  //Feito por João Francisco
+          relatorioContainer  document.querySelector('#containerRelatorio');
+      relatorioContainer.innerHTML = geraRelatorio(codigoRelatorio);
+      relatorioContainer.classList.remove('invisivel');
+    }));
 }
 
 
@@ -21,6 +26,9 @@ function geraRelatorio(codigoRelatorio) {
 
   }
 }
+
+
+
 
 /**Gera uma tabela para expressar informações de várias tarefas com base
  * nos campos especificados.

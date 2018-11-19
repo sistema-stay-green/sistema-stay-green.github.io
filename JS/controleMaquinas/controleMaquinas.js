@@ -302,8 +302,7 @@ function AlteraStatus(elemento,opcao){
   }
 }
 
-function CarregaElementos(){
-  let carregarpagina = receberTodos(),
+function CarregaElementos(carregarpagina){
       string = "",
       botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",

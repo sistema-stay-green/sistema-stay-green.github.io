@@ -10,12 +10,18 @@ function novaData(){
 
 /**
 * Faz requisição Ajax para receber todos os dados
-* @returns {String} vetor de Strings com formatação JSON
+* @returns {JSON} vetor de JSON
 */
 function receberTodos(){
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r").
     then(function(resultado) {
-      return resultado;
+      let resultado = string.split('/');
+      for(i = 0; i < resultado.length; i++){
+        let maquina = new Maquina(null);
+        maquina.fromJSON(resultado[i]);
+        resultado[i] = maquina;
+      }
+      CarregaElementos(resultado);
     });
 }
 
@@ -44,7 +50,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade="+quantidade).then(function(resultado) {
-                return resultado;
+                console.log(resultado);
               });
 }
 
@@ -64,7 +70,7 @@ function vender(id){
               "&dataRetorno="+null+
               "&dataBaixa="+ novaData()+
               "&quantidade="+1).then(function(resultado) {
-                return resultado;
+                console.log(resultado);
               });
 }
 
@@ -84,7 +90,7 @@ function descartar(id){
               "&dataRetorno="+null+
               "&dataBaixa="+ novaData()+
               "&quantidade="+1).then(function(resultado) {
-                return resultado;
+                console.log(resultado);
               });
 }
 
@@ -106,7 +112,7 @@ function alugar(id, valorAluguel){
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
-                return resultado;
+                console.log(resultado);
               });
 }
 
@@ -127,6 +133,6 @@ function manuntenir(id, dataRetorno){
               "&dataRetorno="+dataRetorno+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
-                return resultado;
+                console.log(resultado);
               });
 }

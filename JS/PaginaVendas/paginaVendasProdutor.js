@@ -11,51 +11,33 @@ let divResulEl = document.querySelector("#div-resultados");
 let divRegistraEl = document.querySelector("#div-registra");
 
 let arrayProdutos = new Array();
-let cafe = {
-   id:"1",
-   nome:"café",
-   descricao:"uma saca de café",
-   preco: 15,
-   estoque:44,
-   img:"http://s2.glbimg.com/P6Nn4AXYPq-K1Xek4cCKyONYYyA=/e.glbimg.com/og/ed/f/original/2014/01/15/cafe.jpg"
-};
-let leite = {
-  id:"2",
-  nome:"leite",
-  descricao:"um copão de leite daqls bem tope memo ta lgd? tipo mt nice como giga noias",
-  preco: 10,
-  estoque:50,
-  img:"http://camby.com.br/imagens/noticia/leite280813.jpg"
-};
-addArrayProdutos(cafe);
-addArrayProdutos(leite);
-addArrayProdutos(cafe);
-addArrayProdutos(leite);
-addArrayProdutos(cafe);
-addArrayProdutos(leite);
-addArrayProdutos(cafe);
-addArrayProdutos(leite);
-addArrayProdutos(cafe);
-addArrayProdutos(leite);
-addProdutosPagina(arrayProdutos);
+window.onload = function recebeJSON(){
+  Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
+    .then(function(resposta){
+      for (var i = 0; i < resposta.length; i++) {
+        dadosJSON = resposta;
+        addArrayProdutos(dadosJSON[i]);
+      }
+      addProdutosPagina(arrayProdutos);
+    });
+}
 
-function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
-  let produto = {
-     nome:"",
-     descricao:"",
-     preco: 0,
-     estoque:0,
-     img:""
- };
-  produto.nome = nome;
-  produto.id = id;
-  produto.descricao = descricao;
-  produto.preco = preco;
-  produto.estoque = estoque;
-  produto.img = img;
-  arrayProdutos.push(produto);
-  console.log(arrayProdutos);
- }
+function addArrayProdutos(json){
+    let produto = {
+       nome:"",
+       descricao:"",
+       preco: 0,
+       estoque:0,
+       img:""
+   };
+    produto.nome = json.nomeProduto;
+    produto.descricao = json.descrProduto;
+    produto.preco = json.valorUnitProduto;
+    produto.estoque = json.quantEstoqueProduto;
+    produto.img = json.fotoMercadoria;
+    arrayProdutos.push(produto); // dps da push no array
+    console.log(arrayProdutos);
+   }
 
 function addProdutosPagina(produtos){
 
@@ -117,17 +99,16 @@ botaoResulEl.addEventListener('click',mostraResultados);
 mascaraEl.addEventListener('click',escondeTudo);
 
 //compra é valor negativo
-let resultado = 0;
 function relatorioResultados(){
-  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet', )
+  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet')
      .then(function(resposta){
-         resultado = resposta;
-     });
+       if(resposta < 0)
+         resposta = "Produtor está tendo prejuízo";
+       else if(resposta > 0)
+         resposta = "Produtor está tendo lucro";
+       else
+         resposta = "Indiferente";
 
-  if(resultado < 0)
-    resultado = "Produtor está tendo prejuízo";
-  else if(resultado > 0)
-    resultado = "Produtor está tendo lucro";
-  else
-    resultado = "Indiferente";
+       console.log("resultado="+resposta);
+     });
 }

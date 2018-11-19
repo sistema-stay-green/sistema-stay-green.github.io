@@ -5,12 +5,17 @@ btnEntrarLoginEl.addEventListener("click", function() {
 
   let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
-      //usuario = new Usuario();
-
-  Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
-              + "&senha=" + senhaInputEl.value)
-         .then(() => { window.location.redirect("index.html") })
-         .catch(() => { alert("Erro ao logar o servidor") });
+      
+      Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
+                  + "&senha=" + senhaInputEl.value)
+             .then(() => { 
+                    let usuario = new Usuario(null);
+                    // pegar dados no BD do usuario e colocar no objeto
+                    // salvar objeto no localStorage
+                    localStorage.setItem("usuario", usuario.toJSON());
+                    window.location.redirect("index.html");
+             })
+             .catch(() => { alert("Erro ao logar o servidor") });
 
 });
 
@@ -26,11 +31,13 @@ btnConfimarCadastroEl.addEventListener("click", function() {
       senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
 
       usuario = new Usuario(null);
-      usuario.nome(nomeUsuario);
-      usuario.cnpj(cnpjUsuario);
-      usuario.saldo(saldoUsuario);
-      usuario.email(emailUsuario);
-      usuario.senha(senhaUsuario);
+      usuario.nome = nomeUsuario;
+      usuario.cnpj = cnpjUsuario;
+      usuario.saldo = saldoUsuario;
+      usuario.email = emailUsuario;
+      usuario.senha = null;
+
+      localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
 
       Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
                   + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario

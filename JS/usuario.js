@@ -7,12 +7,12 @@
 
     constructor(id){
 
-        this.id(id);
-        this.nome(null);
-        this.cnpj(null);
-        this.saldo(null);
-        this.email(null);
-        this.senha(null);
+        this.id = id;
+        this.nome = null;
+        this.cnpj = null ;
+        this.saldo = null;
+        this.email = null;
+        this.senha = null;
 
     }
 
@@ -42,23 +42,23 @@
 
         let usuarioJSON = { };
 
-        if (this.id() !== null)
-            usuarioJSON["idUsuario"] = this.id();
+        if (this.id !== null)
+            usuarioJSON["idUsuario"] = this.id;
 
-        if (this.nome() !== null)
-            usuarioJSON["nomeUsuario"] = this.nome();
+        if (this.nome !== null)
+            usuarioJSON["nomeUsuario"] = this.nome;
         
-        if (this.cnpj() !== null)
-            usuarioJSON["cpnjUsuario"] = this.cnpj();
+        if (this.cnpj !== null)
+            usuarioJSON["cnpjUsuario"] = this.cnpj;
 
-        if (this.saldo() !== null)
-            usuarioJSON["saldoUsuario"] = this.saldo();
+        if (this.saldo !== null)
+            usuarioJSON["saldoUsuario"] = this.saldo;
 
-        if (this.email() !== null)
-            usuarioJSON["emailUsuario"] = this.email();
+        if (this.email !== null)
+            usuarioJSON["emailUsuario"] = this.email;
 
-        if (this.senha() !== null)
-            usuarioJSON["senhaUsuario"] = this.senha();
+        if (this.senha !== null)
+            usuarioJSON["senhaUsuario"] = this.senha;
 
         return JSON.stringify(usuarioJSON);
 

@@ -64,16 +64,32 @@ class Maquina {
      */
     toJSON(){
       let patrimonioJSON = {
-        "id": this._id,
-        "nome": this._nome,
-        "tipo": this._tipo,
-        "descricao": this._descricao,
-        "status": this._status,
-        "indiceDepreciacao": this._indiceDepreciacao,
-        "valorCompra": this._valorCompra,
+        "idPatrimonio": this._id,
+        "nomePatrimonio": this._nome,
+        "tipoPatrimonio": this._tipo,
+        "finalidadePatrimonio": this._descricao,
+        "statusPatrimonio": this._status,
+        "indDeprecPatrimonio": this._indiceDepreciacao,
+        "valorCompraPatrimonio": this._valorCompra,
         "valorAtual": this._valorAtual,
       }
       return JSON.stringify(patrimonioJSON);
+    }
+
+    /**
+     * Coloca valores nas váriaveis de máquina a partir de um JSON
+     * @param {string} patrimonoString com formatação JSON do objeto.
+     * @author Guilherme Sena
+     */
+    fromJSON(patrimonioString){
+      patrimonioJSON = JSON.parse(patrimonioString);
+      this._id = patrimonioJSON.idPatrimonio;
+      this._nome = patrimonioJSON.nomePatrimonio;
+      this._tipo = patrimonioJSON.tipoPatrimonio;
+      this._descricao = patrimonioJSON.finalidadePatrimonio;
+      this._status = patrimonioJSON.statusPatrimonio;
+      this._indiceDepreciacao = patrimonioJSON.indDeprecPatrimonio;
+      this._valorCompra = patrimonioJSON.valorCompraPatrimonio;
     }
 
     // Getter

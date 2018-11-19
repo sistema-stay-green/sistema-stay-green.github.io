@@ -1,5 +1,5 @@
 /**
- * Envia dados para o Servlet para Compra de máquinas.
+ * Encapsula dados para propósito geral.
  * @param {int} id inteiro representando o ID da máquina;
  * @param {String} nome representando o nome da máquina;
  * @param {String} descricao breve descricao da máquina;

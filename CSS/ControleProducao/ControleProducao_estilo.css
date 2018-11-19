@@ -1,3 +1,9 @@
+nav {
+  height: 3.2em !important;
+  z-index: 1;
+}
+
+
 tbody select {
   width: 100%;
   text-align-last: center;
@@ -62,11 +68,21 @@ button #iconePlus, #iconeRelatorio {
 
 #btnAbrirModalInsumo {
   position: fixed;
-  right: 6em;
+  right: 10em;
   bottom: 1em;
-  padding: 3vh;
+  padding: 3.5vh;
   border-radius: 50%;
+  margin-left: 2vh;
   border: 1px solid var(--cinzaFoggy);
+}
+
+#divModal, #modalRelatorioHistorico, #modalRelatorioProducao, #divModalInsumo, #divModalEditarProduto{
+  margin-top: 3em;
+}
+
+#modalRelatorioHistorico{
+  overflow-y: scroll;
+  max-height: calc(100vh - 210px);
 }
 
 #tabProdutosRegistrados, #tabInsumosRegistrados {
@@ -265,4 +281,83 @@ button #iconePlus, #iconeRelatorio {
 
 .centralizaTabela {
   margin: auto;
+}
+
+nav {
+ height: 7%;
+ width: 100%;
+ display: flex;
+ background-color: #1d883a;
+ align-content: space-around;
+ align-items: center;
+ position: sticky;
+ top:0;
+}
+
+nav > h3 {
+ width:20%;
+ height: 100%;
+ text-align: center;
+ font-family: 'Niramit' , sans-serif;
+ color:white;
+ font-size: calc(20px + 1vh);
+}
+nav > a {
+ text-decoration: none;
+ width:15%;
+ height: 100%;
+ text-align: center;
+ font-family: 'Niramit' , sans-serif;
+ color:white;
+ font-size: calc(20px + 1vh);
+}
+
+nav > a:hover {
+ background-color: #116623;
+}
+
+footer {
+ height: 50%;
+ width: 100%;
+ display: flex;
+ background-color: #2d2d2d;
+}
+
+footer > section {
+ width: 15%;
+ height: 70%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: space-around;
+}
+
+footer > section > h3 {
+ font-family: 'Niramit' , sans-serif;
+ font-size: calc(10px + 1.5vh);
+ color: white;
+}
+
+footer > section > a {
+ text-decoration: none;
+ font-family: 'Niramit' , sans-serif;
+ font-size: calc(10px + 1vh);
+ color: #c6c7c9;
+}
+
+footer > section > img {
+ height: 100px ;
+ width:  100px;
+}
+
+.redes {
+ justify-content: center;
+}
+
+.aviso{
+ width: 20px;
+ height: 20px;
+ position: relative;
+ top: 4px;
+ left: 5px;
 }

@@ -141,7 +141,7 @@ function removerMercadoria(id){
 					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=produto&id=" + id.substring(17);
 					 Request.get(url).then(function(res){
 						 if (res.resultado == "SUCESSO") {
-							 
+
 						 }
 					 }).catch(function(erro){
 						 console.log(erro);

@@ -4,34 +4,116 @@
 
 class Insumo {
 
-    constructor() {
-        this.encapsulaDados();
-        this._item = {
-            nomeInsumo: this._nome,
-            finalidadeInsumo: this._finalidade,
-            valorCompraInsumo: this._valorUnidade,
-            quantEstoqueInsumo: this._estoque,
-            pontoAvisoInsumo: this._pontoAviso,
-            tipo: "insumo"
-        }
+    construtorSemParametros() {
+        this.idInsumo = null;
+        this.nomeInsumo = null;
+        this.finalidadeInsumo = null;
+        this.valorCompraInsumo = null;
+        this.quantEstoqueInsumo = null;
+        this.pontoAvisoInsumo = null;
     }
 
-    //encapsula os dados
-      encapsulaDados() {
-          this._nome = document.querySelector("#inpNomeInsumo").value;
-          this._finalidade = document.querySelector("#inpFinalidadeInsumo").value;
-          this._valorUnidade = parseFloat(document.querySelector("#inpValorUniInsumo").value);
-          this._estoque = parseInt(document.querySelector("#inpQuantEstoqueInsumo").value);
-          //verifica se há um ponto de aviso
-          var aux = parseInt(document.querySelector("#inpPontoAvisoInsumo").value);
-          this._pontoAviso = (aux == null) ? "" : aux;
-      }
+    /**
+     *
+     * @return Id de um objeto insumo
+     */
+    getIdInsumo() {
+        return idInsumo;
+    }
 
-    //faz requisição utilizando classe fornecida pela gerência
+    /**
+     * Define o id de um objeto insumo
+     * @param idInsumo
+     */
+    setIdInsumo(idInsumo) {
+      this.idInsumo = idInsumo;
+    }
+
+    /**
+     *
+     * @return nome de um objeto insumo
+     */
+    getNomeInsumo() {
+      return nomeInsumo;
+    }
+
+    /**
+     * Define o nome de um objeto insumo
+     * @param nomeInsumo
+    */
+    setNomeInsumo(nomeInsumo) {
+      this.nomeInsumo = nomeInsumo;
+    }
+
+    /**
+     *
+     * @return a finalidade de um objeto insumo
+    */
+    getFinalidadeInsumo() {
+      return finalidadeInsumo;
+    }
+
+    /**
+     * Define o nome de um objeto insumo
+     * @param finalidadeInsumo
+     */
+    setFinalidadeInsumo(finalidadeInsumo) {
+      this.finalidadeInsumo = finalidadeInsumo;
+    }
+
+    /**
+     *
+     * @return o valor de cada unidade de um objeto insumo
+    */
+    getValorCompraInsumo() {
+      return valorCompraInsumo;
+    }
+
+    /**
+     * Define o valor de cada unidade de um objeto insumo
+     * @param valorCompraInsumo
+     */
+    setValorCompraInsumo(valorCompraInsumo) {
+      this.valorCompraInsumo = valorCompraInsumo;
+    }
+
+    /**
+     *
+     * @return estoque de um objeto insumo
+    */
+    getQuantEstoqueInsumo() {
+      return quantEstoqueInsumo;
+    }
+
+    /**
+     * Define o estoque de um objeto insumo
+     * @param quantEstoqueInsumo
+    */
+    setQuantEstoqueInsumo(quantEstoqueInsumo) {
+      this.quantEstoqueInsumo = quantEstoqueInsumo;
+    }
+
+    /**
+     *
+     * @return ponto de aviso para o estoque baixo de um objeto insumo
+    */
+    getPontoAvisoInsumo() {
+      return pontoAvisoInsumo;
+    }
+
+    /**
+     * Define o ponto de aviso para o estoque baixo de um objeto insumo
+     * @param pontoAvisoInsumo
+    */
+    setPontoAvisoInsumo(pontoAvisoInsumo) {
+      this.pontoAvisoInsumo = pontoAvisoInsumo;
+    }
+
+    /**
+    * Faz a requisição para adicionar o produto no bd
+    */
     fazRequisicao() {
-        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&botao=adicionar&tipo=insumo";
-        console.log(url);
+        var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this) + "&operacao=adicionar&tipo=insumo";
         return Request.get(url);
-
     }
 }

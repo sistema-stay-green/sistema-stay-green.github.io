@@ -3,17 +3,33 @@
      líder: Mei Fagundes */
 
 /*Importações*/
-@import url('https://fonts.googleapis.com/css?family=Niramit');
+@font-face {
+    font-family: 'Niramit';
+    src: url('Niramit/Niramit-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* GENERAL */
 
 html{
-    font-family: 'Niramit', sans-serif;
+    font-family: 'Niramit';
 }
 
 body{
     background-color: #FDFCF3 !important;
     width:100%;
+    min-height: 100vh;
+}
+
+body.waiting *{
+    cursor: progress !important;
+}
+
+#main{
+    box-sizing: border-box;
+    padding: 2em;
+    min-height: 45vh;
 }
 
 button{
@@ -34,6 +50,7 @@ input:focus{
 h1{
     text-align: center;
     margin-bottom: 0;
+    margin-top: 0;
     font-size: 2.2em;
 }
 
@@ -42,24 +59,34 @@ nav{
 }
 
 nav a, nav h3{
-    width: 18vw;
-    box-sizing: border-box;
     transition: 50ms ease-out;
 }
 
 nav h3{
     cursor: default;
+    font-weight: bold;
+    margin-left: 0.1em;
 }
 
 nav:hover{
     -webkit-box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
     box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
 }
+footer{
+    bottom: 0;
+    height: 35vh !important;
+    transition: 250ms ease-in-out;
+}
+
+footer:hover{
+    -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+}
 
 table{
     transition: 250ms ease-in-out;
     overflow: auto;
-    margin-bottom: 3em;
+    margin-bottom: 10vh;
 }
 
 table:hover{
@@ -80,7 +107,6 @@ p{
 
 #tabela{
     padding-top: 1em;
-    width: 98%;
     font-size: 0.9em;
     margin: 0 auto;
 }
@@ -110,9 +136,11 @@ tr:hover{
     box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
 }
 
-/* */
+/* No Results Message*/
 
-
+#noResults{
+    margin-bottom: 35vh;
+}
 
 #noResults p:nth-child(1){
     text-align: center;
@@ -154,27 +182,33 @@ button:focus{
 #floatingButtons{
     display: flex;
     flex-direction: row-reverse;
-    position: fixed;
-    bottom: 4vh;
-    right: 4vh;
+    position: sticky;
+    bottom: 2em;
 }
 
 #floatingButtons button{
+    display: flex;
+    align-content: space-around;
     position: relative;
-    padding: 3.5vh;
+    padding: 1.8em;
     border-radius: 50%;
     margin-left: 2vh;
+
+    -webkit-box-shadow: 2px 2px 14px 0px rgba(0,0,0,0.5);
+    box-shadow: 2x 2px 14px 0px rgba(0,0,0,0.5);
 }
 
 #floatingButtons button:hover{
-    -webkit-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
-    box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
+    box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
 }
 
 #floatingButtons button img{
     image-rendering: optimizeQuality;
-    width: 2vh;
-    height: 2vh;
+    display: block;
+    width: 1.1em;
+    height: 1.1em;
+    box-sizing: border-box;
     position: absolute;
     top: 35%;
     right: 35%;
@@ -259,6 +293,7 @@ input:focus{
     display: absolute;
     float: right;
     flex-direction: row-reverse;
+    margin-left: 23em;
 }
 
 #relatorio div:nth-child(2) button{
@@ -293,6 +328,25 @@ input:focus{
     width: 15em;
     padding: 0.8em;
     text-align: left;
+}
+
+.inputVazio{
+    border-color: #E1170F;
+}
+
+input.inputVazio::-webkit-input-placeholder{
+   color: #E1170F;
+   opacity: 0.7;
+}
+
+input.inputVazio::-moz-placeholder{  /* Firefox 19+ */
+   color: #E1170F;
+   opacity: 0.7;
+}
+
+input.inputVazio:-ms-input-placeholder{
+   color: #E1170F;
+   opacity: 0.7;
 }
 
 #form{
@@ -349,6 +403,8 @@ input:focus{
 
 .conteudo input{
     max-width: 90%;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 .conteudo{
@@ -361,8 +417,8 @@ input:focus{
 }
 
 .shadow{
-    -webkit-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
-    box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
 }
 
 .focusedShadow{
@@ -376,23 +432,29 @@ input:focus{
 }
 
 @media print{
-    @import url('https://fonts.googleapis.com/css?family=Niramit');
+
+    @font-face {
+        font-family: 'Niramit';
+        src: url('Niramit/Niramit-Regular.ttf');
+        font-weight: normal;
+        font-style: normal;
+    }
 
     html{
-        font-family: 'Niramit', sans-serif;
+        font-family: 'Niramit';
     }
-    
+
     body{
         background-color: #FDFCF3 !important;
         width:100%;
     }
-    
+
     h1{
         text-align: center !important;
         padding: 0px !important;
         margin: 0px !important;
     }
-    
+
     h2{
         text-align: center !important;
     }

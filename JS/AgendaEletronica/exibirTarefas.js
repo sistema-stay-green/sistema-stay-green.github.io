@@ -1,4 +1,5 @@
-let tarefasArmazenadasBD;
+let tarefasArmazenadasBD,
+    insumosArmazenadosBD;
 
 /*Recebimento das tarefas e insumos armazenados na DB*/
 function recebeTarefas() {
@@ -9,13 +10,14 @@ function recebeTarefas() {
       aplicarEventoGeracaoDataBotoes();
       aplicaFiltros();
       aplicarRelatorios();
+      recebeInsumos();
     });
 }
 
 function recebeInsumos() {
-  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
+  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=insumo')
     .then((resultado) => {
-      console.log(resultado);
+      insumosArmazenadosBD = resultado;
     });
 }
 
@@ -49,7 +51,7 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
   }else{
     for(let tarefa of tarefasProgramadas){
       console.log(Tarefa.toDateObject(tarefa.dataInicialTarefa));
-      
+
       containerCalendario.appendChild(criaContainerDia(Tarefa.toDateObject(tarefa.dataInicialTarefa), [tarefa]));
     }
   }
@@ -63,10 +65,13 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
  */
 function deveRealizarTarefa(tarefa, dataProposta) {
+  if(Tarefa.toDateObject(tarefa.dataInicialTarefa).getTime() > dataProposta.getTime())
+    return false;
+
   if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
     dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
         Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
-            tarefa.periodRepetTarefa === 0 )
+            tarefa.periodRepetTarefa === 0)
     return true;
 
   return false;
@@ -122,9 +127,12 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
 
       tarefaAgendadaEl.innerHTML = tarefa.nomeTarefa;
       tarefaAgendadaEl.classList.add('tarefa');
+      tarefaAgendadaEl.dataset.idTarefa = tarefa.idTarefa;
 
       tarefaAgendadaEl.addEventListener('click', (e) => {
-        exibeFormularioTarefa(tarefa);
+        let tarefaObjWithId = tarefa;
+        tarefaObjWithId.idTarefa = e.currentTarget.dataset.idTarefa;
+        exibeFormularioTarefa(tarefaObjWithId);
         e.stopPropagation();
         e.preventDefault();
       });

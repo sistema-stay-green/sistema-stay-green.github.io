@@ -5,7 +5,7 @@
  * @returns {Boolean} se a tarefa passou no filtro ou não
  */
 function filtrarTarefaDia(tarefa) {
-    if (tarefa.dataInicialTarefa.dayOfMonth === parseInt(this)) {
+    if (parseInt(this) % tarefa.dataInicialTarefa.dayOfMonth === 0) {
         return true;
     }
     return false;
@@ -20,7 +20,7 @@ function filtrarTarefaSemana(tarefa) {
     let diaCorrente = new Date().getDate(),
         limiteDiaSemana = diaCorrente + 6;
     do {
-        if (tarefa.dataInicialTarefa.dayOfMonth === diaCorrente)
+        if (diaCorrente % tarefa.dataInicialTarefa.dayOfMonth === 0)
             return true;
 
         diaCorrente++;

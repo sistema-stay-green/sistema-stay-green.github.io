@@ -7,10 +7,21 @@
     <link rel="shortcut icon" type="image/png" href="imgs/icons/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
     <link rel="stylesheet" href="CSS/staygreen.css">
-    <link rel="stylesheet" href="CSS/Gerencia/perfil.css">
+    <link rel="stylesheet" href="CSS/perfil.css">
     <title>Perfil</title>
   </head>
   <body>
+    <nav>
+        <!-- <a href="perfil1.html">Perfil</a> -->
+        <a href="index.html">Home</a>
+        <a href="agendaEletronica.html">Agenda</a>
+        <a href="controleMaquinas.html">Máquinas</a>
+        <h3>STAY GREEN</h3>
+        <a href="Patrimonio.html">Patrimônio</a>
+        <a href="controleProducao.html">Produção</a>
+        <a href="paginaVendas.html">Vendas</a>
+        <!-- <a href="login.html">Login</a> -->
+      </nav>
     <main>
       <section id="perfil">
         <h1>Perfil</h1>
@@ -25,21 +36,23 @@
           <p><strong>E-mail:</strong> blablabla@gmail.com</p>
           <p><strong>Gráficos:</strong></p>
         </article>
-        <article id="editaInfoUsuario" class="ocultar">
-          <form>
+        <article class="ocultar">
+          <form id="cadastro">
             <label>Nome: <input type="text" name="nomeUsuario" placeholder="Nome"></label>
             <label>CNPJ: <input type="text" name="cnpjUsuario" placeholder="CNPJ" min="0"></label>
             <label>Saldo atual da Fazenda: <input type="number" placeholder="Saldo financeiro da fazenda" name="saldoUsuario" min="0"></label>
             <label>E-mail: <input type="email" name="emailUsuario" placeholder="E-mail"></label>
             <label>Senha: <input type="password" name="senhaUsuario" placeholder="Senha" required></label>
             <label>Confirmar a senha: <input type="password" name="confSenhaUsuario" placeholder="Confirme a senha" required></label><br>
-            <button id="btnConfirmar" type="button">Confirmar</button>
+            <button type="button">Confirmar</button>
             <button type="reset" class="botaoFantasma">Limpar</button>
-            <button id="btnCancelar" type="button">Cancelar</button>
+            <button type="button">Cancelar</button>
           </form>
         </article>
       </section>
     </main>
-    <script src="JS/Gerencia/perfil.js" charset="utf-8"></script>
+    <script src="JS/staygreen.js" charset="utf-8"></script>
+    <script src="JS/checaInputs.js" charset="utf-8"></script>
+    <script src="JS/perfil.js" charset="utf-8"></script>
   </body>
 </html>

@@ -32,6 +32,15 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
   if(tarefaAExibir != null){
+    for(let insumo of insumosArmazenadosBD) {
+      let insumoCheckBox =  document.createElement('input'),
+          labelInsumo = document.createElement('label');
+      insumoCheckBox.type = 'checkbox';
+      insumoCheckBox.name = insumo.nomeInsumo;
+      insumoCheckBox.value = insumo.nomeInsumo;
+      labelInsumo.appendChild(insumoCheckBox);
+      labelInsumo.innerHTML = insumo.nomeInsumo;
+    }
     document.querySelector('button[name="excluirTarefa"]').classList.remove('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;

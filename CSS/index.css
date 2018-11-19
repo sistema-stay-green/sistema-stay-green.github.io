@@ -51,6 +51,7 @@ header > #mascara-conteudo > a {
   font-size: calc(20px + 2.3vh);
   cursor: pointer;
 }
+
 header > #mascara-conteudo > a:hover{
   box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
   width: 15.5%;
@@ -162,12 +163,7 @@ main > article {
 article:hover {
     box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
 }
-#vendas {
-  width: 97vw;
-}
-/* #vendas > img {
-  width: 20%;
-} */
+
 main > article > p {
   position: absolute;
   right: 5%;
@@ -228,6 +224,7 @@ main > article > h3 {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #vendas {
   background:
   linear-gradient(
@@ -236,4 +233,24 @@ main > article > h3 {
     ), url('../imgs/home/img5.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#perfil {
+  background:
+  linear-gradient(
+    rgba(16, 43, 18, 0.4),
+    rgba(16, 43, 18, 0.4)
+    ), url('../imgs/home/img6.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#perfil > img {
+  margin: 1.5% 0;
+  width: 13vw;
+  height: 11vw;
+}
+
+.oculta {
+  display: none;
 }

@@ -2,6 +2,12 @@
  Grupo 1: Controle de produção
  líder: Arthur Marcolino */
 
+/**
+* @author Diego Demétrio e Arthur Marcolino
+* Cria a tabela com os dados do BD
+* @param itens array recebido do servlet (Ajax)
+* @param tipo produto ou insumo
+*/
 function criaTabela(itens, tipo){
 	var sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
 	var tabela = document.querySelector("#tab" + sufixo + "Registrados");
@@ -138,6 +144,10 @@ function criaTabela(itens, tipo){
 	adicionarEventos();
 }
 
+/**
+* @author Arthur Marcolino
+* Atrela eventos a cada um dos botões da tabela
+*/
 function adicionarEventos() {
 	var aux;
 	var botoes = document.querySelectorAll("table button");
@@ -160,7 +170,11 @@ function adicionarEventos() {
 
 }
 
-
+/**
+* @author Arthur Marcolino
+* Remove alguma mercadoria baseado em seu id
+* @param id
+*/
 function removerMercadoria(id){
 	let url;
 	funcaoCerteza(function (confirmar) {
@@ -194,6 +208,12 @@ function removerMercadoria(id){
 
 }
 
+/**
+* @author Arthur Marcolino
+* Remove alguma mercadoria baseado em seu id
+* @param i
+* @param res
+*/
 function avisos(i, res) {
 	divModalAvisos2.innerHTML = "";
 	divModalAvisos2.style.color = "black";
@@ -228,6 +248,12 @@ function avisos(i, res) {
 		}
 }
 
+/**
+* @author Arthur Marcolino
+* Checa se todas as inputs foram preenchidas
+* @param i
+* @param res
+*/
 function checarInputs() {
 		var inputs = document.querySelectorAll('input');
 		var cont = 0;
@@ -254,6 +280,10 @@ function checarInputs() {
 		}
 }
 
+/**
+* @author Arthur Marcolino
+* Limpa todas as inputs
+*/
 function limparInputs() {
 		var inputs = document.querySelectorAll('input');
 		var cont = 0;
@@ -265,7 +295,11 @@ function limparInputs() {
 }
 
 
-
+/**
+* @author Arthur Marcolino
+* Deleta um insumo baseado em seu id
+* @param id
+*/
 	function deletarMercadoria(id){
 		let url;
 		funcaoCerteza(function (confirmar) {
@@ -281,6 +315,11 @@ function limparInputs() {
 		});
 }
 
+/**
+* @author Arthur Marcolino
+* Edita um produto ou insumo baseado em seu id
+* @param id
+*/
 function editarMercadoria(id){
 				if(id.includes("Produto")){
 					var inpNomeProduto =	document.getElementById('inpNomeProduto');
@@ -406,7 +445,11 @@ function editarMercadoria(id){
 		 }
 }
 
-
+/**
+* @author Arthur Marcolino
+* Pede confirmação ao usuário
+* @param callback
+*/
 function funcaoCerteza(callback) {
 		divModalCerteza.classList.remove("esconde");
 		divMascaraEl.classList.remove("ocultar");
@@ -414,6 +457,11 @@ function funcaoCerteza(callback) {
     btnNaoModalCerteza.onclick = function() { callback(false); };
 }
 
+/**
+* @author Arthur Marcolino
+* Abre a modal de edição do insumo
+* @param callback
+*/
 function editarInsumo(callback) {
 		divModalEditarInsumo.classList.remove("esconde");
 		divMascaraEl.classList.remove("ocultar");
@@ -421,6 +469,11 @@ function editarInsumo(callback) {
     btnCancelarEditarInsumo.onclick = function() { callback(false); };
 }
 
+/**
+* @author Arthur Marcolino
+* Abre a modal de edição do produto
+* @param callback
+*/
 function editarProduto(callback) {
 		divModalEditarProduto.classList.remove("esconde");
 		divMascaraEl.classList.remove("ocultar");
@@ -428,6 +481,11 @@ function editarProduto(callback) {
     btnCancelaEditarProduto.onclick = function() { callback(false); };
 }
 
+/**
+* @author Arthur Marcolino
+* Ativa ou desativa botões se alguma input não foi preenchida
+* @param valor
+*/
 function desativarBotoes(valor) {
 	var botoes = document.querySelectorAll("button");
 	var selects =  document.querySelectorAll("select");

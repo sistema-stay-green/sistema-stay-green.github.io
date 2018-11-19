@@ -1,6 +1,6 @@
 /**
  * Arquivo JavaScript de testes e debug da página e suas interações.
- * @author Mei
+ * @author Mei Fagundes
  */
 
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
@@ -11,6 +11,10 @@ let patrimonioStaticStash = [];
 
 // --- FUNCTIONS ---
 
+/**
+ * Gera placeholders no caso da página estar rodando de forma estática.
+ * @author Mei Fagundes
+ */
 function generatePlaceholders() {
 
     const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];

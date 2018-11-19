@@ -1,4 +1,10 @@
 
+/**
+ * CallBack para retorno dos Patrimonios pelo AJAX.
+ * @callback
+ * @param {Patrimonio[]} patrimonios 
+ * @author Mei Fagundes
+ */
 let returnCallBack = (patrimonios = []) => {
     
     clearTableContents();
@@ -8,21 +14,45 @@ let returnCallBack = (patrimonios = []) => {
     }
 };
 
+/**
+ * CallBack para compra de um Patrimonio pelo AJAX.
+ * @callback
+ * @param {Patrimonio} patrimonio
+ * @author Mei Fagundes
+ */
 let comprarCallBack = (patrimonio = new Patrimonio()) => {
 
     insertPatrimonioIntoTable(patrimonio);
 };
 
+/**
+ * CallBack para a remoção de um Patrimonio pelo AJAX.
+ * @callback
+ * @param {int} id 
+ * @author Mei Fagundes
+ */
 let deletarCallBack = (id) => {
 
     removePatrimonioFromTable(id);
 };
 
+/**
+ * CallBack para a criação do relatório dos Patrimonios recebidos pelo AJAX.
+ * @callback
+ * @param {Patrimonio[]} patrimonios 
+ * @author Mei Fagundes
+ */
 let relatorioCallBack = (patrimonios = []) => {
     
     generateRelatorio(patrimonios);
 }
 
+/**
+ * CallBack para o filtro dos Patrimonios recebidos pelo AJAX.
+ * @callback
+ * @param {Patrimonio[]} patrimonios 
+ * @author Mei Fagundes
+ */
 let filterCallBack = (patrimonios = []) => {
     
     switch (filtroSelect.value) {
@@ -60,11 +90,18 @@ let filterCallBack = (patrimonios = []) => {
     }
 }
 
+/**
+ * Recebe todos os Patrimonios do Server através do AJAX.
+ * @author Mei Fagundes
+ */
 function receivePatrimonios(){
 
     receiveAllPatrimoniosFromServlet(returnCallBack);
 }
 
+/**
+ * Altera os Patrimonios mostrados na página usando o valor atual do Filtro.
+ */
 function changeFilter(){
 
     if (!staticDebugMode){
@@ -74,6 +111,10 @@ function changeFilter(){
         filterCallBack(patrimonioStaticStash);
 }
 
+/**
+ * Gera o relatório com os Patrimonios recebidos.
+ * @author Mei Fagundes
+ */
 function showRelatorio(){
 
     if (!staticDebugMode) {
@@ -83,6 +124,11 @@ function showRelatorio(){
         generateRelatorio(patrimonioStaticStash);
 }
 
+/**
+ * Registra um novo Patrimonio comprado.
+ * @param {Patrimonios} patrimonio 
+ * @author Mei Fagundes
+ */
 function newPatrimonio(patrimonio = new Patrimonio()){
 
     patrimonio = getPatrimonioFromModal();
@@ -94,11 +140,16 @@ function newPatrimonio(patrimonio = new Patrimonio()){
         }
         else {
             patrimonio.id = lastIdGenerated++;
+            patrimonioStaticStash.push(patrimonio);
             insertPatrimonioIntoTable(patrimonio);
         }
     }
 }
 
+/**
+ * Edita um Patrimonio usando os valores da Modal Formulário.
+ * @author Mei Fagundes
+ */
 function editPatrimonio(){
 
     patrimonio = getPatrimonioFromModal();
@@ -117,14 +168,25 @@ function editPatrimonio(){
     }
 }
 
+/**
+ * Deleta um Patrimonio correspondente ao ID recebido.
+ * @param {int} id 
+ * @author Mei Fagundes
+ */
 function deletePatrimonio(id) {
     
     if (!staticDebugMode){
 
         sendDeletedPatrimonio(id, deletarCallBack);
     }
-    else
+    else{
         removePatrimonioFromTable(id);
+
+        patrimonioStaticStash.pop(
+            patrimonioStaticStash.indexOf(
+                patrimonioStaticStash.filter(patrimonio => patrimonio.id == id)[0]));
+    }
+        
 }
 
 relatorioButton.addEventListener("click", showRelatorio);

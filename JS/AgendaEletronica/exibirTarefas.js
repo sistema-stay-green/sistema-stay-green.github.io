@@ -1,4 +1,5 @@
-let tarefasArmazenadasBD;
+let tarefasArmazenadasBD,
+    insumosArmazenadosBD;
 
 /*Recebimento das tarefas e insumos armazenados na DB*/
 function recebeTarefas() {
@@ -9,13 +10,14 @@ function recebeTarefas() {
       aplicarEventoGeracaoDataBotoes();
       aplicaFiltros();
       aplicarRelatorios();
+      recebeInsumos();
     });
 }
 
 function recebeInsumos() {
-  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?botao=buscar')
+  Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=insumo')
     .then((resultado) => {
-      console.log(resultado);
+      insumosArmazenadosBD = resultado;
     });
 }
 

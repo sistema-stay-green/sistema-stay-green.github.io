@@ -1,5 +1,6 @@
-/** @autor Alberto
-    js responsável pelos relatórios HTML**/
+/** Autor: Diego Demétrio
+    Grupo 1: Controle de produção
+    líder: Arthur Marcolino **/
 
 //DOM
 var btnRelatorioH = document.getElementById('btnRelatorioHistorico');
@@ -20,14 +21,7 @@ var btnRelatorioProducao = document.getElementById('btnRelatorioProducao');
 btnRelatorioProducao.addEventListener('click', criaRelatorioP);
 btnRelatorioH.addEventListener('click', criaRelatorioH);
 
-function criaRelatorioP() {
-  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio2&id=" + "teste")
-  .then(function(resultado){console.log(resultado);}).catch(function(erro){console.log(erro);});
-}
-
-
-
-/** @autor Alberto
+/** Autor: Alberto
     Descrição: função que apartir de um periodo faz uma requisição
     para o servlet que retorna um ArrayList com as transações feitas**/
 function criaRelatorioH(){
@@ -83,8 +77,6 @@ function criaRelatorioH(){
               var linha = tabelaInsumo.insertRow(contInsumos + 1);
               insereInsumoTabela(resultado, contador, linha);
 
-
-
         }
 
         contador++;
@@ -94,8 +86,13 @@ function criaRelatorioH(){
   })
   .catch(function(erro){console.log(erro);});
 }
-/** @autor Alberto
-    Descrição: função que a partir do resultado e do contador formata a data da transação**/
+/** Autor: Alberto
+    Descrição: função que a partir do resultado e do contador formata a data da transação
+    @param resultado
+    @param contador
+    @return dataFormatada
+**/
+
 function formataData(resultado, contador){
   var mesIncrementado = resultado[contador].dataTransacao.month + 1;
   var dataFormatada = resultado[contador].dataTransacao.dayOfMonth + "/" + mesIncrementado + "/" +
@@ -103,18 +100,12 @@ function formataData(resultado, contador){
   return dataFormatada;
 }
 
-/** @autor Alberto
-    Descrição: função que ajusta o Nome do Produto recuperado do BD, afim de tornar
-    mais agradável visualmente para o usuário **/
-function ajustaNomeProduto(resposta){
-  var vetorTemp = resposta.nomeProduto.split("_");
-  if (vetorTemp["length"] > 1) {
-    vetorTemp = vetorTemp[0] + " " + vetorTemp[1];
-  }
-  return vetorTemp;
-}
-
-
+/** Autor: Alberto
+    Descrição: Insere em cada coluna da tabela de Produtos
+    @param resultado
+    @param contador
+    @param linha
+    **/
 function insereProdutoTabela(resultado, contador, linha){
   for(let i = 1; i <= 4; i++){
 
@@ -134,6 +125,13 @@ function insereProdutoTabela(resultado, contador, linha){
   }
 
 }
+
+  /** Autor: Alberto
+      Descrição: Insere em cada coluna da tabela de Insumo
+      @param resultado
+      @param contador
+      @param linha
+      **/
 function insereInsumoTabela(resultado, contador, linha){
   console.log(resultado[contador]);
   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+resultado[contador].idItemTransacao+"&tipo=insumo")
@@ -161,16 +159,3 @@ function insereInsumoTabela(resultado, contador, linha){
   })
   .catch(function(erro){console.log(erro);});
 }
-
-
-// function requestProduto(resultado, contador, idItem){
-//   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+
-//   idItem+"&tipo=produto").then(function(resposta){
-//     var textoRel = ajustaNomeProduto(resposta) + ": " + resultado[contador].valorTransacao+" R$ "+
-//       formataData(resultado, contador);
-//     encontraTipoProduto(idItem).innerHTML = textoRel;
-//
-//
-//   })
-//   .catch(function(erro){console.log(erro);});
-// }

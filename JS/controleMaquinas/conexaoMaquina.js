@@ -38,7 +38,7 @@ function receberTodos(){
 
 function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
   dataCompra, quantidade){
-  let maquinaJSON = encapsularCadastrar(id, nome, descricao, status,
+  let maquinaJSON = encapsularCadastrar(nome, descricao, status,
     indiceDepreciacao, valorCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquina+

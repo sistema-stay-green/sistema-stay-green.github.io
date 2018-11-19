@@ -1,7 +1,7 @@
 /**
  * Arquivo JavaScript responsável pelas interações dinâmicas da página
  *  e pelo encapsulamento de objetos Patrimônio.
- * @author Mei, Sávio
+ * @author Mei Fagundes
  */
 
 // --- DOM ---
@@ -40,7 +40,7 @@ let isErrorVisible = false;
 /**
  * Mostra uma determinada Modal e esconde as outras
  * @param {string} modal
- * @author Mei
+ * @author Mei Fagundes
  */
 function showModal(modal){
 
@@ -78,6 +78,11 @@ function showModal(modal){
     }
 }
 
+/**
+ * Recebe uma string correspondente à opção a ser mostrada.
+ * @param {String} key 
+ * @author Mei Fagundes
+ */
 function showEditOptions(key){
 
     switch (key) {
@@ -114,6 +119,11 @@ function showEditOptions(key){
     }
 }
 
+/**
+ * Exibe a Modal de Erro
+ * @param {int} cod Código de erro a ser mostrado.
+ * @author Mei Fagundes
+ */
 function showError(cod){
 
     if (isErrorVisible){
@@ -169,6 +179,10 @@ function showError(cod){
     }, 4000);
 }
 
+/**
+ * Esconde as opções de edição.
+ * @author Mei Fagundes
+ */
 function hideEditOptions(){
 
     entradaDiv.classList.add("esconde");
@@ -179,7 +193,7 @@ function hideEditOptions(){
 
 /**
  * Esconde todas as div Modal
- * @author Mei
+ * @author Mei Fagundes
  */
 function hideModal(){
 
@@ -194,7 +208,7 @@ function hideModal(){
 /**
  * Insere um objeto Patrimonio na tabela principal.
  * @param {Patrimonio} patrimonio
- * @author Mei
+ * @author Mei Fagundes
  */
 function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
@@ -273,7 +287,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataCompra !== null)
-        td.innerHTML = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataCompraString;
     else
         td.innerHTML = NA;
     td.id = "dataCompra-" + id;
@@ -281,7 +295,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataSaida !== null)
-        td.innerHTML = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataSaidaString;
     else
         td.innerHTML = NA;
     td.id = "dataSaida-" + id;
@@ -289,7 +303,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataRetorno !== null)
-        td.innerHTML = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataRetornoString;
     else
         td.innerHTML = NA;
     td.id = "dataRetorno-" + id;
@@ -297,7 +311,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataBaixa !== null)
-        td.innerHTML = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataBaixaString;
     else
         td.innerHTML = NA;
     td.id = "dataBaixa-" + id;
@@ -323,6 +337,10 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
 }
 
+/**
+ * Limpa a tabela e a esconde.
+ * @author Mei Fagundes
+ */
 function clearTableContents() {
 
     patrimonioTable.innerHTML = "";
@@ -332,7 +350,7 @@ function clearTableContents() {
 /**
  * Atualiza as informações de um Patrimonio na tabela.
  * @param {Patrimonio} patrimonio
- * @author Mei
+ * @author Mei Fagundes
  */
 function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
 
@@ -374,30 +392,31 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
         document.querySelector("#valorAtual-" + id).innerHTML = NA;
 
     if(patrimonio.dataCompra !== null && patrimonio.dataCompra !== "")
-        document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompra
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompraString;
     else
         document.querySelector("#dataCompra-" + id).innerHTML = NA;
 
     if(patrimonio.dataSaida !== null && patrimonio.dataSaida !== "")
-        document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaida
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaidaString;
     else
         document.querySelector("#dataSaida-" + id).innerHTML = NA;
 
     if(patrimonio.dataRetorno !== null && patrimonio.dataRetorno !== "")
-        document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetorno
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetornoString;
     else
         document.querySelector("#dataRetorno-" + id).innerHTML = NA;
 
     if(patrimonio.dataBaixa !== null && patrimonio.dataBaixa !== "")
-        document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixa
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixaString;
     else
         document.querySelector("#dataBaixa-" + id).innerHTML = NA;
 }
 
+/**
+ * Remove um Patrimonio da tabela correspondente ao ID recebido.
+ * @param {Integer} id 
+ * @author Mei Fagundes
+ */
 function removePatrimonioFromTable(id){
 
     document.querySelector("tbody [name=patrimonio-"+ id +"]").remove();
@@ -412,7 +431,7 @@ function isPatrimoniosEmpty(){
 
 /**
  * Esconde a tabela principal e a substui por uma mensagem de aviso
- * @author Mei
+ * @author Mei Fagundes
  */
 function hidePatrimonioTable(){
 
@@ -422,7 +441,7 @@ function hidePatrimonioTable(){
 
 /**
  * Mostra novamete a tabela e remove a mensagem de aviso.
- * @author Mei
+ * @author Mei Fagundes
  */
 function showPatrimonioTable(){
 
@@ -430,8 +449,10 @@ function showPatrimonioTable(){
     document.querySelector("#noResults").style.display = "none";
 }
 
-function changeFilter(){
-
+/**
+ * Atualiza a página com o filtro seleionado no HTML.
+ */
+function updateFilterOnTable(){
 
     receiveAllPatrimoniosFromServlet();
 
@@ -468,14 +489,14 @@ function changeFilter(){
 
 /**
  * Recupera as informações da div Modal e as armazena em um objeto Patrimonio.
- * @author Mei
  * @returns {Patrimonio} Retorna um objeto Patrimonio preenchido.
+ * @author Mei Fagundes
  */
 function getPatrimonioFromModal(){
 
     let patrimonio = new Patrimonio();
     dataCompra = document.querySelector("#form [name='dataCompraInput']").value.split('-');
-    warnUserAboutEmptyTextInputs();
+    warnUserAboutEmptyInputs();
 
     if (isModalFilled()) {
 
@@ -562,6 +583,11 @@ function getPatrimonioFromModal(){
     }
 }
 
+/**
+ * Retorna se a Modal está totalmente preenchida.
+ * @returns {Boolean} 
+ * @author Mei Fagundes
+ */
 function isModalFilled(){
 
     if (document.querySelector("#form [name='nomeInput']").value == "" ||
@@ -603,7 +629,11 @@ function isModalFilled(){
     return true;
 }
 
-function warnUserAboutEmptyTextInputs(){
+/**
+ * Avisa na Modal quais os inputs que não estão preenchidos.
+ * @author Mei Fagundes
+ */
+function warnUserAboutEmptyInputs(){
 
     warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='nomeInput']"));
     warnUserAboutEmptyFieldsIterateText(document.querySelector("#form [name='finalidadeInput']"));
@@ -625,6 +655,11 @@ function warnUserAboutEmptyTextInputs(){
 
 }
 
+/**
+ * Método auxiliar do warnUserAboutEmptyInputs para manipular Inputs Data.
+ * @param {HTMLElement} element 
+ * @author Mei Fagundes
+ */
 function warnUserAboutEmptyFieldsIterateDate(element) {
 
     dataFieldArray = element.value.split('-');
@@ -638,6 +673,11 @@ function warnUserAboutEmptyFieldsIterateDate(element) {
     }
 }
 
+/**
+ * Método auxiliar do warnUserAboutEmptyInputs para manipular Inputs Text.
+ * @param {HTMLElement} element 
+ * @author Mei Fagundes
+ */
 function warnUserAboutEmptyFieldsIterateText(element) {
     
     if (element.value == ""){
@@ -650,6 +690,10 @@ function warnUserAboutEmptyFieldsIterateText(element) {
     }
 }
 
+/**
+ * Limpa os avisos de Inputs vazios na Modal.
+ * @author Mei Fagundes
+ */
 function clearEmptyFieldsWarning(){
 
     document.querySelector("#form [name='nomeInput']").classList.remove("inputVazio");
@@ -669,7 +713,7 @@ function clearEmptyFieldsWarning(){
  * Retorna um objeto Patrimonio da Tabela com o Id fornecido.
  * @param {string} id
  * @returns {string} nome
- * @author Mei
+ * @author Mei Fagundes
  */
 function getPatrimonioFromTable(id){
 
@@ -730,6 +774,11 @@ function getPatrimonioFromTable(id){
     return patrimonio;
 }
 
+/**
+ * Prepara a edição do Patrimonio correspondente ao Id recebido colocando-o na Modal Formulário.
+ * @param {int} id 
+ * @author Mei Fagundes
+ */
 function setupPatrimonioEdit(id){
 
     patrimonio = getPatrimonioFromTable(id);
@@ -742,7 +791,7 @@ function setupPatrimonioEdit(id){
 /**
  * Insere os dados do objeto Patrimonio na Div Modal
  * @param {Patrimonio} patrimonio
- * @author Mei
+ * @author Mei Fagundes
  */
 function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
 
@@ -755,20 +804,21 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
 
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
     if(patrimonio.dataRetorno !== null)
         document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetorno
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
     if(patrimonio.dataSaida !== null)
         document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaida
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
 }
 
 /**
  * Limpa a Modal Formulário
+ * @author Mei Fagundes
  */
 function clearMainModal(){
 
@@ -783,6 +833,11 @@ function clearMainModal(){
 
 }
 
+/**
+ * Gera um relatório com os Patrimonios recebidos.
+ * @param {Patrimonio[]} patrimonios 
+ * @author Mei Fagundes
+ */
 function generateRelatorio(patrimonios = []){
 
     if (patrimonios.length !== 0) {
@@ -858,6 +913,11 @@ function generateRelatorio(patrimonios = []){
         showError(5);
 }
 
+/**
+ * Método auxiliar de generateRelatorio para gerar as Ul's do relatório da página.
+ * @param {Patrimonio[]} patrimonios 
+ * @author Mei Fagundes
+ */
 function generateUlForRelatorio(patrimonios = []){
 
     if (patrimonios !== null) {
@@ -936,6 +996,10 @@ function generateUlForRelatorio(patrimonios = []){
     }
 }
 
+/**
+ * Envia o relatório gerado para Impressão.
+ * @author Mei Fagundes
+ */
 function printRelatorio() {
 
     let content = document.querySelector("#relatorio").innerHTML;
@@ -945,18 +1009,16 @@ function printRelatorio() {
     printWindow.document.write("<link rel='stylesheet' type='text/css' media='screen' href='CSS/Patrimonio/Print.css'/>");
     printWindow.document.write('</head><body onafterprint="self.close()">');
     printWindow.document.write(content);
+    printWindow.document.write('<script type="text/javascript">' + 'window.onload = () => { setTimeout(() => { window.print(); window.close(); }, 200) };' + '</script>');
     printWindow.document.write('</body></html>');
 
     printWindow.document.close();
-    printWindow.focus()
-    printWindow.print();
-    printWindow.close();
+    printWindow.focus();
 }
 
 // --- EVENT LISTENERS ---
 
 addButton.addEventListener("click", () => {showModal('compra')});
-//relatorioButton.addEventListener("click", showRelatorio);
 closeRelatorioButton.addEventListener("click", hideModal);
 printRelatorioButton.addEventListener("click", printRelatorio);
 entradaOptionButton.addEventListener("click", () => {showEditOptions('entrada')})

@@ -24,13 +24,22 @@ btnConfimarCadastroEl.addEventListener("click", function() {
       saldoUsuario = document.querySelector("#login > form:last-of-type input[name='saldoUsuario']").value,
       emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
       senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
-      //usuario = new Usuario();
+
+      usuario = new Usuario(null);
+      usuario.nome(nomeUsuario);
+      usuario.cnpj(cnpjUsuario);
+      usuario.saldo(saldoUsuario);
+      usuario.email(emailUsuario);
+      usuario.senha(senhaUsuario);
 
       Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
                   + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
                   + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-             .then(() => { window.location.redirect("index.html") })
-             .catch(() => { alert("Erro ao cadastrar os dados no servidor") });
+             .then(() => {
+               localStorage.setItem("usuario", usuario.toJSON());
+               window.location.redirect("index.html");
+             })
+             .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
 

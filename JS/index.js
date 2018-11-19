@@ -47,7 +47,7 @@ else{ //logado
       cardPatrimonio = document.querySelector("#patrimonio"),
       cardMaquinas = document.querySelector("#maquinas"),
       cardVendas = document.querySelector("#vendas"),
-      cardPefil = document.querySelectorAll("#perfil")
+      cardPerfil = document.querySelector("#perfil");
 
 
   cardAgenda.addEventListener('click', function(){ mudaUrl("agendaEletronica.html"); });
@@ -55,5 +55,5 @@ else{ //logado
   cardPatrimonio.addEventListener('click', function(){ mudaUrl("Patrimonio.html"); });
   cardMaquinas.addEventListener('click', function(){ mudaUrl("controleMaquinas.html"); });
   cardProducao.addEventListener('click', function(){ mudaUrl("controleProducao.html"); });
-  cardPefil.addEventListener('click', function(){ mudaUrl("perfil.html"); });
+  cardPerfil.addEventListener('click', function(){ mudaUrl("perfil.html"); });
 }

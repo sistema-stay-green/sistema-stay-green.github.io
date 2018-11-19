@@ -7,10 +7,11 @@ function aplicarRelatorios() {
       let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
 
   //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
-  //Feito por João Francisco
-          relatorioContainer  document.querySelector('#containerRelatorio');
-      relatorioContainer.innerHTML = geraRelatorio(codigoRelatorio);
-      relatorioContainer.classList.remove('invisivel');
+      relatorioContainer = document.querySelector('#containerRelatorio');
+      relatorioContainer.innerHTML = '';
+      relatorioContainer.appendChild(geraRelatorio(codigoRelatorio));
+      alteraVisibilidadeElemento(relatorioContainer, false);
+      mascaraFormEl.addEventListener('click', () => {alteraVisibilidadeElemento(relatorioContainer, true)});
     }));
 }
 
@@ -85,7 +86,7 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
       somaTotal += tarefa[campoTotal];
     }
 
-    celulaTabelaRodape.innerHTML += "<td>" + somaTotal + "</td> ";
+    celulaTabelaRodape.innerHTML += '<td colspan="2">' + somaTotal + '</td> ';
     rodapeTabela.appendChild(celulaTabelaRodape);
 
     tabelaRelatorioGastos.appendChild(rodapeTabela);

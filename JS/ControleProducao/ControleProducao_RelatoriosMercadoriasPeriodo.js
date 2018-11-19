@@ -15,8 +15,17 @@ var tabelaProdutoCafeA = document.getElementById('tabelaRelCafeA');
 var tabelaInsumo = document.getElementById('tabelaInsumo');
 var tituloProduto = document.getElementById('tituloProduto');
 var tituloInsumo = document.getElementById('tituloInsumo');
+var btnRelatorioProducao = document.getElementById('btnRelatorioProducao');
 
+btnRelatorioProducao.addEventListener('click', criaRelatorioP);
 btnRelatorioH.addEventListener('click', criaRelatorioH);
+
+function criaRelatorioP() {
+  Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio2&id=" + "teste")
+  .then(function(resultado){console.log(resultado);}).catch(function(erro){console.log(erro);});
+}
+
+
 
 /** @autor Alberto
     Descrição: função que apartir de um periodo faz uma requisição

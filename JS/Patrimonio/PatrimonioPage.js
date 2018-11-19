@@ -287,7 +287,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataCompra !== null)
-        td.innerHTML = patrimonio.dataCompra.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataCompraString;
     else
         td.innerHTML = NA;
     td.id = "dataCompra-" + id;
@@ -295,7 +295,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataSaida !== null)
-        td.innerHTML = patrimonio.dataSaida.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataSaidaString;
     else
         td.innerHTML = NA;
     td.id = "dataSaida-" + id;
@@ -303,7 +303,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataRetorno !== null)
-        td.innerHTML = patrimonio.dataRetorno.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataRetornoString;
     else
         td.innerHTML = NA;
     td.id = "dataRetorno-" + id;
@@ -311,7 +311,7 @@ function insertPatrimonioIntoTable(patrimonio = new Patrimonio()){
 
     td = document.createElement("td");
     if(patrimonio.dataBaixa !== null)
-        td.innerHTML = patrimonio.dataBaixa.toISOString().slice(0,10).replace("/-/g","");
+        td.innerHTML = patrimonio.dataBaixaString;
     else
         td.innerHTML = NA;
     td.id = "dataBaixa-" + id;
@@ -392,26 +392,22 @@ function updatePatrimonioIntoTable(patrimonio = new Patrimonio()){
         document.querySelector("#valorAtual-" + id).innerHTML = NA;
 
     if(patrimonio.dataCompra !== null && patrimonio.dataCompra !== "")
-        document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompra
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataCompra-" + id).innerHTML = patrimonio.dataCompraString;
     else
         document.querySelector("#dataCompra-" + id).innerHTML = NA;
 
     if(patrimonio.dataSaida !== null && patrimonio.dataSaida !== "")
-        document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaida
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataSaida-" + id).innerHTML = patrimonio.dataSaidaString;
     else
         document.querySelector("#dataSaida-" + id).innerHTML = NA;
 
     if(patrimonio.dataRetorno !== null && patrimonio.dataRetorno !== "")
-        document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetorno
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataRetorno-" + id).innerHTML = patrimonio.dataRetornoString;
     else
         document.querySelector("#dataRetorno-" + id).innerHTML = NA;
 
     if(patrimonio.dataBaixa !== null && patrimonio.dataBaixa !== "")
-        document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixa
-        .toISOString().slice(0,10).replace("/-/g","");
+        document.querySelector("#dataBaixa-" + id).innerHTML = patrimonio.dataBaixaString;
     else
         document.querySelector("#dataBaixa-" + id).innerHTML = NA;
 }
@@ -808,15 +804,15 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
 
     if(patrimonio.dataCompra !== null)
         document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
     if(patrimonio.dataRetorno !== null)
         document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetorno
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
     if(patrimonio.dataSaida !== null)
         document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaida
-            .toISOString().slice(0,10).replace("/-/g","");
+            String;
 
 }
 

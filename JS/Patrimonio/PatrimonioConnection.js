@@ -1,6 +1,6 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Duda
+ * @author Maria Eduarda Pasquel, Mei Fagundes
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
@@ -8,7 +8,7 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 /**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
@@ -33,7 +33,7 @@ function receiveAllPatrimoniosFromServlet(callBack){
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
  * @param {Patrimonio} patrimonio 
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
@@ -56,7 +56,7 @@ function sendNewPatrimonio(patrimonio, callBack){
 /**
  * Envia um Patrimonio atualizado para o Servlet
  * @param {Patrimonio} patrimonio
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendUpdatedPatrimonio(patrimonio){
   
@@ -90,7 +90,7 @@ function sendUpdatedPatrimonio(patrimonio){
 /**
  * Envia uma requisição de remoção de um Patrimonio para o Servlet
  * @param {Patrimonio} patrimonio 
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendDeletedPatrimonio(id, callBack){
 
@@ -123,6 +123,12 @@ function sendDeletedPatrimonio(id, callBack){
   });
 }
 
+/**
+ * Pesquisa um Patrimonio no Server usando o ID recebido.
+ * @param {int} id 
+ * @param {CallBack} callBack 
+ * @author Maria Eduarda Pasquel
+ */
 function searchById(id, callBack){
   let params = "?action=s&s=id&id=";
   Request.get(SERVLET_URL + params + id, "text").then((response) => {
@@ -144,6 +150,12 @@ function searchById(id, callBack){
   });
 }
 
+/**
+ * Pesquisa Patrimonios no Server usando o Nome recebido.
+ * @param {int} id 
+ * @param {CallBack} callBack 
+ * @author Maria Eduarda Pasquel
+ */
 function searchByNome(nome, callBack){
   let params = "?action=s&s=nome&nome=";
   Request.get(SERVLET_URL + params + nome, "text").then((response) => {

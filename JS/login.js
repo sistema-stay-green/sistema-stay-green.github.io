@@ -26,7 +26,7 @@ btnConfimarCadastroEl.addEventListener("click", function() {
 
   Request.get("http://localhost:8080/StayGreen/cadastrarusuario?nome="
               + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-              + "&email=" + emailUsuario + "&senha=" + senhaUsuario);
+              + "&email=" + emailUsuario + "&senha=" + senhaUsuario)
       .then(() => window.location.redirect("index.html"))
       .catch(() => alert("Erro ao cadastrar"));
 
@@ -39,7 +39,7 @@ let btnCadastrarEl = document.querySelector("#login > section > button");
 
 btnCadastrarEl.addEventListener("click", function() {
 
-  let forms = document.querySelectorAll("#login > form"),
+  let forms = document.querySelectorAll("#login form"),
       mensagemCadastroEl = document.querySelector("#login > section > p:first-of-type");
 
   for(let formEl of forms)

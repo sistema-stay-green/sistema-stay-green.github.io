@@ -17,7 +17,6 @@
 function encapsularTodos(id, nome, descricao, status, indiceDepreciacao,
   valorCompra, valorAtual, dataCompra, dataSaida, dataRetorno, dataBaixa){
     let maquina = new Maquina(id);
-    maquina.id = id;
     maquina.nome = nome;
     maquina.tipo = "MAQUINA";
     maquina.descricao = descricao;
@@ -39,10 +38,9 @@ function encapsularTodos(id, nome, descricao, status, indiceDepreciacao,
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularCadastrar(id, nome, descricao, status,
+function encapsularCadastrar(nome, descricao, status,
   indiceDepreciacao, valorCompra){
-    let maquina = new Maquina(id);
-    maquina.id = id;
+    let maquina = new Maquina(0);
     maquina.nome = nome;
     maquina.descricao = descricao;
     maquina.status = status;

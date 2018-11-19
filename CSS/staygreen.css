@@ -151,7 +151,7 @@ header {
   background-color: yellow;
   height:93%;
   width:100%;
-  background-image: url(fazenda.jpeg);
+  background-image: url('../imgs/home/fazenda.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }

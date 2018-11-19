@@ -57,42 +57,11 @@ header > #mascara-conteudo > a:hover{
   height: 9.5%;
 
 }
-
 nav {
-  height: 7%;
-  width: 100%;
-  display: flex;
-  background-color: #1d883a;
-  align-content: space-around;
-  align-items: center;
-  position: sticky;
-  top:0;
+
   z-index: 1;
 }
 
-nav > h3 {
-  width:20%;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-  margin: 0.5%;
-}
-
-nav > a {
-  text-decoration: none;
-  width:15%;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-}
-
-nav > a:hover {
-  background-color: #116623;
-}
 
 
 footer {

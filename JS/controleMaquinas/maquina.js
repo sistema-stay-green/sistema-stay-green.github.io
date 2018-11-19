@@ -64,13 +64,13 @@ class Maquina {
      */
     toJSON(){
       let patrimonioJSON = {
-        "id": this._id,
-        "nome": this._nome,
-        "tipo": this._tipo,
-        "descricao": this._descricao,
-        "status": this._status,
-        "indiceDepreciacao": this._indiceDepreciacao,
-        "valorCompra": this._valorCompra,
+        "idPatrimonio": this._id,
+        "nomePatrimonio": this._nome,
+        "tipoPatrimonio": this._tipo,
+        "finalidadePatrimonio": this._descricao,
+        "statusPatrimonio": this._status,
+        "indDeprecPatrimonio": this._indiceDepreciacao,
+        "valorCompraPatrimonio": this._valorCompra,
         "valorAtual": this._valorAtual,
       }
       return JSON.stringify(patrimonioJSON);

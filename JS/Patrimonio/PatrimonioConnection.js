@@ -1,6 +1,6 @@
 /**
  * Script para comunicação com o servlet PatrimonioServlet no backend.
- * @author Duda
+ * @author Maria Eduarda Pasquel, Mei Fagundes
  */
 
 const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
@@ -8,7 +8,7 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 /**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function receiveAllPatrimoniosFromServlet(callBack){
 
@@ -22,6 +22,9 @@ function receiveAllPatrimoniosFromServlet(callBack){
       patrimonios.push(encapsulateJSON(current));
     }
     callBack(patrimonios);
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
   });
 
 }
@@ -30,47 +33,147 @@ function receiveAllPatrimoniosFromServlet(callBack){
  * Envia um novo Patrimonio para o Servlet, o recebe de volta e o envia para a CallBack recebida.
  * @param {Patrimonio} patrimonio 
  * @param callBack CallBack a ser executada quando a resposta estiver pronta.
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendNewPatrimonio(patrimonio, callBack){
 
   document.body.classList.add("waiting");
   let params = "?action=c&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params).then((response) => {
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
     document.body.classList.remove("waiting");
-    callBack(encapsulateJSON(response));
+    if (response.slice(0,1) !== "F")
+      callBack(encapsulateJSON(JSON.parse(response)));
+    else
+      showError(2);
+
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
   });
 }
 
 /**
  * Envia um Patrimonio atualizado para o Servlet
  * @param {Patrimonio} patrimonio
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendUpdatedPatrimonio(patrimonio){
   
   document.body.classList.add("waiting");
   let params = "?action=u&patrimonio=" + patrimonio.toJSON();
-  Request.get(SERVLET_URL + params).then((response) => {
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
     document.body.classList.remove("waiting");
+    switch (response.slice(0,1)) {
+
+      case "S":
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
   });
 }
 
 /**
  * Envia uma requisição de remoção de um Patrimonio para o Servlet
  * @param {Patrimonio} patrimonio 
- * @author Mei Fagundes, Duda Pasquel
+ * @author Mei Fagundes, Maria Eduarda Pasquel
  */
 function sendDeletedPatrimonio(id, callBack){
 
   document.body.classList.add("waiting");
   let params = "?action=d&id=" + id;
-  Request.get(SERVLET_URL + params).then((response) => {
+  Request.get(SERVLET_URL + params, "text").then((response) => {
 
-    callBack(id);
     document.body.classList.remove("waiting");
+    switch (response.slice(0,1)) {
+
+      case "S":
+        callBack(id);
+        break;
+
+      case "N":
+        showError(1);
+        break;
+
+      case "F":
+        showError(2);
+        break;
+
+      default:
+        throw new Error("Reposta incorreta recebida do Server.");
+    }
+
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
+  });
+}
+
+/**
+ * Pesquisa um Patrimonio no Server usando o ID recebido.
+ * @param {int} id 
+ * @param {CallBack} callBack 
+ * @author Maria Eduarda Pasquel
+ */
+function searchById(id, callBack){
+  let params = "?action=s&s=id&id=";
+  Request.get(SERVLET_URL + params + id, "text").then((response) => {
+
+    document.body.classList.remove("waiting");
+    let patrimonios = [];
+
+    if (response.slice(0,1) == "N") {
+
+      for (const current of response) {
+        patrimonios.push(encapsulateJSON(JSON.parse(current)));
+      }
+    }
+    callBack(patrimonios);
+    
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
+  });
+}
+
+/**
+ * Pesquisa Patrimonios no Server usando o Nome recebido.
+ * @param {int} id 
+ * @param {CallBack} callBack 
+ * @author Maria Eduarda Pasquel
+ */
+function searchByNome(nome, callBack){
+  let params = "?action=s&s=nome&nome=";
+  Request.get(SERVLET_URL + params + nome, "text").then((response) => {
+
+    document.body.classList.remove("waiting");
+    let patrimonios = [];
+
+    if (response.slice(0,1) == "N") {
+
+      for (const current of response) {
+        patrimonios.push(encapsulateJSON(JSON.parse(current)));
+      }
+    }
+    callBack(patrimonios);
+
+  }, (reason) => {
+    document.body.classList.remove("waiting");
+    showError(0);
   });
 }
 

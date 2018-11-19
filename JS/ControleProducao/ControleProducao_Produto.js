@@ -29,15 +29,15 @@ class Produto {
      * Define o id de um objeto Produto
      * @param idProduto
      */
-   setIdProduto(idProduto) {
+    setIdProduto(idProduto) {
         this.idProduto = idProduto;
     }
 
     /**
      *
      * @return nome de um objeto Produto
-     */
-   getNomeProduto() {
+    */
+    getNomeProduto() {
         return nomeProduto;
     }
 
@@ -45,57 +45,100 @@ class Produto {
      * Define o nome de um objeto Produto
      * @param nomeProduto
      */
-   setNomeProduto(nomeProduto) {
+    setNomeProduto(nomeProduto) {
         this.nomeProduto = nomeProduto;
     }
 
-getDescrProduto() {
-           return descrProduto;
-       }
+    /**
+     * @return descrição de um objeto Produto
+    */
+    getDescrProduto() {
+               return descrProduto;
+    }
 
-setDescrProduto(descrProduto) {
-           this.descrProduto = descrProduto;
-       }
+    /**
+    * Define a descrição de um objeto Produto
+    * @param descrProduto
+    */
+    setDescrProduto(descrProduto) {
+      this.descrProduto = descrProduto;
+    }
 
- getUnidMedProduto() {
-           return unidMedProduto;
-       }
+    /**
+     * @return unidade de medida de um objeto Produto
+    */
+    getUnidMedProduto() {
+      return unidMedProduto;
+    }
 
-setUnidMedProduto(unidMedProduto) {
-           this.unidMedProduto = unidMedProduto;
-       }
+    /**
+    * Define a unidade de medida de um objeto Produto
+    * @param unidMedProduto
+    */
+    setUnidMedProduto(unidMedProduto) {
+      this.unidMedProduto = unidMedProduto;
+    }
 
- getValorUnitProduto() {
-           return valorUnitProduto;
-       }
+    /**
+     * @return valor unitário de um objeto Produto
+    */
+    getValorUnitProduto() {
+      return valorUnitProduto;
+    }
 
-setValorUnitProduto(valorUnitProduto) {
-           this.valorUnitProduto = valorUnitProduto;
-       }
+    /**
+    * Define o valor unitário de um objeto Produto
+    * @param valorUnitProduto
+    */
+    setValorUnitProduto(valorUnitProduto) {
+      this.valorUnitProduto = valorUnitProduto;
+    }
 
- getQuantEstoqueProduto() {
-           return quantEstoqueProduto;
-       }
+    getQuantEstoqueProduto() {
+      return quantEstoqueProduto;
+    }
 
-setQuantEstoqueProduto(quantEstoqueProduto) {
-           this.quantEstoqueProduto = quantEstoqueProduto;
-       }
+    /**
+    * Define a quantidade no estoque de um objeto Produto
+    * @param quantEstoqueProduto
+    */
+    setQuantEstoqueProduto(quantEstoqueProduto) {
+      this.quantEstoqueProduto = quantEstoqueProduto;
+    }
 
-getPontoAvisoProduto() {
-           return pontoAvisoProduto;
-       }
+    /**
+     * @return ponto de aviso de um objeto Produto
+    */
+    getPontoAvisoProduto() {
+      return pontoAvisoProduto;
+    }
 
-setPontoAvisoProduto(pontoAvisoProduto) {
-           this.pontoAvisoProduto = pontoAvisoProduto;
-       }
+    /**
+    * Define o ponto de aviso de um objeto Produto
+    * @param pontoAvisoProduto
+    */
+    setPontoAvisoProduto(pontoAvisoProduto) {
+      this.pontoAvisoProduto = pontoAvisoProduto;
+    }
 
-getFotoMercadoria() {
-           return fotoMercadoria;
-       }
-setFotoMercadoria(fotoMercadoria) {
-           this.fotoMercadoria = fotoMercadoria;
-       }
+    /**
+     * @return url da foto de um objeto Produto
+    */
+    getFotoMercadoria() {
+      return fotoMercadoria;
+    }
 
+    /**
+    * Define a foto de um objeto Produto
+    * @param fotoMercadoria
+    */
+    setFotoMercadoria(fotoMercadoria) {
+      this.fotoMercadoria = fotoMercadoria;
+    }
+
+    /**
+    * Faz a requisição para adicionar o produto no bd
+    */
     fazRequisicao() {
         var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?JSON=" + JSON.stringify(this._item) + "&operacao=adicionar&tipo=produto";
         return Request.get(url);

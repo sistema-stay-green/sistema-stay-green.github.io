@@ -1,6 +1,6 @@
 /**
  * Classe objeto para a encapsulação de dados do Patrimonio.
- * @author Mei
+ * @author Mei Fagundes
  */
 class Patrimonio {
 
@@ -23,7 +23,7 @@ class Patrimonio {
 
     /**
      * Imprime no console todos os valores da classe.
-     * @author Mei
+     * @author Mei Fagundes
      */
     printToConsole(){
 
@@ -45,7 +45,7 @@ class Patrimonio {
      * Tenta converter uma string para o seu valor em Float e a retorna.
      * @param {string} number String a ser convertida.
      * @returns {number} Valor em Float correspondente ou o valor inicial.
-     * @author Mei
+     * @author Mei Fagundes
      */
     tryParse(number){
 
@@ -58,7 +58,7 @@ class Patrimonio {
     /**
      * Calcula o valor atual de cada patrimônio. Valor mímimo = 10% do valor de compra.
      * @returns {number} valor em Float correspondente ao valor atual.
-     * @author Mei, Maria Eduarda
+     * @author Mei Fagundes, Samuel Simonetti, Maria Eduarda
      */
     calculateValorAtual(){
 
@@ -81,7 +81,7 @@ class Patrimonio {
     /**
      * Converte objeto Patrimonio em string JSON.
      * @returns {string} String com formatação JSON do objeto.
-     * @author Guilherme Sena
+     * @author Mei Fagundes
      */
     toJSON(){
 
@@ -109,19 +109,19 @@ class Patrimonio {
             patrimonioJSON["valorCompraPatrimonio"] = this._valorCompra;
 
         if (this._dataCompra !== null){
-            let dC = this._dataCompra.toISOString().slice(0,10).replace("/-/g","").split("-");
+            let dC = this._dataCompraString.split("-");
             patrimonioJSON["dataCompraPatrimonio"] = {"year":parseInt(dC[0]), "month":parseInt(dC[1]) - 1, "dayOfMonth":parseInt(dC[2])};
         }
         if (this._dataSaida !== null){
-            let dS = this._dataSaida.toISOString().slice(0,10).replace("/-/g","").split("-");
+            let dS = this._dataSaidaString.split("-");
             patrimonioJSON["dataSaidaPatrimonio"] = {"year":parseInt(dS[0]), "month":parseInt(dS[1]) - 1, "dayOfMonth":parseInt(dS[2])};
         }
         if (this._dataRetorno !== null){
-            let dR = this._dataRetorno.toISOString().slice(0,10).replace("/-/g","").split("-");
+            let dR = this._dataRetornoString.split("-");
             patrimonioJSON["dataRetornoPatrimonio"] = {"year":parseInt(dR[0]), "month":parseInt(dR[1]) - 1, "dayOfMonth":parseInt(dR[2])};
         }
         if (this._dataBaixa !== null){
-            let dB = this._dataBaixa.toISOString().slice(0,10).replace("/-/g","").split("-");
+            let dB = this._dataBaixaString.split("-");
             patrimonioJSON["dataBaixaPatrimonio"] = {"year":parseInt(dB[0]), "month":parseInt(dB[1]) - 1, "dayOfMonth":parseInt(dB[2])};
         }
 

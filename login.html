@@ -11,28 +11,31 @@
     <title>Login</title>
   </head>
   <body>
+    <img src="imgs/home/fazenda.jpeg" alt="">
     <main id="login">
       <section>
-        <img src="imgs/icons/foto-padrao-usuario.svg" alt="Foto de perfil do usuário">
+        <img src="imgs/icons/foto-padrao-usuario.svg" class="shadow" alt="Foto de perfil do usuário">
         <p>Cadastre-se aqui, caso necessite acessar as partes administrativas do sistema</p>
-        <button type="button" class="botaoInvertido">Cadastrar</button>
+        <button type="button" class="botaoInvertido shadow">Cadastrar</button>
       </section>
-      <form>
-        <label>E-mail: <input type="email" name="emailLogin" placeholder="E-mail" required></label>
-        <label>Senha: <input type="password" name="senhaLogin" placeholder="Senha" required></label>
-        <button id="btnEntrar" type="button">Entrar</button>
-        <button type="reset" class="botaoFantasma">Limpar</button>
-      </form>
-      <form id="cadastro" class="ocultar">
-        <label>Nome: <input type="text" name="nomeUsuario" placeholder="Nome" required></label>
-        <label>CNPJ: <input type="text" name="cnpjUsuario" placeholder="CNPJ" min="0" required></label>
-        <label>Saldo atual da Fazenda: <input type="number" placeholder="Saldo financeiro da fazenda" name="saldoUsuario" min="0" required></label>
-        <label>E-mail: <input type="email" name="emailUsuario" placeholder="E-mail" required></label>
-        <label>Senha: <input type="password" name="senhaUsuario" placeholder="Senha" required></label>
-        <label>Confirmar a senha: <input type="password" name="confSenhaUsuario" placeholder="Confirme a senha" required></label>
-        <button id="btnConfirmar"type="button">Cadastrar</button>
-        <button type="reset" class="botaoFantasma">Limpar</button>
-      </form>
+      <section class="shadow">
+          <form>
+            <label>E-mail: <input type="email" name="emailLogin" placeholder="E-mail" required></label>
+            <label>Senha: <input type="password" name="senhaLogin" placeholder="Senha" required></label>
+            <button id="btnEntrar" type="button">Entrar</button>
+            <button type="reset" class="botaoFantasma">Limpar</button>
+          </form>
+          <form id="cadastro" class="ocultar">
+            <label>Nome: <input type="text" name="nomeUsuario" placeholder="Nome" required></label>
+            <label>CNPJ: <input type="text" name="cnpjUsuario" placeholder="CNPJ" min="0" required></label>
+            <label>Saldo atual da Fazenda: <input type="number" placeholder="Saldo financeiro da fazenda" name="saldoUsuario" min="0" required></label>
+            <label>E-mail: <input type="email" name="emailUsuario" placeholder="E-mail" required></label>
+            <label>Senha: <input type="password" name="senhaUsuario" placeholder="Senha" required></label>
+            <label>Confirmar a senha: <input type="password" name="confSenhaUsuario" placeholder="Confirme a senha" required></label>
+            <button id="btnConfirmar"type="button">Cadastrar</button>
+            <button type="reset" class="botaoFantasma">Limpar</button>
+          </form>
+      </section>
     </main>
     <script src="JS/staygreen.js" charset="utf-8"></script>
     <script src="JS/checaInputs.js" charset="utf-8"></script>

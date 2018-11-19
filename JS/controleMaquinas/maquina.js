@@ -73,7 +73,7 @@ class Maquina {
         "idPatrimonio": this._id,
         "nomePatrimonio": this._nome,
         "tipoPatrimonio": this._tipo,
-        "finalidadePatrimonio": this._descricao,
+        "finalidadePatrimonio": this._finalidade,
         "statusPatrimonio": this._status,
         "indDeprecPatrimonio": this._indiceDepreciacao,
         "valorCompraPatrimonio": this._valorCompra,
@@ -91,7 +91,7 @@ class Maquina {
       this._id = patrimonioJSON.idPatrimonio;
       this._nome = patrimonioJSON.nomePatrimonio;
       this._tipo = patrimonioJSON.tipoPatrimonio;
-      this._descricao = patrimonioJSON.finalidadePatrimonio;
+      this._finalidade = patrimonioJSON.finalidadePatrimonio;
       this._status = patrimonioJSON.statusPatrimonio;
       this._indiceDepreciacao = patrimonioJSON.indDeprecPatrimonio;
       this._valorCompra = patrimonioJSON.valorCompraPatrimonio;

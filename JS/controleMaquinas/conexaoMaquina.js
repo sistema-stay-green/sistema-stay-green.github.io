@@ -136,3 +136,18 @@ function manuntenir(id, dataRetorno){
                 console.log(resultado);
               });
 }
+
+function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
+  let maquinaJSON = encapsularEditar(nome, descricao,
+    indiceDepreciacao, valorCompra);
+  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+              "maquinasJSON="+maquina+
+              "&acao="+"c"+
+              "&dataCompra="+dataCompra+
+              "&dataSaida="+null+
+              "&dataRetorno="+null+
+              "&dataBaixa="+null+
+              "&quantidade="+quantidade).then(function(resultado) {
+                console.log(resultado);
+              });
+}

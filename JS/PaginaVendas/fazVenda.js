@@ -1,11 +1,11 @@
-let modalConfirma = document.getElementById('div-modal');
-let nomeInput = modalConfirma.querySelector('input[name=nome]');
-let modoPagamentoSelect = modalConfirma.querySelector('select[name=modoPagamento]');
-let dataEntregaInput = modalConfirma.querySelector('input[name=dataEntrega]');
-let regiaoSelect = modalConfirma.querySelector('select[name=regiao]');
-let enderecoInput = modalConfirma.querySelector('input[name=endereco]');
-let cepInput = modalConfirma.querySelector('input[name=cep]');
-let confirmaButton = modalConfirma.querySelector('#confirmaModal');
+const modalConfirma = document.getElementById('div-modal');
+const nomeInput = modalConfirma.querySelector('input[name=nome]');
+const modoPagamentoSelect = modalConfirma.querySelector('select[name=modoPagamento]');
+const dataEntregaInput = modalConfirma.querySelector('input[name=dataEntrega]');
+const regiaoSelect = modalConfirma.querySelector('select[name=regiao]');
+const enderecoInput = modalConfirma.querySelector('input[name=endereco]');
+const cepInput = modalConfirma.querySelector('input[name=cep]');
+const confirmaButton = modalConfirma.querySelector('#confirmaModal');
 
 class Comprador{
     constructor(nomeComprador, enderecoComprador, cepComprador, modoPagamento){
@@ -17,25 +17,51 @@ class Comprador{
 }
 
 class Venda{
-    constructor(idItemTransacao, valorTransacao, quantTransacao, dataEntrega = new Date()){
-        this.idItemTransacao = idItemTransacao;
-        this.valorTransacao = valorTransacao;
-        this.quantTransacao = quantTransacao;
-        this.dia = dataEntrega.getDate();
-        this.mes = dataEntrega.getMonth()+1;
-        this.ano = dataEntrega.getFullYear();
+    constructor(){
         this.freteVenda = 10;
         this.tempoEntregaVenda = 10;
     }
 }
 
+class Transacao{
+    constructor(idItemTransacao, valorTransacao, quantTransacao){
+        this.idItemTransacao = idItemTransacao;
+        this.valorTransacao = valorTransacao;
+        this.quantTransacao = quantTransacao;
+
+    }
+}
+
+/**
+ * representa a data
+ */
+class dataEntrega{
+    constructor(dataEntrega = new Date()){
+        this.dia = dataEntrega.getDate();
+        this.mes = dataEntrega.getMonth()+1;
+        this.ano = dataEntrega.getFullYear();
+    }
+}
+
 confirmaButton.addEventListener('click', e => {
-    let venda = new Venda(arrayCarrinho[0].id, arrayCarrinho[0].valor , arrayCarrinho[0].quantidade, dataEntregaInput.valueAsDate);
+    let dataTransacao = new dataEntrega(dataEntregaInput.valueAsDate);
+
+    let venda = new Venda();
+    let transacoes = Array();
+    for (const objeto of arrayCarrinho) {
+        transacoes.push(new Transacao(objeto.id, objeto.valor , objeto.quantidade));
+    }
     let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepInput.value, modoPagamentoSelect.value);
-    let query = "?";
+    let query = `?`;
     for (const key in venda) {
         if (venda.hasOwnProperty(key)) {
             const elemento = venda[key];
+            query += `${key}=${encodeURI(elemento)}&`
+        }
+    }
+    for (const key in dataTransacao) {
+        if (dataTransacao.hasOwnProperty(key)) {
+            const elemento = dataTransacao[key];
             query += `${key}=${encodeURI(elemento)}&`
         }
     }
@@ -45,6 +71,7 @@ confirmaButton.addEventListener('click', e => {
             query += `${key}=${encodeURI(elemento)}&`
         }
     }
+    query += `transacoes=${encodeURI(JSON.stringify(transacoes))}`;
     console.log(query);
     Request.get(`http://localhost:8080/StayGreen/DadosVendasServlet${query}`);
 });

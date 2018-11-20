@@ -43,7 +43,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
   let maquinaJSON = encapsularCadastrar(nome, descricao, status,
     indiceDepreciacao, valorCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
-              "maquinasJSON="+maquina+
+              "maquinasJSON="+null+
               "&acao="+"c"+
               "&dataCompra="+dataCompra+
               "&dataSaida="+null+

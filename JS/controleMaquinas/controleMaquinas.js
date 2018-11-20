@@ -65,22 +65,26 @@ function cadastro(){
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
       essa string na tabela*/
+      let id = document.querySelectorAll(".maquina").length + 1;
+      let vetor = [id,nome,finalidade,valor,depreciacao,data,
+                   "Em posse","Maquina","N/A",
+                   "N/A","N/A"];
 
-      let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
+      /*let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
                    maquina.indiceDepreciacao,maquina.dataCompra,
                    maquina.status,maquina.tipo,maquina.valorAtual,
-                   maquina.dataSaida,maquina.dataBaixa];
+                   maquina.dataSaida,maquina.dataBaixa];*/
 
     for (var i = 0; i < vetor.length; i++) {
       if(i == 0){
+        string += "<tr class=\"maquina\">"
         string += "<td class=\"id\">" + vetor[i] + "</td>";
       }else {
         string += "<td>" + vetor[i] + "</td>";
       }
     }
       maquinas.innerHTML += string +
-      "<td>" + botaoSaida + "</td>" +
-      "<td>" + botaoEditar + "</td>";
+      "<td>" + botaoSaida + botaoEditar + "</td>";
 
     //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
     document.querySelector(".maquinas").style.display = "inline-block";
@@ -97,6 +101,11 @@ function cadastro(){
     let botões = document.querySelectorAll(".botaoSaida");
     for (var i = 0; i < botões.length; i++) {
       botões[i].addEventListener("click", saida);
+    }
+    //permite a chamada da função "editar" ao botão "botaoEditar" ser presionado
+       botões = document.querySelectorAll(".botaoEditar");
+    for (var i = 0; i < botões.length; i++) {
+      botões[i].addEventListener("click", editar);
     }
     document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
   }

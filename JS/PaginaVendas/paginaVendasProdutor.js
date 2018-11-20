@@ -1,5 +1,5 @@
 let mainEl = document.querySelector("main");
-let divBotoesEl = document.querySelector(".div-botoes");
+let divBotoesEl = document.querySelector("main > .div-botoes");
 let mascaraEl = document.querySelector("#mascara");
 let botaoEncaEl = document.querySelector("#botaoEnc");
 let botaoFatuEl = document.querySelector("#botaoFat");
@@ -9,7 +9,8 @@ let divEncaEl = document.querySelector("#div-encaminhamentos");
 let divFatuEl = document.querySelector("#div-faturamentos");
 let divResulEl = document.querySelector("#div-resultados");
 let divRegistraEl = document.querySelector("#div-registra");
-
+let botaoConfirmaEl = document.querySelector("#div-registra > .div-botoes > button:first-of-type");
+let botaoCancelaEl = document.querySelector("#div-registra > .div-botoes > button:last-of-type");
 let arrayProdutos = new Array();
 window.onload = function recebeJSON(){
   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
@@ -22,22 +23,23 @@ window.onload = function recebeJSON(){
     });
 }
 
-function addArrayProdutos(json){
-    let produto = {
-       nome:"",
-       descricao:"",
-       preco: 0,
-       estoque:0,
-       img:""
-   };
-    produto.nome = json.nomeProduto;
-    produto.descricao = json.descrProduto;
-    produto.preco = json.valorUnitProduto;
-    produto.estoque = json.quantEstoqueProduto;
-    produto.img = json.fotoMercadoria;
-    arrayProdutos.push(produto); // dps da push no array
-    console.log(arrayProdutos);
-   }
+function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
+  let produto = {
+     nome:"",
+     descricao:"",
+     preco: 0,
+     estoque:0,
+     img:""
+ };
+  produto.nome = nome;
+  produto.id = id;
+  produto.descricao = descricao;
+  produto.preco = preco;
+  produto.estoque = estoque;
+  produto.img = img;
+  arrayProdutos.push(produto);
+  console.log(arrayProdutos);
+ }
 
 function addProdutosPagina(produtos){
 
@@ -92,11 +94,44 @@ function escondeTudo(){
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
-botaoRegistraEl.addEventListener('click',mostraRegistra);
-botaoEncaEl.addEventListener('click',mostraEncaminhamentos);
-botaoFatuEl.addEventListener('click',mostraFaturamentos);
-botaoResulEl.addEventListener('click',mostraResultados);
-mascaraEl.addEventListener('click',escondeTudo);
+function confirmaRegistraProduto(){
+  divRegistraEl.classList.remove("aparece");
+  mascaraEl.classList.remove("aparece");
+}
+function cancelaRegistraProduto(){
+  divRegistraEl.classList.remove("aparece");
+  mascaraEl.classList.remove("aparece");
+}
+
+botaoRegistraEl.addEventListener('click', mostraRegistra);
+botaoEncaEl.addEventListener('click', mostraEncaminhamentos);
+botaoFatuEl.addEventListener('click', mostraFaturamentos);
+botaoResulEl.addEventListener('click', mostraResultados);
+mascaraEl.addEventListener('click', escondeTudo);
+botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
+botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
+
+let padrao = '#####-###';
+
+let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
+  inputCep.addEventListener('input', e => {
+    let entrada = inputCep.value;
+    if(isNaN(entrada[entrada.length - 1])){
+      entrada = entrada.replace(entrada.slice(entrada.length - 1), '');
+    }
+
+    let padraoIndex = 0, resultado = '';
+    for (let i = 0; padraoIndex < padrao.length && i < entrada.length; i++, padraoIndex++) {
+      if (padrao[padraoIndex] != '#') {
+        while (padrao[padraoIndex] != '#' && entrada[i] != padrao[padraoIndex]  && padraoIndex != padrao.length - 1) {
+          resultado += padrao[padraoIndex];
+          padraoIndex++;
+        }
+      }
+      resultado += entrada[i];
+    }
+    inputCep.value = resultado;
+});
 
 //compra é valor negativo
 function relatorioResultados(){

@@ -10,13 +10,7 @@
   </head>
   <body>
     <nav>
-    <a href="#">Home</a>
-    <a href="#">Agenda</a>
-    <a href="#">Máquinas</a>
     <h3>Stay Green</h3>
-    <a href="#">Patrimonio</a>
-    <a href="#">Produção</a>
-    <a href="#">Vendas</a>
   </nav>
   <div id="carrinho">
     <img src="imgs/PaginaVendas/shopping-cart.svg" alt="um carrinho de compras">
@@ -24,20 +18,20 @@
   </div>
   <main></main>
 
-  <div id="mascara" >
+  <div id="mascara" class="aparece" >
     <section id="div-carrinho">
         <div class="div-botoes">
           <button type="button" id="confirmaCarrinho" name="confirmaCarrinho">Confirmar</button>
           <button type="button" id="cancelaCarrinho" name="cancelaCarrinho">Cancelar</button>
         </div>
     </section>
-    <section id="div-modal">
+    <section id="div-modal" class="aparece">
       <label> Digite seu nome Completo: <input type="text" name="nome" value=""> </label>
       <label> modo de pagamento:
         <select name="modoPagamento">
-          <option value="boleto">boleto</option>
-          <option value="credito">Cartão de crédito</option>
-          <option value="debito">cartão de débito</option>
+          <option value="BOLETO">boleto</option>
+          <option value="CARTAO_CREDITO">Cartão de crédito</option>
+          <option value="CARTAO_DEBITO">cartão de débito</option>
         </select>
       </label>
       <label> Digite a data agendada para a entrega: <input type="date" name="dataEntrega" value=""> </label>
@@ -51,11 +45,7 @@
           <option value="Norte">Norte</option>
         </select>
       </label>
-      <label> Estado: <input type="text" name="estado" value=""> </label>
-      <label> Cidade: <input type="text" name="cidade" value=""> </label>
-      <label> Bairro: <input type="text" name="bairro" value=""> </label>
-      <label> Rua: <input type="text" name="rua" value=""> </label>
-      <label> Número: <input type="text" name="numero" value=""> </label>
+      <label> Endereço: <input type="text" name="endereco" value=""> </label>
       <label> CEP: <input type="text" name="cep" value=""> </label>
       <div class="div-botoes">
         <button id="confirmaModal" type="button" name="confirmaModal">Confirmar</button>
@@ -65,6 +55,7 @@
  </div>
   <script src="JS/staygreen.js"></script>
   <script src="JS/PaginaVendas/paginaVendas.js"></script>
+  <script src="JS/PaginaVendas/fazVenda.js"></script>
 
   </body>
 </html>

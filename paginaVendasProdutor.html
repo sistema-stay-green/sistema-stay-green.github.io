@@ -10,32 +10,45 @@
   </head>
   <body>
     <nav>
-	  <a href="#">Home</a>
-	  <a href="#">Agenda</a>
-	  <a href="#">Máquinas</a>
+	  <a href="">Home</a>
+	  <a href="">Agenda</a>
+	  <a href="">Máquinas</a>
       <h3>Stay Green</h3>
 	  <a href="#">Patrimonio</a>
 	  <a href="#">Produção</a>
 	  <a href="#">Vendas</a>
     </nav>
     <div id="mascara"></div>
-    <div id="div-registra">
-      <h1>Registre um produto</h1>
+    <section id="div-registra">
+      <h1>Dados do produto</h1>
       <label> Nome: <input type="text" name="input" value=""> </label>
-      <label> Descrição: <textarea name="" id="" cols="50" rows="5"></textarea> </label>
-      <label> Valor de compra por unidade: <input type="number" value=""></label>
-      <label> Valor de venda por unidade: <input type="number"  value=""></label>
-      <label> Ponto de aviso: <input type="number" value=""></label>
-      <label> Estoque: <input type="number" value=""></label>
-      <label> Unidade de venda:
-          <select >
-            <option value="Kg">Kg</option>
-            <option value="L">L</option>
-            <option value="unidade">unidade</option>
-          </select>
-        </label>
-      <label > imagem: <input type="text"></label>
-    </div>
+      <label> Data da venda: <input type="date"value=""></label>
+      <label> Quantidade vendida: <input type="number" value=""></label>
+      <h1>Dados do cliente</h1>
+      <label> Digite o nome completo do cliente: <input type="text" name="nome" value=""> </label>
+      <label> modo de pagamento:
+        <select name="modoPagamento">
+          <option value="boleto">boleto</option>
+          <option value="credito">Cartão de crédito</option>
+          <option value="debito">cartão de débito</option>
+        </select>
+      </label>
+      <label> Região do Brasil:
+        <select name="regiao">
+          <option value="Sul">Sul</option>
+          <option value="Sudeste">Sudeste</option>
+          <option value="Centro-oeste">Centro-oeste</option>
+          <option value="Nordeste">Nordeste</option>
+          <option value="Norte">Norte</option>
+        </select>
+      </label>
+      <label> Endereço: <input type="text" name="" value=""> </label>
+      <label> CEP: <input type="cep" name="cep" pattern="\d{5}-?\d{3}" maxlength="9" placeholder="_____-___" value=""> </label>
+      <div class="div-botoes">
+        <button  type="button" name="confirmaModal">Confirmar</button>
+        <button  type="button" name="cancelaModal">Cancelar</button>
+      </div>
+    </section>
     <section id="div-encaminhamentos"><h1>Encaminhamentos</h1></section>
     <section id="div-faturamentos"><h1>Faturamentos</h1></section>
     <section id="div-resultados"><h1>Resultados</h1></section>
@@ -46,8 +59,20 @@
         <button id="botaoFat" type="button" name="button">Relatório de Faturamento</button>
         <button id="botaoRes" type="button" name="button" onclick="relatorioResultados()">Relatório de Resultados</button>
 	  </div>
+    <label> Região do Brasil:
+      <select name="regiao">
+        <option value="Sul">Sul</option>
+        <option value="Sudeste">Sudeste</option>
+        <option value="Centro-oeste">Centro-oeste</option>
+        <option value="Nordeste">Nordeste</option>
+        <option value="Norte">Norte</option>
+      </select> <br>
+    </label>
+
+      <label> frete para a região acima: R$ <input type="number" value=""></label>
     <script type="text/javascript" src="JS/staygreen.js"></script>
     <script type="text/javascript" src="JS/PaginaVendas/paginaVendasProdutor.js"></script>
     </main>
+    <script type="text/javascript" src="JS/PaginaVendas/paginaVendasProdutor.js"></script>
   </body>
 </html>

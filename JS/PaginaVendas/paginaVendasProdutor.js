@@ -23,7 +23,7 @@ window.onload = function recebeJSON(){
     });
 }
 
-function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
+function addArrayProdutos({idProduto: id, nomeProduto: nome, descrProduto: descricao, valorUnitProduto: preco, quantEstoqueProduto: estoque,fotoMercadoria: img}){
   let produto = {
      nome:"",
      descricao:"",

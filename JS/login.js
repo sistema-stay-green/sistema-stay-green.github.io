@@ -1,5 +1,5 @@
 // Recebe as informações do formulário  de login
-let btnEntrarLoginEl = document.querySelector("#login > form:first-of-type > button:first-of-type");
+let btnEntrarLoginEl = document.querySelector("#login form:first-of-type > button:first-of-type");
 
 btnEntrarLoginEl.addEventListener("click", function() {
 
@@ -13,7 +13,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
                     // pegar dados no BD do usuario e colocar no objeto
                     // salvar objeto no localStorage
                     localStorage.setItem("usuario", usuario.toJSON());
-                    window.location.redirect("index.html");
+                    window.location.href = "index.html";
              })
              .catch(() => { alert("Erro ao logar o servidor") });
 
@@ -44,15 +44,15 @@ btnCadastrarEl.addEventListener("click", function() {
 });
 
 // Recebe as informações do formulário de cadastro
-let btnConfimarCadastroEl = document.querySelector("#login > form:last-of-type > button:first-of-type");
+let btnConfimarCadastroEl = document.querySelector("#login form:last-of-type > button:first-of-type");
 
 btnConfimarCadastroEl.addEventListener("click", function() {
 
     let nomeUsuario = document.querySelector("input[name='nomeUsuario']").value,
-    cnpjUsuario = document.querySelector("#login > form:last-of-type input[name='cnpjUsuario']").value,
-    saldoUsuario = document.querySelector("#login > form:last-of-type input[name='saldoUsuario']").value,
-    emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
-    senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
+    cnpjUsuario = document.querySelector("#login form:last-of-type input[name='cnpjUsuario']").value,
+    saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
+    emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
+    senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
 
     usuario = new Usuario(null);
     usuario.nome = nomeUsuario;
@@ -62,13 +62,14 @@ btnConfimarCadastroEl.addEventListener("click", function() {
     usuario.senha = null;
 
     localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
+    window.location.href = "index.html";
 
     Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
     + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
     + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
     .then(() => {
         localStorage.setItem("usuario", usuario.toJSON());
-        window.location.redirect("index.html");
+        window.location.href = "index.html";
     })
     .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 

@@ -26,7 +26,7 @@ btnConfimarEdicaoEl.addEventListener("click", function() {
               + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
          .then(() => {
               localStorage.setItem("usuario", usuario.toJSON());
-              window.location.redirect("index.html");
+              window.location.href = "index.html";
          })
          .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 });

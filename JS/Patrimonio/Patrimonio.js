@@ -109,19 +109,19 @@ class Patrimonio {
             patrimonioJSON["valorCompraPatrimonio"] = this._valorCompra;
 
         if (this._dataCompra !== null){
-            let dC = this._dataCompraString.split("-");
+            let dC = this.dataCompraString.split("-");
             patrimonioJSON["dataCompraPatrimonio"] = {"year":parseInt(dC[0]), "month":parseInt(dC[1]) - 1, "dayOfMonth":parseInt(dC[2])};
         }
         if (this._dataSaida !== null){
-            let dS = this._dataSaidaString.split("-");
+            let dS = this.dataSaidaString.split("-");
             patrimonioJSON["dataSaidaPatrimonio"] = {"year":parseInt(dS[0]), "month":parseInt(dS[1]) - 1, "dayOfMonth":parseInt(dS[2])};
         }
         if (this._dataRetorno !== null){
-            let dR = this._dataRetornoString.split("-");
+            let dR = this.dataRetornoString.split("-");
             patrimonioJSON["dataRetornoPatrimonio"] = {"year":parseInt(dR[0]), "month":parseInt(dR[1]) - 1, "dayOfMonth":parseInt(dR[2])};
         }
         if (this._dataBaixa !== null){
-            let dB = this._dataBaixaString.split("-");
+            let dB = this.dataBaixaString.split("-");
             patrimonioJSON["dataBaixaPatrimonio"] = {"year":parseInt(dB[0]), "month":parseInt(dB[1]) - 1, "dayOfMonth":parseInt(dB[2])};
         }
 

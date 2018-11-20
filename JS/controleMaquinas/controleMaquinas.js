@@ -51,6 +51,7 @@ function cadastro(){
     let nome = document.querySelector("input[name='nome']").value,
         finalidade = document.querySelector("input[name='finalidade']").value,
         valor =  document.querySelector("input[name='valor']").value,
+        dataAs = document.querySelector("input[name='data']").valueAsDate,
         data = document.querySelector("input[name='data']").value,
         depreciacao = document.querySelector("input[name='depreciação']").value,
         //quantidade = document.querySelector("input[name='quantidade']").value,
@@ -58,16 +59,24 @@ function cadastro(){
         botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
         maquinas = document.querySelector("#tabela");
     let string = "";
+    console.log(data);
+    let maquina = new Maquina();
+    maquina.dataCompra = dataAs;
+    maquina.valorCompra = valor;
+    maquina.indiceDepreciacao = depreciacao;
+    maquina.calculateValorAtual();
 
-    let maquina = cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor,
+    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor,
       data, 1)
-    //maquina.fromJSON(maquina);
+
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
       essa string na tabela*/
+
+
       let id = document.querySelectorAll(".maquina").length + 1;
       let vetor = [id,nome,finalidade,valor,depreciacao,data,
-                   "Em posse","Maquina","N/A",
+                   "Em posse","Maquina",maquina.valorAtual,
                    "N/A","N/A"];
 
       /*let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
@@ -77,14 +86,14 @@ function cadastro(){
 
     for (var i = 0; i < vetor.length; i++) {
       if(i == 0){
-        string += "<tr class=\"maquina\">"
+        string += "<tr class=\"maquina\">";
         string += "<td class=\"id\">" + vetor[i] + "</td>";
       }else {
         string += "<td>" + vetor[i] + "</td>";
       }
     }
       maquinas.innerHTML += string +
-      "<td>" + botaoSaida + botaoEditar + "</td>";
+      "<td>" + botaoSaida + botaoEditar + "</td><tr>";
 
     //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
     document.querySelector(".maquinas").style.display = "inline-block";
@@ -215,12 +224,12 @@ function editarMaquina() {
       finalidade = document.querySelector("input[name='finalidade-editar']"),
       valor =  document.querySelector("input[name='valor-editar']"),
       data = document.querySelector("input[name='data-editar']"),
-      depreciação = document.querySelector("input[name='depreciação-editar']");
-  let vetor = [id,nome,finalidade,valor,depreciação,data],
+      depreciacao = document.querySelector("input[name='depreciação-editar']");
+  let vetor = [id,nome,finalidade,valor,depreciacao,data],
       maquinas = document.querySelectorAll(".maquina"),
       string = "";
-      /*editarBE(id,nome, finalidade, depreciacao, valor,
-        data)*/
+      editarBE(id,nome, finalidade, depreciacao, valor,
+        data)
       /*descartar(id);
       cadastrar(nome, finalidade, "Em posse", depreciacao, valor,
         data, 1);*/
@@ -389,14 +398,14 @@ function carregaElementos(carregarpagina){
   var j = 1;
   for (var i = 0; i < carregarpagina.length; i++) {
     if(i == 0){
+      string += "<tr class=\"maquina\">";
       string += "<td class=\"id\">" + carregarpagina[i] + "</td>";
     }else {
       string += "<td>" + carregarpagina[i] + "</td>";
     }
     if(j%11 == 0){
       maquinas.innerHTML += string +
-      "<td>" + botaoSaida + "</td>" +
-      "<td>" + botaoEditar + "</td>";
+      "<td>" + botaoSaida + botaoEditar + "</td></tr>";
       string = "";
     }
     j++;

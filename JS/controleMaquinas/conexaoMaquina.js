@@ -43,7 +43,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
   let maquinaJSON = encapsularCadastrar(nome, descricao, status,
     indiceDepreciacao, valorCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
-              "maquinasJSON="+null+
+              "maquinasJSON="+maquinaJSON+
               "&acao="+"c"+
               "&dataCompra="+dataCompra+
               "&dataSaida="+null+
@@ -138,16 +138,16 @@ function manuntenir(id, dataRetorno){
 }
 
 function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
-  let maquinaJSON = encapsularEditar(nome, descricao,
-    indiceDepreciacao, valorCompra);
+  let maquinaJSON = encapsularEditar(nome, finalidade,
+    indiceDepreciacao, valorCompra,dataCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
-              "maquinasJSON="+maquina+
+              "maquinasJSON="+maquinaJSON+
               "&acao="+"c"+
               "&dataCompra="+dataCompra+
               "&dataSaida="+null+
               "&dataRetorno="+null+
               "&dataBaixa="+null+
-              "&quantidade="+quantidade).then(function(resultado) {
+              "&quantidade=1").then(function(resultado) {
                 console.log(resultado);
               });
 }

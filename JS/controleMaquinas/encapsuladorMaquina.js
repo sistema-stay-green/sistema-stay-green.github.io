@@ -78,7 +78,7 @@ function encapsularManutencao(id, dataRetorno){
   return maquina.toJSON();
 }
 
-function encapsularEditar(id, nome, finalidade, indiceDepreciacao, valorCompra){
+function encapsularEditar(id, nome, finalidade, indiceDepreciacao, valorCompra,dataCompra){
     let maquina = new Maquina(id);
     maquina.nome = nome;
     maquina.finalidade = finalidade;

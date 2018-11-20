@@ -39,6 +39,7 @@ function exibeFormularioTarefa(tarefaAExibir){
   for(let insumo of insumosArmazenadosBD) {
     document.querySelector('input[name="' + insumo.nomeInsumo + '"]').checked = false;
   }
+
   mascaraFormEl.classList.remove('invisivel');
   mascaraFormEl.addEventListener('click', () => {alteraVisibilidadeElemento(containerFormNovaTarefa, true)});
 
@@ -73,7 +74,8 @@ function exibeFormularioTarefa(tarefaAExibir){
     if(tarefaAExibir.insumosTarefa) {
       let insumosArray = tarefaAExibir.insumosTarefa.split(", ");
       for(let insumo of insumosArray) {
-        document.querySelector('input[name="' + insumo + '"]').checked = true;
+        console.log(insumo);
+        document.querySelector(`input[name="${insumo}"]`).checked = true;
       }
     }
 

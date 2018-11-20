@@ -37,15 +37,15 @@ function checarSenhas() {
       senhaConfirmar = inputConfSenhaEl.value;
 
   if(senha !== senhaConfirmar && labelEl.querySelector("span") === null) {
-    btnConfimarCadastroEl.disable = "true";
-    btnConfimarCadastroEl.classList.add("botaoDesab");
+    btnConfimarEdicaoEl.disable = "true";
+    btnConfimarEdicaoEl.classList.add("botaoDesab");
     labelEl.insertBefore(escreveMensagemErro(" (Senhas não são iguais)"), labelEl.querySelector("input"));
   }
   else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
     labelEl.removeChild(labelEl.querySelector("span"));
     if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
-      btnConfimarCadastroEl.disable = "false";
-      btnConfimarCadastroEl.classList.remove("botaoDesab");
+      btnConfimarEdicaoEl.disable = "false";
+      btnConfimarEdicaoEl.classList.remove("botaoDesab");
     }
   }
 
@@ -71,3 +71,15 @@ let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUs
 inputConfSenhaEl.addEventListener("change", checarSenhas);
 inputSenhaEl.addEventListener("change", checarSenhas);
 inputEmailEl.addEventListener("change", checaEmail);
+
+// Remove mensagens de erro dos inputs ao clicar em limpar
+let btnLimparEl = document.querySelector("#cadastro > button:last-of-type");
+
+btnLimparEl.addEventListener("click", function(){
+
+  let spanErros = document.querySelectorAll("#cadastro .mensagemErro");
+
+  for (const erroEl of spanErros)
+    erroEl.parentElement.removeChild(erroEl);
+
+});

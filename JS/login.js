@@ -5,10 +5,10 @@ btnEntrarLoginEl.addEventListener("click", function() {
 
   let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
-      
+
       Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
-             .then(() => { 
+             .then(() => {
                     let usuario = new Usuario(null);
                     // pegar dados no BD do usuario e colocar no objeto
                     // salvar objeto no localStorage
@@ -16,37 +16,6 @@ btnEntrarLoginEl.addEventListener("click", function() {
                     window.location.redirect("index.html");
              })
              .catch(() => { alert("Erro ao logar o servidor") });
-
-});
-
-// Recebe as informações do formulário de cadastro
-let btnConfimarCadastroEl = document.querySelector("#login > form:last-of-type > button:first-of-type");
-
-btnConfimarCadastroEl.addEventListener("click", function() {
-
-  let nomeUsuario = document.querySelector("#login > form:last-of-type input[name='nomeUsuario']").value,
-      cnpjUsuario = document.querySelector("#login > form:last-of-type input[name='cnpjUsuario']").value,
-      saldoUsuario = document.querySelector("#login > form:last-of-type input[name='saldoUsuario']").value,
-      emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
-      senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
-
-      usuario = new Usuario(null);
-      usuario.nome = nomeUsuario;
-      usuario.cnpj = cnpjUsuario;
-      usuario.saldo = saldoUsuario;
-      usuario.email = emailUsuario;
-      usuario.senha = null;
-
-      localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
-
-      Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
-                  + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-                  + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-             .then(() => {
-               localStorage.setItem("usuario", usuario.toJSON());
-               window.location.redirect("index.html");
-             })
-             .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
 
@@ -72,14 +41,33 @@ btnCadastrarEl.addEventListener("click", function() {
 
 });
 
-// Remove mensagens de erro dos inputs ao clicar em limpar
-let btnLimparEl = document.querySelector("#cadastro > button:last-of-type");
+// Recebe as informações do formulário de cadastro
+let btnConfimarCadastroEl = document.querySelector("#login > form:last-of-type > button:first-of-type");
 
-btnLimparEl.addEventListener("click", function(){
+btnConfimarCadastroEl.addEventListener("click", function() {
 
-  let spanErros = document.querySelectorAll("#cadastro .mensagemErro");
+    let nomeUsuario = document.querySelector("input[name='nomeUsuario']").value,
+    cnpjUsuario = document.querySelector("#login > form:last-of-type input[name='cnpjUsuario']").value,
+    saldoUsuario = document.querySelector("#login > form:last-of-type input[name='saldoUsuario']").value,
+    emailUsuario = document.querySelector("#login > form:last-of-type input[name='emailUsuario']").value,
+    senhaUsuario = document.querySelector("#login > form:last-of-type input[name='senhaUsuario']").value;
 
-  for (const erroEl of spanErros)
-    erroEl.parentElement.removeChild(erroEl);
+    usuario = new Usuario(null);
+    usuario.nome = nomeUsuario;
+    usuario.cnpj = cnpjUsuario;
+    usuario.saldo = saldoUsuario;
+    usuario.email = emailUsuario;
+    usuario.senha = null;
+
+    localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
+
+    Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
+    + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
+    + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
+    .then(() => {
+        localStorage.setItem("usuario", usuario.toJSON());
+        window.location.redirect("index.html");
+    })
+    .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });

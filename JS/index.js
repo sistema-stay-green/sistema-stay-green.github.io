@@ -15,26 +15,38 @@ let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
 if(dadosUsuario === null){ //não logado
 
-  let cards = document.querySelectorAll("#main > article");
+  let cards = document.querySelectorAll("main > article");
 
   for (let cardEl of cards) {
 
     if (cardEl.id === "perfil") {
-
-      cardEl.addEventListener('click', function(){ mudaUrl("login.html"); });
-      cardEl.querySelector('p').innerHTML = "Caso seja um adiminstrador, faça login no sistema para ter acesso as outras funcionalidades";
-      cardEl.querySelector('h3').innerHTML = "Login e Cadastro";
-
+        cardEl.classList.add("articleDeslogado");
+        cardEl.addEventListener('click', function(){ mudaUrl("login.html"); });
+        cardEl.querySelector('p').innerHTML = "Caso seja um adiminstrador, faça login no sistema para ter acesso as outras funcionalidades.";
+        cardEl.querySelector('h3').innerHTML = "Login ou Cadastro";
     }
     else if (cardEl.id === "vendas") {
-
-      cardEl.addEventListener('click', function(){ mudaUrl("paginaVendas.html"); });
-      cardEl.querySelector('p').innerHTML = "Caso seja um comprador, acesse essa página para pedir nosso produtos";
-      cardEl.querySelector('h3').innerHTML = "Site de vendas";
-
+        cardEl.classList.add("articleDeslogado");
+        cardEl.addEventListener('click', function(){ mudaUrl("paginaVendas.html"); });
+        cardEl.querySelector('p').innerHTML = "Caso seja um comprador, acesse essa página para pedir nosso produtos.";
+        cardEl.querySelector('h3').innerHTML = "Site de vendas";
     }
     else
-      cardEl.classList.add("oculta");
+        cardEl.classList.add("oculta");
+
+  }
+
+  let linksMenu = document.querySelectorAll("nav > a");
+
+  for (let linkMenuEl of linksMenu) {
+
+      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {}
+      else if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/paginaVendasProdutor.html") {
+          linkMenuEl.href = "paginaVendas.html";
+      }
+      else {
+          linkMenuEl.classList.add("oculta");
+      }
 
   }
 
@@ -47,6 +59,11 @@ else{ //logado
       cardVendas = document.querySelector("#vendas"),
       cardPerfil = document.querySelector("#perfil");
 
+  let cards = document.querySelectorAll("main > article");
+
+  for (let cardEl of cards) {
+      cardEl.classList.remove("articleDeslogado");
+  }
 
   cardAgenda.addEventListener('click', function(){ mudaUrl("agendaEletronica.html"); });
   cardVendas.addEventListener('click', function(){ mudaUrl("paginaVendasProdutor.html"); });

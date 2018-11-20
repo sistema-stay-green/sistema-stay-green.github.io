@@ -34,7 +34,7 @@ header > #mascara-conteudo > h1 {
 
 header > #mascara-conteudo > p {
   color: white;
-  text-align: center;
+  text-align: center;paginaVendas
   font-family: 'Niramit', sans-serif;
   font-size: calc(20px + 2vh);
 }
@@ -56,47 +56,11 @@ header > #mascara-conteudo > a:hover{
   box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
   width: 15.5%;
   height: 9.5%;
-
 }
-
-nav {
-  height: 7%;
-  width: 100%;
-  display: flex;
-  background-color: #1d883a;
-  align-content: space-around;
-  align-items: center;
-  position: sticky;
-  top:0;
-  z-index: 1;
-}
-
-nav > h3 {
-  width:20%;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-  margin: 0.5%;
-}
-
-nav > a {
-  text-decoration: none;
-  width:15%;
-  height: 100%;
-  text-align: center;
-  font-family: 'Niramit' , sans-serif;
-  color:white;
-  font-size: calc(20px + 1vh);
-}
-
-nav > a:hover {
-  background-color: #116623;
-}
-
 
 footer {
+  width: 13vw;
+  height: 11vw;
   height: 50%;
   width: 100%;
   display: flex;
@@ -143,13 +107,13 @@ main {
 }
 
 main > article > img {
-  width: 14vw;
-  height: 13vw;
+  width: 25%;
+  height: 80%;
 }
 
 main > article {
   width: 48vw;
-  height: 16vw;
+  height: 26vh;
   box-sizing: border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -247,10 +211,17 @@ main > article > h3 {
 
 #perfil > img {
   margin: 1.5% 0;
-  width: 13vw;
-  height: 11vw;
 }
 
 .oculta {
   display: none;
+}
+
+.articleDeslogado {
+  width: 94vw;
+  height: 44vh;
+}
+
+.articleDeslogado > p {
+  font-size: calc(20px + 2vh);
 }

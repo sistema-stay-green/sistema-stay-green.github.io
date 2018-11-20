@@ -4,20 +4,17 @@ let btnEditarEl = document.querySelector("#btnEditar"),
     btnCancelarEl = document.querySelector('#cadastro > button:last-of-type'),
     formEditaEl = document.querySelector("#infoUsuario > article:nth-child(2)"),
     articleMostraEl = document.querySelector("#mostraInfoUsuario");
-    console.log(btnCancelarEl);
 
-// Recebe as informações do formulário de cadastro
-let btnConfimarCadastroEl = document.querySelector("#cadastro > button:first-of-type");
+// Recebe as informações da edição do perfil
+let btnConfimarEdicaoEl = document.querySelector("#cadastro > button:first-of-type");
 
-btnConfimarCadastroEl.addEventListener("click", function() {
-
+btnConfimarEdicaoEl.addEventListener("click", function() {
   let nomeUsuario = document.querySelector("#cadastro input[name='nomeUsuario']").value,
       cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']").value,
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
       emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
       senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value,
       usuario = new usuario(null);
-
   usuario.nome = nomeUsuario;
   usuario.cnpj = cnpjUsuario;
   usuario.saldo = saldoUsuario;
@@ -45,7 +42,7 @@ btnEditarEl.addEventListener("click", function(){
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']"),
       emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']"),
       usuario = JSON.parse(localStorage.getItem('usuario'));
-  
+
   nomeUsuario.value = usuario.nomeUsuario;
   cnpjUsuario.value = usuario.cnpjUsuario;
   saldoUsuario.value = usuario.saldoUsuario;

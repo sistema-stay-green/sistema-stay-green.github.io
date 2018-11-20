@@ -45,10 +45,10 @@ class Tarefa {
    * @returns {Date} objeto Date formatado
    * @author Pedro
    */
-  static toDateObject(servletData){
+  static toDateObject(servletData) {
     let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :
-    servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
-      servletData.dayOfMonth : servletData.dayOfMonth);
+      servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
+        servletData.dayOfMonth : servletData.dayOfMonth);
 
     let dataFormatadaClient = new Date(stringData);
     dataFormatadaClient.setDate(dataFormatadaClient.getUTCDate());
@@ -72,6 +72,7 @@ class Tarefa {
       "insumosTarefa": this.insumosTarefa,
       "quantInsumosTarefa": this.quantInsumosTarefa,
       "quantProduzTarefa": this.quantProduzTarefa,
+      "produtoProduzido": this.produtoProduzidoTarefa,
       "gastoTarefa": this.gastoTarefa
     }
     return JSON.stringify(tarefaJSON);
@@ -122,6 +123,10 @@ class Tarefa {
     this._gastoTarefa = this.tryParse(gastoTarefa, true);
   }
 
+  set produtoProduzidoTarefa(produtoProduzidoTarefa){
+    this._produtoProduzidoTarefa = produtoProduzidoTarefa;
+  }
+
   //Getters
   get idTarefa() {
     return this._idTarefa;
@@ -161,6 +166,10 @@ class Tarefa {
 
   get gastoTarefa() {
     return this._gastoTarefa;
+  }
+
+  get produtoProduzidoTarefa(){
+    return this._produtoProduzidoTarefa;
   }
 
 }

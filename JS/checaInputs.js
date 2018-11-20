@@ -34,18 +34,19 @@ function checarSenhas() {
 
   let senha = document.querySelector("#cadastro input[name='senhaUsuario']").value,
       labelEl = document.querySelector("#cadastro > label:last-of-type"),
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
       senhaConfirmar = inputConfSenhaEl.value;
 
   if(senha !== senhaConfirmar && labelEl.querySelector("span") === null) {
-    btnConfimarEdicaoEl.disable = "true";
-    btnConfimarEdicaoEl.classList.add("botaoDesab");
+    btnConfirmarEl.disable = "true";
+    btnConfirmarEl.classList.add("botaoDesab");
     labelEl.insertBefore(escreveMensagemErro(" (Senhas não são iguais)"), labelEl.querySelector("input"));
   }
   else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
     labelEl.removeChild(labelEl.querySelector("span"));
     if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
-      btnConfimarEdicaoEl.disable = "false";
-      btnConfimarEdicaoEl.classList.remove("botaoDesab");
+      btnConfirmarEl.disable = "false";
+      btnConfirmarEl.classList.remove("botaoDesab");
     }
   }
 

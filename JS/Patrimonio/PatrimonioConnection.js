@@ -136,7 +136,7 @@ function searchById(id, callBack){
     document.body.classList.remove("waiting");
     let patrimonios = [];
 
-    if (response.slice(0,1) == "N") {
+    if (response.slice(0,1) !== "N") {
 
       for (const current of response) {
         patrimonios.push(encapsulateJSON(JSON.parse(current)));
@@ -163,7 +163,7 @@ function searchByNome(nome, callBack){
     document.body.classList.remove("waiting");
     let patrimonios = [];
 
-    if (response.slice(0,1) == "N") {
+    if (response.slice(0,1) !== "N") {
 
       for (const current of response) {
         patrimonios.push(encapsulateJSON(JSON.parse(current)));

@@ -4,6 +4,15 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoEditarMaquina = document.querySelector("button[name='botaoEditarMaquina']"),
     botaoRelatorio = document.querySelector("button[name='botaoRelatorio']");
 
+function formatarData(data){
+  data = data.split("-");
+  data = data[2] + "/" + data[1] + "/" + data[0];
+  data = data.substr(1);
+  console.log(data);
+  return data;
+}
+
+receberTodos();
 //checa se todos os inputs etão preenchidso e valida o cadastro
 function validacao(){
   //variaveis
@@ -11,7 +20,6 @@ function validacao(){
       valor = 0;
 
   for (let input of inputs){
-    console.log(input.value)
     //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
     if(input.value == ""){
       document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
@@ -59,15 +67,13 @@ function cadastro(){
         botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
         maquinas = document.querySelector("#tabela");
     let string = "";
-    console.log(data);
     let maquina = new Maquina();
     maquina.dataCompra = dataAs;
     maquina.valorCompra = valor;
     maquina.indiceDepreciacao = depreciacao;
     maquina.calculateValorAtual();
 
-    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor,
-      data, 1)
+    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1)
 
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
@@ -129,8 +135,6 @@ function saida(){
   //Pega o estado atual da maquinas, ex: Em posse
   elemento = elemento.parentNode;
   nodes = elemento.parentNode.children;
-  console.log(elemento.parentNode);
-  console.log(nodes[6].innerHTML);
 
   /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
     escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
@@ -201,7 +205,6 @@ function editar(){
     elemento = event.target;
     elemento = elemento.parentElement;
     nodes = elemento.parentNode.children;
-    console.log(elemento.parentNode);
     let id = document.querySelector("input[name='id-editar']"),
         nome = document.querySelector("input[name='nome-editar']"),
         finalidade = document.querySelector("input[name='finalidade-editar']"),
@@ -219,20 +222,17 @@ function editar(){
 
 /*Edita a maquina selecionada*/
 function editarMaquina() {
-  let id = document.querySelector("input[name='id-editar']"),
-      nome = document.querySelector("input[name='nome-editar']"),
-      finalidade = document.querySelector("input[name='finalidade-editar']"),
-      valor =  document.querySelector("input[name='valor-editar']"),
-      data = document.querySelector("input[name='data-editar']"),
-      depreciacao = document.querySelector("input[name='depreciação-editar']");
+  let id = document.querySelector("input[name='id-editar']").value,
+      nome = document.querySelector("input[name='nome-editar']").value,
+      finalidade = document.querySelector("input[name='finalidade-editar']").value,
+      valor =  document.querySelector("input[name='valor-editar']").value,
+      data = document.querySelector("input[name='data-editar']").value,
+      depreciacao = document.querySelector("input[name='depreciação-editar']").value;
   let vetor = [id,nome,finalidade,valor,depreciacao,data],
       maquinas = document.querySelectorAll(".maquina"),
       string = "";
       editarBE(id,nome, finalidade, depreciacao, valor,
-        data)
-      /*descartar(id);
-      cadastrar(nome, finalidade, "Em posse", depreciacao, valor,
-        data, 1);*/
+        formatarData(data))
       for (maquina of maquinas) {
         nodes = maquina.children;
         if(nodes[0].innerHTML == id.value){
@@ -263,12 +263,10 @@ function editarMaquina() {
 
 /*Relatorio da pagina*/
 function relatorio(){
-  console.log("teste");
   maquinas = document.querySelectorAll(".maquina");
   limpa_relatorio()
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
-    console.log(elementos[1].innerHTML);
     let string = "<ul><li>" +
                   "<p>#"+ elementos[0].innerHTML +
                   " - " + elementos[1].innerHTML + "</p>" +
@@ -323,9 +321,7 @@ function limpa_relatorio() {
 //função que altera o status da maquina
 function AlteraStatus(elemento,opcao){
     //Pega os "filhos" da variavel elemento
-    console.log(elemento);
     elemento = elemento.parentElement;
-    console.log(elemento);
     nodes = elemento.children;
 
     //transporta os valores dos filhos de "elemento" para um vetor
@@ -333,7 +329,6 @@ function AlteraStatus(elemento,opcao){
     for (var i = 0; i < nodes.length; i++) {
        vetor.push(nodes[i].innerHTML);
     }
-    console.log(vetor);
 
     /*Imprime os valores do vetor mais a condição que se encontra a maquinas
       de acordo com o valor da variavel opcao*/
@@ -365,7 +360,6 @@ function AlteraStatus(elemento,opcao){
       }
     }
     elemento.innerHTML += "</tr>";
-    console.log(vetor);
 
 /*Permite a chamada da função saida ao clicar no "botaoSaida"*/
   let edita = document.querySelectorAll(".botaoEditar");
@@ -417,9 +411,7 @@ function carregaElementos(carregarpagina){
 function filtraPagina(){
   let filtro = document.querySelector("#filtro_select_status"),
       maquinas = document.querySelectorAll(".maquina");
-      console.log(filtro.value);
   for (row of maquinas) {
-    console.log("teste");
     if (filtro.value == "Em Posse") {
       let node = row.children;
 

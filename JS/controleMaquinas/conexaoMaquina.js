@@ -10,12 +10,12 @@ function novaData(){
 
 /**
 * Faz requisição Ajax para receber todos os dados
-* @returns {JSON} vetor de JSON
+* @returns {Object} vetor de maquinas
 */
 function receberTodos(){
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r").
+  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r"+"&quantidade=1").
     then(function(resultado) {
-      let resultado = string.split('/');
+      resultado = resultado.split('/');
       for(i = 0; i < resultado.length; i++){
         let maquina = new Maquina(null);
         maquina.fromJSON(resultado[i]);
@@ -138,11 +138,11 @@ function manuntenir(id, dataRetorno){
 }
 
 function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
-  let maquinaJSON = encapsularEditar(nome, finalidade,
+  let maquinaJSON = encapsularEditar(id, nome, finalidade,
     indiceDepreciacao, valorCompra,dataCompra);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
-              "&acao="+"c"+
+              "&acao="+"e"+
               "&dataCompra="+dataCompra+
               "&dataSaida="+null+
               "&dataRetorno="+null+

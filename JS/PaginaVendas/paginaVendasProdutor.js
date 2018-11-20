@@ -12,18 +12,16 @@ let divRegistraEl = document.querySelector("#div-registra");
 let botaoConfirmaEl = document.querySelector("#div-registra > .div-botoes > button:first-of-type");
 let botaoCancelaEl = document.querySelector("#div-registra > .div-botoes > button:last-of-type");
 let arrayProdutos = new Array();
+
 window.onload = function recebeJSON(){
   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
-    .then(function(resposta){
-      for (var i = 0; i < resposta.length; i++) {
-        dadosJSON = resposta;
-        addArrayProdutos(dadosJSON[i]);
-      }
+    .then(resposta => {
+      resposta.forEach(addArrayProdutos);
       addProdutosPagina(arrayProdutos);
     });
 }
 
-function addArrayProdutos({id,nome,descricao,preco,estoque,img}){
+function addArrayProdutos({idProduto: id, nomeProduto: nome, descrProduto: descricao, valorUnitProduto: preco, quantEstoqueProduto: estoque,fotoMercadoria: img}){
   let produto = {
      nome:"",
      descricao:"",

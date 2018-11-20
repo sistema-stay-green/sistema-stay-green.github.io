@@ -1,2 +1,2 @@
-console.log("a");
-vender(22);
+//let maquina = vender(67);
+//console.log(maquina.printToConsole());

@@ -18,6 +18,16 @@ function recebeInsumos() {
   Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=insumo')
     .then((resultado) => {
       insumosArmazenadosBD = resultado;
+      for(let insumo of insumosArmazenadosBD) {
+        let insumoCheckBox =  document.createElement('input'),
+        labelInsumo = document.createElement('label');
+        insumoCheckBox.type = 'checkbox';
+        insumoCheckBox.name = insumo.nomeInsumo;
+        insumoCheckBox.value = insumo.nomeInsumo;
+        labelInsumo.innerHTML = insumo.nomeInsumo;
+        labelInsumo.appendChild(insumoCheckBox);
+        document.querySelector("#insumosForm").appendChild(labelInsumo);
+      }
     });
 }
 

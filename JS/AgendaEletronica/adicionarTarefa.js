@@ -68,6 +68,9 @@ function exibeFormularioTarefa(tarefaAExibir) {
 
     document.querySelector('input[name="producaoPrevista"]').value =
       tarefaAExibir.quantProduzTarefa;
+    
+    document.querySelector('select[name="produtoProduzidoTrf"]').value =
+      tarefaAExibir.produtoProduzido;
 
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
@@ -176,6 +179,7 @@ function encapsularDadosTarefa() {
     document.querySelector('form select').value;
 
   let data = new Date(document.querySelector('input[name="realizarDia"]').value);
+
   data.setDate(data.getDate() + 1);
 
   novaTarefaAdicionada.dataInicialTarefa = data;
@@ -193,6 +197,9 @@ function encapsularDadosTarefa() {
 
   novaTarefaAdicionada.idTarefa = document.querySelector('button[name="adicionarTarefa"]')
     .dataset.idTarefa;
+
+  novaTarefaAdicionada.produtoProduzidoTarefa =
+    document.querySelector('select[name="produtoProduzidoTrf"]').value;
 
   let insumosGeraisCheck =
     Array.from(document.querySelectorAll('form input[type="checkbox"]')),

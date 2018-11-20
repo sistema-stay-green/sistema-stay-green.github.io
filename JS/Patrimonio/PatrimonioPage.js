@@ -803,16 +803,13 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
 
     if(patrimonio.dataCompra !== null)
-        document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
-            String;
+        document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompraString;
 
     if(patrimonio.dataRetorno !== null)
-        document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetorno
-            String;
+        document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetornoString;
 
     if(patrimonio.dataSaida !== null)
-        document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaida
-            String;
+        document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaidaString;
 
 }
 

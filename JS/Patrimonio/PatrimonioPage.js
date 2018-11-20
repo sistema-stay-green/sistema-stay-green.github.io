@@ -1,6 +1,6 @@
 /**
- * Arquivo JavaScript responsável pelas interações dinâmicas da página
- *  e pelo encapsulamento de objetos Patrimônio.
+ * Script responsável pelas interações dinâmicas da página
+ *      e pelo encapsulamento de objetos Patrimônio.
  * @author Mei Fagundes
  */
 
@@ -447,44 +447,6 @@ function showPatrimonioTable(){
 
     document.querySelector("table").style.display = "block";
     document.querySelector("#noResults").style.display = "none";
-}
-
-/**
- * Atualiza a página com o filtro seleionado no HTML.
- */
-function updateFilterOnTable(){
-
-    receiveAllPatrimoniosFromServlet();
-
-    switch (filtroSelect.value) {
-
-        case "":
-
-            break;
-
-        case "EM_POSSE":
-
-            break;
-
-        case "EM_MANUTENCAO":
-
-            break;
-
-        case "ALUGADO":
-
-            break;
-
-        case "VENDIDO":
-
-            break;
-
-        case "VENDIDO":
-
-            break;
-
-        default:
-            break;
-    }
 }
 
 /**

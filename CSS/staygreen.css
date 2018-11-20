@@ -210,6 +210,15 @@ nav > h3 {
   align-items: center;
   justify-content: center;
 }
+
+nav> a[href="index.html"]{
+  width:20vw;
+}
+nav> a[href="index.html"] > img{
+  height: 100%;
+}
+
+
 nav > a {
   text-decoration:none;
   width:13.3vw;

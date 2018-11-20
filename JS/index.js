@@ -44,8 +44,12 @@ if(dadosUsuario === null){ //não logado
       else if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/paginaVendasProdutor.html") {
           linkMenuEl.href = "paginaVendas.html";
       }
+
       else {
+        if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/index.html"){} //caso nao seja o link para home
+        else{
           linkMenuEl.classList.add("oculta");
+        }
       }
 
   }

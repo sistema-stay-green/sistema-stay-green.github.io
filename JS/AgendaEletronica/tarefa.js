@@ -45,10 +45,10 @@ class Tarefa {
    * @returns {Date} objeto Date formatado
    * @author Pedro
    */
-  static toDateObject(servletData){
+  static toDateObject(servletData) {
     let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :
-    servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
-      servletData.dayOfMonth : servletData.dayOfMonth);
+      servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
+        servletData.dayOfMonth : servletData.dayOfMonth);
 
     let dataFormatadaClient = new Date(stringData);
     dataFormatadaClient.setDate(dataFormatadaClient.getUTCDate());

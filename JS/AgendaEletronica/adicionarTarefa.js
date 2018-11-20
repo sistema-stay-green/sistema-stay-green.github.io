@@ -14,7 +14,7 @@ botaoExcluirTarefa.addEventListener('click', (evt) => {
   alteraVisibilidadeElemento(containerFormNovaTarefa, true);
 });
 
-/** Altera a visibilidade de um elemento 
+/** Altera a visibilidade de um elemento
  * @param {HTMLElement} elemento o elemento que terá a visibilidade
  * alterada
  * @param {Boolean} deveEsconder valor que indica se o elemento deve ser
@@ -36,6 +36,9 @@ function alteraVisibilidadeElemento(elemento, deveEsconder){
 function exibeFormularioTarefa(tarefaAExibir){
   let botaoCancelarTarefaEl = document.querySelector('button[name="cancelarTarefa"]');
 
+  for(let insumo of insumosArmazenadosBD) {
+    document.querySelector('input[name="' + insumo.nomeInsumo + '"]').checked = false;
+  }
   mascaraFormEl.classList.remove('invisivel');
   mascaraFormEl.addEventListener('click', () => {alteraVisibilidadeElemento(containerFormNovaTarefa, true)});
 
@@ -43,15 +46,6 @@ function exibeFormularioTarefa(tarefaAExibir){
 
   containerFormNovaTarefa.classList.remove('invisivel');
   if(tarefaAExibir != null){
-    for(let insumo of insumosArmazenadosBD) {
-      let insumoCheckBox =  document.createElement('input'),
-          labelInsumo = document.createElement('label');
-      insumoCheckBox.type = 'checkbox';
-      insumoCheckBox.name = insumo.nomeInsumo;
-      insumoCheckBox.value = insumo.nomeInsumo;
-      labelInsumo.appendChild(insumoCheckBox);
-      labelInsumo.innerHTML = insumo.nomeInsumo;
-    }
     document.querySelector('button[name="excluirTarefa"]').classList.remove('invisivel');
     document.querySelector('#nomeNovaTarefa').value =
       tarefaAExibir.nomeTarefa;
@@ -76,6 +70,12 @@ function exibeFormularioTarefa(tarefaAExibir){
 
     document.querySelector('input[name="valorGasto"]').value =
       tarefaAExibir.gastoTarefa;
+    if(tarefaAExibir.insumosTarefa) {
+      let insumosArray = tarefaAExibir.insumosTarefa.split(", ");
+      for(let insumo of insumosArray) {
+        document.querySelector('input[name="' + insumo + '"]').checked = true;
+      }
+    }
 
     botaoConfirmarTarefa.dataset.idTarefa = tarefaAExibir.idTarefa;
     botaoConfirmarTarefa.dataset.operacao = 'u';

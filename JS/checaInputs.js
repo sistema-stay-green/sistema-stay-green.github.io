@@ -1,9 +1,8 @@
-
 // Mostra mensagem caso o email digitado não for válido
 function checaEmail() {
 
   let emailUsuario = inputEmailEl.value,
-      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type')
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
       labelEl = document.querySelector("#cadastro > label:nth-child(4)");
 
   if(emailUsuario == "" && labelEl.contains(labelEl.querySelector("span"))) {
@@ -21,7 +20,7 @@ function checaEmail() {
     }
     else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".com") > -1) && labelEl.querySelector("span") !== null) {
       labelEl.removeChild(labelEl.querySelector("span"));
-      if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
+      if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
         btnConfirmarEl.disable = "false";
         btnConfirmarEl.classList.remove("botaoDesab");
       }
@@ -38,15 +37,15 @@ function checarSenhas() {
       senhaConfirmar = inputConfSenhaEl.value;
 
   if(senha !== senhaConfirmar && labelEl.querySelector("span") === null) {
-    btnConfimarCadastroEl.disable = "true";
-    btnConfimarCadastroEl.classList.add("botaoDesab");
+    btnConfimarEdicaoEl.disable = "true";
+    btnConfimarEdicaoEl.classList.add("botaoDesab");
     labelEl.insertBefore(escreveMensagemErro(" (Senhas não são iguais)"), labelEl.querySelector("input"));
   }
   else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
     labelEl.removeChild(labelEl.querySelector("span"));
-    if(document.querySelectorAll("#login > form .mensagemErro").length === 0) {
-      btnConfimarCadastroEl.disable = "false";
-      btnConfimarCadastroEl.classList.remove("botaoDesab");
+    if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
+      btnConfimarEdicaoEl.disable = "false";
+      btnConfimarEdicaoEl.classList.remove("botaoDesab");
     }
   }
 
@@ -72,3 +71,15 @@ let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUs
 inputConfSenhaEl.addEventListener("change", checarSenhas);
 inputSenhaEl.addEventListener("change", checarSenhas);
 inputEmailEl.addEventListener("change", checaEmail);
+
+// Remove mensagens de erro dos inputs ao clicar em limpar
+let btnLimparEl = document.querySelector("#cadastro > button:last-of-type");
+
+btnLimparEl.addEventListener("click", function(){
+
+  let spanErros = document.querySelectorAll("#cadastro .mensagemErro");
+
+  for (const erroEl of spanErros)
+    erroEl.parentElement.removeChild(erroEl);
+
+});

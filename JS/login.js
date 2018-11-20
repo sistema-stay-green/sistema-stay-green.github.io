@@ -6,7 +6,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
   let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
       
-      Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
+      Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
              .then(() => { 
                     let usuario = new Usuario(null);

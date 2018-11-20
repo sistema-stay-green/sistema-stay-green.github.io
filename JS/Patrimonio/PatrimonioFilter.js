@@ -1,4 +1,9 @@
 /**
+ * Script para filtrar os Patrimônios recebidos.
+ * @author Mei Fagundes, Sávio Cardoso, Rafael Herbert
+ */
+
+/**
  * Função base para filtrar os Patrimonios recebidos por um determinado Status.
  * @author Mei Fagundes, Sávio Cardoso, Rafael Herbert
  */

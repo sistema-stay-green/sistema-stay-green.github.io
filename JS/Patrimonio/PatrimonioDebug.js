@@ -1,8 +1,9 @@
 /**
- * Arquivo JavaScript de testes e debug da página e suas interações.
+ * Script de testes e debug da página e suas interações.
  * @author Mei Fagundes
  */
 
+// --- CONSTANTE DE MODO DE OPERAÇÃO DA PÁGINA ---
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
 const staticDebugMode = false;
 

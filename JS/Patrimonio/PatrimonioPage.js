@@ -145,7 +145,7 @@ function showError(cod){
             break;
 
         case 2:
-            message += "Parametros inválidos enviados.";
+            message += "Parametros inválidos enviados para o Server.";
             break;
 
         case 3:
@@ -153,7 +153,7 @@ function showError(cod){
             break;
 
         case 4:
-            message += "Os valores inseridos são inválidos.";
+            message += "O índice de Depreciação por Ano deve ser menor que 100%.";
             break;
 
         case 5:

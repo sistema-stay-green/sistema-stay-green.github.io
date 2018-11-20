@@ -1,3 +1,8 @@
+/**
+ * Script para a manipulação em alto nível de Patrimônios na página.
+ * @author Mei Fagundes
+ */
+
 
 /**
  * CallBack para retorno dos Patrimonios pelo AJAX.

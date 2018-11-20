@@ -28,7 +28,7 @@
         <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
         <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
-        <label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label>
+        <!--<label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label> -->
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
         <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
@@ -38,7 +38,8 @@
     <div class="maquinas">
       <section id="filtro">
         <label for="filtro_select">Filtro:</label>
-        <select id="filtro_select">
+        <select id="filtro_select_status">
+          <option><a href="#">Todos</option>
           <option><a href="#">Em Posse</option>
           <option><a href="#">Em Manutenção</option>
           <option><a href="#">Alugados</option>
@@ -191,11 +192,11 @@
        <section class="relatorio" id="relatorio">
          <h1>Relatorio das maquinas</h1>
          <span class="fecharModal">&times;</span>
-         <section id="maquinasPosse"><h2>Maquinas em posse</h2></section>
-         <section id="maquinasManutencao"><h2>Maquinas em manutenção</h2></section>
-         <section id="maquinasAlugadas"><h2>Maquinas Alugadas</h2></section>
-         <section id="maquinasDescartadas"><h2>Maquinas descartadas</h2></section>
-         <section id="maquinasVendidas"><h2>Maquinas Vendidas</h2></section>
+         <section id="maquinasPosse"></section>
+         <section id="maquinasManutencao"></section>
+         <section id="maquinasAlugadas"></section>
+         <section id="maquinasDescartadas"></section>
+         <section id="maquinasVendidas"></section>
        </section>
      </section>
 

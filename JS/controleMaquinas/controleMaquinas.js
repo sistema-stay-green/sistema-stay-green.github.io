@@ -53,18 +53,19 @@ function cadastro(){
         valor =  document.querySelector("input[name='valor']").value,
         data = document.querySelector("input[name='data']").value,
         depreciacao = document.querySelector("input[name='depreciação']").value,
-        quantidade = document.querySelector("input[name='quantidade']").value,
+        //quantidade = document.querySelector("input[name='quantidade']").value,
         botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
         botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
         maquinas = document.querySelector("#tabela");
     let string = "";
 
-    let maquina = cadastrar(nome, finalidade, "Em posse", depreciacao, valor,
-      data, quantidade)
-    maquina.fromJSON(maquina);
+    let maquina = cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor,
+      data, 1)
+    //maquina.fromJSON(maquina);
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
       essa string na tabela*/
+
       let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
                    maquina.indiceDepreciacao,maquina.dataCompra,
                    maquina.status,maquina.tipo,maquina.valorAtual,
@@ -246,91 +247,59 @@ function editarMaquina() {
 function relatorio(){
   console.log("teste");
   maquinas = document.querySelectorAll(".maquina");
+  limpa_relatorio()
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
     console.log(elementos[1].innerHTML);
+    let string = "<ul><li>" +
+                  "<p>#"+ elementos[0].innerHTML +
+                  " - " + elementos[1].innerHTML + "</p>" +
+                  "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
+                  "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
+                  "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
+                  "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
+                  "<p>Status: " + elementos[6].innerHTML + "</p>" +
+                  "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
+                  "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
+                  "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
+                  "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
+                  "</li></ul>";
     if(elementos[6].innerHTML == "Em posse"){
       section = document.querySelector("#maquinasPosse");
-      section.innerHTML += "<ul><li>" +
-      "<p>#"+ elementos[0].innerHTML +
-      " - " + elementos[1].innerHTML + "</p>" +
-      "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-      "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-      "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-      "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-      "<p>Status: " + elementos[6].innerHTML + "</p>" +
-      "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
-      "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
-      "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
-      "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
-      "</li></ul>";
+      section.innerHTML += string;
     }
     if(elementos[6].innerHTML == "Vendido"){
       section = document.querySelector("#maquinasVendidas");
-      section.innerHTML += "<ul><li>" +
-      "<p>#"+ elementos[0].innerHTML +
-      " - " + elementos[1].innerHTML + "</p>" +
-      "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-      "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-      "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-      "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-      "<p>Status: " + elementos[6].innerHTML + "</p>" +
-      "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
-      "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
-      "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
-      "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
-      "</li></ul>";
+      section.innerHTML += string;
     }
     if(elementos[6].innerHTML == "Alugado"){
       section = document.querySelector("#maquinasAlugadas");
-      section.innerHTML += "<ul><li>" +
-      "<p>#"+ elementos[0].innerHTML +
-      " - " + elementos[1].innerHTML + "</p>" +
-      "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-      "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-      "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-      "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-      "<p>Status: " + elementos[6].innerHTML + "</p>" +
-      "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
-      "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
-      "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
-      "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
-      "</li></ul>";
+      section.innerHTML += string;
     }
     if(elementos[6].innerHTML == "Em manutenção"){
       section = document.querySelector("#maquinasManutencao");
-      section.innerHTML += "<ul><li>" +
-      "<p>#"+ elementos[0].innerHTML +
-      " - " + elementos[1].innerHTML + "</p>" +
-      "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-      "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-      "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-      "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-      "<p>Status: " + elementos[6].innerHTML + "</p>" +
-      "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
-      "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
-      "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
-      "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
-      "</li></ul>";
+      section.innerHTML += string;
     }
     if(elementos[6].innerHTML == "Descartado"){
       section = document.querySelector("#maquinasDescartadas");
-      section.innerHTML += "<ul><li>" +
-      "<p>#"+ elementos[0].innerHTML +
-      " - " + elementos[1].innerHTML + "</p>" +
-      "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-      "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-      "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-      "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-      "<p>Status: " + elementos[6].innerHTML + "</p>" +
-      "<p>Tipo: " + elementos[7].innerHTML + "</p>" +
-      "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
-      "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
-      "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
-      "</li></ul>";
+      section.innerHTML += string;
     }
     document.querySelector(".relatorioModal").style.display = "block";
   }
+}
+
+//limpa o relatorio para não duplicação de maquinas no mesmo
+function limpa_relatorio() {
+    section = document.querySelector("#maquinasPosse");
+    section.innerHTML = "<h2>Maquinas em posse</h2>";
+    section = document.querySelector("#maquinasVendidas");
+    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
+    section = document.querySelector("#maquinasAlugadas");
+    section.innerHTML = "<h2>Maquinas Alugadas</h2>";
+    section = document.querySelector("#maquinasManutencao");
+    section.innerHTML = "<h2>Maquinas descartadas</h2>";
+    section = document.querySelector("#maquinasDescartadas");
+    section.innerHTML = "<h2>Maquinas Vendidas</h2>";
 }
 
 //função que altera o status da maquina
@@ -402,7 +371,8 @@ function AlteraStatus(elemento,opcao){
   }
 }
 
-function CarregaElementos(carregarpagina){
+//carrega as maquinas na pagina ao iniciar
+function carregaElementos(carregarpagina){
       string = "",
       botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
@@ -422,7 +392,79 @@ function CarregaElementos(carregarpagina){
     }
     j++;
   }
+  visaoBotao();
 }
+
+//filtra a exibição das maquinas
+function filtraPagina(){
+  let filtro = document.querySelector("#filtro_select_status"),
+      maquinas = document.querySelectorAll(".maquina");
+      console.log(filtro.value);
+  for (row of maquinas) {
+    console.log("teste");
+    if (filtro.value == "Em Posse") {
+      let node = row.children;
+
+      if (node[6].innerHTML == "Em posse") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    else if (filtro.value == "Em Manutenção") {
+      let node = row.children;
+      if (node[6].innerHTML == "Em manutenção") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    else if (filtro.value == "Alugados") {
+      let node = row.children;
+      if (node[6].innerHTML == "Alugado") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    else if (filtro.value == "Vendidos") {
+      let node = row.children;
+      if (node[6].innerHTML == "Vendido") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    if (filtro.value == "Descartados") {
+      let node = row.children;
+      if (node[6].innerHTML == "Descartado") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    if (filtro.value == "Descartados") {
+      let node = row.children;
+      if (node[6].innerHTML == "Descartado") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    if (filtro.value == "Todos") {
+      let node = row.children;
+      row.style.display = "table-row";
+    }
+
+  }
+}
+
 
 
 //parte que mexe com a abertura e fechamento das divs modais
@@ -446,6 +488,8 @@ window.addEventListener("click", function(event){
     }
 })
 //fim
+
+
 
 //Chamada das funções
 botaoEditarMaquina.addEventListener("click", editarMaquina);
@@ -473,8 +517,10 @@ for (var i = 0; i < edita.length; i++) {
   })
 }
 
+let filtro = document.querySelector("#filtro_select_status");
+    filtro.addEventListener("change", filtraPagina)
 
 window.addEventListener("onload", function(){
-  CarregaElementos();
+  receberTodos();
 })
 window.onload = visaoBotao;

@@ -21,7 +21,7 @@ function receberTodos(){
         maquina.fromJSON(resultado[i]);
         resultado[i] = maquina;
       }
-      CarregaElementos(resultado);
+      carregaElementos(resultado);
     });
 }
 

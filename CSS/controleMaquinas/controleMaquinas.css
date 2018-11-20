@@ -174,9 +174,10 @@ table{
   align-self: flex-end;
 }
 button[name='botaoRelatorio']{
-  width: 15vh;
+  width: fit-content;
   margin: 3vh 1vh;
 }
 button[name='botaoCadastro']{
+  width: fit-content;
   margin: 0vh 1vh;
 }

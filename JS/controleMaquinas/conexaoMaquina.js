@@ -15,14 +15,31 @@ function novaData(){
 function receberTodos(){
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r"+"&quantidade=1").
     then(function(resultado) {
-      resultado = resultado.split('/');
-      for(i = 0; i < resultado.length; i++){
-        let maquina = new Maquina(null);
-        maquina.fromJSON(resultado[i]);
-        resultado[i] = maquina;
-      }
-      carregaElementos(resultado);
-    });
+      if(resultado != null){
+        for(i = 0; i < resultado.length; i++){
+            let maquina = new Maquina(null);
+            maquina.fromJSON(resultado[i]);
+            resultado[i] = maquina;
+            if(resultado[i].dataCompra != null){
+              resultado[i].dataCompra = new Date(resultado[i].dataCompra.year,
+                  resultado[i].dataCompra.month, resultado[i].dataCompra.dayOfMonth);
+            }
+            if(resultado[i].dataSaida != null){
+             resultado[i].dataSaida = new Date(resultado[i].dataSaida.year,
+                 resultado[i].dataSaida.month, resultado[i].dataSaida.dayOfMonth);
+            }
+            if(resultado[i].dataRetorno != null){
+            resultado[i].dataRetorno = new Date(resultado[i].dataRetorno.year,
+                resultado[i].dataRetorno.month, resultado[i].dataRetorno.dayOfMonth);
+            }
+            if(resultado[i].dataBaixa != null){
+            resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
+                resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
+          }
+          carregaElementos(resultado);
+        }
+    }
+  });
 }
 
 /**

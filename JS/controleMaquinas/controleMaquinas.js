@@ -8,7 +8,11 @@ function formatarData(data){
   data = data.split("-");
   data = data[2] + "/" + data[1] + "/" + data[0];
   data = data.substr(1);
-  console.log(data);
+  return data;
+}
+
+function formatarDataObj(data){
+  data = data.toISOString().split('T')[0];
   return data;
 }
 
@@ -413,21 +417,24 @@ function carregaElementos(carregarpagina){
       botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
       maquinas = document.querySelector("#tabela");
-  var j = 1;
-  for (var i = 0; i < carregarpagina.length; i++) {
-    if(i == 0){
       string += "<tr class=\"maquina\">";
-      string += "<td class=\"id\">" + carregarpagina[i] + "</td>";
-    }else {
-      string += "<td>" + carregarpagina[i] + "</td>";
-    }
-    if(j%11 == 0){
-      maquinas.innerHTML += string +
-      "<td>" + botaoSaida + botaoEditar + "</td></tr>";
-      string = "";
-    }
-    j++;
-  }
+      for(i =0; i < carregarpagina.length; i++){
+        string += "<td class=\"id\">" + carregarpagina[i].id + "</td>";
+        string += "<td>" + carregarpagina[i].nome + "</td>";
+        string += "<td>" + carregarpagina[i].finalidade + "</td>";
+        string += "<td>" + carregarpagina[i].valorCompra + "</td>";
+        string += "<td>" + carregarpagina[i].indiceDepreciacao + "</td>";
+        string += "<td>" + formatarDataObj(carregarpagina[i].dataCompra) + "</td>";
+        string += "<td>" + carregarpagina[i].status + "</td>";
+        string += "<td>" + carregarpagina[i].tipo + "</td>";
+        string += "<td>" + carregarpagina[i].calculateValorAtual() + "</td>";
+        string += "<td>" + carregarpagina[i].dataSaida + "</td>";
+        string += "<td>" + carregarpagina[i].dataBaixa + "</td>";
+        string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
+        maquinas.innerHTML += string;
+        string = "";
+      }
+
   visaoBotao();
 }
 
@@ -554,7 +561,5 @@ for (var i = 0; i < edita.length; i++) {
 let filtro = document.querySelector("#filtro_select_status");
     filtro.addEventListener("change", filtraPagina)
 
-window.addEventListener("onload", function(){
-  receberTodos();
-})
+receberTodos();
 window.onload = visaoBotao;

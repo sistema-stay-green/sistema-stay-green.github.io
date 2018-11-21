@@ -150,7 +150,7 @@ function saida(){
           }
           if(opcao.value == "Descartar"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo-label']").style.display = "none";
+            document.querySelector("label[name='periodo-label']").style.display = "block";
           }
           if(opcao.value == "Vender"){
             document.querySelector("label[name='valor-label']").style.display = "none";
@@ -333,13 +333,13 @@ function limpa_relatorio() {
     section = document.querySelector("#maquinasPosse");
     section.innerHTML = "<h2>Maquinas em posse</h2>";
     section = document.querySelector("#maquinasVendidas");
-    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
+    section.innerHTML = "<h2>Maquinas em vendidas</h2>";
     section = document.querySelector("#maquinasAlugadas");
-    section.innerHTML = "<h2>Maquinas Alugadas</h2>";
+    section.innerHTML = "<h2>Maquinas alugadas</h2>";
     section = document.querySelector("#maquinasManutencao");
-    section.innerHTML = "<h2>Maquinas descartadas</h2>";
+    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
     section = document.querySelector("#maquinasDescartadas");
-    section.innerHTML = "<h2>Maquinas Vendidas</h2>";
+    section.innerHTML = "<h2>Maquinas descartadas</h2>";
 }
 
 //função que altera o status da maquina

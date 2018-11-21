@@ -145,19 +145,19 @@ function saida(){
         function(elemento){
           if(opcao.value == "Alugar"){
             document.querySelector("label[name='valor-label']").style.display = "block";
-            document.querySelector("label[name='periodo']").style.display = "block";
+            document.querySelector("label[name='periodo-label']").style.display = "block";
           }
           if(opcao.value == "Descartar"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo']").style.display = "none";
+            document.querySelector("label[name='periodo-label']").style.display = "none";
           }
           if(opcao.value == "Vender"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo']").style.display = "block";
+            document.querySelector("label[name='periodo-label']").style.display = "block";
           }
           if(opcao.value == "Enviar para conserto"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo']").style.display = "block";
+            document.querySelector("label[name='periodo-label']").style.display = "block";
           }
         });
     }

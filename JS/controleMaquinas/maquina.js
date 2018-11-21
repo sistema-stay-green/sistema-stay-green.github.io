@@ -7,7 +7,7 @@ class Maquina {
     constructor(id) {
         this._id = id;
         this._nome = null;
-        this._tipo = null;
+        this._tipo = "MAQUINA";
         this._finalidade = null;
         this._status = null;
         this._indiceDepreciacao = null;

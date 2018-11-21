@@ -28,6 +28,7 @@ function alteraVisibilidadeElemento(elemento, deveEsconder) {
     mascaraFormEl.classList.remove('invisivel');
     elemento.classList.remove('invisivel');
   }
+  recebeTarefas();
 }
 
 /** Exibe o formulário de adicionar nova tarefa quando usuário clica no
@@ -68,7 +69,7 @@ function exibeFormularioTarefa(tarefaAExibir) {
 
     document.querySelector('input[name="producaoPrevista"]').value =
       tarefaAExibir.quantProduzTarefa;
-    
+
     document.querySelector('select[name="produtoProduzidoTrf"]').value =
       tarefaAExibir.produtoProduzido;
 

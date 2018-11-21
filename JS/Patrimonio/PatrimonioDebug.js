@@ -19,7 +19,7 @@ let patrimonioStaticStash = [];
 function generatePlaceholders() {
 
     const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];
-    const tipo = ["MAQUINA", "OUTROS", "MAQUINA", "OUTROS", "MAQUINA"];
+    const tipo = ["MAQUINA", "ANIMAL", "IMOVEL", "MERCADORIA", "UTENSILIO"];
     const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café",
         "Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café", "Uma máquina que ajuda na colheita do café."];
     const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];

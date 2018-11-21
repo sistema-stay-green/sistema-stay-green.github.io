@@ -57,11 +57,12 @@ function encapsularDescarte(id,data){
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularAluguel(id){
+function encapsularAluguel(id,data,valorAluguel){
   let maquina = new Maquina(id);
   maquina.status = "ALUGADO";
-  maquina.dataRetorno = new Date();
+  maquina.dataRetorno = formatarData(data);
   maquina.dataSaida = novaData();
+  
 
   return maquina.toJSON();
 }

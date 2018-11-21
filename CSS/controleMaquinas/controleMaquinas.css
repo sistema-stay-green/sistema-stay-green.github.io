@@ -12,6 +12,11 @@ form > label{
   display: grid;
   margin: 0.9em;
 }
+th{
+  padding-top: 0.5em !important;
+  padding-bottom: 0.5em !important;
+  width: 50vw;
+}
 .editar-conteudo > #filtro2 > label{
   display: grid;
   margin: 0.9em;
@@ -55,6 +60,7 @@ table{
 }
 #filtro{
   text-align: end;
+  padding: 1em;
 }
 #venda,#envio,#descarte{
   display: none;

@@ -333,7 +333,7 @@ function limpa_relatorio() {
     section = document.querySelector("#maquinasPosse");
     section.innerHTML = "<h2>Maquinas em posse</h2>";
     section = document.querySelector("#maquinasVendidas");
-    section.innerHTML = "<h2>Maquinas em vendidas</h2>";
+    section.innerHTML = "<h2>Maquinas vendidas</h2>";
     section = document.querySelector("#maquinasAlugadas");
     section.innerHTML = "<h2>Maquinas alugadas</h2>";
     section = document.querySelector("#maquinasManutencao");

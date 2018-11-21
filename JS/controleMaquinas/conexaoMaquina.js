@@ -38,7 +38,7 @@ function receberTodos(){
             if(resultado[i].dataBaixa != null){
             resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
                 resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
-          }  
+          }
         }
         carregaElementos(resultado);
     }
@@ -122,7 +122,7 @@ function descartar(id,data){
  * @author Guilherme Sena
  */
 function alugar(id,data, valorAluguel){
-  let maquinaJSON = encapsularAluguel(id);
+  let maquinaJSON = encapsularAluguel(id,data,valorAluguel);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"a"+

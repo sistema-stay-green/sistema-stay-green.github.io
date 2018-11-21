@@ -10,13 +10,21 @@
 </head>
 <body>
     <div class="conteudo">
-      <h1>Controle de produção</h1>
-      <h2 id="h2TabProduto">Registrar:</h2>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="Patrimonio.html">Patrimônio</a>
+        <a href="controleProducao.html">Produção</a>
+        <h3>STAY GREEN</h3>
+        <a href="agendaEletronica.html">Agenda</a>
+        <a href="controleMaquinas.html">Maquinas</a>
+        <a href="paginaVendasProdutor.html">Vendas</a>
+      </nav>
+      <h2 id="h2Registrar">Registrar:</h2>
       <select id="selTabela" name="selTabela">
         <option value="produto">Produto</option>
         <option value="insumo">Insumo</option>
       </select>
-      <section id="secProduto">
+      <section id="secProduto" class="tabFlex">
         <table class="tabProduto">
           <thead>
             <tr>
@@ -36,14 +44,14 @@
                   <option value="leite">Leite</option>
                 </select>
               </td>
-              <td><select id="selDescricaoProduto">
-                <option value="bourbon">Bourbon</option>
-                <option value="robusta">Robusta</option>
-                <option value="arabica">Arabica</option>
-              </select></td>
-              <td id="tdNomeProduto">
-                KG (Kilograma)
+              <td>
+                <select id="selDescricaoProduto">
+                  <option value="bourbon">Bourbon</option>
+                  <option value="robusta">Robusta</option>
+                  <option value="arabica">Arabica</option>
+                </select>
               </td>
+              <td id="tdNomeProduto">KG (Kilograma)</td>
               <td><input type="number" id="inpValorProduto"></td>
               <td><input type="number" id="inpQuantEstoqueProduto"></td>
               <td><input type="number" id="inpPontoAvisoProduto"></td>
@@ -53,7 +61,7 @@
         <button type="button" id="btnRegistarProduto">Registrar</button>
       </section>
 
-      <section id="secInsumo" class="ocultar">
+      <section id="secInsumo" class="ocultar tabFlex">
         <table class="tabInsumo">
           <thead>
             <tr>
@@ -94,10 +102,9 @@
               <div class="filtroTabela">
                 <label for="selFiltro">Filtro: </label>
                 <select class="selFiltro">
-                  <option value="Café">Café</option>
-                  <option value="Leite">Leite</option>
-                  <option value="preco">Preço</option>
-                  <option value="quantEsotque">Quantidade em estoque</option>
+                  <option value="estoqueBaixoP">Estoque baixo</option>
+                  <option value="foraEstoqueP">Fora de estoque</option>
+                  <option value="maisVendidosP">Mais vendidos para menos</option>
                 </select>
               </div>
             </div>
@@ -130,10 +137,8 @@
               <div class="filtroTabela">
                 <label for="selFiltro">Filtro: </label>
                 <select class="selFiltro">
-                  <option value="Café">Café</option>
-                  <option value="Leite">Leite</option>
-                  <option value="preco">Preço</option>
-                  <option value="quantEsotque">Quantidade em estoque</option>
+                  <option value="estoqueBaixoI">Estoque baixo</option>
+                  <option value="foraEstoqueI">Fora de estoque</option>
                 </select>
               </div>
             </div>
@@ -199,7 +204,7 @@
       </div>
     </div>
     <div id="divMascara" class="ocultar"></div>
-    <button type="button" id="btnCriaRelatorio">Criar relatório</button>
+    <button type="button" id="btnCriaRelatorio">Relatórios</button>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -208,8 +213,7 @@
     <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Request.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_Relatorios.js" charset="utf-8"></script>
-    <script src="JS/ControleProducao/ControleProducao_Requisicao.js" charset="utf-8"></script>
+    <script src="JS/ControleProducao/ControleProducao_Retorno.js" charset="utf-8"></script>
     <script src="JS/ControleProducao/ControleProducao_RelatoriosMercadoriasPeriodo.js" charset="utf-8"></script>
-
   </body>
 </html>

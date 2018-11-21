@@ -12,6 +12,9 @@ let divRegistraEl = document.querySelector("#div-registra");
 let botaoConfirmaEl = document.querySelector("#div-registra > .div-botoes > button:first-of-type");
 let botaoCancelaEl = document.querySelector("#div-registra > .div-botoes > button:last-of-type");
 let arrayProdutos = new Array();
+let botaoRegiaoEl = document.querySelector('#regiaoFrete');
+let valorBotaoRegiao = botaoRegiaoEl.options[botaoRegiaoEl.selectedIndex].value;//valor do <option> selecionado
+let valorBotaoFrete = document.querySelector('#valorFrete').value;
 
 window.onload = function recebeJSON(){
   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
@@ -134,7 +137,7 @@ let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
 
 //compra é valor negativo
 function relatorioResultados(){
-  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet')
+  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet)
     .then(resposta => {
       if(resposta < 0)
         respostaMsg = "Produtor está tendo prejuízo";
@@ -151,7 +154,7 @@ function relatorioResultados(){
       let thead = document.createElement("thead");
       thead.innerHTML = "<th>Valor (Lucro/Prejuízo)</th> <th>Resultado</th>";
       tabela.appendChild(thead);
-    
+
       let tbody = document.createElement("tbody");
       let tr = document.createElement("tr");
       tr.innerHTML = `<td>${resposta}</td> <td>${respostaMsg}</td>`;
@@ -173,7 +176,7 @@ function relatorioFaturamento(){
       let thead = document.createElement("thead");
       thead.innerHTML = "<th>Produto</th> <th>Data</th> <th>Valor</th>";
       tabela.appendChild(thead);
-    
+
       let tbody = document.createElement("tbody");
       resposta.forEach(res => {
         let {valor, nome, dia, mes, ano} = res;
@@ -199,7 +202,7 @@ function relatorioEncaminhamento(){
       let thead = document.createElement("thead");
       thead.innerHTML = "<th>Cliente</th> <th>Data</th> <th>Faltam (Dias)</th>";
       tabela.appendChild(thead);
-    
+
       let tbody = document.createElement("tbody");
       resposta.forEach(res => {
         let {nome, dia, mes, ano} = res;
@@ -210,7 +213,14 @@ function relatorioEncaminhamento(){
       });
       tabela.appendChild(tbody);
       divEncaEl.append(tabela);
-
     });
 }
 relatorioEncaminhamento();
+
+function mudaValorFrete(){
+  if(valorBotaoFrete >= 0)
+    Request.get('http://localhost:8080/StayGreen/FreteServlet?regiao='+valorBotaoRegiao+'&valorFrete='+valorBotaoFrete);
+  else {
+    alert("Valor do frete inválido");
+  }
+}

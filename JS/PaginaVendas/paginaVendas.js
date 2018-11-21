@@ -17,7 +17,7 @@ let arrayCarrinho;
  * @author Guilherme Silva
  */
 window.onload = function recebeJSON(){
-  Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet', )
+  Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
     .then((resp) => {
         try {
           resp.forEach(addArrayProdutos);

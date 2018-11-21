@@ -1,6 +1,6 @@
 /**
- * Arquivo JavaScript responsável pelas interações dinâmicas da página
- *  e pelo encapsulamento de objetos Patrimônio.
+ * Script responsável pelas interações dinâmicas da página
+ *      e pelo encapsulamento de objetos Patrimônio.
  * @author Mei Fagundes
  */
 
@@ -145,7 +145,7 @@ function showError(cod){
             break;
 
         case 2:
-            message += "Parametros inválidos enviados.";
+            message += "Parametros inválidos enviados para o Server.";
             break;
 
         case 3:
@@ -153,11 +153,11 @@ function showError(cod){
             break;
 
         case 4:
-            message += "Os valores inseridos são inválidos.";
+            message += "O índice de Depreciação por Ano deve ser menor que 100%.";
             break;
 
         case 5:
-            message += "Nenhum Patrimônio registrado para gerar o relatório.";
+            message += "Nenhum Patrimônio está registrado para gerar o relatório.";
             break;
 
         case 6:
@@ -447,44 +447,6 @@ function showPatrimonioTable(){
 
     document.querySelector("table").style.display = "block";
     document.querySelector("#noResults").style.display = "none";
-}
-
-/**
- * Atualiza a página com o filtro seleionado no HTML.
- */
-function updateFilterOnTable(){
-
-    receiveAllPatrimoniosFromServlet();
-
-    switch (filtroSelect.value) {
-
-        case "":
-
-            break;
-
-        case "EM_POSSE":
-
-            break;
-
-        case "EM_MANUTENCAO":
-
-            break;
-
-        case "ALUGADO":
-
-            break;
-
-        case "VENDIDO":
-
-            break;
-
-        case "VENDIDO":
-
-            break;
-
-        default:
-            break;
-    }
 }
 
 /**
@@ -803,16 +765,13 @@ function insertPatrimonioIntoModal(patrimonio = new Patrimonio()){
     document.querySelector("#form [name='tipoSaidaInput']").value = patrimonio.status;
 
     if(patrimonio.dataCompra !== null)
-        document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompra
-            String;
+        document.querySelector("#form [name='dataCompraInput']").value = patrimonio.dataCompraString;
 
     if(patrimonio.dataRetorno !== null)
-        document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetorno
-            String;
+        document.querySelector("#form [name='dataEntradaInput']").value = patrimonio.dataRetornoString;
 
     if(patrimonio.dataSaida !== null)
-        document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaida
-            String;
+        document.querySelector("#form [name='dataSaidaInput']").value = patrimonio.dataSaidaString;
 
 }
 
@@ -846,16 +805,227 @@ function generateRelatorio(patrimonios = []){
         let h1 = document.createElement("h1");
         let h3;
         let patrimoniosTemp;
+        let ul, li, p;
 
         // Título
         relatorio.innerHTML = "";
         h1.innerHTML = "Relatório dos Patrimônios registrados";
         relatorio.appendChild(h1);
 
+        // Relação de Patrimônios por Tipo
+
+        h3 = document.createElement("h2");
+        h3.innerHTML = "Relação de Patrimônios por Tipo:";
+        relatorio.appendChild(h3);
+        ul = document.createElement("ul");
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MAQUINA');
+        li.innerHTML = "<p><span class='bold'>Maquina:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'ANIMAL');
+        li.innerHTML = "<p><span class='bold'>Animal:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'IMOVEL');
+        li.innerHTML = "<p><span class='bold'>Imovel:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MERCADORIA');
+        li.innerHTML = "<p><span class='bold'>Mercadoria:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'UTENSILIO');
+        li.innerHTML = "<p><span class='bold'>Utensílio:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'VEICULO');
+        li.innerHTML = "<p><span class='bold'>Veículo:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'TERRENO');
+        li.innerHTML = "<p><span class='bold'>Terreno:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        li = document.createElement("li");
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'OUTROS');
+        li.innerHTML = "<p><span class='bold'>Outros:</span> " + patrimoniosTemp.length + " | (" + 
+            ((patrimoniosTemp.length / patrimonios.length) * 100).toFixed(1)  + "% do Total)</p>";
+        ul.appendChild(li);
+
+        relatorio.appendChild(ul);
+
+        // Relação de Patrimônios em Manutenção por Tipo
+
+        
+        ul = document.createElement("ul");
+
+        
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MAQUINA');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Maquina: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'ANIMAL');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Animal: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'IMOVEL');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Imóvel: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MERCADORIA');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Mercadoria: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'UTENSILIO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Utensílio: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'VEICULO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Veículo: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'TERRENO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Terreno: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'OUTROS');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Outros: </span>" + getPatrimoniosEmManutencao(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosEmManutencao(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Manutenção.</p>";
+            ul.appendChild(li);
+        }
+
+        if (ul.innerHTML !== "") {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Relação de Patrimônios em Manutenção por Tipo:";
+            relatorio.appendChild(h3);
+            relatorio.appendChild(ul);
+        }
+
+        // Relação de Patrimônios em Baixa por Tipo
+
+        
+        ul = document.createElement("ul");
+        
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MAQUINA');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Maquina: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'ANIMAL');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Animal: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'IMOVEL');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Imóvel: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'MERCADORIA');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Mercadoria: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'UTENSILIO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Utensílio: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'VEICULO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Veículo: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'TERRENO');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Terreno: </span>" + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        patrimoniosTemp = getPatrimoniosFromTipo(patrimonios, 'OUTROS');
+        if (patrimoniosTemp.length !== 0) {
+            li = document.createElement("li");
+            li.innerHTML = "<p><span class='bold'>Outros</span>: " + getPatrimoniosDescartados(patrimoniosTemp).length + " (" + 
+                ((getPatrimoniosDescartados(patrimoniosTemp).length / patrimoniosTemp.length) * 100).toFixed(1)  + "%) estão em Baixa.</p>";
+            ul.appendChild(li);
+        }
+
+        if (ul.innerHTML !== "") {
+            h3 = document.createElement("h2");
+            h3.innerHTML = "Relação de Patrimônios em Baixa por Tipo:";
+            relatorio.appendChild(h3);
+            relatorio.appendChild(ul);
+        }
+
         // EM_POSSE
 
         patrimoniosTemp = getPatrimoniosEmPosse(patrimonios);
-        if (patrimoniosTemp !== null) {
+        if (patrimoniosTemp.length !== 0) {
             h3 = document.createElement("h2");
             h3.innerHTML = "Patrimônios em Posse:";
             relatorio.appendChild(h3);
@@ -866,7 +1036,7 @@ function generateRelatorio(patrimonios = []){
         // EM_MANUTENCAO
 
         patrimoniosTemp = getPatrimoniosEmManutencao(patrimonios);
-        if (patrimoniosTemp !== null) {
+        if (patrimoniosTemp.length !== 0) {
             h3 = document.createElement("h2");
             h3.innerHTML = "Patrimônios em Manutenção:";
             relatorio.appendChild(h3);
@@ -877,7 +1047,7 @@ function generateRelatorio(patrimonios = []){
         // ALUGADO
 
         patrimoniosTemp = getPatrimoniosAlugados(patrimonios);
-        if (patrimoniosTemp !== null) {
+        if (patrimoniosTemp.length !== 0) {
             h3 = document.createElement("h2");
             h3.innerHTML = "Patrimônios Alugados:";
             relatorio.appendChild(h3);
@@ -888,7 +1058,7 @@ function generateRelatorio(patrimonios = []){
         // VENDIDO
 
         patrimoniosTemp = getPatrimoniosVendidos(patrimonios);
-        if (patrimoniosTemp !== null) {
+        if (patrimoniosTemp.length !== 0) {
             h3 = document.createElement("h2");
             h3.innerHTML = "Patrimônios Vendidos:";
             relatorio.appendChild(h3);
@@ -899,7 +1069,7 @@ function generateRelatorio(patrimonios = []){
         // DESCARTADO
 
         patrimoniosTemp = getPatrimoniosDescartados(patrimonios);
-        if (patrimoniosTemp !== null) {
+        if (patrimoniosTemp.length !== 0) {
             h3 = document.createElement("h2");
             h3.innerHTML = "Patrimônios Descartados:";
             relatorio.appendChild(h3);

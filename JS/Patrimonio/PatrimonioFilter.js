@@ -1,4 +1,9 @@
 /**
+ * Script para filtrar os Patrimônios recebidos.
+ * @author Mei Fagundes, Sávio Cardoso, Rafael Herbert
+ */
+
+/**
  * Função base para filtrar os Patrimonios recebidos por um determinado Status.
  * @author Mei Fagundes, Sávio Cardoso, Rafael Herbert
  */
@@ -9,10 +14,7 @@ function getPatrimoniosFromStatus(patrimonios = [], status){
       if(status == patrimonio.status)
         patrimoniosResult.push(patrimonio);
     }
-    if (patrimoniosResult.length !== 0)
-        return patrimoniosResult;
-    else
-        return null;
+    return patrimoniosResult;
 }
 
 /**
@@ -71,10 +73,7 @@ function getPatrimoniosFromTipo(patrimonios = [],tipo){
       if(tipo == patrimonio.tipo)
         patrimoniosResult.push(patrimonio);
     }
-    if (patrimoniosResult.length !== 0)
-        return patrimoniosResult;
-    else
-        return null;
+    return patrimoniosResult;
 }
 
 /**

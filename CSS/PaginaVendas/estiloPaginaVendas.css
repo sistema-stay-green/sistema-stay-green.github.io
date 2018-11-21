@@ -116,10 +116,10 @@ main > section > button {
 }
 #mascara {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   opacity: 0;
   z-index: -1;
-  background-color:transparent;
+  background-color:rgba(0,0, 0,.7);
   position: fixed;
   left:0;
   top:0;
@@ -138,20 +138,15 @@ main > section > button {
   z-index: -1;
   width: 70vw;
   height: 70vh;
-  background-color: rgba(22, 66, 31, 0.97);
+  background-color: var(--brancoIvory);
   cursor: pointer;
   display: flex;
-  padding:2%;
+  padding:2vh;
+  padding-top:0;
   flex-direction: column;
-  overflow-y:  auto;
-}
-#div-carrinho > article > p {
-  color:var(--brancoIvory);
-  font-family:  'Niramit' , sans-serif;
-  font-size: calc(10px + 1vh);
-}
-#div-carrinho > article {
-  border-bottom:1px solid var(--brancoIvory);
+  justify-content: space-between;
+  overflow-y:auto;
+  overflow-x: hidden;
 }
 #div-modal.aparece , #mascara.aparece,#div-carrinho.aparece, #carrinho > #quantidade-carrinho.aparece{
   opacity: 1;
@@ -159,28 +154,36 @@ main > section > button {
   z-index: 1;
   transition: all 300ms ease-in-out;
 }
+#div-carrinho > article > p {
+  color:var(--cinzaFoggy);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(10px + 1vh);
+}
+#div-carrinho > article {
+  border-bottom:1px solid var(--pretoNight);
+}
 #div-modal > label , #div-carrinho > article > label {
-  color:var(--brancoIvory);
+  color:var(--cinzaFoggy);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(10px + 1vh);
 }
 #div-modal > h1 {
-  color:var(--brancoIvory);
+  color: var(--cinzaFoggy);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(15px + 1.5vh);
 }
 #div-modal > label > input , #div-modal > label > select , #div-carrinho > article > label > input {
-  color:var(--brancoIvory);
+  color:var(--cinzaFoggy);
   font-family:  'Niramit' , sans-serif;
   border:none;
-  border-bottom: 1px solid var(--brancoIvory);
+  border-bottom: 1px solid var(--cinzaFoggy);
   font-size: calc(10px + 1vh);
   background-color: transparent;
   margin-left: .5vw;
   margin-top: .6vh;
 }
 #div-modal > label > select > option {
-  background-color: rgba(22, 66, 31, .97);
+  background-color: var(--brancoIvory);
 }
 .div-botoes{
   display: flex;
@@ -201,6 +204,6 @@ main > section > button {
   margin-top: 1vh;
 }
 #div-modal > .div-botoes  >  button:hover ,#div-carrinho > .div-botoes > button:hover, #div-carrinho > article > button:hover {
-  color: rgba(22, 66, 31);
-  background-color: var(--brancoIvory);
+  color: var(--brancoIvory);
+  background-color: var(---cinzaFoggy);
 }

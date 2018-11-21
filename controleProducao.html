@@ -13,12 +13,12 @@
 <body>
   <div id="conteudo">
     <nav>
-      <a href="index.html">Home</a>
-      <a href="Patrimonio.html">Patrimônio</a>
-      <a href="controleProducao.html">Produção</a>
-      <h3>STAY GREEN</h3>
+      <a href="perfil.html">Perfil</a>
       <a href="agendaEletronica.html">Agenda</a>
       <a href="controleMaquinas.html">Máquinas</a>
+      <a href="index.html"><img src="imgs/staygreen.png" ></a>
+      <a href="Patrimonio.html">Patrimônio</a>
+      <a href="controleProducao.html">Produção</a>
       <a href="paginaVendasProdutor.html">Vendas</a>
     </nav>
 
@@ -146,47 +146,59 @@
           <div id="conteudoProduto">
             <h2 id="tituloProduto">Produtos</h2>
             <label for="tabelaRelLeite"><b>Leite</b></label>
-            <table id="tabelaRelLeite" class="centralizaTabela">
+            <table id="tabelaRelLeite" class="centralizaTabela margin">
               <thead>
-                <th>Data Transacao</th>
-                <th>Quantidade Transação</th>
-                <th>Valor Transação</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Data Transacao</th>
+                  <th>Quantidade Transação</th>
+                  <th>Valor Transação</th>
+                </tr>
               </thead>
               <tbody>
-                <th></th>
+                <tr></tr>
               </tbody>
             </table>
             <label for="tabelaRelCafeB"><b>Café Bourbon</b></label>
-            <table id="tabelaRelCafeB" class="centralizaTabela">
+            <table id="tabelaRelCafeB" class="centralizaTabela margin">
               <thead>
-                <th>Data Transacao</th>
-                <th>Quantidade Transação</th>
-                <th>Valor Transação</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Data Transacao</th>
+                  <th>Quantidade Transação</th>
+                  <th>Valor Transação</th>
+                </tr>
               </thead>
               <tbody>
-                <th></th>
+                <tr></tr>
               </tbody>
             </table>
             <label for="tabelaRelCafeR"><b>Café Robusta</b></label>
-            <table id="tabelaRelCafeR" class="centralizaTabela">
+            <table id="tabelaRelCafeR" class="centralizaTabela margin">
               <thead>
-                <th>Data Transacao</th>
-                <th>Quantidade Transação</th>
-                <th>Valor Transação</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Data Transacao</th>
+                  <th>Quantidade Transação</th>
+                  <th>Valor Transação</th>
+                </tr>
               </thead>
               <tbody>
-                <th></th>
+                <tr></tr>
               </tbody>
             </table>
             <label for="tabelaRelCafeA"><b>Café Arábica</b></label>
             <table id="tabelaRelCafeA" class="centralizaTabela">
               <thead>
-                <th>Data Transação</th>
-                <th>Quantidade Transação</th>
-                <th>Valor Transação</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Data Transação</th>
+                  <th>Quantidade Transação</th>
+                  <th>Valor Transação</th>
+                </tr>
               </thead>
               <tbody>
-                <th></th>
+                <tr></tr>
               </tbody>
             </table>
           </div>
@@ -197,13 +209,16 @@
             <h2 id="tituloInsumo">Insumos</h2>
             <table id="tabelaInsumo">
               <thead>
-                <th>Insumo</th>
-                <th>Data</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Insumo</th>
+                  <th>Data</th>
+                  <th>Quantidade</th>
+                  <th>Valor</th>
+                </tr>
               </thead>
               <tbody>
-                <th></th>
+                <tr></tr>
               </tbody>
             </table>
           </div>
@@ -215,6 +230,7 @@
 
         </div>
       </div>
+
       <div id="modalRelatorioProducao" class="esconde modal">
         <div>
           <h1>Relatório de Produção</h1>
@@ -309,6 +325,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="JS/staygreen.js" charset="utf-8"></script>
   <script src="JS/ControleProducao/ControleProducao_Insumo.js" charset="utf-8"></script>
   <script src="JS/ControleProducao/ControleProducao_Main.js" charset="utf-8"></script>
   <script src="JS/ControleProducao/ControleProducao_Produto.js" charset="utf-8"></script>

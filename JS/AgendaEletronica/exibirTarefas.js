@@ -1,7 +1,9 @@
 let tarefasArmazenadasBD,
-    insumosArmazenadosBD;
+  insumosArmazenadosBD;
 
-/*Recebimento das tarefas e insumos armazenados na DB*/
+/** Recebimento das tarefas armazenados na DB. Assim que
+ * carregam, as demais funcionalidades do sistema são ativadas.
+*/
 function recebeTarefas() {
   Request.get('http:localhost:8080/StayGreen/TarefaServlet')
     .then((resultado) => {
@@ -14,10 +16,23 @@ function recebeTarefas() {
     });
 }
 
+/** Recebe os insumos contidos no BD para colocá-los no formulário
+ * de nova tarefa e permitir que o usuário os selecione
+ */
 function recebeInsumos() {
   Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=insumo')
     .then((resultado) => {
       insumosArmazenadosBD = resultado;
+      for (let insumo of insumosArmazenadosBD) {
+        let insumoCheckBox = document.createElement('input'),
+          labelInsumo = document.createElement('label');
+        insumoCheckBox.type = 'checkbox';
+        insumoCheckBox.name = insumo.nomeInsumo;
+        insumoCheckBox.value = insumo.nomeInsumo;
+        labelInsumo.innerHTML = insumo.nomeInsumo;
+        labelInsumo.appendChild(insumoCheckBox);
+        document.querySelector("#insumosForm").appendChild(labelInsumo);
+      }
     });
 }
 
@@ -39,17 +54,17 @@ const QUANTIDADEDATAS = 16;
 function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBase) {
   document.querySelectorAll('#containerCalendario article').forEach(containerDia =>
     containerCalendario.removeChild(containerDia));
-  if(calendarioSequencial){
+  if (calendarioSequencial) {
     for (let contadorDias = 0; contadorDias < QUANTIDADEDATAS; contadorDias++) {
       let dataAtual = dataBase,
-          containerDia = criaContainerDia(dataAtual, tarefasProgramadas);
+        containerDia = criaContainerDia(dataAtual, tarefasProgramadas);
 
       dataAtual.setDate(dataBase.getDate() + 1);
 
       containerCalendario.appendChild(containerDia);
     }
-  }else{
-    for(let tarefa of tarefasProgramadas){
+  } else {
+    for (let tarefa of tarefasProgramadas) {
       console.log(Tarefa.toDateObject(tarefa.dataInicialTarefa));
 
       containerCalendario.appendChild(criaContainerDia(Tarefa.toDateObject(tarefa.dataInicialTarefa), [tarefa]));
@@ -65,13 +80,18 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
  * @returns {boolean} Se a tarefa deve ser realizada no dia proposto ou não
  */
 function deveRealizarTarefa(tarefa, dataProposta) {
-  if(Tarefa.toDateObject(tarefa.dataInicialTarefa).getTime() > dataProposta.getTime())
+  let dataTarefa = Tarefa.toDateObject(tarefa.dataInicialTarefa);
+
+  dataTarefa.setHours(0, 0, 0, 0);
+  dataProposta.setHours(0, 0, 0, 0);
+
+  if (dataTarefa.getTime() > dataProposta.getTime())
     return false;
 
   if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
     dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
-        Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
-            tarefa.periodRepetTarefa === 0)
+    Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
+    tarefa.periodRepetTarefa === 0)
     return true;
 
   return false;

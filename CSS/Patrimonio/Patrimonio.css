@@ -315,7 +315,7 @@ input:focus{
     margin: 0px !important;
 }
 
-#relatorio div h2{
+#relatorio div h2, #relatorio div h3{
     text-align: center;
 }
 

@@ -15,13 +15,13 @@
   <div id="mascaraForm" class="invisivel"></div>
 
   <nav>
-    <a href="#">Home</a>
+    <a href="perfil.html">Perfil</a>
+    <a href="agendaEletronica.html">Agenda</a>
+    <a href="controleMaquinas.html">Maquinas</a>
+    <a href="index.html"><img src="imgs/staygreen.png" ></a>
     <a href="Patrimonio.html">Patrimônio</a>
-    <a href="#">Produção</a>
-    <h3>STAY GREEN</h3>
-    <a href="#">Agenda</a>
-    <a href="#">Maquinas</a>
-    <a href="#">Vendas</a>
+    <a href="controleProducao.html">Produção</a>
+    <a href="paginaVendasProdutor.html">Vendas</a>
   </nav>
 
   <main>
@@ -63,11 +63,18 @@
 
         <article class="column">
           <p>Insumos Consumidos:</p>
-          <label><input type="checkbox" name="Insumo1" value="Insumo1">Insumo1</label>
-          <label><input type="checkbox" name="Insumo2" value="Insumo2">Insumo2</label>
-          <label><input type="checkbox" name="Insumo3" value="Insumo3">Insumo3</label>
-          <label><input type="checkbox" name="Insumo4" value="Insumo4">Insumo4</label>
-          <label><input type="checkbox" name="Insumo5" value="Insumo5">Insumo5</label>
+          <span id="insumosForm">
+
+          </span>
+          <label>
+            <p>Produto produzido:</p>
+            <select name="produtoProduzidoTrf">
+              <option value="LEITE" selected>Leite</option>
+              <option value="CAFE_BOURBON">Café Bourbon</option>
+              <option value="CAFE_ROBUSTA">Café Robusta</option>
+              <option value="CAFE_ARABICA">Café Arábica</option>
+            </select>
+          </label>
           <div>
             <button type="button" name="adicionarTarefa" data-operacao="a">Adicionar</button>
             <button type="button" name="excluirTarefa" data-operacao="r">Excluir</button>
@@ -129,42 +136,6 @@
     <script src="JS/AgendaEletronica/gerarRelatorios.js"></script>
 
   </main>
-  <footer>
-    <section>
-      <h3>empresa</h3>
-      <a href="#">email1</a>
-      <a href="#">email2</a>
-      <a href="#">email3</a>
-    </section>
-    <section>
-      <h3>desenvolvedores</h3>
-      <a href="#">email1</a>
-      <a href="#">email2</a>
-      <a href="#">email3</a>
-    </section>
-    <section>
-      <h3>contatos</h3>
-      <a href="#">email1</a>
-      <a href="#">email2</a>
-      <a href="#">email3</a>
-    </section>
-    <section>
-      <h3>curiosidades</h3>
-      <a href="#">email1</a>
-      <a href="#">email2</a>
-      <a href="#">email3</a>
-    </section>
-    <section>
-      <h3>Saiba mais</h3>
-      <a href="#">email1</a>
-      <a href="#">email2</a>
-      <a href="#">email3</a>
-    </section>
-    <section class="redes">
-      <img src="imgs/home/face.png" alt="">
-      <a href="#">segue la no face</a>
-    </section>
-  </footer>
 </body>
 
 </html>

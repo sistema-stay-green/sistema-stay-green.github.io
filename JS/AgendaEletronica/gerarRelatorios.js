@@ -6,11 +6,12 @@ function aplicarRelatorios() {
     botaoRelatorio.addEventListener('click', () => {
       let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
 
-  //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
-  //Feito por João Francisco
-          relatorioContainer  document.querySelector('#containerRelatorio');
-      relatorioContainer.innerHTML = geraRelatorio(codigoRelatorio);
-      relatorioContainer.classList.remove('invisivel');
+        //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
+        relatorioContainer = document.querySelector('#containerRelatorio');
+      relatorioContainer.innerHTML = '';
+      relatorioContainer.appendChild(geraRelatorio(codigoRelatorio));
+      alteraVisibilidadeElemento(relatorioContainer, false);
+      mascaraFormEl.addEventListener('click', () => { alteraVisibilidadeElemento(relatorioContainer, true) });
     }));
 }
 
@@ -18,11 +19,11 @@ function aplicarRelatorios() {
 function geraRelatorio(codigoRelatorio) {
   switch (codigoRelatorio) {
     case 0: //Relativo ao Relatório de Gastos
-        return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'gastoTarefa'], 'gastoTarefa');
+      return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'gastoTarefa'], 'gastoTarefa');
     case 1: //Relativo ao Relatório de Produção
-        return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'quantProduzTarefa'], 'quantProduzTarefa');
+      return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'quantProduzTarefa'], 'quantProduzTarefa');
     case 2: //Relativo ao Relatório de Insumos
-        return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'insumosTarefa', 'quantInsumosTarefa'], '', false);
+      return gerarTabela(tarefasArmazenadasBD, ['idTarefa', 'nomeTarefa', 'insumosTarefa', 'quantInsumosTarefa'], '', false);
 
   }
 }
@@ -43,16 +44,16 @@ function geraRelatorio(codigoRelatorio) {
  */
 function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = true) {
   let tabelaRelatorioGastos = document.createElement('table'),
-      cabecalhoTabela = document.createElement('thead'),
-      celulaTabelaCabecalho = document.createElement('tr');
+    cabecalhoTabela = document.createElement('thead'),
+    celulaTabelaCabecalho = document.createElement('tr');
 
-    //Criando e adicionando o cabeçalho da tabela
-    for (let campo of camposRelevantes) {
-      let elementoCabecalho = document.createElement('th');
+  //Criando e adicionando o cabeçalho da tabela
+  for (let campo of camposRelevantes) {
+    let elementoCabecalho = document.createElement('th');
 
-      elementoCabecalho.innerHTML = campo;
-      celulaTabelaCabecalho.appendChild(elementoCabecalho);
-    }
+    elementoCabecalho.innerHTML = campo;
+    celulaTabelaCabecalho.appendChild(elementoCabecalho);
+  }
 
   cabecalhoTabela.appendChild(celulaTabelaCabecalho);
 
@@ -61,10 +62,10 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
   //Criando e adicionando o corpo (conteúdo) da tabela
   let conteudoTabela = document.createElement('tbody');
 
-  for(let tarefa of tarefas){
+  for (let tarefa of tarefas) {
     celulaTabelaCorpo = document.createElement('tr');
 
-    for(let campo of camposRelevantes){
+    for (let campo of camposRelevantes) {
       let celulaConteudo = document.createElement('td');
 
       celulaConteudo.innerHTML = tarefa[campo];
@@ -75,17 +76,17 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
 
   tabelaRelatorioGastos.appendChild(conteudoTabela);
 
-  if(apresentaTotal){
+  if (apresentaTotal) {
     let rodapeTabela = document.createElement('tfoot'),
-        celulaTabelaRodape = document.createElement('tr');
-        somaTotal = 0;
+      celulaTabelaRodape = document.createElement('tr');
+    somaTotal = 0;
 
     celulaTabelaRodape.innerHTML = "<td>Total</td>";
-    for(let tarefa of tarefas){
+    for (let tarefa of tarefas) {
       somaTotal += tarefa[campoTotal];
     }
 
-    celulaTabelaRodape.innerHTML += "<td>" + somaTotal + "</td> ";
+    celulaTabelaRodape.innerHTML += '<td colspan="2">' + somaTotal + '</td> ';
     rodapeTabela.appendChild(celulaTabelaRodape);
 
     tabelaRelatorioGastos.appendChild(rodapeTabela);

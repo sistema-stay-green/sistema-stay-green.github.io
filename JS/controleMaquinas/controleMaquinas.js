@@ -363,25 +363,22 @@ function AlteraStatus(elemento,opcao){
     elemento.innerHTML = "<tr class=\"maquina\">";
     for (var i = 0; i < vetor.length; i++) {
       if(i == 6){
+        periodo = document.querySelector("input[name='periodo']").value;
         if(opcao.value == "Alugar"){
           elemento.innerHTML += "<td>ALUGADO</td>";
-          let valorAluguel = document.querySelector("input[name='valorAluguel']"),
-              periodo = document.querySelector("input[name='periodo']");
-              alugar(vetor[0], periodo, valorAluguel);
+          let valorAluguel = document.querySelector("input[name='valorAluguel']");
+          alugar(vetor[0], periodo, valorAluguel);
         }
         if(opcao.value == "Vender"){
           elemento.innerHTML += "<td>VENDIDO</td>";
-          let periodo = document.querySelector("input[name='periodo']");
             vender(vetor[0], periodo);
         }
         if(opcao.value == "Enviar para conserto"){
           elemento.innerHTML += "<td>EM_MANUTENCAO</td>";
-          let periodo = document.querySelector("input[name='periodo']");
             manuntenir(vetor[0], periodo);
         }
         if(opcao.value == "Descartar"){
           elemento.innerHTML += "<td>Descartado</td>";
-          let periodo = document.querySelector("input[name='periodo']");
           descartar(vetor[0],periodo);
         }
       }

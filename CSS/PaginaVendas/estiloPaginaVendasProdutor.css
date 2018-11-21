@@ -1,8 +1,8 @@
 /*
 :root{
   --brancoIvory: #FDFCF3;
-  --verdeCamarone: #1D883A; // Verde Claro 
-  --verdeCrusoe: #126624;  Verde Escuro 
+  --verdeCamarone: #1D883A; // Verde Claro
+  --verdeCrusoe: #126624;  Verde Escuro
   --pretoNight: #AAA9A4;
   --cinzaFoggy: #2D2D2E;
 }
@@ -10,6 +10,7 @@
 
 body{
   width: 100vw;
+  min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
   background-color: var(--brancoIvory);
@@ -18,6 +19,9 @@ main{
   width: 90vw;
   margin: 0 auto;
   font-size: calc(7px + 2vh);
+  display: flex;
+  flex-direction:column;
+  padding: 2vh;
 }
 main > table{
   width:100%;
@@ -28,13 +32,17 @@ main > .div-botoes {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 3vh;
+}
+main > label > input {
+  width: 5vw;
 }
 #mascara {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   opacity: 0;
   z-index: -1;
-  background-color:transparent;
+  background-color:rgba(0,0, 0,.7);
   position: fixed;
   left:0;
   top:0;
@@ -52,12 +60,16 @@ main > .div-botoes {
   z-index: -1;
   width: 70vw;
   height: 70vh;
-  background-color: rgba(22, 66, 31, 0.97);
+  background-color: var(--brancoIvory);
   cursor: pointer;
   display: flex;
-  padding:2%;
+  padding:2vh;
+  padding-top:0;
   flex-direction: column;
+  justify-content: space-between;
   overflow-y:auto;
+  overflow-x: hidden;
+  
 }
 #mascara.aparece, #div-encaminhamentos.aparece, #div-faturamentos.aparece, #div-resultados.aparece, #div-registra.aparece{
   opacity: 1;
@@ -65,8 +77,63 @@ main > .div-botoes {
   z-index: 1;
   transition: all 300ms ease-in-out;
 }
-#div-registra > h1 {
+#div-registra > label{
+  color:var(--cinzaFoggy);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(10px + 1vh);
+}
+#div-registra > h1:first-of-type, #div-encaminhamentos > h1:first-of-type, #div-faturamentos > h1:first-of-type, #div-resultados > h1:first-of-type {
+  color:var(--brancoIvory);
+  background-color: var(--verdeCamarone);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(15px + 1.5vh);
+  height: 7vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  margin: 0;
+  margin-left: -2vh;
+}
+#div-registra > h1, #div-encaminhamentos > h1, #div-faturamentos > h1, #div-resultados > h1 {
+  font-size: calc(15px + 1.5vh);
+  font-family:  'Niramit' , sans-serif;
+  color: var(--cinzaFoggy);
+}
+#div-registra > label > input , #div-registra > label > select {
+  color:var(--cinzaFoggy);
+  font-family:  'Niramit' , sans-serif;
+  border:none;
+  border-bottom: 1px solid var(--cinzaFoggy);
+  font-size: calc(10px + 1vh);
+  background-color: transparent;
+  margin-left: .5vw;
+  margin-top: .6vh;
+}
+#div-registra > label > select > option {
+  background-color: var(--brancoIvory);
+}
+.div-botoes{
+  display: flex;
+  justify-content: center;
+}
+#div-registra > .div-botoes > button  {
+  width: 7vw;
+  height: 5vh;
+  padding:0;
+  border: 1px solid var(--cinzaFoggy);
+  color:var(--cinzaFoggy);
+  font-family:  'Niramit' , sans-serif;
+  cursor: pointer;
+  font-size: calc(10px + 1vh);
+  background-color: transparent;
+  margin-left: 1vw;
+  margin-bottom:2vh;
+  margin-top: 1vh;
+}
+#div-registra > .div-botoes  >  button:hover {
   color: var(--brancoIvory);
-  font-size: calc(5px + 2.3vh );
-  font-family: 'Niramit' , sans-serif;
+  background-color: var(--verdeCamarone);
+  border: none;
 }

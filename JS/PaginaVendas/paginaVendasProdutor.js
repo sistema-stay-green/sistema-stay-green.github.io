@@ -57,6 +57,7 @@ function addProdutosPagina(produtos){
    tabela.appendChild(tbody);
    mainEl.insertBefore(tabela,divBotoesEl);
 }
+
 function mostraEncaminhamentos(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.add("aparece");
@@ -109,7 +110,7 @@ mascaraEl.addEventListener('click', escondeTudo);
 botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
 botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
 
-let padrao = '#####-###';
+let padrao = '########';
 
 let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
   inputCep.addEventListener('input', e => {
@@ -134,14 +135,82 @@ let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
 //compra é valor negativo
 function relatorioResultados(){
   Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet')
-     .then(function(resposta){
-       if(resposta < 0)
-         resposta = "Produtor está tendo prejuízo";
-       else if(resposta > 0)
-         resposta = "Produtor está tendo lucro";
-       else
-         resposta = "Indiferente";
+    .then(resposta => {
+      if(resposta < 0)
+        respostaMsg = "Produtor está tendo prejuízo";
+      else if(resposta > 0)
+        respostaMsg = "Produtor está tendo lucro";
+      else
+        respostaMsg = "Indiferente";
 
-       console.log("resultado="+resposta);
-     });
+      if(tabelaAntiga = divResulEl.querySelector("table"))
+        tabelaAntiga.remove();
+
+      let tabela = document.createElement("table");
+
+      let thead = document.createElement("thead");
+      thead.innerHTML = "<th>Valor (Lucro/Prejuízo)</th> <th>Resultado</th>";
+      tabela.appendChild(thead);
+    
+      let tbody = document.createElement("tbody");
+      let tr = document.createElement("tr");
+      tr.innerHTML = `<td>${resposta}</td> <td>${respostaMsg}</td>`;
+      tbody.appendChild(tr);
+      tabela.appendChild(tbody);
+      divResulEl.append(tabela);
+
+    });
 }
+
+function relatorioFaturamento(){
+  Request.get('http://localhost:8080/StayGreen/RelatorioVendaServlet')
+    .then(resposta => {
+      if(tabelaAntiga = divFatuEl.querySelector("table"))
+        tabelaAntiga.remove();
+
+      let tabela = document.createElement("table");
+
+      let thead = document.createElement("thead");
+      thead.innerHTML = "<th>Produto</th> <th>Data</th> <th>Valor</th>";
+      tabela.appendChild(thead);
+    
+      let tbody = document.createElement("tbody");
+      resposta.forEach(res => {
+        let {valor, nome, dia, mes, ano} = res;
+        let tr = document.createElement("tr");
+        tr.innerHTML = `<td>${nome}</td> <td>${dia}/${mes}/${ano}</td> <td>${valor}</td>`;
+        tbody.appendChild(tr);
+      });
+      tabela.appendChild(tbody);
+      divFatuEl.append(tabela);
+
+    });
+}
+
+function relatorioEncaminhamento(){
+  Request.get('http://localhost:8080/StayGreen/VendasEncaminhamentosServlet')
+    .then(resposta => {
+      console.table(resposta);
+      if(tabelaAntiga = divEncaEl.querySelector("table"))
+        tabelaAntiga.remove();
+
+      let tabela = document.createElement("table");
+
+      let thead = document.createElement("thead");
+      thead.innerHTML = "<th>Cliente</th> <th>Data</th> <th>Faltam (Dias)</th>";
+      tabela.appendChild(thead);
+    
+      let tbody = document.createElement("tbody");
+      resposta.forEach(res => {
+        let {nome, dia, mes, ano} = res;
+        let falta = dia - (new Date()).getDate();
+        let tr = document.createElement("tr");
+        tr.innerHTML = `<td>${nome}</td> <td>${dia}/${mes}/${ano}</td> <td>${ falta > 0 ? falta : "Não"}</td>`;
+        tbody.appendChild(tr);
+      });
+      tabela.appendChild(tbody);
+      divEncaEl.append(tabela);
+
+    });
+}
+relatorioEncaminhamento();

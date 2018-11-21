@@ -306,3 +306,5 @@ let inputCep = divModalEl.querySelector("label:last-of-type > input");
     }
     inputCep.value = resultado;
 });
+
+cancelaModal();

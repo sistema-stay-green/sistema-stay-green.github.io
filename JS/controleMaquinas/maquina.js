@@ -7,12 +7,11 @@ class Maquina {
     constructor(id) {
         this._id = id;
         this._nome = null;
-        this._tipo = null;
+        this._tipo = "MAQUINA";
         this._finalidade = null;
         this._status = null;
         this._indiceDepreciacao = null;
         this._valorCompra = null;
-        this._valorAtual = null;
         this._dataCompra = null;
         this._dataSaida = null;
         this._dataRetorno = null;
@@ -32,7 +31,6 @@ class Maquina {
         console.log("Status: " + this._status);
         console.log("Índice de depreciação: " + this._indiceDepreciacao);
         console.log("Valor da Compra: " + this._valorCompra);
-        console.log("Valor Atual: " + this._valorAtual);
         console.log("Data da Compra: " + this._dataCompra);
         console.log("Data da Saída: " + this._dataSaida);
         console.log("Data do Retorno: " + this._dataRetorno);
@@ -54,16 +52,22 @@ class Maquina {
     }
 
     calculateValorAtual(){
-        if (this._valorCompra !== null && this._dataCompra !== null) {
-          console.log(this._valorCompra +" "+this._dataCompra)
-          console.log(this._valorAtual)
-            let anoCompra = this._dataCompra.getFullYear();
-            let diferencaData = new Date().getFullYear() - anoCompra;
-            this._valorAtual = this._valorCompra -
-                ((diferencaData * (this._indiceDepreciacao/100))
-                * this._valorCompra);
-            console.log(this._valorAtual+" "+anoCompra+" "+diferencaData);
-        }
+      if (this._valorCompra !== null && this._dataCompra !== null) {
+
+          let anoCompra = this._dataCompra.getFullYear();
+          let diferencaData = new Date().getFullYear() - anoCompra;
+          let valorAtt = this._valorCompra -
+              ((diferencaData * (this._indiceDepreciacao/100))
+              * this._valorCompra);
+          let valorMinimo = this._valorCompra/10;
+          if(valorAtt > valorMinimo){
+            return valorAtt;
+          }else{
+            return valorMinimo;
+          }
+      }
+      else
+          return null;
 
     }
 
@@ -135,10 +139,6 @@ class Maquina {
         return this._valorCompra;
     }
 
-    get valorAtual(){
-        return this._valorAtual;
-    }
-
     get dataCompra(){
             return this._dataCompra;
     }
@@ -206,10 +206,6 @@ class Maquina {
 
     set valorCompra(valorCompra){
             this._valorCompra = this.tryParse(valorCompra);
-    }
-
-    set valorAtual(valorAtual){
-            this._valorAtual = this.tryParse(valorAtual);
     }
 
     set dataCompra(dataCompra){

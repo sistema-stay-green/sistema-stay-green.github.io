@@ -15,14 +15,34 @@ function novaData(){
 function receberTodos(){
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r"+"&quantidade=1").
     then(function(resultado) {
-      resultado = resultado.split('/');
-      for(i = 0; i < resultado.length; i++){
-        let maquina = new Maquina(null);
-        maquina.fromJSON(resultado[i]);
-        resultado[i] = maquina;
-      }
-      carregaElementos(resultado);
-    });
+      if(resultado != null){
+        let maquina;
+        for(i = 0; i < resultado.length; i++){
+            console.log(i);
+            maquina = new Maquina(null);
+            maquina.fromJSON(resultado[i]);
+            resultado[i] = maquina;
+
+            if(resultado[i].dataCompra != null){
+              resultado[i].dataCompra = new Date(resultado[i].dataCompra.year,
+                  resultado[i].dataCompra.month, resultado[i].dataCompra.dayOfMonth);
+            }
+            if(resultado[i].dataSaida != null){
+             resultado[i].dataSaida = new Date(resultado[i].dataSaida.year,
+                 resultado[i].dataSaida.month, resultado[i].dataSaida.dayOfMonth);
+            }
+            if(resultado[i].dataRetorno != null){
+            resultado[i].dataRetorno = new Date(resultado[i].dataRetorno.year,
+                resultado[i].dataRetorno.month, resultado[i].dataRetorno.dayOfMonth);
+            }
+            if(resultado[i].dataBaixa != null){
+            resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
+                resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
+          }  
+        }
+        carregaElementos(resultado);
+    }
+  });
 }
 
 /**
@@ -60,15 +80,15 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
  * @returns {String} Retorna uma string com resposta do Servlet;
  * @author Guilherme Sena
  */
-function vender(id){
-  let maquinaJSON = encapsularVenda(id);
+function vender(id,data){
+  let maquinaJSON = encapsularVenda(id,data);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"v"+
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ novaData()+
+              "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);
               });
@@ -80,7 +100,7 @@ function vender(id){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function descartar(id){
+function descartar(id,data){
   let maquinaJSON = encapsularDescarte(id);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
@@ -88,7 +108,7 @@ function descartar(id){
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ novaData()+
+              "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);
               });
@@ -101,14 +121,14 @@ function descartar(id){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function alugar(id, valorAluguel){
+function alugar(id,data, valorAluguel){
   let maquinaJSON = encapsularAluguel(id);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"a"+
               "&dataCompra="+null+
               "&dataSaida="+novaData()+
-              "&dataRetorno="+null+
+              "&dataRetorno="+formatarData(data)+
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
@@ -130,7 +150,7 @@ function manuntenir(id, dataRetorno){
               "&acao="+"m"+
               "&dataCompra="+null+
               "&dataSaida="+novaData()+
-              "&dataRetorno="+dataRetorno+
+              "&dataRetorno="+formatarData(dataRetorno)+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);

@@ -27,7 +27,7 @@
         <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
         <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
         <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
-        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
+        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação" max="100" required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
         <!--<label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label> -->
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
@@ -66,91 +66,7 @@
         </tr>
       </thead>
       <tbody id="tabela">
-        <tr class="maquina">
-          <td class="id">1</td>
-          <td>Trator</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>5000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">Vendido</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
-        <tr class="maquina">
-          <td class="id">2</td>
-          <td>Trator2</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>5000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">Em posse</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
-        <tr class="maquina">
-          <td class="id">3</td>
-          <td>Teste</td>
-          <td>Alguma coisa</td>
-          <td>5000</td>
-          <td>44</td>
-          <td>2018-10-01</td>
-          <td class="status">Alugado</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
-        <tr class="maquina">
-          <td class="id">4</td>
-          <td>teste2</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>4000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">Em manutenção</td>
-          <td>Máquina</td>
-          <td>3000</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
-        <tr class="maquina">
-          <td class="id">5</td>
-          <td>Trator3</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>5000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">Descartado</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
     </div>
@@ -168,7 +84,7 @@
             </select>
           </label>
           <span id="retorno">
-            <label name="periodo-label">Periodo/Retorno: <input type="number" name="periodo" class="periodo"></label>
+            <label name="periodo-label">Data/Retorno-Saida: <input type="date" name="periodo" class="periodo"></label>
             <label name="valor-label">Valor: <input type="number" name="valorAluguel"></label>
             <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
           </span>

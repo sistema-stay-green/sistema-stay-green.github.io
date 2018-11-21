@@ -67,7 +67,6 @@ function cadastro(){
         dataAs = document.querySelector("input[name='data']").valueAsDate,
         data = document.querySelector("input[name='data']").value,
         depreciacao = document.querySelector("input[name='depreciação']").value,
-        //quantidade = document.querySelector("input[name='quantidade']").value,
         botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
         botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
         maquinas = document.querySelector("#tabela");
@@ -89,11 +88,6 @@ function cadastro(){
       let vetor = [id,nome,finalidade,valor,depreciacao,data,
                    "EM_POSSE","Maquina",maquina.valorAtual,
                    "N/A","N/A"];
-
-      /*let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
-                   maquina.indiceDepreciacao,maquina.dataCompra,
-                   maquina.status,maquina.tipo,maquina.valorAtual,
-                   maquina.dataSaida,maquina.dataBaixa];*/
 
     for (var i = 0; i < vetor.length; i++) {
       if(i == 0){
@@ -141,6 +135,7 @@ function saida(){
   elemento = elemento.parentNode;
   nodes = elemento.parentNode.children;
 
+  document.querySelector("#editar").style.display = "none";
   /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
     escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
   if (nodes[6].innerHTML == "EM_POSSE") {
@@ -193,7 +188,7 @@ function visaoBotao() {
       botões[i].className = "botaoDesab";
     }
     else {
-      botões[i].className = "botaoEditar";
+      botões[i].className = "botaoSaida";
     }
   }
   for (botao of botões2) {
@@ -275,7 +270,7 @@ function editarMaquina() {
           }
         }
       }
-      document.querySelector("#editar").style.display = "none";
+
       let edita = document.querySelectorAll(".botaoEditar");
       for (var i = 0; i < edita.length; i++) {
         edita[i].addEventListener("click", editar)
@@ -284,6 +279,7 @@ function editarMaquina() {
       for (var i = 0; i < botoes.length; i++) {
         botoes[i].addEventListener("click", saida);
       }
+      document.querySelector("#editar").style.display = "none";
 
 }
 
@@ -378,7 +374,7 @@ function AlteraStatus(elemento,opcao){
             manuntenir(vetor[0], periodo);
         }
         if(opcao.value == "Descartar"){
-          elemento.innerHTML += "<td>Descartado</td>";
+          elemento.innerHTML += "<td>DESCARTADO</td>";
           descartar(vetor[0],periodo);
         }
       }
@@ -393,6 +389,7 @@ function AlteraStatus(elemento,opcao){
   for (var i = 0; i < edita.length; i++) {
     edita[i].addEventListener("click", editar)
   }
+
   let botoes = document.querySelectorAll(".botaoSaida");
   for (var i = 0; i < botoes.length; i++) {
     botoes[i].addEventListener("click", saida);
@@ -412,10 +409,10 @@ function AlteraStatus(elemento,opcao){
 
 //carrega as maquinas na pagina ao iniciar
 function carregaElementos(carregarpagina){
-      string = "",
-      botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
-      botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
-      maquinas = document.querySelector("#tabela");
+      let string = "",
+          botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+          botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+          maquinas = document.querySelector("#tabela");
 
       for(i =0; i < carregarpagina.length; i++){
         string += "<tr class=\"maquina\">";
@@ -428,8 +425,15 @@ function carregaElementos(carregarpagina){
         string += "<td>" + carregarpagina[i].status + "</td>";
         string += "<td>" + carregarpagina[i].tipo + "</td>";
         string += "<td>" + carregarpagina[i].calculateValorAtual() + "</td>";
-        string += "<td>" + carregarpagina[i].dataSaida + "</td>";
-        string += "<td>" + carregarpagina[i].dataBaixa + "</td>";
+        if(carregarpagina[i].dataSaida == null)
+          string += "<td>N/A</td>";
+        else
+          string += "<td>" + carregarpagina[i].dataSaida + "</td>";
+        if(carregarpagina[i].dataBaixa == null)
+          string += "<td>N/A</td>";
+        else
+          string += "<td>" + carregarpagina[i].dataBaixa + "</td>";
+
         string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
         maquinas.innerHTML += string;
         string = "";
@@ -441,9 +445,7 @@ function carregaElementos(carregarpagina){
 
       let edita = document.querySelectorAll(".botaoEditar");
       for (var i = 0; i < edita.length; i++) {
-        edita[i].addEventListener("click", function() {
-          editar();
-        })
+        edita[i].addEventListener("click", editar);
       }
       visaoBotao();
 }
@@ -456,7 +458,7 @@ function filtraPagina(){
     if (filtro.value == "Em Posse") {
       let node = row.children;
 
-      if (node[6].innerHTML == "Em posse") {
+      if (node[6].innerHTML == "EM_POSSE") {
         row.style.display = "table-row";
       }
       else {
@@ -465,7 +467,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Em Manutenção") {
       let node = row.children;
-      if (node[6].innerHTML == "Em manutenção") {
+      if (node[6].innerHTML == "EM_MANUTENCAO") {
         row.style.display = "table-row";
       }
       else {
@@ -474,7 +476,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Alugados") {
       let node = row.children;
-      if (node[6].innerHTML == "Alugado") {
+      if (node[6].innerHTML == "ALUGADO") {
         row.style.display = "table-row";
       }
       else {
@@ -483,7 +485,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Vendidos") {
       let node = row.children;
-      if (node[6].innerHTML == "Vendido") {
+      if (node[6].innerHTML == "VENDIDO") {
         row.style.display = "table-row";
       }
       else {
@@ -492,16 +494,7 @@ function filtraPagina(){
     }
     if (filtro.value == "Descartados") {
       let node = row.children;
-      if (node[6].innerHTML == "Descartado") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    if (filtro.value == "Descartados") {
-      let node = row.children;
-      if (node[6].innerHTML == "Descartado") {
+      if (node[6].innerHTML == "DESCARTADO") {
         row.style.display = "table-row";
       }
       else {
@@ -572,7 +565,7 @@ let filtro = document.querySelector("#filtro_select_status");
     filtro.addEventListener("change", filtraPagina)
 
 receberTodos();
-window.onload = visaoBotao;
+visaoBotao();
 
 document.querySelector("input[name='depreciação']").oninput = function () {
     if (this.value > 100) {

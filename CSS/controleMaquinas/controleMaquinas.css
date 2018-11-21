@@ -7,9 +7,6 @@ body{
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Niramit', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 form > label{
   display: grid;
@@ -166,13 +163,6 @@ table{
 .fecharModal:hover{
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
-}
-.footer {
-  margin-top: 20vh;
-  height: 31vh;
-  width: 100vw;
-  margin-bottom: 0;
-  align-self: flex-end;
 }
 button[name='botaoRelatorio']{
   width: fit-content;

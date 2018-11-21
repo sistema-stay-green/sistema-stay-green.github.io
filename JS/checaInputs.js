@@ -69,9 +69,9 @@ let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUs
     inputSenhaEl = document.querySelector("#cadastro input[name='senhaUsuario']"),
     inputEmailEl = document.querySelector("#cadastro input[name='emailUsuario']");
 
-inputConfSenhaEl.addEventListener("change", checarSenhas);
-inputSenhaEl.addEventListener("change", checarSenhas);
-inputEmailEl.addEventListener("change", checaEmail);
+inputConfSenhaEl.addEventListener("input", checarSenhas);
+inputSenhaEl.addEventListener("input", checarSenhas);
+inputEmailEl.addEventListener("input", checaEmail);
 
 // Remove mensagens de erro dos inputs ao clicar em limpar
 let btnLimparEl = document.querySelector("#cadastro > button:nth-of-type(2)");
@@ -84,3 +84,27 @@ btnLimparEl.addEventListener("click", function(){
     erroEl.parentElement.removeChild(erroEl);
 
 });
+
+/*function checarCNPJ(cnpj = []){
+  
+  var v: int[2]
+  //Nota: Calcula o primeiro dígito de verificação.
+  v[1] := 5×cnpj[1] + 4×cnpj[2]  + 3×cnpj[3]  + 2×cnpj[4]
+  v[1] += 9×cnpj[5] + 8×cnpj[6]  + 7×cnpj[7]  + 6×cnpj[8]
+  v[1] += 5×cnpj[9] + 4×cnpj[10] + 3×cnpj[11] + 2×cnpj[12]
+  v[1] := 11 - v[1] mod 11
+  v[1] := 0 if v[1] ≥ 10
+  
+  //Nota: Calcula o segundo dígito de verificação.
+  v[2] := 6×cnpj[1] + 5×cnpj[2]  + 4×cnpj[3]  + 3×cnpj[4]
+  v[2] += 2×cnpj[5] + 9×cnpj[6]  + 8×cnpj[7]  + 7×cnpj[8]
+  v[2] += 6×cnpj[9] + 5×cnpj[10] + 4×cnpj[11] + 3×cnpj[12]
+  v[2] += 2×cnpj[13]
+  v[2] := 11 - v[2] mod 11
+  v[2] := 0 if v[2] ≥ 10
+  
+  //Nota: Verdadeiro se os dígitos de verificação são os esperados.
+  return v[1] = cnpj[13] and v[2] = cnpj[14]
+
+
+}*/

@@ -12,7 +12,6 @@ function formatarData(data){
   return data;
 }
 
-receberTodos();
 //checa se todos os inputs etão preenchidso e valida o cadastro
 function validacao(){
   //variaveis

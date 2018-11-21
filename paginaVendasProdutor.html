@@ -58,18 +58,18 @@
         <button id="botaoEnc" type="button" name="button" onclick="relatorioEncaminhamento()">Histórico de Encaminhamento</button>
         <button id="botaoFat" type="button" name="button" onclick="relatorioFaturamento()">Relatório de Faturamento</button>
         <button id="botaoRes" type="button" name="button" onclick="relatorioResultados()">Relatório de Resultados</button>
-	  </div>
-    <label> Região do Brasil:
-      <select name="regiao">
-        <option value="Sul">Sul</option>
-        <option value="Sudeste">Sudeste</option>
-        <option value="Centro-oeste">Centro-oeste</option>
-        <option value="Nordeste">Nordeste</option>
-        <option value="Norte">Norte</option>
-      </select> <br>
-    </label>
-
-      <label> frete para a região acima: R$ <input type="number" value=""></label>
+      </div>
+      <label> Região do Brasil:
+        <select name="regiaoFrete">
+          <option value="1">Sul</option>
+          <option value="2">Sudeste</option>
+          <option value="3">Centro-oeste</option>
+          <option value="4">Nordeste</option>
+          <option value="5">Norte</option>
+        </select> <br>
+      </label>
+      <label> frete para a região acima: R$ <input type="number" name="valorFrete" value=""></label>
+      <button type="button" name="altera">Alterar frete</button>
     </main>
     <script type="text/javascript" src="JS/staygreen.js"></script>
     <script type="text/javascript" src="JS/PaginaVendas/paginaVendasProdutor.js"></script>

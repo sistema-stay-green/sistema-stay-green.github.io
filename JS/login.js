@@ -17,8 +17,6 @@ btnEntrarLoginEl.addEventListener("click", function() {
              })
              .catch(() => { alert("Erro ao logar o servidor") });
 
-  // TODO: Criar classe para o usuário e salvá-lo no sessionStorage (objeto global será criado e lido)
-
 });
 
 // Troca o formulário para o de cadastro ao invés do login

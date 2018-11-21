@@ -16,10 +16,13 @@ function receberTodos(){
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r"+"&quantidade=1").
     then(function(resultado) {
       if(resultado != null){
+        let maquina;
         for(i = 0; i < resultado.length; i++){
-            let maquina = new Maquina(null);
+            console.log(i);
+            maquina = new Maquina(null);
             maquina.fromJSON(resultado[i]);
             resultado[i] = maquina;
+
             if(resultado[i].dataCompra != null){
               resultado[i].dataCompra = new Date(resultado[i].dataCompra.year,
                   resultado[i].dataCompra.month, resultado[i].dataCompra.dayOfMonth);
@@ -35,9 +38,9 @@ function receberTodos(){
             if(resultado[i].dataBaixa != null){
             resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
                 resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
-          }
-          carregaElementos(resultado);
+          }  
         }
+        carregaElementos(resultado);
     }
   });
 }

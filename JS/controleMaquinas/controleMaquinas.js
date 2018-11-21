@@ -12,8 +12,10 @@ function formatarData(data){
 }
 
 function formatarDataObj(data){
-  data = data.toISOString().split('T')[0];
-  return data;
+  if(data != null){
+    data = data.toISOString().split('T')[0];
+    return data;
+  }
 }
 
 //checa se todos os inputs etão preenchidso e valida o cadastro
@@ -187,7 +189,7 @@ function visaoBotao() {
     var pesquisa = botões[i].parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML != "Em posse"){
+    if(nodes[6].innerHTML != "EM_POSSE"){
       botões[i].className = "botaoDesab";
     }
     else {
@@ -198,7 +200,7 @@ function visaoBotao() {
     var pesquisa = botao.parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML != "Em posse"){
+    if(nodes[6].innerHTML != "EM_POSSE"){
       botao.className = "botaoDesab";
     }
     else {
@@ -417,8 +419,9 @@ function carregaElementos(carregarpagina){
       botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
       maquinas = document.querySelector("#tabela");
-      string += "<tr class=\"maquina\">";
+
       for(i =0; i < carregarpagina.length; i++){
+        string += "<tr class=\"maquina\">";
         string += "<td class=\"id\">" + carregarpagina[i].id + "</td>";
         string += "<td>" + carregarpagina[i].nome + "</td>";
         string += "<td>" + carregarpagina[i].finalidade + "</td>";
@@ -434,8 +437,18 @@ function carregaElementos(carregarpagina){
         maquinas.innerHTML += string;
         string = "";
       }
+      let chamaSaida = document.querySelectorAll(".botaoSaida");
+      for (var i = 0; i < chamaSaida.length; i++) {
+        chamaSaida[i].addEventListener("click", saida);
+      }
 
-  visaoBotao();
+      let edita = document.querySelectorAll(".botaoEditar");
+      for (var i = 0; i < edita.length; i++) {
+        edita[i].addEventListener("click", function() {
+          editar();
+        })
+      }
+      visaoBotao();
 }
 
 //filtra a exibição das maquinas
@@ -563,3 +576,9 @@ let filtro = document.querySelector("#filtro_select_status");
 
 receberTodos();
 window.onload = visaoBotao;
+
+document.querySelector("input[name='depreciação']").oninput = function () {
+    if (this.value > 100) {
+        this.value = 100;
+    }
+}

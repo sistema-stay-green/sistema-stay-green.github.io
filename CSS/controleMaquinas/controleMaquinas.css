@@ -127,6 +127,7 @@ table{
   z-index: 3;
   overflow-y: auto;
   height: 90vh;
+  padding: 3vh;
 }
 
 .tabelaDeMaquinas{

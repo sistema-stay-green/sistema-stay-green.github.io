@@ -70,9 +70,9 @@ function cadastro(){
     maquina.dataCompra = dataAs;
     maquina.valorCompra = valor;
     maquina.indiceDepreciacao = depreciacao;
-    maquina.calculateValorAtual();
+    maquina.valorAtual = maquina.calculateValorAtual();
 
-    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1)
+    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1);
 
 
     /*insere os valores adquiridos na div modal em uma string e depois insere
@@ -81,7 +81,7 @@ function cadastro(){
 
       let id = document.querySelectorAll(".maquina").length + 1;
       let vetor = [id,nome,finalidade,valor,depreciacao,data,
-                   "Em posse","Maquina",maquina.valorAtual,
+                   "EM_POSSE","Maquina",maquina.valorAtual,
                    "N/A","N/A"];
 
       /*let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
@@ -137,7 +137,7 @@ function saida(){
 
   /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
     escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
-  if (nodes[6].innerHTML == "Em posse") {
+  if (nodes[6].innerHTML == "EM_POSSE") {
     document.querySelector("#saidas").style.display = "block";
 
       if(elemento.className != "botaoDesab"){
@@ -145,10 +145,19 @@ function saida(){
         function(elemento){
           if(opcao.value == "Alugar"){
             document.querySelector("label[name='valor-label']").style.display = "block";
+            document.querySelector("label[name='periodo']").style.display = "block";
           }
-          else{
+          if(opcao.value == "Descartar"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='valor-label']").value = "";
+            document.querySelector("label[name='periodo']").style.display = "none";
+          }
+          if(opcao.value == "Vender"){
+            document.querySelector("label[name='valor-label']").style.display = "none";
+            document.querySelector("label[name='periodo']").style.display = "block";
+          }
+          if(opcao.value == "Enviar para conserto"){
+            document.querySelector("label[name='valor-label']").style.display = "none";
+            document.querySelector("label[name='periodo']").style.display = "block";
           }
         });
     }
@@ -199,7 +208,7 @@ function editar(){
   elemento = event.target;
   elemento = elemento.parentElement;
   nodes = elemento.parentNode.children;
-  if(nodes[6].innerHTML == "Em posse"){
+  if(nodes[6].innerHTML == "EM_POSSE"){
     document.querySelector("#editar").style.display = "block";
     elemento = event.target;
     elemento = elemento.parentElement;
@@ -226,22 +235,34 @@ function editarMaquina() {
       finalidade = document.querySelector("input[name='finalidade-editar']").value,
       valor =  document.querySelector("input[name='valor-editar']").value,
       data = document.querySelector("input[name='data-editar']").value,
+      dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
       depreciacao = document.querySelector("input[name='depreciação-editar']").value;
   let vetor = [id,nome,finalidade,valor,depreciacao,data],
       maquinas = document.querySelectorAll(".maquina"),
       string = "";
       editarBE(id,nome, finalidade, depreciacao, valor,
         formatarData(data))
+
+        let maquinaE = new Maquina();
+        maquinaE.dataCompra = dataAs;
+        maquinaE.valorCompra = valor;
+        maquinaE.indiceDepreciacao = depreciacao;
+        maquinaE.valorAtual = maquinaE.calculateValorAtual();
+
       for (maquina of maquinas) {
         nodes = maquina.children;
-        if(nodes[0].innerHTML == id.value){
+        if(nodes[0].innerHTML == id){
           for (var i = 0; i < nodes.length; i++) {
             if(i < 6){
-              string += "<td>" + vetor[i].value + "</td>";
+              string += "<td>" + vetor[i] + "</td>";
             }
-            else {
+            else if(i == 8){
+              string += "<td>" + maquinaE.valorAtual + "</td>"
+            }
+            else{
               string += "<td>" + nodes[i].innerHTML + "</td>";
             }
+
             if(i == nodes.length - 1){
               maquina.innerHTML = string;
             }
@@ -266,6 +287,7 @@ function relatorio(){
   limpa_relatorio()
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
+    console.log(elementos[1]);
     let string = "<ul><li>" +
                   "<p>#"+ elementos[0].innerHTML +
                   " - " + elementos[1].innerHTML + "</p>" +
@@ -278,24 +300,25 @@ function relatorio(){
                   "<p>Valor atual: " + elementos[8].innerHTML + "</p>" +
                   "<p>Data de saida: " + elementos[9].innerHTML + "</p>" +
                   "<p>Data de baixa: " + elementos[10].innerHTML + "</p>" +
+                  "<p>-----------------------------------------------------</p>" +
                   "</li></ul>";
-    if(elementos[6].innerHTML == "Em posse"){
+    if(elementos[6].innerHTML == "EM_POSSE"){
       section = document.querySelector("#maquinasPosse");
       section.innerHTML += string;
     }
-    if(elementos[6].innerHTML == "Vendido"){
+    if(elementos[6].innerHTML == "VENDIDO"){
       section = document.querySelector("#maquinasVendidas");
       section.innerHTML += string;
     }
-    if(elementos[6].innerHTML == "Alugado"){
+    if(elementos[6].innerHTML == "ALUGADO"){
       section = document.querySelector("#maquinasAlugadas");
       section.innerHTML += string;
     }
-    if(elementos[6].innerHTML == "Em manutenção"){
+    if(elementos[6].innerHTML == "EM_MANUTENCAO"){
       section = document.querySelector("#maquinasManutencao");
       section.innerHTML += string;
     }
-    if(elementos[6].innerHTML == "Descartado"){
+    if(elementos[6].innerHTML == "DESCARTADO"){
       section = document.querySelector("#maquinasDescartadas");
       section.innerHTML += string;
     }
@@ -338,20 +361,22 @@ function AlteraStatus(elemento,opcao){
           elemento.innerHTML += "<td>ALUGADO</td>";
           let valorAluguel = document.querySelector("input[name='valorAluguel']"),
               periodo = document.querySelector("input[name='periodo']");
-          alugar(vetor[0], periodo, valorAluguel);
+              alugar(vetor[0], periodo, valorAluguel);
         }
         if(opcao.value == "Vender"){
-          elemento.innerHTML += "<td>Vendido</td>";
-          vender(vetor[0]);
+          elemento.innerHTML += "<td>VENDIDO</td>";
+          let periodo = document.querySelector("input[name='periodo']");
+            vender(vetor[0], periodo);
         }
         if(opcao.value == "Enviar para conserto"){
-          elemento.innerHTML += "<td>Em manutenção</td>";
+          elemento.innerHTML += "<td>EM_MANUTENCAO</td>";
           let periodo = document.querySelector("input[name='periodo']");
-          manuntenir(vetor[0], periodo);
+            manuntenir(vetor[0], periodo);
         }
         if(opcao.value == "Descartar"){
           elemento.innerHTML += "<td>Descartado</td>";
-          descartar(vetor[0]);
+          let periodo = document.querySelector("input[name='periodo']");
+          descartar(vetor[0],periodo);
         }
       }
       else {

@@ -28,9 +28,10 @@ function encapsularCadastrar(nome, finalidade, status,
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularVenda(id){
+function encapsularVenda(id,data){
     let maquina = new Maquina(id);
     maquina.status = "VENDIDO";
+    maquina.dataBaixa = formatarData(data);
 
     return maquina.toJSON();
 }
@@ -41,9 +42,10 @@ function encapsularVenda(id){
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularDescarte(id){
+function encapsularDescarte(id,data){
     let maquina = new Maquina(id);
     maquina.status = "DESCARTADO";
+    maquina.dataBaixa = formatarData(data);
 
     return maquina.toJSON();
 }
@@ -58,6 +60,8 @@ function encapsularDescarte(id){
 function encapsularAluguel(id){
   let maquina = new Maquina(id);
   maquina.status = "ALUGADO";
+  maquina.dataRetorno = new Date();
+  maquina.dataSaida = novaData();
 
   return maquina.toJSON();
 }

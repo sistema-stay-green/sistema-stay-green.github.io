@@ -60,15 +60,15 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
  * @returns {String} Retorna uma string com resposta do Servlet;
  * @author Guilherme Sena
  */
-function vender(id){
-  let maquinaJSON = encapsularVenda(id);
+function vender(id,data){
+  let maquinaJSON = encapsularVenda(id,data);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"v"+
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ novaData()+
+              "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);
               });
@@ -80,7 +80,7 @@ function vender(id){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function descartar(id){
+function descartar(id,data){
   let maquinaJSON = encapsularDescarte(id);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
@@ -88,7 +88,7 @@ function descartar(id){
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ novaData()+
+              "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);
               });
@@ -101,14 +101,14 @@ function descartar(id){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function alugar(id, valorAluguel){
+function alugar(id,data, valorAluguel){
   let maquinaJSON = encapsularAluguel(id);
   Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"a"+
               "&dataCompra="+null+
               "&dataSaida="+novaData()+
-              "&dataRetorno="+null+
+              "&dataRetorno="+formatarData(data)+
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
@@ -130,7 +130,7 @@ function manuntenir(id, dataRetorno){
               "&acao="+"m"+
               "&dataCompra="+null+
               "&dataSaida="+novaData()+
-              "&dataRetorno="+dataRetorno+
+              "&dataRetorno="+formatarData(dataRetorno)+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);

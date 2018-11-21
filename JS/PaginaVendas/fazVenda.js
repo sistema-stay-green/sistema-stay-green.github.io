@@ -8,6 +8,9 @@ const cepInput = modalConfirma.querySelector('input[name=cep]');
 const confirmaButton = modalConfirma.querySelector('#confirmaModal');
 const regexCEP = /(\d{5})-?(\d{3})/;
 
+/**
+ * Classe que auxilia a passar dados do comprador
+ */
 class Comprador{
     constructor(nomeComprador, enderecoComprador, cepComprador, modoPagamento){
         this.nomeComprador = nomeComprador;
@@ -17,6 +20,9 @@ class Comprador{
     }
 }
 
+/**
+ * Classe que auxilia a passar dados do frete e tempo de entrega
+ */
 class Venda{
     constructor(){
         this.freteVenda = 10;
@@ -44,6 +50,7 @@ class dataEntrega{
     }
 }
 
+//Adiciona evento de compra ao clickar o botao de confirmar
 confirmaButton.addEventListener('click', e => {
     let dataTransacao = new dataEntrega(dataEntregaInput.valueAsDate);
 
@@ -52,25 +59,25 @@ confirmaButton.addEventListener('click', e => {
     for (const objeto of arrayCarrinho) {
         transacoes.push(new Transacao(objeto.id, objeto.valor , objeto.quantidade));
     }
-    let cepExp = regexCEP.exec(cepInput.value)
+    let cepExp = regexCEP.exec(cepInput.value);
     let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2] , modoPagamentoSelect.value);
     let query = `?`;
     for (const key in venda) {
         if (venda.hasOwnProperty(key)) {
             const elemento = venda[key];
-            query += `${key}=${encodeURI(elemento)}&`
+            query += `${key}=${encodeURI(elemento)}&`;
         }
     }
     for (const key in dataTransacao) {
         if (dataTransacao.hasOwnProperty(key)) {
             const elemento = dataTransacao[key];
-            query += `${key}=${encodeURI(elemento)}&`
+            query += `${key}=${encodeURI(elemento)}&`;
         }
     }
     for (const key in comprador) {
         if (comprador.hasOwnProperty(key)) {
             const elemento = comprador[key];
-            query += `${key}=${encodeURI(elemento)}&`
+            query += `${key}=${encodeURI(elemento)}&`;
         }
     }
     query += `transacoes=${encodeURI(JSON.stringify(transacoes))}`;

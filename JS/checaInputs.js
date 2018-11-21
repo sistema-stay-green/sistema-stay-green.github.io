@@ -74,7 +74,7 @@ inputSenhaEl.addEventListener("change", checarSenhas);
 inputEmailEl.addEventListener("change", checaEmail);
 
 // Remove mensagens de erro dos inputs ao clicar em limpar
-let btnLimparEl = document.querySelector("#cadastro > button:last-of-type");
+let btnLimparEl = document.querySelector("#cadastro > button:nth-of-type(2)");
 
 btnLimparEl.addEventListener("click", function(){
 

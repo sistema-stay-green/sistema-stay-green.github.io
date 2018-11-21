@@ -1,3 +1,23 @@
+
+let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+
+if(dadosUsuario !== null){
+
+  let nomeEl = document.querySelector("#perfil > p"),
+      cnpjEl = document.querySelector("#mostraInfoUsuario > p:nth-child(1)"),
+      saldoEl = document.querySelector("#mostraInfoUsuario > p:nth-child(2)"),
+      emailEl = document.querySelector("#mostraInfoUsuario > p:nth-child(3)");
+
+  nomeEl.innerHTML = dadosUsuario.nomeUsuario;
+  cnpjEl.innerHTML += dadosUsuario.cnpjUsuario;
+  saldoEl.innerHTML += dadosUsuario.saldoUsuario + ",00R$";
+  emailEl.innerHTML += dadosUsuario.emailUsuario;
+
+}
+else
+  window.location.href = "login.html";
+
+
 // Declaração de variáveis
 let btnEditarEl = document.querySelector("#btnEditar"),
     btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),

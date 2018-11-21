@@ -6,6 +6,7 @@ const regiaoSelect = modalConfirma.querySelector('select[name=regiao]');
 const enderecoInput = modalConfirma.querySelector('input[name=endereco]');
 const cepInput = modalConfirma.querySelector('input[name=cep]');
 const confirmaButton = modalConfirma.querySelector('#confirmaModal');
+const regexCEP = /(\d{5})-?(\d{3})/;
 
 class Comprador{
     constructor(nomeComprador, enderecoComprador, cepComprador, modoPagamento){
@@ -51,7 +52,8 @@ confirmaButton.addEventListener('click', e => {
     for (const objeto of arrayCarrinho) {
         transacoes.push(new Transacao(objeto.id, objeto.valor , objeto.quantidade));
     }
-    let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepInput.value, modoPagamentoSelect.value);
+    let cepExp = regexCEP.exec(cepInput.value)
+    let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2] , modoPagamentoSelect.value);
     let query = `?`;
     for (const key in venda) {
         if (venda.hasOwnProperty(key)) {

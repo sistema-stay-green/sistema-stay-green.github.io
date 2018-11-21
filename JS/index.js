@@ -40,9 +40,11 @@ if(dadosUsuario === null){ //não logado
 
   for (let linkMenuEl of linksMenu) {
 
-      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {}
+      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {
+        linkMenuEl.innerHTML = "Cadastrar";
+      }
       else if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/paginaVendasProdutor.html") {
-          linkMenuEl.href = "paginaVendas.html";
+        linkMenuEl.href = "paginaVendas.html";
       }
 
       else {

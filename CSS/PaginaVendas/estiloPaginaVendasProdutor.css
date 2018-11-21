@@ -78,7 +78,7 @@ main > label > input {
   font-family:  'Niramit' , sans-serif;
   font-size: calc(10px + 1vh);
 }
-#div-registra > h1 {
+#div-registra > h1, #div-encaminhamentos > h1, #div-faturamentos > h1, #div-resultados > h1 {
   color:var(--brancoIvory);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(15px + 1.5vh);

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Vendas do Produtor</title>
-    <link rel="stylesheet" href="CSS\PaginaVendas\estiloPaginaVendasProdutor.css">
     <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
     <link rel="stylesheet" href="CSS/staygreen.css">
+    <link rel="stylesheet" href="CSS\PaginaVendas\estiloPaginaVendasProdutor.css">
     <link rel="icon" href="imgs/icons/favicon.png">
   </head>
   <body>
@@ -21,16 +21,16 @@
     <div id="mascara"></div>
     <section id="div-registra">
       <h1>Dados do produto</h1>
-      <label> Nome: <input type="text" name="input" value=""> </label>
-      <label> Data da venda: <input type="date"value=""></label>
-      <label> Quantidade vendida: <input type="number" value=""></label>
+      <label> Id: <input type="number" name="input" value=""> </label>
+      <label> Data da venda: <input type="date" name="dataEntrega" value=""></label>
+      <label> Quantidade vendida: <input type="number" name="quant" value=""></label>
       <h1>Dados do cliente</h1>
       <label> Digite o nome completo do cliente: <input type="text" name="nome" value=""> </label>
       <label> modo de pagamento:
         <select name="modoPagamento">
-          <option value="boleto">boleto</option>
-          <option value="credito">Cartão de crédito</option>
-          <option value="debito">cartão de débito</option>
+          <option value="BOLETO">boleto</option>
+          <option value="CARTAO_CREDITO">Cartão de crédito</option>
+          <option value="CARTAO_DEBITO">cartão de débito</option>
         </select>
       </label>
       <label> Região do Brasil:
@@ -42,7 +42,7 @@
           <option value="Norte">Norte</option>
         </select>
       </label>
-      <label> Endereço: <input type="text" name="" value=""> </label>
+      <label> Endereço: <input type="text" name="endereco" value=""> </label>
       <label> CEP: <input type="cep" name="cep" pattern="\d{5}-?\d{3}" maxlength="9" placeholder="_____-___" value=""> </label>
       <div class="div-botoes">
         <button  type="button" name="confirmaModal">Confirmar</button>
@@ -54,9 +54,9 @@
     <section id="div-resultados"><h1>Resultados</h1></section>
     <main>
       <div class="div-botoes">
-        <button id="botaoRegistra" type="button" name="button">Registrar um Produto</button>
-        <button id="botaoEnc" type="button" name="button">Histórico de Encaminhamento</button>
-        <button id="botaoFat" type="button" name="button">Relatório de Faturamento</button>
+        <button id="botaoRegistra" type="button" name="button">Registrar uma Venda</button>
+        <button id="botaoEnc" type="button" name="button" onclick="relatorioEncaminhamento()">Histórico de Encaminhamento</button>
+        <button id="botaoFat" type="button" name="button" onclick="relatorioFaturamento()">Relatório de Faturamento</button>
         <button id="botaoRes" type="button" name="button" onclick="relatorioResultados()">Relatório de Resultados</button>
 	  </div>
     <label> Região do Brasil:
@@ -73,5 +73,6 @@
     </main>
     <script type="text/javascript" src="JS/staygreen.js"></script>
     <script type="text/javascript" src="JS/PaginaVendas/paginaVendasProdutor.js"></script>
+    <script type="text/javascript" src="JS/PaginaVendas/fazVendaProdutor.js"></script>
   </body>
 </html>

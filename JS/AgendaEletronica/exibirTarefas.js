@@ -1,6 +1,8 @@
 let tarefasArmazenadasBD,
   insumosArmazenadosBD;
 
+let staticDebugMode = false;
+
 /** Recebimento das tarefas armazenados na DB. Assim que
  * carregam, as demais funcionalidades do sistema são ativadas.
 */

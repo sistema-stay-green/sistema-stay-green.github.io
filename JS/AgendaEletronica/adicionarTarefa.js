@@ -219,3 +219,38 @@ function encapsularDadosTarefa() {
 
   return novaTarefaAdicionada;
 }
+
+/**
+ * Gera placeholders para as tarefas e os insumos caso o modo estático esteja ativado.
+ * @author Mei Fagundes
+ */
+function generatePlaceholders(){
+
+  let tarefasPlaceHolder = [];
+  let idTarefaPH = [1, 2, 3, 4, 5];
+  let nomeTarefaPH = ["Nome Teste 1", "Nome Teste 2", "Nome Teste 3", "Nome Teste 4", "Nome Teste 5",];
+  let gastoTarefaPH = [1000, 2000, 3000, 4000, 5000];
+  let quantProduzTarefaPH = [100, 200, 300, 400, 500];
+  let insumosTarefaPH = [1, 2, 3, 4, 5];
+  let quantInsumosTarefaPH = [150, 250, 350, 450, 550];
+
+  for (let i = 0; i < idTarefaPH.length; i++) {
+
+    tarefasPlaceHolder.push({"idTarefa":idTarefaPH[i], "nomeTarefa":nomeTarefaPH[i],
+      "gastoTarefa":gastoTarefaPH[i], "quantProduzTarefa":quantProduzTarefaPH[i],
+      "insumosTarefa":insumosTarefaPH[i], "quantInsumosTarefa":quantInsumosTarefaPH[i]});
+  }
+
+  let insumosPlaceHolder = [];
+  let idInsumo = [1, 2, 3, 4, 5];
+  let nomeInsumo = ["Nome Teste 1", "Nome Teste 2", "Nome Teste 3", "Nome Teste 4", "Nome Teste 5",]
+
+  for (let i = 0; i < idInsumo.length; i++) {
+    
+    insumosPlaceHolder.push({"idInsumo":idInsumo[i], "nomeInsumo":nomeInsumo[i]});
+    
+  }
+
+  insumosArmazenadosBD = insumosPlaceHolder;
+  tarefasArmazenadasBD = tarefasPlaceHolder;
+}

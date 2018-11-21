@@ -7,11 +7,12 @@ function aplicarRelatorios() {
       let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
 
         //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
-        relatorioContainer = document.querySelector('#containerRelatorio');
+        relatorioContainer = document.querySelector('#containerRelatorio div:nth-child(1)');
       relatorioContainer.innerHTML = '';
       relatorioContainer.appendChild(geraRelatorio(codigoRelatorio));
-      alteraVisibilidadeElemento(relatorioContainer, false);
-      mascaraFormEl.addEventListener('click', () => { alteraVisibilidadeElemento(relatorioContainer, true) });
+      alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), false);
+      mascaraFormEl.addEventListener('click', () => {
+         alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), true) });
     }));
 }
 
@@ -102,7 +103,7 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
  */
 function printRelatorio() {
 
-  let content = document.querySelector("#containerRelatorio").innerHTML;
+  let content = document.querySelector("#containerRelatorio div:nth-child(1)").innerHTML;
   let printWindow = window.open('', 'Print', 'height=768,width=1024');
 
   printWindow.document.write('<html><head><title>Print</title>');
@@ -115,3 +116,12 @@ function printRelatorio() {
   printWindow.document.close();
   printWindow.focus();
 }
+
+document.querySelector("#containerRelatorio div:nth-child(2) button")
+  .addEventListener("click", printRelatorio);
+
+if (staticDebugMode){
+  generatePlaceholders();
+  aplicarRelatorios();
+}
+  

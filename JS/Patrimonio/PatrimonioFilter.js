@@ -14,10 +14,7 @@ function getPatrimoniosFromStatus(patrimonios = [], status){
       if(status == patrimonio.status)
         patrimoniosResult.push(patrimonio);
     }
-    if (patrimoniosResult.length !== 0)
-        return patrimoniosResult;
-    else
-        return null;
+    return patrimoniosResult;
 }
 
 /**
@@ -76,10 +73,7 @@ function getPatrimoniosFromTipo(patrimonios = [],tipo){
       if(tipo == patrimonio.tipo)
         patrimoniosResult.push(patrimonio);
     }
-    if (patrimoniosResult.length !== 0)
-        return patrimoniosResult;
-    else
-        return null;
+    return patrimoniosResult;
 }
 
 /**

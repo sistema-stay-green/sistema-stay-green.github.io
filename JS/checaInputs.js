@@ -85,26 +85,34 @@ btnLimparEl.addEventListener("click", function(){
 
 });
 
-/*function checarCNPJ(cnpj = []){
-  
-  var v: int[2]
+// Checa vetorCNPJ
+function checarvetorCNPJ(cnpj){
+
+  let v = ["", ""],
+      vetorCNPJ = cnpj.split("");
+
   //Nota: Calcula o primeiro dígito de verificação.
-  v[1] := 5×cnpj[1] + 4×cnpj[2]  + 3×cnpj[3]  + 2×cnpj[4]
-  v[1] += 9×cnpj[5] + 8×cnpj[6]  + 7×cnpj[7]  + 6×cnpj[8]
-  v[1] += 5×cnpj[9] + 4×cnpj[10] + 3×cnpj[11] + 2×cnpj[12]
-  v[1] := 11 - v[1] mod 11
-  v[1] := 0 if v[1] ≥ 10
-  
+  v[0] = 5*vetorCNPJ[0] + 4*vetorCNPJ[1]  + 3*vetorCNPJ[2]  + 2*vetorCNPJ[3];
+  v[0] += 9*vetorCNPJ[4] + 8*vetorCNPJ[6]  + 7*vetorCNPJ[6]  + 6*vetorCNPJ[7];
+  v[0] += 5*vetorCNPJ[8] + 4*vetorCNPJ[9] + 3*vetorCNPJ[10] + 2*vetorCNPJ[11];
+  v[0] = 11 - (vetorCNPJ[0] % 11);
+  if(v[0] >= 10) v[0] = 0;
+
   //Nota: Calcula o segundo dígito de verificação.
-  v[2] := 6×cnpj[1] + 5×cnpj[2]  + 4×cnpj[3]  + 3×cnpj[4]
-  v[2] += 2×cnpj[5] + 9×cnpj[6]  + 8×cnpj[7]  + 7×cnpj[8]
-  v[2] += 6×cnpj[9] + 5×cnpj[10] + 4×cnpj[11] + 3×cnpj[12]
-  v[2] += 2×cnpj[13]
-  v[2] := 11 - v[2] mod 11
-  v[2] := 0 if v[2] ≥ 10
-  
+  v[1] = 6*vetorCNPJ[0] + 5*vetorCNPJ[1] + 4*vetorCNPJ[2] + 3*vetorCNPJ[3];
+  v[1] += 2*vetorCNPJ[4] + 9*vetorCNPJ[5] + 8*vetorCNPJ[6] + 7*vetorCNPJ[7];
+  v[1] += 6*vetorCNPJ[8] + 5*vetorCNPJ[9] + 4*vetorCNPJ[10] + 3*vetorCNPJ[11];
+  v[1] += 2*vetorCNPJ[12];
+  v[1] = 11 - (vetorCNPJ[1] % 11);
+  if(v[1] >= 10) v[1] = 0;
+
+  console.log(v[0]);
+  console.log(v[1]);
+
   //Nota: Verdadeiro se os dígitos de verificação são os esperados.
-  return v[1] = cnpj[13] and v[2] = cnpj[14]
+  console.log((v[0] === vetorCNPJ[12]) && (v[1] === vetorCNPJ[13]));
+  return ((v[0] === vetorCNPJ[12]) && (v[1] === vetorCNPJ[13]));
 
+}
 
-}*/
+checarvetorCNPJ("19764353000196");

@@ -83,18 +83,6 @@ button #iconePlus, #iconeRelatorio {
   margin-bottom: 100px;
 }
 
-#modalRelatorioHistorico{
-  width: 90%;
-  height: 80%;
-  margin-top: 5em;
-}
-
-#modalRelatorioHistorico2{
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-}
-
 #tabProdutosRegistrados, #tabInsumosRegistrados {
   margin: auto;
   margin-top: 1em;
@@ -138,17 +126,18 @@ button #iconePlus, #iconeRelatorio {
   left: calc(50vw - 20em);
   top: calc(50vh - 22em);
   padding: 1em;
-  max-height: 41em;;
+  max-height: 41em;
+  overflow-y: scroll;
 }
 
 #divModalAvisos{
-transition: 2s ease-in-out;
-width: 20em;
-right: -350px;
-top: calc(50vh - 16em);
-background-color: var(--brancoIvory);
-border: solid 0.25em var(--verdeCamarone);
-border-radius: 1em;
+  transition: 2s ease-in-out;
+  width: 20em;
+  right: -350px;
+  top: calc(50vh - 16em);
+  background-color: var(--brancoIvory);
+  border: solid 0.25em var(--verdeCamarone);
+  border-radius: 1em;
 }
 
 #divBtnFechar {
@@ -296,6 +285,10 @@ border-radius: 1em;
 
 .centralizaTabela {
   margin: auto;
+}
+
+.margin {
+  margin-bottom: 1.5em;
 }
 
 .aviso{

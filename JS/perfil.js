@@ -69,6 +69,14 @@ btnEditarEl.addEventListener("click", function(){
   emailUsuario.value = usuario.emailUsuario;
 });
 
+// Deslogar usuario
+let btnDeslogEl = document.querySelector("#mostraInfoUsuario > button:first-of-type");
+
+btnDeslogEl.addEventListener("click", function(){
+  localStorage.clear();
+  window.location.href = "index.html";
+});
+
 function alternaArticles(){
   formEditaEl.classList.toggle("ocultar");
   articleMostraEl.classList.toggle("ocultar");

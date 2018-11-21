@@ -217,21 +217,21 @@ function removerMercadoria(id){
 function avisos(i, res) {
 	divModalAvisos2.innerHTML = "";
 	divModalAvisos2.style.color = "black";
+	divModalAvisos2.classList.remove("esconde");
+	divModalAvisos.classList.remove("esconde");
 		switch (i) {
 				case "SUCESSO":
 						divModalAvisos2.innerHTML = "Operação realizada com sucesso!!";
 						divModalAvisos2.style.color = "green";
-						divModalAvisos2.classList.remove("esconde");
 						break;
 				case "INPUT_INVALIDO":
 						divModalAvisos2.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar...</p>";
 						divModalAvisos2.style.color = "red";
-						divModalAvisos.classList.remove("esconde");
+
 						divModalAvisos.style.right = "10px";
 ;
 						break;
 				case "FALHA":
-						divModalAvisos2.classList.remove("esconde");
 						divModalAvisos2.style.color = "red";
 						if (res.target.statusText) {
 							divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo:"+ res.target.statusText +"</p>";
@@ -240,12 +240,13 @@ function avisos(i, res) {
 						}
 						break;
 				case "FALHA":
-						divModalAvisos2.classList.remove("esconde");
 						divModalAvisos2.innerHTML = "<p>Houve uma falha</p>";
 						divModalAvisos2.style.color = "red";
 						break;
 				default:
+						break;
 		}
+		setTimeout(function(){ divModalAvisos2.classList.add("esconde"); divModalAvisos.classList.add("esconde"); }, 5000);
 }
 
 /**

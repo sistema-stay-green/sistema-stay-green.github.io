@@ -17,8 +17,6 @@ btnEntrarLoginEl.addEventListener("click", function() {
              })
              .catch(() => { alert("Erro ao logar o servidor") });
 
-  // TODO: Criar classe para o usuário e salvá-lo no sessionStorage (objeto global será criado e lido)
-
 });
 
 // Troca o formulário para o de cadastro ao invés do login
@@ -74,3 +72,24 @@ btnConfimarCadastroEl.addEventListener("click", function() {
     .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
+
+// Atualiza o header
+let linksMenu = document.querySelectorAll("nav > a");
+
+  for (let linkMenuEl of linksMenu) {
+
+      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {
+        linkMenuEl.innerHTML = "Cadastrar";
+      }
+      else if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/paginaVendasProdutor.html") {
+        linkMenuEl.href = "paginaVendas.html";
+      }
+
+      else {
+        if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/index.html"){} //caso nao seja o link para home
+        else{
+          linkMenuEl.classList.add("oculta");
+        }
+      }
+
+  }

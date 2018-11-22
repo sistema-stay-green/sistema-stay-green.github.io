@@ -40,16 +40,19 @@ if(dadosUsuario === null){ //não logado
 
   for (let linkMenuEl of linksMenu) {
 
-      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {}
+      if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/perfil.html") {
+          linkMenuEl.innerHTML = "Login";
+          linkMenuEl.href = "login.html";
+      }
       else if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/paginaVendasProdutor.html") {
           linkMenuEl.href = "paginaVendas.html";
       }
 
       else {
-        if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/index.html"){} //caso nao seja o link para home
-        else{
+        if (linkMenuEl.href.slice(linkMenuEl.href.lastIndexOf('/')) === "/index.html") {}
+        //caso nao seja o link para home
+        else
           linkMenuEl.classList.add("oculta");
-        }
       }
 
   }

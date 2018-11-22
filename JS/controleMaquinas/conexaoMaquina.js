@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:30194/StayGreen/MaquinasServlet?";
+const SERVER_URL = "http://localhost:8080/StayGreen/MaquinasServlet?";
 
 
 /**
@@ -8,7 +8,6 @@ const SERVER_URL = "http://localhost:30194/StayGreen/MaquinasServlet?";
 function novaData(){
   data = new Date().toLocaleString("pt-BR");
   data = data.substring(0,10);
-  console.log(data);
   return data;
 }
 
@@ -19,6 +18,32 @@ function formatarData(data){
   return data;
 }
 
+function transformaEmMaquina(resultado){
+  let maquina = new Maquina(null);
+  maquina.fromJSON(resultado);
+  return maquina;
+}
+
+function dateObjToDate(resultado){
+    if(resultado.dataCompra != null){
+      resultado.dataCompra = new Date(resultado.dataCompra.year,
+          resultado.dataCompra.month, resultado.dataCompra.dayOfMonth);
+    }
+    if(resultado.dataSaida != null){
+     resultado.dataSaida = new Date(resultado.dataSaida.year,
+         resultado.dataSaida.month, resultado.dataSaida.dayOfMonth);
+    }
+    if(resultado.dataRetorno != null){
+    resultado.dataRetorno = new Date(resultado.dataRetorno.year,
+        resultado.dataRetorno.month, resultado.dataRetorno.dayOfMonth);
+    }
+    if(resultado.dataBaixa != null){
+    resultado.dataBaixa = new Date(resultado.dataBaixa.year,
+        resultado.dataBaixa.month, resultado.dataBaixa.dayOfMonth);
+    }
+    return resultado;
+}
+
 /**
 * Faz requisição Ajax para receber todos os dados
 * @returns {Object} vetor de maquinas
@@ -26,31 +51,11 @@ function formatarData(data){
 function receberTodos(){
   Request.get(SERVER_URL+"acao=r&quantidade=1").then(function(resultado){
       if(resultado != null){
-        let maquina;
         for(i = 0; i < resultado.length; i++){
-            maquina = new Maquina(null);
-            maquina.fromJSON(resultado[i]);
-            resultado[i] = maquina;
-
-            if(resultado[i].dataCompra != null){
-              resultado[i].dataCompra = new Date(resultado[i].dataCompra.year,
-                  resultado[i].dataCompra.month, resultado[i].dataCompra.dayOfMonth);
-            }
-            if(resultado[i].dataSaida != null){
-             resultado[i].dataSaida = new Date(resultado[i].dataSaida.year,
-                 resultado[i].dataSaida.month, resultado[i].dataSaida.dayOfMonth);
-            }
-            if(resultado[i].dataRetorno != null){
-            resultado[i].dataRetorno = new Date(resultado[i].dataRetorno.year,
-                resultado[i].dataRetorno.month, resultado[i].dataRetorno.dayOfMonth);
-            }
-            if(resultado[i].dataBaixa != null){
-            resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
-                resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
-          }
+            resultado[i] = transformaEmMaquina(resultado[i]);
+            resultado[i] = dateObjToDate(resultado[i])
         }
-        console.log(resultado);
-        adicionarMaquina(resultado);
+        adicionaTodasMaquinas(resultado);
     }
   });
 }
@@ -80,6 +85,8 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade="+quantidade).then(function(resultado) {
+                resultado = transformaEmMaquina(resultado);
+                resultado = dateObjToDate(resultado);
                 adicionaMaquina(resultado);
               });
 }
@@ -100,7 +107,8 @@ function vender(id,data){
               "&dataRetorno="+null+
               "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
-                adicionaMaquina(resultado);
+                resultado = dateObjToDate(resultado);
+                editaMaquina(transformaEmMaquina(resultado));
               });
 }
 
@@ -120,7 +128,8 @@ function descartar(id,data){
               "&dataRetorno="+null+
               "&dataBaixa="+formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
-                adicionaMaquina(resultado);
+                resultado = dateObjToDate(resultado);
+                editaMaquina(transformaEmMaquina(resultado));
               });
 }
 
@@ -142,7 +151,9 @@ function alugar(id,data, valorAluguel){
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
-                adicionaMaquina(resultado);
+                resultado = transformaEmMaquina(resultado)
+                resultado = dateObjToDate(resultado);
+                editaMaquina(resultado);
               });
 }
 
@@ -163,7 +174,8 @@ function manuntenir(id, dataRetorno){
               "&dataRetorno="+formatarData(dataRetorno)+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
-                adicionaMaquina(resultado);
+                resultado = dateObjToDate(resultado);
+                editaMaquina(transformaEmMaquina(resultado));
               });
 }
 
@@ -178,6 +190,7 @@ function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataComp
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade=1").then(function(resultado) {
-                editaMaquina(resultado);
+                resultado = dateObjToDate(resultado);
+                editaMaquina(transformaEmMaquina(resultado));
               });
 }

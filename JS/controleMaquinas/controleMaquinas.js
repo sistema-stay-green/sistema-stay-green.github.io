@@ -229,6 +229,9 @@ function visaoBotao() {
 /*Chama a aba para editar maquinas Em posse*/
 // Estilização
 function mostraModalEditar(){
+  elemento = event.target;
+  elemento = elemento.parentElement;
+  nodes = elemento.parentNode.children;
   if(nodes[6].innerHTML == "EM_POSSE"){
     document.querySelector("#editar").style.display = "block";
   }
@@ -339,40 +342,84 @@ function AlteraStatus(elemento,opcao){
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
   }
-  setTimeout(function(){
-    receberTodos();
-  }, 500);
 }
 
 //carrega as maquinas na pagina ao iniciar
-function adicionaMaquina(maquinas){
+function adicionaMaquina(maquina){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
           botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
           tabelaMaquinas = document.querySelector("#tabela");
 
-      for(i = 0; i < maquinas.length; i++){
+          console.log(maquina);
+
           string += "<tr class=\"maquina\">";
-          string += "<td class=\"id\">" + maquinas[i].id + "</td>";
-          string += "<td>" + maquinas[i].nome + "</td>";
-          string += "<td class=\"finalidade\">" + maquinas[i].finalidade + "</td>";
-          string += "<td>" + maquinas[i].valorCompra + "</td>";
-          string += "<td>" + maquinas[i].indiceDepreciacao + "</td>";
-          string += "<td>" + formatarDataObj(maquinas[i].dataCompra) + "</td>";
-          string += "<td>" + maquinas[i].status + "</td>";
-          string += "<td>" + maquinas[i].calculateValorAtual() + "</td>";
-          if(maquinas[i].dataSaida == null)
+          string += "<td class=\"id\">" + maquina.id + "</td>";
+          string += "<td>" + maquina.nome + "</td>";
+          string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
+          string += "<td>" + maquina.valorCompra + "</td>";
+          string += "<td>" + maquina.indiceDepreciacao + "</td>";
+          string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
+          string += "<td>" + maquina.status + "</td>";
+          string += "<td>" + maquina.calculateValorAtual() + "</td>";
+          if(maquina.dataSaida == null)
             string += "<td>N/A</td>";
           else
-            string += "<td>" + formatarDataObj(maquinas[i].dataSaida) + "</td>";
-          if(maquinas[i].dataBaixa == null)
+            string += "<td>" + formatarDataObj(maquina.dataSaida) + "</td>";
+          if(maquina.dataBaixa == null)
             string += "<td>N/A</td>";
           else
-            string += "<td>" + formatarDataObj(maquinas[i].dataBaixa) + "</td>";
-          if(maquinas[i].dataRetorno == null)
+            string += "<td>" + formatarDataObj(maquina.dataBaixa) + "</td>";
+          if(maquina.dataRetorno == null)
             string += "<td>N/A</td>";
           else
-            string +=   "<td>" + formatarDataObj(maquinas[i].dataRetorno) + "</td>";
+            string +=   "<td>" + formatarDataObj(maquina.dataRetorno) + "</td>";
+
+          string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
+          tabelaMaquinas.innerHTML += string;
+          string = "";
+
+      let chamaSaida = document.querySelectorAll(".botaoSaida");
+      for (var i = 0; i < chamaSaida.length; i++) {
+        chamaSaida[i].addEventListener("click", saida);
+      }
+
+      let edita = document.querySelectorAll(".botaoEditar");
+      for (var i = 0; i < edita.length; i++) {
+        edita[i].addEventListener("click", mostraModalEditar);
+      }
+      visaoBotao();
+}
+
+function adicionaTodasMaquinas(maquinasVetor){
+      let string = "",
+          botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+          botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+          tabelaMaquinas = document.querySelector("#tabela");
+
+
+      for(i = 0; i < maquinasVetor.length; i++){
+          string += "<tr class=\"maquina\">";
+          string += "<td class=\"id\">" + maquinasVetor[i].id + "</td>";
+          string += "<td>" + maquinasVetor[i].nome + "</td>";
+          string += "<td class=\"finalidade\">" + maquinasVetor[i].finalidade + "</td>";
+          string += "<td>" + maquinasVetor[i].valorCompra + "</td>";
+          string += "<td>" + maquinasVetor[i].indiceDepreciacao + "</td>";
+          string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
+          string += "<td>" + maquinasVetor[i].status + "</td>";
+          string += "<td>" + maquinasVetor[i].calculateValorAtual() + "</td>";
+          if(maquinasVetor[i].dataSaida == null)
+            string += "<td>N/A</td>";
+          else
+            string += "<td>" + formatarDataObj(maquinasVetor[i].dataSaida) + "</td>";
+          if(maquinasVetor[i].dataBaixa == null)
+            string += "<td>N/A</td>";
+          else
+            string += "<td>" + formatarDataObj(maquinasVetor[i].dataBaixa) + "</td>";
+          if(maquinasVetor[i].dataRetorno == null)
+            string += "<td>N/A</td>";
+          else
+            string +=   "<td>" + formatarDataObj(maquinasVetor[i].dataRetorno) + "</td>";
 
           string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
           tabelaMaquinas.innerHTML += string;
@@ -385,7 +432,7 @@ function adicionaMaquina(maquinas){
 
       let edita = document.querySelectorAll(".botaoEditar");
       for (var i = 0; i < edita.length; i++) {
-        edita[i].addEventListener("click", editar);
+        edita[i].addEventListener("click", mostraModalEditar);
       }
       visaoBotao();
 }
@@ -397,6 +444,8 @@ function editaMaquina(maquina){
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>";
   for (linhaMaquina of arrLinhaMaquina) {
     let node = linhaMaquina.children;
+    console.log(maquina);
+
     if(node[0].innerHTML == maquina.id){
         string += "<tr class=\"maquina\">";
         string += "<td class=\"id\">" + maquina.id + "</td>";
@@ -463,13 +512,11 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoVoltar = document.querySelector("button[name='botaoVoltar']"),
     botaoConfirmarCadastro = document.querySelector("button[name='botaoAcao']"),
     botaoConfirmarEditar = document.querySelector("button[name='botaoEditarMaquina']"),
-    botaoEditar = document.querySelector("button[name='botaoEditar']"),
     botaoRelatorio = document.querySelector("button[name='botaoRelatorio']"),
     filtro = document.querySelector("#filtro_select_status");
 
 //Adiciona as funções aos botões
 botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
-botaoEditar.addEventListener("click", mostraModalEditar);
 botaoCadastro.addEventListener("click", mostraModalCadastro);
 botaoVoltar.addEventListener("click", voltar);
 botaoConfirmarCadastro.addEventListener("click", enviaInformacoesCadastro);

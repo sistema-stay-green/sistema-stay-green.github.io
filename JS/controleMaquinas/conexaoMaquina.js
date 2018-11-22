@@ -49,8 +49,8 @@ function receberTodos(){
                 resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
           }
         }
-
-        carregaElementos(resultado);
+        console.log(resultado);
+        adicionarMaquina(resultado);
     }
   });
 }
@@ -80,7 +80,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade="+quantidade).then(function(resultado) {
-                console.log(resultado);
+                adicionaMaquina(resultado);
               });
 }
 
@@ -100,7 +100,7 @@ function vender(id,data){
               "&dataRetorno="+null+
               "&dataBaixa="+ formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
-                console.log(resultado);
+                adicionaMaquina(resultado);
               });
 }
 
@@ -120,7 +120,7 @@ function descartar(id,data){
               "&dataRetorno="+null+
               "&dataBaixa="+formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
-                console.log(resultado);
+                adicionaMaquina(resultado);
               });
 }
 
@@ -142,7 +142,7 @@ function alugar(id,data, valorAluguel){
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
-                console.log(resultado);
+                adicionaMaquina(resultado);
               });
 }
 
@@ -163,7 +163,7 @@ function manuntenir(id, dataRetorno){
               "&dataRetorno="+formatarData(dataRetorno)+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
-                console.log(resultado);
+                adicionaMaquina(resultado);
               });
 }
 
@@ -178,6 +178,6 @@ function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataComp
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade=1").then(function(resultado) {
-                console.log(resultado);
+                editaMaquina(resultado);
               });
 }

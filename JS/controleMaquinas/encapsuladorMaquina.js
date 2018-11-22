@@ -62,7 +62,7 @@ function encapsularAluguel(id,data,valorAluguel){
   maquina.status = "ALUGADO";
   maquina.dataRetorno = formatarData(data);
   maquina.dataSaida = novaData();
-  
+
 
   return maquina.toJSON();
 }

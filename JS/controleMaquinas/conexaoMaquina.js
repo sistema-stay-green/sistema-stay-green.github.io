@@ -1,10 +1,21 @@
+const SERVER_URL = "http://localhost:30194/StayGreen/MaquinasServlet?";
+
+
 /**
 * Retorna data atual já formatada
 * @returns {String} data atual formatada
 */
 function novaData(){
   data = new Date().toLocaleString("pt-BR");
-  data = data.substring(1,10);
+  data = data.substring(0,10);
+  console.log(data);
+  return data;
+}
+
+function formatarData(data){
+  data = data.split("-");
+  data = data[2] + "/" + data[1] + "/" + data[0];
+  data = data.substr(1);
   return data;
 }
 
@@ -13,12 +24,10 @@ function novaData(){
 * @returns {Object} vetor de maquinas
 */
 function receberTodos(){
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?acao="+"r"+"&quantidade=1").
-    then(function(resultado) {
+  Request.get(SERVER_URL+"acao=r&quantidade=1").then(function(resultado){
       if(resultado != null){
         let maquina;
         for(i = 0; i < resultado.length; i++){
-            console.log(i);
             maquina = new Maquina(null);
             maquina.fromJSON(resultado[i]);
             resultado[i] = maquina;
@@ -38,8 +47,9 @@ function receberTodos(){
             if(resultado[i].dataBaixa != null){
             resultado[i].dataBaixa = new Date(resultado[i].dataBaixa.year,
                 resultado[i].dataBaixa.month, resultado[i].dataBaixa.dayOfMonth);
-          }  
+          }
         }
+
         carregaElementos(resultado);
     }
   });
@@ -62,7 +72,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
   dataCompra, quantidade){
   let maquinaJSON = encapsularCadastrar(nome, descricao, status,
     indiceDepreciacao, valorCompra);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"c"+
               "&dataCompra="+dataCompra+
@@ -82,7 +92,7 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
  */
 function vender(id,data){
   let maquinaJSON = encapsularVenda(id,data);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"v"+
               "&dataCompra="+null+
@@ -101,14 +111,14 @@ function vender(id,data){
  * @author Guilherme Sena
  */
 function descartar(id,data){
-  let maquinaJSON = encapsularDescarte(id);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  let maquinaJSON = encapsularDescarte(id,data);
+  Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"d"+
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ formatarData(data)+
+              "&dataBaixa="+formatarData(data)+
               "&quantidade="+1).then(function(resultado) {
                 console.log(resultado);
               });
@@ -122,8 +132,8 @@ function descartar(id,data){
  * @author Guilherme Sena
  */
 function alugar(id,data, valorAluguel){
-  let maquinaJSON = encapsularAluguel(id);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  let maquinaJSON = encapsularAluguel(id,data,valorAluguel);
+  Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"a"+
               "&dataCompra="+null+
@@ -145,7 +155,7 @@ function alugar(id,data, valorAluguel){
  */
 function manuntenir(id, dataRetorno){
   let maquinaJSON = encapsularManutencao(id, dataRetorno);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  Request.get(SERVER_URL+
               "&maquinasJSON="+maquinaJSON+
               "&acao="+"m"+
               "&dataCompra="+null+
@@ -160,7 +170,7 @@ function manuntenir(id, dataRetorno){
 function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
   let maquinaJSON = encapsularEditar(id, nome, finalidade,
     indiceDepreciacao, valorCompra,dataCompra);
-  Request.get("http://localhost:8080/StayGreen/MaquinasServlet?"+
+  Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"e"+
               "&dataCompra="+dataCompra+

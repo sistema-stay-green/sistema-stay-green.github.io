@@ -19,6 +19,7 @@ function formatarDataObj(data){
 }
 
 //checa se todos os inputs etão preenchidso e valida o cadastro
+// Estilização
 function validacao(){
   //variaveis
   let inputs = document.querySelectorAll(".inputs"),
@@ -37,6 +38,7 @@ function validacao(){
 }
 
 //fecha a div modal que pergunta os valores a serem cadastrados
+// Estilização
 function voltar(){
   document.querySelector(".maquinas").style.display = "inline-block";
   document.querySelector(".valores_fundo").style.display = "none";
@@ -47,6 +49,7 @@ function voltar(){
 }
 
 //Abre uma div modal que permite a inserção de dados a srem cadastrados
+// Estilização
 function cadastrar_fe(){
   validacao();
     let inputs = document.querySelectorAll(".inputs");
@@ -57,81 +60,68 @@ function cadastrar_fe(){
 
 }
 
-//função que cadastra valores na tabela sem a utilização do BD
-function cadastro(){
-  if(validacao() == true){
-    //variaveis
-    let nome = document.querySelector("input[name='nome']").value,
-        finalidade = document.querySelector("input[name='finalidade']").value,
-        valor =  document.querySelector("input[name='valor']").value,
-        dataAs = document.querySelector("input[name='data']").valueAsDate,
-        data = document.querySelector("input[name='data']").value,
-        depreciacao = document.querySelector("input[name='depreciação']").value,
-        //quantidade = document.querySelector("input[name='quantidade']").value,
-        botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
-        botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
-        maquinas = document.querySelector("#tabela");
-    let string = "";
-    let maquina = new Maquina();
-    maquina.dataCompra = dataAs;
-    maquina.valorCompra = valor;
-    maquina.indiceDepreciacao = depreciacao;
-    maquina.valorAtual = maquina.calculateValorAtual();
+//filtra a exibição das maquinas
+// Estilização
+function filtraPagina(){
+  let filtro = document.querySelector("#filtro_select_status"),
+      maquinas = document.querySelectorAll(".maquina");
+  for (row of maquinas) {
+    if (filtro.value == "Em Posse") {
+      let node = row.children;
 
-    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1);
-
-
-    /*insere os valores adquiridos na div modal em uma string e depois insere
-      essa string na tabela*/
-
-
-      let id = document.querySelectorAll(".maquina").length + 1;
-      let vetor = [id,nome,finalidade,valor,depreciacao,data,
-                   "EM_POSSE","Maquina",maquina.valorAtual,
-                   "N/A","N/A"];
-
-      /*let vetor = [maquina.id,maquina.nome,maquina.valorCompra,
-                   maquina.indiceDepreciacao,maquina.dataCompra,
-                   maquina.status,maquina.tipo,maquina.valorAtual,
-                   maquina.dataSaida,maquina.dataBaixa];*/
-
-    for (var i = 0; i < vetor.length; i++) {
-      if(i == 0){
-        string += "<tr class=\"maquina\">";
-        string += "<td class=\"id\">" + vetor[i] + "</td>";
-      }else {
-        string += "<td>" + vetor[i] + "</td>";
+      if (node[6].innerHTML == "EM_POSSE") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
       }
     }
-      maquinas.innerHTML += string +
-      "<td>" + botaoSaida + botaoEditar + "</td><tr>";
-
-    //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
-    document.querySelector(".maquinas").style.display = "inline-block";
-    document.querySelector(".opcoes").style.display = "block";
-    document.querySelector(".valores_fundo").style.display = "none";
-
-    //zera os valores dos inputs da div modal
-    var valores = document.querySelectorAll(".inputs");
-    for (var i = 0; i < valores.length; i++) {
-      valores[i].value = "";
+    else if (filtro.value == "Em Manutenção") {
+      let node = row.children;
+      if (node[6].innerHTML == "EM_MANUTENCAO") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    else if (filtro.value == "Alugados") {
+      let node = row.children;
+      if (node[6].innerHTML == "ALUGADO") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    else if (filtro.value == "Vendidos") {
+      let node = row.children;
+      if (node[6].innerHTML == "VENDIDO") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    if (filtro.value == "Descartados") {
+      let node = row.children;
+      if (node[6].innerHTML == "DESCARTADO") {
+        row.style.display = "table-row";
+      }
+      else {
+        row.style.display = "none";
+      }
+    }
+    if (filtro.value == "Todos") {
+      let node = row.children;
+      row.style.display = "table-row";
     }
 
-    //permite a chamada da função "saida" ao botão "botaoSaida" ser presionado
-    let botões = document.querySelectorAll(".botaoSaida");
-    for (var i = 0; i < botões.length; i++) {
-      botões[i].addEventListener("click", saida);
-    }
-    //permite a chamada da função "editar" ao botão "botaoEditar" ser presionado
-       botões = document.querySelectorAll(".botaoEditar");
-    for (var i = 0; i < botões.length; i++) {
-      botões[i].addEventListener("click", editar);
-    }
-    document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
   }
 }
 
 //Passa a informação se a maquina sera ALugada,Vendida,Etc...
+// Estilização
 function saida(){
   //Variaveis
   let opcao = document.querySelector("#filtro_saida"),
@@ -141,6 +131,7 @@ function saida(){
   elemento = elemento.parentNode;
   nodes = elemento.parentNode.children;
 
+  document.querySelector("#editar").style.display = "none";
   /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
     escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
   if (nodes[6].innerHTML == "EM_POSSE") {
@@ -155,7 +146,7 @@ function saida(){
           }
           if(opcao.value == "Descartar"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo-label']").style.display = "none";
+            document.querySelector("label[name='periodo-label']").style.display = "block";
           }
           if(opcao.value == "Vender"){
             document.querySelector("label[name='valor-label']").style.display = "none";
@@ -182,6 +173,7 @@ function saida(){
 
 /*Função que adiciona ou remove a classe botaoDesab de acordo com o estado da
   maquina*/
+// Estilização
 function visaoBotao() {
   let botões = document.querySelectorAll(".botaoSaida");
   let botões2 = document.querySelectorAll(".botaoEditar");
@@ -193,7 +185,7 @@ function visaoBotao() {
       botões[i].className = "botaoDesab";
     }
     else {
-      botões[i].className = "botaoEditar";
+      botões[i].className = "botaoSaida";
     }
   }
   for (botao of botões2) {
@@ -210,6 +202,7 @@ function visaoBotao() {
 }
 
 /*Chama a aba para editar maquinas Em posse*/
+// Estilização
 function editar(){
   elemento = event.target;
   elemento = elemento.parentElement;
@@ -243,57 +236,23 @@ function editarMaquina() {
       data = document.querySelector("input[name='data-editar']").value,
       dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
       depreciacao = document.querySelector("input[name='depreciação-editar']").value;
-  let vetor = [id,nome,finalidade,valor,depreciacao,data],
-      maquinas = document.querySelectorAll(".maquina"),
-      string = "";
-      editarBE(id,nome, finalidade, depreciacao, valor,
-        formatarData(data))
 
-        let maquinaE = new Maquina();
-        maquinaE.dataCompra = dataAs;
-        maquinaE.valorCompra = valor;
-        maquinaE.indiceDepreciacao = depreciacao;
-        maquinaE.valorAtual = maquinaE.calculateValorAtual();
+      editarBE(id,nome, finalidade, depreciacao, valor,formatarData(data))
 
-      for (maquina of maquinas) {
-        nodes = maquina.children;
-        if(nodes[0].innerHTML == id){
-          for (var i = 0; i < nodes.length; i++) {
-            if(i < 6){
-              string += "<td>" + vetor[i] + "</td>";
-            }
-            else if(i == 8){
-              string += "<td>" + maquinaE.valorAtual + "</td>"
-            }
-            else{
-              string += "<td>" + nodes[i].innerHTML + "</td>";
-            }
-
-            if(i == nodes.length - 1){
-              maquina.innerHTML = string;
-            }
-          }
-        }
+      for (var i = 0; i < 2; i++) {
+        receberTodos();
       }
+
       document.querySelector("#editar").style.display = "none";
-      let edita = document.querySelectorAll(".botaoEditar");
-      for (var i = 0; i < edita.length; i++) {
-        edita[i].addEventListener("click", editar)
-      }
-      let botoes = document.querySelectorAll(".botaoSaida");
-      for (var i = 0; i < botoes.length; i++) {
-        botoes[i].addEventListener("click", saida);
-      }
-
 }
 
 /*Relatorio da pagina*/
+// Estilização
 function relatorio(){
   maquinas = document.querySelectorAll(".maquina");
   limpa_relatorio()
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
-    console.log(elementos[1]);
     let string = "<ul><li>" +
                   "<p>#"+ elementos[0].innerHTML +
                   " - " + elementos[1].innerHTML + "</p>" +
@@ -333,17 +292,18 @@ function relatorio(){
 }
 
 //limpa o relatorio para não duplicação de maquinas no mesmo
+// Estilização
 function limpa_relatorio() {
     section = document.querySelector("#maquinasPosse");
     section.innerHTML = "<h2>Maquinas em posse</h2>";
     section = document.querySelector("#maquinasVendidas");
-    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
+    section.innerHTML = "<h2>Maquinas vendidas</h2>";
     section = document.querySelector("#maquinasAlugadas");
-    section.innerHTML = "<h2>Maquinas Alugadas</h2>";
+    section.innerHTML = "<h2>Maquinas alugadas</h2>";
     section = document.querySelector("#maquinasManutencao");
-    section.innerHTML = "<h2>Maquinas descartadas</h2>";
+    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
     section = document.querySelector("#maquinasDescartadas");
-    section.innerHTML = "<h2>Maquinas Vendidas</h2>";
+    section.innerHTML = "<h2>Maquinas descartadas</h2>";
 }
 
 //função que altera o status da maquina
@@ -351,88 +311,72 @@ function AlteraStatus(elemento,opcao){
     //Pega os "filhos" da variavel elemento
     elemento = elemento.parentElement;
     nodes = elemento.children;
+    let valorAluguel = document.querySelector("input[name='valorAluguel']").value,
+        periodo = document.querySelector("input[name='periodo']").value;
 
     //transporta os valores dos filhos de "elemento" para um vetor
-    let vetor = [];
-    for (var i = 0; i < nodes.length; i++) {
-       vetor.push(nodes[i].innerHTML);
-    }
 
     /*Imprime os valores do vetor mais a condição que se encontra a maquinas
       de acordo com o valor da variavel opcao*/
-    elemento.innerHTML = "<tr class=\"maquina\">";
-    for (var i = 0; i < vetor.length; i++) {
-      if(i == 6){
-        periodo = document.querySelector("input[name='periodo']").value;
         if(opcao.value == "Alugar"){
-          elemento.innerHTML += "<td>ALUGADO</td>";
-          let valorAluguel = document.querySelector("input[name='valorAluguel']");
-          alugar(vetor[0], periodo, valorAluguel);
+            console.log(nodes[0].innerHTML+" "+periodo+" "+valorAluguel);
+            alugar(nodes[0].innerHTML, periodo, valorAluguel);
         }
         if(opcao.value == "Vender"){
-          elemento.innerHTML += "<td>VENDIDO</td>";
-            vender(vetor[0], periodo);
+            vender(nodes[0].innerHTML, periodo);
         }
         if(opcao.value == "Enviar para conserto"){
-          elemento.innerHTML += "<td>EM_MANUTENCAO</td>";
-            manuntenir(vetor[0], periodo);
+            manuntenir(nodes[0].innerHTML, periodo);
         }
         if(opcao.value == "Descartar"){
-          elemento.innerHTML += "<td>Descartado</td>";
-          descartar(vetor[0],periodo);
+            descartar(nodes[0].innerHTML, periodo);
         }
-      }
-      else {
-        elemento.innerHTML += "<td>" + vetor[i] + "</td>";
-      }
-    }
-    elemento.innerHTML += "</tr>";
-
 /*Permite a chamada da função saida ao clicar no "botaoSaida"*/
-  let edita = document.querySelectorAll(".botaoEditar");
-  for (var i = 0; i < edita.length; i++) {
-    edita[i].addEventListener("click", editar)
-  }
-  let botoes = document.querySelectorAll(".botaoSaida");
-  for (var i = 0; i < botoes.length; i++) {
-    botoes[i].addEventListener("click", saida);
-  }
-
-/*Chama a função "visaoBotao" que altera a classe do "botaoSaida" de acordo
-  com o estado da maquina, se for Em posse não se altera, ao contrario,
-  adiciona a classe botaoDesab*/
-  visaoBotao();
 
   /*Zera os valores dos inputs da data requisitada*/
   let valores = document.querySelectorAll("input[name='data']");
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
   }
+  for (var i = 0; i < 2; i++) {
+    receberTodos();
+  }
 }
 
 //carrega as maquinas na pagina ao iniciar
 function carregaElementos(carregarpagina){
-      string = "",
-      botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
-      botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
-      maquinas = document.querySelector("#tabela");
+      let string = "",
+          botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
+          botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+          maquinas = document.querySelector("#tabela");
+          maquinas.innerHTML = "";
 
       for(i =0; i < carregarpagina.length; i++){
-        string += "<tr class=\"maquina\">";
-        string += "<td class=\"id\">" + carregarpagina[i].id + "</td>";
-        string += "<td>" + carregarpagina[i].nome + "</td>";
-        string += "<td>" + carregarpagina[i].finalidade + "</td>";
-        string += "<td>" + carregarpagina[i].valorCompra + "</td>";
-        string += "<td>" + carregarpagina[i].indiceDepreciacao + "</td>";
-        string += "<td>" + formatarDataObj(carregarpagina[i].dataCompra) + "</td>";
-        string += "<td>" + carregarpagina[i].status + "</td>";
-        string += "<td>" + carregarpagina[i].tipo + "</td>";
-        string += "<td>" + carregarpagina[i].calculateValorAtual() + "</td>";
-        string += "<td>" + carregarpagina[i].dataSaida + "</td>";
-        string += "<td>" + carregarpagina[i].dataBaixa + "</td>";
-        string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
-        maquinas.innerHTML += string;
-        string = "";
+          string += "<tr class=\"maquina\">";
+          string += "<td class=\"id\">" + carregarpagina[i].id + "</td>";
+          string += "<td>" + carregarpagina[i].nome + "</td>";
+          string += "<td>" + carregarpagina[i].finalidade + "</td>";
+          string += "<td>" + carregarpagina[i].valorCompra + "</td>";
+          string += "<td>" + carregarpagina[i].indiceDepreciacao + "</td>";
+          string += "<td>" + formatarDataObj(carregarpagina[i].dataCompra) + "</td>";
+          string += "<td>" + carregarpagina[i].status + "</td>";
+          string += "<td>" + carregarpagina[i].calculateValorAtual() + "</td>";
+          if(carregarpagina[i].dataSaida == null)
+            string += "<td>N/A</td>";
+          else
+            string += "<td>" + formatarDataObj(carregarpagina[i].dataSaida) + "</td>";
+          if(carregarpagina[i].dataBaixa == null)
+            string += "<td>N/A</td>";
+          else
+            string += "<td>" + formatarDataObj(carregarpagina[i].dataBaixa) + "</td>";
+          if(carregarpagina[i].dataRetorno == null)
+            string += "<td>N/A</td>";
+          else
+            string +=   "<td>" + formatarDataObj(carregarpagina[i].dataRetorno) + "</td>";
+
+          string += "<td>" + botaoSaida + botaoEditar + "</td></tr>";
+          maquinas.innerHTML += string;
+          string = "";
       }
       let chamaSaida = document.querySelectorAll(".botaoSaida");
       for (var i = 0; i < chamaSaida.length; i++) {
@@ -441,83 +385,40 @@ function carregaElementos(carregarpagina){
 
       let edita = document.querySelectorAll(".botaoEditar");
       for (var i = 0; i < edita.length; i++) {
-        edita[i].addEventListener("click", function() {
-          editar();
-        })
+        edita[i].addEventListener("click", editar);
       }
       visaoBotao();
 }
 
-//filtra a exibição das maquinas
-function filtraPagina(){
-  let filtro = document.querySelector("#filtro_select_status"),
-      maquinas = document.querySelectorAll(".maquina");
-  for (row of maquinas) {
-    if (filtro.value == "Em Posse") {
-      let node = row.children;
+//função que cadastra valores na tabela sem a utilização do BD
+function cadastro(){
+  if(validacao() == true){
+    //variaveis
+    let nome = document.querySelector("input[name='nome']").value,
+        finalidade = document.querySelector("input[name='finalidade']").value,
+        valor =  document.querySelector("input[name='valor']").value,
+        dataAs = document.querySelector("input[name='data']").valueAsDate,
+        data = document.querySelector("input[name='data']").value,
+        depreciacao = document.querySelector("input[name='depreciação']").value;
 
-      if (node[6].innerHTML == "Em posse") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    else if (filtro.value == "Em Manutenção") {
-      let node = row.children;
-      if (node[6].innerHTML == "Em manutenção") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    else if (filtro.value == "Alugados") {
-      let node = row.children;
-      if (node[6].innerHTML == "Alugado") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    else if (filtro.value == "Vendidos") {
-      let node = row.children;
-      if (node[6].innerHTML == "Vendido") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    if (filtro.value == "Descartados") {
-      let node = row.children;
-      if (node[6].innerHTML == "Descartado") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    if (filtro.value == "Descartados") {
-      let node = row.children;
-      if (node[6].innerHTML == "Descartado") {
-        row.style.display = "table-row";
-      }
-      else {
-        row.style.display = "none";
-      }
-    }
-    if (filtro.value == "Todos") {
-      let node = row.children;
-      row.style.display = "table-row";
-    }
+        cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1);
+    //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
+    document.querySelector(".maquinas").style.display = "inline-block";
+    document.querySelector(".opcoes").style.display = "block";
+    document.querySelector(".valores_fundo").style.display = "none";
 
+    //zera os valores dos inputs da div modal
+    var valores = document.querySelectorAll(".inputs");
+    for (var i = 0; i < valores.length; i++) {
+      valores[i].value = "";
+    }
+    for (var i = 0; i < 2; i++) {
+      receberTodos();
+    }
+    document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
   }
+
 }
-
-
-
 //parte que mexe com a abertura e fechamento das divs modais
 botaoVoltar.addEventListener("click", function(){
   document.querySelector(".valores_fundo").style.display = "none";
@@ -572,7 +473,7 @@ let filtro = document.querySelector("#filtro_select_status");
     filtro.addEventListener("change", filtraPagina)
 
 receberTodos();
-window.onload = visaoBotao;
+visaoBotao();
 
 document.querySelector("input[name='depreciação']").oninput = function () {
     if (this.value > 100) {

@@ -73,7 +73,7 @@ btnEditarEl.addEventListener("click", function(){
 let btnDeslogEl = document.querySelector("#mostraInfoUsuario > button:first-of-type");
 
 btnDeslogEl.addEventListener("click", function(){
-  localStorage.clear();
+  localStorage.removeItem("usuario");
   window.location.href = "index.html";
 });
 

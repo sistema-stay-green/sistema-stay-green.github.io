@@ -69,9 +69,9 @@ let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUs
     inputSenhaEl = document.querySelector("#cadastro input[name='senhaUsuario']"),
     inputEmailEl = document.querySelector("#cadastro input[name='emailUsuario']");
 
-inputConfSenhaEl.addEventListener("change", checarSenhas);
-inputSenhaEl.addEventListener("change", checarSenhas);
-inputEmailEl.addEventListener("change", checaEmail);
+inputConfSenhaEl.addEventListener("input", checarSenhas);
+inputSenhaEl.addEventListener("input", checarSenhas);
+inputEmailEl.addEventListener("input", checaEmail);
 
 // Remove mensagens de erro dos inputs ao clicar em limpar
 let btnLimparEl = document.querySelector("#cadastro > button:nth-of-type(2)");

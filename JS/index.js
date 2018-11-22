@@ -22,7 +22,7 @@ if(dadosUsuario === null){ //não logado
     if (cardEl.id === "perfil") {
         cardEl.classList.add("articleDeslogado");
         cardEl.addEventListener('click', function(){ mudaUrl("login.html"); });
-        cardEl.querySelector('p').innerHTML = "Caso seja um adiminstrador, faça login no sistema para ter acesso as outras funcionalidades.";
+        cardEl.querySelector('p').innerHTML = "Caso seja um administrador, faça login no sistema para ter acesso as outras funcionalidades.";
         cardEl.querySelector('h3').innerHTML = "Login ou Cadastro";
     }
     else if (cardEl.id === "vendas") {

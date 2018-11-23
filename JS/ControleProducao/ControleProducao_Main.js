@@ -2,9 +2,6 @@
 Grupo 1: Controle de produção
 líder: Arthur Marcolino */
 
-
-
-
 /**
 * @author Diego Demétrio
 * Chama a função que cria as tabelas e atrela um evento ao botão de registrar insumos
@@ -30,6 +27,23 @@ window.onload = function () {
    });
 };
 
+function mostraTabela(tipo, acao){
+  let sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
+  let tabela = document.querySelector("#tab" + sufixo + "Registrados");
+  let mensagem = document.querySelector("#mensagem" + sufixo);
+  console.log(tabela);
+  if(acao == "mostrar"){
+    mensagem.classList.add("ocultar");
+    tabela.classList.remove("ocultar");
+      console.log("teste");
+  }
+  else{
+    mensagem.classList.remove("ocultar");
+    tabela.classList.add("ocultar");
+    console.log("teste");
+  }
+}
+
 /**
 * @author Diego Demétrio
 * Faz a requisição AJAX para criar as tabelas
@@ -41,7 +55,10 @@ function fazRequisicaoTabela(tipo){
           .then(function(res){
            criaTabela(res, tipo);
           })
-          .catch(function(error){ console.log(error)});
+          .catch(function(error){
+            console.log(error);
+            mostraTabela(tipo, "ocultar");
+          });
 }
 
 /**
@@ -144,29 +161,3 @@ function encapsulaDados(tipo, operacao) {
    }
    return item;
 }
-
-
-// document.querySelector("#btnRemoverProdutos").addEventListener('click', function(){
-//   removerTodos("produto");
-//   fazRequisicaoTabela("produto");
-// });
-// document.querySelector("#btnRemoverInsumos").addEventListener('click', function(){
-//   removerTodos("insumo");
-//   fazRequisicaoTabela("insumo");
-// });
-// document.querySelector("#btnRemoverTodos").addEventListener('click', function(){
-//   removerTodos("ambos");
-//   fazRequisicaoTabela("insumo");
-//   fazRequisicaoTabela("produto");
-// });
-
-// function removerTodos(tipo){
-//   var url;
-//   if(tipo == ambos)
-//     url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=removerTodos";
-//   else
-//     url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=" + tipo;
-//   Request.get(url)
-//          .then(function(res){ console.log("Removido(s) com sucesso\t" + res); })
-//          .catch(function(erro){ console.log("Erro na remoção de itens\t" + erro) });
-// }

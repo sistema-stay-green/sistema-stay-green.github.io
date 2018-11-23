@@ -2,7 +2,6 @@
 function formatarData(data){
   data = data.split("-");
   data = data[2] + "/" + data[1] + "/" + data[0];
-  data = data.substr(1);
   return data;
 }
 
@@ -53,7 +52,6 @@ function validacao(valores){
       }
   hoje = ano+'-'+mes+'-'+dia;
 
-  console.log(valores[valores.length-1].value);
   if(valores[valores.length-1].value > hoje){
     valores[valores.length-1].value = null;
   }
@@ -290,6 +288,12 @@ function mostraModalEditar(){
   nodes = elemento.parentNode.children;
   if(nodes[6].innerHTML == "EM_POSSE"){
     document.querySelector("#editar").style.display = "block";
+    document.querySelector("input[name='id-editar']").value = nodes[0].innerHTML,
+    document.querySelector("input[name='nome-editar']").value = nodes[1].innerHTML,
+    document.querySelector("input[name='finalidade-editar']").value = nodes[2].innerHTML,
+    document.querySelector("input[name='valor-editar']").value = nodes[3].innerHTML,
+    document.querySelector("input[name='depreciação-editar']").value = nodes[4].innerHTML,
+    document.querySelector("input[name='data-editar']").value = nodes[5].innerHTML;
   }
 }
 
@@ -356,7 +360,9 @@ function enviaInformacoesEditar() {
   dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
   depreciacao = document.querySelector("input[name='depreciação-editar']").value;
 
-  editarBE(id,nome, finalidade, depreciacao, valor,formatarData(data))
+  console.log(id);
+
+  editarBE(id,nome, finalidade, depreciacao, valor, formatarData(data))
 
   document.querySelector("#editar").style.display = "none";
 }
@@ -526,6 +532,16 @@ function editaMaquina(maquina){
         string = "";
     }
   }
+  let chamaSaida = document.querySelectorAll(".botaoSaida");
+  for (var i = 0; i < chamaSaida.length; i++) {
+    chamaSaida[i].addEventListener("click", saida);
+  }
+
+  let edita = document.querySelectorAll(".botaoEditar");
+  for (var i = 0; i < edita.length; i++) {
+    edita[i].addEventListener("click", mostraModalEditar);
+  }
+  visaoBotao();
 }
 
 //função que cadastra valores no BD

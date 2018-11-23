@@ -46,7 +46,7 @@ function dateObjToDate(resultado){
 
 /**
 * Faz requisição Ajax para receber todos os dados
-* @returns {Object} vetor de maquinas
+* @returns {Array} vetor de maquinas
 */
 function receberTodos(){
   Request.get(SERVER_URL+"acao=r&quantidade=1").then(function(resultado){
@@ -182,6 +182,7 @@ function manuntenir(id, dataRetorno){
 function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
   let maquinaJSON = encapsularEditar(id, nome, finalidade,
     indiceDepreciacao, valorCompra,dataCompra);
+    console.log(dataCompra);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"e"+
@@ -190,7 +191,8 @@ function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataComp
               "&dataRetorno="+null+
               "&dataBaixa="+null+
               "&quantidade=1").then(function(resultado) {
+                resultado = transformaEmMaquina(resultado)
                 resultado = dateObjToDate(resultado);
-                editaMaquina(transformaEmMaquina(resultado));
+                editaMaquina(resultado);
               });
 }

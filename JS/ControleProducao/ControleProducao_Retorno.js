@@ -16,13 +16,49 @@ function criaTabela(itens, tipo){
 			tabela.deleteRow(1);
 		}
 	}
-
+	/* Para testes
+	itens = [];
+	itens[0] = {
+		nomeProduto: "LEITE",
+		descrProduto: "jair",
+		unidMedProduto: "L",
+		valorUnitProduto: "50",
+		quantEstoqueProduto: "500",
+		pontoAvisoProduto: "100"
+	};
+	itens[1] = {
+		nomeProduto: "CAFE_BOURBON",
+		descrProduto: "jair",
+		unidMedProduto: "KG",
+		valorUnitProduto: "50",
+		quantEstoqueProduto: "500",
+		pontoAvisoProduto: "100"
+	}
+	itens[2] = {
+		nomeProduto: "CAFE_ROBUSTA",
+		descrProduto: "jair",
+		unidMedProduto: "KG",
+		valorUnitProduto: "50",
+		quantEstoqueProduto: "500",
+		pontoAvisoProduto: "100"
+	}
+	itens[3] = {
+		nomeProduto: "CAFE_ARABICA",
+		descrProduto: "jair",
+		unidMedProduto: "KG",
+		valorUnitProduto: "50",
+		quantEstoqueProduto: "49",
+		pontoAvisoProduto: "50"
+	}
+	*/
+	console.log(itens.length);
 	if(itens != null) {
-		mostraTabela(tipo, "ocultar");
+		mostraTabela(tipo, "mostrar");
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);
+			itens[i].quantEstoqueProduto = parseInt(itens[i].quantEstoqueProduto);
+			itens[i].pontoAvisoProduto = parseInt(itens[i].pontoAvisoProduto);
 			if(tipo == "produto"){
-
 				for (var j = 0; j < 7; j++) {
 
 					var celula = linha.insertCell(j);
@@ -61,7 +97,7 @@ function criaTabela(itens, tipo){
 							else if(itens[i].quantEstoqueProduto == itens[i].pontoAvisoProduto){
 								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoqueBaixo.png\" title=\"Estoque igual ao ponto de aviso!\" class=\"aviso\">";
 							}
-							else if(((itens[i].quantEstoqueProduto) - (itens[i].quantEstoqueProduto) * 0.25) <= itens[i].pontoAvisoProduto){
+							else if(((itens[i].quantEstoqueProduto) * 0.9) <= itens[i].pontoAvisoProduto){
 								celula.innerHTML += " <img src=\"imgs/ControleProducao/estoquePerto.png\" title=\"Estoque próximo ao ponto de aviso!\" class=\"aviso\">";
 							}
 						}
@@ -144,9 +180,9 @@ function criaTabela(itens, tipo){
 	}
 
 	else if(itens == null){
+
 		mostraTabela(tipo, "ocultar");
 	}
-  console.log(itens);
 	adicionarEventos();
 }
 

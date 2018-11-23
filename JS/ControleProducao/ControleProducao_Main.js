@@ -31,16 +31,13 @@ function mostraTabela(tipo, acao){
   let sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
   let tabela = document.querySelector("#tab" + sufixo + "Registrados");
   let mensagem = document.querySelector("#mensagem" + sufixo);
-  console.log(tabela);
   if(acao == "mostrar"){
     mensagem.classList.add("ocultar");
     tabela.classList.remove("ocultar");
-      console.log("teste");
   }
-  else{
+  else {
     mensagem.classList.remove("ocultar");
     tabela.classList.add("ocultar");
-    console.log("teste");
   }
 }
 
@@ -56,8 +53,8 @@ function fazRequisicaoTabela(tipo){
            criaTabela(res, tipo);
           })
           .catch(function(error){
-            console.log(error);
             mostraTabela(tipo, "ocultar");
+            console.log(error);
           });
 }
 

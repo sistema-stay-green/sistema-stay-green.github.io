@@ -5,7 +5,7 @@
  * @returns {Boolean} se a tarefa passou no filtro ou não
  */
 function filtrarTarefaDia(tarefa) {
-    if (tarefa.dataInicialTarefa.dayOfMonth === parseInt(this)) {
+    if (parseInt(this) % tarefa.dataInicialTarefa.dayOfMonth === 0) {
         return true;
     }
     return false;
@@ -20,7 +20,7 @@ function filtrarTarefaSemana(tarefa) {
     let diaCorrente = new Date().getDate(),
         limiteDiaSemana = diaCorrente + 6;
     do {
-        if (tarefa.dataInicialTarefa.dayOfMonth === diaCorrente)
+        if (diaCorrente % tarefa.dataInicialTarefa.dayOfMonth === 0)
             return true;
 
         diaCorrente++;
@@ -46,8 +46,8 @@ function filtrarTarefaMes(tarefa) {
  * @returns {Boolean} se a tarefa passou no filtro ou não
  */
 function filtrarTarefasTipo(tarefa) {
-    for(let tipo of this){
-        if(tarefa.tipoTarefa === String(tipo))
+    for (let tipo of this) {
+        if (tarefa.tipoTarefa === String(tipo))
             return true;
     }
     return false;
@@ -112,31 +112,34 @@ function aplicaFiltros() {
                             break;
                         case 4:
                             tarefasFiltradas = tarefasFiltradas.filter(FUNCOESFILTROS[3],
-                                 ["IRRIGACAO", "MAQUINÁRIO", "COLHEITA", "PECUARIA"]);
+                                ["IRRIGACAO", "MAQUINÁRIO", "COLHEITA", "PECUARIA"]);
                             break;
                         case 5:
                             tarefasFiltradas = tarefasFiltradas.filter(FUNCOESFILTROS[3],
-                                 ["ADUBACAO", "ARAR"]);  
+                                ["ADUBACAO", "ARAR"]);
                             break;
                     }
-                    //tarefasFiltradas = tarefasFiltradas.filter(FUNCOESFILTROS[codigoFiltro](tarefa, ));
-                    //resultado recebe ele mesmo filtrado com cada filtro do vetor
                 }
 
-                if(tarefasFiltradas.length === 0){
+                if (tarefasFiltradas.length === 0) {
                     let tituloErro = document.createElement('h1');
                     tituloErro.innerHTML = 'Nenhuma tarefa se encaixa aos filtros selecionados.';
                     containerCalendario.appendChild(tituloErro);
-                }else{
-                    if(document.querySelector('#containerCalendario > h1') != null)
-                         containerCalendario.removeChild(document.querySelector('#containerCalendario > h1'));
+                } else {
+                    if (document.querySelector('#containerCalendario > h1') != null)
+                        containerCalendario.removeChild(document.querySelector('#containerCalendario > h1'));
                 }
                 //Se há filtros ativos, mostre apenas as tarefas filtradas
-                if(filtrosMarcados.length != 0)
+                if (filtrosMarcados.length != 0)
                     geraCalendario(tarefasFiltradas, false);
-                else    
+                else {
+                    document.querySelectorAll('#containerCalendario h1').forEach(tituloErro => {
+                        document.querySelector('#containerCalendario').removeChild(tituloErro);
+                    })
                     geraCalendario(tarefasArmazenadasBD, true, new Date());
-                
+                }
+
+
             }
             )
         })

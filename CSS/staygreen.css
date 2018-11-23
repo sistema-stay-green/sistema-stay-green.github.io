@@ -151,7 +151,7 @@ header {
   background-color: yellow;
   height:93%;
   width:100%;
-  background-image: url(fazenda.jpeg);
+  background-image: url('../imgs/home/fazenda.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -193,7 +193,7 @@ nav{
   width: 100%;
   display: flex;
   background-color: #1d883a;
-  align-content: space-around;
+  justify-content: space-around;
   align-items: center;
   position: sticky;
   top:0;
@@ -210,6 +210,15 @@ nav > h3 {
   align-items: center;
   justify-content: center;
 }
+
+nav> a[href="index.html"]{
+  width:20vw;
+}
+nav> a[href="index.html"] > img{
+  height: 100%;
+}
+
+
 nav > a {
   text-decoration:none;
   width:13.3vw;
@@ -233,6 +242,7 @@ footer {
   display: flex;
   background-color: #2d2d2d;
 }
+
 footer > section {
   width: 15%;
   height: 70%;
@@ -241,21 +251,25 @@ footer > section {
   align-items: center;
   justify-content: space-around;
 }
+
 footer > section > h3 {
     font-family: 'Niramit' , sans-serif;
     font-size: calc(10px + 1.5vh);
     color: white;
 }
+
 footer > section > a {
     text-decoration: none;
     font-family: 'Niramit' , sans-serif;
     font-size: calc(10px + 1vh);
     color: #c6c7c9;
 }
+
 footer > section > img {
   height: 100px ;
   width:  100px;
 }
+
 .redes {
   justify-content: center;
 }

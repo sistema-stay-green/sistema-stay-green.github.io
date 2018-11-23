@@ -13,7 +13,7 @@ const Request = class {
 
     /**
      * Realiza uma requisição GET, retornando uma Promise com a resposta.
-     * 
+     *
      * @param {string} url - A URL de onde se quer fazer a requisição
      * @param {string} [responseType=json] - O tipo de resposta que se deseja
      * obter. Por padrão, o tipo será JSON
@@ -39,7 +39,7 @@ const Request = class {
 
     /**
      * Realiza uma requisição POST, retornando uma Promise com a resposta.
-     * 
+     *
      * @param {string} url - A URL de onde se quer fazer a requisição
      * @param {string} params - String contendo os parâmetros a serem
      *  passados na requisição. Exemplo: 'id=3&parametro=valor'

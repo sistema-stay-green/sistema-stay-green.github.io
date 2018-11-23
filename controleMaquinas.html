@@ -4,21 +4,22 @@
     <meta charset="utf-8">
     <title>Controle de Maquinas</title>
     <link rel="stylesheet" href="CSS/controleMaquinas/controleMaquinas.css">
+    <link rel="icon" href="imgs/icons/favicon.png">
     <link rel="stylesheet" href="CSS/staygreen.css">
   </head>
   <body>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Agenda</a>
-      <a href="#">Máquinas</a>
-      <h3>Stay Green</h3>
-      <a href="#">Patrimonio</a>
-      <a href="#">Produção</a>
-      <a href="#">Vendas</a>
+      <a href="perfil.html">Perfil</a>
+      <a href="agendaEletronica.html">Agenda</a>
+      <a href="controleMaquinas.html">Maquinas</a>
+      <a href="index.html"><img src="imgs/staygreen.png" ></a>
+      <a href="Patrimonio.html">Patrimônio</a>
+      <a href="controleProducao.html">Produção</a>
+      <a href="paginaVendasProdutor.html">Vendas</a>
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
     <div class="opcoes">
-      <button type="button" name="botaoCadastro">Cadastrar</button>
+      <button type="button" class="botaoCadastro" name="botaoCadastro">Cadastrar</button>
     </div>
     <!-- Parte do Cadastro -->
     <div class="valores_fundo">
@@ -26,8 +27,9 @@
         <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
         <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
         <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
-        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação"  required></label>
+        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação" max="100" required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
+        <!--<label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label> -->
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
         <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
@@ -37,7 +39,8 @@
     <div class="maquinas">
       <section id="filtro">
         <label for="filtro_select">Filtro:</label>
-        <select id="filtro_select">
+        <select id="filtro_select_status">
+          <option><a href="#">Todos</option>
           <option><a href="#">Em Posse</option>
           <option><a href="#">Em Manutenção</option>
           <option><a href="#">Alugados</option>
@@ -55,48 +58,15 @@
           <th>Indice de depreciação</th>
           <th>Data de compra</th>
           <th>Status</th>
-          <th>Tipo</th>
           <th>Valor atual</th>
           <th>Data de saída</th>
           <th>Data de baixa</th>
+          <th>Data de retorno</th>
           <th>Opções</th>
         </tr>
       </thead>
       <tbody id="tabela">
-        <tr class="maquina">
-          <td class="id">1</td>
-          <td>Trator</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>5000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">VENDIDO</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
-        <tr class="maquina">
-          <td class="id">2</td>
-          <td>Trator2</td>
-          <td>Uma máquina que ajuda na colheita do café</td>
-          <td>5000</td>
-          <td>15</td>
-          <td>2018-10-01</td>
-          <td class="status">EM POSSE</td>
-          <td>Máquina</td>
-          <td>4800</td>
-          <td>2018-10-03</td>
-          <td>2018-10-02</td>
-          <td>
-             <button type="button" class="botaoSaida">Saida</button>
-             <button type="button" class="botaoEditar">Editar</button>
-          </td>
-        </tr>
+
       </tbody>
     </table>
     </div>
@@ -114,7 +84,7 @@
             </select>
           </label>
           <span id="retorno">
-            <label name="periodo-label">Periodo/Retorno: <input type="number" name="periodo" class="periodo"></label>
+            <label name="periodo-label">Data/Retorno-Saida: <input type="date" name="periodo" class="periodo"></label>
             <label name="valor-label">Valor: <input type="number" name="valorAluguel"></label>
             <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
           </span>
@@ -125,58 +95,34 @@
       <div class="editar-conteudo">
         <span class="fecharModal">&times;</span>
         <section id="filtro2">
-          <input type="hidden" class="inputs" name="id-editar" required></label>
-          <label>Nome da Máquina <input type="text" class="inputs" name="nome-editar" required></label>
-          <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade-editar"  required></label>
-          <label>Valor de Compra<input type="number" class="inputs" name="valor-editar"  required></label>
-          <label>Indice de depreciação<input type="number" class="inputs" name="depreciação-editar"  required></label>
-          <label>Data de Compra <input type="date" class="inputs" name="data-editar"  required></label>
+          <input type="hidden" name="id-editar" required></label>
+          <label>Nome da Máquina <input type="text" name="nome-editar" required></label>
+          <label>Finalidade da Maquina<input type="text" name="finalidade-editar"  required></label>
+          <label>Valor de Compra<input type="number" name="valor-editar"  required></label>
+          <label>Indice de depreciação<input type="number" name="depreciação-editar"  required></label>
+          <label>Data de Compra <input type="date" name="data-editar"  required></label>
           <button type="button" name="botaoEditarMaquina">Editar</button>
         </section>
       </div>
      </div>
+     <section class="relatorioModal">
+       <section class="relatorio" id="relatorio">
+         <h1>Relatorio das maquinas</h1>
+         <span class="fecharModal">&times;</span>
+         <section id="maquinasPosse"></section>
+         <section id="maquinasManutencao"></section>
+         <section id="maquinasAlugadas"></section>
+         <section id="maquinasDescartadas"></section>
+         <section id="maquinasVendidas"></section>
+       </section>
+     </section>
 
-   <footer class="footer">
-      <section>
-        <h3>empresa</h3>
-        <a href="#">email1</a>
-        <a href="#">email2</a>
-        <a href="#">email3</a>
-      </section>
-      <section>
-        <h3>desenvolvedores</h3>
-        <a href="#">email1</a>
-        <a href="#">email2</a>
-        <a href="#">email3</a>
-      </section>
-      <section>
-        <h3>contatos</h3>
-        <a href="#">email1</a>
-        <a href="#">email2</a>
-        <a href="#">email3</a>
-      </section>
-      <section>
-        <h3>curiosidades</h3>
-        <a href="#">email1</a>
-        <a href="#">email2</a>
-        <a href="#">email3</a>
-      </section>
-      <section>
-        <h3>Saiba mais</h3>
-        <a href="#">email1</a>
-        <a href="#">email2</a>
-        <a href="#">email3</a>
-      </section>
-      <section class="redes">
-        <img src="imgs/home/face.png" alt="">
-        <a href="#">segue la no face</a>
-      </section>
-    </footer>
+    <button type="button" class="botaoRelatorio" name="botaoRelatorio">Relatorio</button>
   </body>
   <script src="JS/staygreen.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/maquina.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/conexaoMaquina.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/main.js" charset="utf-8"></script>
-  <script src="JS/controleMaquinas/controleMaquinas.js" charset="utf-8"></script>
+  <script src="JS/ControleMaquinas/maquina.js" charset="utf-8"></script>
+  <script src="JS/ControleMaquinas/encapsuladorMaquina.js" charset="utf-8"></script>
+  <script src="JS/ControleMaquinas/conexaoMaquina.js" charset="utf-8"></script>
+  <script src="JS/ControleMaquinas/controleMaquinas.js" charset="utf-8"></script>
+  <script src="JS/ControleMaquinas/main.js" charset="utf-8"></script>
 </html>

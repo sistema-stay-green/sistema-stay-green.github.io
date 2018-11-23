@@ -7,18 +7,25 @@ body{
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Niramit', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 form > label{
   display: grid;
   margin: 0.9em;
 }
+th{
+  padding-top: 0.5em !important;
+  padding-bottom: 0.5em !important;
+  width: 50vw;
+}
 .editar-conteudo > #filtro2 > label{
-  display: block;
-  margin-top: 2.5em;
-  margin-bottom: 1.5em;
+  display: grid;
+  margin: 0.9em;
+}
+#relatorio h1 {
+    text-align: center;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 2em;
 }
 #filtro2 > label, span > label{
   display: block;
@@ -53,12 +60,19 @@ table{
 }
 #filtro{
   text-align: end;
+  padding: 1em;
 }
 #venda,#envio,#descarte{
   display: none;
 }
 #botaoCadastro{
   margin-left: 1em;
+}
+#tabela{
+  padding-top: 1em;
+    width: 98%;
+    font-size: 0.9em;
+    margin: 0 auto;
 }
 
 
@@ -77,19 +91,18 @@ table{
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.valores,.editar-conteudo{
+.valores,.editar-conteudo,.relatorio{
   text-align: center;
    background-color: #FDFCF3;
-   margin: 9% 33%;
+   margin: 6% 33%;
    padding: 20px;
    border: 0.4em solid #1D883A;
    width: 30%;
-   height: 55vh;
    border-radius: 20px;
    position: fixed;
    z-index: 3;
 }
-.valores_fundo,.saidas,.editar{
+.valores_fundo,.saidas,.editar,.relatorioModal{
   display: none;
   position: fixed;
   z-index: 1;
@@ -97,10 +110,29 @@ table{
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: unset;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
 }
+.relatorio > .fecharModal{
+  position: sticky;
+  top: 1em;
+}
+.relatorio{
+  text-align: justify;
+  background-color: #FDFCF3;
+  margin: 1% 27%;
+  padding: 20px;
+  border: 0.4em solid #1D883A;
+  width: 58vh;
+  border-radius: 20px;
+  position: fixed;
+  z-index: 3;
+  overflow-y: auto;
+  height: 90vh;
+  padding: 3vh;
+}
+
 .tabelaDeMaquinas{
     display: inline;
     width:99%;
@@ -138,10 +170,11 @@ table{
   background-color: var(--verdeCrusoe);
   color: var(--brancoIvory);
 }
-.footer {
-  margin-top: 20vh;
-  height: 31vh;
-  width: 100vw;
-  margin-bottom: 0;
-  align-self: flex-end;
+button[name='botaoRelatorio']{
+  width: fit-content;
+  margin: 3vh 1vh;
+}
+button[name='botaoCadastro']{
+  width: fit-content;
+  margin: 0vh 1vh;
 }

@@ -1,17 +1,23 @@
-// Recebe as informações do formulário  de login
-let btnEntrarLoginEl = document.querySelector("#cadastro > button:first-of-type");
+// Testa se os inputs são válidos ou não
+let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUsuario']"),
+    inputSenhaEl = document.querySelector("#cadastro input[name='senhaUsuario']"),
+    inputEmailEl = document.querySelector("#cadastro input[name='emailUsuario']"),
+    inputCNPJEl = document.querySelector("#cadastro input[name='cnpjUsuario']");
 
-btnEntrarLoginEl.addEventListener("click", function() {
+inputConfSenhaEl.addEventListener("input", checarSenhas);
+inputSenhaEl.addEventListener("input", checarSenhas);
+inputEmailEl.addEventListener("input", checaEmail);
+inputCNPJEl.addEventListener("focusout", checaCNPJ);
 
-  let emailInputEl = document.querySelector("#cadastro > label:first-of-type > input"),
-      senhaInputEl = document.querySelector("#cadastro > label:last-of-type > input");
+// Remove mensagens de erro dos inputs ao clicar em limpar
+let btnLimparEl = document.querySelector("#cadastro > button:nth-of-type(2)");
 
-  Request.get("http://localhost:8080/logarusuario?login=" + emailInputEl.value
-              + "&senha=" + senhaInputEl.value)
-         .then(function(){window.location.redirect("index.html")})
-         .catch(function(){
-           alert("Erro ao logar o servidor");
-         });
+btnLimparEl.addEventListener("click", function(){
+
+  let spanErros = document.querySelectorAll("#cadastro .mensagemErro");
+
+  for (const erroEl of spanErros)
+    erroEl.parentElement.removeChild(erroEl);
 
 });
 
@@ -19,7 +25,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
 function checaEmail() {
 
   let emailUsuario = inputEmailEl.value,
-      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type')
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
       labelEl = document.querySelector("#cadastro > label:nth-child(4)");
 
   if(emailUsuario == "" && labelEl.contains(labelEl.querySelector("span"))) {
@@ -37,7 +43,7 @@ function checaEmail() {
     }
     else if((emailUsuario.indexOf("@") > -1 && emailUsuario.indexOf(".com") > -1) && labelEl.querySelector("span") !== null) {
       labelEl.removeChild(labelEl.querySelector("span"));
-      if(document.querySelectorAll("#editaInfoUsuario > form .mensagemErro").length === 0) {
+      if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
         btnConfirmarEl.disable = "false";
         btnConfirmarEl.classList.remove("botaoDesab");
       }
@@ -51,20 +57,130 @@ function checarSenhas() {
 
   let senha = document.querySelector("#cadastro input[name='senhaUsuario']").value,
       labelEl = document.querySelector("#cadastro > label:last-of-type"),
+      btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
       senhaConfirmar = inputConfSenhaEl.value;
 
   if(senha !== senhaConfirmar && labelEl.querySelector("span") === null) {
-    btnConfimarCadastroEl.disable = "true";
-    btnConfimarCadastroEl.classList.add("botaoDesab");
+    btnConfirmarEl.disable = "true";
+    btnConfirmarEl.classList.add("botaoDesab");
     labelEl.insertBefore(escreveMensagemErro(" (Senhas não são iguais)"), labelEl.querySelector("input"));
   }
   else if(senha === senhaConfirmar && labelEl.querySelector("span") !== null) {
     labelEl.removeChild(labelEl.querySelector("span"));
-    if(document.querySelectorAll("#login > form .mensagemErro").length === 0) {
-      btnConfimarCadastroEl.disable = "false";
-      btnConfimarCadastroEl.classList.remove("botaoDesab");
+    if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
+      btnConfirmarEl.disable = "false";
+      btnConfirmarEl.classList.remove("botaoDesab");
     }
   }
+
+}
+
+// Checa vetorCNPJ
+function checaCNPJ() {
+
+    let btnConfirmarEl = document.querySelector('#cadastro > button:first-of-type'),
+        labelEl = document.querySelector("#cadastro > label:nth-of-type(2)"),
+        cnpj = inputCNPJEl.value;
+
+    cnpj = cnpj.replace(/[^\d]+/g,'');
+
+    if(cnpj === ''){
+      while(labelEl.querySelector("span") !== null) {
+        labelEl.removeChild(labelEl.querySelector("span"));
+        if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+          btnConfirmarEl.disable = "false";
+          btnConfirmarEl.classList.remove("botaoDesab");
+        }
+      }
+      btnConfirmarEl.disable = "true";
+      btnConfirmarEl.classList.add("botaoDesab");
+      labelEl.insertBefore(escreveMensagemErro(" (CNPJ obrigatório)"), labelEl.querySelector("input"));
+      return false;
+    }
+
+    if(cnpj.length != 14 ||
+        cnpj == "00000000000000" ||
+        cnpj == "11111111111111" ||
+        cnpj == "22222222222222" ||
+        cnpj == "33333333333333" ||
+        cnpj == "44444444444444" ||
+        cnpj == "55555555555555" ||
+        cnpj == "66666666666666" ||
+        cnpj == "77777777777777" ||
+        cnpj == "88888888888888" ||
+        cnpj == "99999999999999"){
+          while(labelEl.querySelector("span") !== null) {
+            labelEl.removeChild(labelEl.querySelector("span"));
+            if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+              btnConfirmarEl.disable = "false";
+              btnConfirmarEl.classList.remove("botaoDesab");
+            }
+          }
+          btnConfirmarEl.disable = "true";
+          btnConfirmarEl.classList.add("botaoDesab");
+          labelEl.insertBefore(escreveMensagemErro(" (CNPJ inválido)"), labelEl.querySelector("input"));
+          return false;
+        }
+
+    // Valida DVs
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0)){
+      while(labelEl.querySelector("span") !== null) {
+        labelEl.removeChild(labelEl.querySelector("span"));
+        if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+          btnConfirmarEl.disable = "false";
+          btnConfirmarEl.classList.remove("botaoDesab");
+        }
+      }
+      btnConfirmarEl.disable = "true";
+      btnConfirmarEl.classList.add("botaoDesab");
+      labelEl.insertBefore(escreveMensagemErro(" (CNPJ inválido)"), labelEl.querySelector("input"));
+      return false;
+    }
+
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1)){
+      while(labelEl.querySelector("span") !== null) {
+        labelEl.removeChild(labelEl.querySelector("span"));
+        if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+          btnConfirmarEl.disable = "false";
+          btnConfirmarEl.classList.remove("botaoDesab");
+        }
+      }
+      btnConfirmarEl.disable = "true";
+      btnConfirmarEl.classList.add("botaoDesab");
+      labelEl.insertBefore(escreveMensagemErro(" (CNPJ inválido)"), labelEl.querySelector("input"));
+      return false;
+    }
+
+    while(labelEl.querySelector("span") !== null) {
+      labelEl.removeChild(labelEl.querySelector("span"));
+      if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+        btnConfirmarEl.disable = "false";
+        btnConfirmarEl.classList.remove("botaoDesab");
+      }
+    }
+
+    return true;
 
 }
 
@@ -79,12 +195,3 @@ function escreveMensagemErro(mensagem) {
   return mensagemEl;
 
 }
-
-// Testa se os inputs são válidos ou não
-let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUsuario']"),
-    inputSenhaEl = document.querySelector("#cadastro input[name='senhaUsuario']"),
-    inputEmailEl = document.querySelector("#cadastro input[name='emailUsuario']");
-
-inputConfSenhaEl.addEventListener("change", checarSenhas);
-inputSenhaEl.addEventListener("change", checarSenhas);
-inputEmailEl.addEventListener("change", checaEmail);

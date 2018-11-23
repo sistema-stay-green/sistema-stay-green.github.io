@@ -6,14 +6,30 @@ html, #login, body{
   display: flex;
   flex-direction: row;
   align-items: center;
+  z-index: 2;
 }
 
 #login > section{
   height: 100%;
 }
 
+section:nth-child(2){
+  background-color: rgba(255, 255, 255, 0.85);
+  width: 70vw;
+  box-sizing: border-box;
+}
+
+body > img{
+  top: -5em;
+  right: -5em;
+  z-index: -1;
+  height: calc(100vw + 10em);
+  width: calc(100vw + 10em);
+  position: fixed;
+  filter: blur(1em);
+}
+
 #login > section:first-of-type{
-  background-color: var(--verdeCamarone);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -21,7 +37,7 @@ html, #login, body{
   text-align: center;
   box-sizing: border-box;
   padding: 1.2em 5em;
-  width: 30%;
+  width: 30vw;
 }
 
 #login > section:first-of-type > p{
@@ -29,32 +45,45 @@ html, #login, body{
 }
 
 #login > section:first-of-type > img{
-  background-color: var(--verdeCrusoe);
+  /*background-color: var(--verdeCrusoe);*/
+  background-color: rgba(0, 0, 0, 0.30);
   width: 12vw;
   height: 12vw;
   padding: 1.2em 1.2em;
   border-radius: 50%;
 }
 
-#login > form{
+#login form{
+  position: relative;
+  margin: 0 auto;
   box-sizing: border-box;
   text-align: center;
   padding: 0 1.2em;
   width: 70%;
 }
 
-#login > form > label{
+#login form:first-of-type{
+  top: calc(50vh - 8em);
+  height: 16em;
+}
+
+#login form:last-of-type{
+  top: calc(50vh - 18em);
+  height: 35em;
+}
+
+#login form > label{
   display: block;
   text-align: left;
   margin: 3% 15%;
 }
 
-#login > form > label > input{
+#login form > label > input{
   display: block;
   width: 100%;
 }
 
-#login > form > button{
+#login form > button{
   margin: .7em .7em;
   width: 12em;
 }
@@ -65,4 +94,13 @@ html, #login, body{
 
 .mensagemErro{
   color: red;
+}
+
+.shadow{
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+}
+
+.oculta {
+  display: none;
 }

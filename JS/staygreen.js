@@ -5,6 +5,11 @@
  * @file JavaScript para propósito geral.
  */
 
+/*impedir de acessar outras paginas mesmo não logado
+if (JSON.parse(localStorage.getItem('usuario')) === null && window.location.href.indexOf("index.html") !== -1) {
+    window.location.href = "index.html";
+}*/
+
  /**
   * Classe que contém métodos estáticos para a realização
   * mais facilitada de requisições AJAX.

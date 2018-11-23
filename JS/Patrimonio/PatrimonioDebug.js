@@ -1,20 +1,25 @@
 /**
- * Arquivo JavaScript de testes e debug da página e suas interações.
- * @author Mei
+ * Script de testes e debug da página e suas interações.
+ * @author Mei Fagundes
  */
 
+// --- CONSTANTE DE MODO DE OPERAÇÃO DA PÁGINA ---
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
-const staticDebugMode = true;
+const staticDebugMode = false;
 
 let lastIdGenerated = 0;
-let relatorioStaticStash = [];
+let patrimonioStaticStash = [];
 
 // --- FUNCTIONS ---
 
+/**
+ * Gera placeholders no caso da página estar rodando de forma estática.
+ * @author Mei Fagundes
+ */
 function generatePlaceholders() {
 
     const nome = ["Trator 1", "Saca de café 1", "Trator 2", "Saca de café 2", "Trator 3"];
-    const tipo = ["MAQUINA", "OUTROS", "MAQUINA", "OUTROS", "MAQUINA"];
+    const tipo = ["MAQUINA", "ANIMAL", "IMOVEL", "MERCADORIA", "UTENSILIO"];
     const finalidade = ["Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café",
         "Uma máquina que ajuda na colheita do café.", "Saca com 20KG de grãos de café", "Uma máquina que ajuda na colheita do café."];
     const status = ["EM_POSSE", "VENDIDO", "EM_MANUTENCAO", "DESCARTADO", "ALUGADO"];
@@ -40,7 +45,7 @@ function generatePlaceholders() {
         patrimonio.dataBaixa = dB[i];
         lastIdGenerated++;
 
-        relatorioStaticStash.push(patrimonio);
+        patrimonioStaticStash.push(patrimonio);
 
         insertPatrimonioIntoTable(patrimonio);
     }

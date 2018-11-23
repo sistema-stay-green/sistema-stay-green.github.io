@@ -45,10 +45,10 @@ class Tarefa {
    * @returns {Date} objeto Date formatado
    * @author Pedro
    */
-  static toDateObject(servletData){
+  static toDateObject(servletData) {
     let stringData = servletData.year + "-" + (servletData.month + 1 < 10 ? "0" + (servletData.month + 1) :
-    servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
-      servletData.dayOfMonth : servletData.dayOfMonth);
+      servletData.month + 1) + "-" + (servletData.dayOfMonth < 10 ? "0" +
+        servletData.dayOfMonth : servletData.dayOfMonth);
 
     let dataFormatadaClient = new Date(stringData);
     dataFormatadaClient.setDate(dataFormatadaClient.getUTCDate());
@@ -63,14 +63,16 @@ class Tarefa {
   */
   toJSONString() {
     let tarefaJSON = {
+      "idTarefa": this.idTarefa,
       "nomeTarefa": this.nomeTarefa,
-      "descrTarefa": "aaaa",
+      "descrTarefa": this.descrTarefa,
       "tipoTarefa": this.tipoTarefa,
       "dataInicialTarefa": this.formatDataServlet(this.dataInicialTarefa),
       "periodRepetTarefa": this.periodRepetTarefa,
       "insumosTarefa": this.insumosTarefa,
       "quantInsumosTarefa": this.quantInsumosTarefa,
       "quantProduzTarefa": this.quantProduzTarefa,
+      "produtoProduzido": this.produtoProduzidoTarefa,
       "gastoTarefa": this.gastoTarefa
     }
     return JSON.stringify(tarefaJSON);
@@ -78,6 +80,10 @@ class Tarefa {
 
 
   //Setters
+  set idTarefa(idTarefa) {
+    this._idTarefa = this.tryParse(idTarefa);
+  }
+
   set nomeTarefa(nomeTarefa) {
     this._nomeTarefa = nomeTarefa;
   }
@@ -97,8 +103,8 @@ class Tarefa {
       this._dataInicialTarefa = dataInicialTarefa;
   }
 
-  set periodRepetTarefa(periodoRepetTarefa) {
-    this._periodRepetTarefa = this.tryParse(periodoRepetTarefa);
+  set periodRepetTarefa(periodRepetTarefa) {
+    this._periodRepetTarefa = this.tryParse(periodRepetTarefa);
   }
 
   set insumosTarefa(insumosTarefa) {
@@ -117,7 +123,15 @@ class Tarefa {
     this._gastoTarefa = this.tryParse(gastoTarefa, true);
   }
 
+  set produtoProduzidoTarefa(produtoProduzidoTarefa){
+    this._produtoProduzidoTarefa = produtoProduzidoTarefa;
+  }
+
   //Getters
+  get idTarefa() {
+    return this._idTarefa;
+  }
+
   get nomeTarefa() {
     return this._nomeTarefa;
   }
@@ -152,6 +166,10 @@ class Tarefa {
 
   get gastoTarefa() {
     return this._gastoTarefa;
+  }
+
+  get produtoProduzidoTarefa(){
+    return this._produtoProduzidoTarefa;
   }
 
 }

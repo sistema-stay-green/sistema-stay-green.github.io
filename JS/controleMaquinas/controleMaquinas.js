@@ -13,6 +13,8 @@ function formatarDataObj(data){
   }
 }
 
+//define a abertura/fechamento das modais
+//estilização
 function estilizarModal(){
   botaoVoltar.addEventListener("click", function(){
     document.querySelector(".valores_fundo").style.display = "none";
@@ -38,9 +40,6 @@ function estilizarModal(){
 //checa se todos os inputs etão preenchidso e valida o cadastro
 // Estilização
 function validacao(){
-  //variaveis
-  let inputs = document.querySelectorAll(".inputs"),
-      valor = 0;
 
   for (let input of inputs){
     //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
@@ -54,10 +53,50 @@ function validacao(){
     return true;
 }
 
+//limita a data de compra para no maximo o dia atual
+//estilização
+function limitaDataCompra(){
+
+  let hoje = new Date(),
+      dia = hoje.getDate(),
+      mes = hoje.getMonth()+1, //January is 0!
+      ano = hoje.getFullYear();
+   if(dia<10){
+          dia='0'+dia
+      }
+      if(mes<10){
+          mes='0'+mes
+      }
+
+  hoje = ano+'-'+mes+'-'+dia;
+  document.querySelector("input[name='data']").setAttribute("max", hoje);
+}
+
+//limitaa data de retorno para no minimo depois do dia atual
+//estilização
+function limitaDataRetornoSaida(){
+
+  let hoje = new Date(),
+      dia = hoje.getDate(),
+      mes = hoje.getMonth()+1, //January is 0!
+      ano = hoje.getFullYear();
+   if(dia<10){
+          dia='0'+dia
+      }
+      if(mes<10){
+          mes='0'+mes
+      }
+
+  hoje = ano+'-'+mes+'-'+dia;
+  document.querySelector("input[name='periodo']").setAttribute("min", hoje);
+}
+
+//limita o indice de depreciação para 90
+//estilização
 function limiteDepreciacao(){
   document.querySelector("input[name='depreciação']").oninput = function () {
-      if (this.value > 100) {
-          this.value = 100;
+      if (this.value > 90) {
+          this.value = 90;
       }
   }
 }
@@ -237,78 +276,72 @@ function mostraModalEditar(){
   }
 }
 
-/*Pega valores do modal e manda para Backend*/
-function enviaInformacoesEditar() {
-  let id = document.querySelector("input[name='id-editar']").value,
-      nome = document.querySelector("input[name='nome-editar']").value,
-      finalidade = document.querySelector("input[name='finalidade-editar']").value,
-      valor =  document.querySelector("input[name='valor-editar']").value,
-      data = document.querySelector("input[name='data-editar']").value,
-      dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
-      depreciacao = document.querySelector("input[name='depreciação-editar']").value;
-
-      editarBE(id,nome, finalidade, depreciacao, valor,formatarData(data))
-
-      document.querySelector("#editar").style.display = "none";
-}
-
 /*Relatorio da pagina*/
 // Estilização
 function relatorio(){
-  maquinas = document.querySelectorAll(".maquina");
-  limpa_relatorio()
+  let maquinas = document.querySelectorAll(".maquina"),
+      totalMaquinas = maquinas.length,
+      maquinasPosse = 0,
+      maquinasAlugadas = 0,
+      maquinasDescartadas = 0,
+      maquinasVendidas = 0,
+      maquinasManutencao = 0,
+      valorTotalMaquina = 0,
+      string = "";
+
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
-    let string = "<ul><li>" +
-                  "<p>#"+ elementos[0].innerHTML +
-                  " - " + elementos[1].innerHTML + "</p>" +
-                  "<p>Finalidade: " + elementos[2].innerHTML + "</p>" +
-                  "<p>Valor de compra: " + elementos[3].innerHTML + "</p>" +
-                  "<p>Depreciação: " + elementos[4].innerHTML + "</p>" +
-                  "<p>Data de compra: " + elementos[5].innerHTML + "</p>" +
-                  "<p>Status: " + elementos[6].innerHTML + "</p>" +
-                  "<p>Valor atual: " + elementos[7].innerHTML + "</p>" +
-                  "<p>Data de saida: " + elementos[8].innerHTML + "</p>" +
-                  "<p>Data de baixa: " + elementos[9].innerHTML + "</p>" +
-                  "<p>-----------------------------------------------------</p>" +
-                  "</li></ul>";
     if(elementos[6].innerHTML == "EM_POSSE"){
-      section = document.querySelector("#maquinasPosse");
-      section.innerHTML += string;
+      maquinasPosse++;
+      valorTotalMaquina += elementos[7].innerHTML;
     }
     if(elementos[6].innerHTML == "VENDIDO"){
-      section = document.querySelector("#maquinasVendidas");
-      section.innerHTML += string;
+      maquinasVendidas++;
     }
     if(elementos[6].innerHTML == "ALUGADO"){
-      section = document.querySelector("#maquinasAlugadas");
-      section.innerHTML += string;
+      maquinasAlugadas++;
+      valorTotalMaquina += elementos[7].innerHTML;
     }
     if(elementos[6].innerHTML == "EM_MANUTENCAO"){
-      section = document.querySelector("#maquinasManutencao");
-      section.innerHTML += string;
+      maquinasManutencao++;
+      valorTotalMaquina += elementos[7].innerHTML;
     }
     if(elementos[6].innerHTML == "DESCARTADO"){
-      section = document.querySelector("#maquinasDescartadas");
-      section.innerHTML += string;
+      maquinasDescartadas++;
     }
-    document.querySelector(".relatorioModal").style.display = "block";
   }
+  document.querySelector("#totalMaquinas").innerHTML =
+      "<h4>Quantidade de maquinas</h4><ul>" +
+      "<li>" + totalMaquinas + "</li></ul>";
+
+  document.querySelector("#totalTiposMaquinas").innerHTML =
+      "<h4>Total de maquinas</h4><ul>" +
+      "<li>Em posse - " +maquinasPosse+ "</li>" +
+      "<li>Vendidas - " +maquinasVendidas+ "</li>" +
+      "<li>Alugadas - " +maquinasAlugadas+ "</li>" +
+      "<li>Descartadas - " +maquinasDescartadas+ "</li>" +
+      "<li>Em manutenção - " +maquinasManutencao+ "</li></ul>";
+
+  document.querySelector("#valorTotalMaquina").innerHTML =
+      "<h4>Valor total das maquinas</h4><ul>" +
+      "<li>Valor total - " + totalMaquinas + "</li></ul>";
+
+  document.querySelector(".relatorioModal").style.display = "block";
 }
 
-//limpa o relatorio para não duplicação de maquinas no mesmo
-// Estilização
-function limpa_relatorio() {
-    section = document.querySelector("#maquinasPosse");
-    section.innerHTML = "<h2>Maquinas em posse</h2>";
-    section = document.querySelector("#maquinasVendidas");
-    section.innerHTML = "<h2>Maquinas vendidas</h2>";
-    section = document.querySelector("#maquinasAlugadas");
-    section.innerHTML = "<h2>Maquinas alugadas</h2>";
-    section = document.querySelector("#maquinasManutencao");
-    section.innerHTML = "<h2>Maquinas em manutenção</h2>";
-    section = document.querySelector("#maquinasDescartadas");
-    section.innerHTML = "<h2>Maquinas descartadas</h2>";
+/*Pega valores do modal e manda para Backend*/
+function enviaInformacoesEditar() {
+  let id = document.querySelector("input[name='id-editar']").value,
+  nome = document.querySelector("input[name='nome-editar']").value,
+  finalidade = document.querySelector("input[name='finalidade-editar']").value,
+  valor =  document.querySelector("input[name='valor-editar']").value,
+  data = document.querySelector("input[name='data-editar']").value,
+  dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
+  depreciacao = document.querySelector("input[name='depreciação-editar']").value;
+
+  editarBE(id,nome, finalidade, depreciacao, valor,formatarData(data))
+
+  document.querySelector("#editar").style.display = "none";
 }
 
 //função que altera o status da maquina
@@ -391,6 +424,7 @@ function adicionaMaquina(maquina){
       visaoBotao();
 }
 
+//carrega todas as maquinas na pagina ao iniciar
 function adicionaTodasMaquinas(maquinasVetor){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
@@ -437,6 +471,7 @@ function adicionaTodasMaquinas(maquinasVetor){
       visaoBotao();
 }
 
+//edita a maquina selecionada
 function editaMaquina(maquina){
   let arrLinhaMaquina = document.querySelectorAll(".maquina"),
       string = "",
@@ -476,7 +511,7 @@ function editaMaquina(maquina){
   }
 }
 
-//função que cadastra valores na tabela sem a utilização do BD
+//função que cadastra valores no BD
 function enviaInformacoesCadastro(){
   if(validacao() == true){
     //variaveis
@@ -505,6 +540,7 @@ function enviaInformacoesCadastro(){
 
 }
 
+//rcarrega todas as maquinas na pagina
 receberTodos();
 
 // Variáveis
@@ -513,7 +549,8 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoConfirmarCadastro = document.querySelector("button[name='botaoAcao']"),
     botaoConfirmarEditar = document.querySelector("button[name='botaoEditarMaquina']"),
     botaoRelatorio = document.querySelector("button[name='botaoRelatorio']"),
-    filtro = document.querySelector("#filtro_select_status");
+    filtro = document.querySelector("#filtro_select_status"),
+    inputs = document.querySelectorAll(".inputs");
 
 //Adiciona as funções aos botões
 botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
@@ -522,8 +559,12 @@ botaoVoltar.addEventListener("click", voltar);
 botaoConfirmarCadastro.addEventListener("click", enviaInformacoesCadastro);
 botaoRelatorio.addEventListener("click", relatorio);
 filtro.addEventListener("change", filtraPagina);
+for (input of inputs) {
+  input.addEventListener("change",validacao);
+}
 
-
+limitaDataRetornoSaida();
+limitaDataCompra()
 visaoBotao();
 estilizarModal();
 limiteDepreciacao();

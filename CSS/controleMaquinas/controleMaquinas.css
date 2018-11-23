@@ -107,14 +107,14 @@ table{
 }
 .valores,.editar-conteudo,.relatorio{
   text-align: center;
-   background-color: #FDFCF3;
-   margin: 6% 33%;
-   padding: 20px;
-   border: 0.4em solid #1D883A;
-   width: 30%;
-   border-radius: 20px;
-   position: fixed;
-   z-index: 3;
+  background-color: #FDFCF3;
+  margin: 6% 33%;
+  padding: 20px;
+  border: 0.4em solid #1D883A;
+  width: 30%;
+  border-radius: 20px;
+  position: fixed;
+  z-index: 3;
 }
 .valores_fundo,.saidas,.editar,.relatorioModal{
   display: none;
@@ -135,16 +135,12 @@ table{
 .relatorio{
   text-align: justify;
   background-color: #FDFCF3;
-  margin: 1% 27%;
-  padding: 20px;
   border: 0.4em solid #1D883A;
-  width: 58vh;
   border-radius: 20px;
   position: fixed;
   z-index: 3;
+  display: block;
   overflow-y: auto;
-  height: 90vh;
-  padding: 3vh;
 }
 
 .tabelaDeMaquinas{

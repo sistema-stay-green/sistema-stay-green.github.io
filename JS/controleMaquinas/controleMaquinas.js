@@ -39,11 +39,29 @@ function estilizarModal(){
 
 //checa se todos os inputs etão preenchidso e valida o cadastro
 // Estilização
-function validacao(){
+function validacao(valores){
+  let hoje = new Date(),
+      dia = hoje.getDate(),
+      mes = hoje.getMonth()+1, //January is 0!
+      ano = hoje.getFullYear();
 
-  for (let input of inputs){
+   if(dia<10){
+          dia='0'+dia
+      }
+      if(mes<10){
+          mes='0'+mes
+      }
+  hoje = ano+'-'+mes+'-'+dia;
+
+  console.log(valores[valores.length-1].value);
+  if(valores[valores.length-1].value > hoje){
+    valores[valores.length-1].value = null;
+  }
+  for (var i = 0; i < valores.length; i++) {
+
     //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
-    if(input.value == ""){
+
+    if(valores[i].value == ""){
       document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
       return false;
     }
@@ -95,8 +113,8 @@ function limitaDataRetornoSaida(){
 //estilização
 function limiteDepreciacao(){
   document.querySelector("input[name='depreciação']").oninput = function () {
-      if (this.value > 90) {
-          this.value = 90;
+      if (this.value > 100) {
+          this.value = 100;
       }
   }
 }
@@ -115,8 +133,7 @@ function voltar(){
 //Abre uma div modal que permite a inserção de dados a srem cadastrados
 // Estilização
 function mostraModalCadastro(){
-  validacao();
-    let inputs = document.querySelectorAll(".inputs");
+
     for (input of inputs) {
       input.value = "";
     }
@@ -513,7 +530,7 @@ function editaMaquina(maquina){
 
 //função que cadastra valores no BD
 function enviaInformacoesCadastro(){
-  if(validacao() == true){
+  if(validacao(inputs) == true){
     //variaveis
     let nome = document.querySelector("input[name='nome']").value,
         finalidade = document.querySelector("input[name='finalidade']").value,
@@ -550,7 +567,8 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoConfirmarEditar = document.querySelector("button[name='botaoEditarMaquina']"),
     botaoRelatorio = document.querySelector("button[name='botaoRelatorio']"),
     filtro = document.querySelector("#filtro_select_status"),
-    inputs = document.querySelectorAll(".inputs");
+    inputs = document.querySelectorAll(".inputs"),
+    inputs_editar = document.querySelectorAll(".inputs-editar");
 
 //Adiciona as funções aos botões
 botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
@@ -560,7 +578,14 @@ botaoConfirmarCadastro.addEventListener("click", enviaInformacoesCadastro);
 botaoRelatorio.addEventListener("click", relatorio);
 filtro.addEventListener("change", filtraPagina);
 for (input of inputs) {
-  input.addEventListener("change",validacao);
+  input.addEventListener("input",function(){
+    validacao(inputs);
+  });
+}
+for (input of inputs_editar) {
+  input.addEventListener("input",function(){
+    validacao(inputs_editar);
+  });
 }
 
 limitaDataRetornoSaida();

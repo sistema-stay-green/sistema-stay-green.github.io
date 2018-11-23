@@ -16,10 +16,9 @@ function criaTabela(itens, tipo){
 			tabela.deleteRow(1);
 		}
 	}
-	var mensagem1 = document.querySelector("#mensagem" + sufixo + "1");
-	var mensagem2 = document.querySelector("#mensagem" + sufixo + "2");
+
 	if(itens != null) {
-		tabela.classList.remove("ocultar");
+		mostraTabela(tipo, "ocultar");
 		for (var i = 0; i < itens.length; i++) {
 			var linha = tabela.insertRow(i+1);
 			if(tipo == "produto"){
@@ -145,10 +144,7 @@ function criaTabela(itens, tipo){
 	}
 
 	else if(itens == null){
-		tabela.classList.add("ocultar");
-		mensagem1.innerHTML = "Não foram encontrados " + tipo + "s"
-		mensagem2.innerHTML = "Tente"
-		tabela.parentNode.innerHTML += mensagem;
+		mostraTabela(tipo, "ocultar");
 	}
   console.log(itens);
 	adicionarEventos();

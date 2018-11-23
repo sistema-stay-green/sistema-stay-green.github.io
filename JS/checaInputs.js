@@ -21,6 +21,41 @@ btnLimparEl.addEventListener("click", function(){
 
 });
 
+let inputs = document.querySelectorAll("#cadastro input");
+
+for (let inputEl of inputs) {
+  inputEl.addEventListener("input", function(evt){
+
+    let inputAlvoEl = evt.currentTarget;
+
+    if (inputAlvoEl.value === ""){
+
+      let labelEl = inputAlvoEl.parentElement,
+          btnConfirmarEl = document.querySelector("#cadastro > button:first-of-type");
+
+      if (labelEl.querySelector("span") === null) {
+        labelEl.insertBefore(escreveMensagemErro(" (Campo obrigatório)"), labelEl.querySelector("input"));
+        btnConfirmarEl.disable = "true";
+        btnConfirmarEl.classList.add("botaoDesab");
+      }
+
+    }
+    else {
+
+      let labelEl = inputAlvoEl.parentElement;
+      if(labelEl.querySelector("span") !== null)
+        labelEl.removeChild(labelEl.querySelector("span"));
+
+      if (document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
+        btnConfirmarEl.disable = "false";
+        btnConfirmarEl.classList.remove("botaoDesab");
+      }
+
+    }
+
+  });
+}
+
 // Mostra mensagem caso o email digitado não for válido
 function checaEmail() {
 
@@ -111,7 +146,7 @@ function checaCNPJ() {
         cnpj == "99999999999999"){
           while(labelEl.querySelector("span") !== null) {
             labelEl.removeChild(labelEl.querySelector("span"));
-            if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+            if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
               btnConfirmarEl.disable = "false";
               btnConfirmarEl.classList.remove("botaoDesab");
             }
@@ -137,7 +172,7 @@ function checaCNPJ() {
     if (resultado != digitos.charAt(0)){
       while(labelEl.querySelector("span") !== null) {
         labelEl.removeChild(labelEl.querySelector("span"));
-        if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+        if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
           btnConfirmarEl.disable = "false";
           btnConfirmarEl.classList.remove("botaoDesab");
         }
@@ -161,7 +196,7 @@ function checaCNPJ() {
     if (resultado != digitos.charAt(1)){
       while(labelEl.querySelector("span") !== null) {
         labelEl.removeChild(labelEl.querySelector("span"));
-        if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+        if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
           btnConfirmarEl.disable = "false";
           btnConfirmarEl.classList.remove("botaoDesab");
         }
@@ -174,7 +209,7 @@ function checaCNPJ() {
 
     while(labelEl.querySelector("span") !== null) {
       labelEl.removeChild(labelEl.querySelector("span"));
-      if(document.querySelectorAll("#cadastro .mensagemErro").length != 0) {
+      if(document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
         btnConfirmarEl.disable = "false";
         btnConfirmarEl.classList.remove("botaoDesab");
       }

@@ -34,7 +34,8 @@ btnConfimarEdicaoEl.addEventListener("click", function() {
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
       emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
       senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value,
-      usuario = new usuario(null);
+      usuario = new Usuario(null);
+      
   usuario.nome = nomeUsuario;
   usuario.cnpj = cnpjUsuario;
   usuario.saldo = saldoUsuario;

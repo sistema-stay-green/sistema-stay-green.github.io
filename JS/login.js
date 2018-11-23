@@ -47,10 +47,10 @@ let btnConfimarCadastroEl = document.querySelector("#login form:last-of-type > b
 btnConfimarCadastroEl.addEventListener("click", function() {
 
     let nomeUsuario = document.querySelector("input[name='nomeUsuario']").value,
-    cnpjUsuario = document.querySelector("#login form:last-of-type input[name='cnpjUsuario']").value,
-    saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
-    emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
-    senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
+        cnpjUsuario = document.querySelector("#login form:last-of-type input[name='cnpjUsuario']").value,
+        saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
+        emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
+        senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
 
     usuario = new Usuario(null);
     usuario.nome = nomeUsuario;
@@ -59,17 +59,14 @@ btnConfimarCadastroEl.addEventListener("click", function() {
     usuario.email = emailUsuario;
     usuario.senha = null;
 
-    localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
-    window.location.href = "index.html";
-
     Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
-    + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-    + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-    .then(() => {
-        localStorage.setItem("usuario", usuario.toJSON());
-        window.location.href = "index.html";
-    })
-    .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
+                + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
+                + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
+           .then(() => {
+              localStorage.setItem("usuario", usuario.toJSON());
+              window.location.href = "index.html";
+           })
+           .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
 

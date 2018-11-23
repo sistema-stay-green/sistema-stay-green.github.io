@@ -14,7 +14,6 @@ function recebeTarefas() {
       aplicarEventoGeracaoDataBotoes();
       aplicaFiltros();
       aplicarRelatorios();
-      recebeInsumos();
     });
 }
 
@@ -25,8 +24,10 @@ function recebeInsumos() {
   Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscarTodos&tipo=insumo')
     .then((resultado) => {
       insumosArmazenadosBD = resultado;
+
       let insumosSpan = document.querySelector("#insumosForm");
       insumosSpan.innerHTML = "";
+
       for (let insumo of insumosArmazenadosBD) {
         let insumoCheckBox = document.createElement('input'),
           labelInsumo = document.createElement('label');
@@ -37,10 +38,12 @@ function recebeInsumos() {
         labelInsumo.appendChild(insumoCheckBox);
         insumosSpan.appendChild(labelInsumo);
       }
+
+      recebeTarefas();
     });
 }
 
-window.onload = recebeTarefas;
+window.onload = recebeInsumos;
 
 
 let containerCalendario = document.querySelector('#containerCalendario');
@@ -160,7 +163,22 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
         e.stopPropagation();
         e.preventDefault();
       });
+
       containerDia.appendChild(tarefaAgendadaEl);
+
+      if (dataContainer.getUTCDate() === new Date().getUTCDate()) {
+        /*Atualizando o estoque dos insumos que as tarefas realizadas no
+        dia atual consomem*/
+        for (let insumoTarefa of tarefa.insumosTarefa.split(", ")) {
+          for (let insumoGeral of insumosArmazenadosBD) {
+            if (insumoTarefa === insumoGeral.nomeInsumo) {
+              insumoGeral.quantEstoqueInsumo -= 1;
+              atualizarQtInsumo(insumoGeral);
+            }
+          }
+        }
+      }
+
     }
   }
 

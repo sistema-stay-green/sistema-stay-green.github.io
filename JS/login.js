@@ -8,10 +8,14 @@ btnEntrarLoginEl.addEventListener("click", function() {
 
       Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
-             .then(() => {
+             .then((resposta) => {
                     let usuario = new Usuario(null);
-                    // pegar dados no BD do usuario e colocar no objeto
-                    // salvar objeto no localStorage
+
+                    usuario.nome = resposta.nomeUsuario;
+                    usuario.cnpj = resposta.cnpjUsuario;
+                    usuario.saldo = resposta.saldoUsuario;
+                    usuario.email = resposta.emailUsuario;
+                    
                     localStorage.setItem("usuario", usuario.toJSON());
                     window.location.href = "index.html";
              })

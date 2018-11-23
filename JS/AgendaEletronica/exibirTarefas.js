@@ -139,6 +139,13 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
   textoData.innerHTML = dataContainer.getDate() + " de " +
     MESES[dataContainer.getMonth()] + " de " + dataContainer.getUTCFullYear();
 
+  /*Marcando o dia atual com uma estilização diferente,
+  apenas para orientação do usuário*/
+  if(dataContainer.getUTCDate() === new Date().getUTCDate()){
+    textoData.style.color = 'var(--brancoIvory)';
+    textoData.style.backgroundColor = 'var(--verdeCamarone)';
+  }
+
   containerDia.appendChild(textoData);
 
   //Colocando atributo data-date no formato YYYY-mm-dd

@@ -1,3 +1,25 @@
+function formatarStatus(status){
+  switch (status) {
+    case "EM_POSSE":
+      status = "Em posse";
+      break;
+    case "ALUGADO":
+      status = "Alugado";
+      break;
+    case "VENDIDO":
+      status = "Vendido";
+      break;
+    case "EM_MANUTENCAO":
+      status = "Em manutenção";
+      break;
+    case "DESCARTADO":
+      status = "Descartado";
+      break;
+    default:
+      status = "N/A"
+  }
+  return status;
+}
 
 function formatarData(data){
   data = data.split("-");
@@ -8,6 +30,8 @@ function formatarData(data){
 function formatarDataObj(data){
   if(data != null){
     data = data.toISOString().split('T')[0];
+    data = data.split("-");
+    data = data[2] + "/" + data[1] + "/" + data[0];
     return data;
   }
 }
@@ -69,6 +93,36 @@ function validacao(valores){
     return true;
 }
 
+function validacaoEditar(valores){
+  let hoje = new Date(),
+      dia = hoje.getDate(),
+      mes = hoje.getMonth()+1, //January is 0!
+      ano = hoje.getFullYear();
+
+   if(dia<10){
+          dia='0'+dia
+      }
+      if(mes<10){
+          mes='0'+mes
+      }
+  hoje = ano+'-'+mes+'-'+dia;
+
+  if(valores[valores.length-1].value > hoje){
+    valores[valores.length-1].value = null;
+  }
+  for (var i = 0; i < valores.length; i++) {
+
+    //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
+
+    if(valores[i].value == ""){
+      document.querySelector("button[name='botaoEditarMaquina']").classList.add("botaoDesab");
+      return false;
+    }
+  }
+  //se todos os input estiverem preenchidos retorna "true"e deixa o botão para cadastrar habilitado
+    document.querySelector("button[name='botaoEditarMaquina']").classList.remove("botaoDesab");
+    return true;
+}
 //limita a data de compra para no maximo o dia atual
 //estilização
 function limitaDataCompra(){
@@ -86,6 +140,7 @@ function limitaDataCompra(){
 
   hoje = ano+'-'+mes+'-'+dia;
   document.querySelector("input[name='data']").setAttribute("max", hoje);
+  document.querySelector("input[name='data-editar']").setAttribute("max", hoje);
 }
 
 //limitaa data de retorno para no minimo depois do dia atual
@@ -112,7 +167,12 @@ function limitaDataRetornoSaida(){
 function limiteDepreciacao(){
   document.querySelector("input[name='depreciação']").oninput = function () {
       if (this.value > 100) {
-          this.value = 100;
+          this.value = null;
+      }
+  }
+  document.querySelector("input[name='depreciação-editar']").oninput = function () {
+      if (this.value > 100) {
+          this.value = null;
       }
   }
 }
@@ -360,9 +420,8 @@ function enviaInformacoesEditar() {
   dataAs = document.querySelector("input[name='data-editar']").valueAsDate,
   depreciacao = document.querySelector("input[name='depreciação-editar']").value;
 
-  console.log(id);
 
-  editarBE(id,nome, finalidade, depreciacao, valor, formatarData(data))
+  editarBE(id,nome, finalidade, depreciacao, valor, data)
 
   document.querySelector("#editar").style.display = "none";
 }
@@ -377,8 +436,8 @@ function AlteraStatus(elemento,opcao){
 
     //transporta os valores dos filhos de "elemento" para um vetor
 
-    /*Imprime os valores do vetor mais a condição que se encontra a maquinas
-      de acordo com o valor da variavel opcao*/
+    //Imprime os valores do vetor mais a condição que se encontra a maquinas
+    //de acordo com o valor da variavel opcao
         if(opcao.value == "Alugar"){
             alugar(nodes[0].innerHTML, periodo, valorAluguel);
         }
@@ -391,9 +450,9 @@ function AlteraStatus(elemento,opcao){
         if(opcao.value == "Descartar"){
             descartar(nodes[0].innerHTML, periodo);
         }
-/*Permite a chamada da função saida ao clicar no "botaoSaida"*/
+  //Permite a chamada da função saida ao clicar no "botaoSaida"
 
-  /*Zera os valores dos inputs da data requisitada*/
+  //Zera os valores dos inputs da data requisitada
   let valores = document.querySelectorAll("input[name='data']");
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
@@ -405,19 +464,20 @@ function adicionaMaquina(maquina){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
           botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+          div = "<div class='scrollabe'>",
           tabelaMaquinas = document.querySelector("#tabela");
 
-          console.log(maquina);
+          console.log(maquina.dataCompra);
 
           string += "<tr class=\"maquina\">";
           string += "<td class=\"id\">" + maquina.id + "</td>";
           string += "<td>" + maquina.nome + "</td>";
-          string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
-          string += "<td>" + maquina.valorCompra + "</td>";
+          string += "<td class=\"finalidade\">"+ div + maquina.finalidade + "</div></td>";
+          string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquina.indiceDepreciacao + "</td>";
           string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
-          string += "<td>" + maquina.status + "</td>";
-          string += "<td>" + maquina.calculateValorAtual() + "</td>";
+          string += "<td>" + formatarStatus(maquina.status) + "</td>";
+          string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
           if(maquina.dataSaida == null)
             string += "<td>N/A</td>";
           else
@@ -452,6 +512,7 @@ function adicionaTodasMaquinas(maquinasVetor){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
           botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
+          div = "<div class='scrollabe'>",
           tabelaMaquinas = document.querySelector("#tabela");
 
 
@@ -459,12 +520,12 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<tr class=\"maquina\">";
           string += "<td class=\"id\">" + maquinasVetor[i].id + "</td>";
           string += "<td>" + maquinasVetor[i].nome + "</td>";
-          string += "<td class=\"finalidade\">" + maquinasVetor[i].finalidade + "</td>";
-          string += "<td>" + maquinasVetor[i].valorCompra + "</td>";
+          string += "<td class=\"finalidade\">" +div + maquinasVetor[i].finalidade + "</div></td>";
+          string += "<td>" + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquinasVetor[i].indiceDepreciacao + "</td>";
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
-          string += "<td>" + maquinasVetor[i].status + "</td>";
-          string += "<td>" + maquinasVetor[i].calculateValorAtual() + "</td>";
+          string += "<td>" + formatarStatus(maquinasVetor[i].status) + "</td>";
+          string += "<td>" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
           if(maquinasVetor[i].dataSaida == null)
             string += "<td>N/A</td>";
           else
@@ -502,18 +563,17 @@ function editaMaquina(maquina){
       botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>";
   for (linhaMaquina of arrLinhaMaquina) {
     let node = linhaMaquina.children;
-    console.log(maquina);
 
     if(node[0].innerHTML == maquina.id){
         string += "<tr class=\"maquina\">";
         string += "<td class=\"id\">" + maquina.id + "</td>";
         string += "<td>" + maquina.nome + "</td>";
         string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
-        string += "<td>" + maquina.valorCompra + "</td>";
+        string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
         string += "<td>" + maquina.indiceDepreciacao + "</td>";
         string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
-        string += "<td>" + maquina.status + "</td>";
-        string += "<td>" + maquina.calculateValorAtual() + "</td>";
+        string += "<td>" + formatarStatus(maquina.status) + "</td>";
+        string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
         if(maquina.dataSaida == null)
           string += "<td>N/A</td>";
         else
@@ -555,7 +615,7 @@ function enviaInformacoesCadastro(){
         data = document.querySelector("input[name='data']").value,
         depreciacao = document.querySelector("input[name='depreciação']").value;
 
-    cadastrar(nome, finalidade, "EM_POSSE", depreciacao, valor, formatarData(data), 1);
+    cadastrar(nome, finalidade, depreciacao, valor, data, 1);
     //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
     document.querySelector(".maquinas").style.display = "inline-block";
     document.querySelector(".opcoes").style.display = "block";
@@ -566,11 +626,8 @@ function enviaInformacoesCadastro(){
     for (var i = 0; i < valores.length; i++) {
       valores[i].value = "";
     }
-
-
     document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
   }
-
 }
 
 //rcarrega todas as maquinas na pagina
@@ -600,9 +657,10 @@ for (input of inputs) {
 }
 for (input of inputs_editar) {
   input.addEventListener("input",function(){
-    validacao(inputs_editar);
+    validacaoEditar(inputs_editar);
   });
 }
+
 
 limitaDataRetornoSaida();
 limitaDataCompra()

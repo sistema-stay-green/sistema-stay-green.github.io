@@ -2,7 +2,7 @@ const SERVER_URL = "http://localhost:8080/StayGreen/MaquinasServlet?";
 
 
 /**
-* Retorna data atual já formatada
+* Retorna data atual já formatada em DD/MM/YYYY
 * @returns {String} data atual formatada
 */
 function novaData(){
@@ -15,7 +15,12 @@ function formatarData(data){
   data = data.split("-");
   data = data[2] + "/" + data[1] + "/" + data[0];
   data = data.substr(1);
-  return data;
+  console.log(data + " 2");
+  data = new Date(data[0], data[1], data[2]);
+  data = data.setMonth(data.getMonth() - 1);
+  let novaData = data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear();
+  console.log(novaData + " 3");
+  return novaData;
 }
 
 function transformaEmMaquina(resultado){
@@ -27,19 +32,19 @@ function transformaEmMaquina(resultado){
 function dateObjToDate(resultado){
     if(resultado.dataCompra != null){
       resultado.dataCompra = new Date(resultado.dataCompra.year,
-          resultado.dataCompra.month, resultado.dataCompra.dayOfMonth);
+          resultado.dataCompra.month-1, resultado.dataCompra.dayOfMonth);
     }
     if(resultado.dataSaida != null){
      resultado.dataSaida = new Date(resultado.dataSaida.year,
-         resultado.dataSaida.month, resultado.dataSaida.dayOfMonth);
+         resultado.dataSaida.month-1, resultado.dataSaida.dayOfMonth);
     }
     if(resultado.dataRetorno != null){
     resultado.dataRetorno = new Date(resultado.dataRetorno.year,
-        resultado.dataRetorno.month, resultado.dataRetorno.dayOfMonth);
+        resultado.dataRetorno.month-1, resultado.dataRetorno.dayOfMonth);
     }
     if(resultado.dataBaixa != null){
     resultado.dataBaixa = new Date(resultado.dataBaixa.year,
-        resultado.dataBaixa.month, resultado.dataBaixa.dayOfMonth);
+        resultado.dataBaixa.month-1, resultado.dataBaixa.dayOfMonth);
     }
     return resultado;
 }
@@ -73,14 +78,14 @@ function receberTodos(){
  * @returns {String} Retorna a resposta do servidor;
  * @author Guilherme Sena
  */
-function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
+function cadastrar(nome, descricao, indiceDepreciacao, valorCompra,
   dataCompra, quantidade){
-  let maquinaJSON = encapsularCadastrar(nome, descricao, status,
+  let maquinaJSON = encapsularCadastrar(nome, descricao,
     indiceDepreciacao, valorCompra);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"c"+
-              "&dataCompra="+dataCompra+
+              "&dataCompra="+formatarData(dataCompra)+
               "&dataSaida="+null+
               "&dataRetorno="+null+
               "&dataBaixa="+null+
@@ -93,22 +98,23 @@ function cadastrar(nome, descricao, status, indiceDepreciacao, valorCompra,
 
 /**
  * Envia dados para o Servlet para Comprar máquina.
- * @param {int} id que é um inteiro representando o ID da máquina;
+ * @param {int} id que é um inteiro positivo representando o ID da máquina;
  * @returns {String} Retorna uma string com resposta do Servlet;
  * @author Guilherme Sena
  */
-function vender(id,data){
-  let maquinaJSON = encapsularVenda(id,data);
+function vender(id, dataBaixa){
+  let maquinaJSON = encapsularVenda(id, dataBaixa);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"v"+
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+ formatarData(data)+
+              "&dataBaixa="+ formatarData(dataBaixa)+
               "&quantidade="+1).then(function(resultado) {
+                resultado = transformaEmMaquina(resultado)
                 resultado = dateObjToDate(resultado);
-                editaMaquina(transformaEmMaquina(resultado));
+                editaMaquina(resultado);
               });
 }
 
@@ -118,18 +124,19 @@ function vender(id,data){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function descartar(id,data){
-  let maquinaJSON = encapsularDescarte(id,data);
+function descartar(id, dataBaixa){
+  let maquinaJSON = encapsularDescarte(id, dataBaixa);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"d"+
               "&dataCompra="+null+
               "&dataSaida="+null+
               "&dataRetorno="+null+
-              "&dataBaixa="+formatarData(data)+
+              "&dataBaixa="+formatarData(dataBaixa)+
               "&quantidade="+1).then(function(resultado) {
+                resultado = transformaEmMaquina(resultado)
                 resultado = dateObjToDate(resultado);
-                editaMaquina(transformaEmMaquina(resultado));
+                editaMaquina(resultado);
               });
 }
 
@@ -140,19 +147,22 @@ function descartar(id,data){
  * @returns {String} Retorna uma string com a resposta do Servlet;
  * @author Guilherme Sena
  */
-function alugar(id,data, valorAluguel){
-  let maquinaJSON = encapsularAluguel(id,data,valorAluguel);
+function alugar(id, dataSaida, valorAluguel){
+  let maquinaJSON = encapsularAluguel(id, dataSaida, valorAluguel);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"a"+
               "&dataCompra="+null+
               "&dataSaida="+novaData()+
-              "&dataRetorno="+formatarData(data)+
+              "&dataRetorno="+formatarData(dataSaida)+
               "&dataBaixa="+null+
               "&valorAluguel="+valorAluguel+
               "&quantidade="+1).then(function(resultado) {
-                resultado = transformaEmMaquina(resultado)
+                console.log(resultado.idPatrimonio+" 1");
+                resultado = transformaEmMaquina(resultado);
+                console.log(resultado.id+" 2");
                 resultado = dateObjToDate(resultado);
+                console.log(resultado.id+" 3");
                 editaMaquina(resultado);
               });
 }
@@ -174,19 +184,20 @@ function manuntenir(id, dataRetorno){
               "&dataRetorno="+formatarData(dataRetorno)+
               "&dataBaixa="+null+
               "&quantidade="+1).then(function(resultado) {
+                resultado = transformaEmMaquina(resultado)
                 resultado = dateObjToDate(resultado);
-                editaMaquina(transformaEmMaquina(resultado));
+                editaMaquina(resultado);
               });
 }
 
 function editarBE(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
   let maquinaJSON = encapsularEditar(id, nome, finalidade,
-    indiceDepreciacao, valorCompra,dataCompra);
+    indiceDepreciacao, valorCompra, dataCompra);
     console.log(dataCompra);
   Request.get(SERVER_URL+
               "maquinasJSON="+maquinaJSON+
               "&acao="+"e"+
-              "&dataCompra="+dataCompra+
+              "&dataCompra="+formatarData(dataCompra)+
               "&dataSaida="+null+
               "&dataRetorno="+null+
               "&dataBaixa="+null+

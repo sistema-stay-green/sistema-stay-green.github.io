@@ -4,18 +4,18 @@
  * @param {int} id inteiro representando o ID da máquina;
  * @param {String} nome representando o nome da máquina;
  * @param {String} finalidade breve finalidade da máquina;
- * @param {String} status em qual situação se encontra a máquina;
- * @param {int} indiceDepreciacao inteiro representando a porcentagem a depreciacao por ano;
- * @param {int} valorCompra inteiro negativo representando o valor da compra da máquina;
+ * @param {float} indiceDepreciacao real positivo representando a porcentagem a depreciacao por ano;
+ * @param {int} valorCompra inteiro positivo representando o valor da compra da máquina;
+ * @param {String} dataCompra representa a data em que a compra foi realizada;
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularCadastrar(nome, finalidade, status,
+function encapsularCadastrar(nome, finalidade,
   indiceDepreciacao, valorCompra){
     let maquina = new Maquina(0);
     maquina.nome = nome;
     maquina.finalidade = finalidade;
-    maquina.status = status;
+    maquina.status = "EM_POSSE";
     maquina.indiceDepreciacao = indiceDepreciacao;
     maquina.valorCompra = valorCompra;
 
@@ -24,14 +24,15 @@ function encapsularCadastrar(nome, finalidade, status,
 
 /**
  * Envia dados para o Servlet para Comprar máquina.
- * @param {int} ID que é um inteiro representando o ID da máquina;
+ * @param {int} Id um inteiro representando o ID da máquina;
+ * @param {int} dataBaixa uma string com a data de baixa;
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularVenda(id,data){
+function encapsularVenda(id, dataBaixa){
     let maquina = new Maquina(id);
     maquina.status = "VENDIDO";
-    maquina.dataBaixa = formatarData(data);
+    maquina.dataBaixa = formatarData(dataBaixa);
 
     return maquina.toJSON();
 }
@@ -39,13 +40,14 @@ function encapsularVenda(id,data){
 /**
  * Envia dados para o Servlet para Vender máquina.
  * @param {int} Número inteiro representando o ID da máquina;
+ * @param {int} dataBaixa uma string com a data de baixa;
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularDescarte(id,data){
+function encapsularDescarte(id,dataBaixa){
     let maquina = new Maquina(id);
     maquina.status = "DESCARTADO";
-    maquina.dataBaixa = formatarData(data);
+    maquina.dataBaixa = formatarData(dataBaixa);
 
     return maquina.toJSON();
 }
@@ -53,14 +55,14 @@ function encapsularDescarte(id,data){
 /**
  * Envia dados para o Servlet para Alugar máquina.
  * @param {int} Número inteiro representando o ID da máquina;
- * @param {object} dataRetorno Objeto Data representando data de retorno;
+ * @param {String} dataRetorno string representando data de retorno;
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
-function encapsularAluguel(id,data,valorAluguel){
+function encapsularAluguel(id, dataRetorno, valorAluguel){
   let maquina = new Maquina(id);
   maquina.status = "ALUGADO";
-  maquina.dataRetorno = formatarData(data);
+  maquina.dataRetorno = formatarData(dataRetorno);
   maquina.dataSaida = novaData();
 
 
@@ -70,7 +72,7 @@ function encapsularAluguel(id,data,valorAluguel){
 /**
  * Envia dados para o Servlet para Enviar máquina à manutenção.
  * @param {int} Número inteiro representando o ID da máquina;
- * @param {object} dataRetorno Objeto Data representando data de retorno;
+ * @param {String} dataRetorno string representando data de retorno;
  * @returns {String} Retorna uma string com formatação JSON;
  * @author Guilherme Sena
  */
@@ -83,7 +85,18 @@ function encapsularManutencao(id, dataRetorno){
   return maquina.toJSON();
 }
 
-function encapsularEditar(id, nome, finalidade, indiceDepreciacao, valorCompra,dataCompra){
+/**
+ * Envia dados para o Servlet para edição de máquinas.
+ * @param {int} id inteiro representando o ID da máquina;
+ * @param {String} nome representando o nome da máquina;
+ * @param {String} finalidade breve finalidade da máquina;
+ * @param {float} indiceDepreciacao real positivo representando a porcentagem a depreciacao por ano;
+ * @param {int} valorCompra inteiro positivo representando o valor da compra da máquina;
+ * @param {String} dataCompra representa a data em que a compra foi realizada;
+ * @returns {String} Retorna uma string com formatação JSON;
+ * @author Guilherme Sena
+ */
+function encapsularEditar(id, nome, finalidade, indiceDepreciacao, valorCompra, dataCompra){
     let maquina = new Maquina(id);
     maquina.nome = nome;
     maquina.finalidade = finalidade;

@@ -216,20 +216,16 @@ button #iconePlus, #iconeRelatorio {
   height: 100%;
 }
 
+#divH2ModalInsumo {
+  text-align: center;
+}
+
 #divModalCerteza{
   margin-top: 11em;
   padding: 0.5em;
   width: 40%;
   left: 30%;
   text-align: center;
-}
-
-#tabelaProduto , #tabelaInsumo{
-  width: 100%;
-}
-
-.tabProduto, .tabInsumo {
-  margin: auto;
 }
 
 .selFiltro {

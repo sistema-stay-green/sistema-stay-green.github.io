@@ -24,6 +24,11 @@ window.onload = function recebeJSON(){
     });
 }
 
+/**
+ * Insere os produtos em um array
+ * @param {Object} param0 objeto com informaçoes dos produtos
+ * @author Vinícius
+ */
 function addArrayProdutos({idProduto: id, nomeProduto: nome, descrProduto: descricao, valorUnitProduto: preco, quantEstoqueProduto: estoque,fotoMercadoria: img}){
   let produto = {
      nome:"",
@@ -40,8 +45,13 @@ function addArrayProdutos({idProduto: id, nomeProduto: nome, descrProduto: descr
   produto.img = img;
   arrayProdutos.push(produto);
   console.log(arrayProdutos);
- }
+}
 
+/**
+ * Insere os produtos do array na tela
+ * @param {Array} produtos array de produtos
+ * @author Vinícius
+ */
 function addProdutosPagina(produtos){
 
    let tabela = document.createElement("table");
@@ -61,6 +71,10 @@ function addProdutosPagina(produtos){
    mainEl.insertBefore(tabela,divBotoesEl);
 }
 
+/**
+ * Mostra a modal correspondente o relatorio de encaminhamentos
+ * @author Vinícius
+ */
 function mostraEncaminhamentos(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.add("aparece");
@@ -68,6 +82,11 @@ function mostraEncaminhamentos(){
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
+
+/**
+ * Mostra a modal correspondente o relatorio de faturametos
+ * @author Vinicius
+ */
 function mostraFaturamentos(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.remove("aparece");
@@ -75,6 +94,11 @@ function mostraFaturamentos(){
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
+
+/**
+ * Mostra a modal correspondente o relatorio de faturametos 
+ * @author Vinicius
+ */
 function mostraResultados(){
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.remove("aparece");
@@ -82,6 +106,11 @@ function mostraResultados(){
   divResulEl.classList.add("aparece");
   divRegistraEl.classList.remove("aparece");
 }
+
+/**
+ * Mostra a modal correspondente a venda 
+ * @author Vinicius
+ */
 function mostraRegistra() {
   mascaraEl.classList.add("aparece");
   divEncaEl.classList.remove("aparece");
@@ -89,6 +118,10 @@ function mostraRegistra() {
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.add("aparece");
 }
+
+/**
+ * 
+ */
 function escondeTudo(){
   mascaraEl.classList.remove("aparece");
   divEncaEl.classList.remove("aparece");
@@ -96,24 +129,33 @@ function escondeTudo(){
   divResulEl.classList.remove("aparece");
   divRegistraEl.classList.remove("aparece");
 }
+
+
 function confirmaRegistraProduto(){
   divRegistraEl.classList.remove("aparece");
   mascaraEl.classList.remove("aparece");
 }
+
+
 function cancelaRegistraProduto(){
   divRegistraEl.classList.remove("aparece");
   mascaraEl.classList.remove("aparece");
 }
 
-botaoRegistraEl.addEventListener('click', mostraRegistra);
-botaoEncaEl.addEventListener('click', mostraEncaminhamentos);
+botaoRegistraEl.addEventListener('click',e => {
+  mostraRegistra();
+});
+botaoEncaEl.addEventListener('click', w=> {
+  mostraEncaminhamentos();
+  relatorioEncaminhamento()
+});
 botaoFatuEl.addEventListener('click', mostraFaturamentos);
 botaoResulEl.addEventListener('click', mostraResultados);
 mascaraEl.addEventListener('click', escondeTudo);
 botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
 botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
 
-let padrao = '########';
+let padrao = '#####-###';
 
 let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
   inputCep.addEventListener('input', e => {
@@ -137,7 +179,7 @@ let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
 
 //compra é valor negativo
 function relatorioResultados(){
-  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet)
+  Request.get('http://localhost:8080/StayGreen/RelatorioResultadoServlet')
     .then(resposta => {
       if(resposta < 0)
         respostaMsg = "Produtor está tendo prejuízo";
@@ -215,7 +257,6 @@ function relatorioEncaminhamento(){
       divEncaEl.append(tabela);
     });
 }
-relatorioEncaminhamento();
 
 function mudaValorFrete(){
   if(valorBotaoFrete >= 0)
@@ -224,3 +265,27 @@ function mudaValorFrete(){
     alert("Valor do frete inválido");
   }
 }
+
+const modalVenda = document.getElementById('div-registra');
+const idInput = modalVenda.querySelector('input[name=input]');
+const dataEntregaInput = modalVenda.querySelector('input[name=dataEntrega]');
+const quantVendidaInput = modalVenda.querySelector('input[name=quant]');
+const nomeInput = modalVenda.querySelector('input[name=nome]');
+const modoPagamentoSelect = modalVenda.querySelector('select[name=modoPagamento]');
+const regiaoSelect = modalVenda.querySelector('select[name=regiao]');
+const enderecoInput = modalVenda.querySelector('input[name=endereco]');
+const cepInput = modalVenda.querySelector('input[name=cep]');
+const confirmaButton = modalVenda.querySelector('button[name=confirmaModal]');
+const regexCEP = /(\d{5})-?(\d{3})/;
+
+//Confirma venda
+confirmaButton.addEventListener('click', e => {
+  let cepExp = regexCEP.exec(cepInput.value);
+  fazVenda(
+      new DataEntrega(dataEntregaInput.valueAsDate),
+      new Venda(),
+      new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2], modoPagamentoSelect.value),
+      new Transacao(idInput.value, arrayProdutos[idInput.value-1].preco * quantVendidaInput.value , quantVendidaInput.value)
+  );
+});
+

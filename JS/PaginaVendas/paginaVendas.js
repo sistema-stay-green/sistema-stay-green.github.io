@@ -308,3 +308,32 @@ let inputCep = divModalEl.querySelector("label:last-of-type > input");
 });
 
 cancelaModal();
+
+const modalConfirma = document.getElementById('div-modal');
+const nomeInput = modalConfirma.querySelector('input[name=nome]');
+const modoPagamentoSelect = modalConfirma.querySelector('select[name=modoPagamento]');
+const dataEntregaInput = modalConfirma.querySelector('input[name=dataEntrega]');
+const regiaoSelect = modalConfirma.querySelector('select[name=regiao]');
+const enderecoInput = modalConfirma.querySelector('input[name=endereco]');
+const cepInput = modalConfirma.querySelector('input[name=cep]');
+const confirmaButton = modalConfirma.querySelector('#confirmaModal');
+const regexCEP = /(\d{5})-?(\d{3})/;
+
+confirmaButton.addEventListener('click', e => {
+    let dataTransacao = new DataEntrega(dataEntregaInput.valueAsDate);
+    let venda = new Venda();
+
+    let cepExp = regexCEP.exec(cepInput.value);
+    let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2] , modoPagamentoSelect.value);
+
+    let transacoes = Array();
+    for (const objeto of arrayCarrinho) {
+        transacoes.push(new Transacao(objeto.id, objeto.valor , objeto.quantidade));
+    }
+
+    fazVenda(dataTransacao,
+        venda,
+        comprador,
+        ...transacoes
+    );
+});

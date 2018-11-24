@@ -3,23 +3,31 @@ let btnEntrarLoginEl = document.querySelector("#login form:first-of-type > butto
 
 btnEntrarLoginEl.addEventListener("click", function() {
 
-  let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
-      senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
+  let emailInputEl = document.querySelector("#login form > label:first-of-type > input"),
+      senhaInputEl = document.querySelector("#login form > label:last-of-type > input");
 
       Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
              .then((resposta) => {
-                    let usuario = new Usuario(null);
 
-                    usuario.nome = resposta.nomeUsuario;
-                    usuario.cnpj = resposta.cnpjUsuario;
-                    usuario.saldo = resposta.saldoUsuario;
-                    usuario.email = resposta.emailUsuario;
-                    
-                    localStorage.setItem("usuario", usuario.toJSON());
-                    window.location.href = "index.html";
+                if (resposta !== null){
+
+                  let usuario = new Usuario(null);
+
+                  usuario.nome = resposta.nomeUsuario;
+                  usuario.cnpj = resposta.cnpjUsuario;
+                  usuario.saldo = resposta.saldoUsuario;
+                  usuario.email = resposta.emailUsuario;
+                  
+                  localStorage.setItem("usuario", usuario.toJSON());
+                  window.location.href = "index.html";
+
+                }
+                else
+                  alert("Email e/ou senha errados");
+                  
              })
-             .catch(() => { alert("Erro ao logar o servidor") });
+             .catch((reason) => { alert("Erro ao logar o servidor") });
 
 });
 
@@ -63,14 +71,14 @@ btnConfimarCadastroEl.addEventListener("click", function() {
     usuario.email = emailUsuario;
     usuario.senha = null;
 
-    Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
+    Request.get("http://localhost:8080/StayGreen/cadastrarusuario?nome="
                 + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
                 + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-           .then(() => {
+           .then((resposta) => {
               localStorage.setItem("usuario", usuario.toJSON());
               window.location.href = "index.html";
            })
-           .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
+           .catch((reason) => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
 

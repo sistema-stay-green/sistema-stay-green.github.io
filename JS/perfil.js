@@ -33,7 +33,6 @@ btnConfimarEdicaoEl.addEventListener("click", function() {
       cnpjUsuario = document.querySelector("#cadastro input[name='cnpjUsuario']").value,
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
       emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
-      senhaUsuario = document.querySelector("#cadastro input[name='senhaUsuario']").value,
       usuario = new Usuario(null);
       
   usuario.nome = nomeUsuario;
@@ -42,14 +41,16 @@ btnConfimarEdicaoEl.addEventListener("click", function() {
   usuario.email = emailUsuario;
   usuario.senha = null;
 
-  Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
+  let usuarioLocal = JSON.parse(localStorage.getItem('usuario'));
+
+  Request.get("http://localhost:8080/StayGreen/UpdateUsuarioServlet?nome="
               + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-              + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-         .then(() => {
+              + "&login=" + emailUsuario + "&loginAntigo=" + usuarioLocal.emailUsuario)
+         .then((resposta) => {
               localStorage.setItem("usuario", usuario.toJSON());
-              window.location.href = "index.html";
+              window.location.href = "perfil.html";
          })
-         .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
+         .catch((reason) => { alert("Erro ao atualiza os dados no servidor"); });
 });
 
 // Chama funções relacionadas a cada botão

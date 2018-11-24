@@ -4,8 +4,10 @@ let inputConfSenhaEl = document.querySelector("#cadastro input[name='confSenhaUs
     inputEmailEl = document.querySelector("#cadastro input[name='emailUsuario']"),
     inputCNPJEl = document.querySelector("#cadastro input[name='cnpjUsuario']");
 
-inputConfSenhaEl.addEventListener("input", checarSenhas);
-inputSenhaEl.addEventListener("input", checarSenhas);
+if (inputConfSenhaEl && inputSenhaEl){
+  inputConfSenhaEl.addEventListener("input", checarSenhas);
+  inputSenhaEl.addEventListener("input", checarSenhas);
+}
 inputEmailEl.addEventListener("input", checaEmail);
 inputCNPJEl.addEventListener("focusout", checaCNPJ);
 
@@ -31,7 +33,7 @@ for (let inputEl of inputs) {
     if (inputAlvoEl.value === ""){
 
       let labelEl = inputAlvoEl.parentElement,
-          btnConfirmarEl = document.querySelector("#cadastro > button:first-of-type");
+          btnConfirmarEl = document.querySelector("#cadastro button:first-of-type");
 
       if (labelEl.querySelector("span") === null) {
         labelEl.insertBefore(escreveMensagemErro(" (Campo obrigatório)"), labelEl.querySelector("input"));
@@ -43,6 +45,7 @@ for (let inputEl of inputs) {
     else {
 
       let labelEl = inputAlvoEl.parentElement;
+      let btnConfirmarEl = document.querySelector("#cadastro button:first-of-type");
       if(labelEl.querySelector("span") !== null)
         labelEl.removeChild(labelEl.querySelector("span"));
 

@@ -1,0 +1,42 @@
+@media print{
+    *{
+        color: blueviolet !important;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+        text-align: center !important;
+        background-color: var(--brancoIvory) !important;
+      }
+      
+      tfoot {
+        background-color: var(--verdeCrusoe) !important;
+        color: var(--brancoIvory) !important;
+      }
+      
+      th {
+        padding: 0em 1em !important;
+        font-weight: normal !important;
+      }
+      
+      thead {
+        background-color: var(--verdeCamarone) !important;
+        color: var(--brancoIvory) !important;
+        border: none !important;
+      }
+      
+      thead > tr {
+        border: none !important;
+      }
+      
+      tr {
+        border-bottom: 1px solid var(--pretoNight) !important;
+        padding: 1em !important;
+      }
+      
+      td > button {
+        padding: 0 .5em !important;
+        margin: calc(4px + .1vw) !important;
+      }
+}
+

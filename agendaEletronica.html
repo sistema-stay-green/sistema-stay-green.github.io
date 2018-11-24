@@ -25,9 +25,12 @@
   </nav>
 
   <main>
-    <section id="containerRelatorio" class="invisivel"></section>
+    <section id="containerRelatorio" class="invisivel">
+      <div></div>
+      <div><button>Print Relatório</button></div>
+    </section>
     <form class="invisivel">
-      <input type="text" placeholder="Nova Tarefa (Clique para editar)" value="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
+      <input type="text" placeholder="Nova Tarefa (Clique para editar)" id="nomeNovaTarefa">
       <label>
         <textarea rows="5" name="descricaoTarefa" placeholder="Coloque a descrição da tarefa aqui"></textarea>
       </label>
@@ -127,6 +130,8 @@
         <button type="button" class="botaoRelatorio" data-codrelat="2">Consumo de Insumos</button>
       </section>
     </aside>
+    
+  </main>
 
     <script src="JS/staygreen.js"></script>
     <script src="JS/AgendaEletronica/tarefa.js"></script>

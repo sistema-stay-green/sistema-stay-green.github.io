@@ -229,7 +229,7 @@ function filtraPagina(){
     if (filtro.value == "Em Posse") {
       let node = row.children;
 
-      if (node[6].innerHTML == "EM_POSSE") {
+      if (node[6].innerHTML == "Em posse") {
         row.style.display = "table-row";
       }
       else {
@@ -238,7 +238,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Em Manutenção") {
       let node = row.children;
-      if (node[6].innerHTML == "EM_MANUTENCAO") {
+      if (node[6].innerHTML == "Em manutenção") {
         row.style.display = "table-row";
       }
       else {
@@ -247,7 +247,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Alugados") {
       let node = row.children;
-      if (node[6].innerHTML == "ALUGADO") {
+      if (node[6].innerHTML == "Alugado") {
         row.style.display = "table-row";
       }
       else {
@@ -256,7 +256,7 @@ function filtraPagina(){
     }
     else if (filtro.value == "Vendidos") {
       let node = row.children;
-      if (node[6].innerHTML == "VENDIDO") {
+      if (node[6].innerHTML == "Vendido") {
         row.style.display = "table-row";
       }
       else {
@@ -265,7 +265,7 @@ function filtraPagina(){
     }
     if (filtro.value == "Descartados") {
       let node = row.children;
-      if (node[6].innerHTML == "DESCARTADO") {
+      if (node[6].innerHTML == "Descartado") {
         row.style.display = "table-row";
       }
       else {
@@ -415,18 +415,18 @@ function relatorio(){
     elementos = maquinas[i].children;
     if(elementos[6].innerHTML == "Em posse"){
       maquinasPosse++;
-      valorTotalMaquina += elementos[7].innerHTML;
+      valorTotalMaquina += parseFloat(elementos[7].innerHTML);
     }
     if(elementos[6].innerHTML == "Vendido"){
       maquinasVendidas++;
     }
     if(elementos[6].innerHTML == "Alugado"){
       maquinasAlugadas++;
-      valorTotalMaquina += elementos[7].innerHTML;
+      valorTotalMaquina += parseFloat(elementos[7].innerHTML);
     }
     if(elementos[6].innerHTML == "Em manutenção"){
       maquinasManutencao++;
-      valorTotalMaquina += elementos[7].innerHTML;
+      valorTotalMaquina += parseFloat(elementos[7].innerHTML);
     }
     if(elementos[6].innerHTML == "Descartado"){
       maquinasDescartadas++;
@@ -446,7 +446,7 @@ function relatorio(){
 
   document.querySelector("#valorTotalMaquina").innerHTML =
       "<h4>Valor total das maquinas</h4><ul>" +
-      "<li>Valor total - R$" + parseFloat(totalMaquinas.toFixed(2)) + "</li></ul>";
+      "<li>Valor total - R$ " + totalMaquinas.toFixed(2) + "</li></ul>";
 
   document.querySelector(".relatorioModal").style.display = "block";
 }

@@ -1,444 +1,41 @@
-/*   Autor: Sávio Cardoso
-     Grupo 5: patrimônio
+/*   Autores: Sávio Cardoso, Mei Fagundes
+     Grupo 5: Controle de Patrimônio
      líder: Mei Fagundes */
 
-/*Importações*/
-@font-face {
-    font-family: 'Niramit';
-    src: url('Niramit/Niramit-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
 
-/* GENERAL */
-
-html{
-    font-family: 'Niramit';
-}
-
-body{
-    background-color: #FDFCF3 !important;
-    width:100%;
-    min-height: 100vh;
-}
-
-body.waiting *{
-    cursor: progress !important;
-}
-
-#main{
-    box-sizing: border-box;
-    padding: 2em;
-    min-height: 45vh;
-}
-
-button{
-    transition: 150ms ease-in-out;
-}
-
-button:hover{
-    -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
-    box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
-}
-
-input:focus{
-    transition: 200ms ease-in-out;
-    -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
-}
-
-h1{
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 0;
-    font-size: 2.2em;
-}
-
-nav{
-    transition: 250ms ease-in-out;
-}
-
-nav a, nav h3{
-    transition: 50ms ease-out;
-}
-
-nav h3{
-    cursor: default;
-    font-weight: bold;
-    margin-left: 0.1em;
-}
-
-nav:hover{
-    -webkit-box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
-    box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
-}
-footer{
-    bottom: 0;
-    height: 35vh !important;
-    transition: 250ms ease-in-out;
-}
-
-footer:hover{
-    -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
-    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
-}
-
-table{
-    transition: 250ms ease-in-out;
-    overflow: auto;
-    margin-bottom: 10vh;
-}
-
-table:hover{
-    -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
-    box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
-}
-
-.bold{
-    font-weight: bold;
-}
-
-p{
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-}
-
-/* TABLE */
-
-#tabela{
-    padding-top: 1em;
-    font-size: 0.9em;
-    margin: 0 auto;
-}
-
-td, th, #noResults, h1{
-    padding: 0.5em;
-    cursor: default;
-}
-
-thead {
-    color: white;
-    background-color: #1e8939;
-}
-
-th{
-    padding-top: 0.5em !important;
-    padding-bottom: 0.5em !important;
-    width: 50vw;
-}
-
-tr{
-    transition: 120ms ease-in-out;
-}
-
-tr:hover{
-    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
-}
-
-/* No Results Message*/
-
-#noResults{
-    margin-bottom: 35vh;
-}
-
-#noResults p:nth-child(1){
-    text-align: center;
-    font-weight: bold;
-    font-size: 2.5em;
-}
-
-#noResults p:nth-child(2){
-    text-align: center;
-    font-weight: lighter;
-    font-size: 1.5em;
-}
-
-/*Botões*/
-
-#menu button{
-    float: left;
-    font-weight: bold;
-    width: 100%; /*varia de acordo com o número de botões no menu*/
-}
-
-button:focus{
-    outline: none !important;
-}
-
-#menu button:not(:last-child) {
-    border-right: none; /* Previne bordas duplas */
-}
-
-#cancelar{
-    float: right;
-}
-
-#cancelar:hover{
-    background-color: #1D883A;
-    color: #FDFCF3;
-}
-
-#floatingButtons{
-    display: flex;
-    flex-direction: row-reverse;
-    position: sticky;
-    bottom: 2em;
-}
-
-#floatingButtons button{
-    display: flex;
-    align-content: space-around;
-    position: relative;
-    padding: 1.8em;
-    border-radius: 50%;
-    margin-left: 2vh;
-
-    -webkit-box-shadow: 2px 2px 14px 0px rgba(0,0,0,0.5);
-    box-shadow: 2x 2px 14px 0px rgba(0,0,0,0.5);
-}
-
-#floatingButtons button:hover{
-    -webkit-box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
-    box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
-}
-
-#floatingButtons button img{
-    image-rendering: optimizeQuality;
-    display: block;
-    width: 1.1em;
-    height: 1.1em;
-    box-sizing: border-box;
-    position: absolute;
-    top: 35%;
-    right: 35%;
-}
-
-[id|=edit], [id|=delete]{
-    display: block;
-    border-radius: 0.3em;
-    margin-left: 3.5em;
-}
-
-[id|=edit]{
-    padding-right: 0.8em;
-    padding-left: 0.8em;
-}
-
-[id|=delete]{
-    border-radius: 0.3em;
-    margin-left: 3.5em;
-}
-
-/* Selects, Inputs e Labels */
-
-#toolbar li{
-    list-style: none;
-}
-
-#toolbar {
-    display: flex;
-    right: 3em;
-    width: 100%;
-    padding-top: 0.5em;
-    margin-bottom: 1em;
-    align-content: flex-end;
-    flex-direction: row-reverse;
-}
-
-input{
-    display:block;
-}
-
-input:focus{
-    outline-style: none;
-}
-
-#form input:not(#statusOptions), #form select, #form div{
-    margin-bottom: 1em;
-}
-
-/* Modal */
-.mascara{
-  z-index: -1;
-  opacity: 0;
-  height: 150vh;
-  width: 150vw;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top:0;
-}
-
-.modal{
-    z-index: 1;
-    background-color: white;
-    border: 0.5em solid #1e8939;
-    border-radius: 2.5em;
-    position: fixed;
-    transition: 300ms ease-in-out;
-    padding: 2em;
-}
-
-#relatorio{
-    top: 6vh;
-    bottom: 6vh;
-    left: calc(50vw - 25em);
-    width: 50em;
-    background-color: #FDFCF3 !important;
-    box-sizing: border-box;
-}
-
-#relatorio div:nth-child(2){
-    position: absolute;
-    display: absolute;
-    float: right;
-    flex-direction: row-reverse;
-    margin-left: 23em;
-}
-
-#relatorio div:nth-child(2) button{
-    position: relative;
-    top: 1em;
-    margin-left: 2em;
-    border-radius: 0.8em;
-}
-
-#relatorio div:nth-child(1){
-    position: relative;
-    overflow-y: auto;
-    height: 100%;
-}
-
-#relatorio div h1{
-    text-align: center;
-    padding: 0px !important;
-    margin: 0px !important;
-}
-
-#relatorio div h2, #relatorio div h3{
-    text-align: center;
-}
-
-#errorModal{
-    transform: scale(0.9);
-    border: 0.3em solid #E1170F;
-    border-radius: 1.5em;
-    bottom: 3vh;
-    left: 1vw;
-    width: 15em;
-    padding: 0.8em;
-    text-align: left;
-}
-
-.inputVazio{
-    border-color: #E1170F;
-}
-
-input.inputVazio::-webkit-input-placeholder{
-   color: #E1170F;
-   opacity: 0.7;
-}
-
-input.inputVazio::-moz-placeholder{  /* Firefox 19+ */
-   color: #E1170F;
-   opacity: 0.7;
-}
-
-input.inputVazio:-ms-input-placeholder{
-   color: #E1170F;
-   opacity: 0.7;
-}
-
-#form{
-    top: 18vh;
-    left: calc(50vw - 13.5em);
-    width: 27em;
-    margin-top: -5em;
-    font-size: 0.95em;
-    box-sizing: border-box;
-}
-
-#form input{
-    width: 100%;
-}
-
-#form label{
-    display: block;
-}
-
-.aparece-fundo-escuro{
-    z-index: 1;
-    opacity: 1;
-    transition: 300ms ease-in;
-}
-
-.esconde{
-    transform: scale(0.8);
-    z-index: -1;
-    opacity: 0;
-    transition: 300ms ease-in-out;
-}
-
-
-.container-modal{
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-    right: 0;
-}
-
-.container-modal button{
-    display: inline-block;
-    position: relative;
-    bottom: -2.5em;
-    margin-left: 3.6em;
-    border-radius: 0.8em;
-}
-
-.conteudo button{
-    margin-left: 1.8em;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
-}
-
-.conteudo input{
-    max-width: 90%;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
-}
-
-.conteudo{
-    padding-left: 0.1em;
-    overflow-y: auto;
-    overflow-x: auto;
-    max-height: 70vh;
-    max-width: 80vw;
-    width: 23em;
-}
-
-.shadow{
-    -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
-    box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
-}
-
-.focusedShadow{
-    -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
-}
-
-.escurece{
-    background-color: black;
-    margin: 0;
-}
-
-@media print{
-
+@media print {
+
+        @font-face {
+            font-family: 'Niramit';
+            src: url('Niramit/Niramit-Regular.ttf');
+        }
+    
+        html{
+            font-family: 'Niramit';
+        }
+    
+        body{
+            width:100%;
+            margin: 0;
+        }
+    
+        h1, h2, h3{
+            text-align: center !important;
+            font-weight: 200;
+        }
+    }
+
+@media screen {
+
+    /*Importações*/
     @font-face {
         font-family: 'Niramit';
         src: url('Niramit/Niramit-Regular.ttf');
         font-weight: normal;
         font-style: normal;
     }
+
+    /* GENERAL */
 
     html{
         font-family: 'Niramit';
@@ -447,15 +44,416 @@ input.inputVazio:-ms-input-placeholder{
     body{
         background-color: #FDFCF3 !important;
         width:100%;
+        min-height: 100vh;
+    }
+
+    body.waiting *{
+        cursor: progress !important;
+    }
+
+    #main{
+        box-sizing: border-box;
+        padding: 2em;
+        min-height: 45vh;
+    }
+
+    button{
+        transition: 150ms ease-in-out;
+    }
+
+    button:hover{
+        -webkit-box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
+        box-shadow: 1px 1px 15px 0px rgba(0,0,0,0.45);
+    }
+
+    input:focus{
+        transition: 200ms ease-in-out;
+        -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.25);
     }
 
     h1{
-        text-align: center !important;
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 2.2em;
+    }
+
+    nav{
+        transition: 250ms ease-in-out;
+    }
+
+    nav a, nav h3{
+        transition: 50ms ease-out;
+    }
+
+    nav h3{
+        cursor: default;
+        font-weight: bold;
+        margin-left: 0.1em;
+    }
+
+    nav:hover{
+        -webkit-box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
+        box-shadow: 1px 1px 28px 0px rgba(0,0,0,0.4);
+    }
+    footer{
+        bottom: 0;
+        height: 35vh !important;
+        transition: 250ms ease-in-out;
+    }
+
+    footer:hover{
+        -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+        box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.4);
+    }
+
+    table{
+        transition: 250ms ease-in-out;
+        overflow: auto;
+        margin-bottom: 10vh;
+    }
+
+    table:hover{
+        -webkit-box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
+        box-shadow: 0px 0px 28px 0px rgba(0,0,0,0.4);
+    }
+
+    .bold{
+        font-weight: bold;
+    }
+
+    p{
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+    }
+
+    /* TABLE */
+
+    #tabela{
+        padding-top: 1em;
+        font-size: 0.9em;
+        margin: 0 auto;
+    }
+
+    td, th, #noResults, h1{
+        padding: 0.5em;
+        cursor: default;
+    }
+
+    thead {
+        color: white;
+        background-color: #1e8939;
+    }
+
+    th{
+        padding-top: 0.5em !important;
+        padding-bottom: 0.5em !important;
+        width: 50vw;
+    }
+
+    tr{
+        transition: 120ms ease-in-out;
+    }
+
+    tr:hover{
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+    }
+
+    /* No Results Message*/
+
+    #noResults{
+        margin-bottom: 35vh;
+    }
+
+    #noResults p:nth-child(1){
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.5em;
+    }
+
+    #noResults p:nth-child(2){
+        text-align: center;
+        font-weight: lighter;
+        font-size: 1.5em;
+    }
+
+    /*Botões*/
+
+    #menu button{
+        float: left;
+        font-weight: bold;
+        width: 100%; /*varia de acordo com o número de botões no menu*/
+    }
+
+    button:focus{
+        outline: none !important;
+    }
+
+    #menu button:not(:last-child) {
+        border-right: none; /* Previne bordas duplas */
+    }
+
+    #cancelar{
+        float: right;
+    }
+
+    #cancelar:hover{
+        background-color: #1D883A;
+        color: #FDFCF3;
+    }
+
+    #floatingButtons{
+        display: flex;
+        flex-direction: row-reverse;
+        position: sticky;
+        bottom: 2em;
+    }
+
+    #floatingButtons button{
+        display: flex;
+        align-content: space-around;
+        position: relative;
+        padding: 1.8em;
+        border-radius: 50%;
+        margin-left: 2vh;
+
+        -webkit-box-shadow: 2px 2px 14px 0px rgba(0,0,0,0.5);
+        box-shadow: 2x 2px 14px 0px rgba(0,0,0,0.5);
+    }
+
+    #floatingButtons button:hover{
+        -webkit-box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
+        box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.6);
+    }
+
+    #floatingButtons button img{
+        image-rendering: optimizeQuality;
+        display: block;
+        width: 1.1em;
+        height: 1.1em;
+        box-sizing: border-box;
+        position: absolute;
+        top: 35%;
+        right: 35%;
+    }
+
+    [id|=edit], [id|=delete]{
+        display: block;
+        border-radius: 0.3em;
+        margin-left: 3.5em;
+    }
+
+    [id|=edit]{
+        padding-right: 0.8em;
+        padding-left: 0.8em;
+    }
+
+    [id|=delete]{
+        border-radius: 0.3em;
+        margin-left: 3.5em;
+    }
+
+    /* Selects, Inputs e Labels */
+
+    #toolbar li{
+        list-style: none;
+    }
+
+    #toolbar {
+        display: flex;
+        right: 3em;
+        width: 100%;
+        padding-top: 0.5em;
+        margin-bottom: 1em;
+        align-content: flex-end;
+        flex-direction: row-reverse;
+    }
+
+    input{
+        display:block;
+    }
+
+    input:focus{
+        outline-style: none;
+    }
+
+    #form input:not(#statusOptions), #form select, #form div{
+        margin-bottom: 1em;
+    }
+
+    /* Modal */
+    .mascara{
+    z-index: -1;
+    opacity: 0;
+    height: 150vh;
+    width: 150vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top:0;
+    }
+
+    .modal{
+        z-index: 1;
+        background-color: white;
+        border: 0.5em solid #1e8939;
+        border-radius: 2.5em;
+        position: fixed;
+        transition: 300ms ease-in-out;
+        padding: 2em;
+    }
+
+    #relatorio{
+        top: 6vh;
+        bottom: 6vh;
+        left: calc(50vw - 25em);
+        width: 50em;
+        background-color: #FDFCF3 !important;
+        box-sizing: border-box;
+    }
+
+    #relatorio div:nth-child(2){
+        position: absolute;
+        display: absolute;
+        float: right;
+        flex-direction: row-reverse;
+        margin-left: 23em;
+    }
+
+    #relatorio div:nth-child(2) button{
+        position: relative;
+        top: 1em;
+        margin-left: 2em;
+        border-radius: 0.8em;
+    }
+
+    #relatorio div:nth-child(1){
+        position: relative;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    #relatorio div h1{
+        text-align: center;
         padding: 0px !important;
         margin: 0px !important;
     }
 
-    h2{
-        text-align: center !important;
+    #relatorio div h2, #relatorio div h3{
+        text-align: center;
+    }
+
+    #errorModal{
+        transform: scale(0.9);
+        border: 0.3em solid #E1170F;
+        border-radius: 1.5em;
+        bottom: 3vh;
+        left: 1vw;
+        width: 15em;
+        padding: 0.8em;
+        text-align: left;
+    }
+
+    .inputVazio{
+        border-color: #E1170F;
+    }
+
+    input.inputVazio::-webkit-input-placeholder{
+    color: #E1170F;
+    opacity: 0.7;
+    }
+
+    input.inputVazio::-moz-placeholder{  /* Firefox 19+ */
+    color: #E1170F;
+    opacity: 0.7;
+    }
+
+    input.inputVazio:-ms-input-placeholder{
+    color: #E1170F;
+    opacity: 0.7;
+    }
+
+    #form{
+        top: 18vh;
+        left: calc(50vw - 13.5em);
+        width: 27em;
+        margin-top: -5em;
+        font-size: 0.95em;
+        box-sizing: border-box;
+    }
+
+    #form input{
+        width: 100%;
+    }
+
+    #form label{
+        display: block;
+    }
+
+    .aparece-fundo-escuro{
+        z-index: 1;
+        opacity: 1;
+        transition: 300ms ease-in;
+    }
+
+    .esconde{
+        transform: scale(0.8);
+        z-index: -1;
+        opacity: 0;
+        transition: 300ms ease-in-out;
+    }
+
+
+    .container-modal{
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        right: 0;
+    }
+
+    .container-modal button{
+        display: inline-block;
+        position: relative;
+        bottom: -2.5em;
+        margin-left: 3.6em;
+        border-radius: 0.8em;
+    }
+
+    .conteudo button{
+        margin-left: 1.8em;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+    }
+
+    .conteudo input{
+        max-width: 90%;
+        padding-top: 0.4em;
+        padding-bottom: 0.4em;
+    }
+
+    .conteudo{
+        padding-left: 0.1em;
+        overflow-y: auto;
+        overflow-x: auto;
+        max-height: 70vh;
+        max-width: 80vw;
+        width: 23em;
+    }
+
+    .shadow{
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.5);
+    }
+
+    .focusedShadow{
+        -webkit-box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.3);
+        box-shadow: 1px 1px 25px 0px rgba(0,0,0,0.3);
+    }
+
+    .escurece{
+        background-color: black;
+        margin: 0;
     }
 }
+

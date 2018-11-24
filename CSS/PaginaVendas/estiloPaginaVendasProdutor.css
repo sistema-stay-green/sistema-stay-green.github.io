@@ -69,7 +69,7 @@ main > label > input {
   justify-content: space-between;
   overflow-y:auto;
   overflow-x: hidden;
-  
+
 }
 #mascara.aparece, #div-encaminhamentos.aparece, #div-faturamentos.aparece, #div-resultados.aparece, #div-registra.aparece{
   opacity: 1;
@@ -122,18 +122,15 @@ main > label > input {
   width: 7vw;
   height: 5vh;
   padding:0;
-  border: 1px solid var(--cinzaFoggy);
-  color:var(--cinzaFoggy);
+  color:var(--brancoIvory);
+  background-color: var(--verdeCamarone);
   font-family:  'Niramit' , sans-serif;
   cursor: pointer;
   font-size: calc(10px + 1vh);
-  background-color: transparent;
   margin-left: 1vw;
   margin-bottom:2vh;
   margin-top: 1vh;
 }
 #div-registra > .div-botoes  >  button:hover {
-  color: var(--brancoIvory);
-  background-color: var(--verdeCamarone);
-  border: none;
+  background-color: var(--verdeCrusoe);
 }

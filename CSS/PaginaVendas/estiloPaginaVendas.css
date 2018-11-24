@@ -1,8 +1,8 @@
 /*
 :root{
   --brancoIvory: #FDFCF3;
-  --verdeCamarone: #1D883A;  Verde Claro 
-  --verdeCrusoe: #126624;  Verde Escuro 
+  --verdeCamarone: #1D883A;  Verde Claro
+  --verdeCrusoe: #126624;  Verde Escuro
   --pretoNight: #AAA9A4;
   --cinzaFoggy: #2D2D2E;
 }
@@ -167,7 +167,19 @@ main > section > button {
   font-family:  'Niramit' , sans-serif;
   font-size: calc(10px + 1vh);
 }
-#div-modal > h1 {
+#div-modal > h1:first-of-type , #div-carrinho > h1:first-of-type {
+  color:var(--brancoIvory);
+  background-color: var(--verdeCamarone);
+  font-family:  'Niramit' , sans-serif;
+  font-size: calc(15px + 1.5vh);
+  height: 7vh;
+  width: 100%;
+  padding-left: 2vh;
+  padding-right: 2vh;
+  margin: 0;
+  margin-left: -2vh;
+}
+#div-modal > h1{
   color: var(--cinzaFoggy);
   font-family:  'Niramit' , sans-serif;
   font-size: calc(15px + 1.5vh);
@@ -193,17 +205,15 @@ main > section > button {
   width: 7vw;
   height: 5vh;
   padding:0;
-  border: 1px solid var(--brancoIvory);
   color:var(--brancoIvory);
+  background-color: var(--verdeCamarone);
   font-family:  'Niramit' , sans-serif;
   cursor: pointer;
   font-size: calc(10px + 1vh);
-  background-color: transparent;
   margin-left: 1vw;
   margin-bottom:2vh;
   margin-top: 1vh;
 }
 #div-modal > .div-botoes  >  button:hover ,#div-carrinho > .div-botoes > button:hover, #div-carrinho > article > button:hover {
-  color: var(--brancoIvory);
-  background-color: var(---cinzaFoggy);
+  background-color: var(--verdeCrusoe);
 }

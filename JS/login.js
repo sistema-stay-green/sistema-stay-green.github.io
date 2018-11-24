@@ -3,19 +3,31 @@ let btnEntrarLoginEl = document.querySelector("#login form:first-of-type > butto
 
 btnEntrarLoginEl.addEventListener("click", function() {
 
-  let emailInputEl = document.querySelector("#login > form > label:first-of-type > input"),
-      senhaInputEl = document.querySelector("#login > form > label:last-of-type > input");
+  let emailInputEl = document.querySelector("#login form > label:first-of-type > input"),
+      senhaInputEl = document.querySelector("#login form > label:last-of-type > input");
 
       Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
-             .then(() => {
-                    let usuario = new Usuario(null);
-                    // pegar dados no BD do usuario e colocar no objeto
-                    // salvar objeto no localStorage
-                    localStorage.setItem("usuario", usuario.toJSON());
-                    window.location.href = "index.html";
+             .then((resposta) => {
+
+                if (resposta !== null){
+
+                  let usuario = new Usuario(null);
+
+                  usuario.nome = resposta.nomeUsuario;
+                  usuario.cnpj = resposta.cnpjUsuario;
+                  usuario.saldo = resposta.saldoUsuario;
+                  usuario.email = resposta.emailUsuario;
+                  
+                  localStorage.setItem("usuario", usuario.toJSON());
+                  window.location.href = "index.html";
+
+                }
+                else
+                  alert("Email e/ou senha errados");
+                  
              })
-             .catch(() => { alert("Erro ao logar o servidor") });
+             .catch((reason) => { alert("Erro ao logar o servidor") });
 
 });
 
@@ -47,10 +59,10 @@ let btnConfimarCadastroEl = document.querySelector("#login form:last-of-type > b
 btnConfimarCadastroEl.addEventListener("click", function() {
 
     let nomeUsuario = document.querySelector("input[name='nomeUsuario']").value,
-    cnpjUsuario = document.querySelector("#login form:last-of-type input[name='cnpjUsuario']").value,
-    saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
-    emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
-    senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
+        cnpjUsuario = document.querySelector("#login form:last-of-type input[name='cnpjUsuario']").value,
+        saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
+        emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
+        senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
 
     usuario = new Usuario(null);
     usuario.nome = nomeUsuario;
@@ -59,17 +71,14 @@ btnConfimarCadastroEl.addEventListener("click", function() {
     usuario.email = emailUsuario;
     usuario.senha = null;
 
-    localStorage.setItem("usuario", usuario.toJSON()); //deletar dps
-    window.location.href = "index.html";
-
-    Request.get("http://localhost:8080/StayGreen/CadastroUsuarioServlet?nome="
-    + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
-    + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
-    .then(() => {
-        localStorage.setItem("usuario", usuario.toJSON());
-        window.location.href = "index.html";
-    })
-    .catch(() => { alert("Erro ao cadastrar os dados no servidor"); });
+    Request.get("http://localhost:8080/StayGreen/cadastrarusuario?nome="
+                + nomeUsuario + "&cnpj=" + cnpjUsuario + "&saldo=" + saldoUsuario
+                + "&login=" + emailUsuario + "&senha=" + senhaUsuario)
+           .then((resposta) => {
+              localStorage.setItem("usuario", usuario.toJSON());
+              window.location.href = "index.html";
+           })
+           .catch((reason) => { alert("Erro ao cadastrar os dados no servidor"); });
 
 });
 

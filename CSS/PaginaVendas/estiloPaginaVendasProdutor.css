@@ -76,6 +76,7 @@ main > label > input {
   transform: scale(1);
   z-index: 1;
   transition: all 300ms ease-in-out;
+  overflow-y: auto;
 }
 #div-registra > label{
   color:var(--cinzaFoggy);
@@ -89,12 +90,13 @@ main > label > input {
   font-size: calc(15px + 1.5vh);
   height: 7vh;
   width: 100%;
-  display: flex;
+  display: block;
   align-items: center;
   padding-left: 2vh;
   padding-right: 2vh;
   margin: 0;
   margin-left: -2vh;
+  margin-bottom: 2px;
 }
 #div-registra > h1, #div-encaminhamentos > h1, #div-faturamentos > h1, #div-resultados > h1 {
   font-size: calc(15px + 1.5vh);

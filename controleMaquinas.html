@@ -18,16 +18,13 @@
       <a href="paginaVendasProdutor.html">Vendas</a>
     </nav>
     <h1 id="TituloPagina">Controle De Maquinas</h1>
-    <div class="opcoes">
-      <button type="button" class="botaoCadastro" name="botaoCadastro">Cadastrar</button>
-    </div>
     <!-- Parte do Cadastro -->
     <div class="valores_fundo">
       <form class="valores">
         <label>Nome da Máquina <input type="text" class="inputs" name="nome" required></label>
         <label>Finalidade da Maquina<input type="text" class="inputs" name="finalidade"  required></label>
-        <label>Valor de Compra<input type="number" class="inputs" name="valor"  required></label>
-        <label>Indice de depreciação<input type="number" class="inputs" name="depreciação" max="100" required></label>
+        <label>Valor de Compra (R$)<input type="number" class="inputs" name="valor"  required></label>
+        <label>Indice de depreciação por ano (%)<input type="number" class="inputs" name="depreciação" max="100" required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
         <!--<label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label> -->
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
@@ -96,28 +93,28 @@
         <span class="fecharModal">&times;</span>
         <section id="filtro2">
           <input type="hidden" name="id-editar" required></label>
-          <label>Nome da Máquina <input type="text" name="nome-editar" required></label>
-          <label>Finalidade da Maquina<input type="text" name="finalidade-editar"  required></label>
-          <label>Valor de Compra<input type="number" name="valor-editar"  required></label>
-          <label>Indice de depreciação<input type="number" name="depreciação-editar"  required></label>
-          <label>Data de Compra <input type="date" name="data-editar"  required></label>
+          <label>Nome da Máquina <input type="text" class="inputs-editar" name="nome-editar" required></label>
+          <label>Finalidade da Maquina<input type="text" class="inputs-editar" name="finalidade-editar"  required></label>
+          <label>Valor de Compra<input type="number" class="inputs-editar" name="valor-editar"  required></label>
+          <label>Indice de depreciação<input type="number" class="inputs-editar" name="depreciação-editar"  required></label>
+          <label>Data de Compra <input type="date" class="inputs-editar" name="data-editar"  required></label>
           <button type="button" name="botaoEditarMaquina">Editar</button>
         </section>
       </div>
      </div>
      <section class="relatorioModal">
        <section class="relatorio" id="relatorio">
-         <h1>Relatorio das maquinas</h1>
          <span class="fecharModal">&times;</span>
-         <section id="maquinasPosse"></section>
-         <section id="maquinasManutencao"></section>
-         <section id="maquinasAlugadas"></section>
-         <section id="maquinasDescartadas"></section>
-         <section id="maquinasVendidas"></section>
+         <h1>Relatorio das maquinas</h1>
+         <section id="totalMaquinas"></section>
+         <section id="totalTiposMaquinas"></section>
+         <section id="valorTotalMaquina"></section>
        </section>
      </section>
-
-    <button type="button" class="botaoRelatorio" name="botaoRelatorio">Relatorio</button>
+     <div class="opcoes">
+       <button type="button" class="botaoCadastro" name="botaoCadastro">Cadastrar</button>
+       <button type="button" class="botaoRelatorio" name="botaoRelatorio">Relatorio</button>
+     </div>
   </body>
   <script src="JS/staygreen.js" charset="utf-8"></script>
   <script src="JS/ControleMaquinas/maquina.js" charset="utf-8"></script>

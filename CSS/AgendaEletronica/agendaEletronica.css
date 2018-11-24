@@ -47,16 +47,12 @@ form p {
 	display: inline-block;
 }
 
-form div{
-	position: absolute;
-	bottom: 0;
-	right: 0;
-}
-
 form{
-	min-height: 31em;
-	top: calc(50% - 31em/2);
-	margin: auto 30vw;
+	overflow-y: scroll;
+    height: 85vh;
+    width: 50vw;
+    top: calc(50% - 85vh/2 + 20px);
+    left: calc(50% - 25vw);
 	position: absolute;
 	z-index: 3;
 	background-color: var(--brancoIvory);

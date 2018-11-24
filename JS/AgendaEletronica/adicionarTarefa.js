@@ -90,12 +90,7 @@ function exibeFormularioTarefa(tarefaAExibir) {
 
   } else {
     document.querySelector('button[name="excluirTarefa"]').classList.add('invisivel');
-    document.querySelector('#nomeNovaTarefa').value =
-      "Nova tarefa (clique para editar)";
-
-    document.querySelector('textarea[name="descricaoTarefa"').value =
-      "Descrição da Tarefa";
-
+    
     document.querySelector('form select').value =
       "ARAR";
 

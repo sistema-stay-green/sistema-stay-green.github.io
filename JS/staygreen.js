@@ -75,7 +75,8 @@ class Request {
  */
 function atualizarQtInsumo(insumo) {
     let storageInsumos = localStorage.getItem('atualizouInsumos');
-    if (storageInsumos === null || storageInsumos === false) {
+    //Comparação em String porque o localStorage armazena tudo como String
+    if (storageInsumos === "null" || storageInsumos === "false") {
         Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?&tipo=insumo&operacao=atualizar&JSON=' + JSON.stringify(insumo))
             .then(resultado => {
                 if (resultado.resultado === "SUCESSO") {
@@ -83,7 +84,7 @@ function atualizarQtInsumo(insumo) {
                     localStorage.setItem('dataAtualizacao', new Date());
                 }
             });
-
+        return;
     }else{
         /*Se estivermos em um novo dia, ele atualiza os insumos novamente
         (caso contrário o localStorage ficaria ativo para sempre após a 

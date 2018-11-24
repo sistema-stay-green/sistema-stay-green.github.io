@@ -28,6 +28,9 @@ function recebeInsumos() {
       let insumosSpan = document.querySelector("#insumosForm");
       insumosSpan.innerHTML = "";
 
+      //Insumos descartados não poderão estar disponíveis para adicionar na tarefa
+      insumosArmazenadosBD = insumosArmazenadosBD.filter(insumo => insumo.quantEstoqueInsumo > 0);
+
       for (let insumo of insumosArmazenadosBD) {
         let insumoCheckBox = document.createElement('input'),
           labelInsumo = document.createElement('label');
@@ -90,14 +93,13 @@ function deveRealizarTarefa(tarefa, dataProposta) {
   let dataTarefa = Tarefa.toDateObject(tarefa.dataInicialTarefa);
 
   dataTarefa.setHours(0, 0, 0, 0);
-  dataProposta.setHours(0, 0, 0, 0);
 
   if (dataTarefa.getTime() > dataProposta.getTime())
     return false;
 
-  if (dataProposta.getDate() === tarefa.dataInicialTarefa.dayOfMonth &&
+  if (dataProposta.getUTCDate() === tarefa.dataInicialTarefa.dayOfMonth &&
     dataProposta.getMonth() === tarefa.dataInicialTarefa.month ||
-    Math.abs((dataProposta.getDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
+    Math.abs((dataProposta.getUTCDate() - tarefa.dataInicialTarefa.dayOfMonth)) %
     tarefa.periodRepetTarefa === 0)
     return true;
 
@@ -134,14 +136,18 @@ function aplicarEventoGeracaoDataBotoes() {
  */
 function criaContainerDia(dataContainer, tarefasARealizar) {
   let containerDia = document.createElement('article'),
-    textoData = document.createElement('p');
+    textoData = document.createElement('p'),
+    dataAtual = new Date();
+
+  dataAtual.setHours(0, 0, 0, 0);
+  dataContainer.setHours(0, 0, 0, 0);
 
   textoData.innerHTML = dataContainer.getDate() + " de " +
     MESES[dataContainer.getMonth()] + " de " + dataContainer.getUTCFullYear();
 
   /*Marcando o dia atual com uma estilização diferente,
   apenas para orientação do usuário*/
-  if(dataContainer.getUTCDate() === new Date().getUTCDate()){
+  if (dataAtual.getTime() === dataContainer.getTime()) {
     textoData.style.color = 'var(--brancoIvory)';
     textoData.style.backgroundColor = 'var(--verdeCamarone)';
   }
@@ -173,13 +179,24 @@ function criaContainerDia(dataContainer, tarefasARealizar) {
 
       containerDia.appendChild(tarefaAgendadaEl);
 
-      if (dataContainer.getUTCDate() === new Date().getUTCDate()) {
+      if (dataContainer.getTime() <= dataAtual.getTime()) {
+        let quantDesconto = 1;
+
+        if(dataContainer.getTime() === dataAtual.getTime()){
+          let quantRepetTarefa = 
+          Math.floor((dataContainer.getUTCDate() - Tarefa.toDateObject(tarefa.dataInicialTarefa).getUTCDate())
+           / tarefa.periodRepetTarefa);
+
+          quantDesconto = quantRepetTarefa + 1;
+
+        }
+        
         /*Atualizando o estoque dos insumos que as tarefas realizadas no
         dia atual consomem*/
         for (let insumoTarefa of tarefa.insumosTarefa.split(", ")) {
           for (let insumoGeral of insumosArmazenadosBD) {
             if (insumoTarefa === insumoGeral.nomeInsumo) {
-              insumoGeral.quantEstoqueInsumo -= 1;
+              insumoGeral.quantEstoqueInsumo -= quantDesconto;
               atualizarQtInsumo(insumoGeral);
             }
           }

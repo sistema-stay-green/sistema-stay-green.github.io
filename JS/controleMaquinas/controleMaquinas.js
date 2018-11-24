@@ -519,7 +519,8 @@ function adicionaMaquina(maquina){
           string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquina.status) + "</td>";
           string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
-          if(maquina.dataSaida == null)
+          if(maquina.dataSaida == null || maquina.status === "VENDIDO" ||
+            maquina.status === "DESCARTADO")
             string += "<td>N/A</td>";
           else
             string += "<td>" + formatarDataObj(maquina.dataSaida) + "</td>";
@@ -567,7 +568,8 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquinasVetor[i].status) + "</td>";
           string += "<td> R$" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
-          if(maquinasVetor[i].dataSaida == null)
+          if(maquinasVetor[i].dataSaida == null || maquina.status === "VENDIDO" ||
+            maquina.status === "DESCARTADO")
             string += "<td>N/A</td>";
           else
             string += "<td>" + formatarDataObj(maquinasVetor[i].dataSaida) + "</td>";
@@ -616,7 +618,8 @@ function editaMaquina(maquina){
         string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
         string += "<td>" + formatarStatus(maquina.status) + "</td>";
         string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
-        if(maquina.dataSaida == null)
+        if(maquina.dataSaida == null || maquina.status === "VENDIDO" ||
+          maquina.status === "DESCARTADO")
           string += "<td>N/A</td>";
         else
           string += "<td>" + formatarDataObj(maquina.dataSaida) + "</td>";

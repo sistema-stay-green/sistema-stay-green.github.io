@@ -123,6 +123,7 @@ function validacaoEditar(valores){
     document.querySelector("button[name='botaoEditarMaquina']").classList.remove("botaoDesab");
     return true;
 }
+
 //limita a data de compra para no maximo o dia atual
 //estilização
 function limitaDataCompra(){
@@ -141,6 +142,26 @@ function limitaDataCompra(){
   hoje = ano+'-'+mes+'-'+dia;
   document.querySelector("input[name='data']").setAttribute("max", hoje);
   document.querySelector("input[name='data-editar']").setAttribute("max", hoje);
+}
+
+//limita o valor de compra e de venda para no minimo 1
+//estilização
+function limitaValorCompra_ValorVenda(){
+  document.querySelector("input[name='valor']").oninput = function () {
+      if (this.value < 1) {
+          this.value = null;
+      }
+  }
+  document.querySelector("input[name='valor-editar']").oninput = function () {
+      if (this.value < 1) {
+          this.value = null;
+      }
+  }
+  document.querySelector("input[name='valorAluguel']").oninput = function () {
+      if (this.value < 1) {
+          this.value = null;
+      }
+  }
 }
 
 //limitaa data de retorno para no minimo depois do dia atual
@@ -320,7 +341,8 @@ function visaoBotao() {
     var pesquisa = botões[i].parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML != "EM_POSSE"){
+    if(nodes[6].innerHTML == "Vendido" || nodes[6].innerHTML == "Descartado" ||
+      nodes[6].innerHTML == "Alugado"){
       botões[i].className = "botaoDesab";
     }
     else {
@@ -331,7 +353,7 @@ function visaoBotao() {
     var pesquisa = botao.parentNode;
     pesquisa = pesquisa.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML != "EM_POSSE"){
+    if(nodes[6].innerHTML == "Vendido" || nodes[6].innerHTML == "Em manutenção"){
       botao.className = "botaoDesab";
     }
     else {
@@ -372,22 +394,22 @@ function relatorio(){
 
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
-    if(elementos[6].innerHTML == "EM_POSSE"){
+    if(elementos[6].innerHTML == "Em posse"){
       maquinasPosse++;
       valorTotalMaquina += elementos[7].innerHTML;
     }
-    if(elementos[6].innerHTML == "VENDIDO"){
+    if(elementos[6].innerHTML == "Vendido"){
       maquinasVendidas++;
     }
-    if(elementos[6].innerHTML == "ALUGADO"){
+    if(elementos[6].innerHTML == "Alugado"){
       maquinasAlugadas++;
       valorTotalMaquina += elementos[7].innerHTML;
     }
-    if(elementos[6].innerHTML == "EM_MANUTENCAO"){
+    if(elementos[6].innerHTML == "Em manutenção"){
       maquinasManutencao++;
       valorTotalMaquina += elementos[7].innerHTML;
     }
-    if(elementos[6].innerHTML == "DESCARTADO"){
+    if(elementos[6].innerHTML == "Descartado"){
       maquinasDescartadas++;
     }
   }
@@ -405,7 +427,7 @@ function relatorio(){
 
   document.querySelector("#valorTotalMaquina").innerHTML =
       "<h4>Valor total das maquinas</h4><ul>" +
-      "<li>Valor total - " + totalMaquinas + "</li></ul>";
+      "<li>Valor total - R$" + parseFloat(totalMaquinas.toFixed(2)) + "</li></ul>";
 
   document.querySelector(".relatorioModal").style.display = "block";
 }
@@ -473,11 +495,11 @@ function adicionaMaquina(maquina){
           string += "<td class=\"id\">" + maquina.id + "</td>";
           string += "<td>" + maquina.nome + "</td>";
           string += "<td class=\"finalidade\">"+ div + maquina.finalidade + "</div></td>";
-          string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
-          string += "<td>" + maquina.indiceDepreciacao + "</td>";
+          string += "<td> R$" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
+          string += "<td>" + maquina.indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquina.status) + "</td>";
-          string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
+          string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
           if(maquina.dataSaida == null)
             string += "<td>N/A</td>";
           else
@@ -521,11 +543,11 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<td class=\"id\">" + maquinasVetor[i].id + "</td>";
           string += "<td>" + maquinasVetor[i].nome + "</td>";
           string += "<td class=\"finalidade\">" +div + maquinasVetor[i].finalidade + "</div></td>";
-          string += "<td>" + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
-          string += "<td>" + maquinasVetor[i].indiceDepreciacao + "</td>";
+          string += "<td> R$ " + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
+          string += "<td>" + maquinasVetor[i].indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquinasVetor[i].status) + "</td>";
-          string += "<td>" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
+          string += "<td> R$" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
           if(maquinasVetor[i].dataSaida == null)
             string += "<td>N/A</td>";
           else
@@ -569,11 +591,11 @@ function editaMaquina(maquina){
         string += "<td class=\"id\">" + maquina.id + "</td>";
         string += "<td>" + maquina.nome + "</td>";
         string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
-        string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
-        string += "<td>" + maquina.indiceDepreciacao + "</td>";
+        string += "<td> R$" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
+        string += "<td>" + maquina.indiceDepreciacao + "%</td>";
         string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
         string += "<td>" + formatarStatus(maquina.status) + "</td>";
-        string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
+        string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
         if(maquina.dataSaida == null)
           string += "<td>N/A</td>";
         else
@@ -663,7 +685,8 @@ for (input of inputs_editar) {
 
 
 limitaDataRetornoSaida();
-limitaDataCompra()
+limitaDataCompra();
+limitaValorCompra_ValorVenda();
 visaoBotao();
 estilizarModal();
 limiteDepreciacao();

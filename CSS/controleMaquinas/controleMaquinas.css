@@ -147,6 +147,8 @@ div.scrollabe{
   z-index: 3;
   display: block;
   overflow-y: auto;
+  margin-top: 2vh;
+  max-height: 90vh;
 }
 
 .tabelaDeMaquinas{

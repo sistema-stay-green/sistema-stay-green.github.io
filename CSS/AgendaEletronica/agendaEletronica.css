@@ -1,219 +1,280 @@
-body,html{
-	height: 100%;
-	overflow-x: hidden;
+@media screen{
+
+	body,html{
+		height: 100%;
+		overflow-x: hidden;
+	}
+	
+	main{
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		overflow: hidden;
+	}
+	
+	label{
+	  display: block;
+	}
+	
+	aside{
+		display: inline;
+		width: 20%;
+		height: 100vh;
+		float: right;
+		border-left: 1px solid;
+		padding-left: 20px;
+	}
+	
+	aside h1{
+		margin: 0;
+	}
+	
+	aside button{
+		width: 95%;
+	}
+	
+	form > section{
+		display: flex;
+		padding: 10px;
+	}
+	
+	form article{
+		width: 50%;
+		padding: 1em;
+		position: relative;
+	}
+	
+	form p {
+		margin: 0;
+		display: inline-block;
+	}
+	
+	form div{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+	
+	form{
+		min-height: 31em;
+		top: calc(50% - 31em/2);
+		margin: auto 30vw;
+		position: absolute;
+		z-index: 3;
+		background-color: var(--brancoIvory);
+		transition: 200ms;
+		transform: scale(1);
+	}
+	
+	textarea{
+		background-color: var(--brancoIvory);
+		width: 95%;
+		height: 10vh;
+		font-size: calc(15px + .1vw);
+	  box-sizing: border-box;
+		font-family: 'Niramit', sans-serif;
+	  display: block;
+		margin: 2% 0 auto 3%;
+		padding: .5em;
+	}
+	
+	textarea::placeholder{
+		font-weight: bold;
+	}
+	
+	nav{
+		z-index: 999;
+	}
+	.sectionCheck{
+		border-bottom: 1px solid;
+	}
+	
+	.sectionButton{
+		border-bottom: 1px solid;
+		width: 100%;
+		height: 40%;
+		display: flex;
+		justify-content: space-around;
+		flex-direction: column;
+	}
+	
+	.invisivel{
+		display: none;
+		z-index: -999;
+		transform: scale(0);
+	}
+	
+	.tarefa{
+		background-color: var(--verdeCamarone);
+		width: 80%;
+		color: var(--brancoIvory);
+		margin-left: 5%;
+		transition: 100ms;
+		z-index: 2;
+	}
+	
+	.tarefa:hover{
+		background-color: var(--verdeCrusoe);
+	}
+	
+	#nomeNovaTarefa{
+		box-sizing: border-box;
+		border-bottom: 1px solid var(--brancoIvory);
+		color: var(--brancoIvory);
+		background-color: var(--verdeCamarone);
+		margin: 0;
+		width: 100%;
+		padding: .3em;
+		font-size: calc(20px + .2vw);
+	}
+	
+	#mascaraForm{
+		z-index: 2;
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, .5);
+	}
+	
+	#containerRelatorio{
+		width: 50vw;
+		max-height: 80vh;
+		left: calc(50vw/2);
+		top: calc(50% - 10vh);
+		box-sizing: border-box;
+		margin-top: -25vh;
+		background-color: var(--brancoIvory);
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+		z-index: 3;
+		padding: 1.2em;
+	}
+	
+	/* Div container das tabelas do relatório */
+	#containerRelatorio div:nth-child(1){
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		overflow: auto;
+	}
+	
+	/* Div container do botão 'Print Relatório'*/
+	#containerRelatorio div:nth-child(2){
+		width: 100%;
+		position: relative;
+		left: 35.5vw;
+		bottom: -1vh;
+	}
+	
+	#containerRelatorio div:nth-child(1) table{
+		margin: 0 auto;
+		margin-bottom: 2em;
+	}
+	
+	#containerCalendario{
+		position: relative;
+		display: grid;
+		grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
+		grid-template-rows: calc(100vh/4) calc(100vh/4) calc(100vh/4) calc(100vh/4);
+		overflow-y: auto;
+		overflow-x: hidden;
+		width: 80vw;
+	}
+	
+	#containerCalendario article{
+		border-bottom: 1px solid var(--pretoNight);
+		border-right: 1px solid var(--pretoNight);
+		cursor: pointer;
+		transition: 100ms;
+		overflow-y: auto;
+	}
+	
+	#containerCalendario > h1{
+		margin: 0 auto;
+		grid-column: span 4;
+		display: blcok;
+		font-weight: bold;
+		grid-row-start: 3;
+	}
+	
+	#containerCalendario article:hover{
+		background-color: rgba(0, 0, 0, .05);
+	}
+	
+	#containerCalendario article p{
+		margin: 1vw;
+		font-weight: bold;
+		padding: .3em;
+	}
+	
+	#containerCalendario div, #containerCalendario > button{
+		position: absolute;
+		bottom: 0;
+		margin: 1em;
+	}
+	
+	section > #botaoFormTarefa{
+		right: 0;
+	}
+	
 }
 
-main{
-	margin: 0;
-	display: flex;
-	flex-direction: row;
-	overflow: hidden;
-}
+@media print{
 
-label{
-  display: block;
-}
+	:root {
+		--brancoIvory: #FDFCF3;
+		--verdeCamarone: #1D883A; /* Verde Claro */
+		--verdeCrusoe: #126624; /* Verde Escuro */
+		--pretoNight: #AAA9A4;
+		--cinzaFoggy: #2D2D2E;
+	  }
 
-aside{
-	display: inline;
-	width: 20%;
-	height: 100vh;
-	float: right;
-	border-left: 1px solid;
-	padding-left: 20px;
-}
+	body{
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+	}
 
-aside h1{
-	margin: 0;
-}
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		background-color: var(--brancoIvory);
+	}
 
-aside button{
-	width: 95%;
-}
-
-form > section{
-	display: flex;
-	padding: 10px;
-}
-
-form article{
-	width: 50%;
-	padding: 1em;
-	position: relative;
-}
-
-form p {
-	margin: 0;
-	display: inline-block;
-}
-
-form div{
-	position: absolute;
-	bottom: 0;
-	right: 0;
-}
-
-form{
-	min-height: 31em;
-	top: calc(50% - 31em/2);
-	margin: auto 30vw;
-	position: absolute;
-	z-index: 3;
-	background-color: var(--brancoIvory);
-	transition: 200ms;
-	transform: scale(1);
-}
-
-textarea{
-	background-color: var(--brancoIvory);
-	width: 95%;
-	height: 10vh;
-	font-size: calc(15px + .1vw);
-  box-sizing: border-box;
-	font-family: 'Niramit', sans-serif;
-  display: block;
-	margin: 2% 0 auto 3%;
-	padding: .5em;
-}
-
-textarea::placeholder{
-	font-weight: bold;
-}
-
-nav{
-	z-index: 999;
-}
-.sectionCheck{
-	border-bottom: 1px solid;
-}
-
-.sectionButton{
-	border-bottom: 1px solid;
-	width: 100%;
-	height: 40%;
-	display: flex;
-	justify-content: space-around;
-	flex-direction: column;
-}
-
-.invisivel{
-	display: none;
-	z-index: -999;
-	transform: scale(0);
-}
-
-.tarefa{
-	background-color: var(--verdeCamarone);
-    width: 80%;
-    color: var(--brancoIvory);
-	margin-left: 5%;
-	transition: 100ms;
-	z-index: 2;
-}
-
-.tarefa:hover{
-	background-color: var(--verdeCrusoe);
-}
-
-#nomeNovaTarefa{
-	box-sizing: border-box;
-	border-bottom: 1px solid var(--brancoIvory);
-	color: var(--brancoIvory);
-	background-color: var(--verdeCamarone);
-	margin: 0;
-	width: 100%;
-	padding: .3em;
-	font-size: calc(20px + .2vw);
-}
-
-#mascaraForm{
-	z-index: 2;
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, .5);
-}
-
-#containerRelatorio{
-	width: 50vw;
-	max-height: 80vh;
-	left: calc(50vw/2);
-	top: calc(50% - 10vh);
-	box-sizing: border-box;
-	margin-top: -25vh;
-	background-color: var(--brancoIvory);
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
-	z-index: 3;
-	padding: 1.2em;
-}
-
-/* Div container das tabelas do relatório */
-#containerRelatorio div:nth-child(1){
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	overflow: auto;
-}
-
-/* Div container do botão 'Print Relatório'*/
-#containerRelatorio div:nth-child(2){
-	width: 100%;
-	position: relative;
-	left: 35.5vw;
-	bottom: -1vh;
-}
-
-#containerRelatorio div:nth-child(1) table{
-	margin: 0 auto;
-	margin-bottom: 2em;
-}
-
-#containerCalendario{
-	position: relative;
-	display: grid;
-	grid-template-columns: calc(80vw/4) calc(80vw/4) calc(80vw/4) calc(80vw/4);
-	grid-template-rows: calc(100vh/4) calc(100vh/4) calc(100vh/4) calc(100vh/4);
-	overflow-y: auto;
-	overflow-x: hidden;
-	width: 80vw;
-}
-
-#containerCalendario article{
-	border-bottom: 1px solid var(--pretoNight);
-	border-right: 1px solid var(--pretoNight);
-	cursor: pointer;
-	transition: 100ms;
-	overflow-y: auto;
-}
-
-#containerCalendario > h1{
-	margin: 0 auto;
-	grid-column: span 4;
-	display: blcok;
-	font-weight: bold;
-	grid-row-start: 3;
-}
-
-#containerCalendario article:hover{
-	background-color: rgba(0, 0, 0, .05);
-}
-
-#containerCalendario article p{
-	margin: 1vw;
-	font-weight: bold;
-	padding: .3em;
-}
-
-#containerCalendario div, #containerCalendario > button{
-	position: absolute;
-	bottom: 0;
-	margin: 1em;
-}
-
-section > #botaoFormTarefa{
-	right: 0;
+	tr{
+		height: 2em;
+	}
+	
+	tfoot {
+		background-color: var(--verdeCrusoe);
+		color: var(--brancoIvory);
+	}
+	
+	th {
+		padding: 0em 1em;
+		font-weight: normal;
+	}
+	
+	thead {
+		background-color: var(--verdeCamarone);
+		color: var(--brancoIvory);
+		border: none;
+	}
+	
+	thead > tr {
+		border: none;
+	}
+	
+	tr {
+		border-bottom: 1px solid var(--pretoNight);
+		padding: 1em;
+	}
+	
+	td > button {
+		padding: 0 .5em;
+		margin: calc(4px + .1vw);
+	}
 }

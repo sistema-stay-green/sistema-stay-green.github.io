@@ -285,16 +285,21 @@ function filtraPagina(){
 function saida(){
   //Variaveis
   let opcao = document.querySelector("#filtro_saida"),
-      elemento = event.target;
+      elemento = event.target,
+      nodes;
+      status;
 
   //Pega o estado atual da maquinas, ex: Em posse
   elemento = elemento.parentNode;
-  nodes = elemento.parentNode.children;
+  nodes = elemento.parentNode.children,
+  status = nodes[6].innerHTML;
+
+
 
   document.querySelector("#editar").style.display = "none";
   /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
     escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
-  if (nodes[6].innerHTML == "EM_POSSE") {
+  if (status === "Em posse" || status === "Em manutenção") {
     document.querySelector("#saidas").style.display = "block";
 
       if(elemento.className != "botaoDesab"){
@@ -335,29 +340,42 @@ function saida(){
   maquina*/
 // Estilização
 function visaoBotao() {
-  let botões = document.querySelectorAll(".botaoSaida");
-  let botões2 = document.querySelectorAll(".botaoEditar");
-  for (var i = 0; i < botões.length; i++) {
-    var pesquisa = botões[i].parentNode;
-    pesquisa = pesquisa.parentNode;
+  let botoesSaida = document.querySelectorAll(".botaoSaida");
+  let botoesEditar = document.querySelectorAll(".botaoEditar");
+
+  console.log(botoesSaida[0]);
+  console.log(botoesSaida[0].parentNode.parentNode.children[6]);
+
+  // Desabilita botão saída caso o status seja Vendido, Descartado ou Alugado
+  for (botao of botoesSaida) {
+    var pesquisa = botao.parentNode.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML == "Vendido" || nodes[6].innerHTML == "Descartado" ||
-      nodes[6].innerHTML == "Alugado"){
-      botões[i].className = "botaoDesab";
+    status = nodes[6].innerHTML;
+
+    if(status === "Vendido" || status === "Descartado" || status === "Alugado"){
+      console.log("Máquina de ID: "+nodes[0].innerHTML);
+      botao.classList.remove("botaoSaida");
+      botao.classList.add("botaoDesab");
     }
     else {
-      botões[i].className = "botaoSaida";
+      botoesSaida.className = "botaoSaida";
     }
   }
-  for (botao of botões2) {
-    var pesquisa = botao.parentNode;
-    pesquisa = pesquisa.parentNode;
+
+
+  // Desabilita botão editar caso o status seja Vendido, Descartado
+  for (botao of botoesEditar) {
+    var pesquisa = botao.parentNode.parentNode;
     var nodes = pesquisa.children;
-    if(nodes[6].innerHTML == "Vendido" || nodes[6].innerHTML == "Em manutenção"){
-      botao.className = "botaoDesab";
+    status = nodes[6].innerHTML;
+
+    if(status === "Vendido" || status === "Descartado"){
+      console.log("Máquina de ID: "+nodes[0].innerHTML);
+      botao.classList.remove("botaoEditae");
+      botao.classList.add("botaoDesab");
     }
     else {
-      botao.className = "botaoEditar";
+      botoesEditar.className = "botaoEditar";
     }
   }
 }
@@ -368,7 +386,8 @@ function mostraModalEditar(){
   elemento = event.target;
   elemento = elemento.parentElement;
   nodes = elemento.parentNode.children;
-  if(nodes[6].innerHTML == "EM_POSSE"){
+  status = nodes[6].innerHTML;
+  if(status === "Em posse" || status === "Em manutenção"|| status === "Alugado"){
     document.querySelector("#editar").style.display = "block";
     document.querySelector("input[name='id-editar']").value = nodes[0].innerHTML,
     document.querySelector("input[name='nome-editar']").value = nodes[1].innerHTML,
@@ -451,7 +470,9 @@ function enviaInformacoesEditar() {
 //função que altera o status da maquina
 function AlteraStatus(elemento,opcao){
     //Pega os "filhos" da variavel elemento
-    elemento = elemento.parentElement;
+    console.log(elemento);
+    elemento = elemento.parentNode;
+    console.log(elemento);
     nodes = elemento.children;
     let valorAluguel = document.querySelector("input[name='valorAluguel']").value,
         periodo = document.querySelector("input[name='periodo']").value;
@@ -486,15 +507,13 @@ function adicionaMaquina(maquina){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
           botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
-          div = "<div class='scrollabe'>",
           tabelaMaquinas = document.querySelector("#tabela");
 
-          console.log(maquina.dataCompra);
 
           string += "<tr class=\"maquina\">";
           string += "<td class=\"id\">" + maquina.id + "</td>";
           string += "<td>" + maquina.nome + "</td>";
-          string += "<td class=\"finalidade\">"+ div + maquina.finalidade + "</div></td>";
+          string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
           string += "<td> R$" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquina.indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
@@ -508,7 +527,8 @@ function adicionaMaquina(maquina){
             string += "<td>N/A</td>";
           else
             string += "<td>" + formatarDataObj(maquina.dataBaixa) + "</td>";
-          if(maquina.dataRetorno == null)
+          if(maquina.dataRetorno == null || maquina.status === "VENDIDO" ||
+            maquina.status === "DESCARTADO")
             string += "<td>N/A</td>";
           else
             string +=   "<td>" + formatarDataObj(maquina.dataRetorno) + "</td>";
@@ -534,7 +554,6 @@ function adicionaTodasMaquinas(maquinasVetor){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
           botaoEditar = "<button type=\"button\" class=\"botaoEditar\">Editar</button>",
-          div = "<div class='scrollabe'>",
           tabelaMaquinas = document.querySelector("#tabela");
 
 
@@ -542,7 +561,7 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<tr class=\"maquina\">";
           string += "<td class=\"id\">" + maquinasVetor[i].id + "</td>";
           string += "<td>" + maquinasVetor[i].nome + "</td>";
-          string += "<td class=\"finalidade\">" +div + maquinasVetor[i].finalidade + "</div></td>";
+          string += "<td class=\"finalidade\">"+ maquinasVetor[i].finalidade + "</td>";
           string += "<td> R$ " + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquinasVetor[i].indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
@@ -556,7 +575,9 @@ function adicionaTodasMaquinas(maquinasVetor){
             string += "<td>N/A</td>";
           else
             string += "<td>" + formatarDataObj(maquinasVetor[i].dataBaixa) + "</td>";
-          if(maquinasVetor[i].dataRetorno == null)
+          if(maquinasVetor[i].dataRetorno == null ||
+             maquinasVetor[i].status === "VENDIDO" ||
+             maquinasVetor[i].status === "DESCARTADO")
             string += "<td>N/A</td>";
           else
             string +=   "<td>" + formatarDataObj(maquinasVetor[i].dataRetorno) + "</td>";
@@ -569,7 +590,6 @@ function adicionaTodasMaquinas(maquinasVetor){
       for (var i = 0; i < chamaSaida.length; i++) {
         chamaSaida[i].addEventListener("click", saida);
       }
-
       let edita = document.querySelectorAll(".botaoEditar");
       for (var i = 0; i < edita.length; i++) {
         edita[i].addEventListener("click", mostraModalEditar);
@@ -604,7 +624,8 @@ function editaMaquina(maquina){
           string += "<td>N/A</td>";
         else
           string += "<td>" + formatarDataObj(maquina.dataBaixa) + "</td>";
-        if(maquina.dataRetorno == null)
+        if(maquina.dataRetorno == null || maquina.status === "VENDIDO" ||
+           maquina.status === "DESCARTADO")
           string += "<td>N/A</td>";
         else
           string +=   "<td>" + formatarDataObj(maquina.dataRetorno) + "</td>";
@@ -665,6 +686,7 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     inputs = document.querySelectorAll(".inputs"),
     inputs_editar = document.querySelectorAll(".inputs-editar");
 
+
 //Adiciona as funções aos botões
 botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
 botaoCadastro.addEventListener("click", mostraModalCadastro);
@@ -687,6 +709,5 @@ for (input of inputs_editar) {
 limitaDataRetornoSaida();
 limitaDataCompra();
 limitaValorCompra_ValorVenda();
-visaoBotao();
 estilizarModal();
 limiteDepreciacao();

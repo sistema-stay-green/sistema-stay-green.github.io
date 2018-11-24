@@ -16,20 +16,42 @@ var tabelaInsumo = document.getElementById('tabelaInsumo');
 var tituloProduto = document.getElementById('tituloProduto');
 var tituloInsumo = document.getElementById('tituloInsumo');
 var btnRelatorioProducao = document.getElementById('btnRelatorioProducao');
-var textoRelProducao = document.getElementById('textoRelProducao');
+var textoRelProducaoLeite = document.getElementById('textoRelProducaoLeite');
+var textoRelProducaoCafeB = document.getElementById('textoRelProducaoCafeB');
+var textoRelProducaoCafeR = document.getElementById('textoRelProducaoCafeR');
+var textoRelProducaoCafeA = document.getElementById('textoRelProducaoCafeA');
+var textoRelProducaoData = document.getElementById('textoRelProducaoData');
 
+
+//Adicionando eventos
 btnRelatorioProducao.addEventListener('click', criaRelatorioP);
 btnRelatorioH.addEventListener('click', criaRelatorioH);
 
+/** @autor Alberto
+Descrição: função que faz uma requisição
+para o servlet que retorna um array cuja chave é o ID dos produtos e o conteudo
+é a produção semanal daquele Produto, esse valor é colocado no conteudo de um
+h4 específico para mostrar ao usuário essa quantidade**/
 function criaRelatorioP() {
   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=relatorio2&id=" + "teste")
-  .then(function(resultado){
-    console.log(resultado);
-    if (resultado == 0) {
-      textoRelProducao.innerHTML = "Não foi possivel calcular a Produção Semanal";
-      textoRelProducao.style.color = "red";
+  .then(function(producao){
+    if (producao == null) {
+      textoRelProducaoLeite.innerHTML = "Não foi possivel calcular a Produção Semanal";
+      textoRelProducaoLeite.style.color = "red";
     }else{
-      textoRelProducao.innerHTML = "Produção Semanal: " + resultado + "$";
+      var dataAtual = new Date();
+      var umaSemanaAtras = new Date();
+      umaSemanaAtras.setDate(umaSemanaAtras.getDate()-7);
+      var mesAjustado = dataAtual.getMonth() +1;
+      textoRelProducaoData.innerHTML = dataAtual.getDate() + "/" + mesAjustado + "/" + dataAtual.getFullYear();
+      mesAjustado = umaSemanaAtras.getMonth() +1;
+      textoRelProducaoData.innerHTML += "-" + umaSemanaAtras.getDate() +  "/" + mesAjustado + "/"+ umaSemanaAtras.getFullYear();
+      console.log(umaSemanaAtras.getDate());
+      textoRelProducaoLeite.innerHTML = "Leite: " + producao[0] + "$";
+      textoRelProducaoCafeB.innerHTML = "Café Bourbon: " + producao[1] + "$";
+      textoRelProducaoCafeR.innerHTML = "Café Robusta: " + producao[2] + "$";
+      textoRelProducaoCafeA.innerHTML = "Café Arábica: " + producao[3] + "$";
+
     }
   })
   .catch(function(erro){console.log(erro);});
@@ -128,21 +150,18 @@ com os devidos valores  **/
 function insereProdutoTabela(resultado, contador, linha){
   var valTransacao = resultado[contador].valorTransacao;
   //para cada uma das colunas da tabela insere o respectivo valor
-  for(let i = 1; i <= 4; i++){
+  for(let i = 1; i <= 3; i++){
     var celula = linha.insertCell(i-1);
     switch(i){
       case 1:
-      valTransacao > 0 ? celula.innerHTML = "Venda" : celula.innerHTML = "Compra";
-      break;
-      case 2:
       celula.innerHTML = formataData(resultado, contador);
 
       break;
-      case 3:
+      case 2:
       celula.innerHTML = resultado[contador].quantTransacao;
       break;
-      case 4:
-      valTransacao > 0 ? celula.innerHTML = valTransacao.toFixed(2) + "$" : celula.innerHTML = (valTransacao * -1).toFixed(2) +"$" ;
+      case 3:
+      celula.innerHTML = valTransacao.toFixed(2) +"$" ;
       break;
     }
   }
@@ -152,29 +171,25 @@ function insereProdutoTabela(resultado, contador, linha){
 Descrição: Insere os insumos em uma tabela, preenchendo-as
 com os devidos valores  **/
 function insereInsumoTabela(resultado, contador, linha){
-  console.log(resultado[contador]);
   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+resultado[contador].idItemTransacao+"&tipo=insumo")
   .then(function(resposta){
     var valTransacao = resultado[contador].valorTransacao;
-    console.log(valTransacao);
     var nome = resposta.nomeInsumo;
-    for(let i = 1; i <= 5; i++){
+    for(let i = 1; i <= 4; i++){
       var celula = linha.insertCell(i-1);
       switch(i){
         case 1:
-          valTransacao > 0 ? celula.innerHTML = "Venda" : celula.innerHTML = "Compra";
-          break;
-        case 2:
           celula.innerHTML = nome;
           break;
-        case 3:
+        case 2:
           celula.innerHTML = formataData(resultado, contador);
           break;
-        case 4:
+        case 3:
+          valTransacao > 0 ? celula.innerHTML = "Venda" : celula.innerHTML = "Compra/Descarte";
           celula.innerHTML = resultado[contador].quantTransacao;
           break;
-        case 5:
-          valTransacao > 0 ? celula.innerHTML = valTransacao.toFixed(2) + "$" : celula.innerHTML = (valTransacao * -1).toFixed(2) +"$" ;
+        case 4:
+          celula.innerHTML = valTransacao.toFixed(2) +"$" ;
           break;
       }
     }

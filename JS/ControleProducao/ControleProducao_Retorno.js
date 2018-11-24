@@ -51,7 +51,6 @@ function criaTabela(itens, tipo){
 		pontoAvisoProduto: "50"
 	}
 	*/
-	console.log(itens.length);
 	if(itens != null) {
 		mostraTabela(tipo, "mostrar");
 		for (var i = 0; i < itens.length; i++) {

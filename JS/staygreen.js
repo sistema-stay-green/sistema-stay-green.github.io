@@ -30,7 +30,7 @@ class Request {
 
             let request = new XMLHttpRequest();
             request.responseType = responseType;
-            request.open('GET', url, true);
+            request.open('GET', encodeURI(url), true);
             request.onreadystatechange = function() {
                 if (request.readyState === 4 && request.status === 200)
                     resolve(request.response);

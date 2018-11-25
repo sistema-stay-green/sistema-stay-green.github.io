@@ -7,6 +7,7 @@ let botaoFormTarefaEl = document.querySelector('#botaoFormTarefa'),
 botaoConfirmarTarefa.addEventListener('click', (evt) => {
   operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
   alteraVisibilidadeElemento(containerFormNovaTarefa, true);
+  recebeTarefas();
 });
 
 botaoExcluirTarefa.addEventListener('click', (evt) => {

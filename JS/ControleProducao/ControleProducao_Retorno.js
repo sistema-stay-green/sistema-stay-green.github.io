@@ -295,7 +295,8 @@ function avisos(i, res) {
 				default:
 					break;
 		}
-		setTimeout(function(){ divModalAvisos2.classList.add("esconde"); divModalAvisos.classList.add("esconde"); }, 5000);
+		setTimeout(function(){ divModalAvisos.style.top = "2500px"; divModalAvisos.style.opacity = "0"; }, 1500);
+		setTimeout(function(){ 		divModalAvisos.classList.add("esconde"); divModalAvisos.style.opacity = "1"; divModalAvisos.style.top = "calc(50vh - 16em)"; }, 1900);
 }
 
 /**

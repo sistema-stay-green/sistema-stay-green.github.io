@@ -378,6 +378,7 @@ nav{
 }
 
 #containerRelatorio{
+	overflow-y: scroll;
 	width: 50vw;
 	height: 50vh;
 	left: calc(50vw/2);

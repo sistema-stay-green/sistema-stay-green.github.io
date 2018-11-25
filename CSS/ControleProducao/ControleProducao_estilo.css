@@ -131,13 +131,13 @@ button #iconePlus, #iconeRelatorio {
 }
 
 #divModalAvisos{
-  transition: 2s ease-in-out;
+  transition: top 3s, opacity 0.5s;
   width: 20em;
-  right: -350px;
   top: calc(50vh - 16em);
   background-color: var(--brancoIvory);
   border: solid 0.25em var(--verdeCamarone);
   border-radius: 1em;
+  opacity: 1;
 }
 
 #divBtnFechar {

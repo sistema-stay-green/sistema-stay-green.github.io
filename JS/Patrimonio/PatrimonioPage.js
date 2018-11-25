@@ -501,7 +501,7 @@ function getPatrimonioFromModal(){
 
             let dataSaidaTmp = new Date(dataSaida[0], dataSaida[1] - 1, dataSaida[2]);
 
-            if (patrimonio.status == "DESCARTADO" || patrimonio.status == "VENDIDO") {
+            if (patrimonio.status == "DESCARTADO") {
 
                 if (patrimonio.dataCompra.getTime() < dataSaidaTmp.getTime()) {
 

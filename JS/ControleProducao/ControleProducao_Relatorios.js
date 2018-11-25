@@ -205,6 +205,7 @@ if (e.target.id == "selFiltroP") {
   var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=produto&id=" + e.target.value;
   Request.get(url)
   .then(function(res) {
+  console.log(res);
    criaTabela(res, "produto");
    avisos("SUCESSO");
   })

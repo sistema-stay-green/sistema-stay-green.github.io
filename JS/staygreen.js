@@ -92,7 +92,7 @@ function atualizarQtInsumo(insumo) {
         return;
     }else{
         /*Se estivermos em um novo dia, ele atualiza os insumos novamente
-        (caso contrário o localStorage ficaria ativo para sempre após a 
+        (caso contrário o localStorage ficaria ativo para sempre após a
         primeira atualização de insumos)*/
         let dataUltimaAtualizacao = new Date(localStorage.getItem('dataAtualizacao')),
             dataAtual = new Date();

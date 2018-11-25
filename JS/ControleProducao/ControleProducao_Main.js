@@ -40,6 +40,26 @@ var tabelaCafeA= document.getElementById('tabelaRelCafeA');
 var tabelaCafeB = document.getElementById('tabelaRelCafeB');
 var tabelaCafeR = document.getElementById('tabelaRelCafeR');
 
+ /**
+ * @author Diego Demétrio
+ * Mostra ou oculta as tabelas
+ * @param tipo produto ou insumo
+ * @param acao ocultar ou mostrar
+ */
+ function mostraTabela(tipo, acao){
+   let sufixo = (tipo ==  "produto") ? "Produtos" : "Insumos";
+   let tabela = document.querySelector("#tab" + sufixo + "Registrados");
+   let mensagem = document.querySelector("#mensagem" + sufixo);
+   if(acao == "mostrar"){
+     mensagem.classList.add("ocultar");
+   }
+   else if(acao == "ocultar"){
+     mensagem.classList.remove("ocultar");
+   }else{
+		 mensagem.classList.remove("ocultar");
+		 avisos("FALHA");
+	 }
+ }
 
 
 

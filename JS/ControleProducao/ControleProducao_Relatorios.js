@@ -210,7 +210,7 @@ if (e.target.id == "selFiltroP") {
    criaTabela(res, "produto");
   })
   .catch(function(erro){
-  console.log(erro);
+    avisos("FALHA");
   });
 }else {
   var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=insumo&id=" + e.target.value;
@@ -219,7 +219,7 @@ if (e.target.id == "selFiltroP") {
    criaTabela(res, "insumo");
   })
   .catch(function(erro){
-  console.log(erro);
+    avisos("FALHA");
   });
 }
 }

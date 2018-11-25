@@ -45,12 +45,12 @@ function criaRelatorioP() {
       var mesAjustado = dataAtual.getMonth() +1;
       textoRelProducaoData.innerHTML = dataAtual.getDate() + "/" + mesAjustado + "/" + dataAtual.getFullYear();
       mesAjustado = umaSemanaAtras.getMonth() +1;
-      textoRelProducaoData.innerHTML += "-" + umaSemanaAtras.getDate() +  "/" + mesAjustado + "/"+ umaSemanaAtras.getFullYear();
+      textoRelProducaoData.innerHTML += "  -  " + umaSemanaAtras.getDate() +  "/" + mesAjustado + "/"+ umaSemanaAtras.getFullYear();
       console.log(umaSemanaAtras.getDate());
-      textoRelProducaoLeite.innerHTML = "Leite: " + producao[0] + "$";
-      textoRelProducaoCafeB.innerHTML = "Café Bourbon: " + producao[1] + "$";
-      textoRelProducaoCafeR.innerHTML = "Café Robusta: " + producao[2] + "$";
-      textoRelProducaoCafeA.innerHTML = "Café Arábica: " + producao[3] + "$";
+      textoRelProducaoLeite.innerHTML = "Leite: " + producao[0] + " L";
+      textoRelProducaoCafeB.innerHTML = "Café Bourbon: " + producao[1] + " Kg";
+      textoRelProducaoCafeR.innerHTML = "Café Robusta: " + producao[2] + " Kg";
+      textoRelProducaoCafeA.innerHTML = "Café Arábica: " + producao[3] + " Kg";
 
     }
   })

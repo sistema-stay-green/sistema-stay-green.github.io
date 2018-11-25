@@ -121,21 +121,22 @@ function aplicaFiltros() {
                     }
                 }
 
+                if (document.querySelector('#containerCalendario > h1') != null)
+                        containerCalendario.removeChild(document.querySelector('#containerCalendario > h1'));
+
                 if (tarefasFiltradas.length === 0) {
                     let tituloErro = document.createElement('h1');
                     tituloErro.innerHTML = 'Nenhuma tarefa se encaixa aos filtros selecionados.';
                     containerCalendario.appendChild(tituloErro);
-                } else {
-                    if (document.querySelector('#containerCalendario > h1') != null)
-                        containerCalendario.removeChild(document.querySelector('#containerCalendario > h1'));
-                }
+                } 
                 //Se há filtros ativos, mostre apenas as tarefas filtradas
-                if (filtrosMarcados.length != 0)
+                if (filtrosMarcados.length != 0){
                     geraCalendario(tarefasFiltradas, false);
+                    
+                    for(let containerDia of document.querySelectorAll('#containerCalendario article'))
+                        containerDia.removeChild(containerDia.firstChild);
+                }
                 else {
-                    document.querySelectorAll('#containerCalendario h1').forEach(tituloErro => {
-                        document.querySelector('#containerCalendario').removeChild(tituloErro);
-                    })
                     geraCalendario(tarefasArmazenadasBD, true, new Date());
                 }
 

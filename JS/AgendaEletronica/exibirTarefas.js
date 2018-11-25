@@ -75,8 +75,6 @@ function geraCalendario(tarefasProgramadas, calendarioSequencial = true, dataBas
     }
   } else {
     for (let tarefa of tarefasProgramadas) {
-      console.log(Tarefa.toDateObject(tarefa.dataInicialTarefa));
-
       containerCalendario.appendChild(criaContainerDia(Tarefa.toDateObject(tarefa.dataInicialTarefa), [tarefa]));
     }
   }

@@ -366,9 +366,6 @@ function visaoBotao() {
   let botoesSaida = document.querySelectorAll(".botaoSaida");
   let botoesEditar = document.querySelectorAll(".botaoEditar");
 
-  console.log(botoesSaida[0]);
-  console.log(botoesSaida[0].parentNode.parentNode.children[6]);
-
   // Desabilita botão saída caso o status seja Vendido, Descartado ou Alugado
   for (botao of botoesSaida) {
     var pesquisa = botao.parentNode.parentNode;
@@ -376,7 +373,6 @@ function visaoBotao() {
     status = nodes[6].innerHTML;
 
     if(status === "Vendido" || status === "Descartado" || status === "Alugado"){
-      console.log("Máquina de ID: "+nodes[0].innerHTML);
       botao.classList.remove("botaoSaida");
       botao.classList.add("botaoDesab");
     }
@@ -393,7 +389,6 @@ function visaoBotao() {
     status = nodes[6].innerHTML;
 
     if(status === "Vendido" || status === "Descartado"){
-      console.log("Máquina de ID: "+nodes[0].innerHTML);
       botao.classList.remove("botaoEditae");
       botao.classList.add("botaoDesab");
     }
@@ -594,8 +589,8 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquinasVetor[i].status) + "</td>";
           string += "<td>" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
-          if(maquinasVetor[i].dataSaida == null || maquina.status === "VENDIDO" ||
-            maquina.status === "DESCARTADO")
+          if(maquinasVetor[i].dataSaida == null || maquinasVetor[i].status === "VENDIDO" ||
+            maquinasVetor[i].status === "DESCARTADO")
             string += "<td>N/A</td>";
           else
             string += "<td>" + formatarDataObj(maquinasVetor[i].dataSaida) + "</td>";
@@ -704,6 +699,7 @@ function enviaInformacoesCadastro(){
 
 //rcarrega todas as maquinas na pagina
 receberTodos();
+
 
 // Variáveis
 var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),

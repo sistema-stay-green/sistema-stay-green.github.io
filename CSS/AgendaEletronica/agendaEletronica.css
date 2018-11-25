@@ -1,4 +1,3 @@
-@media screen{
 
 	body,html{
 		height: 100%;
@@ -53,17 +52,19 @@
 		position: absolute;
 		bottom: 0;
 		right: 0;
+		padding: 1em;
 	}
 	
 	form{
-		min-height: 31em;
-		top: calc(50% - 31em/2);
-		margin: auto 30vw;
+		left: 25vw;
+		top: 50%;
+		margin-top: -37.5vh;
+		width: 50vw;
+		min-height: 65vh;
 		position: absolute;
 		z-index: 3;
 		background-color: var(--brancoIvory);
 		transition: 200ms;
-		transform: scale(1);
 	}
 	
 	textarea{
@@ -223,89 +224,6 @@
 	section > #botaoFormTarefa{
 		right: 0;
 	}
-	
-}
-
-@media print{
-
-	:root {
-		--brancoIvory: #FDFCF3;
-		--verdeCamarone: #1D883A; /* Verde Claro */
-		--verdeCrusoe: #126624; /* Verde Escuro */
-		--pretoNight: #AAA9A4;
-		--cinzaFoggy: #2D2D2E;
-	  }
-
-	body{
-		display: flex;
-		flex-direction: column;
-		align-content: center;
-	}
-
-	table {
-		border-collapse: collapse;
-		text-align: center;
-		background-color: var(--brancoIvory);
-	}
-
-	tr{
-		height: 2em;
-	}
-	
-	tfoot {
-		background-color: var(--verdeCrusoe);
-		color: var(--brancoIvory);
-	}
-	
-	th {
-		padding: 0em 1em;
-		font-weight: normal;
-	}
-	
-	thead {
-		background-color: var(--verdeCamarone);
-		color: var(--brancoIvory);
-		border: none;
-	}
-	
-	thead > tr {
-		border: none;
-	}
-	
-	tr {
-		border-bottom: 1px solid var(--pretoNight);
-		padding: 1em;
-	}
-	
-	td > button {
-		padding: 0 .5em;
-		margin: calc(4px + .1vw);
-	}
-}
-
-form article{
-	width: 50%;
-	padding: 1em;
-	position: relative;
-}
-
-form p {
-	margin: 0;
-	display: inline-block;
-}
-
-form{
-	overflow-y: scroll;
-    height: 85vh;
-    width: 50vw;
-    top: calc(50% - 85vh/2 + 20px);
-    left: calc(50% - 25vw);
-	position: absolute;
-	z-index: 3;
-	background-color: var(--brancoIvory);
-	transition: 200ms;
-	transform: scale(1);
-}
 
 textarea{
 	background-color: var(--brancoIvory);
@@ -437,4 +355,61 @@ nav{
 
 section > #botaoFormTarefa{
 	right: 0;
+}
+
+@media print{
+
+	:root {
+		--brancoIvory: #FDFCF3;
+		--verdeCamarone: #1D883A; /* Verde Claro */
+		--verdeCrusoe: #126624; /* Verde Escuro */
+		--pretoNight: #AAA9A4;
+		--cinzaFoggy: #2D2D2E;
+	  }
+
+	body{
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+	}
+
+	table {
+		border-collapse: collapse;
+		text-align: center;
+		background-color: var(--brancoIvory);
+	}
+
+	tr{
+		height: 2em;
+	}
+	
+	tfoot {
+		background-color: var(--verdeCrusoe);
+		color: var(--brancoIvory);
+	}
+	
+	th {
+		padding: 0em 1em;
+		font-weight: normal;
+	}
+	
+	thead {
+		background-color: var(--verdeCamarone);
+		color: var(--brancoIvory);
+		border: none;
+	}
+	
+	thead > tr {
+		border: none;
+	}
+	
+	tr {
+		border-bottom: 1px solid var(--pretoNight);
+		padding: 1em;
+	}
+	
+	td > button {
+		padding: 0 .5em;
+		margin: calc(4px + .1vw);
+	}
 }

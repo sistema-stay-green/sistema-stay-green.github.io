@@ -1,3 +1,12 @@
+Request.get("http://localhost:8080/StayGreen/UsuarioExistsServlet")
+    .then(r => {
+
+      if (r) {
+        document.querySelector("#login > section > button").style.display = "none";
+      }
+
+    });
+
 // Recebe as informações do formulário  de login
 let btnEntrarLoginEl = document.querySelector("#login form:first-of-type > button:first-of-type");
 

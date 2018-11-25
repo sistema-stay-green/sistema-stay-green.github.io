@@ -21,7 +21,14 @@
     <div id="mascara"></div>
     <section id="div-registra">
       <h1>Dados do produto</h1>
-      <label> Id: <input type="number" name="input" value=""> </label>
+      <label> Produto: 
+        <select name="produto">
+          <option value="1">Leite</option>
+          <option value="2">Café robusta</option>
+          <option value="3">Café arábica</option>
+          <option value="4">Café bourbon</option>
+        </select>
+      </label>
       <label> Data da venda: <input type="date" name="dataEntrega" value=""></label>
       <label> Quantidade vendida: <input type="number" name="quant" value=""></label>
       <h1>Dados do cliente</h1>
@@ -35,11 +42,11 @@
       </label>
       <label> Região do Brasil:
         <select name="regiao">
-          <option value="Sul">Sul</option>
-          <option value="Sudeste">Sudeste</option>
-          <option value="Centro-oeste">Centro-oeste</option>
-          <option value="Nordeste">Nordeste</option>
-          <option value="Norte">Norte</option>
+          <option value="SUL">Sul</option>
+          <option value="SUDESTE">Sudeste</option>
+          <option value="CENTRO_OESTE">Centro-oeste</option>
+          <option value="NORDESTE">Nordeste</option>
+          <option value="NORTE">Norte</option>
         </select>
       </label>
       <label> Endereço: <input type="text" name="endereco" value=""> </label>
@@ -61,15 +68,15 @@
       </div>
       <label> Região do Brasil:
         <select name="regiaoFrete" id="regiaoFrete">
-          <option value="1">Sul</option>
-          <option value="2">Sudeste</option>
-          <option value="3">Centro-oeste</option>
-          <option value="4">Nordeste</option>
-          <option value="5">Norte</option>
+          <option value="SUL">Sul</option>
+          <option value="SUDESTE">Sudeste</option>
+          <option value="CENTRO_OESTE">Centro-oeste</option>
+          <option value="NORDESTE">Nordeste</option>
+          <option value="NORTE">Norte</option>
         </select> <br>
       </label>
       <label> frete para a região acima: R$ <input type="number" name="valorFrete" value="" id="valorFrete"></label>
-      <button type="button" name="altera" onclick="relatorioResultados()">Alterar frete</button>
+      <button type="button" name="altera" onclick="mudaValorFrete()">Alterar frete</button>
     </main>
     <script type="text/javascript" src="JS/staygreen.js"></script>
     <script type="text/javascript" src="JS/PaginaVendas/fazVenda.js"></script>

@@ -113,7 +113,7 @@ function addProdutosPagina(produtos){
     let inputQuantidade  = document.createElement("input");
     inputQuantidade.type = "number";
     inputQuantidade.max = produto.estoque;
-    inputQuantidade.min = 1;
+    inputQuantidade.min = 0;
     labelQuantidade.appendChild(inputQuantidade);
     sectionProduto.appendChild(labelQuantidade);
 
@@ -280,6 +280,22 @@ function cancelaModal(){
   divModalEl.classList.remove("aparece");
 };
 
+/**
+ * @author Vinicius Gabriel
+ */
+function limpaCarrinho(){
+  let elementosCarrinho = divCarrinhoEl.querySelectorAll('article');
+  elementosCarrinho.forEach(el => divCarrinhoEl.removeChild(el));
+  quantidadeCarrinhoEl.innerHTML--;
+
+  if(quantidadeCarrinhoEl.innerHTML == 0){
+    quantidadeCarrinhoEl.classList.remove("aparece");
+    mascaraEl.classList.remove("aparece");
+    divCarrinhoEl.classList.remove("aparece");
+    carrinhoEl.removeEventListener('click',apareceCarrinho);
+  }
+}
+
 function confirmaModal(){
   mascaraEl.classList.remove("aparece");
   divModalEl.classList.remove("aparece");
@@ -288,7 +304,7 @@ function confirmaModal(){
 cancelaCarrinhoEl.addEventListener('click',cancelaCarrinho);
 confirmaCarrinhoEl.addEventListener('click',confirmaCarrinho);
 cancelaModalEl.addEventListener('click',cancelaModal);
-confirmaModalEl.addEventListener('click',confirmaModal);
+confirmaModalEl.addEventListener('click', e => {confirmaModal(), limpaCarrinho()});
 
 let padrao = '#####-###';
 
@@ -325,8 +341,9 @@ const confirmaButton = modalConfirma.querySelector('#confirmaModal');
 const regexCEP = /(\d{5})-?(\d{3})/;
 
 confirmaButton.addEventListener('click', e => {
-    let dataTransacao = new DataEntrega(dataEntregaInput.valueAsDate);
-    let venda = new Venda();
+    let dataTransacao = new DataTransacao();
+    let venda = new Venda(fretes[regiaoSelect.value],
+      dataEntregaInput.valueAsDate);
 
     let cepExp = regexCEP.exec(cepInput.value);
     let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2] , modoPagamentoSelect.value);

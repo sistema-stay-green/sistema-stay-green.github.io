@@ -166,7 +166,7 @@ function limitaValorCompra_ValorVenda(){
 
 //limitaa data de retorno para no minimo depois do dia atual
 //estilização
-function limitaDataRetornoSaida(){
+function limitaDataRetorno(){
 
   let hoje = new Date(),
       dia = hoje.getDate(),
@@ -181,6 +181,25 @@ function limitaDataRetornoSaida(){
 
   hoje = ano+'-'+mes+'-'+dia;
   document.querySelector("input[name='periodo']").setAttribute("min", hoje);
+}
+
+//limitaa data de saida para no minimo depois do dia atual
+//estilização
+function limitaDataSaida(){
+
+  let hoje = new Date(),
+      dia = hoje.getDate(),
+      mes = hoje.getMonth()+1, //January is 0!
+      ano = hoje.getFullYear();
+   if(dia<10){
+          dia='0'+dia
+      }
+      if(mes<10){
+          mes='0'+mes
+      }
+
+  hoje = ano+'-'+mes+'-'+dia;
+  document.querySelector("input[name='periodoSaida']").setAttribute("max", hoje);
 }
 
 //limita o indice de depreciação para 90
@@ -308,17 +327,21 @@ function saida(){
           if(opcao.value == "Alugar"){
             document.querySelector("label[name='valor-label']").style.display = "block";
             document.querySelector("label[name='periodo-label']").style.display = "block";
+            document.querySelector("label[name='periodoSaida-label']").style.display = "none";
           }
           if(opcao.value == "Descartar"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo-label']").style.display = "block";
+            document.querySelector("label[name='periodo-label']").style.display = "none";
+            document.querySelector("label[name='periodoSaida-label']").style.display = "block";
           }
           if(opcao.value == "Vender"){
             document.querySelector("label[name='valor-label']").style.display = "none";
-            document.querySelector("label[name='periodo-label']").style.display = "block";
+            document.querySelector("label[name='periodo-label']").style.display = "none";
+            document.querySelector("label[name='periodoSaida-label']").style.display = "block";
           }
           if(opcao.value == "Enviar para conserto"){
             document.querySelector("label[name='valor-label']").style.display = "none";
+            document.querySelector("label[name='periodoSaida-label']").style.display = "none";
             document.querySelector("label[name='periodo-label']").style.display = "block";
           }
         });
@@ -387,6 +410,7 @@ function mostraModalEditar(){
   elemento = elemento.parentElement;
   nodes = elemento.parentNode.children;
   status = nodes[6].innerHTML;
+  console.log(nodes[5].innerHTML);
   if(status === "Em posse" || status === "Em manutenção"|| status === "Alugado"){
     document.querySelector("#editar").style.display = "block";
     document.querySelector("input[name='id-editar']").value = nodes[0].innerHTML,
@@ -409,7 +433,8 @@ function relatorio(){
       maquinasVendidas = 0,
       maquinasManutencao = 0,
       valorTotalMaquina = 0,
-      string = "";
+      string = "",
+      elementos = null;
 
   for (var i = 0; i < maquinas.length; i++) {
     elementos = maquinas[i].children;
@@ -446,7 +471,7 @@ function relatorio(){
 
   document.querySelector("#valorTotalMaquina").innerHTML =
       "<h4>Valor total das maquinas</h4><ul>" +
-      "<li>Valor total - R$ " + totalMaquinas.toFixed(2) + "</li></ul>";
+      "<li>Valor total - R$ " + valorTotalMaquina.toFixed(2) + "</li></ul>";
 
   document.querySelector(".relatorioModal").style.display = "block";
 }
@@ -475,7 +500,8 @@ function AlteraStatus(elemento,opcao){
     console.log(elemento);
     nodes = elemento.children;
     let valorAluguel = document.querySelector("input[name='valorAluguel']").value,
-        periodo = document.querySelector("input[name='periodo']").value;
+        periodo = document.querySelector("input[name='periodo']").value,
+        periodoSaida = document.querySelector("input[name='periodoSaida']").value;
 
     //transporta os valores dos filhos de "elemento" para um vetor
 
@@ -485,13 +511,13 @@ function AlteraStatus(elemento,opcao){
             alugar(nodes[0].innerHTML, periodo, valorAluguel);
         }
         if(opcao.value == "Vender"){
-            vender(nodes[0].innerHTML, periodo);
+            vender(nodes[0].innerHTML, periodoSaida);
         }
         if(opcao.value == "Enviar para conserto"){
             manuntenir(nodes[0].innerHTML, periodo);
         }
         if(opcao.value == "Descartar"){
-            descartar(nodes[0].innerHTML, periodo);
+            descartar(nodes[0].innerHTML, periodoSaida);
         }
   //Permite a chamada da função saida ao clicar no "botaoSaida"
 
@@ -514,11 +540,11 @@ function adicionaMaquina(maquina){
           string += "<td class=\"id\">" + maquina.id + "</td>";
           string += "<td>" + maquina.nome + "</td>";
           string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
-          string += "<td> R$" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
+          string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquina.indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquina.status) + "</td>";
-          string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
+          string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
           if(maquina.dataSaida == null || maquina.status === "VENDIDO" ||
             maquina.status === "DESCARTADO")
             string += "<td>N/A</td>";
@@ -563,11 +589,11 @@ function adicionaTodasMaquinas(maquinasVetor){
           string += "<td class=\"id\">" + maquinasVetor[i].id + "</td>";
           string += "<td>" + maquinasVetor[i].nome + "</td>";
           string += "<td class=\"finalidade\">"+ maquinasVetor[i].finalidade + "</td>";
-          string += "<td> R$ " + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
+          string += "<td>" + parseFloat(maquinasVetor[i].valorCompra.toFixed(2)) + "</td>";
           string += "<td>" + maquinasVetor[i].indiceDepreciacao + "%</td>";
           string += "<td>" + formatarDataObj(maquinasVetor[i].dataCompra) + "</td>";
           string += "<td>" + formatarStatus(maquinasVetor[i].status) + "</td>";
-          string += "<td> R$" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
+          string += "<td>" + parseFloat(maquinasVetor[i].calculateValorAtual().toFixed(2)) + "</td>";
           if(maquinasVetor[i].dataSaida == null || maquina.status === "VENDIDO" ||
             maquina.status === "DESCARTADO")
             string += "<td>N/A</td>";
@@ -613,11 +639,11 @@ function editaMaquina(maquina){
         string += "<td class=\"id\">" + maquina.id + "</td>";
         string += "<td>" + maquina.nome + "</td>";
         string += "<td class=\"finalidade\">" + maquina.finalidade + "</td>";
-        string += "<td> R$" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
+        string += "<td>" + parseFloat(maquina.valorCompra.toFixed(2)) + "</td>";
         string += "<td>" + maquina.indiceDepreciacao + "%</td>";
         string += "<td>" + formatarDataObj(maquina.dataCompra) + "</td>";
         string += "<td>" + formatarStatus(maquina.status) + "</td>";
-        string += "<td> R$" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
+        string += "<td>" + parseFloat(maquina.calculateValorAtual().toFixed(2)) + "</td>";
         if(maquina.dataSaida == null || maquina.status === "VENDIDO" ||
           maquina.status === "DESCARTADO")
           string += "<td>N/A</td>";
@@ -709,7 +735,8 @@ for (input of inputs_editar) {
 }
 
 
-limitaDataRetornoSaida();
+limitaDataRetorno();
+limitaDataSaida();
 limitaDataCompra();
 limitaValorCompra_ValorVenda();
 estilizarModal();

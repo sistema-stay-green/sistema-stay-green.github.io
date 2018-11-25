@@ -30,7 +30,7 @@
         </select>
       </label>
       <label> Data da venda: <input type="date" name="dataEntrega" value=""></label>
-      <label> Quantidade vendida: <input type="number" name="quant" value=""></label>
+      <label> Quantidade vendida: <input type="number" name="quant" value="" min="0"></label>
       <h1>Dados do cliente</h1>
       <label> Digite o nome completo do cliente: <input type="text" name="nome" value=""> </label>
       <label> modo de pagamento:
@@ -75,7 +75,7 @@
           <option value="NORTE">Norte</option>
         </select> <br>
       </label>
-      <label> frete para a região acima: R$ <input type="number" name="valorFrete" value="" id="valorFrete"></label>
+      <label> frete para a região acima: R$ <input type="number" name="valorFrete" value="" id="valorFrete" min="0"></label>
       <button type="button" name="altera" onclick="mudaValorFrete()">Alterar frete</button>
     </main>
     <script type="text/javascript" src="JS/staygreen.js"></script>

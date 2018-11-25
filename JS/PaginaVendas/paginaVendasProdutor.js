@@ -289,7 +289,7 @@ confirmaButton.addEventListener('click', e => {
   const produtoId = divRegistraEl.querySelector('select[name=produto]').value;
   const quantVendidaInput = divRegistraEl.querySelector('input[name=quant]');
   if(DataInput.valueAsDate >= new Date() &&
-    parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId] ){
+    parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId].estoque ){
       let cepExp = regexCEP.exec(cepInput.value);
       fazVenda(
           new DataTransacao(dataEntregaInput.valueAsDate),
@@ -301,7 +301,7 @@ confirmaButton.addEventListener('click', e => {
     }else{
       if (DataInput.valueAsDate >= new Date())
         alert("Data inválida");
-      if (parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId] )
+      if (parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId].estoque )
       alert('Quantidade inválida');
     }
 });

@@ -52,6 +52,9 @@ div.scrollabe{
 .finalidade{
   padding-right: 16px;
   word-break: normal;
+  overflow-y: scroll;
+  max-height: 15vh;
+  display: inline-block;
 }
 #TituloPagina{
    text-align: center;

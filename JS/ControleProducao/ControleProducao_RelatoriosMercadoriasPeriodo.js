@@ -152,11 +152,9 @@ function insereProdutoTabela(resultado, contador, linha){
 Descrição: Insere os insumos em uma tabela, preenchendo-as
 com os devidos valores  **/
 function insereInsumoTabela(resultado, contador, linha){
-  console.log(resultado[contador]);
   Request.get("http:localhost:8080/StayGreen/ControleProducaoServlet?operacao=buscar&id="+resultado[contador].idItemTransacao+"&tipo=insumo")
   .then(function(resposta){
     var valTransacao = resultado[contador].valorTransacao;
-    console.log(valTransacao);
     var nome = resposta.nomeInsumo;
     for(let i = 1; i <= 5; i++){
       var celula = linha.insertCell(i-1);

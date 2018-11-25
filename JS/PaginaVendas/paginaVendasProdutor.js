@@ -298,7 +298,7 @@ confirmaButton.addEventListener('click', e => {
       );
       confirmaRegistraProduto();
     }else{
-      if (parseInt(quantVendidaInput.value) >= arrayProdutos[produtoId-1].estoque )
+      if (parseInt(quantVendidaInput.value) > arrayProdutos[produtoId-1].estoque )
         alert('Quantidade inválida');
     }
 });

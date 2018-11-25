@@ -84,6 +84,10 @@ function addProdutosPagina(produtos){
     let sectionProduto = document.createElement("section");
     sectionProduto.dataset.id = produto.id;
 
+    let nomeProduto = document.createElement("h1");
+    nomeProduto.innerHTML = produto.nome;
+    sectionProduto.appendChild(nomeProduto);
+
     let imgProduto  = document.createElement("img");
     imgProduto.src = produto.img;
     sectionProduto.appendChild(imgProduto);
@@ -100,6 +104,7 @@ function addProdutosPagina(produtos){
 
     let precoProduto = document.createElement('p');
     precoProduto.innerHTML = "R$ " + produto.preco;
+    precoProduto.innerHTML = precoProduto.innerHTML.replace(".", ",");
     precoProduto.classList.add("preco");
     sectionProduto.appendChild(precoProduto);
 

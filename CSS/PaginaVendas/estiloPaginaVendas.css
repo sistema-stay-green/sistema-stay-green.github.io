@@ -72,8 +72,7 @@ main > section {
   padding: 4vh;
 }
 main > section > img {
-    height: 40vh;
-    width: 40vh;
+    height: 50vh;
     align-self: center;
 }
 main > section > .descricao-estoque {

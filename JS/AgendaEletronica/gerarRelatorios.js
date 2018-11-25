@@ -3,7 +3,7 @@ function aplicarRelatorios() {
   let botoesRelatorio = document.querySelectorAll('.botaoRelatorio');
 
   botoesRelatorio.forEach(botaoRelatorio =>
-    botaoRelatorio.addEventListener('click', () => {
+    botaoRelatorio.addEventListener('click', (evt) => {
       let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
 
         //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
@@ -13,6 +13,8 @@ function aplicarRelatorios() {
       alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), false);
       mascaraFormEl.addEventListener('click', () => {
          alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), true) });
+      evt.stopPropagation();
+      evt.preventDefault();
     }));
 }
 

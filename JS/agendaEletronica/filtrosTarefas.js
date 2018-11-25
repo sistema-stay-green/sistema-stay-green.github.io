@@ -5,7 +5,7 @@
  * @returns {Boolean} se a tarefa passou no filtro ou não
  */
 function filtrarTarefaDia(tarefa) {
-    if (parseInt(this) % tarefa.dataInicialTarefa.dayOfMonth === 0) {
+    if (Math.abs(parseInt(this) - tarefa.dataInicialTarefa.dayOfMonth) % tarefa.periodRepetTarefa === 0) {
         return true;
     }
     return false;

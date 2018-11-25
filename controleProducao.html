@@ -58,7 +58,7 @@
           </table>
           <div id="mensagemProdutos" class="ocultar">
             <h5>Não foram encontrados produtos no banco de dados.</h5>
-            <p>Tente atualizar ou adicionar manualmente algum produto no BD.</p>
+            <p>Tente atualizar, adicionar manualmente algum produto no BD ou verificar se o servidor está ativo.</p>
           </div>
         </section>
 
@@ -93,7 +93,7 @@
           </table>
           <div id="mensagemInsumos" class="ocultar">
             <h5>Não foram encontrados insumos no banco de dados.</h5>
-            <p>Tente atualizar o BD ou adicionar algum insumo.</p>
+            <p>Tente atualizar o BD, adicionar algum insumo ou verificar se o servidor está ativo.</p>
           </div>
         </section>
       </section>
@@ -157,7 +157,6 @@
             <table id="tabelaRelLeite" class="centralizaTabela margin">
               <thead>
                 <tr>
-                  <th>Tipo</th>
                   <th>Data Transacao</th>
                   <th>Quantidade Transação</th>
                   <th>Valor Transação</th>
@@ -171,7 +170,6 @@
             <table id="tabelaRelCafeB" class="centralizaTabela margin">
               <thead>
                 <tr>
-                  <th>Tipo</th>
                   <th>Data Transacao</th>
                   <th>Quantidade Transação</th>
                   <th>Valor Transação</th>
@@ -185,7 +183,6 @@
             <table id="tabelaRelCafeR" class="centralizaTabela margin">
               <thead>
                 <tr>
-                  <th>Tipo</th>
                   <th>Data Transacao</th>
                   <th>Quantidade Transação</th>
                   <th>Valor Transação</th>
@@ -199,7 +196,6 @@
             <table id="tabelaRelCafeA" class="centralizaTabela">
               <thead>
                 <tr>
-                  <th>Tipo</th>
                   <th>Data Transação</th>
                   <th>Quantidade Transação</th>
                   <th>Valor Transação</th>
@@ -218,7 +214,6 @@
             <table id="tabelaInsumo">
               <thead>
                 <tr>
-                  <th>Tipo</th>
                   <th>Insumo</th>
                   <th>Data</th>
                   <th>Quantidade</th>
@@ -242,7 +237,12 @@
       <div id="modalRelatorioProducao" class="esconde modal">
         <div>
           <h1>Relatório de Produção</h1>
-          <p id="textoRelProducao"></p>
+          <h3> <b>Produção Semanal</b> </h3>
+          <h3 id="textoRelProducaoData"></h3>
+          <h4 id="textoRelProducaoLeite"></h4>
+          <h4 id="textoRelProducaoCafeB"></h4>
+          <h4 id="textoRelProducaoCafeR"></h4>
+          <h4 id="textoRelProducaoCafeA"></h4>
         </div>
         <div class="divBotoes">
           <button type="button" id="btnVoltaRelatorioP" class="voltarModal">Voltar</button>

@@ -227,7 +227,7 @@ function removerMercadoria(id){
 
 						 }
 					 }).catch(function(erro){
-						 console.log(erro);
+						 avisos("ERRO_REMOVER");
 					 });
 					 desativarBotoes(true);
 					 setTimeout(function () {
@@ -237,7 +237,7 @@ function removerMercadoria(id){
 			 }
 			 else{
 				 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=remover&tipo=insumo&id=" + id.substring(16);;
-				 Request.get(url).then(function(res) { 	}).catch(function(erro){console.log(erro);});
+				 Request.get(url).then(function(res) { 	}).catch(function(erro){avisos("ERRO_REMOVER")});
 				 desativarBotoes(true);
 				 setTimeout(function () {
 				 	desativarBotoes(false);
@@ -262,30 +262,38 @@ function avisos(i, res) {
 	divModalAvisos.classList.remove("esconde");
 		switch (i) {
 				case "SUCESSO":
-						divModalAvisos2.innerHTML = "Operação realizada com sucesso!!";
-						divModalAvisos2.style.color = "green";
-						break;
-				case "INPUT_INVALIDO":
-						divModalAvisos2.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar...</p>";
-						divModalAvisos2.style.color = "red";
+					divModalAvisos2.innerHTML = "Operação realizada com sucesso!!";
+					divModalAvisos2.style.color = "green";
+					break;
 
-						divModalAvisos.style.right = "10px";
-;
-						break;
+				case "INPUT_INVALIDO":
+					divModalAvisos2.innerHTML = "<p>Por favor, preencha os campos obrigatórios para continuar...</p>";
+					divModalAvisos2.style.color = "red";
+
+					divModalAvisos.style.right = "10px";
+					break;
+
 				case "FALHA":
-						divModalAvisos2.style.color = "red";
-						if (res.target.statusText) {
-							divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo:"+ res.target.statusText +"</p>";
-						}else {
-							 divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo: Falha ao conectar com banco de dados.</p>";
-						}
-						break;
-				case "FALHA":
-						divModalAvisos2.innerHTML = "<p>Houve uma falha</p>";
-						divModalAvisos2.style.color = "red";
-						break;
+					divModalAvisos2.style.color = "red";
+					if (res.target.statusText) {
+						divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo:"+ res.target.statusText +"</p>";
+					}else {
+						divModalAvisos2.innerHTML = "<p>Houve uma falha</p><p>Motivo: Falha ao conectar com banco de dados.</p>";
+					}
+					break;
+
+				case "ERRO_REMOVER":
+					divModalAvisos2.innerHTML = "<p>Houve uma falha durante a remoção desta mercadoria</p>";
+					divModalAvisos2.style.color = "red";
+					break;
+
+				case "ERRO_ADICIONAR":
+					divModalAvisos2.innerHTML = "<p>Houve uma falha durante a a edição ou adição desta mercadoria</p>";
+					divModalAvisos2.style.color = "red";
+					break;
+					
 				default:
-						break;
+					break;
 		}
 		setTimeout(function(){ divModalAvisos.style.top = "2500px"; divModalAvisos.style.opacity = "0"; }, 1500);
 		setTimeout(function(){ 		divModalAvisos.classList.add("esconde"); divModalAvisos.style.opacity = "1"; divModalAvisos.style.top = "calc(50vh - 16em)"; }, 1900);
@@ -348,7 +356,7 @@ function limparInputs() {
 		funcaoCerteza(function (confirmar) {
 				if (confirmar) {
 					 url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=removerDefinitivo&id=" + id.substring(19);
-					 Request.get(url).then(function(res) { 	}).catch(function(erro){console.log(erro);});
+					 Request.get(url).then(function(res) { 	}).catch(function(erro){ avisos("ERRO_REMOVER") });
 					 desativarBotoes(true);
 					 setTimeout(function () {
 					 	desativarBotoes(false);
@@ -407,7 +415,7 @@ function editarMercadoria(id){
 
 					})
 					.catch(function(erro){
-					 console.log(erro);
+						avisos("ERRO_ADICIONAR");
 					});
 					editarProduto(function (confirmar) {
 						if (confirmar) {
@@ -422,7 +430,7 @@ function editarMercadoria(id){
 
 											})
 											.catch(function(erro){
-											 console.log(erro);
+											 avisos("ERRO_ADICIONAR");
 											});
 										 desativarBotoes(true);
 										setTimeout(function () {
@@ -455,7 +463,7 @@ function editarMercadoria(id){
 						inpPontoAvisoInsumo2.value = res.pontoAvisoInsumo;
 					})
 					.catch(function(erro){
-					 console.log(erro);
+					 avisos("ERRO_ADICIONAR");
 					});
 
 					 editarInsumo(function (confirmar) {
@@ -471,7 +479,7 @@ function editarMercadoria(id){
 
   										})
   										.catch(function(erro){
-  										console.log(erro);
+  											avisos("ERRO_ADICIONAR");
   										});
   										desativarBotoes(true);
   										setTimeout(function () {

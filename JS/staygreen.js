@@ -26,7 +26,7 @@ class Request {
      */
     static async get(url, responseType = 'json') {
 
-        return await new Promise(function(resolve, reject) {
+        return await new Promise(function (resolve, reject) {
 
             let request = new XMLHttpRequest();
             request.responseType = responseType;
@@ -54,12 +54,12 @@ class Request {
      */
     static async post(url, params = '', responseType = 'json') {
 
-        return await new Promise(function(resolve, reject) {
+        return await new Promise(function (resolve, reject) {
 
             let request = new XMLHttpRequest();
             request.responseType = responseType;
             request.open('POST', url, true);
-            request.onreadystatechange = function() {
+            request.onreadystatechange = function () {
                 if (request.readyState === 4 && request.status === 200)
                     resolve(request.response);
             };
@@ -72,3 +72,34 @@ class Request {
     }
 
 };
+
+/**
+ * Atualiza um insumo
+ * @param {Insumo} insumo O insumo a ser atualizado
+ * @returns {JSON} Se a operação de atualizar foi bem sucedida ou não
+ */
+function atualizarQtInsumo(insumo) {
+    let storageInsumos = localStorage.getItem('atualizouInsumos');
+    //Comparação em String porque o localStorage armazena tudo como String
+    if (storageInsumos === "null" || storageInsumos === "false") {
+        Request.get('http:localhost:8080/StayGreen/ControleProducaoServlet?&tipo=insumo&operacao=atualizar&JSON=' + JSON.stringify(insumo))
+            .then(resultado => {
+                if (resultado.resultado === "SUCESSO") {
+                    localStorage.setItem('atualizouInsumos', true);
+                    localStorage.setItem('dataAtualizacao', new Date());
+                }
+            });
+        return;
+    }else{
+        /*Se estivermos em um novo dia, ele atualiza os insumos novamente
+        (caso contrário o localStorage ficaria ativo para sempre após a 
+        primeira atualização de insumos)*/
+        let dataUltimaAtualizacao = new Date(localStorage.getItem('dataAtualizacao')),
+            dataAtual = new Date();
+
+        if(dataUltimaAtualizacao.getUTCDate() < dataAtual.getUTCDate()){
+            localStorage.setItem('atualizouInsumos', false);
+            atualizarQtInsumo(insumo);
+        }
+    }
+}

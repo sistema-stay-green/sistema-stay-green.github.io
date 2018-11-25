@@ -7,11 +7,12 @@ function aplicarRelatorios() {
       let codigoRelatorio = parseInt(botaoRelatorio.dataset.codrelat),
 
         //Seleção por id da section  e o conteúdo torna-se a tabela gerada. Remoção da classe invisivel
-        relatorioContainer = document.querySelector('#containerRelatorio');
+        relatorioContainer = document.querySelector('#containerRelatorio div:nth-child(1)');
       relatorioContainer.innerHTML = '';
       relatorioContainer.appendChild(geraRelatorio(codigoRelatorio));
-      alteraVisibilidadeElemento(relatorioContainer, false);
-      mascaraFormEl.addEventListener('click', () => { alteraVisibilidadeElemento(relatorioContainer, true) });
+      alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), false);
+      mascaraFormEl.addEventListener('click', () => {
+         alteraVisibilidadeElemento(document.querySelector('#containerRelatorio'), true) });
     }));
 }
 
@@ -95,3 +96,32 @@ function gerarTabela(tarefas, camposRelevantes, campoTotal, apresentaTotal = tru
 
   return tabelaRelatorioGastos;
 }
+
+/**
+ * Envia o relatório gerado para Impressão.
+ * @author Mei Fagundes
+ */
+function printRelatorio() {
+
+  let content = document.querySelector("#containerRelatorio div:nth-child(1)").innerHTML;
+  let printWindow = window.open('', 'Print', 'height=768,width=1024');
+
+  printWindow.document.write('<html><head><title>Print</title>');
+  printWindow.document.write('<link rel="stylesheet" href="CSS/AgendaEletronica/agendaEletronica.css">');
+  printWindow.document.write('</head><body onafterprint="self.close()">');
+  printWindow.document.write(content);
+  printWindow.document.write('<script type="text/javascript">' + 'window.onload = () => { setTimeout(() => { window.print(); window.close(); }, 500) };' + '</script>');
+  printWindow.document.write('</body></html>');
+
+  printWindow.document.close();
+  printWindow.focus();
+}
+
+document.querySelector("#containerRelatorio div:nth-child(2) button")
+  .addEventListener("click", printRelatorio);
+
+if (staticDebugMode){
+  generatePlaceholders();
+  aplicarRelatorios();
+}
+  

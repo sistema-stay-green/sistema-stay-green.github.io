@@ -13,8 +13,7 @@ let botaoConfirmaEl = document.querySelector("#div-registra > .div-botoes > butt
 let botaoCancelaEl = document.querySelector("#div-registra > .div-botoes > button:last-of-type");
 let arrayProdutos = new Array();
 let botaoRegiaoEl = document.querySelector('#regiaoFrete');
-let valorBotaoRegiao = botaoRegiaoEl.options[botaoRegiaoEl.selectedIndex].value;//valor do <option> selecionado
-let valorBotaoFrete = document.querySelector('#valorFrete').value;
+let BotaoFreteEl = document.querySelector('#valorFrete');
 
 window.onload = function recebeJSON(){
   Request.get('http://localhost:8080/StayGreen/ProdutosVendaServlet')
@@ -158,7 +157,7 @@ botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
 let padrao = '#####-###';
 
 let inputCep = divRegistraEl.querySelector("label:last-of-type > input");
-  inputCep.addEventListener('input', e => {
+inputCep.addEventListener('input', e => {
     let entrada = inputCep.value;
     if(isNaN(entrada[entrada.length - 1])){
       entrada = entrada.replace(entrada.slice(entrada.length - 1), '');
@@ -258,16 +257,20 @@ function relatorioEncaminhamento(){
     });
 }
 
+/**
+ * Muda o valor do frete
+ * @author Guilherme da Silva
+ */
 function mudaValorFrete(){
-  if(valorBotaoFrete >= 0)
-    Request.get('http://localhost:8080/StayGreen/FreteServlet?regiao='+valorBotaoRegiao+'&valorFrete='+valorBotaoFrete);
+  if(BotaoFreteEl.value >= 0)
+    Request.get('http://localhost:8080/StayGreen/VendasFretesServlet?regiao='+botaoRegiaoEl.value+'&valorFrete='+BotaoFreteEl.value);
   else {
     alert("Valor do frete inválido");
   }
 }
 
 const modalVenda = document.getElementById('div-registra');
-const idInput = modalVenda.querySelector('input[name=input]');
+const idInput = modalVenda.querySelector('select[name=produto]');
 const dataEntregaInput = modalVenda.querySelector('input[name=dataEntrega]');
 const quantVendidaInput = modalVenda.querySelector('input[name=quant]');
 const nomeInput = modalVenda.querySelector('input[name=nome]');

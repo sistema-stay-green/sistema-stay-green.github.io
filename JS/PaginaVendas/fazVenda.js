@@ -1,3 +1,10 @@
+let fretes = {};
+Request.get('http://localhost:8080/StayGreen/GetFretesServlets')
+    .then(resp => {
+        resp.forEach(element => {
+            fretes[element.regiaoFrete] = element.precoFrete;
+        });
+    });
 /**
  * Classe que auxilia a passar dados do comprador
  */
@@ -27,7 +34,7 @@ class Venda{
      * @param {Number} tempoEntregaVenda dias faltantes para a entrega
      */
     constructor(freteVenda = 10, tempoEntregaVenda = 10){
-        this.freteVenda = 10;
+        this.freteVenda = freteVenda;
         this.tempoEntregaVenda = 10;
     }
 }
@@ -60,7 +67,6 @@ class DataEntrega{
         this.ano = dataEntrega.getFullYear();
     }
 }
-
 
 
 function fazVenda(dataTransacao, venda, comprador, ...transacoes) {

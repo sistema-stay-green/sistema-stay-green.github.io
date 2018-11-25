@@ -62,9 +62,32 @@ class Patrimonio {
      */
     calculateValorAtual(){
 
+        let dataCompare;
+
+        switch (this._status) {
+
+            case "DESCARTADO":
+                if (this._dataBaixa !== null && this._dataBaixa !== undefined)
+                    dataCompare = this._dataBaixa.getFullYear();
+                else
+                    dataCompare = new Date().getFullYear();
+                break;
+
+            case "VENDIDO":
+                if (this._dataSaida !== null && this._dataSaida !== undefined)
+                    dataCompare = this._dataSaida.getFullYear();
+                else
+                    dataCompare = new Date().getFullYear();
+                break;
+
+            default:
+                dataCompare = new Date().getFullYear();
+                break;
+        }
+
         if (this._valorCompra !== null && this._dataCompra !== null) {
             let anoCompra = this._dataCompra.getFullYear();
-            let diferencaData = new Date().getFullYear() - anoCompra;
+            let diferencaData = dataCompare - anoCompra;
             let valorAtt = this._valorCompra -
                 ((diferencaData * (this._indiceDepreciacao/100))
                 * this._valorCompra);
@@ -151,16 +174,30 @@ class Patrimonio {
     }
 
     get indiceDepreciacao(){
-        return this._indiceDepreciacao;
+
+        if (typeof this._indiceDepreciacao === "number") {
+            return this._indiceDepreciacao.toFixed(2);
+        }
+        else
+            return this._indiceDepreciacao;
     }
 
     get valorCompra(){
-        return this._valorCompra;
+
+        if (typeof this._valorCompra === "number") {
+            return this._valorCompra.toFixed(2);
+        }
+        else
+            return this._valorCompra;
     }
 
     get valorAtual(){
-        return this.calculateValorAtual();
-        //return this._valorAtual;
+        let temp = this.calculateValorAtual()
+        if (typeof temp === "number") {
+            return temp.toFixed(2);
+        }
+        else
+           return temp;
     }
 
     get dataCompra(){

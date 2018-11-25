@@ -161,7 +161,11 @@ function showError(cod){
             break;
 
         case 6:
-            message += "A Data de Compra deve ser menor que a Data de Retorno/Saída.";
+            message += "A Data de Compra deve ser anterior a Data de Retorno/Saída.";
+            break;
+
+        case 7:
+            message += "A Data de Compra não pode estar no ano seguinte à Data atual.";
             break;
 
         default:
@@ -471,9 +475,13 @@ function getPatrimonioFromModal(){
         patrimonio.finalidade = document.querySelector("#form [name='finalidadeInput']").value;
         patrimonio.indiceDepreciacao = document.querySelector("#form [name='indiceDepreciacaoInput']").value;
         patrimonio.valorCompra = document.querySelector("#form [name='valorCompraInput']").value;
-        patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
         patrimonio.status = document.querySelector("#form [name='tipoSaidaInput']").value;
+        patrimonio.dataCompra = new Date(dataCompra[0], dataCompra[1] - 1, dataCompra[2]);
 
+        if (patrimonio.dataCompra.getFullYear() > new Date().getFullYear()) {
+            showError(7);
+            return null;
+        }
 
         dataEntrada = document.querySelector("#form [name='dataEntradaInput']").value.split('-');
         dataSaida = document.querySelector("#form [name='dataSaidaInput']").value.split('-');

@@ -15,7 +15,6 @@ function receiveAllPatrimoniosFromServlet(callBack){
   document.body.classList.add("waiting");
   let params = "?action=r";
   Request.get(SERVLET_URL + params).then((response) => {
-    console.log(response);
     document.body.classList.remove("waiting");
     let patrimonios = [];
     for (const current of response) {

@@ -151,7 +151,6 @@ botaoEncaEl.addEventListener('click', w=> {
 botaoFatuEl.addEventListener('click', mostraFaturamentos);
 botaoResulEl.addEventListener('click', mostraResultados);
 mascaraEl.addEventListener('click', escondeTudo);
-botaoConfirmaEl.addEventListener('click', confirmaRegistraProduto);
 botaoCancelaEl.addEventListener('click', cancelaRegistraProduto);
 
 let padrao = '#####-###';
@@ -232,7 +231,7 @@ function relatorioFaturamento(){
 }
 
 function relatorioEncaminhamento(){
-  Request.get('http://localhost:8080/StayGreen/VendasEncaminhamentosServlet')
+  Request.get(`http://localhost:8080/StayGreen/VendasEncaminhamentosServlet`)
     .then(resposta => {
       console.table(resposta);
       if(tabelaAntiga = divEncaEl.querySelector("table"))
@@ -241,13 +240,15 @@ function relatorioEncaminhamento(){
       let tabela = document.createElement("table");
 
       let thead = document.createElement("thead");
-      thead.innerHTML = "<th>Cliente</th> <th>Data</th> <th>Faltam (Dias)</th>";
+      thead.innerHTML = "<th>Cliente</th> <th>Data Transaçao</th> <th>Faltam para entrega(Dias)</th>";
       tabela.appendChild(thead);
 
       let tbody = document.createElement("tbody");
       resposta.forEach(res => {
-        let {nome, dia, mes, ano} = res;
-        let falta = dia - (new Date()).getDate();
+        let {nome, dia, mes, ano, entregaMes, entregaDia, entregaAno} = res;
+
+        //numeros de dias para o dia da entrega
+        let falta = Math.round( (new Date(entregaAno, entregaMes, entregaDia) - new Date()) / 8.64e+7 );
         let tr = document.createElement("tr");
         tr.innerHTML = `<td>${nome}</td> <td>${dia}/${mes}/${ano}</td> <td>${ falta > 0 ? falta : "Não"}</td>`;
         tbody.appendChild(tr);
@@ -283,12 +284,25 @@ const regexCEP = /(\d{5})-?(\d{3})/;
 
 //Confirma venda
 confirmaButton.addEventListener('click', e => {
-  let cepExp = regexCEP.exec(cepInput.value);
-  fazVenda(
-      new DataEntrega(dataEntregaInput.valueAsDate),
-      new Venda(),
-      new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2], modoPagamentoSelect.value),
-      new Transacao(idInput.value, arrayProdutos[idInput.value-1].preco * quantVendidaInput.value , quantVendidaInput.value)
-  );
+  
+  const DataInput = divRegistraEl.querySelector('input[name=dataEntrega]');
+  const produtoId = divRegistraEl.querySelector('select[name=produto]').value;
+  const quantVendidaInput = divRegistraEl.querySelector('input[name=quant]');
+  if(DataInput.valueAsDate >= new Date() &&
+    parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId] ){
+      let cepExp = regexCEP.exec(cepInput.value);
+      fazVenda(
+          new DataTransacao(dataEntregaInput.valueAsDate),
+          new Venda(fretes[regiaoSelect.value],dataEntregaInput.valueAsDate),
+          new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2], modoPagamentoSelect.value),
+          new Transacao(idInput.value, arrayProdutos[idInput.value-1].preco * quantVendidaInput.value , quantVendidaInput.value)
+      );
+      confirmaRegistraProduto();
+    }else{
+      if (DataInput.valueAsDate >= new Date())
+        alert("Data inválida");
+      if (parseInt(quantVendidaInput.value) <= arrayProdutos[produtoId] )
+      alert('Quantidade inválida');
+    }
 });
 

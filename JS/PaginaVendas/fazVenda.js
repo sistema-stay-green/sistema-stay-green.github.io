@@ -33,9 +33,11 @@ class Venda{
      * @param {Number} freteVenda valor do frete
      * @param {Number} tempoEntregaVenda dias faltantes para a entrega
      */
-    constructor(freteVenda = 10, tempoEntregaVenda = 10){
+    constructor(freteVenda = 10, tempoEntregaVenda = new Date()){
         this.freteVenda = freteVenda;
-        this.tempoEntregaVenda = 10;
+        this.diaEntregaVenda = tempoEntregaVenda.getUTCDate();
+        this.mesEntregaVenda = tempoEntregaVenda.getMonth();
+        this.anoEntregaVenda = tempoEntregaVenda.getFullYear();
     }
 }
 
@@ -60,10 +62,10 @@ class Transacao{
 /**
  * representa a data
  */
-class DataEntrega{
+class DataTransacao{
     constructor(dataEntrega = new Date()){
         this.dia = dataEntrega.getDate();
-        this.mes = dataEntrega.getMonth()+1;
+        this.mes = dataEntrega.getMonth();
         this.ano = dataEntrega.getFullYear();
     }
 }

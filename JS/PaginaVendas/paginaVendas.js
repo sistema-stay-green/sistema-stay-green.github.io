@@ -336,8 +336,9 @@ const confirmaButton = modalConfirma.querySelector('#confirmaModal');
 const regexCEP = /(\d{5})-?(\d{3})/;
 
 confirmaButton.addEventListener('click', e => {
-    let dataTransacao = new DataEntrega(dataEntregaInput.valueAsDate);
-    let venda = new Venda(fretes[regiaoSelect.value]);
+    let dataTransacao = new DataTransacao();
+    let venda = new Venda(fretes[regiaoSelect.value],
+      dataEntregaInput.valueAsDate);
 
     let cepExp = regexCEP.exec(cepInput.value);
     let comprador = new Comprador(nomeInput.value, enderecoInput.value, cepExp[1] + cepExp[2] , modoPagamentoSelect.value);

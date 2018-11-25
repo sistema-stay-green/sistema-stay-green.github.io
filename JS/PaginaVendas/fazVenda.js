@@ -8,7 +8,7 @@ Request.get('http://localhost:8080/StayGreen/GetFretesServlets')
 /**
  * Classe que auxilia a passar dados do comprador
  */
-class Comprador{
+class Comprador {
     /**
      * 
      * @param {String} nomeComprador nome do comprador
@@ -16,7 +16,7 @@ class Comprador{
      * @param {String} cepComprador cep do comprador
      * @param {String} modoPagamento modo de pagamento do comprador 
      */
-    constructor(nomeComprador, enderecoComprador, cepComprador, modoPagamento){
+    constructor(nomeComprador, enderecoComprador, cepComprador, modoPagamento) {
         this.nomeComprador = nomeComprador;
         this.enderecoComprador = enderecoComprador;
         this.cepComprador = cepComprador;
@@ -27,13 +27,13 @@ class Comprador{
 /**
  * Classe que auxilia a passar dados do frete e tempo de entrega
  */
-class Venda{
+class Venda {
     /**
      * 
      * @param {Number} freteVenda valor do frete
      * @param {Number} tempoEntregaVenda dias faltantes para a entrega
      */
-    constructor(freteVenda = 10, tempoEntregaVenda = new Date()){
+    constructor(freteVenda = 10, tempoEntregaVenda = new Date()) {
         this.freteVenda = freteVenda;
         this.diaEntregaVenda = tempoEntregaVenda.getUTCDate();
         this.mesEntregaVenda = tempoEntregaVenda.getMonth();
@@ -44,14 +44,14 @@ class Venda{
 /**
  * Classe que auxilia a passar dados de transação
  */
-class Transacao{
+class Transacao {
     /**
      * 
      * @param {any} idItemTransacao id do item 
      * @param {Number} valorTransacao valor da transação 
      * @param {Number} quantTransacao quantidade de itens na transação
      */
-    constructor(idItemTransacao, valorTransacao, quantTransacao){
+    constructor(idItemTransacao, valorTransacao, quantTransacao) {
         this.idItemTransacao = idItemTransacao;
         this.valorTransacao = valorTransacao;
         this.quantTransacao = quantTransacao;
@@ -62,8 +62,8 @@ class Transacao{
 /**
  * representa a data
  */
-class DataTransacao{
-    constructor(dataEntrega = new Date()){
+class DataTransacao {
+    constructor(dataEntrega = new Date()) {
         this.dia = dataEntrega.getDate();
         this.mes = dataEntrega.getMonth();
         this.ano = dataEntrega.getFullYear();

@@ -26,7 +26,6 @@
         <label>Valor de Compra (R$)<input type="number" class="inputs" name="valor"  required></label>
         <label>Indice de depreciação por ano (%)<input type="number" class="inputs" name="depreciação" max="100" required></label>
         <label>Data de Compra <input type="date" class="inputs" name="data"  required></label>
-        <!--<label>Quantidade<input type="number" class="inputs" name="quantidade"  required></label> -->
         <button type="button" name="botaoAcao" class="botaoDesab">Enviar</button>
         <button type="button" name="botaoVoltar" class="botaoFantasma">Voltar</button>
       </form>
@@ -51,11 +50,11 @@
           <th>ID</th>
           <th>Nome</th>
           <th>Finalidade</th>
-          <th>Valor de compra</th>
+          <th>Valor de compra/R$</th>
           <th>Indice de depreciação</th>
           <th>Data de compra</th>
           <th>Status</th>
-          <th>Valor atual</th>
+          <th>Valor atual/R$</th>
           <th>Data de saída</th>
           <th>Data de baixa</th>
           <th>Data de retorno</th>
@@ -81,7 +80,8 @@
             </select>
           </label>
           <span id="retorno">
-            <label name="periodo-label">Data/Retorno-Saida: <input type="date" name="periodo" class="periodo"></label>
+            <label name="periodo-label">Data/Retorno: <input type="date" name="periodo" class="periodo"></label>
+            <label name="periodoSaida-label">Data/Saida: <input type="date" name="periodoSaida" class="periodoSaida"></label>
             <label name="valor-label">Valor: <input type="number" name="valorAluguel"></label>
             <button type="button" class="botaoEnviar" name="botaoEnviar">Enviar</button>
           </span>
@@ -95,8 +95,8 @@
           <input type="hidden" name="id-editar" required></label>
           <label>Nome da Máquina <input type="text" class="inputs-editar" name="nome-editar" required></label>
           <label>Finalidade da Maquina<input type="text" class="inputs-editar" name="finalidade-editar"  required></label>
-          <label>Valor de Compra<input type="number" class="inputs-editar" name="valor-editar"  required></label>
-          <label>Indice de depreciação<input type="number" class="inputs-editar" name="depreciação-editar"  required></label>
+          <label>Valor de Compra (R$)<input type="number" class="inputs-editar" name="valor-editar"  required></label>
+          <label>Indice de depreciação (%)<input type="number" class="inputs-editar" name="depreciação-editar"  required></label>
           <label>Data de Compra <input type="date" class="inputs-editar" name="data-editar"  required></label>
           <button type="button" name="botaoEditarMaquina">Editar</button>
         </section>

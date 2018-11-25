@@ -150,7 +150,9 @@ div.scrollabe{
   margin-top: 2vh;
   max-height: 90vh;
 }
-
+label[name='periodoSaida-label']{
+  display: none;
+}
 .tabelaDeMaquinas{
     display: inline;
     width:99%;

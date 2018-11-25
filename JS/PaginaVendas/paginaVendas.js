@@ -262,15 +262,17 @@ function cancelaModal() {
  */
 function limpaCarrinho() {
   let elementosCarrinho = divCarrinhoEl.querySelectorAll('article');
-  elementosCarrinho.forEach(el => divCarrinhoEl.removeChild(el));
-  quantidadeCarrinhoEl.innerHTML--;
-
-  if (quantidadeCarrinhoEl.innerHTML == 0) {
-    quantidadeCarrinhoEl.classList.remove("aparece");
-    mascaraEl.classList.remove("aparece");
-    divCarrinhoEl.classList.remove("aparece");
-    carrinhoEl.removeEventListener('click', apareceCarrinho);
-  }
+  elementosCarrinho.forEach(el => {
+    divCarrinhoEl.removeChild(el)
+    quantidadeCarrinhoEl.innerHTML--;
+  
+    if (quantidadeCarrinhoEl.innerHTML == 0) {
+      quantidadeCarrinhoEl.classList.remove("aparece");
+      mascaraEl.classList.remove("aparece");
+      divCarrinhoEl.classList.remove("aparece");
+      carrinhoEl.removeEventListener('click', apareceCarrinho);
+    }
+  });
 }
 
 function confirmaModal() {

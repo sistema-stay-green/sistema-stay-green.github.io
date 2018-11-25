@@ -201,26 +201,63 @@ function limpaRelatorio(){
 }
 
 function filtrarTabelas(e) {
-if (e.target.id == "selFiltroP") {
-  var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=produto&id=" + e.target.value;
-  Request.get(url)
-  .then(function(res) {
-  console.log(res);
-   criaTabela(res, "produto");
-   avisos("SUCESSO");
-  })
-  .catch(function(erro){
-    avisos("FALHA");
-  });
-}else {
-  var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=insumo&id=" + e.target.value;
-  Request.get(url)
-  .then(function(res) {
-   criaTabela(res, "insumo");
-   avisos("SUCESSO");
-  })
-  .catch(function(erro){
-    avisos("FALHA");
-  });
+  if (e.target.id == "selFiltroP") {
+    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=produto&id=" + e.target.value;
+    Request.get(url)
+    .then(function(res) {
+    console.log(res);
+     criaTabela(res, "produto");
+     avisos("SUCESSO");
+    })
+    .catch(function(erro){
+      avisos("FALHA");
+    });
+  }else {
+    var url = "http://localhost:8080/StayGreen/ControleProducaoServlet?operacao=filtro&tipo=insumo&id=" + e.target.value;
+    Request.get(url)
+    .then(function(res) {
+     criaTabela(res, "insumo");
+     avisos("SUCESSO");
+    })
+    .catch(function(erro){
+      avisos("FALHA");
+    });
+  }
 }
+
+
+document.querySelector("#btnPrintProducao").onclick = printRelatorio("producao");
+document.querySelector("#btnPrintPeriodo").onclick = printRelatorio("periodo");
+/**
+ * @author Diego Demétrio e Mei Fagundes
+ * Abre uma janela para impressão dos relatórios
+ * @param relatorio 
+ */
+function printRelatorio(relatorio) {
+    let aux;
+    let content;
+    if(relatorio == "periodo"){
+      content = document.querySelector("#tabelaRelLeite").outerHTML +
+                document.querySelector("#tabelaRelCafeR").outerHTML +
+                document.querySelector("#tabelaRelCafeB").outerHTML +
+                document.querySelector("#tabelaRelCafeA").outerHTML;
+    }
+    else if(relatorio == "producao"){
+      content = document.querySelector("#modalRelatorioProducao").cloneNode(true);
+      aux = content.firstElementChild;
+      content.innerHTML = aux.outerHTML;
+      content = content.outerHTML;
+    }
+
+    let printWindow = window.open('', 'Print', 'height=768,width=1024');
+    console.log(content);
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('<link rel="stylesheet" type="text/css" href="CSS/ControleProducao/ControleProducao_estilo.css"/>');
+    printWindow.document.write('</head><body onafterprint="self.close()">');
+    printWindow.document.write(content);
+    printWindow.document.write('<script type="text/javascript">' + 'window.onload = () => { setTimeout(() => { window.print(); window.close(); }, 2000) };' + '</script>');
+    printWindow.document.write('</body></html>');
+
+    printWindow.document.close();
+    printWindow.focus();
 }

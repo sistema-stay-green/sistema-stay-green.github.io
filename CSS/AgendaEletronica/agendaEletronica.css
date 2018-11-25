@@ -49,18 +49,16 @@
 	}
 	
 	form div{
-		position: absolute;
-		bottom: 0;
-		right: 0;
 		padding: 1em;
 	}
 	
 	form{
+		overflow-y: scroll;
 		left: 25vw;
-		top: 50%;
+		top: 46%;
 		margin-top: -37.5vh;
 		width: 50vw;
-		min-height: 65vh;
+		min-height: 60vh;
 		position: absolute;
 		z-index: 3;
 		background-color: var(--brancoIvory);
@@ -297,6 +295,7 @@ nav{
 
 #containerRelatorio{
 	overflow-y: scroll;
+	overflow-x: hidden;
 	width: 50vw;
 	height: 50vh;
 	left: calc(50vw/2);

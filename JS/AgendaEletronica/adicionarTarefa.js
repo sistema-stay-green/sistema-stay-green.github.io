@@ -13,6 +13,7 @@ botaoConfirmarTarefa.addEventListener('click', (evt) => {
 botaoExcluirTarefa.addEventListener('click', (evt) => {
   operacaoRequisicaoTarefas(evt.target.dataset.operacao, encapsularDadosTarefa());
   alteraVisibilidadeElemento(containerFormNovaTarefa, true);
+  recebeTarefas();
 });
 
 /** Altera a visibilidade de um elemento
@@ -62,8 +63,10 @@ function exibeFormularioTarefa(tarefaAExibir) {
     let data = Tarefa.toDateObject(tarefaAExibir.dataInicialTarefa);
 
     document.querySelector('input[name="realizarDia"]').value =
-      data.getUTCFullYear() + "-" + ((data.getMonth + 1 < 10) ? '0' + data.getMonth()
-        + 1 : data.getMonth() + 1 + "-" + data.getDate());
+    data.getUTCFullYear() + "-" +
+    (data.getMonth() + 1 < 10 ? "0" + (data.getMonth() + 1) :
+      data.getMonth() + 1) + "-" + (data.getDate() < 10 ? "0" +
+        data.getDate() : data.getDate());
 
     document.querySelector('input[name="periodoRepeticao"]').value =
       tarefaAExibir.periodRepetTarefa;

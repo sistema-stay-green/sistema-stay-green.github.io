@@ -57,6 +57,13 @@ btnConfimarEdicaoEl.addEventListener("click", function() {
       saldoUsuario = document.querySelector("#cadastro input[name='saldoUsuario']").value,
       emailUsuario = document.querySelector("#cadastro input[name='emailUsuario']").value,
       usuario = new Usuario(null);
+
+  for (let input of document.querySelectorAll("#cadastro input")) {
+    if (input.value === ""){
+      alert("Preencha todos os campos");
+      return
+    }
+  }
       
   usuario.nome = nomeUsuario;
   usuario.cnpj = cnpjUsuario;

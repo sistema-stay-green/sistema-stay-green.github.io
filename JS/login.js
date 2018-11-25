@@ -15,6 +15,13 @@ btnEntrarLoginEl.addEventListener("click", function() {
   let emailInputEl = document.querySelector("#login form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login form > label:last-of-type > input");
 
+  for (let input of document.querySelectorAll("#login form input")) {
+    if (input.value === ""){
+      alert("Preencha todos os campos");
+      return
+    }
+  }
+
       Request.get("http://localhost:8080/StayGreen/LoginUsuarioServlet?login=" + emailInputEl.value
                   + "&senha=" + senhaInputEl.value)
              .then((resposta) => {
@@ -72,6 +79,13 @@ btnConfimarCadastroEl.addEventListener("click", function() {
         saldoUsuario = document.querySelector("#login form:last-of-type input[name='saldoUsuario']").value,
         emailUsuario = document.querySelector("#login form:last-of-type input[name='emailUsuario']").value,
         senhaUsuario = document.querySelector("#login form:last-of-type input[name='senhaUsuario']").value;
+
+    for (let input of document.querySelectorAll("#login form:last-of-type input")) {
+      if (input.value === ""){
+        alert("Preencha todos os campos");
+        return
+      }
+    }
 
     usuario = new Usuario(null);
     usuario.nome = nomeUsuario;

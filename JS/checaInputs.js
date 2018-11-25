@@ -23,42 +23,6 @@ btnLimparEl.addEventListener("click", function(){
 
 });
 
-let inputs = document.querySelectorAll("#cadastro input");
-
-for (let inputEl of inputs) {
-  inputEl.addEventListener("input", function(evt){
-
-    let inputAlvoEl = evt.currentTarget;
-
-    if (inputAlvoEl.value === ""){
-
-      let labelEl = inputAlvoEl.parentElement,
-          btnConfirmarEl = document.querySelector("#cadastro button:first-of-type");
-
-      if (labelEl.querySelector("span") === null) {
-        labelEl.insertBefore(escreveMensagemErro(" (Campo obrigatório)"), labelEl.querySelector("input"));
-        btnConfirmarEl.disable = "true";
-        btnConfirmarEl.classList.add("botaoDesab");
-      }
-
-    }
-    else {
-
-      let labelEl = inputAlvoEl.parentElement;
-      let btnConfirmarEl = document.querySelector("#cadastro button:first-of-type");
-      if(labelEl.querySelector("span") !== null)
-        labelEl.removeChild(labelEl.querySelector("span"));
-
-      if (document.querySelectorAll("#cadastro .mensagemErro").length === 0) {
-        btnConfirmarEl.disable = "false";
-        btnConfirmarEl.classList.remove("botaoDesab");
-      }
-
-    }
-
-  });
-}
-
 // Mostra mensagem caso o email digitado não for válido
 function checaEmail() {
 

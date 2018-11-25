@@ -54,7 +54,7 @@ function criaRelatorioP() {
 
     }
   })
-  .catch(function(erro){console.log(erro);});
+  .catch(function(erro){avisos("FALHA");});
 
 }
 
@@ -122,7 +122,7 @@ function criaRelatorioH(){
       })
     }
   })
-  .catch(function(erro){console.log(erro);});
+  .catch(function(erro){avisos("FALHA");});
 }
 /** @autor Alberto
 Descrição: função que a partir do resultado e do contador formata a data da transação**/
@@ -194,5 +194,5 @@ function insereInsumoTabela(resultado, contador, linha){
       }
     }
   })
-  .catch(function(erro){console.log(erro);});
+  .catch(function(erro){avisos("FALHA");});
 }

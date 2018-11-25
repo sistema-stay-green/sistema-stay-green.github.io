@@ -1,18 +1,41 @@
-
 let dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 
 if(dadosUsuario !== null){
-
+  
   let nomeEl = document.querySelector("#perfil > p"),
-      cnpjEl = document.querySelector("#mostraInfoUsuario > p:nth-child(1)"),
-      saldoEl = document.querySelector("#mostraInfoUsuario > p:nth-child(2)"),
-      emailEl = document.querySelector("#mostraInfoUsuario > p:nth-child(3)");
+      cnpjEl = document.querySelector("#mostraInfoUsuario > p:nth-of-type(1)"),
+      saldoEl = document.querySelector("#mostraInfoUsuario > p:nth-of-type(2)"),
+      emailEl = document.querySelector("#mostraInfoUsuario > p:nth-of-type(3)");
+
+  Request.get("http://localhost:8080/StayGreen/GetTransacoesServlet")
+         .then((resposta) => {
+
+            let transacoes = localStorage.getItem("transacoes");
+
+            if (transacoes === JSON.stringify(resposta))
+              return
+
+              Request.get("http://localhost:8080/StayGreen/UpdateSaldoServlet?login=" + dadosUsuario.emailUsuario)
+                  .then(saldoUsuario => {
+                    
+
+                    dadosUsuario.saldoUsuario = saldoUsuario;    
+                    nomeEl.innerHTML = dadosUsuario.nomeUsuario;
+                    cnpjEl.innerHTML = dadosUsuario.cnpjUsuario;
+                    saldoEl.innerHTML = dadosUsuario.saldoUsuario + "R$";
+                    emailEl.innerHTML = dadosUsuario.emailUsuario;
+                    localStorage.setItem("usuario", JSON.stringify(dadosUsuario));
+
+                  });
+            localStorage.setItem("transacoes", JSON.stringify(resposta));
+
+         });
 
   nomeEl.innerHTML = dadosUsuario.nomeUsuario;
-  cnpjEl.innerHTML += dadosUsuario.cnpjUsuario;
-  saldoEl.innerHTML += dadosUsuario.saldoUsuario + ",00R$";
-  emailEl.innerHTML += dadosUsuario.emailUsuario;
-
+  cnpjEl.innerHTML = dadosUsuario.cnpjUsuario;
+  saldoEl.innerHTML = dadosUsuario.saldoUsuario + "R$";
+  emailEl.innerHTML = dadosUsuario.emailUsuario;
+  
 }
 else
   window.location.href = "login.html";
@@ -83,4 +106,24 @@ function alternaArticles(){
   formEditaEl.classList.toggle("ocultar");
   articleMostraEl.classList.toggle("ocultar");
   btnEditarEl.classList.toggle("ocultar");
+}
+
+function atualizaDadosUsuario(){
+
+  Request.get("http://localhost:8080/StayGreen/UpdateSaldoServlet?login=" + dadosUsuario.emailUsuario)
+  .then(r => {
+
+    let nomeEl = document.querySelector("#perfil > p"),
+        cnpjEl = document.querySelector("#mostraInfoUsuario > p:nth-child(1)"),
+        saldoEl = document.querySelector("#mostraInfoUsuario > p:nth-child(2)"),
+        emailEl = document.querySelector("#mostraInfoUsuario > p:nth-child(3)");
+
+    dadosUsuario.saldoUsuario = r.saldoUsuario;    
+    nomeEl.innerHTML = dadosUsuario.nomeUsuario;
+    cnpjEl.innerHTML += dadosUsuario.cnpjUsuario;
+    saldoEl.innerHTML += dadosUsuario.saldoUsuario + ",00R$";
+    emailEl.innerHTML += dadosUsuario.emailUsuario;
+
+  });
+
 }

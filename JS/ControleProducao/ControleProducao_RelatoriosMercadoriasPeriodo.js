@@ -7,7 +7,6 @@ var btnVoltaRelatorioP = document.getElementById('btnVoltaRelatorioP');
 var btnFechaRelatorioP = document.getElementById('btnFechaRelatorioP');
 var divInsumo = document.getElementById('conteudoInsumo');
 var divProduto = document.getElementById('conteudoProduto');
-var avisoRelatorio = document.getElementById('avisoRelatorio');
 var tabelaProdutoLeite = document.getElementById('tabelaRelLeite');
 var tabelaProdutoCafeB = document.getElementById('tabelaRelCafeB');
 var tabelaProdutoCafeR = document.getElementById('tabelaRelCafeR');
@@ -77,11 +76,10 @@ function criaRelatorioH(){
     var contador = 0;
     //testa se há resultados disponiveis do request
     if(resultado == null){
-      avisoRelatorio.innerHTML == "" ? avisoRelatorio.innerHTML = "Não foram encontradas transações nesse período": avisoRelatorio.innerHTML="Não foram " +
-      "encontradas transações nesse período";
+      avisos("FALHA_RELATORIO");
 
     }else{
-      avisoRelatorio.innerHTML == "Não foram encontradas transações nesse período" ? avisoRelatorio.innerHTML="": avisoRelatorio.innerHTML = "";
+      avisos("SUCESSO");
       resultado.forEach(function(){
 
         //teste para saber se a transação é de Produto

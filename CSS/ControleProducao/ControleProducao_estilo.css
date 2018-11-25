@@ -123,18 +123,18 @@ button #iconePlus, #iconeRelatorio {
 #modalRelatorioHistorico, #modalRelatorioProducao {
   width: 40em;
   left: calc(50vw - 20em);
-  top: calc(50vh - 22em);
   padding: 1em;
-  max-height: 41em;
+  max-height: 75%;
   overflow-y: scroll;
 }
 
 #divModalAvisos{
   transition: top 3s, opacity 0.5s;
   width: 20em;
-  top: calc(50vh - 16em);
+  top: 70%;
+  right: 72%;
   background-color: var(--brancoIvory);
-  border: solid 0.25em var(--verdeCamarone);
+  border: solid 0.25em rgba(255, 204, 0, 0.9);
   border-radius: 1em;
   opacity: 1;
 }

@@ -31,7 +31,6 @@ var btnCancelarEditarInsumo = document.querySelector('#btnCancelarEditarInsumo')
 var btnConfirmarEditarInsumo = document.querySelector('#btnConfirmarEditarInsumo');
 var selFiltroP = document.getElementById('selFiltroP');
 var selFiltroI = document.getElementById('selFiltroI');
-var avisoRelatorio = document.getElementById('avisoRelatorio');
 var tabelaLeite = document.getElementById('tabelaRelLeite');
 var tabelaCafeA= document.getElementById('tabelaRelCafeA');
 var tabelaCafeB = document.getElementById('tabelaRelCafeB');
@@ -169,7 +168,6 @@ if (e) {
 
 
 function limpaRelatorio(){
-  avisoRelatorio.innerHTML = " ";
   var aux = tabelaLeite.innerHTML.slice(0, tabelaLeite.innerHTML.indexOf("<tbody>"));
   aux += "<tbody>" +
        "<tr>" +
@@ -208,6 +206,7 @@ if (e.target.id == "selFiltroP") {
   Request.get(url)
   .then(function(res) {
    criaTabela(res, "produto");
+   avisos("SUCESSO");
   })
   .catch(function(erro){
     avisos("FALHA");
@@ -217,6 +216,7 @@ if (e.target.id == "selFiltroP") {
   Request.get(url)
   .then(function(res) {
    criaTabela(res, "insumo");
+   avisos("SUCESSO");
   })
   .catch(function(erro){
     avisos("FALHA");

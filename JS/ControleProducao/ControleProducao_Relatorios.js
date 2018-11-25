@@ -225,14 +225,14 @@ function filtrarTabelas(e) {
   }
 }
 
-
-document.querySelector("#btnPrintProducao").onclick = printRelatorio("producao");
-document.querySelector("#btnPrintPeriodo").onclick = printRelatorio("periodo");
 /**
  * @author Diego Demétrio e Mei Fagundes
  * Abre uma janela para impressão dos relatórios
  * @param relatorio 
  */
+document.querySelector("#btnPrintProducao").onclick = printRelatorio("producao");
+document.querySelector("#btnPrintPeriodo").onclick = printRelatorio("periodo");
+
 function printRelatorio(relatorio) {
     let aux;
     let content;
@@ -250,7 +250,6 @@ function printRelatorio(relatorio) {
     }
 
     let printWindow = window.open('', 'Print', 'height=768,width=1024');
-    console.log(content);
     printWindow.document.write('<html><head><title>Print</title>');
     printWindow.document.write('<link rel="stylesheet" type="text/css" href="CSS/ControleProducao/ControleProducao_estilo.css"/>');
     printWindow.document.write('</head><body onafterprint="self.close()">');

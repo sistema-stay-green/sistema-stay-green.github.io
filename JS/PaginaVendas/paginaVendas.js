@@ -139,10 +139,10 @@ function addCarrinho(evt){
   id = paiEl.dataset.id;
   filhos = paiEl.children;
   console.log(filhos);
-  descricao = filhos[1].innerHTML;
-  preco = parseFloat(filhos[3].innerHTML.split(" ")[1]);
-  quantidade  = parseInt(filhos[4].children[0].value);
-  quantidadeMax = parseInt(filhos[4].children[0].max);
+  descricao = filhos[2].innerHTML;
+  preco = parseFloat(filhos[4].innerHTML.split(" ")[1]);
+  quantidade  = parseInt(filhos[5].children[0].value);
+  quantidadeMax = parseInt(filhos[5].children[0].max);
   quantidadeItensCarrinho = document.querySelector("#quantidade-carrinho");
   if(quantidadeItensCarrinho.innerHTML > 0){
     let articlesCarrinho = document.querySelectorAll("#div-carrinho > article");

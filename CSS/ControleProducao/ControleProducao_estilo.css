@@ -37,6 +37,18 @@ button #iconePlus, #iconeRelatorio {
   top: 35%;
 }
 
+nav{
+  z-index: 2;
+}
+
+h5 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
 #conteudo {
   min-height: 100%;
   position: relative;
@@ -89,12 +101,23 @@ button #iconePlus, #iconeRelatorio {
 }
 
 #tabProdutosRegistrados {
-  margin-bottom: 4em;
+  margin-bottom: 2em;
+}
+
+#secProduto {
+  margin-bottom: 2em;
+}
+
+#secInsumo {
+  margin-top: 3em;
+}
+
+#tabInsumosRegistrados {
+  margin-bottom: 2em;
 }
 
 #capTabProduto, #capTabInsumo {
   border: solid 0.1em var(--verdeCamarone);
-  margin-bottom: 0.05em;
 }
 
 #h3CaptionProduto, #h3CaptionInsumo {
@@ -262,7 +285,7 @@ button #iconePlus, #iconeRelatorio {
 .modal {
   width: 20em;
   left: calc(50vw - 10em);
-  top: calc(50vh - 16em);
+  top: calc(50vh - 20em);
   background-color: var(--brancoIvory);
   border: solid 0.25em var(--verdeCamarone);
   border-radius: 1em;
@@ -273,7 +296,7 @@ button #iconePlus, #iconeRelatorio {
   position: fixed;
 }
 
-.voltarModal {
+.bordaBtn {
   border: solid 1px var(--verdeCamarone);
 }
 
@@ -296,16 +319,4 @@ button #iconePlus, #iconeRelatorio {
  position: relative;
  top: 4px;
  left: 5px;
-}
-
-nav{
-  z-index: 2;
-}
-
-h5 {
-  text-align: center;
-  font-weight: bold;
-  font-size: 2.5em;
-  margin-top: 0;
-  margin-bottom: 0.5em;
 }

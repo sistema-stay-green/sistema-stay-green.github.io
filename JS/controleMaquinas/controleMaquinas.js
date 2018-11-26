@@ -1,3 +1,10 @@
+
+/**
+* Define o status da maquina na tabela
+* @param {String} Status da máquina
+* @returns {String} Retorna o status atual da máquina
+* @author Ítalo Fideles, Nikolas Victor
+*/
 function formatarStatus(status){
   switch (status) {
     case "EM_POSSE":
@@ -21,11 +28,25 @@ function formatarStatus(status){
   return status;
 }
 
+/**
+* Coloca a data no formato convêncional
+* @param {String} Data atual
+* @returns {String} Data atual no novo formato
+* @author Ítalo Fideles, Nikolas Victor
+*/
+
 function formatarData(data){
   data = data.split("-");
   data = data[2] + "/" + data[1] + "/" + data[0];
   return data;
 }
+
+/**
+* Coloca a data no formato convêncional
+* @param {String} Data atual
+* @returns {String} Data atual no novo formato
+* @author Ítalo Fideles, Nikolas Victor
+*/
 
 function formatarDataObj(data){
   if(data != null){
@@ -36,8 +57,10 @@ function formatarDataObj(data){
   }
 }
 
-//define a abertura/fechamento das modais
-//estilização
+/**
+* Estilização: Define a abertura/fechamento das modais
+* @author Ítalo Fideles, Nikolas Victor
+*/
 function estilizarModal(){
   botaoVoltar.addEventListener("click", function(){
     document.querySelector(".valores_fundo").style.display = "none";
@@ -60,8 +83,12 @@ function estilizarModal(){
   })
 }
 
-//checa se todos os inputs etão preenchidso e valida o cadastro
-// Estilização
+/**
+* Checa e valida o cadastro
+* @param {String} Data atual
+* @returns {String} True ou False
+* @author Ítalo Fideles, Nikolas Victor
+*/
 function validacao(valores){
   let hoje = new Date(),
       dia = hoje.getDate(),
@@ -81,17 +108,21 @@ function validacao(valores){
   }
   for (var i = 0; i < valores.length; i++) {
 
-    //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
-
     if(valores[i].value == ""){
       document.querySelector("button[name='botaoAcao']").classList.add("botaoDesab");
       return false;
     }
   }
-  //se todos os input estiverem preenchidos retorna "true"e deixa o botão para cadastrar habilitado
     document.querySelector("button[name='botaoAcao']").classList.remove("botaoDesab");
     return true;
 }
+
+/**
+* Verifica a validade dos valores preenchidos no formulário
+* @param {String} Data
+* @returns {String} Retorna true ou false
+* @author Ítalo Fideles , Nikolas Victor
+*/
 
 function validacaoEditar(valores){
   let hoje = new Date(),
@@ -112,20 +143,21 @@ function validacaoEditar(valores){
   }
   for (var i = 0; i < valores.length; i++) {
 
-    //se algum input estiver vazio retorna "false"e deixa o botão para cadastrar desabilitado
 
     if(valores[i].value == ""){
       document.querySelector("button[name='botaoEditarMaquina']").classList.add("botaoDesab");
       return false;
     }
   }
-  //se todos os input estiverem preenchidos retorna "true"e deixa o botão para cadastrar habilitado
     document.querySelector("button[name='botaoEditarMaquina']").classList.remove("botaoDesab");
     return true;
 }
 
-//limita a data de compra para no maximo o dia atual
-//estilização
+/**
+* Estilização: Limita a data de compra para o dia atual
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function limitaDataCompra(){
 
   let hoje = new Date(),
@@ -144,8 +176,11 @@ function limitaDataCompra(){
   document.querySelector("input[name='data-editar']").setAttribute("max", hoje);
 }
 
-//limita o valor de compra e de venda para no minimo 1
-//estilização
+/**
+* Estilização: Limita o valor de compra e venda para no mínimo 1
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function limitaValorCompra_ValorVenda(){
   document.querySelector("input[name='valor']").oninput = function () {
       if (this.value < 1) {
@@ -164,8 +199,11 @@ function limitaValorCompra_ValorVenda(){
   }
 }
 
-//limitaa data de retorno para no minimo depois do dia atual
-//estilização
+/**
+* Estilização: Limita a data de retorno para no mínimo um dia depois do dia atual
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function limitaDataRetorno(){
 
   let hoje = new Date(),
@@ -183,8 +221,11 @@ function limitaDataRetorno(){
   document.querySelector("input[name='periodo']").setAttribute("min", hoje);
 }
 
-//limitaa data de saida para no minimo depois do dia atual
-//estilização
+/**
+* Estilização: Limita a data de saida para no mínimo um dia após o dia atual
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function limitaDataSaida(){
 
   let hoje = new Date(),
@@ -202,8 +243,11 @@ function limitaDataSaida(){
   document.querySelector("input[name='periodoSaida']").setAttribute("max", hoje);
 }
 
-//limita o indice de depreciação para 90
-//estilização
+/**
+* Estilização: Limita o indice de depreciação em 90% a.a.
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function limiteDepreciacao(){
   document.querySelector("input[name='depreciação']").oninput = function () {
       if (this.value > 100) {
@@ -217,8 +261,11 @@ function limiteDepreciacao(){
   }
 }
 
-//fecha a div modal que pergunta os valores a serem cadastrados
-// Estilização
+/**
+* Estilização: Fechar a modal de cadastro
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function voltar(){
   document.querySelector(".maquinas").style.display = "inline-block";
   document.querySelector(".valores_fundo").style.display = "none";
@@ -228,8 +275,11 @@ function voltar(){
   }
 }
 
-//Abre uma div modal que permite a inserção de dados a srem cadastrados
-// Estilização
+/**
+* Estilização: Abre a modal que permite o cadastro
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function mostraModalCadastro(){
 
     for (input of inputs) {
@@ -239,8 +289,11 @@ function mostraModalCadastro(){
 
 }
 
-//filtra a exibição das maquinas
-// Estilização
+/**
+* Estilização: Filtra a exibição das máquinas
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function filtraPagina(){
   let filtro = document.querySelector("#filtro_select_status"),
       maquinas = document.querySelectorAll(".maquina");
@@ -299,16 +352,17 @@ function filtraPagina(){
   }
 }
 
-//Passa a informação se a maquina sera ALugada,Vendida,Etc...
-// Estilização
+/**
+* Estilização: Mostra o estado atual da máquina na tabela
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function saida(){
-  //Variaveis
   let opcao = document.querySelector("#filtro_saida"),
       elemento = event.target,
       nodes;
       status;
 
-  //Pega o estado atual da maquinas, ex: Em posse
   elemento = elemento.parentNode;
   nodes = elemento.parentNode.children,
   status = nodes[6].innerHTML;
@@ -316,8 +370,6 @@ function saida(){
 
 
   document.querySelector("#editar").style.display = "none";
-  /*Verifica se o estado é "Em posse", se for ativa a div modal e permite a
-    escolha do que ira ser feito, ex:Vender, Alugar, etc..*/
   if (status === "Em posse" || status === "Em manutenção") {
     document.querySelector("#saidas").style.display = "block";
 
@@ -346,10 +398,6 @@ function saida(){
           }
         });
     }
-    /*Chama a função que altera o status da maquina com os parametros sendo,
-      elemento = a linha da tabela obtida pelo parent node
-      opcao = o que sera feito, ex: Vender, Descartar, etc...
-      */
     let botão = document.querySelector("button[name='botaoEnviar']");
       botão.addEventListener("click", function(){
         AlteraStatus(elemento,opcao);
@@ -359,14 +407,15 @@ function saida(){
 
   }
 
-/*Função que adiciona ou remove a classe botaoDesab de acordo com o estado da
-  maquina*/
-// Estilização
+/**
+* Estilização: Desabilita o botão de saída de acordo com o estado da máquina
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function visaoBotao() {
   let botoesSaida = document.querySelectorAll(".botaoSaida");
   let botoesEditar = document.querySelectorAll(".botaoEditar");
 
-  // Desabilita botão saída caso o status seja Vendido, Descartado ou Alugado
   for (botao of botoesSaida) {
     var pesquisa = botao.parentNode.parentNode;
     var nodes = pesquisa.children;
@@ -382,7 +431,6 @@ function visaoBotao() {
   }
 
 
-  // Desabilita botão editar caso o status seja Vendido, Descartado
   for (botao of botoesEditar) {
     var pesquisa = botao.parentNode.parentNode;
     var nodes = pesquisa.children;
@@ -398,8 +446,11 @@ function visaoBotao() {
   }
 }
 
-/*Chama a aba para editar maquinas Em posse*/
-// Estilização
+/**
+* Estilização: Opção para poder editar máquinas em posse
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function mostraModalEditar(){
   elemento = event.target;
   elemento = elemento.parentElement;
@@ -417,8 +468,11 @@ function mostraModalEditar(){
   }
 }
 
-/*Relatorio da pagina*/
-// Estilização
+/**
+* Estilização: Relatório da página
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function relatorio(){
   let maquinas = document.querySelectorAll(".maquina"),
       totalMaquinas = maquinas.length,
@@ -471,7 +525,11 @@ function relatorio(){
   document.querySelector(".relatorioModal").style.display = "block";
 }
 
-/*Pega valores do modal e manda para Backend*/
+/**
+* Estilização: Passa os valores do formulário e tranfere para o banco de dados
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function enviaInformacoesEditar() {
   let id = document.querySelector("input[name='id-editar']").value,
   nome = document.querySelector("input[name='nome-editar']").value,
@@ -487,9 +545,15 @@ function enviaInformacoesEditar() {
   document.querySelector("#editar").style.display = "none";
 }
 
-//função que altera o status da maquina
+/**
+* Verifica a validade dos valores preenchidos no formulário
+* @param {String} Elemento que irá ser alterado
+* @param {String} Opções de alteração para o status da máquina
+* @returns {String} Retorna a circunstância atual da máquina
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function AlteraStatus(elemento,opcao){
-    //Pega os "filhos" da variavel elemento
     console.log(elemento);
     elemento = elemento.parentNode;
     console.log(elemento);
@@ -498,10 +562,6 @@ function AlteraStatus(elemento,opcao){
         periodo = document.querySelector("input[name='periodo']").value,
         periodoSaida = document.querySelector("input[name='periodoSaida']").value;
 
-    //transporta os valores dos filhos de "elemento" para um vetor
-
-    //Imprime os valores do vetor mais a condição que se encontra a maquinas
-    //de acordo com o valor da variavel opcao
         if(opcao.value == "Alugar"){
             alugar(nodes[0].innerHTML, periodo, valorAluguel);
         }
@@ -514,16 +574,19 @@ function AlteraStatus(elemento,opcao){
         if(opcao.value == "Descartar"){
             descartar(nodes[0].innerHTML, periodoSaida);
         }
-  //Permite a chamada da função saida ao clicar no "botaoSaida"
-
-  //Zera os valores dos inputs da data requisitada
   let valores = document.querySelectorAll("input[name='data']");
   for (var i = 0; i < valores.length; i++) {
     valores[i].value = "";
   }
 }
 
-//carrega as maquinas na pagina ao iniciar
+/**
+* Exibe as máquinas na página ao iniciar
+* @param {String} Nome da Máquina
+* @returns {String} Exibe o nome da máquina
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function adicionaMaquina(maquina){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
@@ -571,7 +634,13 @@ function adicionaMaquina(maquina){
       visaoBotao();
 }
 
-//carrega todas as maquinas na pagina ao iniciar
+/**
+* Exibe as máquinas na página ao iniciar
+* @param {String} Vetor com o nome das máquinas
+* @returns {String} Exibição das máquinas na página
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function adicionaTodasMaquinas(maquinasVetor){
       let string = "",
           botaoSaida = "<button type=\"button\" class=\"botaoSaida\">Saida</button>",
@@ -620,7 +689,13 @@ function adicionaTodasMaquinas(maquinasVetor){
       visaoBotao();
 }
 
-//edita a maquina selecionada
+/**
+* Edita a máquina selecionada
+* @param {String} Nome da máquina
+* @returns {String} Novo status da máquina
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function editaMaquina(maquina){
   let arrLinhaMaquina = document.querySelectorAll(".maquina"),
       string = "",
@@ -671,10 +746,13 @@ function editaMaquina(maquina){
   visaoBotao();
 }
 
-//função que cadastra valores no BD
+/**
+* Cadastra os novos valores no banco de dados
+* @author Ítalo Fideles , Nikolas Victor
+*/
+
 function enviaInformacoesCadastro(){
   if(validacao(inputs) == true){
-    //variaveis
     let nome = document.querySelector("input[name='nome']").value,
         finalidade = document.querySelector("input[name='finalidade']").value,
         valor =  document.querySelector("input[name='valor']").value,
@@ -683,12 +761,10 @@ function enviaInformacoesCadastro(){
         depreciacao = document.querySelector("input[name='depreciação']").value;
 
     cadastrar(nome, finalidade, depreciacao, valor, data, 1);
-    //Fecha a div modal e mostra a tabela junto com o botão que permite cadastrar
     document.querySelector(".maquinas").style.display = "inline-block";
     document.querySelector(".opcoes").style.display = "block";
     document.querySelector(".valores_fundo").style.display = "none";
 
-    //zera os valores dos inputs da div modal
     var valores = document.querySelectorAll(".inputs");
     for (var i = 0; i < valores.length; i++) {
       valores[i].value = "";
@@ -697,11 +773,8 @@ function enviaInformacoesCadastro(){
   }
 }
 
-//rcarrega todas as maquinas na pagina
 receberTodos();
 
-
-// Variáveis
 var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     botaoVoltar = document.querySelector("button[name='botaoVoltar']"),
     botaoConfirmarCadastro = document.querySelector("button[name='botaoAcao']"),
@@ -710,25 +783,22 @@ var botaoCadastro = document.querySelector("button[name='botaoCadastro']"),
     filtro = document.querySelector("#filtro_select_status"),
     inputs = document.querySelectorAll(".inputs"),
     inputs_editar = document.querySelectorAll(".inputs-editar");
-
-
-//Adiciona as funções aos botões
-botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
-botaoCadastro.addEventListener("click", mostraModalCadastro);
-botaoVoltar.addEventListener("click", voltar);
-botaoConfirmarCadastro.addEventListener("click", enviaInformacoesCadastro);
-botaoRelatorio.addEventListener("click", relatorio);
-filtro.addEventListener("change", filtraPagina);
-for (input of inputs) {
-  input.addEventListener("input",function(){
-    validacao(inputs);
-  });
-}
-for (input of inputs_editar) {
-  input.addEventListener("input",function(){
-    validacaoEditar(inputs_editar);
-  });
-}
+    botaoConfirmarEditar.addEventListener("click", enviaInformacoesEditar);
+    botaoCadastro.addEventListener("click", mostraModalCadastro);
+    botaoVoltar.addEventListener("click", voltar);
+    botaoConfirmarCadastro.addEventListener("click", enviaInformacoesCadastro);
+    botaoRelatorio.addEventListener("click", relatorio);
+    filtro.addEventListener("change", filtraPagina);
+    for (input of inputs) {
+      input.addEventListener("input",function(){
+        validacao(inputs);
+      });
+    }
+    for (input of inputs_editar) {
+      input.addEventListener("input",function(){
+        validacaoEditar(inputs_editar);
+      });
+    }
 
 
 limitaDataRetorno();

@@ -235,9 +235,13 @@
   * Abre uma janela para impressão dos relatórios
   * @param relatorio
   */
- document.querySelector("#btnPrintProducao").onclick = printRelatorio("producao");
- document.querySelector("#btnPrintPeriodo").onclick = printRelatorio("periodo");
+ document.querySelector("#btnPrintProducao").onclick = function () {
+   printRelatorio("producao");
+ };
+ document.querySelector("#btnPrintPeriodo").onclick = function () {
+   printRelatorio("periodo");
 
+ }
  function printRelatorio(relatorio) {
      let aux;
      let content;

@@ -15,7 +15,7 @@ btnEntrarLoginEl.addEventListener("click", function() {
   let emailInputEl = document.querySelector("#login form > label:first-of-type > input"),
       senhaInputEl = document.querySelector("#login form > label:last-of-type > input");
 
-  for (let input of document.querySelectorAll("#login form input")) {
+  for (let input of document.querySelectorAll("#login > section:last-of-type > form:first-of-type input")) {
     if (input.value === ""){
       alert("Preencha todos os campos");
       return

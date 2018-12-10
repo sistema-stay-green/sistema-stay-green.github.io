@@ -3,11 +3,4 @@
  * @author Mei Fagundes
  */
 hidePatrimonioTable();
-
-if (!staticDebugMode) {
-    receivePatrimonios();
-    
-}
-else{
-    generatePlaceholders();
-}
+initData();

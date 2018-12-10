@@ -7,10 +7,10 @@ const SERVLET_URL = "http://localhost:8080/StayGreen/PatrimonioServlet";
 
 /**
  * Recebe todos os Patrimonios registrados e os envia para a CallBack recebida.
- * @param callBack CallBack a ser executada quando a resposta estiver pronta.
+ * @param callBackSucceded CallBack a ser executada quando a resposta estiver pronta.
  * @author Mei Fagundes, Maria Eduarda Pasquel
  */
-function receiveAllPatrimoniosFromServlet(callBack){
+function receiveAllPatrimoniosFromServlet(callBackSucceded, callBackFailed){
 
   document.body.classList.add("waiting");
   let params = "?action=r";
@@ -20,10 +20,11 @@ function receiveAllPatrimoniosFromServlet(callBack){
     for (const current of response) {
       patrimonios.push(encapsulateJSON(current));
     }
-    callBack(patrimonios);
+    callBackSucceded(patrimonios);
   }, (reason) => {
     document.body.classList.remove("waiting");
-    showError(0);
+    showError(8);
+    callBackFailed();
   });
 
 }

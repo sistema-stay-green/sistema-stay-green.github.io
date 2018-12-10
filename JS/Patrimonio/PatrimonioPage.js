@@ -37,6 +37,8 @@ let isErrorVisible = false;
 
 // --- FUNCTIONS ---
 
+
+
 /**
  * Mostra uma determinada Modal e esconde as outras
  * @param {string} modal
@@ -167,6 +169,10 @@ function showError(cod){
         case 7:
             message += "A Data de Compra não pode estar no ano seguinte à Data atual.";
             break;
+
+        case 8:
+            message += "Falha na conexão com o Servidor. A Página irá operar no modo estático. Tente novamente atualizando-a";
+            break
 
         default:
             throw new Error("Código de erro inválido!");

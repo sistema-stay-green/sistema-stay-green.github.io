@@ -5,7 +5,7 @@
 
 // --- CONSTANTE DE MODO DE OPERAÇÃO DA PÁGINA ---
 // Define se a página será executada de forma estática ou dinâmica (com conexão).
-const staticDebugMode = false;
+let staticDebugMode = false;
 
 let lastIdGenerated = 0;
 let patrimonioStaticStash = [];

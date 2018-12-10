@@ -20,6 +20,16 @@ let returnCallBack = (patrimonios = []) => {
 };
 
 /**
+ * CallBack para alterar o modo de dados da página para estático caso a conexão falhe.
+ * @callback
+ * @author Mei Fagundes
+ */
+let connectionErrorCallBack = () => {
+    
+    enableStaticMode();
+};
+
+/**
  * CallBack para compra de um Patrimonio pelo AJAX.
  * @callback
  * @param {Patrimonio} patrimonio
@@ -95,13 +105,27 @@ let filterCallBack = (patrimonios = []) => {
     }
 }
 
+function initData(){
+    if (!staticDebugMode) {
+        receivePatrimonios();
+    }
+    else{
+        generatePlaceholders();
+    }
+}
+
+function enableStaticMode(){
+    staticDebugMode = true;
+    initData();
+}
+
 /**
  * Recebe todos os Patrimonios do Server através do AJAX.
  * @author Mei Fagundes
  */
 function receivePatrimonios(){
 
-    receiveAllPatrimoniosFromServlet(returnCallBack);
+    receiveAllPatrimoniosFromServlet(returnCallBack, connectionErrorCallBack);
 }
 
 /**
